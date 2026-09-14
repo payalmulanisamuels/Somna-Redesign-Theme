@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -38,6 +39,7 @@
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
+            "icons_style": "arrow",
             "slideshow_controls_style": "counter",
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "right",
@@ -116,6 +118,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
+                "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 0,
@@ -273,6 +276,20 @@
               },
               "block_order": []
             },
+            "subscriptions_app_block_mgq3DE": {
+              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+              "settings": {
+                "widget_style": "card",
+                "widget_style_card_selector": "radio_button",
+                "subscription_policy_url": "",
+                "color_text_body": "#6D7175",
+                "dividers_color": "#8F8D8D",
+                "background_color": "#FFFFFF",
+                "border_thickness": 1,
+                "border_radius": 0,
+                "product": "{{closest.product}}"
+              }
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
@@ -305,6 +322,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
+            "subscriptions_app_block_mgq3DE",
             "text_aEtTtq"
           ]
         }
