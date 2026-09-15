@@ -813,7 +813,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h3>New arrivals</h3>",
+                "text": "<h3>Small Strip<br/>Bid Difference</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -859,30 +859,11 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "button_3aKP8k": {
-              "type": "button",
-              "settings": {
-                "label": "Shop now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "text_rH4Yri",
-            "text_bVeELU",
-            "button_3aKP8k"
+            "text_bVeELU"
           ]
         }
       },
@@ -891,7 +872,7 @@
       ],
       "name": "t:names.layered_slideshow",
       "settings": {
-        "section_width": "page-width",
+        "section_width": "full-width",
         "height": "medium",
         "corner_radius": 0,
         "border_width": 1,
