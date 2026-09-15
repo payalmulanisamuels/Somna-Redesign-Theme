@@ -118,7 +118,6 @@
         },
         "email_signup_crihX7": {
           "type": "email-signup",
-          "disabled": true,
           "settings": {
             "width": "fill",
             "custom_width": 100,
