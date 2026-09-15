@@ -803,8 +803,8 @@
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
-            "padding-block-start": 32,
-            "padding-block-end": 32,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
             "padding-inline-start": 32,
             "padding-inline-end": 32
           },
@@ -878,8 +878,8 @@
         "border_width": 1,
         "drop_shadow": false,
         "background_color": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "layered_slideshow_DTPUxY": {
@@ -938,7 +938,7 @@
             "text_Wk87dc": {
               "type": "text",
               "settings": {
-                "text": "<p>Introducing our latest products, made especially for the season. Shop your favorites before they're gone!</p>",
+                "text": "<p>Introducing our latest products</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -978,8 +978,8 @@
         "border_width": 1,
         "drop_shadow": false,
         "background_color": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "product_recommendations_qggXJq": {
