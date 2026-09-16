@@ -56,7 +56,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -81,7 +81,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<h6>A little something for your nightly ritual.</h6>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -156,6 +156,8 @@
       ],
       "name": "t:names.footer",
       "settings": {
+        "top_wave_image": "shopify://shop_images/Curved_edge.png",
+        "background_image": "shopify://shop_images/footer-email.jpg",
         "section_width": "page-width",
         "gap": 20,
         "background_color": "{{ settings.color_palette.background }}",
@@ -175,9 +177,9 @@
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 14,
             "width": "custom",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -215,9 +217,9 @@
                 "image_ratio": "adapt",
                 "width": "fill",
                 "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
+                "width_mobile": "custom",
+                "custom_width_mobile": 55,
+                "height": "fill",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -235,16 +237,16 @@
               "name": "t:names.group",
               "settings": {
                 "content_direction": "row",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-end",
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
-                "width": "fill",
+                "width": "custom",
                 "custom_width": 100,
-                "width_mobile": "fill",
+                "width_mobile": "custom",
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
@@ -275,14 +277,14 @@
                   "name": "t:names.menu",
                   "settings": {
                     "menu": "shop",
-                    "heading": "",
-                    "menu_spacing": 12,
+                    "heading": "Shop",
+                    "menu_spacing": 0,
                     "show_as_accordion": false,
                     "accordion_icon": "caret",
                     "accordion_dividers": false,
                     "background_color": "",
                     "text_color": "",
-                    "heading_preset": "h3",
+                    "heading_preset": "h5",
                     "link_preset": "paragraph",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -297,13 +299,13 @@
                   "settings": {
                     "menu": "learn",
                     "heading": "",
-                    "menu_spacing": 12,
+                    "menu_spacing": 0,
                     "show_as_accordion": false,
                     "accordion_icon": "caret",
                     "accordion_dividers": false,
                     "background_color": "",
                     "text_color": "",
-                    "heading_preset": "h3",
+                    "heading_preset": "h5",
                     "link_preset": "paragraph",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -318,13 +320,13 @@
                   "settings": {
                     "menu": "support",
                     "heading": "",
-                    "menu_spacing": 12,
+                    "menu_spacing": 0,
                     "show_as_accordion": false,
                     "accordion_icon": "caret",
                     "accordion_dividers": false,
                     "background_color": "",
                     "text_color": "",
-                    "heading_preset": "h3",
+                    "heading_preset": "h5",
                     "link_preset": "paragraph",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -352,6 +354,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
+        "top_wave_image": "shopify://shop_images/footer-curved.svg",
         "section_width": "page-width",
         "gap": 20,
         "background_color": "#071a4b",
@@ -359,9 +362,89 @@
         "padding-block-end": 36
       }
     },
+    "footer_wtgjpB": {
+      "type": "footer",
+      "blocks": {
+        "text_7E4TmC": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>The Breathe Bundle · $59 Subscribe & Save</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.625rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_rcUxmF": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p><a href=\"/pages/terms-of-service\" title=\"Terms of Service\">Terms of Service</a> · <a href=\"/pages/shipping-policy\" title=\"Shipping Policy\">Shipping Policy</a> · <a href=\"/pages/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a> · <a href=\"/pages/order-cancellation-policy\" title=\"Order Cancellation Policy\">Order Cancellation Policy</a> · <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">Return & Refund Policy</a> · <a href=\"/pages/subscription-policy\" title=\"Subscription Policy\">Subscription Policy</a></p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.625rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_7E4TmC",
+        "text_rcUxmF"
+      ],
+      "name": "t:names.footer",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 11,
+        "background_color": "#0a1a4a",
+        "padding-block-start": 12,
+        "padding-block-end": 12
+      }
+    },
     "footer_utilities_jLGE8U": {
       "type": "footer-utilities",
       "blocks": {
+        "footer_copyright_wAXfwq": {
+          "type": "footer-copyright",
+          "name": "t:names.copyright",
+          "settings": {
+            "show_powered_by": true,
+            "text_color": "",
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
         "footer_copyright_jweRK8": {
           "type": "footer-copyright",
           "settings": {
@@ -371,46 +454,17 @@
             "case": "none"
           },
           "blocks": {}
-        },
-        "footer_policy_list_VCdnpa": {
-          "type": "footer-policy-list",
-          "settings": {
-            "text_color": "",
-            "font_size": "0.75rem",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "social_links_Ew63Kq": {
-          "type": "social-links",
-          "settings": {
-            "icon_color": "",
-            "facebook_url": "https://www.facebook.com/",
-            "instagram_url": "https://www.instagram.com/",
-            "youtube_url": "https://www.youtube.com/",
-            "tiktok_url": "https://www.tiktok.com/",
-            "twitter_url": "https://x.com/",
-            "threads_url": "",
-            "linkedin_url": "",
-            "bluesky_url": "",
-            "snapchat_url": "",
-            "pinterest_url": "",
-            "tumblr_url": "",
-            "vimeo_url": "",
-            "custom_url": ""
-          },
-          "blocks": {}
         }
       },
       "block_order": [
-        "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa",
-        "social_links_Ew63Kq"
+        "footer_copyright_wAXfwq",
+        "footer_copyright_jweRK8"
       ],
+      "disabled": true,
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
-        "gap": 24,
+        "gap": 6,
         "background_color": "#071a4b",
         "divider_thickness": 1,
         "divider_color": "{{ settings.color_palette.color2 }}",
@@ -422,6 +476,7 @@
   "order": [
     "footer_m9NzUG",
     "footer_yUAnWa",
+    "footer_wtgjpB",
     "footer_utilities_jLGE8U"
   ]
 }
