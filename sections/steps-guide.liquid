@@ -1,0 +1,221 @@
+<div class="steps-section" style="background-color: {{ section.settings.bg_color }};">
+    {% comment %} Top Wave Divider {% endcomment %}
+
+{% if section.settings.top_wave_image != blank %}
+ <div class="wave-container top">
+
+<img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+
+{% comment %} Bottom Wave Divider {% endcomment %}
+
+{% if section.settings.bottom_wave_image != blank %}
+ <div class="wave-container bottom">
+<img 
+      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+      alt="bottom_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+ 
+
+  <div class="steps-container">
+    
+
+    {% if section.settings.title != blank %}
+      <h2 class="steps-heading custom-header">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="steps-grid">
+      {% for block in section.blocks %}
+        <div class="step-card" {{ block.shopify_attributes }}>
+          {% if block.settings.step_number != blank %}
+            <span class="step-number">{{ block.settings.step_number }}</span>
+          {% endif %}
+
+          <div class="step-image-wrapper">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 300 }}" 
+                alt="{{ block.settings.title | escape }}" 
+                loading="lazy" 
+                width="140" 
+                height="100"
+              />
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'step-placeholder' }}
+            {% endif %}
+          </div>
+
+          {% if block.settings.title != blank %}
+            <h3 class="step-title">{{ block.settings.title }}</h3>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.subheading_bottom != blank %}
+      <p class="steps-subheading-bottom">{{ section.settings.subheading_bottom }}</p>
+    {% endif %}
+  </div>
+ 
+</div>
+
+<style>
+  .steps-section {
+    position: relative;
+    padding: 20px 20px;
+    color: #0A1A4A;
+  }
+
+  .steps-subheading-top {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+  .steps-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 36px;
+  }
+  .step-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-number {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .step-image-wrapper {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .step-image-wrapper img {
+    max-width: 130px;
+    max-height: 90px;
+    object-fit: contain;
+  }
+  .step-placeholder {
+    width: 90px;
+    height: 70px;
+    opacity: 0.3;
+  }
+  .step-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .steps-subheading-bottom {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .steps-grid {
+      gap: 40px;
+    }
+    .steps-heading {
+      font-size: 32px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Steps Guide",
+  "settings": [
+     {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#dbe4d7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_waves",
+      "label": "Show Wave Borders",
+      "default": true
+    },
+   
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Peel. Place. <em>Unwind.</em>"
+    },
+    {
+      "type": "text",
+      "id": "subheading_bottom",
+      "label": "Bottom Subheading",
+      "default": "Follow the directions on your pack."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "01"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Icon/Illustration"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Label",
+          "default": "Clean & dry"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Steps Guide",
+      "blocks": [
+        { "type": "step", "settings": { "step_number": "01", "title": "Clean & dry" } },
+        { "type": "step", "settings": { "step_number": "02", "title": "Peel & place" } },
+        { "type": "step", "settings": { "step_number": "03", "title": "Press gently" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

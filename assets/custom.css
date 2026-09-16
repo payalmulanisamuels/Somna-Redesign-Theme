@@ -1,0 +1,121 @@
+/* Header */
+.custom-header {
+    font-size: 24px !important;
+    color: #0A1A4A !important;
+    text-align: center;
+}
+.custom-header em,.custom-header i {
+    font-family: 'Lora';
+}
+/* Header */
+
+/* Wave */
+.wave-container {
+    position: absolute;
+    z-index: 111;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+.wave-container svg {
+    width: 100%;
+    object-fit: contain;
+}
+.wave-container img {
+    width: 100%;
+    object-fit: cover;
+    height: 25px;
+    object-position: top;
+}
+.wave-container.bottom {
+    transform: rotate(180deg);
+    bottom: -16px;
+}
+.wave-container.top {
+    top: -12px;
+}
+/* Wave */
+
+/* Header */
+p.announcement-bar__text {
+    position: relative;
+    z-index: 11;
+    line-height: 20px;
+}
+.menu-drawer-container .header__icon--summary {
+    padding: 0 !important;
+}
+.header__icon--summary .header-drawer-icon {
+    --icon-size-xs: 25px !important;
+}
+.header__columns{
+   padding-inline-start: 15px !important;
+   padding-inline-end: 15px !important;
+}
+.header-actions__action:not(.account-button) .svg-wrapper{
+    justify-content: flex-end;
+}
+.header-logo span[data-testid="header-logo"] {
+    max-width: 80px;
+}
+
+/* Header */
+
+/* Footer */
+.footer-content summary.menu__heading.h5 {
+    padding: 0 0 5px 0;
+    color: #98A3DE;
+}
+.layout-panel-flex--row:not(.mobile-column)>.menu {
+    width: auto;
+    flex: initial;
+}
+.layout-panel-flex--row {
+    justify-content: space-between;
+}
+.footer-content a{
+    text-decoration: none;
+}
+.shopify-section-group-footer-group:last-child .footer-content {
+    border-top: 1px solid #52618D;
+}
+/* Footer */
+
+
+/* Signup Form*/
+ .email-signup__input-group--integrated .email-signup__input {
+    padding: 0px 10px;
+    font-size: 10px !important;
+  }
+  .email-signup-block {
+    height: 27px;
+    max-width: 190px;
+  }
+  .email-signup__form {
+    height: 100%;
+  }
+  .email-signup__input-group, .password-dialog__submit-button {
+    height: 100%;
+  }
+/* Signup Form*/
+
+/* Faq */
+.accordion--dividers accordion-custom:first-child .details {
+    border-block-start: 0;
+}
+.accordion--dividers accordion-custom:not(:first-child) .details {
+    --color-border: #B9B7AC;
+}
+.accordion--dividers accordion-custom:first-child .details {
+    border-block-start: 0;
+}
+
+.accordion--dividers accordion-custom:not(:first-child) .details {
+    --color-border: #B9B7AC;
+}
+.accordion .details__header {
+    font-size: 14px !important;
+    color: #0A1A4A;
+    font-weight: 400 !important;
+}
+/* Faq */
