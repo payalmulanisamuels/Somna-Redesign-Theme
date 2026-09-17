@@ -19,6 +19,34 @@
   skip_contrast: skip_contrast
 %}
 
+{% comment %} Top Wave Divider {% endcomment %}
+
+{% if section.settings.top_wave_image != blank %}
+ <div class="wave-container top">
+
+<img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+
+{% comment %} Bottom Wave Divider {% endcomment %}
+
+{% if section.settings.bottom_wave_image != blank %}
+ <div class="wave-container bottom">
+<img 
+      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+      alt="bottom_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+
+
 <div class="section-background color-custom-{{ section_id }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} color-custom-{{ section_id }}"
@@ -42,6 +70,7 @@
      {% endif %}
   "
 >
+
   <div class="custom-section-background">
     {% render 'background-media',
       background_media: section.settings.background_media,

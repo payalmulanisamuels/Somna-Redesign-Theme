@@ -1,6 +1,6 @@
 <div class="hz-circle-section" id="hz-circle-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
-   {% comment %} Top Wave Divider {% endcomment %}
+{% comment %} Top Wave Divider {% endcomment %}
 
 {% if section.settings.top_wave_image != blank %}
  <div class="wave-container top">
@@ -68,7 +68,7 @@
   .hz-circle-section {
     width: 100%;
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
   }
   .hz-circle-wrapper {
     max-width: 1200px;
@@ -89,12 +89,13 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    gap: 24px;
+    gap: 15px;
     overflow-x: auto;
     scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     box-sizing: border-box;
+    padding: 0 15px;
   }
 
   .hz-circle-scroll-track::-webkit-scrollbar {
@@ -106,8 +107,6 @@
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    flex: 0 0 95px;
-    max-width: 95px;
     scroll-snap-align: start;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -144,8 +143,7 @@
   }
 
   .hz-circle-title {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
     line-height: 1.25;
     text-align: center;
     display: -webkit-box;
@@ -155,28 +153,14 @@
     word-break: break-word;
   }
 
-  /* Mobile horizontal swipe optimization */
-  @media (max-width: 768px) {
-
-    .hz-circle-scroll-track {
-      justify-content: flex-start;
-      gap: 16px;
-    }
-    .hz-circle-item {
-      flex: 0 0 78px;
-      max-width: 78px;
-    }
-    .hz-circle-title {
-      font-size: 12px;
-    }
-  }
+ 
 </style>
 
 {% schema %}
 {
   "name": "Circle Categories",
   "settings": [
-     {
+    {
       "type": "header",
       "content": "Wave Dividers"
     },

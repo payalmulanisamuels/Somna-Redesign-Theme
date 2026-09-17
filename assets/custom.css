@@ -1,11 +1,28 @@
+:root{
+    --color-text: #0A1A4A;
+    --seconday-color: #FFD94F;
+    --headfont : "Lora"
+}
 /* Header */
 .custom-header {
-    font-size: 24px !important;
-    color: #0A1A4A !important;
+    font-size: 18px !important;
     text-align: center;
+    line-height: 1;
 }
+.layered-slideshow__panels .group-block-content .custom.text-block i,
+.layered-slideshow__panels .group-block-content .custom.text-block em,
 .custom-header em,.custom-header i {
-    font-family: 'Lora';
+    font-family: var(--headfont);
+}
+
+.group-block-content .custom.text-block, .group-block-content .custom.text-block p{
+    line-height: 1;
+}
+#header-component {
+    padding-top: 10px;
+}
+.header__drawer {
+    --header-drawer-min-height: 25px;
 }
 /* Header */
 
@@ -22,10 +39,10 @@
     object-fit: contain;
 }
 .wave-container img {
-    width: 100%;
     object-fit: cover;
-    height: 25px;
+    height: 20px;
     object-position: top;
+    width: 100%;
 }
 .wave-container.bottom {
     transform: rotate(180deg);
@@ -115,7 +132,33 @@ p.announcement-bar__text {
 }
 .accordion .details__header {
     font-size: 14px !important;
-    color: #0A1A4A;
+    color: var(--color-text);
     font-weight: 400 !important;
 }
 /* Faq */
+
+/* Hero section */
+.bundle {
+    display: block;
+    background: var(--seconday-color);
+    color: var(--color-text);
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+.hero__container  .button-custom {
+    font-size: 12px;
+    border-radius: 40px;
+    display: flex;
+    gap: 10px;
+}
+
+.hero__container  .button-custom:after {
+    content: '';
+    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEzIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMi4zNTM2IDQuMDM1NTZDMTIuNTQ4OCAzLjg0MDMgMTIuNTQ4OCAzLjUyMzcyIDEyLjM1MzYgMy4zMjg0NUw5LjE3MTU3IDAuMTQ2NDczQzguOTc2MzEgLTAuMDQ4Nzg5MyA4LjY1OTczIC0wLjA0ODc4OTMgOC40NjQ0NyAwLjE0NjQ3M0M4LjI2OTIgMC4zNDE3MzUgOC4yNjkyIDAuNjU4MzE4IDguNDY0NDcgMC44NTM1OEwxMS4yOTI5IDMuNjgyMDFMOC40NjQ0NyA2LjUxMDQzQzguMjY5MiA2LjcwNTcgOC4yNjkyIDcuMDIyMjggOC40NjQ0NyA3LjIxNzU0QzguNjU5NzMgNy40MTI4IDguOTc2MzEgNy40MTI4IDkuMTcxNTcgNy4yMTc1NEwxMi4zNTM2IDQuMDM1NTZaTTAgMy42ODIwMVY0LjE4MjAxSDEyVjMuNjgyMDFWMy4xODIwMUgwVjMuNjgyMDFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+    width: 12px;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+}
+/* Hero section */
