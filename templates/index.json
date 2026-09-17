@@ -69,7 +69,7 @@
       "settings": {
         "bottom_wave_image": "shopify://shop_images/curve-tranparent-main.svg",
         "bg_color": "#fdf8ee",
-        "text_color": "#0b1a30",
+        "text_color": "#0a1a4a",
         "heading": ""
       }
     },
@@ -124,9 +124,9 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "paragraph",
+                "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "0.75rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -150,10 +150,10 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
+                "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
+                "font_size": "1.5rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
@@ -176,9 +176,9 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "paragraph",
+                "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "0.75rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -241,6 +241,14 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "custom_liquid_iRWbVt": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
+              "settings": {
+                "custom_liquid": "<span class=\"bundle\">Bundles from $59 · Subscribe & Save</span>"
+              },
+              "blocks": {}
+            },
             "button_x76i7w": {
               "type": "button",
               "name": "t:names.button",
@@ -262,6 +270,7 @@
             }
           },
           "block_order": [
+            "custom_liquid_iRWbVt",
             "button_x76i7w"
           ]
         }
@@ -404,9 +413,9 @@
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "paragraph",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -530,9 +539,9 @@
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "paragraph",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -656,9 +665,9 @@
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "paragraph",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -693,6 +702,8 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
+        "top_wave_image": "shopify://shop_images/curve.svg",
+        "bottom_wave_image": "shopify://shop_images/curve.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "flex-start",
@@ -717,8 +728,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 10,
+        "padding-block-end": 10
       }
     },
     "layered_image_with_text_LEPfjJ": {
@@ -735,7 +746,7 @@
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
             "gap": 12,
             "background_color": "",
             "toggle_overlay": false,
@@ -756,9 +767,9 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h2",
+                "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "1.5rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -793,6 +804,75 @@
         "background_color": "",
         "padding-block-start": 0,
         "padding-block-end": 0
+      }
+    },
+    "featured_bundle_grid_6jFGFr": {
+      "type": "featured-bundle-grid",
+      "blocks": {
+        "bundle_gCFgge": {
+          "type": "bundle",
+          "settings": {
+            "product": "sleep-bundle",
+            "is_featured": false,
+            "custom_title": "",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        },
+        "bundle_6MqjwE": {
+          "type": "bundle",
+          "settings": {
+            "product": "season-bundle",
+            "is_featured": false,
+            "custom_title": "",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        },
+        "bundle_LHB8m9": {
+          "type": "bundle",
+          "settings": {
+            "product": "complete-sleep-bundle",
+            "is_featured": true,
+            "custom_title": "",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        },
+        "bundle_rBjHFi": {
+          "type": "bundle",
+          "settings": {
+            "product": "mouth-tape",
+            "is_featured": false,
+            "custom_title": "",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        },
+        "bundle_CGg3b8": {
+          "type": "bundle",
+          "settings": {
+            "product": "nasal-strips",
+            "is_featured": false,
+            "custom_title": "",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_gCFgge",
+        "bundle_6MqjwE",
+        "bundle_LHB8m9",
+        "bundle_rBjHFi",
+        "bundle_CGg3b8"
+      ],
+      "name": "Featured Bundle Grid",
+      "settings": {
+        "heading": "Featured Bundle Block",
+        "bg_color": "#fdfaf3",
+        "padding_top": 50,
+        "padding_bottom": 50
       }
     },
     "custom_cards_slider_pyJahK": {
@@ -1542,7 +1622,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "",
+            "text_color": "#0a1a4a",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -1825,6 +1905,7 @@
     "hero_jVaWmY",
     "section_zELtyM",
     "layered_image_with_text_LEPfjJ",
+    "featured_bundle_grid_6jFGFr",
     "custom_cards_slider_pyJahK",
     "section_ibM3ft",
     "steps_guide_GFjEFb",
