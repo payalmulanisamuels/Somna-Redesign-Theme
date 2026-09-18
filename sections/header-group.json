@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Free US Standard Shipping",
+            "text": "Free shipping, always.",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -34,14 +34,14 @@
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/footer-curved.svg",
+        "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
         "speed": 5,
         "section_width": "page-width",
         "background_color": "#071a4b",
         "divider_width": 1,
         "divider_color": "#ffffff",
         "padding-block-start": 15,
-        "padding-block-end": 15
+        "padding-block-end": 0
       }
     },
     "header_section": {
@@ -83,6 +83,7 @@
         }
       },
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/header-bottom.svg",
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
@@ -109,7 +110,7 @@
         "actions_font_size": "0.875rem",
         "actions_font": "body",
         "actions_text_case": "none",
-        "background_color_top": "#fff9ed",
+        "background_color_top": "{{ settings.color_palette.background }}",
         "text_color_top": "#071a4b",
         "background_color_bottom": "",
         "text_color_bottom": "",
