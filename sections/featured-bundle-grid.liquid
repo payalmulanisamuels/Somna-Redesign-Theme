@@ -1,210 +1,152 @@
 {%- style -%}
   /* --- 1. Section & Container Wrappers --- */
-  .bundle-section-{{ section.id }} {
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
-    background-color: {{ section.settings.bg_color }};
-    overflow-x: clip; /* Prevents mobile horizontal scroll */
-    width: 100%;
-  }
+.bundle-section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  background-color: {{ section.settings.bg_color }};
+  overflow-x: clip; /* Prevents mobile horizontal scroll */
+  width: 100%;
+}
+/* --- 2. Grid Layout --- */
+.bundle-section__grid {
+  display: grid;
+  /* Use minmax(0, 1fr) so contents can shrink inside columns */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .bundle-section__container {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 16px;
-    box-sizing: border-box;
-    width: 100%;
-  }
+/* --- 3. Standard Cards --- */
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  box-shadow: 0px 0px 4px 0px #00000040;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 10px;
+}
+.bundle-card__image-wrapper {
+  position: relative;
+  border-radius: 7px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #f4f4f4;
+}
+.bundle-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
 
-  .bundle-section__heading {
-    text-align: center;
-    font-family: serif;
-    font-size: clamp(1.8rem, 3.5vw, 3rem);
-    color: #11224d;
-    margin-bottom: 24px;
-    font-weight: 500;
-  }
+.bundle-card:hover .bundle-card__image {
+  transform: scale(1.03);
+}
 
-  /* --- 2. Grid Layout --- */
-  .bundle-section__grid {
-    display: grid;
-    /* Use minmax(0, 1fr) so contents can shrink inside columns */
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+.bundle-card__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
 
-  /* --- 3. Standard Cards --- */
-  .bundle-card {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
+.bundle-card__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
 
-  .bundle-card__image-wrapper {
-    position: relative;
-    border-radius: 14px;
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-    background: #f4f4f4;
-  }
+.bundle-card__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin:0;
+}
 
-  .bundle-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
+.bundle-card__price {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0 0 2px 0;
+}
+.bundle-card__content-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+.bundle-card__subtext {
+  font-size: 9px;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1;
+}
 
-  .bundle-card:hover .bundle-card__image {
-    transform: scale(1.03);
-  }
+.bundle-card__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: var(--color-text);
+  color: #ffffff !important;
+  text-decoration: none;
+  padding: 4px 9px;
+  border-radius: 9999px;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1;
+  transition: background-color 0.2s ease;
+}
 
-  .bundle-card__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    gap: 8px;
-    min-width: 0;
-  }
+.bundle-card__button:hover {
+  background-color: var(--color-text);
+}
 
-  .bundle-card__info {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
+.bundle-card__button svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
 
-  .bundle-card__title {
-    font-size: clamp(0.9rem, 1.2vw, 1.15rem);
-    font-weight: 700;
-    color: #11224d;
-    margin: 0 0 2px 0;
-    line-height: 1.2;
-  }
+/* --- 4. Featured Large Card --- */
+.bundle-card--featured {
+  grid-column: span 2;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
 
-  .bundle-card__price {
-    font-size: clamp(0.9rem, 1.2vw, 1.15rem);
-    font-weight: 800;
-    color: #11224d;
-    margin: 0 0 2px 0;
-  }
+.bundle-card--featured .bundle-card__image-wrapper {
+  aspect-ratio: 15 / 10;
+  height: 100%;
+}
+.bundle-card--featured .bundle-card__title {
+  font-size: 14px;
+}
+.bundle-card--featured .bundle-card__content-wrapper {
+    flex-wrap: wrap;
+}
+.bundle-card--featured .bundle-card__price {
+  font-size: 14px;
+}
 
-  .bundle-card__subtext {
-    font-size: clamp(0.75rem, 1vw, 0.85rem);
-    color: #4a5568;
-    margin: 0;
-  }
+.bundle-card--featured .bundle-card__button {
+  padding: 7px 13px;
+  margin-top: 8px;
+}
 
-  .bundle-card__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background-color: #11224d;
-    color: #ffffff !important;
-    text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 9999px;
-    font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.2s ease;
-  }
-
-  .bundle-card__button:hover {
-    background-color: #1d3570;
-  }
-
-  .bundle-card__button svg {
-    width: 12px;
-    height: 12px;
-    flex-shrink: 0;
-  }
-
-  /* --- 4. Featured Large Card --- */
-  .bundle-card--featured {
-    grid-column: span 2;
-    background-color: #ffffff;
-    border-radius: 18px;
-    padding: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .bundle-card--featured .bundle-card__image-wrapper {
-    aspect-ratio: 16 / 10;
-    height: 100%;
-  }
-
-  .bundle-card--featured .bundle-card__content {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 0;
-    gap: 12px;
-  }
-
-  .bundle-card--featured .bundle-card__title {
-    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
-  }
-
-  .bundle-card--featured .bundle-card__price {
-    font-size: clamp(1.2rem, 2.5vw, 1.85rem);
-  }
-
-  .bundle-card--featured .bundle-card__button {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-  }
-
-  /* --- 5. Mobile Adjustments (Max 640px) --- */
-  @media screen and (max-width: 640px) {
-    .bundle-section__grid {
-      gap: 10px;
-    }
-
-    .bundle-card__content {
-      flex-direction: column;
-      align-items: stretch; /* Button stretches to fit full card width */
-      gap: 8px;
-    }
-
-    .bundle-card__button {
-      width: 100%;
-      box-sizing: border-box;
-      white-space: normal; /* Allows text to wrap, fixing horizontal overflow */
-      text-align: center;
-      font-size: 11px;
-      padding: 6px 8px;
-    }
-
-    .bundle-card__button svg {
-      display: none; /* Hides arrow to save space on mobile */
-    }
-
-    .bundle-card--featured {
-      grid-template-columns: 1fr; /* Stack image and text vertically */
-      padding: 12px;
-      gap: 12px;
-    }
-
-    .bundle-card--featured .bundle-card__button {
-      width: 100%;
-    }
-  }
 {%- endstyle -%}
 
 <section class="bundle-section-{{ section.id }}">
-  <div class="bundle-section__container">
+  <div class="section section--page-width">
     {%- if section.settings.heading != blank -%}
-      <h2 class="bundle-section__heading">{{ section.settings.heading }}</h2>
+      <h2 class="custom-header">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
     <div class="bundle-section__grid">
@@ -234,11 +176,15 @@
           </div>
 
           <div class="bundle-card__content">
-            <div class="bundle-card__info">
-              {%- if title != blank -%}
+            {%- if title != blank -%}
                 <h3 class="bundle-card__title">{{ title }}</h3>
               {%- endif -%}
 
+
+          <div class="bundle-card__content-wrapper">
+
+            <div class="bundle-card__info">
+            
               {%- if product != blank -%}
                 <p class="bundle-card__price">{{ price }}</p>
               {%- endif -%}
@@ -257,6 +203,9 @@
                 </svg>
               </a>
             {%- endif -%}
+          </div>
+
+
           </div>
         </div>
       {%- endfor -%}
@@ -283,7 +232,7 @@
     {
       "type": "range",
       "id": "padding_top",
-      "min": 20,
+      "min": 10,
       "max": 100,
       "step": 5,
       "unit": "px",
@@ -293,7 +242,7 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "min": 20,
+      "min": 10,
       "max": 100,
       "step": 5,
       "unit": "px",

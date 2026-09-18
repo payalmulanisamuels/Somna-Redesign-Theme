@@ -5,17 +5,6 @@
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
 %}
-
-<div
-  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-></div>
-<div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-{% if section.settings.background_image != blank %}
-style="background-image:url({{ section.settings.background_image |  image_url }});background-size: cover;background-position: center;"
-{% endif %}
->
-
  {% comment %} Top Wave Divider {% endcomment %}
 
 {% if section.settings.top_wave_image != blank %}
@@ -42,6 +31,18 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
     />
 </div>
 {% endif %}
+
+<div
+  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+></div>
+<div
+  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+{% if section.settings.background_image != blank %}
+style="background-image:url({{ section.settings.background_image |  image_url }});background-size: cover;background-position: center;"
+{% endif %}
+>
+
+
  
 
  
