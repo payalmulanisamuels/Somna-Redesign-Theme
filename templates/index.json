@@ -131,7 +131,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
+                "text_color": "#0A1A4A",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
