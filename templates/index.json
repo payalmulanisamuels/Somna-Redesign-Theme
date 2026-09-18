@@ -1025,7 +1025,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Two products, <br/>applied nightly,<br/>no machines, no learning <br/>curve.</p>",
+                    "text": "<p>Two products, <br/>applied nightly,<br/>no machines, no <br/>learning curve.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
