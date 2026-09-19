@@ -26,7 +26,9 @@
 search-button.search-action.search-action--hidden-on-menu {
     display: none;
 }
-
+.header-actions__action:not(.account-button) .svg-wrapper {
+    width: 38px;
+}
 #header-component[data-menu-style=drawer] .header__drawer{
     --header-drawer-min-height: 30px;
 }
