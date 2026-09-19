@@ -9,8 +9,8 @@
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   justify-content: flex-start;
   flex: 1;
 }
