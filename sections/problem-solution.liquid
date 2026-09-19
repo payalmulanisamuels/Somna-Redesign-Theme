@@ -30,6 +30,8 @@
       {% endif %}
     </div>
 
+    {% if section.settings.solution_heading != blank %}
+
     {% comment %} Arrow Indicator {% endcomment %}
     <div class="hz-ps-arrow-wrapper">
       <div class="hz-ps-arrow-circle">
@@ -39,23 +41,26 @@
         </svg>
       </div>
     </div>
+    {% endif %}
 
-    {% comment %} Solution Column {% endcomment %}
-    <div class="hz-ps-col hz-ps-solution">
-      {% if section.settings.solution_tag != blank %}
-        <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
-      {% endif %}
+    {% if section.settings.solution_heading != blank %}
+        {% comment %} Solution Column {% endcomment %}
+        <div class="hz-ps-col hz-ps-solution">
+        {% if section.settings.solution_tag != blank %}
+            <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
+        {% endif %}
 
-      {%  assign solution = section.settings.solution_heading | split:'|' %}
+        {%  assign solution = section.settings.solution_heading | split:'|' %}
 
-      {% if solution[0] != blank %}
-        <h3 class="hz-ps-heading">{{ solution[0] }}</h3>
-      {% endif %}
+        {% if solution[0] != blank %}
+            <h3 class="hz-ps-heading">{{ solution[0] }}</h3>
+        {% endif %}
 
-      {% if solution[1] != blank %}
-        <div class="hz-ps-text">{{ solution[1] }}</div>
-      {% endif %}
-    </div>
+        {% if solution[1] != blank %}
+            <div class="hz-ps-text">{{ solution[1] }}</div>
+        {% endif %}
+        </div>
+    {% endif %}
   </div>
 
   {% comment %} Bottom Wave Image Divider {% endcomment %}
