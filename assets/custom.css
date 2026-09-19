@@ -18,7 +18,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  gap: 22px;
+  gap: 16px;
 }
 .header__columns.spacing-style {
     display: flex;
