@@ -6,6 +6,9 @@
 *:focus-visible {
     outline: none;
 }
+html[scroll-lock] .wave-container {
+    z-index: 11;
+}
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
