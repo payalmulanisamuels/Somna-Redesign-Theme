@@ -138,7 +138,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<h5>New arrivals</h5>",
+                    "text": "<h5>{{ closest.product.metafields.custom.sub_headline.value }}</h5>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
