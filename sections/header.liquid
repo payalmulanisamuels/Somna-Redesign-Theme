@@ -81,8 +81,6 @@
   endif
 
   capture logo
-    content_for 'block', type: '_header-logo', id: 'header-logo'
-    content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'mobile'
   endcapture
 
   capture menu
@@ -90,10 +88,10 @@
   endcapture
 
   capture drawer_menu
+    content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'mobile'
   endcapture
 
   capture navigation_bar
-    content_for 'block', type: '_header-menu', id: 'header-menu', variant: 'navigation_bar', transparent: transparent
   endcapture
 
   assign has_navigation_bar = false
