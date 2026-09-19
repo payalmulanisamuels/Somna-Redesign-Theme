@@ -46,12 +46,14 @@
         <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
       {% endif %}
 
-      {% if section.settings.solution_heading != blank %}
-        <h3 class="hz-ps-heading">{{ section.settings.solution_heading }}</h3>
+      {%  assign solution = section.settings.solution_heading | split:'|' %}
+
+      {% if solution[0] != blank %}
+        <h3 class="hz-ps-heading">{{ solution[0] }}</h3>
       {% endif %}
 
-      {% if section.settings.solution_text != blank %}
-        <div class="hz-ps-text">{{ section.settings.solution_text }}</div>
+      {% if solution[1] != blank %}
+        <div class="hz-ps-text">{{ solution[1] }}</div>
       {% endif %}
     </div>
   </div>
