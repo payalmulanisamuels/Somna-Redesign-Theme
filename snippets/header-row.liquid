@@ -13,6 +13,7 @@
   @param {string} [search] - Captured HTML for search input
   @param {string} [drawer_search] - Captured HTML for drawer-based search
 {% enddoc %}
+
 {%- liquid
   assign order = order | split: ','
   assign left = ''
@@ -51,3 +52,46 @@
 
   assign columns = 'left,center,right' | split: ','
 -%}
+
+{%- for column in columns -%}
+  {%- capture items_for_column -%}
+    {% case column %}
+      {% when 'left' %}
+        {{ left }}
+      {% when 'center' %}
+        {{ center }}
+      {% else %}
+        {{ right }}
+    {% endcase %}
+  {%- endcapture -%}
+
+  {%- assign items_array = items_for_column | strip | split: ' ' | compact -%}
+
+  {%- if items_array.size > 0 -%}
+    <div
+      class="header__column header__column--{{ column }}"
+      data-testid="header-{{ row }}-{{ column }}"
+    >
+      {% for key in items_array %}
+        {% unless key == blank %}
+          {% case key %}
+            {% when 'first' %}
+              {{ first }}
+            {% when 'logo' %}
+              {{ logo }}
+            {% when 'menu' %}
+              {{ menu }}
+            {% when 'localization' %}
+              {{ localization }}
+            {% when 'search' %}
+              {{ search }}
+            {% when 'drawer_search' %}
+              {{ drawer_search }}
+            {% when 'actions' %}
+              {{ actions }}
+          {% endcase %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  {%- endif -%}
+{%- endfor -%}
