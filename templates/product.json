@@ -1152,7 +1152,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Strips open your nasal passages so you<br/>breathe easier through the night. Tape<br/>encourages nasal breathing instead <br/>of mouth breathing while you sleep. <br/>Used together, they support one simple<br/>habit breathingthe way your body<br/> actually rests best.</p>",
+                "text": "{{ closest.product.metafields.custom.comparison | metafield_tag }}",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
