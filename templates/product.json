@@ -244,19 +244,6 @@
                 "product": "{{closest.product}}"
               }
             },
-            "quantity_mNyJFN": {
-              "type": "quantity",
-              "name": "t:names.quantity",
-              "settings": {
-                "input_style": "default",
-                "input_background_color": "{{ settings.color_palette.background }}",
-                "input_text_color": "{{ settings.color_palette.foreground }}",
-                "input_border_color": "{{ settings.color_palette.foreground }}",
-                "border_width": 1,
-                "border_radius": 0
-              },
-              "blocks": {}
-            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -471,7 +458,6 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "subscriptions_app_block_mgq3DE",
-            "quantity_mNyJFN",
             "buy_buttons_eYQEYi",
             "accordion_63cAMn"
           ]
