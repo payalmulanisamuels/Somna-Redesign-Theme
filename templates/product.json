@@ -1715,7 +1715,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
+                "text": "<p>{{ closest.product.metafields.custom.bottom_section.value.headline.value }}</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1740,7 +1740,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
+                "text": "<p>{{ closest.product.metafields.custom.bottom_section.value.content.value }}</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1766,7 +1766,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Add to bag →",
+                "label": "{{ closest.product.metafields.custom.bottom_section.value.button.value }}",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
