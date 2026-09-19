@@ -1,0 +1,273 @@
+<div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  {% comment %} Top Wave Image Divider {% endcomment %}
+  {% if section.settings.top_wave_image != blank %}
+    <div class="hz-ps-wave hz-ps-wave--top">
+      <img 
+        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+        alt="" 
+        loading="lazy" 
+        class="hz-ps-wave-img"
+      />
+    </div>
+  {% endif %}
+
+  <div class="hz-ps-container">
+    {% comment %} Problem Column {% endcomment %}
+    <div class="hz-ps-col hz-ps-problem">
+      {% if section.settings.problem_tag != blank %}
+        <span class="hz-ps-tag">{{ section.settings.problem_tag }}</span>
+      {% endif %}
+
+      {% if section.settings.problem_heading != blank %}
+        <h3 class="hz-ps-heading">{{ section.settings.problem_heading }}</h3>
+      {% endif %}
+
+      {% if section.settings.problem_text != blank %}
+        <div class="hz-ps-text">{{ section.settings.problem_text }}</div>
+      {% endif %}
+    </div>
+
+    {% comment %} Arrow Indicator {% endcomment %}
+    <div class="hz-ps-arrow-wrapper">
+      <div class="hz-ps-arrow-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    {% comment %} Solution Column {% endcomment %}
+    <div class="hz-ps-col hz-ps-solution">
+      {% if section.settings.solution_tag != blank %}
+        <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
+      {% endif %}
+
+      {% if section.settings.solution_heading != blank %}
+        <h3 class="hz-ps-heading">{{ section.settings.solution_heading }}</h3>
+      {% endif %}
+
+      {% if section.settings.solution_text != blank %}
+        <div class="hz-ps-text">{{ section.settings.solution_text }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% comment %} Bottom Wave Image Divider {% endcomment %}
+  {% if section.settings.bottom_wave_image != blank %}
+    <div class="hz-ps-wave hz-ps-wave--bottom">
+      <img 
+        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+        alt="" 
+        loading="lazy" 
+        class="hz-ps-wave-img"
+      />
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .hz-prob-sol-section {
+    position: relative;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .hz-ps-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hz-ps-wave--top {
+    top: 0;
+  }
+
+  .hz-ps-wave--bottom {
+    bottom: -1px;
+  }
+
+  .hz-ps-wave-img {
+    display: block;
+    width: 100%;
+    height: 60px;
+    object-fit: fill;
+  }
+
+  .hz-ps-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hz-ps-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hz-ps-tag {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1255e3;
+    margin-bottom: 12px;
+  }
+
+  .hz-ps-heading {
+    font-size: 34px;
+    font-weight: 400;
+    font-family: serif;
+    color: #0d1e3a;
+    line-height: 1.25;
+    margin: 0 0 16px 0;
+  }
+
+  .hz-ps-text {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #26354a;
+    font-weight: 400;
+  }
+
+  .hz-ps-text p {
+    margin: 0;
+  }
+
+  /* Center Arrow */
+  .hz-ps-arrow-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hz-ps-arrow-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #a4f4e7;
+    border: 1.5px solid #0d1e3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0d1e3a;
+  }
+
+  /* Mobile Layout */
+  @media (max-width: 768px) {
+    .hz-prob-sol-section {
+      padding: 50px 20px;
+    }
+
+    .hz-ps-wave-img {
+      height: 35px;
+    }
+
+    .hz-ps-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    .hz-ps-heading {
+      font-size: 26px;
+    }
+
+    .hz-ps-text {
+      font-size: 15px;
+    }
+
+    .hz-ps-arrow-wrapper {
+      align-self: center;
+      transform: rotate(90deg);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Problem Solution",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "header",
+      "content": "Problem Settings"
+    },
+    {
+      "type": "text",
+      "id": "problem_tag",
+      "label": "Tag",
+      "default": "PROBLEM"
+    },
+    {
+      "type": "text",
+      "id": "problem_heading",
+      "label": "Heading",
+      "default": "Restless, disrupted sleep"
+    },
+    {
+      "type": "richtext",
+      "id": "problem_text",
+      "label": "Description",
+      "default": "<p>from struggling to breathe through the nose tossing, turning, waking up more tired than you went to bed.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Solution Settings"
+    },
+    {
+      "type": "text",
+      "id": "solution_tag",
+      "label": "Tag",
+      "default": "SOLUTION"
+    },
+    {
+      "type": "text",
+      "id": "solution_heading",
+      "label": "Heading",
+      "default": "Strips are designed"
+    },
+    {
+      "type": "richtext",
+      "id": "solution_text",
+      "label": "Description",
+      "default": "<p>to gently open your nasal passages, making it easier to breathe through your nose instead of your mouth as you fall asleep.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top Wave SVG Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom Wave SVG Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem Solution"
+    }
+  ]
+}
+{% endschema %}
