@@ -1070,33 +1070,16 @@
       "blocks": {
         "step_a9NE7E": {
           "type": "step",
+          "repeater": "{{ product.metafields.custom.how_to_use.value }}",
           "settings": {
-            "step_number": "01",
-            "image": "shopify://shop_images/step1.png",
-            "title": "<p>Clean & dry</p>"
-          }
-        },
-        "step_Xi3rtx": {
-          "type": "step",
-          "settings": {
-            "step_number": "02",
-            "image": "shopify://shop_images/step2.png",
-            "title": "<p>Peel & place</p>"
-          }
-        },
-        "step_dwFEQe": {
-          "type": "step",
-          "settings": {
-            "step_number": "03",
-            "image": "shopify://shop_images/step3.png",
-            "title": "<p>Press gently</p>"
+            "step_number": "",
+            "image": "{{ block.repeater.image.value }}",
+            "title": "{{ block.repeater.content | metafield_tag }}"
           }
         }
       },
       "block_order": [
-        "step_a9NE7E",
-        "step_Xi3rtx",
-        "step_dwFEQe"
+        "step_a9NE7E"
       ],
       "name": "Steps Guide",
       "settings": {
