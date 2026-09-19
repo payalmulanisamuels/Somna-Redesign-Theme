@@ -943,7 +943,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>How It Works</h2>",
+                "text": "<h2>{{ closest.product.metafields.custom.how_it_works.value.heading.value }}</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -968,7 +968,7 @@
             "text_zgLpxc": {
               "type": "text",
               "settings": {
-                "text": "<p>Flexible fabric backing, a gentle spring structure, and a hypoallergenic adhesive layer designed to stay comfortable through the night without irritating skin.</p>",
+                "text": "{{ closest.product.metafields.custom.how_it_works.value.content | metafield_tag }}",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -999,7 +999,7 @@
         "image_eLbtcy": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/pdpimage.png",
+            "image": "{{ closest.product.metafields.custom.how_it_works.value.image.value }}",
             "link": "",
             "image_ratio": "square",
             "width": "fill",
