@@ -13,19 +13,7 @@
 
 {% case variant %}
   {% when 'mobile' %}
-    <div
-      class="header__drawer"
-      ref="headerDrawerContainer"
-      data-hydration-key="header-drawer-mobile"
-      {{ block.shopify_attributes }}
-    >
-      {% render 'header-drawer',
-        linklist: block_settings.menu,
-        data_header_drawer_type: 'mobile-drawer',
-        block: block,
-        section: section
-      %}
-    </div>
+
 
   {% when 'navigation_bar' %}
     {% if block_settings.navigation_bar == true %}
