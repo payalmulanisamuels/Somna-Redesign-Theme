@@ -1,15 +1,5 @@
 <div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
-  {% comment %} Top Wave Image Divider {% endcomment %}
-  {% if section.settings.top_wave_image != blank %}
-    <div class="hz-ps-wave hz-ps-wave--top">
-      <img 
-        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-        alt="" 
-        loading="lazy" 
-        class="hz-ps-wave-img"
-      />
-    </div>
-  {% endif %}
+  
 
   <div class="section section--page-width">
   <div class="hz-ps-container">
@@ -62,18 +52,7 @@
         </div>
     {% endif %}
   </div>
-
-  {% comment %} Bottom Wave Image Divider {% endcomment %}
-  {% if section.settings.bottom_wave_image != blank %}
-    <div class="hz-ps-wave hz-ps-wave--bottom">
-      <img 
-        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
-        alt="" 
-        loading="lazy" 
-        class="hz-ps-wave-img"
-      />
-    </div>
-  {% endif %}
+ 
 </div>
 </div>
 
@@ -83,31 +62,7 @@
     padding: 80px 24px;
     overflow: hidden;
   }
-
-  .hz-ps-wave {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    line-height: 0;
-    pointer-events: none;
-    z-index: 3;
-  }
-
-  .hz-ps-wave--top {
-    top: 0;
-  }
-
-  .hz-ps-wave--bottom {
-    bottom: -1px;
-  }
-
-  .hz-ps-wave-img {
-    display: block;
-    width: 100%;
-    height: 60px;
-    object-fit: fill;
-  }
-
+  
   .hz-ps-container {
     max-width: 1100px;
     margin: 0 auto;
@@ -175,35 +130,7 @@
     color: #0d1e3a;
   }
 
-  /* Mobile Layout */
-  @media (max-width: 768px) {
-    .hz-prob-sol-section {
-      padding: 50px 20px;
-    }
-
-    .hz-ps-wave-img {
-      height: 35px;
-    }
-
-    .hz-ps-container {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 30px;
-    }
-
-    .hz-ps-heading {
-      font-size: 26px;
-    }
-
-    .hz-ps-text {
-      font-size: 15px;
-    }
-
-    .hz-ps-arrow-wrapper {
-      align-self: center;
-      transform: rotate(90deg);
-    }
-  }
+ 
 </style>
 
 {% schema %}
