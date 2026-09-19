@@ -911,6 +911,47 @@
         "padding-block-end": 0
       }
     },
+    "steps_guide_GFjEFb": {
+      "type": "steps-guide",
+      "blocks": {
+        "step_a9NE7E": {
+          "type": "step",
+          "settings": {
+            "step_number": "01",
+            "image": "shopify://shop_images/step1.png",
+            "title": "Clean & dry"
+          }
+        },
+        "step_Xi3rtx": {
+          "type": "step",
+          "settings": {
+            "step_number": "02",
+            "image": "shopify://shop_images/step2.png",
+            "title": "Peel & place"
+          }
+        },
+        "step_dwFEQe": {
+          "type": "step",
+          "settings": {
+            "step_number": "03",
+            "image": "shopify://shop_images/step3.png",
+            "title": "Press gently"
+          }
+        }
+      },
+      "block_order": [
+        "step_a9NE7E",
+        "step_Xi3rtx",
+        "step_dwFEQe"
+      ],
+      "name": "Steps Guide",
+      "settings": {
+        "bg_color": "#e0e8d7",
+        "show_waves": true,
+        "title": "<strong>Peel. Place.</strong> <em>Unwind.</em>",
+        "subheading_bottom": "Follow the directions on your pack."
+      }
+    },
     "layered_image_with_text_LEPfjJ": {
       "type": "layered-image-with-text",
       "blocks": {
@@ -918,13 +959,13 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Subtract.png",
+            "image_1": "shopify://shop_images/pdpbanner.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "flex-end",
             "gap": 10,
             "background_color": "",
@@ -942,10 +983,10 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>It's simple.<br/>Breathe through your nose.</p>",
+                "text": "<p>Comparison</p>",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -1029,48 +1070,6 @@
         "button_link": "",
         "padding_top": 28,
         "padding_bottom": 28
-      }
-    },
-    "steps_guide_GFjEFb": {
-      "type": "steps-guide",
-      "blocks": {
-        "step_a9NE7E": {
-          "type": "step",
-          "settings": {
-            "step_number": "01",
-            "image": "shopify://shop_images/step1.png",
-            "title": "Clean & dry"
-          }
-        },
-        "step_Xi3rtx": {
-          "type": "step",
-          "settings": {
-            "step_number": "02",
-            "image": "shopify://shop_images/step2.png",
-            "title": "Peel & place"
-          }
-        },
-        "step_dwFEQe": {
-          "type": "step",
-          "settings": {
-            "step_number": "03",
-            "image": "shopify://shop_images/step3.png",
-            "title": "Press gently"
-          }
-        }
-      },
-      "block_order": [
-        "step_a9NE7E",
-        "step_Xi3rtx",
-        "step_dwFEQe"
-      ],
-      "disabled": true,
-      "name": "Steps Guide",
-      "settings": {
-        "bg_color": "#e0e8d7",
-        "show_waves": true,
-        "title": "<strong>Peel. Place.</strong> <em>Unwind.</em>",
-        "subheading_bottom": "Follow the directions on your pack."
       }
     },
     "section_BbCdDx": {
@@ -1670,9 +1669,9 @@
   "order": [
     "main",
     "section_zELtyM",
+    "steps_guide_GFjEFb",
     "layered_image_with_text_LEPfjJ",
     "bundle_feature_banner_Qrgcy3",
-    "steps_guide_GFjEFb",
     "section_BbCdDx",
     "section_HiaPwG",
     "footer_m9NzUG"
