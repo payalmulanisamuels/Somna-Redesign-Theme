@@ -1767,7 +1767,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "{{ closest.product.metafields.custom.bottom_section.value.button.value }}",
-                "link": "shopify://collections/all",
+                "link": "{{ product.metafields.custom.bottom_section.value.url.value }}",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -1794,7 +1794,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/footer-email.jpg",
+        "background_image": "{{ product.metafields.custom.bottom_section.value.image.value }}",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
