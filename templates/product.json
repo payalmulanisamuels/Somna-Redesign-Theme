@@ -897,6 +897,19 @@
         "padding-block-end": 0
       }
     },
+    "problem_solution_bcG9jR": {
+      "type": "problem-solution",
+      "name": "Problem Solution",
+      "settings": {
+        "bg_color": "#fdf8ee",
+        "problem_tag": "PROBLEM",
+        "problem_heading": "{{ product.metafields.custom.problem.value }}",
+        "problem_text": "",
+        "solution_tag": "SOLUTION",
+        "solution_heading": "Strips are designed",
+        "solution_text": "<p>to gently open your nasal passages, making it easier to breathe through your nose instead of your mouth as you fall asleep.</p>"
+      }
+    },
     "section_QGgpqD": {
       "type": "section",
       "blocks": {
@@ -1812,6 +1825,7 @@
   "order": [
     "main",
     "section_zELtyM",
+    "problem_solution_bcG9jR",
     "section_QGgpqD",
     "steps_guide_GFjEFb",
     "layered_image_with_text_LEPfjJ",
