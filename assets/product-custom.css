@@ -12,3 +12,9 @@
     border-radius: 12px;
     font-size: 15px;
 }
+.variant-option--buttons legend {
+    font-size: 15px;
+    color: #0A1A4A;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
