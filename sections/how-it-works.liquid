@@ -56,7 +56,7 @@
         <div class="hz-hiw-single-row">
           <div class="hz-hiw-single-content">
             <h2 class="hz-hiw-single-title">
-              {{ single_item.heading | default: section.settings.heading }}
+              {{ single_item.heading | metafield_tag }}
             </h2>
             {% if single_item.content != blank %}
               <div class="hz-hiw-single-desc">
