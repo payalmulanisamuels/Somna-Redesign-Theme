@@ -21,3 +21,20 @@
 .variant-option__button-label {
     border: 1px solid #E5E5EA;
 }
+.subscription_group {
+    border: 1px solid #E1E6EB !important;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+.plan_card {
+    border: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+.subscription_group:has(input[type="radio"]:checked) {
+  border-color: #0A4FD6 !important;
+  background:#FCF9F5;
+}
