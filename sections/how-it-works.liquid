@@ -1,21 +1,11 @@
 {%- assign how_it_works_items = product.metafields.custom.how_it_works.value -%}
 {%- assign item_count = how_it_works_items.count | default: how_it_works_items.size -%}
 
+
+{{item_count }}
 {%- if item_count > 0 -%}
   <div class="hz-hiw-section" id="hz-hiw-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
-    
-    {% comment %} Top Wave Divider {% endcomment %}
-    {% if section.settings.top_wave_image != blank %}
-      <div class="hz-hiw-wave hz-hiw-wave--top">
-        <img 
-          src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-          alt="" 
-          loading="lazy" 
-          class="hz-hiw-wave-img"
-        />
-      </div>
-    {% endif %}
-
+   
     <div class="hz-hiw-container">
       {%- if item_count > 1 -%}
         {% comment %} ========================================================
