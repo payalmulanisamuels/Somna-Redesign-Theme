@@ -43,3 +43,7 @@
     font-size: 13px;
     font-weight: 700;
 }
+.custom_radio_button:has(input[type='radio']:checked):before{
+    border: 2px solid #0A4FD6 !important;
+    background: #0A4FD6 !important
+}
