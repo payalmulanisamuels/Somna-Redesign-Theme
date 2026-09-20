@@ -1086,7 +1086,7 @@
         "bg_color": "#e0e8d7",
         "show_waves": true,
         "title": "How To Use",
-        "subheading_bottom": "Follow the directions on your pack."
+        "subheading_bottom": "{{ product.metafields.custom.how_to_use_subtext.value }}"
       }
     },
     "layered_image_with_text_LEPfjJ": {
@@ -1383,7 +1383,8 @@
           "repeater": "{{ product.metafields.custom.faq.value }}",
           "settings": {
             "question": "{{ block.repeater.question.value }}",
-            "answer": "<p>{{ block.repeater.answer_content.value }}</p>"
+            "answer": "<p>{{ block.repeater.answer_content.value }}</p>",
+            "default_open": false
           }
         }
       },
