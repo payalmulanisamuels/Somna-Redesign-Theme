@@ -1083,6 +1083,8 @@
       ],
       "name": "Steps Guide",
       "settings": {
+        "top_wave_image": "shopify://shop_images/real-top-svg.svg",
+        "bottom_wave_image": "shopify://shop_images/real-bottom-svg.svg",
         "bg_color": "#e0e8d7",
         "show_waves": true,
         "title": "How To Use",
