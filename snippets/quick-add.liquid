@@ -133,12 +133,12 @@
       name="add"
       on:click="quick-add-component/handleClick"
     >
-      <span
+      {% comment %} <span
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
       >
         {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-      </span>
+      </span> {% endcomment %}
       {{- choose_options_text -}}
     </button>
   {% endif %}
