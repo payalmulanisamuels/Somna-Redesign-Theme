@@ -23,15 +23,15 @@
                   {% if item.heading != blank %}
                     <h3 class="hz-hiw-card-title">{{ item.heading }}</h3>
                   {% endif %}
-                  {% if item.description != blank %}
-                    <div class="hz-hiw-card-desc">{{ item.description | metafield_tag }}</div>
+                  {% if item.content != blank %}
+                    <div class="hz-hiw-card-desc">{{ item.content | metafield_tag }}</div>
                   {% endif %}
                 </div>
 
-                {% if item.product_image != blank %}
+                {% if item.image != blank %}
                   <div class="hz-hiw-card-pouch">
                     <img 
-                      src="{{ item.product_image | image_url: width: 300 }}" 
+                      src="{{ item.image | image_url: width: 300 }}" 
                       alt="{{ item.title | escape }}"
                       loading="lazy"
                     />
