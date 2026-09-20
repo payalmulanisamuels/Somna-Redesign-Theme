@@ -20,8 +20,8 @@
             <div class="hz-hiw-card">
               <div class="hz-hiw-card-header">
                 <div class="hz-hiw-card-info">
-                  {% if item.title != blank %}
-                    <h3 class="hz-hiw-card-title">{{ item.title }}</h3>
+                  {% if item.heading != blank %}
+                    <h3 class="hz-hiw-card-title">{{ item.heading }}</h3>
                   {% endif %}
                   {% if item.description != blank %}
                     <div class="hz-hiw-card-desc">{{ item.description | metafield_tag }}</div>
