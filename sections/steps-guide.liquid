@@ -31,7 +31,7 @@
     
 
     {% if section.settings.title != blank %}
-      <h2 class="steps-heading custom-header">{{ section.settings.title }}</h2>
+      <h2 class="custom-header">{{ section.settings.title }}</h2>
     {% endif %}
 
     <div class="steps-grid">
@@ -85,7 +85,7 @@
   .steps-grid {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
     margin-bottom: 36px;
   }
   .step-card {
@@ -125,14 +125,7 @@
     font-weight: 600;
   }
 
-  @media (max-width: 768px) {
-    .steps-grid {
-      gap: 40px;
-    }
-    .steps-heading {
-      font-size: 32px;
-    }
-  }
+
 </style>
 
 {% schema %}
