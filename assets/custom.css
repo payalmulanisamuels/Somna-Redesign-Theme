@@ -9,10 +9,7 @@
 html[scroll-lock] .wave-container {
     z-index: 11;
 }
-.footer-content a.button {
-    font-size: 10px;
-    padding: 6px 16px;
-}
+
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
