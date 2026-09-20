@@ -1,0 +1,343 @@
+{%- assign how_it_works_items = product.metafields.custom.how_it_works.value -%}
+{%- assign item_count = how_it_works_items.count | default: how_it_works_items.size -%}
+
+{%- if item_count > 0 -%}
+  <div class="hz-hiw-section" id="hz-hiw-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+    
+    {% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+      <div class="hz-hiw-wave hz-hiw-wave--top">
+        <img 
+          src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+          alt="" 
+          loading="lazy" 
+          class="hz-hiw-wave-img"
+        />
+      </div>
+    {% endif %}
+
+    <div class="hz-hiw-container">
+      {%- if item_count > 1 -%}
+        {% comment %} ========================================================
+          LAYOUT A: 2+ Items (Double Card View)
+        ======================================================== {% endcomment %}
+        {% if section.settings.heading != blank %}
+          <h2 class="hz-hiw-main-title">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        <div class="hz-hiw-grid">
+          {% for item in how_it_works_items %}
+            <div class="hz-hiw-card">
+              <div class="hz-hiw-card-header">
+                <div class="hz-hiw-card-info">
+                  {% if item.title != blank %}
+                    <h3 class="hz-hiw-card-title">{{ item.title }}</h3>
+                  {% endif %}
+                  {% if item.description != blank %}
+                    <div class="hz-hiw-card-desc">{{ item.description | metafield_tag }}</div>
+                  {% endif %}
+                </div>
+
+                {% if item.product_image != blank %}
+                  <div class="hz-hiw-card-pouch">
+                    <img 
+                      src="{{ item.product_image | image_url: width: 300 }}" 
+                      alt="{{ item.title | escape }}"
+                      loading="lazy"
+                    />
+                  </div>
+                {% endif %}
+              </div>
+
+              {% if item.detail_image != blank %}
+                <div class="hz-hiw-card-bottom-image">
+                  <img 
+                    src="{{ item.detail_image | image_url: width: 500 }}" 
+                    alt="{{ item.title | escape }}"
+                    loading="lazy"
+                  />
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+      {%- else -%}
+        {% comment %} ========================================================
+          LAYOUT B: 1 Item (Single Exploded View)
+        ======================================================== {% endcomment %}
+        {% assign single_item = how_it_works_items.first %}
+        <div class="hz-hiw-single-row">
+          <div class="hz-hiw-single-content">
+            <h2 class="hz-hiw-single-title">
+              {{ section.settings.heading | default: single_item.title }}
+            </h2>
+            {% if single_item.description != blank %}
+              <div class="hz-hiw-single-desc">
+                {{ single_item.description | metafield_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% assign diagram_img = single_item.detail_image | default: single_item.product_image %}
+          {% if diagram_img != blank %}
+            <div class="hz-hiw-single-media">
+              <img 
+                src="{{ diagram_img | image_url: width: 600 }}" 
+                alt="{{ single_item.title | escape }}"
+                loading="lazy"
+              />
+            </div>
+          {% endif %}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+      <div class="hz-hiw-wave hz-hiw-wave--bottom">
+        <img 
+          src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+          alt="" 
+          loading="lazy" 
+          class="hz-hiw-wave-img"
+        />
+      </div>
+    {% endif %}
+
+  </div>
+{%- endif -%}
+
+<style>
+  .hz-hiw-section {
+    position: relative;
+    padding: 70px 20px;
+    overflow: hidden;
+  }
+
+  .hz-hiw-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .hz-hiw-wave--top { top: 0; }
+  .hz-hiw-wave--bottom { bottom: -1px; }
+
+  .hz-hiw-wave-img {
+    display: block;
+    width: 100%;
+    height: 60px;
+    object-fit: fill;
+  }
+
+  .hz-hiw-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hz-hiw-main-title {
+    text-align: center;
+    font-size: 38px;
+    font-family: serif;
+    font-weight: 500;
+    color: #0b1a30;
+    margin: 0 0 40px 0;
+  }
+
+  /* ------------------- Double Card Layout ------------------- */
+  .hz-hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .hz-hiw-card {
+    background-color: #dceaf7;
+    border-radius: 20px;
+    padding: 30px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hz-hiw-card:nth-child(2) {
+    background-color: #eee9e0;
+  }
+
+  .hz-hiw-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hz-hiw-card-info {
+    flex: 1;
+  }
+
+  .hz-hiw-card-title {
+    font-size: 34px;
+    font-family: serif;
+    font-weight: 600;
+    color: #0b1a30;
+    margin: 0 0 12px 0;
+    line-height: 1.1;
+  }
+
+  .hz-hiw-card-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #172437;
+  }
+
+  .hz-hiw-card-desc p {
+    margin: 0;
+  }
+
+  .hz-hiw-card-pouch {
+    width: 105px;
+    flex-shrink: 0;
+  }
+
+  .hz-hiw-card-pouch img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  .hz-hiw-card-bottom-image {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+
+  .hz-hiw-card-bottom-image img {
+    max-width: 80%;
+    height: auto;
+    display: inline-block;
+  }
+
+  /* ------------------- Single Item Layout ------------------- */
+  .hz-hiw-single-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .hz-hiw-single-content {
+    flex: 1;
+  }
+
+  .hz-hiw-single-title {
+    font-size: 36px;
+    font-family: serif;
+    font-weight: 500;
+    color: #0b1a30;
+    margin: 0 0 16px 0;
+  }
+
+  .hz-hiw-single-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #27374b;
+  }
+
+  .hz-hiw-single-desc p {
+    margin: 0;
+  }
+
+  .hz-hiw-single-media {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hz-hiw-single-media img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* ------------------- Responsive ------------------- */
+  @media (max-width: 768px) {
+    .hz-hiw-section {
+      padding: 50px 18px;
+    }
+    .hz-hiw-wave-img {
+      height: 35px;
+    }
+    .hz-hiw-main-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    .hz-hiw-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .hz-hiw-card {
+      padding: 24px 18px;
+    }
+    .hz-hiw-card-title {
+      font-size: 28px;
+    }
+    .hz-hiw-single-row {
+      flex-direction: column;
+      gap: 30px;
+    }
+    .hz-hiw-single-title {
+      font-size: 30px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "How It Works (Dynamic)",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#fbf7ee"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "How It Works"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top Wave SVG Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom Wave SVG Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works (Dynamic)"
+    }
+  ]
+}
+{% endschema %}
