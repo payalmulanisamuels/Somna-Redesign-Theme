@@ -901,6 +901,7 @@
       "type": "problem-solution",
       "name": "Problem Solution",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-wave.svg",
         "bg_color": "#fdf8ee",
         "problem_tag": "PROBLEM",
         "problem_heading": "{{ product.metafields.custom.problem.value }}",
