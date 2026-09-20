@@ -19,7 +19,7 @@
     letter-spacing: -1px;
 }
 .variant-option__button-label {
-    border: 1px solid #E5E5EA;
+    border: 1px solid #E5E5EA !important;
 }
 .subscription_group {
     border: 1px solid #E1E6EB !important;
@@ -28,7 +28,7 @@
     border-radius: 10px;
 }
 .plan_card {
-    border: 0;
+    border: 0 !important;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
