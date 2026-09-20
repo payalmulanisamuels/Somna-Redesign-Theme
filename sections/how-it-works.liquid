@@ -70,7 +70,7 @@
             {% endif %}
           </div>
 
-          {% assign diagram_img = single_item.detail_image | default: single_item.product_image %}
+          {% assign diagram_img = single_item.image %}
           {% if diagram_img != blank %}
             <div class="hz-hiw-single-media">
               <img 
