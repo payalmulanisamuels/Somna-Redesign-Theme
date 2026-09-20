@@ -536,7 +536,7 @@
                 "text_zjGAzP": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>90-night<br/>guarantee</strong></p>",
+                    "text": "<p><strong>30-night<br/>guarantee</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -662,7 +662,7 @@
                 "text_mznam6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Free US<br/>Shipping</strong></p>",
+                    "text": "<p><strong>Secure<br/>checkout</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1582,7 +1582,7 @@
           "settings": {
             "step_number": "01",
             "image": "shopify://shop_images/step1.png",
-            "title": "Clean & dry"
+            "title": "<p>Clean & dry</p>"
           }
         },
         "step_Xi3rtx": {
@@ -1590,7 +1590,7 @@
           "settings": {
             "step_number": "02",
             "image": "shopify://shop_images/step2.png",
-            "title": "Peel & place"
+            "title": "<p>Peel & place</p>"
           }
         },
         "step_dwFEQe": {
@@ -1598,7 +1598,7 @@
           "settings": {
             "step_number": "03",
             "image": "shopify://shop_images/step3.png",
-            "title": "Press gently"
+            "title": "<p>Press gently</p>"
           }
         }
       },
