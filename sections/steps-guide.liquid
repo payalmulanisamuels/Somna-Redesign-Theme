@@ -45,7 +45,7 @@
             {% if block.settings.image != blank %}
               <img 
                 src="{{ block.settings.image | image_url: width: 300 }}" 
-                alt="{{ block.settings.title | escape }}" 
+                alt="{{ block.settings.image.alt }}" 
                 loading="lazy" 
                 width="140" 
                 height="100"
