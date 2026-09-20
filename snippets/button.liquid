@@ -9,6 +9,7 @@
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
+{% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 
 {%  if block_settings.label != blank %}
 <a
