@@ -13,7 +13,6 @@
         {% if section.settings.heading != blank %}
           <h2 class="hz-hiw-main-title">{{ section.settings.heading }}</h2>
         {% endif %}
-===={{item_count }}
 
         <div class="hz-hiw-grid">
           {% for item in how_it_works_items %}
@@ -53,6 +52,8 @@
         </div>
 
       {%- else -%}
+===={{how_it_works_items }}
+
         {% comment %} ========================================================
           LAYOUT B: 1 Item (Single Exploded View)
         ======================================================== {% endcomment %}
@@ -62,7 +63,7 @@
             <h2 class="hz-hiw-single-title">
               {{ section.settings.heading | default: single_item.title }}
             </h2>
-            {% if single_item.description != blank %}
+            {% if single_item.content != blank %}
               <div class="hz-hiw-single-desc">
                 {{ single_item.description | metafield_tag }}
               </div>
