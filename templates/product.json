@@ -495,6 +495,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".custom-font-size.custom-color h5 {font-family: var(--headfont);}"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
