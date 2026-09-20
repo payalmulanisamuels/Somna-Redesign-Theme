@@ -1375,6 +1375,28 @@
         "padding-block-end": 26
       }
     },
+    "faq_accordion_VVXzwx": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_YJ6Epn": {
+          "type": "faq_item",
+          "repeater": "{{ product.metafields.custom.faq.value }}",
+          "settings": {
+            "question": "{{ block.repeater.question.value }}",
+            "answer": "<p>{{ block.repeater.answer_content.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_YJ6Epn"
+      ],
+      "name": "FAQ Accordion - PDP",
+      "settings": {
+        "bg_color": "#fdf8ee",
+        "divider_color": "#cbd3d8",
+        "heading": "FAQ"
+      }
+    },
     "section_HiaPwG": {
       "type": "section",
       "blocks": {
@@ -1428,7 +1450,7 @@
             "accordion_row_Ebj6H3": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?",
+                "heading": "",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1812,6 +1834,7 @@
     "layered_image_with_text_LEPfjJ",
     "bundle_feature_banner_Qrgcy3",
     "section_BbCdDx",
+    "faq_accordion_VVXzwx",
     "section_HiaPwG",
     "footer_m9NzUG"
   ]
