@@ -697,7 +697,7 @@
                 "text_zjGAzP": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>90-night<br/>guarantee</strong></p>",
+                    "text": "<p><strong>30-night<br/>guarantee</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -823,7 +823,7 @@
                 "text_mznam6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Free US<br/>Shipping</strong></p>",
+                    "text": "<p><strong>Secure<br/>checkout</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -902,7 +902,7 @@
       "name": "Problem Solution",
       "settings": {
         "bottom_wave_image": "shopify://shop_images/brand-bottom-wave.svg",
-        "bg_color": "#fdf8ee",
+        "bg_color": "#faf2df",
         "problem_tag": "PROBLEM",
         "problem_heading": "{{ product.metafields.custom.problem.value }}",
         "solution_tag": "SOLUTION",
