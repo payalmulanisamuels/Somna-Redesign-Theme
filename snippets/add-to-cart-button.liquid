@@ -40,12 +40,12 @@
     {% endunless %}
   >
     {% if show_icon %}
-      {% comment %} <span {% endcomment %}
+      {% comment %} <span
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
       >
         {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-      </span>
+      </span> {% endcomment %}
     {% endif %}
     {{- add_to_cart_text | default: default_add_to_cart_text -}}
     {% comment %} checkmark burst markup {% endcomment %}
