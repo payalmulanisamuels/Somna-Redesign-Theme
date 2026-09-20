@@ -1,6 +1,31 @@
 <div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
+   {% comment %} Top Wave Divider {% endcomment %}
 
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top">
+
+    <img 
+        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+        alt="top_wave_image" 
+        loading="lazy" 
+        class="custom-wave-img"
+        />
+    </div>
+    {% endif %}
+
+    {% comment %} Bottom Wave Divider {% endcomment %}
+
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom">
+    <img 
+        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+        alt="bottom_wave_image" 
+        loading="lazy" 
+        class="custom-wave-img"
+        />
+    </div>
+    {% endif %}
   <div class="section section--page-width">
   <div class="hz-ps-container">
     {% comment %} Problem Column {% endcomment %}
@@ -119,6 +144,22 @@
 {
   "name": "Problem Solution",
   "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
     {
       "type": "color",
       "id": "bg_color",
