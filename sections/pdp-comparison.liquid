@@ -4,7 +4,7 @@
     id="hz-comp-{{ section.id }}"
     style="{% if section.settings.background_image != blank %}background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}'); background-size: cover; background-position: center;{% else %}background-color: #fbf7ee;{% endif %}"
   >
-    <div class="hz-simple-comp-container">
+    <div class="section section--page-width">
       {% if section.settings.heading != blank %}
         <h2 class="hz-simple-comp-heading">{{ section.settings.heading }}</h2>
       {% endif %}
@@ -31,14 +31,6 @@
     overflow: hidden;
   }
 
-  .hz-simple-comp-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
   .hz-simple-comp-heading {
     font-size: 42px;
