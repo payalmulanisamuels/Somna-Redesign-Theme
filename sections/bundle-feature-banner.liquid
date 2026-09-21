@@ -67,7 +67,7 @@
     assign banner_image = selected_product.featured_image
   endif
 -%}
-
+{% if selected_product %}
 <div class="hz-bundle-section" id="hz-bundle-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
    {% comment %} Top Wave Divider {% endcomment %}
 
@@ -308,6 +308,7 @@
   
 </style>
 
+{%  endif %}
 {% schema %}
 {
   "name": "Bundle Feature Banner",
