@@ -339,8 +339,22 @@ a.cart-items__title {
     font-weight: 900 !important; 
     line-height: 22.5px; /* 150% */
 }
-
 .cart-totals__tax-note {
     display: none;
+}
+ul.custom-payment-icons-list {
+    display: flex;
+    gap: 5px;
+    max-width: 320px;
+    margin: 16px auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ul.custom-payment-icons-list li {
+    display: block;
+    flex: 0 0 40px;
+    max-width: 40px;
+    border-radius: 4px;
 }
 /* Cart Drawer */
