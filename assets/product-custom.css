@@ -67,8 +67,8 @@ slideshow-arrows[position=center].pagination-arrows {
 slideshow-arrows .slideshow-control {
     background: #ffff;
     border: 0.5px solid #FFFFFF;
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 16px !important;
+    min-height: 16px !important;
     display: flex;
     justify-content: center;
     padding-inline: 0 !important;
