@@ -949,7 +949,8 @@
       "name": "How It Works (Dynamic)",
       "settings": {
         "bg_color": "#fbf7ee",
-        "heading": "How It Works"
+        "heading": "How It Works",
+        "bottom_wave_image": "shopify://shop_images/Curvededge.svg"
       }
     },
     "steps_guide_GFjEFb": {
