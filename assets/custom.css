@@ -249,7 +249,7 @@ height: 100%;
 /* Hero section */
 
 /* Cart Drawer */
-.theme-drawer__badge[data-maintain-ratio],.theme-drawer__title {
+.theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0A1A4A;
     font-size: 22px;
