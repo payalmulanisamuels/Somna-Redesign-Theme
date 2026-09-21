@@ -51,6 +51,11 @@ search-button.search-action.search-action--hidden-on-menu {
     color: var(--color-text) !important;
     font-weight: 500;
 }
+.header_main.h2 p {
+    font-size: 18px;
+    font-weight: normal;
+    font-family: var(--headfont);
+}
 .header-section:has(>#header-component[data-sticky-state="active"]){
     z-index: 11111 !important;
 }
