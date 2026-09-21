@@ -57,8 +57,7 @@
   endif
 
   # Dynamic URL
-  assign button_link = section.settings.button_link
-  if button_link == blank and selected_product != blank
+  if  selected_product != blank
     assign button_link = selected_product.url
   endif
 
@@ -399,12 +398,7 @@
       "label": "Button Label",
       "default": "Shop the Breathe Bundle"
     },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button Link",
-      "info": "Defaults to selected product page."
-    },
+   
     {
       "type": "header",
       "content": "Padding"
