@@ -251,11 +251,17 @@ height: 100%;
 /* Cart Drawer */
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
-    color: #0A1A4A;
+    color: #0a1a4a;
     font-size: 22px;
     font-style: normal;
     font-family: var(--headfont);
     font-weight: 400;
-    line-height: 32px; /* 145.455% */
+    line-height: 32px;
+    gap: 0;
+    padding: 0 !important;
+    justify-content: flex-start;
+    min-width: auto;
+    width: auto;
+    aspect-ratio: unset !important;
 }
 /* Cart Drawer */
