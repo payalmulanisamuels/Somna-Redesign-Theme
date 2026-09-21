@@ -1011,7 +1011,7 @@
       "settings": {
         "background_image": "{{ product.metafields.custom.comparison_background_image.value }}",
         "heading": "Comparison",
-        "subheading": "",
+        "subheading": "{{ product.metafields.custom.comparison | metafield_tag }}",
         "bottom_image": "{{ product.metafields.custom.comparison_bottom_image.value }}"
       }
     },
