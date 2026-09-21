@@ -20,7 +20,7 @@
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
-            "icons_style": "arrow",
+            "icons_style": "chevron",
             "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "thumbnails",
             "thumbnail_position": "bottom",
@@ -1084,7 +1084,7 @@
       "name": "Bundle Feature Banner",
       "settings": {
         "product": "season-bundle",
-        "bg_color": "#FFF9ED",
+        "bg_color": "#fff9ed",
         "image": "shopify://shop_images/image.png",
         "title": "The Breathe Bundle",
         "subtitle": "Blue Strips + Blue Tape, one month supply",
@@ -1297,6 +1297,6 @@
     "layered_image_with_text_LEPfjJ",
     "bundle_feature_banner_Qrgcy3",
     "section_BbCdDx",
-    "faq_accordion_VVXzwx",
+    "faq_accordion_VVXzwx"
   ]
 }
