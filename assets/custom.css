@@ -10,10 +10,10 @@ html[scroll-lock] .wave-container {
     z-index: 11;
 }
 .bg_image {
-    background-size: cover;
-    background-color: transparent !important;
-    background-repeat: repeat-x;
-    background-position: center;
+    background-size: cover !important;
+    background-position: center !important;
+    height: 55px;
+    top: -12px;
 }
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
