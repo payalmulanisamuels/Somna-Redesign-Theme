@@ -281,4 +281,11 @@ a.cart-items__title {
     line-height: 21.25px; /* 132.813% */
     font-family: var(--headfont);
 }
+.cart-items__table-row--full-width-variants .cart-items__unit-price-wrapper {
+    color: #0D1B38;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22.5px; /* 160.714% */
+}
 /* Cart Drawer */
