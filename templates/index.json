@@ -806,7 +806,7 @@
         "heading": "Featured Bundle Block",
         "bg_color": "#ffffff",
         "padding_top": 20,
-        "padding_bottom": 20
+        "padding_bottom": 10
       }
     },
     "custom_cards_slider_pyJahK": {
