@@ -71,7 +71,7 @@
     "show_add_discount_code": true,
     "show_installments": false,
     "show_accelerated_checkout_buttons": false,
-    "trust_badge_1_image": "shopify://shop_images/truck-iocn.png",
+    "trust_badge_1_image": "shopify://shop_images/truck-icon.png",
     "trust_badge_2_image": "shopify://shop_images/lock.svg",
     "drawer_background_color": "{{ settings.color_palette.background }}",
     "drawer_text_color": "#0A1A4A",
