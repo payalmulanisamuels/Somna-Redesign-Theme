@@ -47,11 +47,12 @@
 {% endif %}
 
 
-<div class="section-background color-custom-{{ section_id }} {%  if section.settings.bg_image %}bg_image{% endif %}" 
-  {%  if section.settings.bg_image %}style="background-image: url({{ section.settings.bg_image | image_url }})"{%  endif %}></div>
+<div class="section-background color-custom-{{ section_id }} " 
+ ></div>
 <div
-  class="section section--{{ section.settings.section_width }} color-custom-{{ section_id }}"
+  class="section section--{{ section.settings.section_width }} color-custom-{{ section_id }} {%  if section.settings.bg_image %}bg_image{% endif %}"
   data-testid="ui-test-section"
+   {%  if section.settings.bg_image %}style="background-image: url({{ section.settings.bg_image | image_url }})"{%  endif %}
 
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
