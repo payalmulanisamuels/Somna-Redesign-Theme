@@ -34,7 +34,7 @@
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
+        "bottom_wave_image": "shopify://shop_images/annouce-wave.svg",
         "speed": 5,
         "section_width": "page-width",
         "background_color": "#071a4b",
