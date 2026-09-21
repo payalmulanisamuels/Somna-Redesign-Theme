@@ -339,4 +339,8 @@ a.cart-items__title {
     font-weight: 900 !important; 
     line-height: 22.5px; /* 150% */
 }
+
+.cart-totals__tax-note {
+    display: none;
+}
 /* Cart Drawer */
