@@ -80,6 +80,10 @@ span.variant-card__title {
     line-height: normal;
 }
 
+.variant-card__duration {
+    display: block;
+    width: 100%;
+}
 .subscription_group {
     border: 1px solid #E1E6EB !important;
     width: 100%;
