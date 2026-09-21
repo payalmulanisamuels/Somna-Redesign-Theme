@@ -54,7 +54,7 @@
 %}
 
 {% capture attributes %}
-  class="{% if class %}header_main {{ class }}{% elsif block_settings.type_preset == "rte" %}custom-header{% endif %} {{ block_settings.type_preset }} spacing-style text-block text-block--{{ block.id }} {{ block_settings.type_preset }}
+  class="header_main {% if class %}{{ class }}{% elsif block_settings.type_preset == "rte" %}custom-header{% endif %} {{ block_settings.type_preset }} spacing-style text-block text-block--{{ block.id }} {{ block_settings.type_preset }}
     {{ text_block_classes }}
   "
 
