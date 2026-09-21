@@ -49,7 +49,7 @@ search-button.search-action.search-action--hidden-on-menu {
     margin-bottom: -10px;
 }
 .custom-header {
-    font-size: 24px !important;
+    font-size: 18px !important;
     text-align: center;
     line-height: 1;
     font-family: var(--headfont);
