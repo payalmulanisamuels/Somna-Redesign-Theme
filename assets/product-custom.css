@@ -80,3 +80,6 @@ slideshow-arrows .slideshow-control {
 .media-gallery--carousel slideshow-arrows .slideshow-control svg {
     width: 14px;
 }
+.slideshow-controls__thumbnails-container{
+    padding: 0 20px;
+}
