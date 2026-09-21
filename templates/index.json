@@ -1544,6 +1544,7 @@
       ],
       "name": "Layered Image with Text",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
         "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
