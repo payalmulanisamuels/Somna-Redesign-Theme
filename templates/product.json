@@ -942,7 +942,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FAF2DF",
+        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1018,7 +1018,6 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
-        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
         "product": "{{ product.metafields.custom.bundle_section.value.choose_bundle_product.value }}",
         "bg_color": "#fff9ed",
         "image": "{{ product.metafields.custom.bundle_section.value.bundle_image.value }}",

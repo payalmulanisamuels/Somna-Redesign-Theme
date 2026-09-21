@@ -4,6 +4,33 @@
     id="hz-comp-{{ section.id }}"
     style="{% if section.settings.background_image != blank %}background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}'); background-size: cover; background-position: center;{% else %}background-color: #fbf7ee;{% endif %}"
   >
+    
+{% comment %} Top Wave Divider {% endcomment %}
+
+{% if section.settings.top_wave_image != blank %}
+ <div class="wave-container top">
+
+<img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+
+{% comment %} Bottom Wave Divider {% endcomment %}
+
+{% if section.settings.bottom_wave_image != blank %}
+ <div class="wave-container bottom">
+<img 
+      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+      alt="bottom_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
     <div class="section section--page-width">
       {% if section.settings.heading != blank %}
         <h2 class="hz-simple-comp-heading">{{ section.settings.heading }}</h2>
