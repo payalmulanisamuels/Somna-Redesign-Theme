@@ -1011,7 +1011,7 @@
       "settings": {
         "background_image": "{{ product.metafields.custom.comparison_background_image.value }}",
         "heading": "Comparison",
-        "subheading": "Three individual 1-month Nasal Strips subscriptions would run $135 (3 × $45 Subscribe & Save)",
+        "subheading": "",
         "bottom_image": "{{ product.metafields.custom.comparison_bottom_image.value }}"
       }
     },
