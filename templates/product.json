@@ -1409,6 +1409,7 @@
       "block_order": [
         "group_H6VpwJ"
       ],
+      "disabled": true,
       "name": "t:names.footer",
       "settings": {
         "background_image": "{{ product.metafields.custom.bottom_section.value.image.value }}",
