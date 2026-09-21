@@ -31,7 +31,17 @@
             <details class="details" data-testid="accordion-details" {% if block.settings.default_open %}open{% endif %}>
               <summary class="details__header">
                 <span class="details__title">{{ block.settings.question }}</span>
-                <span class="details__icon" aria-hidden="true"></span>
+                <span class="details__icon" aria-hidden="true">
+                  <span class="svg-wrapper icon-caret icon-animated"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 5.5L7 9.5L3 5.5" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  </span>
+                        <span class="svg-wrapper icon-plus"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="vertical" d="M2.75 7H11.25" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"></path>
+                    <path class="horizontal" d="M7 2.75L7 11.25" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"></path>
+                  </svg>
+                  </span>
+                </span>
               </summary>
               <div class="details-content">
                 <div class="custom spacing-style text-block custom-typography custom-font-size">
