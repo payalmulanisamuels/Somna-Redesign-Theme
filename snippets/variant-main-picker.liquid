@@ -182,14 +182,20 @@
     <div class="variant-card__inner">
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
       <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
-      <span class="variant-card__onetime-price">{{ one_time_price | money_without_trailing_zeros }} one-time</span>
-      <span class="variant-card__duration">
+      <span class="variant-card__onetime-price">
+      <span class="variant-card__onetime-price-inner">
+        {{ one_time_price | money_without_trailing_zeros }} one-time
+      </span>
+  <span class="variant-card__duration">
         {% if duration_text != blank %}
           {{ duration_text }}
         {% else %}
           {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
         {% endif %}
       </span>
+
+      </span>
+    
     </div>
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
