@@ -103,67 +103,114 @@
               {% if product_option_value.size > longest_value and option_id_attribute %}
                 {% assign longest_value = product_option_value.size %}
               {% endif %}
-              <label
-                class="variant-option__button-label 1 {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
-              >
-                <input
-                  type="radio"
-                  name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
-                  value="{{ product_option_value | escape }}"
-                  aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
-                  {% if product_option_value.available == false %}
-                    aria-disabled="true"
-                  {% endif %}
-                  data-previous-checked="false"
-                  data-fieldset-index="{{ fieldset_index }}"
-                  data-input-index="{{ forloop.index0 }}"
-                  data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
-                  data-option-name="{{ product_option.name | escape }}"
-                  data-option-value-id="{{ product_option_value.id }}"
-                  data-option-available="{{ product_option_value.available }}"
-                  data-connected-product-url="{{ product_option_value.product_url }}"
-                  {% if product_option_value.variant.id %}
-                    data-variant-id="{{ product_option_value.variant.id }}"
-                  {% endif %}
-                  {% if product_option_value.selected %}
-                    data-current-checked="true"
-                    checked
-                  {% else %}
-                    data-current-checked="false"
-                  {% endif %}
-                >
-                {% if variant_style == 'swatch' %}
-                  {% liquid
-                    assign featured_media = product_option_value.variant.featured_media
+     {%- liquid
+  # Target the variant object for this option value
+  assign current_variant = product_option_value.variant
+  
+  # Check for Shopify Native Subscription / Selling Plan pricing
+  assign has_selling_plan = false
+  assign sub_price = current_variant.price
+  assign one_time_price = current_variant.price
 
-                    # If the variant has no featured media, and we have a combined listing product, then fall back to
-                    # using the featured media of the child product that is linked to this option value.
-                    if featured_media == blank and product_option_value.product_url
-                      assign featured_media = product_option_value.variant.product.featured_media
-                    endif
-                  %}
+  for alloc in current_variant.selling_plan_allocations
+    assign has_selling_plan = true
+    assign sub_price = alloc.price
+    assign one_time_price = alloc.compare_at_price | default: current_variant.price
+    break
+  endfor
 
-                  {% render 'swatch',
-                    swatch: product_option_value.swatch,
-                    variant_image: featured_media,
-                    mode: 'unscaled'
-                  %}
-                {% else %}
-                  {% if product_option_value.available == true %}
-                    <span
-                      class="variant-option__button-label__pill"
-                      data-key="variant-option-pill"
-                    ></span>
-                  {% endif %}
-                  <span
-                    class="variant-option__button-label__text"
-                    data-key="variant-option-text"
-                  >
-                    {{- product_option_value | escape -}}
-                  </span>
-                {% endif %}
-                {% render 'strikethrough-variant', product_option: product_option_value %}
-              </label>
+  # Fallback to variant metafields if you use custom fields instead of Shopify Subscriptions
+  if current_variant.metafields.custom.subscription_price != blank
+    assign sub_price = current_variant.metafields.custom.subscription_price.value
+  endif
+  if current_variant.metafields.custom.one_time_price != blank
+    assign one_time_price = current_variant.metafields.custom.one_time_price.value
+  endif
+  assign duration_text = current_variant.metafields.custom.duration.value | default: current_variant.metafields.custom.subtitle.value
+-%}
+
+<label
+  class="variant-option__button-label variant-option__button-label--card {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+>
+  {% comment %} Optional 'MOST POPULAR' Badge via Variant Metafield or Title Check {% endcomment %}
+  {% if current_variant.metafields.custom.badge != blank %}
+    <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
+  {% elsif product_option_value.name contains '2 Sets' or product_option_value == '2 Sets' %}
+    <span class="variant-card__badge">MOST POPULAR</span>
+  {% endif %}
+
+  <input
+    type="radio"
+    name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+    value="{{ product_option_value | escape }}"
+    aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
+    {% if product_option_value.available == false %}
+      aria-disabled="true"
+    {% endif %}
+    data-previous-checked="false"
+    data-fieldset-index="{{ fieldset_index }}"
+    data-input-index="{{ forloop.index0 }}"
+    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+    data-option-name="{{ product_option.name | escape }}"
+    data-option-value-id="{{ product_option_value.id }}"
+    data-option-available="{{ product_option_value.available }}"
+    data-connected-product-url="{{ product_option_value.product_url }}"
+    {% if product_option_value.variant.id %}
+      data-variant-id="{{ product_option_value.variant.id }}"
+    {% endif %}
+    {% if product_option_value.selected %}
+      data-current-checked="true"
+      checked
+    {% else %}
+      data-current-checked="false"
+    {% endif %}
+  >
+
+  {% if variant_style == 'swatch' %}
+    {% liquid
+      assign featured_media = product_option_value.variant.featured_media
+      if featured_media == blank and product_option_value.product_url
+        assign featured_media = product_option_value.variant.product.featured_media
+      endif
+    %}
+    {% render 'swatch',
+      swatch: product_option_value.swatch,
+      variant_image: featured_media,
+      mode: 'unscaled'
+    %}
+  {% else %}
+    <div class="variant-card__inner">
+      {% comment %} 1. Option Title (e.g., 1 Set, 2 Sets, 3+1 Sets) {% endcomment %}
+      <span class="variant-card__title">
+        {{- product_option_value | escape -}}
+      </span>
+
+      {% comment %} 2. Subscription Price (Large Bold Blue / White) {% endcomment %}
+      <span class="variant-card__sub-price">
+        {{ sub_price | money_without_trailing_zeros }}
+      </span>
+
+      {% comment %} 3. One-time Price Subtext {% endcomment %}
+      <span class="variant-card__onetime-price">
+        {{ one_time_price | money_without_trailing_zeros }} one-time
+      </span>
+
+      {% comment %} 4. Duration text (1 month, 2 months, 4 months) {% endcomment %}
+      {% if duration_text != blank %}
+        <span class="variant-card__duration">
+          {{ duration_text }}
+        </span>
+      {% else %}
+        {% comment %} Smart fallback duration if no metafield is populated {% endcomment %}
+        <span class="variant-card__duration">
+          {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% render 'strikethrough-variant', product_option: product_option_value %}
+</label>
             {%- endfor -%}
             {% if option_id_attribute %}
               {% style %}
