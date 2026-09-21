@@ -706,8 +706,6 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "top_wave_image": "shopify://shop_images/feature-top-svg.svg",
-        "bottom_wave_image": "shopify://shop_images/feature-bottom-svg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -1569,7 +1567,6 @@
         "onetime_price_override": "",
         "onetime_label": "One-time",
         "button_label": "Shop the Breathe Bundle",
-        "button_link": "",
         "padding_top": 28,
         "padding_bottom": 28
       }
@@ -2089,6 +2086,6 @@
     "bundle_feature_banner_Qrgcy3",
     "steps_guide_GFjEFb",
     "section_BbCdDx",
-    "section_HiaPwG" 
+    "section_HiaPwG"
   ]
 }
