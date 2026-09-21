@@ -1029,8 +1029,8 @@
         "onetime_price_override": "",
         "onetime_label": "One-time",
         "button_label": "{{ product.metafields.custom.bundle_section.value.call_to_action.value }}",
-        "padding_top": 28,
-        "padding_bottom": 28
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "section_BbCdDx": {
