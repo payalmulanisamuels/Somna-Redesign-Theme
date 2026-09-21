@@ -47,3 +47,13 @@
     background: #0A4FD6 !important;
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
+.slideshow-controls__thumbnails .slideshow-control {
+    width: 80px;
+    height: 52px;
+    border-radius: 8px;
+    border: 2px solid #98A3DE !important;
+}
+slideshow-controls[pagination-position=center][thumbnails] {
+    position: absolute;
+    bottom: 4px;
+}
