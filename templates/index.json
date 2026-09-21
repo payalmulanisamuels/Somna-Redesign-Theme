@@ -1542,6 +1542,9 @@
       "block_order": [
         "layered_slide_jqmf8i"
       ],
+      "custom_css": [
+        ".wave-container img {height: 50px; object-position: top;}"
+      ],
       "name": "Layered Image with Text",
       "settings": {
         "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
