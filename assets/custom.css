@@ -9,7 +9,7 @@
 html[scroll-lock] .wave-container {
     z-index: 11;
 }
-.section-background.bg_image {
+.bg_image {
     background-size: cover;
     background-color: transparent !important;
     background-repeat: repeat-x;
