@@ -148,7 +148,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/footer-email.jpg",
+        "background_image": "shopify://shop_images/footer-bg.jpg",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
