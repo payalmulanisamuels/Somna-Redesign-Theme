@@ -43,8 +43,11 @@
 .variant-option__button-label:has(:checked) .variant-card__onetime-price {
     color: #B9C2D2;
 }
-.variant-option__button-label:hover, .variant-option__button-label:hover:has([aria-disabled=true]):has([data-option-available=false]){
-    background: #0B57E3;
+.variant-option__button-label:hover{
+    background: #0B57E3 !important;
+}
+.variant-option__button-label:hover .variant-card__title {
+    color: #fff !important;
 }
 span.variant-card__title {
     width: 100%;
