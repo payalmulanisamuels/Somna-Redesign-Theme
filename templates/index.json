@@ -1558,7 +1558,6 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
-        "top_wave_image": "shopify://shop_images/bundle-curved.svg",
         "product": "season-bundle",
         "bg_color": "{{ settings.color_palette.background }}",
         "image": "shopify://shop_images/image.png",
