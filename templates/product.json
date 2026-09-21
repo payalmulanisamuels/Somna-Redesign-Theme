@@ -1135,17 +1135,16 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
-        "product": "season-bundle",
+        "product": "{{ product.metafields.custom.bundle_section.value.choose_bundle_product.value }}",
         "bg_color": "#fff9ed",
-        "image": "shopify://shop_images/image.png",
-        "title": "The Breathe Bundle",
-        "subtitle": "Blue Strips + Blue Tape, one month supply",
+        "image": "{{ product.metafields.custom.bundle_section.value.bundle_image.value }}",
+        "title": "{{ product.metafields.custom.bundle_section.value.heading.value }}",
+        "subtitle": "{{ product.metafields.custom.bundle_section.value.subheading.value }}",
         "sub_price_override": "",
         "sub_label": "Subscribe & Save",
         "onetime_price_override": "",
         "onetime_label": "One-time",
-        "button_label": "Shop the Breathe Bundle",
-        "button_link": "",
+        "button_label": "{{ product.metafields.custom.bundle_section.value.call_to_action.value }}",
         "padding_top": 28,
         "padding_bottom": 28
       }
