@@ -40,6 +40,9 @@
 .variant-option__button-label:has(:checked) .variant-card__sub-price  {
     color: #fff;
 }
+.variant-option__button-label:has(:checked) .variant-card__onetime-price {
+    color: #fff;
+}
 span.variant-card__title {
     width: 100%;
     color: #0A1A4A;
