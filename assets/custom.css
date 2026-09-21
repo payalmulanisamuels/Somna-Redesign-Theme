@@ -357,4 +357,48 @@ ul.custom-payment-icons-list li {
     max-width: 40px;
     border-radius: 4px;
 }
+  .hz-trust-badges-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+
+  .hz-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .hz-trust-pill__img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .hz-trust-pill__icon {
+    font-size: 15px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .hz-trust-pill__text {
+    display: inline-block;
+  }
+
+
 /* Cart Drawer */
