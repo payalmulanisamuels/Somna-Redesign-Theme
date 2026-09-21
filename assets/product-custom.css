@@ -45,6 +45,7 @@
 }
 .variant-option__button-label:hover{
     background: #0B57E3 !important;
+    color: #fff !important;
 }
 .variant-option__button-label:hover .variant-card__title {
     color: #fff !important;
