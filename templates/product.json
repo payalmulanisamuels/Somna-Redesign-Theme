@@ -936,7 +936,7 @@
       "type": "problem-solution",
       "name": "Problem Solution",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-wave.svg",
+        "bottom_wave_image": "shopify://shop_images/Curvededge.svg",
         "bg_color": "#faf2df",
         "problem_tag": "PROBLEM",
         "problem_heading": "{{ product.metafields.custom.problem.value }}",
@@ -949,8 +949,7 @@
       "name": "How It Works (Dynamic)",
       "settings": {
         "bg_color": "#fbf7ee",
-        "heading": "How It Works",
-        "bottom_wave_image": "shopify://shop_images/Curvededge.svg"
+        "heading": "How It Works"
       }
     },
     "steps_guide_GFjEFb": {
