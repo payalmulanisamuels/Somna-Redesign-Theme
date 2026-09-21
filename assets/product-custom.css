@@ -31,25 +31,20 @@
 .variant-option__button-label:has(:checked) {
     background: #0b57e3;
 }
-.variant-option__button-label:has(:checked) .variant-card__title {
+.variant-option__button-label:has(:checked) .variant-card__title,.variant-option__button-label:hover .variant-card__title  {
     color: #fff;
 }
-.variant-option__button-label:has(:checked) .variant-card__sub-price  {
+.variant-option__button-label:has(:checked) .variant-card__sub-price,.variant-option__button-label:hover .variant-card__sub-price  {
     color: #fff;
 }
-.variant-option__button-label:has(:checked) .variant-card__sub-price  {
-    color: #fff;
-}
-.variant-option__button-label:has(:checked) .variant-card__onetime-price {
+.variant-option__button-label:has(:checked) .variant-card__onetime-price,.variant-option__button-label:hover .variant-card__onetime-price  {
     color: #B9C2D2;
 }
 .variant-option__button-label:hover{
     background: #0B57E3 !important;
     color: #fff !important;
 }
-.variant-option__button-label:hover .variant-card__title {
-    color: #fff !important;
-}
+ 
 span.variant-card__title {
     width: 100%;
     color: #0A1A4A;
