@@ -89,3 +89,6 @@ slideshow-arrows .slideshow-control {
 .accordion .details{
     border-bottom: 3.01px solid #B9B7AC;
 }
+.accordion--dividers .details-content,.accordion--dividers .details-content p {
+    color: #0A1A4A;
+}
