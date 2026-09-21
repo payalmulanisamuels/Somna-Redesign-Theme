@@ -1053,6 +1053,19 @@
                 "text_XpGJhd"
               ]
             },
+            "divider_CAjH4x": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "#D9D9D9",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
             "group_BtrEUK": {
               "type": "group",
               "settings": {
@@ -1162,6 +1175,19 @@
                 "text_Czr7MH"
               ]
             },
+            "divider_NXzB8L": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "#D9D9D9",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
             "group_mahKqw": {
               "type": "group",
               "settings": {
@@ -1270,6 +1296,19 @@
                 "text_6dYGUM",
                 "text_9rK86g"
               ]
+            },
+            "divider_UnrxgJ": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "#D9D9D9",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
             },
             "group_MLieTy": {
               "type": "group",
@@ -1383,8 +1422,11 @@
           },
           "block_order": [
             "group_aP6tjC",
+            "divider_CAjH4x",
             "group_BtrEUK",
+            "divider_NXzB8L",
             "group_mahKqw",
+            "divider_UnrxgJ",
             "group_MLieTy"
           ]
         },
