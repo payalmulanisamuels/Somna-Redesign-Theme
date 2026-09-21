@@ -273,4 +273,12 @@ height: 100%;
 a.cart-items__media-container {
     border-radius: 13.179px;
 }
+a.cart-items__title {
+    color: #0D1B38;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21.25px; /* 132.813% */
+    font-family: var(--headfont);
+}
 /* Cart Drawer */
