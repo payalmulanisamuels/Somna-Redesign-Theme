@@ -89,6 +89,9 @@ span.variant-card__title {
     padding: 10px 12px;
     border-radius: 10px;
 }
+.most_popular{
+    overflow: visible;
+}
 .plan_card {
     border: 0 !important;
     display: flex;
