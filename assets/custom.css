@@ -288,4 +288,28 @@ a.cart-items__title {
     font-weight: 600;
     line-height: 22.5px; /* 160.714% */
 }
+.cart-items .quantity-selector input[type=number] {
+    color: #0F172A;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+}
+
+.cart-items .quantity-selector {
+    border-radius: 9999px;
+    border: 1px solid rgba(203, 213, 225, 0.60);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.quantity-selector svg {
+    color: #1E293B;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px; /* 142.857% */
+}
 /* Cart Drawer */
