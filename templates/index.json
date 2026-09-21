@@ -1422,7 +1422,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "top_wave_image": "shopify://shop_images/brand-top-wave.png",
+        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
         "bottom_wave_image": "shopify://shop_images/brand-bottom-wave.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
