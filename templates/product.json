@@ -1084,7 +1084,7 @@
       "name": "Bundle Feature Banner",
       "settings": {
         "product": "season-bundle",
-        "bg_color": "{{ settings.color_palette.background }}",
+        "bg_color": "#FFF9ED",
         "image": "shopify://shop_images/image.png",
         "title": "The Breathe Bundle",
         "subtitle": "Blue Strips + Blue Tape, one month supply",
