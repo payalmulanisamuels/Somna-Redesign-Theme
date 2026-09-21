@@ -78,6 +78,7 @@
             </div>
           {%- else -%}
             {% capture cart_badge_html %}
+              (
               <span
                 class="theme-drawer__badge{% if cart.item_count == 0 %} visually-hidden{% endif %}"
                 aria-hidden="true"
@@ -85,8 +86,8 @@
                   data-maintain-ratio
                 {% endif %}
               >
-                ({{- cart.item_count -}})
-              </span>
+                {{- cart.item_count -}}
+              </span>)
               {% if cart.item_count > 0 %}
                 <span class="visually-hidden">
                   {{ 'accessibility.cart_count' | t }}: {{ cart.item_count }}
