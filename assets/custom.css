@@ -268,7 +268,7 @@ height: 100%;
     display: none;
 }
 .cart-items__table-row--full-width-variants {
-    grid-template-columns: 140px auto;
+    grid-template-columns: 140px auto !important;
 }
 a.cart-items__media-container {
     border-radius: 13.179px;
