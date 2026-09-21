@@ -1222,7 +1222,7 @@
         "heading": "FAQ"
       }
     },
-      "footer_m9NzUG": {
+    "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
         "group_H6VpwJ": {
@@ -1267,7 +1267,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
+                "text": "<p><strong>Two Essentials.<br/></strong><em>One Simpler Nightly Ritual.</em></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1289,68 +1289,29 @@
               },
               "blocks": {}
             },
-            "text_f9CFLH": {
-              "type": "text",
+            "button_DxkhRr": {
+              "type": "button",
+              "name": "t:names.button",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "email_signup_TkptFH": {
-              "type": "email-signup",
-              "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "heading": "",
-                "heading_text_color": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "input_style": "custom",
-                "border_width": 1,
-                "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.background }}",
-                "input_text_color": "{{ settings.color_palette.color1 }}",
-                "input_border_color": "#0a1a4a",
-                "input_type_preset": "paragraph",
-                "style_class": "button-unstyled",
+                "label": "Add to bag →",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
                 "custom_button_text": "{{ settings.color_palette.background }}",
                 "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "{{ settings.color_palette.background }}",
-                "display_type": "text",
-                "label": "Unlock 10% off →",
-                "integrated_button": true,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
           },
           "block_order": [
             "text_LWt8Pz",
-            "text_f9CFLH",
-            "email_signup_TkptFH"
+            "button_DxkhRr"
           ]
         }
       },
@@ -1359,14 +1320,14 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/footer-bg.jpg",
+        "background_image": "shopify://shop_images/bundle.jpg",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 30,
         "padding-block-end": 50
       }
-    },
+    }
   },
   "order": [
     "main",
@@ -1378,7 +1339,6 @@
     "bundle_feature_banner_Qrgcy3",
     "section_BbCdDx",
     "faq_accordion_VVXzwx",
-        "footer_m9NzUG",
-
+    "footer_m9NzUG"
   ]
 }
