@@ -1,3 +1,8 @@
+{%  assign problem = section.settings.problem_heading | split:'|' %}
+{%  assign solution = section.settings.solution_heading | split:'|' %}
+
+{% if problem[0] != blank or solution[0] != blank %}
+
 <div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
    {% comment %} Top Wave Divider {% endcomment %}
@@ -142,6 +147,7 @@
   color: #fff;
 }
 </style>
+    {% endif %}
 
 {% schema %}
 {
