@@ -1267,13 +1267,13 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Two Essentials.<br/></strong><em>One Simpler Nightly Ritual.</em></p>",
+                "text": "<p>{{ closest.product.metafields.custom.bottom_section.value.heading.value }}</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
+                "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1289,12 +1289,38 @@
               },
               "blocks": {}
             },
+            "text_a8gGy8": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>{{ closest.product.metafields.custom.bottom_section.value.subheading.value }}</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "button_DxkhRr": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Add to bag →",
-                "link": "shopify://collections/all",
+                "label": "{{ closest.product.metafields.custom.bottom_section.value.button_text.value }}",
+                "link": "{{ closest.product.metafields.custom.bottom_section.value.button_url.value }}",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -1311,6 +1337,7 @@
           },
           "block_order": [
             "text_LWt8Pz",
+            "text_a8gGy8",
             "button_DxkhRr"
           ]
         }
@@ -1320,7 +1347,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/bundle.jpg",
+        "background_image": "{{ product.metafields.custom.bottom_section.value.background_image.value }}",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
