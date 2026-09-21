@@ -48,7 +48,7 @@
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
 .slideshow-controls__thumbnails .slideshow-control {
-    width: 75px !important;
+    width: 82px !important;
     height: 52px !important;
     border-radius: 8px !important;
     border: 2px solid #98A3DE !important;
@@ -82,4 +82,7 @@ slideshow-arrows .slideshow-control {
 }
 .slideshow-controls__thumbnails-container{
     padding: 0 20px;
+}
+.slideshow-controls__thumbnails {
+    gap: 4px;
 }
