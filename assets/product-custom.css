@@ -90,7 +90,7 @@ span.variant-card__title {
     border-radius: 10px;
 }
 .most_popular{
-    overflow: visible;
+    overflow: visible !important;
 }
 .plan_card {
     border: 0 !important;
