@@ -1754,8 +1754,8 @@
       ],
       "name": "t:names.rich_text_section",
       "settings": {
-        "top_wave_image": "shopify://shop_images/real-top-svg.svg",
-        "bottom_wave_image": "shopify://shop_images/real-bottom-svg.svg",
+        "top_wave_image": "shopify://shop_images/review-svg-top.svg",
+        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
