@@ -92,3 +92,6 @@ slideshow-arrows .slideshow-control {
 .accordion--dividers .details-content,.accordion--dividers .details-content p {
     color: #0A1A4A;
 }
+.accordion .details__header {
+ justify-content: space-between;
+}
