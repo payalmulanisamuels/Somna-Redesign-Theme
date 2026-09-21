@@ -28,25 +28,31 @@
         <div class="hz-hiw-grid">
           {% for item in how_it_works_items %}
             <div class="hz-hiw-card">
-            <div class="hz-hiw-card-inner">
-           
-              <div class="hz-hiw-card-header">
-                <div class="hz-hiw-card-info">
-                  {% if item.heading != blank %}
-                    <h3 class="hz-hiw-card-title">{{ item.heading }}</h3>
-                  {% endif %}
-                  {% if item.content != blank %}
-                    <div class="hz-hiw-card-desc">{{ item.content | metafield_tag }}</div>
-                  {% endif %}
-                </div>
-              </div>
+              <div class="hz-hiw-card-inner">
+            
+                  <div class="hz-hiw-card-header">
+                    <div class="hz-hiw-card-info">
+                      {% if item.heading != blank %}
+                        <h3 class="hz-hiw-card-title">{{ item.heading }}</h3>
+                      {% endif %}
+                      {% if item.content != blank %}
+                        <div class="hz-hiw-card-desc">{{ item.content | metafield_tag }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
 
-              {% if item.image != blank %}
-                <div class="hz-hiw-card-bottom-image">
-                  {{ item.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
-                </div>
-              {% endif %}
-            </div>
+                  {% if item.image != blank %}
+                    <div class="hz-hiw-card-bottom-image">
+                      {{ item.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                    </div>
+                  {% endif %}
+              </div>
+                {% if item.bottom_image != blank %}
+                    <div class="hz-bottom_image">
+                      {{ item.bottom_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                    </div>
+                  {% endif %}
+
             </div>
           {% endfor %}
         </div>
