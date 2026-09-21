@@ -84,5 +84,5 @@ slideshow-arrows .slideshow-control {
     padding: 0 20px;
 }
 .slideshow-controls__thumbnails {
-    gap: 4px;
+    gap: 4px !important;
 }
