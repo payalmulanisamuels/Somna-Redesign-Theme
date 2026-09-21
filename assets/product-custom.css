@@ -21,6 +21,68 @@
 .variant-option__button-label {
     border: 1px solid #E5E5EA !important;
 }
+.variant-card__inner {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 5px;
+}
+
+.variant-option__button-label:has(:checked) {
+    background: #0b57e3;
+}
+
+span.variant-card__title {
+    width: 100%;
+    color: #0A1A4A;
+    font-weight: bold;
+}
+
+.variant-card__badge {
+    background: #0A1A4A;
+    position: absolute;
+    top: -10px;
+    font-size: 9px;
+    color: #fff;
+    z-index: 111;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.variant-card__sub-price {
+    display: block;
+    width: 100%;
+    color: #0B57E3;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.variant-card__onetime-price {
+    display: block;
+    margin: 0 auto;
+    color: #5E6C84;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.variant-card__duration {
+    display: block;
+    margin: 0 auto;
+    color: #5E6C84;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+}
 .subscription_group {
     border: 1px solid #E1E6EB !important;
     width: 100%;
