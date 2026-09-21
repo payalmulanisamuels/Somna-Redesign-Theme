@@ -312,4 +312,19 @@ a.cart-items__title {
     font-weight: 600;
     line-height: 20px; /* 142.857% */
 }
+.cart__ctas .cart__checkout-button {
+    background: #0D121C;
+    border-radius: 9999px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+}
+
+.cart__ctas .cart__checkout-button span {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
+}
 /* Cart Drawer */
