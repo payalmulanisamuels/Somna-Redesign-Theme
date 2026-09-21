@@ -58,7 +58,8 @@
             <h2 class="hz-hiw-single-title">
               {{ single_item.heading | default: section.settings.heading }}
             </h2>
-            {{single_item.content }}
+            ==={{single_item | json }}
+            
             {% if single_item.content != blank %}
               <div class="hz-hiw-single-desc">
                 {{ single_item.content | metafield_tag }}
