@@ -143,7 +143,7 @@
     SIZE / QUANTITY CARDS ONLY (with subscription and duration prices)
   ========================================================= {% endcomment %}
   <label
-    class="variant-option__button-label variant-option__button-label--card {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+    class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
     {% comment %} Badge {% endcomment %}
     {% if current_variant.metafields.custom.badge != blank %}
