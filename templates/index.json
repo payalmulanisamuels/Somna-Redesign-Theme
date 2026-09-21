@@ -1460,7 +1460,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Subtract.png",
+            "image_1": "shopify://shop_images/simple-banner.jpg",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -1558,6 +1558,7 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
+        "top_wave_image": "shopify://shop_images/bundle-curved.svg",
         "product": "season-bundle",
         "bg_color": "{{ settings.color_palette.background }}",
         "image": "shopify://shop_images/image.png",
