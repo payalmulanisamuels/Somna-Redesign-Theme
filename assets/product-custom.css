@@ -57,3 +57,26 @@ slideshow-controls[pagination-position=center][thumbnails] {
     position: absolute;
     bottom: 4px;
 }
+slideshow-arrows[position=center].pagination-arrows {
+    align-items: flex-end;
+    bottom: 30px;
+    mix-blend-mode: normal;
+    margin: 0 10px;
+}
+
+slideshow-arrows .slideshow-control {
+    background: #ffff;
+    border: 0.5px solid #FFFFFF;
+    min-width: 16px;
+    min-height: 16px;
+    display: flex;
+    justify-content: center;
+    padding-inline: 0 !important;
+    border-radius: 100%;
+    opacity: 1 !important;
+}
+
+.media-gallery--carousel slideshow-arrows .slideshow-control svg path {stroke: #0A1A4A;}
+.media-gallery--carousel slideshow-arrows .slideshow-control svg {
+    width: 14px;
+}
