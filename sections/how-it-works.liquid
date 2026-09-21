@@ -28,6 +28,8 @@
         <div class="hz-hiw-grid">
           {% for item in how_it_works_items %}
             <div class="hz-hiw-card">
+            <div class="hz-hiw-card-inner">
+           
               <div class="hz-hiw-card-header">
                 <div class="hz-hiw-card-info">
                   {% if item.heading != blank %}
@@ -44,6 +46,7 @@
                   {{ item.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
                 </div>
               {% endif %}
+            </div>
             </div>
           {% endfor %}
         </div>
@@ -125,7 +128,10 @@
     display: flex;
     justify-content: space-between;
   }
-
+  .hz-hiw-card-inner{
+    display: flex;
+    justify-content: space-between;
+  }
   .hz-hiw-card:nth-child(2) {
     background-color: #eee9e0;
   }
