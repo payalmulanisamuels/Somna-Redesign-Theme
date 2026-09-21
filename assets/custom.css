@@ -247,3 +247,15 @@ height: 100%;
     background-position: center;
 }
 /* Hero section */
+
+/* Cart Drawer */
+.theme-drawer__badge[data-maintain-ratio],.h2#cart-drawer-heading {
+    background: transparent;
+    color: #0A1A4A;
+    font-size: 22px;
+    font-style: normal;
+    font-family: var(--headfont);
+    font-weight: 400;
+    line-height: 32px; /* 145.455% */
+}
+/* Cart Drawer */
