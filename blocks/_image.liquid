@@ -38,14 +38,14 @@
     }}
   </image-block>
 {% else %}
-  <image-block
+  {% comment %} <image-block
     ratio="{{ block_settings.ratio }}"
     height="{{ block_settings.height }}"
     style="--border-radius: {{ block_settings.border_radius }}px;"
     {{ block.shopify_attributes }}
   >
     {{ placeholder | default: 'hero-apparel-2' | placeholder_svg_tag: 'image-block__placeholder' }}
-  </image-block>
+  </image-block> {% endcomment %}
 {% endif %}
 
 {% stylesheet %}
