@@ -69,6 +69,7 @@
     "cart_price_font": "subheading",
     "show_cart_note": false,
     "show_add_discount_code": true,
+    "show_installments": false,
     "drawer_background_color": "{{ settings.color_palette.background }}",
     "drawer_text_color": "#0A1A4A",
     "drawer_border_color": "#E2E8F0",
