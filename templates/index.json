@@ -706,6 +706,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
+        "bg_image": "shopify://shop_images/icon-bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
