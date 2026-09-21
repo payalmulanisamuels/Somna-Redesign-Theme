@@ -41,11 +41,11 @@
     color: #fff;
 }
 .variant-option__button-label:has(:checked) .variant-card__onetime-price {
-    color: #fff;
+    color: #B9C2D2;
 }
 span.variant-card__title {
     width: 100%;
-    color: #B9C2D2;
+    color: #0A1A4A;
     font-weight: bold;
 }
 
