@@ -1018,6 +1018,7 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
+        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
         "product": "{{ product.metafields.custom.bundle_section.value.choose_bundle_product.value }}",
         "bg_color": "#fff9ed",
         "image": "{{ product.metafields.custom.bundle_section.value.bundle_image.value }}",
