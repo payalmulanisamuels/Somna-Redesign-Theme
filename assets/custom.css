@@ -15,6 +15,10 @@ html[scroll-lock] .wave-container {
     height: 55px;
     top: -12px;
 }
+.header_main strong {
+    font-family: var(--headfont);
+    line-height: 1;
+}
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
