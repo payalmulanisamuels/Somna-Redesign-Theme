@@ -326,4 +326,12 @@ a.cart-items__title {
     font-weight: 700;
     line-height: 24px; /* 150% */
 }
+
+.cart-totals__total-label {
+    color: #020617;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22.5px; /* 150% */
+}
 /* Cart Drawer */
