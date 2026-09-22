@@ -760,6 +760,13 @@ ul.custom-payment-icons-list li {
     left: 0;
     right: 0;
 }
+.message_cotent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
 /*progresbar */
 
 /* Cart Drawer */
