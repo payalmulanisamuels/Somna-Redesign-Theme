@@ -27,21 +27,21 @@
   # 3. Apply rule engine based on state
   if has_tape and has_strips and has_bundle == false
     # Both in cart -> Next tier or matching Bundle
-    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend | default: all_products['sleep-bundle']
+    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend 
     assign matched_tag = 'Best Value Upgrade'
     assign matched_desc = 'Upgrade to the complete sleep bundle system.'
   elsif has_tape and has_strips == false
     # Tape in cart -> Recommend matching Strips
-    assign matched_upsell_product = settings.upsell_pair_tape_recommend | default: all_products['nasal-strips']
+    assign matched_upsell_product = settings.upsell_pair_tape_recommend 
     assign matched_tag = 'Complete the ritual'
     assign matched_desc = 'Pair your mouth tape with nasal strips for unobstructed airflow.'
   elsif has_strips and has_tape == false
     # Strips in cart -> Recommend matching Tape
-    assign matched_upsell_product = settings.upsell_pair_strips_recommend | default: all_products['mouth-tape']
+    assign matched_upsell_product = settings.upsell_pair_strips_recommend
     assign matched_tag = 'Complete the ritual'
     assign matched_desc = 'Seal your mouth and protect nasal breathing alignment.'
   else
-    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend | default: all_products['sleep-bundle']
+    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend
   endif
 
   if matched_upsell_product == blank
