@@ -404,7 +404,7 @@
                   </div> {% endcomment %}
     {%- liquid
   # Base default prices for the cart item
-  assign active_price = item.final_price
+  assign active_price = item.final_line_price
   assign compare_price = item.original_price | default: item.variant.price
 
   # Check if a selling plan allocation is active on this specific cart line item
