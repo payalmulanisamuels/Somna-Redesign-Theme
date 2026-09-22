@@ -403,34 +403,30 @@
                     </div>
                   </div> {% endcomment %}
                  {%- liquid
-  # 1. Grab the variant (adjust reference if using current_variant or product_option_value.variant)
-  assign target_variant = product.selected_or_first_available_variant
-  
-  # 2. Extract subscription price and percentage adjustment from selling plan allocations
-  assign subscription_price = blank
-  assign discount_percentage = 10 
+                  assign target_variant = product.selected_or_first_available_variant
+                  assign subscription_price = blank
+                  assign discount_percentage = 10 
 
-  for allocation in target_variant.selling_plan_allocations
-    assign subscription_price = allocation.price
-    for adjustment in allocation.selling_plan.price_adjustments
-      if adjustment.value_type == 'percentage'
-        assign discount_percentage = adjustment.value
-      endif
-    endfor
-    break
-  endfor
+                  for allocation in target_variant.selling_plan_allocations
+                    assign subscription_price = allocation.price
+                    for adjustment in allocation.selling_plan.price_adjustments
+                      if adjustment.value_type == 'percentage'
+                        assign discount_percentage = adjustment.value
+                      endif
+                    endfor
+                    break
+                  endfor
 
-  # Fallback calculation if allocation.price isn't scoped directly, 
-  # or use subscription_price if available.
-  assign final_sub_price = subscription_price | default: target_variant.price
--%}
+                  assign final_sub_price = subscription_price | default: target_variant.price
+                -%}
 
-<div class="subscription-price-display">
-  <text-component value="{{ final_sub_price | money_without_trailing_zeros }}">
-    {{ final_sub_price | money_without_trailing_zeros }}
-  </text-component>
-  <span class="sub-discount-tag">Subscribe & save {{ discount_percentage }}%</span>
-</div>
+                <div class="subscription-price-display">
+                  <text-component value="{{ final_sub_price | money_without_trailing_zeros }}">
+                    {{ final_sub_price | money_without_trailing_zeros }}
+                  </text-component>
+                  <span class="sub-discount-tag">Subscribe & save {{ discount_percentage }}%</span>
+                </div>
+                
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
