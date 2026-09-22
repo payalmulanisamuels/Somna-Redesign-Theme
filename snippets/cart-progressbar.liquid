@@ -43,10 +43,7 @@
   endif
 -%}
 
-{% for item in cart.items %}
-    {% assign title_down = item.title | downcase | default: item.product.title | downcase %}
-    === {{title_down }}
-{% endfor %}
+    === {{total_bags }}
 
 <div class="sleep-guide-progress-wrapper" style="position: relative; width: 100%; max-width: 500px; margin: 20px auto; padding: 24px 16px; text-align: center; overflow: hidden; border-radius: 12px;">
   <!-- Background SVG Image -->
