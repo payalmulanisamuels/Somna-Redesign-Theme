@@ -402,12 +402,12 @@
                       {% endif %}
                     </div>
                   </div>
-                  {% comment %} <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
+                 <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
                     </div>
-                  {%- endif -%} {% endcomment %}
+                  {%- endif -%}
                 </td>
               </tr>
             {% endfor %}
