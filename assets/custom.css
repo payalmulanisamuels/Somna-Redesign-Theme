@@ -252,8 +252,7 @@ height: 100%;
 .cart-drawer__inner {
     background: #FFF9ED;
 }
-
-.cart-drawer__content {
+.cart-drawer__content,.cart-drawer__items {
     background: #FFF9ED;
 }
 
