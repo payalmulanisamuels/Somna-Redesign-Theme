@@ -252,7 +252,7 @@
       </span>
     {% endif %}
     <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+      {% comment %} {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %} {% endcomment %}
     </div>
   </div>
 </div>
