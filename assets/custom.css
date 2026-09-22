@@ -428,7 +428,7 @@ text-component.cart-totals__total-value {
 }
 .cart-drawer__items .cart-items__table-row:last-child {
     border-bottom:  1px solid #E2E8F0 !important;
-    padding-bottom: 29px;
+    padding-bottom: 29px !important;
 }
 text-component.hz-price-main {
     color: #0D1B38;
