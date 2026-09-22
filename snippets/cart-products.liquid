@@ -402,31 +402,33 @@
                       {% endif %}
                     </div>
                   </div> {% endcomment %}
-                 {%- liquid
-                  assign target_variant = product.selected_or_first_available_variant
-                  assign subscription_price = blank
-                  assign discount_percentage = 10 
+                  {%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  
+  # Determine price and compare-at/one-time price logic
+  assign active_price = current_variant.price
+  assign compare_price = current_variant.compare_at_price
 
-                  for allocation in target_variant.selling_plan_allocations
-                    assign subscription_price = allocation.price
-                    for adjustment in allocation.selling_plan.price_adjustments
-                      if adjustment.value_type == 'percentage'
-                        assign discount_percentage = adjustment.value
-                      endif
-                    endfor
-                    break
-                  endfor
+  # Optional: check if subscription selling plan is active/selected or fallback
+  for alloc in current_variant.selling_plan_allocations
+    assign active_price = alloc.price
+    assign compare_price = current_variant.price
+    break
+  endfor
+-%}
 
-                  assign final_sub_price = subscription_price | default: target_variant.price
-                -%}
+<div class="hz-price-stack">
+  <text-component class="hz-price-main" value="{{ active_price | money }}">
+    {{ active_price | money }}
+  </text-component>
 
-                <div class="subscription-price-display">
-                  <text-component value="{{ final_sub_price | money_without_trailing_zeros }}">
-                    {{ final_sub_price | money_without_trailing_zeros }}
-                  </text-component>
-                  <span class="sub-discount-tag"></span>
-                </div>
-
+  {%- if compare_price > active_price -%}
+    <text-component class="hz-price-compare" value="{{ compare_price | money }}">
+      <s>{{ compare_price | money }}</s>
+    </text-component>
+  {%- endif -%}
+</div>
+                 <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
