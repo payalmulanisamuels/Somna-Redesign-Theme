@@ -402,18 +402,21 @@
                       {% endif %}
                     </div>
                   </div> {% endcomment %}
-                  {%- liquid
-  
-  # Determine price and compare-at/one-time price logic
-  assign active_price = item.final_line_price
-  assign compare_price = item.compare_at_price
+    {%- liquid
+  # Base default prices for the cart item
+  assign active_price = item.final_price
+  assign compare_price = item.original_price | default: item.variant.price
 
-  # Optional: check if subscription selling plan is active/selected or fallback
-  for alloc in item.selling_plan_allocations
-    assign active_price = alloc.price
-    assign compare_price = item.price
-    break
-  endfor
+  # Check if a selling plan allocation is active on this specific cart line item
+  if item.selling_plan_allocation != blank
+    assign active_price = item.selling_plan_allocation.price
+    # Compare against original variant price or regular item price before subscription
+    if item.variant.price > active_price
+      assign compare_price = item.variant.price
+    elsif item.original_price > active_price
+      assign compare_price = item.original_price
+    endif
+  endif
 -%}
 
 <div class="hz-price-stack">
