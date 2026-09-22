@@ -72,6 +72,7 @@
     "show_installments": false,
     "show_accelerated_checkout_buttons": false,
     "trust_badge_1_image": "shopify://shop_images/truck-icon.png",
+    "show_trust_badge_2": false,
     "trust_badge_2_image": "shopify://shop_images/lock.svg",
     "drawer_background_color": "#FFF9ED",
     "drawer_text_color": "#0A1A4A",
