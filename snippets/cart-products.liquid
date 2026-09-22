@@ -420,8 +420,8 @@
 -%}
 
 <div class="hz-price-stack">
-  <text-component class="hz-price-main" value="{{ active_price  | strip_html }}">
-    {{ active_price | money }}
+  <text-component class="hz-price-main" value="{{ price  | strip_html }}">
+    {{ price | money }}
   </text-component>
 
   {%- if compare_price > active_price -%}
