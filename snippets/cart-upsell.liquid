@@ -1,4 +1,3 @@
-
 {%- liquid
   assign has_strips = false
   assign has_tape = false
@@ -35,7 +34,7 @@
 
 {%- if matched_upsell_product != blank and matched_upsell_product.available -%}
   {%- assign upsell_variant = matched_upsell_product.selected_or_first_available_variant -%}
-  <div class="hz-minicart-upsell" {{ section.shopify_attributes }}>
+  <div class="hz-minicart-upsell">
     <div class="hz-minicart-upsell__card">
       <div class="hz-minicart-upsell__media">
         {%- if matched_upsell_product.featured_image != blank -%}
@@ -162,4 +161,3 @@
     opacity: 0.9;
   }
 </style>
- 
