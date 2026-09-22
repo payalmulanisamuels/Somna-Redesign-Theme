@@ -301,6 +301,10 @@ td.cart-items__details.cart-primary-typography {
     text-align: center;
     padding: 0 8px;
     margin-top: 8px;
+    max-width: max-content;
+}
+.cart-items__variants-wrapper {
+    width: 100%;
 }
 p.selling_plan_allocation {
     font-size: 11px;
