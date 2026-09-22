@@ -5,7 +5,7 @@ document.querySelectorAll(".shopify_subscriptions_app_block").forEach(block => {
 });
 
   document.addEventListener('submit', async function(e) {
-    const form = e.target.closest('[data-upsell-form]');
+    const form = e.target.closest('[data-ajax-form>]');
     if (!form) return;
 
     e.preventDefault();
