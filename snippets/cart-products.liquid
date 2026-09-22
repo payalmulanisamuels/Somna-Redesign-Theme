@@ -57,6 +57,11 @@
     {{- custom_style -}}
   "
 >
+
+{% render 'cart-progressbar' %}
+
+
+
   {% if cart.empty? or force_empty %}
     {%- if shop.customer_accounts_enabled and customer == null -%}
       <p>
