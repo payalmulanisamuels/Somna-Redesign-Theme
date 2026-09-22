@@ -402,34 +402,39 @@
                       {% endif %}
                     </div>
                   </div> {% endcomment %}
-    {%- liquid
-  # Base default prices for the cart item
-  assign active_price = item.final_price
-  assign compare_price = item.original_price | default: item.variant.price
+  {%- liquid
+  # Base default prices for the cart item (per unit first)
+  assign active_unit_price = item.final_price
+  assign compare_unit_price = item.original_price | default: item.variant.price
 
   # Check if a selling plan allocation is active on this specific cart line item
   if item.selling_plan_allocation != blank
-    assign active_price = item.selling_plan_allocation.price
-    # Compare against original variant price or regular item price before subscription
-    if item.variant.price > active_price
-      assign compare_price = item.variant.price
-    elsif item.original_price > active_price
-      assign compare_price = item.original_price
+    assign active_unit_price = item.selling_plan_allocation.price
+    if item.variant.price > active_unit_price
+      assign compare_unit_price = item.variant.price
+    elsif item.original_price > active_unit_price
+      assign compare_unit_price = item.original_price
     endif
   endif
+
+  # Multiply per-unit price by quantity for total line display
+  # Alternatively, item.final_line_price handles total active discounted line price natively
+  assign total_active_price = active_unit_price | times: item.quantity
+  assign total_compare_price = compare_unit_price | times: item.quantity
 -%}
 
 <div class="hz-price-stack">
-  <text-component class="hz-price-main" value="{{ active_price | money }}">
-    {{ active_price | money }}
+  <text-component class="hz-price-main" value="{{ total_active_price | money }}">
+    {{ total_active_price | money }}
   </text-component>
 
-  {%- if compare_price > active_price -%}
-    <text-component class="hz-price-compare" value="{{ compare_price | money }}">
-      <s>{{ compare_price | money }}</s>
+  {%- if total_compare_price > total_active_price -%}
+    <text-component class="hz-price-compare" value="{{ total_compare_price | money }}">
+      <s>{{ total_compare_price | money }}</s>
     </text-component>
   {%- endif -%}
 </div>
+
                  {% comment %} <text-component value="{{ price | strip_html }}">{{ price }}</text-component> {% endcomment %}
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
