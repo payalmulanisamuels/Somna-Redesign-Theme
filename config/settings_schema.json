@@ -1948,6 +1948,48 @@
     }
   ]
 },
+{
+  "name": "Cart Upsell Rules",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Pair 1: Tape in Cart → Strips Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_tape_trigger",
+      "label": "Trigger Product (Tape)"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_tape_recommend",
+      "label": "Recommended Product (Strips)"
+    },
+    {
+      "type": "header",
+      "content": "Pair 2: Strips in Cart → Tape Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_strips_trigger",
+      "label": "Trigger Product (Strips)"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_strips_recommend",
+      "label": "Recommended Product (Tape)"
+    },
+    {
+      "type": "header",
+      "content": "Pair 3: Both/Bundle → Upgrade Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_upgrade_recommend",
+      "label": "Recommended Upgrade Product (Bundle)"
+    }
+  ]
+},
   {
     "name": "t:names.drawers",
     "settings": [
