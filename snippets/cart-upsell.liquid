@@ -72,7 +72,7 @@
             {%- endif -%}
           </div>
 
-          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form">
+          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form" data-ajax-form>
             <input type="hidden" name="id" value="{{ upsell_variant.id }}">
             <input type="hidden" name="quantity" value="1">
             <button type="submit" class="hz-upsell-add-btn">
