@@ -744,4 +744,14 @@ ul.custom-payment-icons-list li {
 }
 /* upsell */
 
+/*progresbar */
+.sleep-guide-progress-wrapper{
+    position: relative;
+    width: calc(100% + 40px);
+    margin: 0 -20px 24px;
+    padding: 24px 16px;
+    text-align: center;
+}
+/*progresbar */
+
 /* Cart Drawer */
