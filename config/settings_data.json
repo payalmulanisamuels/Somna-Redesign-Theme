@@ -71,6 +71,8 @@
     "show_add_discount_code": false,
     "show_installments": false,
     "show_accelerated_checkout_buttons": false,
+    "text_color": "#0A1A4A",
+    "divider_color": "#0A1A4A",
     "icon_1_image": "shopify://shop_images/Gift.png",
     "icon_2_image": "shopify://shop_images/Refresh.png",
     "icon_3_image": "shopify://shop_images/guarantee.png",
