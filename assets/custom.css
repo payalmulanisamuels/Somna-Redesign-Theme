@@ -638,9 +638,11 @@ ul.custom-payment-icons-list li {
 
 /* upsell */
 .hz-minicart-upsell {
-    padding: 12px var(--cart-drawer-padding, 20px);
+    padding: 29px 8px;
     width: 100%;
     box-sizing: border-box;
+    margin-top: 29px;
+    border-top: 1px solid #E2E8F0;
 }
 .hz-minicart-upsell__card {
     background-color: #E7F5FF;
