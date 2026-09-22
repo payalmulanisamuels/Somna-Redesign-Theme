@@ -447,8 +447,7 @@ ul.custom-payment-icons-list li {
   }
 
   .hz-trust-pill__img {
-    width: 16px;
-    height: 16px;
+    width: 30px;
     object-fit: contain;
     display: block;
   }
