@@ -31,7 +31,23 @@ document.addEventListener('submit', function(e) {
         btn.disabled = false;
         btn.textContent = originalText;
       }, 1500);
-
+        // Trigger Horizon / Shopify Section Rendering API / Cart Drawer Refresh
+      if (window.cart && typeof window.cart.refresh === 'function') {
+        window.cart.refresh();
+      } else {
+        // Dispatch standard Shopify cart update event or re-render drawer section
+        document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+          bubbles: true,
+          detail: { cart: data }
+        }));
+        // Fallback reload/open drawer dispatch if custom theme hook differs
+        const drawer = document.querySelector('theme-drawer');
+        if (drawer && typeof drawer.open === 'function') {
+          drawer.open();
+        } else {
+          window.location.reload();
+        }
+      }
      
     })
     .catch(error => {
