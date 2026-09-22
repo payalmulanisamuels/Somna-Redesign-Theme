@@ -403,16 +403,15 @@
                     </div>
                   </div> {% endcomment %}
                   {%- liquid
-  assign current_variant = product.selected_or_first_available_variant
   
   # Determine price and compare-at/one-time price logic
-  assign active_price = current_variant.price
-  assign compare_price = current_variant.compare_at_price
+  assign active_price = item.final_line_price
+  assign compare_price = item.compare_at_price
 
   # Optional: check if subscription selling plan is active/selected or fallback
-  for alloc in current_variant.selling_plan_allocations
+  for alloc in item.selling_plan_allocations
     assign active_price = alloc.price
-    assign compare_price = current_variant.price
+    assign compare_price = item.price
     break
   endfor
 -%}
