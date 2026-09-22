@@ -414,7 +414,14 @@ ul.custom-payment-icons-list {
     flex-wrap: wrap;
     justify-content: center;
 }
-
+text-component.cart-totals__total-value {
+    color: #0D162D;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 140% */
+    letter-spacing: -0.5px;
+}
 ul.custom-payment-icons-list li {
     display: block;
     flex: 0 0 40px;
