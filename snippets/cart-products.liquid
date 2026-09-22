@@ -404,7 +404,7 @@
                   </div> {% endcomment %}
     {%- liquid
   # Base default prices for the cart item
-  assign active_price = item.final_line_price
+  assign active_price = item.final_price
   assign compare_price = item.original_price | default: item.variant.price
 
   # Check if a selling plan allocation is active on this specific cart line item
@@ -420,12 +420,12 @@
 -%}
 
 <div class="hz-price-stack">
-  <text-component class="hz-price-main" value="{{ price  | strip_html }}">
-    {{ price | money }}
+  <text-component class="hz-price-main" value="{{ active_price | money }}">
+    {{ active_price | money }}
   </text-component>
 
   {%- if compare_price > active_price -%}
-    <text-component class="hz-price-compare" value="{{ compare_price  | strip_html }}">
+    <text-component class="hz-price-compare" value="{{ compare_price | money }}">
       <s>{{ compare_price | money }}</s>
     </text-component>
   {%- endif -%}
