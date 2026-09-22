@@ -634,4 +634,106 @@ ul.custom-payment-icons-list li {
     width: 1px;
     height: 32px;
 }
+
+/* upsell */
+.hz-minicart-upsell {
+    padding: 12px var(--cart-drawer-padding, 20px);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .hz-minicart-upsell__card {
+    background-color: #E7F5FF;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .hz-minicart-upsell__media {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hz-upsell-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hz-minicart-upsell__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .hz-minicart-upsell__tag {
+    color: #334155;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.75px; 
+    margin: 0;
+  }
+  .hz-minicart-upsell__title {
+    color: #0D1B38;
+    font-family: var(--headfont);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21.25px;
+    margin: 0;
+  }
+  .hz-minicart-upsell__desc {
+    color: #334155;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.75px; 
+    margin: 0;
+  }
+  .hz-minicart-upsell__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .hz-minicart-upsell__price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .hz-minicart-upsell__price {
+    color: #0D1B38;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22.5px; /* 160.714% */
+  }
+  .hz-minicart-upsell__compare {
+    font-size: 12px;
+    color: #64748b;
+  }
+  .hz-upsell-add-btn {
+    background-color: #0A1A4A;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    border: none;
+    border-radius: 999px;
+    padding: 5px 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+  .hz-upsell-add-btn:hover {
+    opacity: 0.9;
+  }
+/* upsell */
+
 /* Cart Drawer */
