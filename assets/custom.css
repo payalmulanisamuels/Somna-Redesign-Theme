@@ -469,4 +469,7 @@ ul.custom-payment-icons-list li {
     font-style: unset;
     font-size: 10px;
 }
+.hz-trust-pill__text p {
+    line-height: 1;
+}
 /* Cart Drawer */
