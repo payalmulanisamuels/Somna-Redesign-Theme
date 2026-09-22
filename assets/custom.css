@@ -288,7 +288,7 @@ td.cart-items__details.cart-primary-typography {
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 22.5px; /* 160.714% */
+    line-height: 1; /* 160.714% */
 }
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
