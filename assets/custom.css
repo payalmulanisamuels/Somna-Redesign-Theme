@@ -432,6 +432,7 @@ text-component.cart-totals__total-value {
 .cart-drawer__items{
     border-bottom:  1px solid #E2E8F0 !important;
     padding-bottom: 29px !important;
+    margin-bottom: 29px;
 }
 text-component.hz-price-main {
     color: #0D1B38;
