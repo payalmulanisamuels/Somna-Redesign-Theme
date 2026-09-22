@@ -626,9 +626,10 @@ ul.custom-payment-icons-list li {
     object-fit: contain;
 }
 .hz-perk-text {
-    font-size: 13.5px;
+    font-size: 10px;
+    font-style: normal;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 120%;
 }
 .hz-perk-divider {
     width: 1px;
