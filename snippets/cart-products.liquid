@@ -373,7 +373,7 @@
                   role="cell"
                   headers="productTotal"
                 >
-                         <div class="cart-items__unit-price-wrapper">
+                  {% comment %} <div class="cart-items__unit-price-wrapper">
                     <div>
                       {% if item.original_price != item.final_price %}
                         <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
@@ -401,7 +401,7 @@
                         {% endif %}
                       {% endif %}
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
