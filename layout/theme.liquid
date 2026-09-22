@@ -46,6 +46,11 @@
         })
     </script>
 
+    <script
+  type="module"
+  src="{{ 'custom.js' | asset_url }}"
+  fetchpriority="low"
+></script>
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
