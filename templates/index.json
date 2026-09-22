@@ -763,7 +763,7 @@
         "bundle_LHB8m9": {
           "type": "bundle",
           "settings": {
-            "product": "complete-sleep-bundle",
+            "product": "the-colour-set",
             "is_featured": true,
             "custom_title": "",
             "custom_image": "shopify://shop_images/night.jpg",
@@ -2121,7 +2121,7 @@
         "padding-block-end": 48
       }
     },
-      "footer_m9NzUG": {
+    "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
         "group_H6VpwJ": {
@@ -2265,7 +2265,7 @@
         "padding-block-start": 30,
         "padding-block-end": 50
       }
-    },
+    }
   },
   "order": [
     "custom_circle_categories_DqUCEF",
@@ -2279,7 +2279,6 @@
     "steps_guide_GFjEFb",
     "section_BbCdDx",
     "section_HiaPwG",
-        "footer_m9NzUG",
-
+    "footer_m9NzUG"
   ]
 }
