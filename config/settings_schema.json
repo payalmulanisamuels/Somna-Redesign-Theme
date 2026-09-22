@@ -1786,10 +1786,9 @@
       "default": "🚚"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "trust_badge_1_text",
-      "label": "Badge 1 Text",
-      "default": "Hassle-Free Returns"
+      "label": "Badge 1 Text"
     },
     {
       "type": "header",
