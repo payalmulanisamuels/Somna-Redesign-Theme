@@ -15,7 +15,7 @@
   assign message = 'You unlocked 2 free Sleep Guides!'
 
   for item in cart.items
-    assign title_down = item.title | downsized | default: item.product.title | downcase
+    assign title_down = item.title | downcase | default: item.product.title | downcase
     assign qty = item.quantity
 
     if title_down contains '1 bag' or title_down contains '1-month'
