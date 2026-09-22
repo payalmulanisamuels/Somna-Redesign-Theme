@@ -424,9 +424,9 @@
                   <text-component value="{{ final_sub_price | money_without_trailing_zeros }}">
                     {{ final_sub_price | money_without_trailing_zeros }}
                   </text-component>
-                  <span class="sub-discount-tag">Subscribe & save {{ discount_percentage }}%</span>
+                  <span class="sub-discount-tag"></span>
                 </div>
-                
+
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
