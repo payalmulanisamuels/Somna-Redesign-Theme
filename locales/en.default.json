@@ -11,7 +11,7 @@
   "accessibility": {
     "account": "Account",
     "active_filters": "Active filters:",
-    "cart": "Cart",
+    "cart": "Your cart",
     "cart_count": "Total items in cart",
     "close_dialog": "Close dialog",
     "country_region": "Country/Region",
@@ -159,7 +159,7 @@
     "account_profile": "Profile",
     "blog_details_separator": "|",
     "cart_estimated_total": "Estimated total",
-    "cart_title": "Cart",
+    "cart_title": "Your cart",
     "cart_subtotal": "Subtotal",
     "cart_total": "Cart total",
     "checkout": "Check out",
