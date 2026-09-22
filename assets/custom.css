@@ -302,7 +302,9 @@ td.cart-items__details.cart-primary-typography {
     padding: 0 8px;
     margin-top: 8px;
 }
-
+p.selling_plan_allocation {
+    font-size: 11px;
+}
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0a1a4a;
