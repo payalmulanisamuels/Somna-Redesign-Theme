@@ -274,7 +274,12 @@ height: 100%;
     width: auto;
     aspect-ratio: unset !important;
 }
-.cart-items__table-row--full-width-variants .cart-items__price {
+.cart-items__variants-wrapper {
+    color: #334155;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.75px; 
 }
 .cart-items__table-row--full-width-variants {
     grid-template-columns: 140px auto !important;
