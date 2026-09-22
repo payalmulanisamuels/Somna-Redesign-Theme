@@ -428,6 +428,25 @@ text-component.cart-totals__total-value {
 .cart-drawer__items .cart-items__table-row:last-child {
     border-bottom: 0 !important;
 }
+text-component.hz-price-main {
+    color: #0D1B38;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22.5px; /* 160.714% */
+}
+.hz-price-stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+text-component.hz-price-compare {
+    width: 100%;
+    color: #9D9D9D;
+    font-size: 12px;
+    font-style: normal;
+    line-height: 1; /* 281.25% */
+}
 ul.custom-payment-icons-list li {
     display: block;
     flex: 0 0 40px;
