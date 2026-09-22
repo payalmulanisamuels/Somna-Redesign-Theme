@@ -601,6 +601,9 @@ ul.custom-payment-icons-list li {
     color: #34A853;
 }
 
+.hz-perks-section {
+    width: 100%;
+}
 .hz-perks-container {
     display: flex;
     align-items: center;
