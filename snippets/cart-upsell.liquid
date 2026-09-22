@@ -49,6 +49,8 @@
   endif
 -%}
 
+=== {{matched_upsell_product }}
+
 {%- if matched_upsell_product != blank and matched_upsell_product.available -%}
   {%- assign upsell_variant = matched_upsell_product.selected_or_first_available_variant -%}
   <div class="hz-minicart-upsell">
