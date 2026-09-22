@@ -114,7 +114,55 @@
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
-                {% render 'cart-upsell' %}
+                {%- if cart.items.size > 0 -%}
+  {%- assign anchor_product = cart.items.first.product -%}
+  <div class="hz-native-recs-section" {{ section.shopify_attributes }}>
+    <product-recommendations
+      data-url="{{ routes.product_recommendations_url }}?product_id={{ anchor_product.id }}&limit=1&intent=complementary"
+      class="hz-native-recs-container"
+    >
+      <div class="hz-native-recs-target" data-recommendations-holder>
+        {%- comment -%} JS or Shopify native web component will hydrate recommendations here {%- endcomment -%}
+      </div>
+    </product-recommendations>
+  </div>
+
+  <script>
+    (function() {
+      const container = document.currentScript.previousElementSibling.querySelector('product-recommendations');
+      if (!container) return;
+
+      fetch(container.dataset.url)
+        .then(response => response.text())
+        .then(text => {
+          const html = document.createElement('div');
+          html.innerHTML = text;
+          const recommendations = html.querySelector('product-recommendations');
+          if (recommendations && recommendations.innerHTML.trim().length) {
+            container.innerHTML = recommendations.innerHTML;
+          }
+        })
+        .catch(e => console.error('Recommendation fetch error:', e));
+    })();
+  </script>
+{%- endif -%}
+
+<style>
+  .hz-native-recs-section {
+    padding: 16px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .hz-native-recs-container product-recommendations {
+    display: block;
+    width: 100%;
+  }
+  /* Optional card wrapper style matching your single-item spec */
+  .hz-native-recs-container .hz-minicart-upsell {
+    padding: 0;
+  }
+</style>
+
                 <div class="cart-drawer__summary">
                   {% render 'cart-summary', section_id: 'cart-drawer-section' %}
                 </div>
