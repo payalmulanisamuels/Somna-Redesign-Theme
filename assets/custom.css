@@ -410,7 +410,7 @@ ul.custom-payment-icons-list {
     display: flex;
     gap: 5px;
     max-width: 320px;
-    margin: 16px auto 0;
+    margin: 21px auto 34px;
     flex-wrap: wrap;
     justify-content: center;
 }
