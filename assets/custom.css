@@ -425,6 +425,9 @@ text-component.cart-totals__total-value {
 .cart-totals:not(:has(.cart-actions)) {
     border-block-start: 0px solid #E2E8F0 !important;
 }
+.cart-drawer__items .cart-items__table-row:last-child {
+    border-bottom: 0 !important;
+}
 ul.custom-payment-icons-list li {
     display: block;
     flex: 0 0 40px;
