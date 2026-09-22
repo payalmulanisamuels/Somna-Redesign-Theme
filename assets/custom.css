@@ -786,8 +786,8 @@ ul.custom-payment-icons-list li {
 }
 .progress-icon{
     transform: translate(-50%, -50%);
-    width: 28px; 
-    height: 28px; 
+    width: 24px; 
+    height: 24px; 
     background: #fff; 
     border: 2px solid #4f46e5; 
     border-radius: 50%; 
@@ -797,7 +797,9 @@ ul.custom-payment-icons-list li {
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     position: absolute; top: 50%;
 }
-
+.progress-icon svg {
+    width: 13px;
+}
 /*progresbar */
 
 /* Cart Drawer */
