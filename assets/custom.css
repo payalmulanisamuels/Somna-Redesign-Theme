@@ -259,6 +259,13 @@ height: 100%;
 .theme-drawer__dialog[cart-summary-sticky=false] .cart-drawer__summary {
     background: #FFF9ED;
 }
+.cart-content {
+    color: #0A1A4A;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 15px */
+}
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0a1a4a;
@@ -281,6 +288,7 @@ height: 100%;
     font-weight: 400;
     line-height: 18.75px; 
 }
+
 .cart-items__table-row--full-width-variants {
     grid-template-columns: 140px auto !important;
 }
