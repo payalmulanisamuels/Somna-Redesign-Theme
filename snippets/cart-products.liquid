@@ -430,7 +430,7 @@
     </text-component>
   {%- endif -%}
 </div>
-                 <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
+                 {% comment %} <text-component value="{{ price | strip_html }}">{{ price }}</text-component> {% endcomment %}
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
