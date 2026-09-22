@@ -1,40 +1,33 @@
 {%- liquid
-  assign anchor_product = cart.items.first.product
-  assign comp_product = blank
-  for product_ref in anchor_product.metafields.shopify.complementary_products.value limit: 1
-    assign comp_product = product_ref
+  assign has_strips = false
+  assign has_tape = false
+  assign matched_upsell_product = blank
+  assign matched_tag = 'Complete the ritual'
+  assign matched_desc = 'Pairs perfectly with your current items for even better results.'
+
+  for item in cart.items
+    assign title_clean = item.product.title | downcase
+    if title_clean contains 'nasal strips'
+      assign has_strips = true
+    elsif title_clean contains 'mouth tape'
+      assign has_tape = true
+    endif
   endfor
+
+  # Match global settings choices
+  if has_tape and has_strips == false
+    assign matched_upsell_product = settings.upsell_pair_tape_recommend
+    assign matched_desc = 'Pair your mouth tape with nasal strips for unobstructed airflow.'
+  elsif has_strips and has_tape == false
+    assign matched_upsell_product = settings.upsell_pair_strips_recommend
+    assign matched_desc = 'Seal your mouth and protect nasal breathing alignment.'
+  else
+    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend
+    assign matched_tag = 'Best Value Upgrade'
+    assign matched_desc = 'Upgrade to the complete sleep bundle system.'
+  endif
+
+  if matched_upsell_product == blank
+    assign matched_upsell_product = all_products['mouth-tape']
+  endif
 -%}
-
-{%- if comp_product != blank -%}
-  {%- assign comp_variant = comp_product.selected_or_first_available_variant -%}
-  <div class="hz-minicart-upsell">
-    <div class="hz-minicart-upsell__card">
-      <div class="hz-minicart-upsell__media">
-        {%- if comp_product.featured_image != blank -%}
-          {{ comp_product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
-        {%- endif -%}
-      </div>
-      
-      <div class="hz-minicart-upsell__content">
-        <span class="hz-minicart-upsell__tag">Complete the ritual</span>
-        <h4 class="hz-minicart-upsell__title">{{ comp_product.title }}</h4>
-        <p class="hz-minicart-upsell__desc">Pairs recommended by your routine.</p>
-
-        <div class="hz-minicart-upsell__bottom">
-          <div class="hz-minicart-upsell__price-wrap">
-            <span class="hz-minicart-upsell__price">{{ comp_variant.price | money }}</span>
-          </div>
-
-          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form">
-            <input type="hidden" name="id" value="{{ comp_variant.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="hz-upsell-add-btn">
-              Add to Cart
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-{%- endif -%}
