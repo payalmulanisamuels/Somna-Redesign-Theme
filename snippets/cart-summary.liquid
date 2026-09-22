@@ -8,6 +8,54 @@
 {% render 'text-component-shimmer-styles' %}
 {% render 'cart-typography-styles' %}
 
+
+{%- liquid
+  # Calculate dynamic original total vs active cart total including subscription savings
+  assign calculated_original_total = 0
+  assign calculated_active_total = cart.total_price
+
+  for item in cart.items
+    assign orig_price = item.variant.price | default: item.original_price
+    if item.selling_plan_allocation != blank
+      assign orig_price = item.variant.price
+    endif
+    assign line_orig = orig_price | times: item.quantity
+    assign calculated_original_total = calculated_original_total | plus: line_orig
+  endfor
+
+  # Total cart discount + subscription value difference
+  assign subscription_savings = calculated_original_total | minus: cart.total_price
+  assign total_saved = cart.total_discount | plus: subscription_savings
+  if total_saved < 0
+    assign total_saved = 0
+  endif
+-%}
+
+<div class="hz-cart-totals-summary">
+  <div class="hz-cart-totals-row">
+    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
+    <text-component value="{{ cart.total_price | money }}">
+      {{ cart.total_price | money }}
+    </text-component>
+  </div>
+
+  {%- if total_saved > 0 -%}
+    <div class="hz-cart-totals-row hz-cart-totals-saved">
+      <span>You saved</span>
+      <text-component value="-{{ total_saved | money }}">
+        -{{ total_saved | money }}
+      </text-component>
+    </div>
+  {%- endif -%}
+
+  <div class="hz-cart-totals-row">
+    <span>Shipping</span>
+    <span>{% if cart.total_price >= 5000 %}Free{% else %}Calculated at checkout{% endif %}</span>
+  </div>
+</div>
+
+
+
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
