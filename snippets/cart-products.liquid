@@ -58,7 +58,6 @@
   "
 >
 
-{% render 'cart-progressbar' %}
 
 
 
@@ -78,6 +77,8 @@
       </span>
     </a>
   {%- else -%}
+{% render 'cart-progressbar' %}
+
     <span
       class="visually-hidden"
       ref="cartItemCount"
