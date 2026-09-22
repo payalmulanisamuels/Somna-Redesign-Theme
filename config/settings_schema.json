@@ -1621,146 +1621,7 @@
       }
     ]
   },
-  {
-  "name": "Payment Icons",
-  "settings": [
-    {
-      "type": "header",
-      "content": "American Express"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_amex",
-      "label": "Show American Express",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_amex",
-      "label": "Custom Amex Icon"
-    },
-    {
-      "type": "header",
-      "content": "Apple Pay"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_apple_pay",
-      "label": "Show Apple Pay",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_apple_pay",
-      "label": "Custom Apple Pay Icon"
-    },
-    {
-      "type": "header",
-      "content": "Bancontact"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_bancontact",
-      "label": "Show Bancontact",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_bancontact",
-      "label": "Custom Bancontact Icon"
-    },
-    {
-      "type": "header",
-      "content": "Diners Club"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_diners_club",
-      "label": "Show Diners Club",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_diners_club",
-      "label": "Custom Diners Club Icon"
-    },
-    {
-      "type": "header",
-      "content": "Discover"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_discover",
-      "label": "Show Discover",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_discover",
-      "label": "Custom Discover Icon"
-    },
-    {
-      "type": "header",
-      "content": "Google Pay"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_google_pay",
-      "label": "Show Google Pay",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_google_pay",
-      "label": "Custom Google Pay Icon"
-    },
-    {
-      "type": "header",
-      "content": "Mastercard"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_mastercard",
-      "label": "Show Mastercard",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_mastercard",
-      "label": "Custom Mastercard Icon"
-    },
-    {
-      "type": "header",
-      "content": "Shop Pay"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_shop_pay",
-      "label": "Show Shop Pay",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_shop_pay",
-      "label": "Custom Shop Pay Icon"
-    },
-    {
-      "type": "header",
-      "content": "Visa"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_payment_visa",
-      "label": "Show Visa",
-      "default": true
-    },
-    {
-      "type": "image_picker",
-      "id": "payment_image_visa",
-      "label": "Custom Visa Icon"
-    }
-  ]
-},
+ 
 {
   "name": "Cart Drawer",
   "settings": [
@@ -1944,6 +1805,146 @@
       "id": "trust_badge_color",
       "label": "Badge Text Color",
       "default": "#18283d"
+    },
+    {
+      "type": "header",
+      "content": "Payment Icons",
+      
+    },
+    {
+      "type": "header",
+      "content": "American Express"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_amex",
+      "label": "Show American Express",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_amex",
+      "label": "Custom Amex Icon"
+    },
+    {
+      "type": "header",
+      "content": "Apple Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_apple_pay",
+      "label": "Show Apple Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_apple_pay",
+      "label": "Custom Apple Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Bancontact"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_bancontact",
+      "label": "Show Bancontact",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_bancontact",
+      "label": "Custom Bancontact Icon"
+    },
+    {
+      "type": "header",
+      "content": "Diners Club"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_diners_club",
+      "label": "Show Diners Club",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_diners_club",
+      "label": "Custom Diners Club Icon"
+    },
+    {
+      "type": "header",
+      "content": "Discover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_discover",
+      "label": "Show Discover",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_discover",
+      "label": "Custom Discover Icon"
+    },
+    {
+      "type": "header",
+      "content": "Google Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_google_pay",
+      "label": "Show Google Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_google_pay",
+      "label": "Custom Google Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Mastercard"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_mastercard",
+      "label": "Show Mastercard",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_mastercard",
+      "label": "Custom Mastercard Icon"
+    },
+    {
+      "type": "header",
+      "content": "Shop Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_shop_pay",
+      "label": "Show Shop Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_shop_pay",
+      "label": "Custom Shop Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Visa"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_visa",
+      "label": "Show Visa",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_visa",
+      "label": "Custom Visa Icon"
     }
   ]
 },
