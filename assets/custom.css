@@ -290,7 +290,7 @@ td.cart-items__details.cart-primary-typography {
     font-weight: 600;
     line-height: 1; /* 160.714% */
 }
-.subcription_badge {
+.cart-items__details * .subcription_badge{
     border-radius: 10px;
     background: #C9E5FE;
     color: #064BD8;
