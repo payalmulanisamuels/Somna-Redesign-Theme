@@ -746,33 +746,34 @@
             "custom_title": "The Breathe Bundle",
             "custom_image": "shopify://shop_images/breat-bundle.jpg",
             "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
+            "button_label": "Shop the Sleep Bundle"
           }
         },
         "bundle_6MqjwE": {
           "type": "bundle",
           "settings": {
-            "product": "season-bundle",
+            "product": "the-colour-set",
             "is_featured": false,
-            "custom_title": "The Bold Bundle",
+            "custom_title": "The Colour Set",
             "custom_image": "shopify://shop_images/night.jpg",
             "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
+            "button_label": "Shop the Colour Set"
           }
         },
         "bundle_LHB8m9": {
           "type": "bundle",
           "settings": {
-            "product": "the-colour-set",
+            "product": "season-bundle",
             "is_featured": true,
-            "custom_title": "",
+            "custom_title": "The Season Bundle",
             "custom_image": "shopify://shop_images/night.jpg",
             "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
+            "button_label": "Shop the Season Bundle"
           }
         },
         "bundle_rBjHFi": {
           "type": "bundle",
+          "disabled": true,
           "settings": {
             "product": "mouth-tape",
             "is_featured": false,
@@ -784,6 +785,7 @@
         },
         "bundle_CGg3b8": {
           "type": "bundle",
+          "disabled": true,
           "settings": {
             "product": "nasal-strips",
             "is_featured": false,
@@ -1059,7 +1061,7 @@
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
-                "divider_color": "#D9D9D9",
+                "divider_color": "#d9d9d9",
                 "width_percent": 100,
                 "padding-block-start": 20,
                 "padding-block-end": 20
@@ -1181,7 +1183,7 @@
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
-                "divider_color": "#D9D9D9",
+                "divider_color": "#d9d9d9",
                 "width_percent": 100,
                 "padding-block-start": 20,
                 "padding-block-end": 20
@@ -1303,7 +1305,7 @@
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
-                "divider_color": "#D9D9D9",
+                "divider_color": "#d9d9d9",
                 "width_percent": 100,
                 "padding-block-start": 20,
                 "padding-block-end": 20
