@@ -643,7 +643,7 @@ ul.custom-payment-icons-list li {
 
 /* upsell */
 .hz-minicart-upsell {
-    padding: 29px 8px;
+    padding: 0 8px 29px 8px;
     width: 100%;
     box-sizing: border-box;
 
