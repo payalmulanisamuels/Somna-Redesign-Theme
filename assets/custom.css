@@ -748,8 +748,17 @@ ul.custom-payment-icons-list li {
 .sleep-guide-progress-wrapper{
     position: relative;
     margin: 0 -20px 24px;
-    padding: 24px 16px;
+    padding: 24px 0px;
     text-align: center;
+}
+.progressbar-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 0 25px;
+    left: 0;
+    right: 0;
 }
 /*progresbar */
 
