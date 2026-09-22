@@ -135,7 +135,7 @@
           </div>
         {% endif %}
 
-        {% if onetime_price != blank %}
+        {% if onetime_price != blank and template contains 'index' %}
           <div class="hz-bundle-divider" aria-hidden="true"></div>
           <div class="hz-bundle-onetime-price">
             <span class="hz-price-regular">{{ onetime_price }}</span>
