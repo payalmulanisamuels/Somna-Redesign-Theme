@@ -266,6 +266,30 @@ height: 100%;
     font-weight: 400;
     line-height: 150%; /* 15px */
 }
+.cart-items__unit-price-wrapper>div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.cart-items__unit-price-wrapper s.compare-at-price {
+    width: 100%;
+    color: #9D9D9D;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 22.5px; /* 281.25% */
+}
+td.cart-items__details.cart-primary-typography {
+    display: flex;
+    flex-wrap: wrap;
+}
+.cart-items__unit-price-wrapper span {
+    color: #0D1B38;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22.5px; /* 160.714% */
+}
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0a1a4a;
