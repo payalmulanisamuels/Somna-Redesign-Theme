@@ -273,7 +273,62 @@
     </span>
   </button>
 
+
+<div class="hz-trust-badges-wrapper">
+  {% comment %} Badge 1 {% endcomment %}
+  {% if settings.show_trust_badge_1 and settings.trust_badge_1_text != blank %}
+    <div 
+      class="hz-trust-pill"
+      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
+    >
+      {% if settings.trust_badge_1_image != blank %}
+        <img 
+          src="{{ settings.trust_badge_1_image | image_url: width: 40 }}" 
+          alt="" 
+          class="hz-trust-pill__img"
+          loading="lazy"
+          width="16"
+          height="16"
+        >
+      {% elsif settings.trust_badge_1_emoji != blank %}
+        <span class="hz-trust-pill__icon">{{ settings.trust_badge_1_emoji }}</span>
+      {% endif %}
+      <span class="hz-trust-pill__text">{{ settings.trust_badge_1_text }}</span>
+    </div>
+  {% endif %}
+
+  {% comment %} Badge 2 {% endcomment %}
+  {% if settings.show_trust_badge_2 and settings.trust_badge_2_text != blank %}
+    <div 
+      class="hz-trust-pill"
+      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
+    >
+      {% if settings.trust_badge_2_image != blank %}
+        <img 
+          src="{{ settings.trust_badge_2_image | image_url: width: 40 }}" 
+          alt="" 
+          class="hz-trust-pill__img"
+          loading="lazy"
+          width="16"
+          height="16"
+        >
+      {% elsif settings.trust_badge_2_emoji != blank %}
+        <span class="hz-trust-pill__icon">{{ settings.trust_badge_2_emoji }}</span>
+      {% endif %}
+      <span class="hz-trust-pill__text">{{ settings.trust_badge_2_text }}</span>
+    </div>
+  {% endif %}
+</div>
+
+
+
+
+
 <div class="custom-payment-icons-wrapper">
+
+  <div class="express_checkout">
+    or express checkout
+  </div>
   <ul class="custom-payment-icons-list" role="list">
     
     {% comment %} Amex {% endcomment %}
@@ -377,54 +432,6 @@
 
   </ul>
 </div>
-
-
-<div class="hz-trust-badges-wrapper">
-  {% comment %} Badge 1 {% endcomment %}
-  {% if settings.show_trust_badge_1 and settings.trust_badge_1_text != blank %}
-    <div 
-      class="hz-trust-pill"
-      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
-    >
-      {% if settings.trust_badge_1_image != blank %}
-        <img 
-          src="{{ settings.trust_badge_1_image | image_url: width: 40 }}" 
-          alt="" 
-          class="hz-trust-pill__img"
-          loading="lazy"
-          width="16"
-          height="16"
-        >
-      {% elsif settings.trust_badge_1_emoji != blank %}
-        <span class="hz-trust-pill__icon">{{ settings.trust_badge_1_emoji }}</span>
-      {% endif %}
-      <span class="hz-trust-pill__text">{{ settings.trust_badge_1_text }}</span>
-    </div>
-  {% endif %}
-
-  {% comment %} Badge 2 {% endcomment %}
-  {% if settings.show_trust_badge_2 and settings.trust_badge_2_text != blank %}
-    <div 
-      class="hz-trust-pill"
-      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
-    >
-      {% if settings.trust_badge_2_image != blank %}
-        <img 
-          src="{{ settings.trust_badge_2_image | image_url: width: 40 }}" 
-          alt="" 
-          class="hz-trust-pill__img"
-          loading="lazy"
-          width="16"
-          height="16"
-        >
-      {% elsif settings.trust_badge_2_emoji != blank %}
-        <span class="hz-trust-pill__icon">{{ settings.trust_badge_2_emoji }}</span>
-      {% endif %}
-      <span class="hz-trust-pill__text">{{ settings.trust_badge_2_text }}</span>
-    </div>
-  {% endif %}
-</div>
-
 
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div
