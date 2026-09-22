@@ -32,16 +32,18 @@ document.addEventListener('submit', function(e) {
   .then(data => {
     btn.textContent = 'Added!';
 
-    // Native Horizon / Shopify event sync
+    // Provide a valid backing promise for listeners awaiting event.promise
+    const cartPromise = fetch('/cart.js', { headers: { Accept: 'application/json' } }).then(r => r.json());
+
     document.dispatchEvent(
       new CartLinesUpdateEvent({
         action: 'add',
         context: 'product',
-        lines: [{ merchandiseId: variantId, quantity }]
+        lines: [{ merchandiseId: variantId, quantity }],
+        promise: cartPromise
       })
     );
 
-    // Refresh cart-items drawer/component if present
     document.querySelectorAll('cart-items-component').forEach(component => {
       component.fetchCartData?.();
     });
