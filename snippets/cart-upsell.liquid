@@ -1,48 +1,40 @@
-{%- if cart.items.size > 0 -%}
-  {%- assign anchor_product = cart.items.first.product -%}
-  <div class="hz-native-recs-section" {{ section.shopify_attributes }}>
-    <product-recommendations
-      data-url="{{ routes.product_recommendations_url }}?product_id={{ anchor_product.id }}&limit=1&intent=complementary"
-      class="hz-native-recs-container"
-    >
-      <div class="hz-native-recs-target" data-recommendations-holder>
-        {%- comment -%} JS or Shopify native web component will hydrate recommendations here {%- endcomment -%}
+{%- liquid
+  assign anchor_product = cart.items.first.product
+  assign comp_product = blank
+  for product_ref in anchor_product.metafields.shopify.complementary_products.value limit: 1
+    assign comp_product = product_ref
+  endfor
+-%}
+
+{%- if comp_product != blank -%}
+  {%- assign comp_variant = comp_product.selected_or_first_available_variant -%}
+  <div class="hz-minicart-upsell">
+    <div class="hz-minicart-upsell__card">
+      <div class="hz-minicart-upsell__media">
+        {%- if comp_product.featured_image != blank -%}
+          {{ comp_product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
+        {%- endif -%}
       </div>
-    </product-recommendations>
+      
+      <div class="hz-minicart-upsell__content">
+        <span class="hz-minicart-upsell__tag">Complete the ritual</span>
+        <h4 class="hz-minicart-upsell__title">{{ comp_product.title }}</h4>
+        <p class="hz-minicart-upsell__desc">Pairs recommended by your routine.</p>
+
+        <div class="hz-minicart-upsell__bottom">
+          <div class="hz-minicart-upsell__price-wrap">
+            <span class="hz-minicart-upsell__price">{{ comp_variant.price | money }}</span>
+          </div>
+
+          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form">
+            <input type="hidden" name="id" value="{{ comp_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="hz-upsell-add-btn">
+              Add to Cart
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <script>
-    (function() {
-      const container = document.currentScript.previousElementSibling.querySelector('product-recommendations');
-      if (!container) return;
-
-      fetch(container.dataset.url)
-        .then(response => response.text())
-        .then(text => {
-          const html = document.createElement('div');
-          html.innerHTML = text;
-          const recommendations = html.querySelector('product-recommendations');
-          if (recommendations && recommendations.innerHTML.trim().length) {
-            container.innerHTML = recommendations.innerHTML;
-          }
-        })
-        .catch(e => console.error('Recommendation fetch error:', e));
-    })();
-  </script>
 {%- endif -%}
-
-<style>
-  .hz-native-recs-section {
-    padding: 16px 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .hz-native-recs-container product-recommendations {
-    display: block;
-    width: 100%;
-  }
-  /* Optional card wrapper style matching your single-item spec */
-  .hz-native-recs-container .hz-minicart-upsell {
-    padding: 0;
-  }
-</style>
