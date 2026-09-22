@@ -422,6 +422,9 @@ text-component.cart-totals__total-value {
     line-height: 28px; /* 140% */
     letter-spacing: -0.5px;
 }
+.cart-totals:not(:has(.cart-actions)) {
+    border-block-start: 1px solid #E2E8F0;
+}
 ul.custom-payment-icons-list li {
     display: block;
     flex: 0 0 40px;
