@@ -423,7 +423,7 @@ text-component.cart-totals__total-value {
     letter-spacing: -0.5px;
 }
 .cart-totals:not(:has(.cart-actions)) {
-    border-block-start: 1px solid #E2E8F0 !important;
+    border-block-start: 0px solid #E2E8F0 !important;
 }
 ul.custom-payment-icons-list li {
     display: block;
