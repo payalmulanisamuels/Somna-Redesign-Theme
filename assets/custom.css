@@ -290,6 +290,20 @@ td.cart-items__details.cart-primary-typography {
     font-weight: 600;
     line-height: 1; /* 160.714% */
 }
+.subcription_badge {
+    border-radius: 10px;
+    background: #C9E5FE;
+    color: #064BD8;
+    font-family: Inter;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: center;
+    padding: 0 8px;
+    margin-top: 8px;
+}
+
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0a1a4a;
