@@ -249,6 +249,17 @@ height: 100%;
 /* Hero section */
 
 /* Cart Drawer */
+.cart-drawer__inner {
+    background: #FFF9ED;
+}
+
+.cart-drawer__content {
+    background: #FFF9ED;
+}
+
+.theme-drawer__dialog[cart-summary-sticky=false] .cart-drawer__summary {
+    background: #FFF9ED;
+}
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
     color: #0a1a4a;
