@@ -180,6 +180,12 @@
     >
 
     <div class="variant-card__inner">
+      {%- assign var_img = current_variant.metafields.custom.variant_image.value -%}
+      {%- if var_img != blank -%}
+        <div class="variant-card__image-wrapper">
+          {{ var_img | image_url: width: 200 | image_tag: loading: 'lazy', class: 'variant-card__img' }}
+        </div>
+      {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
       <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
