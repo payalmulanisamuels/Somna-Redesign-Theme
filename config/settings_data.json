@@ -68,7 +68,7 @@
     "cart_type": "drawer",
     "cart_price_font": "subheading",
     "show_cart_note": false,
-    "show_add_discount_code": true,
+    "show_add_discount_code": false,
     "show_installments": false,
     "show_accelerated_checkout_buttons": false,
     "trust_badge_1_image": "shopify://shop_images/Protect.png",
