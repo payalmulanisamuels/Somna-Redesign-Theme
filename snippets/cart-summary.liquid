@@ -317,7 +317,7 @@
     form="cart-form"
   >
     <span class="button-text">
-      {{ 'content.checkout' | t }}
+      {{ 'content.checkout' | t }} - {{ cart.total_price | money_without_currency }}
     </span>
   </button>
 
