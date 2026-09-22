@@ -275,7 +275,6 @@ height: 100%;
     aspect-ratio: unset !important;
 }
 .cart-items__table-row--full-width-variants .cart-items__price {
-    display: none;
 }
 .cart-items__table-row--full-width-variants {
     grid-template-columns: 140px auto !important;
