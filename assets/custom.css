@@ -780,7 +780,7 @@ ul.custom-payment-icons-list li {
 }
 .fill-track{
     height: 100%; 
-    background: linear-gradient(90deg, #4f46e5, #6366f1); 
+    background: #4660E8; 
     border-radius: 999.9px;
     transition: width 0.3s ease;
 }
