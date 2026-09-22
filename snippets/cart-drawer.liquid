@@ -114,9 +114,8 @@
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
-                {%- if cart.items.size > 0 -%}
   {%- assign anchor_product = cart.items.first.product -%}
-  <div class="hz-native-recs-section" {{ section.shopify_attributes }}>
+  <div class="hz-native-recs-section" >
     <product-recommendations
       data-url="{{ routes.product_recommendations_url }}?product_id={{ anchor_product.id }}&limit=1&intent=complementary"
       class="hz-native-recs-container"
@@ -145,7 +144,6 @@
         .catch(e => console.error('Recommendation fetch error:', e));
     })();
   </script>
-{%- endif -%}
 
 <style>
   .hz-native-recs-section {
