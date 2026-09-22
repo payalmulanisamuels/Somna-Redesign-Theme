@@ -1,161 +1,48 @@
-{%- liquid
-  # Determine upsell product (fallback to product metafield or a designated product handle/ID)
-  assign upsell_product = blank
-  if cart.items.size > 0
-    # Try fetching complementary/upsell product from first item in cart or settings/metafield
-    assign sample_product = cart.items.first.product
-    if sample_product.metafields.custom.upsell_product != blank
-      assign upsell_product = sample_product.metafields.custom.upsell_product.value
-    endif
-  endif
-
-  # Fallback target if metafield is blank (optional handle or first product query)
-  if upsell_product == blank
-    assign upsell_product = all_products['blue-tape']
-  endif
--%}
-
-{%- if upsell_product != blank and upsell_product.available -%}
-  {%- assign upsell_variant = upsell_product.selected_or_first_available_variant -%}
-  <div class="hz-minicart-upsell">
-    <div class="hz-minicart-upsell__card">
-      <div class="hz-minicart-upsell__media">
-        {%- if upsell_product.featured_image != blank -%}
-          {{ upsell_product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
-        {%- endif -%}
+{%- if cart.items.size > 0 -%}
+  {%- assign anchor_product = cart.items.first.product -%}
+  <div class="hz-native-recs-section" {{ section.shopify_attributes }}>
+    <product-recommendations
+      data-url="{{ routes.product_recommendations_url }}?product_id={{ anchor_product.id }}&limit=1&intent=complementary"
+      class="hz-native-recs-container"
+    >
+      <div class="hz-native-recs-target" data-recommendations-holder>
+        {%- comment -%} JS or Shopify native web component will hydrate recommendations here {%- endcomment -%}
       </div>
-      
-      <div class="hz-minicart-upsell__content">
-        <span class="hz-minicart-upsell__tag">Complete the ritual</span>
-        <h4 class="hz-minicart-upsell__title">{{ upsell_product.title }}</h4>
-        <p class="hz-minicart-upsell__desc">
-          {{ upsell_product.description | strip_html | truncate: 70 | default: 'Pairs perfectly with your current items for even better results.' }}
-        </p>
-
-        <div class="hz-minicart-upsell__bottom">
-          <div class="hz-minicart-upsell__price-wrap">
-            <span class="hz-minicart-upsell__price">{{ upsell_variant.price | money }}</span>
-            {%- if upsell_variant.compare_at_price > upsell_variant.price -%}
-              <s class="hz-minicart-upsell__compare">{{ upsell_variant.compare_at_price | money }}</s>
-            {%- endif -%}
-          </div>
-
-          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form">
-            <input type="hidden" name="id" value="{{ upsell_variant.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="hz-upsell-add-btn">
-              Add to Cart
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    </product-recommendations>
   </div>
+
+  <script>
+    (function() {
+      const container = document.currentScript.previousElementSibling.querySelector('product-recommendations');
+      if (!container) return;
+
+      fetch(container.dataset.url)
+        .then(response => response.text())
+        .then(text => {
+          const html = document.createElement('div');
+          html.innerHTML = text;
+          const recommendations = html.querySelector('product-recommendations');
+          if (recommendations && recommendations.innerHTML.trim().length) {
+            container.innerHTML = recommendations.innerHTML;
+          }
+        })
+        .catch(e => console.error('Recommendation fetch error:', e));
+    })();
+  </script>
 {%- endif -%}
 
 <style>
-  .hz-minicart-upsell {
-    padding: 12px var(--cart-drawer-padding, 20px);
+  .hz-native-recs-section {
+    padding: 16px 20px;
     width: 100%;
     box-sizing: border-box;
   }
-
-  .hz-minicart-upsell__card {
-    background-color: #e0f2fe;
-    border-radius: 18px;
-    padding: 14px;
-    display: flex;
-    gap: 14px;
-    align-items: center;
-  }
-
-  .hz-minicart-upsell__media {
-    width: 90px;
-    height: 90px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hz-upsell-img {
+  .hz-native-recs-container product-recommendations {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
-
-  .hz-minicart-upsell__content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .hz-minicart-upsell__tag {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #475569;
-  }
-
-  .hz-minicart-upsell__title {
-    font-size: 15px;
-    font-family: serif;
-    font-weight: 600;
-    color: #0b1a30;
-    margin: 0;
-  }
-
-  .hz-minicart-upsell__desc {
-    font-size: 12px;
-    color: #334155;
-    margin: 0 0 8px 0;
-    line-height: 1.35;
-  }
-
-  .hz-minicart-upsell__bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  .hz-minicart-upsell__price-wrap {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-  }
-
-  .hz-minicart-upsell__price {
-    font-size: 15px;
-    font-weight: 800;
-    color: #0b1a30;
-  }
-
-  .hz-minicart-upsell__compare {
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  .hz-upsell-add-btn {
-    background-color: #0b1a30;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 700;
-    border: none;
-    border-radius: 999px;
-    padding: 7px 14px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-  }
-
-  .hz-upsell-add-btn:hover {
-    opacity: 0.9;
+  /* Optional card wrapper style matching your single-item spec */
+  .hz-native-recs-container .hz-minicart-upsell {
+    padding: 0;
   }
 </style>
