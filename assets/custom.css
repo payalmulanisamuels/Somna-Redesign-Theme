@@ -306,6 +306,7 @@ td.cart-items__details.cart-primary-typography {
 .cart-items__variants-wrapper {
     width: 100%;
 }
+.cart-page__title {margin-top: 20px;}
 p.selling_plan_allocation {
     font-size: 11px;
 }
