@@ -1,0 +1,70 @@
+{%- comment -%}
+  Sleep Guide Progress Bar Component (Horizon compatible)
+  Rules:
+  - 1 Bag / 1 month -> no guides (0%)
+  - 2 Bags / 2 months -> both guides (100%)
+  - 3+1 Bags / 4 months -> both guides (100%)
+  - Colour Set + Season Bundle -> 3 months -> both guides (100%)
+  - Sleep Bundle -> same rule for 2-Set and 3+1-Set tiers -> both guides (100%)
+{%- endcomment -%}
+
+{%- liquid
+  assign total_bags = 0
+  assign has_guides = false
+  assign progress_percent = 0
+  assign message = 'You unlocked 2 free Sleep Guides!'
+
+  for item in cart.items
+    assign title_down = item.title | downsized | default: item.product.title | downcase
+    assign qty = item.quantity
+
+    if title_down contains '1 bag' or title_down contains '1-month'
+      # 1 Bag (1 month) -> no guides
+    elsif title_down contains '2 bags' or title_down contains '2-month' or title_down contains '2-set'
+      assign total_bags = total_bags | plus: qty | times: 2
+      assign has_guides = true
+    elsif title_down contains '3+1' or title_down contains '4-month' or title_down contains '3+1-set'
+      assign total_bags = total_bags | plus: qty | times: 4
+      assign has_guides = true
+    elsif title_down contains 'colour set' and title_down contains 'season bundle'
+      assign has_guides = true
+    elsif title_down contains 'sleep bundle'
+      # handled by tier checks above if tagged or parsed via title variant
+    endif
+  endfor
+
+  # Fallback calculation logic for Cart/Bundle rule mapping:
+  if has_guides or total_bags >= 2
+    assign progress_percent = 100
+    assign message = 'You unlocked 2 free Sleep Guides!'
+  else
+    assign progress_percent = 0
+    assign message = 'Add 2 bags, 3+1 bags, or a bundle to unlock 2 free Sleep Guides'
+  endif
+-%}
+
+<div class="sleep-guide-progress-wrapper" style="position: relative; width: 100%; max-width: 500px; margin: 20px auto; padding: 24px 16px; text-align: center; overflow: hidden; border-radius: 12px;">
+  <!-- Background SVG Image -->
+  <div style="position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%;">
+    <img src="{{ 'bar-bg.svg' | asset_url }}" alt="Background wave" style="width: 100%; height: 100%; object-fit: cover;" [cite: 2] />
+  </div>
+
+  <!-- Content Layer -->
+  <div style="position: relative; z-index: 1;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; font-family: serif; font-size: 1.1rem; color: #1e293b;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20 7h-5v4h5V7zm-7 0H4v4h9V7zM4 13v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4H4zm16-8H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z"/></svg>
+      <span>{{ message }}</span>
+    </div>
+
+    <!-- Progress Track -->
+    <div style="width: 100%; height: 10px; background-color: #d1c4e9; border-radius: 999.9px; position: relative; overflow: visible;">
+      <!-- Filled Track -->
+      <div style="width: {{ progress_percent }}%; height: 100%; background: linear-gradient(90deg, #4f46e5, #6366f1); border-radius: 999.9px; transition: width 0.3s ease;"></div>
+      
+      <!-- Progress Indicator Icon Badge -->
+      <div style="position: absolute; top: 50%; left: {{ progress_percent }}%; transform: translate(-50%, -50%); width: 28px; height: 28px; background: #fff; border: 2px solid #4f46e5; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.15);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#4f46e5"><path d="M20 7h-5v4h5V7zm-7 0H4v4h9V7zM4 13v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4H4zm16-8H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2z"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
