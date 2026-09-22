@@ -21,10 +21,10 @@
     if title_down contains '1 bag' or title_down contains '1-month'
       # 1 Bag (1 month) -> no guides
     elsif title_down contains '2 bags' or title_down contains '2-month' or title_down contains '2-set'
-      assign total_bags = total_bags | plus: qty | times: 2
+      assign total_bags = total_bags | plus: qty 
       assign has_guides = true
     elsif title_down contains '3+1' or title_down contains '4-month' or title_down contains '3+1-set'
-      assign total_bags = total_bags | plus: qty | times: 4
+      assign total_bags = total_bags | plus: qty  
       assign has_guides = true
     elsif title_down contains 'colour set' and title_down contains 'season bundle'
       assign has_guides = true
