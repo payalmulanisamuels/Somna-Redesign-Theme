@@ -398,10 +398,10 @@ a.cart-items__title {
     line-height: 20px; /* 133.333% */
 }
 .cart-totals__total-label {
-    color: #020617 !important;
-    font-size: 15px !important;
-    font-weight: 900 !important; 
-    line-height: 22.5px; /* 150% */
+    color: #1E293B !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    line-height: 24px;
 }
 .cart-totals__tax-note {
     display: none;
