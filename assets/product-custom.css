@@ -33,17 +33,17 @@
     border: 2px solid #0A1A4A !important;
 }
 .variant-option__button-label:has(:checked) .variant-card__title,.variant-option__button-label:hover .variant-card__title  {
-    color: #fff;
+    color: #0A1A4A;
 }
 .variant-option__button-label:has(:checked) .variant-card__sub-price,.variant-option__button-label:hover .variant-card__sub-price  {
-    color: #fff;
+    color: #0A1A4A;
 }
 .variant-option__button-label:has(:checked) .variant-card__onetime-price,.variant-option__button-label:hover .variant-card__onetime-price  {
-    color: #B9C2D2;
+    color: #0A1A4A;
 }
 .variant-option__button-label:hover{
-    background: #0B57E3 !important;
-    color: #fff !important;
+    background: #C9E5FE !important;
+    color: #0A1A4A !important;
 }
  
 span.variant-card__title {
