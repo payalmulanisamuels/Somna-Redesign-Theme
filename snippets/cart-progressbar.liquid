@@ -37,9 +37,12 @@
   if has_guides and total_bags >= 2
     assign progress_percent = 100
     assign message = 'You unlocked 2 free Sleep Guides!'
-  else
-    assign progress_percent = 0
+  elsif total_bags == 1
+    assign progress_percent = 50
     assign message = "You're 1 bag away from 2 free Sleep Guides"
+else
+    assign progress_percent = 0
+    assign message = "You're 2 bag away from 2 free Sleep Guides"
   endif
 -%}
 
