@@ -472,4 +472,28 @@ ul.custom-payment-icons-list li {
 .hz-trust-pill__text p {
     line-height: 1;
 }
+
+.express_checkout {
+    background: #FFFEFB;
+    color: #64748B;
+    font-family: Inter;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.75px; /* 150% */
+  
+    padding: 3px 12px;
+    position: relative;
+}
+.express_checkout span{
+    max-width: max-content;
+    margin: 0 auto;
+}
+.express_checkout:before {
+    content: '';
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    background: #E2E8F0;
+}
 /* Cart Drawer */
