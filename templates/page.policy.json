@@ -77,7 +77,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#0A1A4A",
+            "text_color": "#0a1a4a",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -108,7 +108,98 @@
         "section_height": "small",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E0E8D7",
+        "background_color": "#e0e8d7",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    },
+    "section_iYG7xV": {
+      "type": "section",
+      "blocks": {
+        "text_U9w3gK": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2>Personal Information We Collect or Process</h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.5rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0A1A4A",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_maNYt7": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>When we use the term \"personalinformation,\" we are referring to information that identifies or canreasonably be linked to you or another person. Personal information does notinclude information that is collected anonymously or that has been de-identified,so that it cannot identify or be reasonably linked to you. We may collect orprocess the following categories of personal information, including inferencesdrawn from this personal information, depending on how you interact with theServices, where you live, and as permitted or required by applicable law:</p><p>· <strong>Contact details </strong>including your name, address, billing address,shipping address, phone number, and email address.<br/>· <strong>Financial information </strong>including credit card, debit card, andfinancial account numbers, payment card information, financial accountinformation, transaction details, form of payment, payment confirmation andother payment details.<br/>· <strong>Account information </strong>including your username, password, security questions, preferences and settings.<br/>· <strong>Transaction information</strong> including the items you view, put in your cart, add to your wishlist, or purchase, return, exchange or cancel and your past transactions.<br/>· <strong>Communications with us</strong> including the information you include in communications with us, for example, when sending a customer support inquiry.<br/>· <strong>Device information</strong> including information about your device, browser, or network connection, your IP address, and other unique identifiers.<br/>· <strong>Usage information</strong> including information regarding your interaction with the Services, including how and when you interact with or navigate the Services.</p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0a1a4a",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_U9w3gK",
+        "text_maNYt7"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#FFF9ED",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -273,6 +364,7 @@
   "order": [
     "main",
     "section_nCrU7b",
+    "section_iYG7xV",
     "footer_m9NzUG"
   ]
 }
