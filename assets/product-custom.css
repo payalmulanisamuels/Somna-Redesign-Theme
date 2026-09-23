@@ -6,7 +6,7 @@
     padding: 20px 0px;
 }
 .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
-    object-fit: cover;
+    object-fit: cover !important;
     border-radius: 0 0 20px 20px;
 }
 .product-details {
