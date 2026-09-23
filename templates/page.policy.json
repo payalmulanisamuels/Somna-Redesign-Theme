@@ -96,7 +96,6 @@
       "settings": {
         "top_wave_image": "shopify://shop_images/review-svg-top.svg",
         "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
-        "bg_image": "shopify://shop_images/bg-image.png",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
