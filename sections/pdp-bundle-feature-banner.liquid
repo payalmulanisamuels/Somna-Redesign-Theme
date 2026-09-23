@@ -18,7 +18,7 @@
 
   # If single meta item, extract fields to match original design structure
   if is_single_meta and meta_item != blank
-    assign target_product = meta_item.choose_bundle_product | default: meta_item.target_product
+    assign target_product = meta_item.choose_bundle_product 
     assign section_title = meta_item.heading | default: target_product.title
     assign banner_image = meta_item.bundle_image | default: meta_item.bundle_image | default: target_product.featured_image
     
