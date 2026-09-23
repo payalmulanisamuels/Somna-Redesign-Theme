@@ -225,8 +225,8 @@
       const listId = form.getAttribute('data-klaviyo-list-id');
       const publicKey = form.getAttribute('data-klaviyo-public-key');
       
-      const errorMsg = document.getElementById('Klaviyo-message-error-{{ block.id }}');
-      const successMsg = document.getElementById('Klaviyo-message-success-{{ block.id }}');
+      const errorMsg = document.getElementById('Klaviyo-message-error-{{ section.id }}');
+      const successMsg = document.getElementById('Klaviyo-message-success-{{ section.id }}');
       if (errorMsg) errorMsg.style.display = 'none';
       if (successMsg) successMsg.style.display = 'none';
 
