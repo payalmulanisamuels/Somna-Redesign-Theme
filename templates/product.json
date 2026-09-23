@@ -329,7 +329,7 @@
                   "settings": {
                     "text": "{{ product.metafields.custom.subscription_content | metafield_tag }}",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",

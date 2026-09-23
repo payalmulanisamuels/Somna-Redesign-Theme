@@ -178,7 +178,14 @@ slideshow-arrows .slideshow-control {
  justify-content: space-between;
 }
 
-
+/* Collection */
+.header_main ul li {
+    display: block;
+}
+.header_main ul {
+    padding: 0;
+    width: 100%;
+}
 /* Collection Feature section */
   .hz-not-sure-section {
     position: relative;
@@ -253,3 +260,4 @@ slideshow-arrows .slideshow-control {
   }
 
 /* Collection Feature section */
+/* Collection */
