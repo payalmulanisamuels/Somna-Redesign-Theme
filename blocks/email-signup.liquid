@@ -198,14 +198,14 @@
     </button>
   </div>
 
-  <div id="Klaviyo-message-error-{{ block.id }}" class="email-signup__message" tabindex="-1" style="display: none;">
+  <div id="Klaviyo-message-error" class="email-signup__message" tabindex="-1" style="display: none;">
     <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" class="icon-error">
       {%- render 'icon', icon: 'error' -%}
     </svg>
     <span class="klaviyo-error-text">Something went wrong. Please try again.</span>
   </div>
 
-  <div id="Klaviyo-message-success-{{ block.id }}" class="email-signup__message" tabindex="-1" style="display: none;">
+  <div id="Klaviyo-message-success" class="email-signup__message" tabindex="-1" style="display: none;">
     <span class="svg-wrapper icon-success">
       {{ 'icon-checkmark.svg' | inline_asset_content }}
     </span>
