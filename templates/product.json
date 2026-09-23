@@ -179,8 +179,8 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
+                    "padding-block-start": 5,
+                    "padding-block-end": 10,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
                   },
@@ -1219,7 +1219,9 @@
       "settings": {
         "bg_color": "#fdf8ee",
         "divider_color": "#cbd3d8",
-        "heading": "FAQ"
+        "heading": "FAQ",
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "footer_m9NzUG": {
