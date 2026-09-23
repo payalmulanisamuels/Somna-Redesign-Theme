@@ -59,13 +59,12 @@
         <div class="hz-crosssell-grid">
           {% for item in meta_bundles %}
             <div class="hz-crosssell-card">
-              {% if item.sub_headline != blank %}
-                <h3 class="hz-crosssell-card-title">{{ item.sub_headline }}</h3>
-              {% elsif item.title != blank %}
+              
+              {% if item.heading != blank %}
                 <h3 class="hz-crosssell-card-title">{{ item.heading }}</h3>
               {% endif %}
 
-              {% if item.sub_content != blank %}
+              {% if item.subheading != blank %}
                 <p class="hz-crosssell-card-desc">{{ item.subheading }}</p>
               {% endif %}
 
