@@ -132,7 +132,6 @@
     {%- endif -%}
   {% endform %}
 {% else %}
-  <div class="klaviyo-form-S7fEZF"></div>
   {%- form 'customer', class: 'email-signup__form spacing-style', id: 'KlaviyoEmailForm', data-klaviyo-list-id: block_settings.klaviyo_list_id, data-klaviyo-public-key: block_settings.klaviyo_public_key -%}
   {% comment %} --- Input group classes --- {% endcomment %}
   {%- liquid
@@ -236,36 +235,14 @@
           method: 'POST',
           headers: {
             'revision': '2024-10-15',
-            'content-type': 'application/vnd.api+json'
+            'content-type': 'application/json'
           },
           body: JSON.stringify({
             data: {
               type: 'subscription',
               attributes: {
-                custom_source: 'Shopify Custom Signup Form',
-                profile: {
-                  data: {
-                    type: 'profile',
-                    attributes: {
-                      email: email
-                    }
-                  }
-                },
-                subscriptions: {
-                  email: {
-                    marketing: {
-                      consent: 'SUBSCRIBED'
-                    }
-                  }
-                }
-              },
-              relationships: {
-                list: {
-                  data: {
-                    type: 'list',
-                    id: listId
-                  }
-                }
+                list_id: listId,
+                email: email
               }
             }
           })
