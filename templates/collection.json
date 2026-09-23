@@ -291,7 +291,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Strips, Tape, and the bundles that pair them</strong></p>",
+                "text": "<p>Strips, Tape, and the bundles that pair them</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
