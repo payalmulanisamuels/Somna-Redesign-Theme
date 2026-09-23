@@ -1081,7 +1081,6 @@
       "type": "pdp-comparison",
       "name": "Comparison Simple",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "background_image": "{{ product.metafields.custom.comparison_background_image.value }}",
         "heading": "Comparison",
         "subheading": "{{ product.metafields.custom.comparison | metafield_tag }}",
