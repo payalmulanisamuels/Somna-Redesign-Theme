@@ -66,7 +66,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>1. Acceptance of Terms</strong></h2>",
+            "text": "<h2><strong>1. Cancellation Window</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -92,7 +92,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>By accessing or using the website, products, or services of Somna Sleep Co. (\"Somna\", \"we\", \"us\", or \"our\"), you agree to be bound by these Terms of Service. If you do not agree, you must not use our website or purchase our products.</p>",
+            "text": "<p>You may cancel your order any time before it has been marked as fulfilled. Because we process orders within 1–2 business days, this generally gives you a window of up to 1–2 business days after placing your order to request a cancellation.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -158,7 +158,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>2. Medical Disclaimer (CRITICAL)</strong></h2>",
+            "text": "<h2><strong>2. How to Request a Cancellation</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -184,7 +184,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>SOMNA PRODUCTS ARE NOT MEDICAL DEVICES. THEY ARE NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE OR MEDICAL CONDITION, INCLUDING BUT NOT LIMITED TO SLEEP APNEA. All information provided by Somna on our website, packaging, or marketing materials is for informational purposes only and is not a substitute for professional medical advice. Always consult a physician or qualified healthcare provider regarding any medical condition or sleep disorder. By using our products, you acknowledge and agree that Somna is not providing medical advice.</p>",
+            "text": "<p>To request a cancellation, email us at hello@somnasleep.com with the subject line \"ORDER CANCELLATION - [Your Order Number]\".</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -249,7 +249,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>3. Product Use and Assumption of Risk</strong></h2>",
+            "text": "<h2><strong>3. Post-Processing Cancellations</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -275,7 +275,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You agree to use Somna products strictly according to the provided instructions. You acknowledge that individual results may vary. You assume all risks associated with the use of our products. Somna shall not be held liable for any adverse reactions, skin irritations, or other issues arising from the use or misuse of our products.</p>",
+            "text": "<p>Once an order has been marked as fulfilled at our fulfillment center, it cannot be canceled or modified. If your cancellation request arrives after that point, the order will be shipped to you as placed.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -340,7 +340,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>4. Limitation of Liability</strong></h2>",
+            "text": "<h2><strong>4. Returning an Uncanceled Order</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -366,7 +366,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, SOMNA AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR USE, ARISING OUT OF OR IN ANY WAY CONNECTED WITH YOUR USE OF OUR WEBSITE OR PRODUCTS. IN NO EVENT SHALL SOMNA'S TOTAL LIABILITY EXCEED THE AMOUNT YOU PAID FOR THE SPECIFIC PRODUCT GIVING RISE TO THE CLAIM.</p>",
+            "text": "<p>If you were unable to cancel your order in time, you may return the items in accordance with our Return & Refund Policy once you receive them. Please note that original shipping costs are non-refundable, and you will be responsible for return shipping fees.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -431,7 +431,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>5. Indemnification</strong></h2>",
+            "text": "<h2><strong>5. Somna's Right to Cancel</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -457,7 +457,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You agree to indemnify, defend, and hold harmless Somna from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising from your violation of these Terms of Service or your use or misuse of our products.</p>",
+            "text": "<p>We reserve the right to cancel any order at our sole discretion, including but not limited to situations involving suspected fraud, unauthorized or illegal transactions, pricing errors, or inventory shortages. If we cancel your order, you will be notified via email and fully refunded to your original payment method.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
