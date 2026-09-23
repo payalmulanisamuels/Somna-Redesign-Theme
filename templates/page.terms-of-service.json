@@ -148,7 +148,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "section_iYG7xV": {
@@ -238,8 +238,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_63n6Lm": {
@@ -329,8 +329,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_xXDyC9": {
@@ -420,8 +420,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_B46NBr": {
@@ -511,8 +511,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_RixrEc": {
@@ -602,8 +602,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_NwyYHk": {
@@ -693,8 +693,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "section_TkMKVc": {
@@ -784,8 +784,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 30,
+        "padding-block-end": 0
       }
     },
     "footer_m9NzUG": {
