@@ -285,6 +285,30 @@
                   },
                   "blocks": {}
                 },
+                "image_9PYQF9": {
+                  "type": "image",
+                  "name": "t:names.image",
+                  "settings": {
+                    "image": "{{ product.metafields.custom.subscription_image.value }}",
+                    "link": "",
+                    "image_ratio": "adapt",
+                    "width": "fill",
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "subscriptions_app_block_8Fe6G8": {
                   "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
                   "settings": {
@@ -364,6 +388,7 @@
               },
               "block_order": [
                 "variant_picker_Ka7XHY",
+                "image_9PYQF9",
                 "subscriptions_app_block_8Fe6G8",
                 "buy_buttons_RGzwUW"
               ]
