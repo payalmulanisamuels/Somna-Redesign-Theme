@@ -1084,7 +1084,7 @@
         "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "background_image": "{{ product.metafields.custom.comparison_background_image.value }}",
         "heading": "Comparison",
-        "subheading": "<p>{{ product.metafields.custom.comparison | metafield_tag }}</p>",
+        "subheading": "{{ product.metafields.custom.comparison | metafield_tag }}",
         "bottom_image": "{{ product.metafields.custom.comparison_bottom_image.value }}"
       }
     },
