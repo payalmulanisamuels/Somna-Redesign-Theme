@@ -203,12 +203,7 @@ slideshow-arrows .slideshow-control {
     justify-content: center;
     flex-wrap: wrap;
   }
-  .hz-not-sure-grid > :nth-child(n+4) {
-    grid-column: span 1.5;
-    max-width: 500px;
-    margin: 0 auto;
-    width: 100%;
-  }
+ 
   .hz-not-sure-card {
     position: relative;
     border: 1px solid #E1E6EB;
