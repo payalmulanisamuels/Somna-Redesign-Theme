@@ -113,6 +113,7 @@ search-button.search-action.search-action--hidden-on-menu {
 }
 .wave-container.bottom {
     bottom: -18px;
+    background-position: bottom;
 }
 .wave-container.top {
     top: -18px;
