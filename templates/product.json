@@ -349,6 +349,19 @@
                   },
                   "blocks": {}
                 },
+                "divider_EaWhy8": {
+                  "type": "_divider",
+                  "name": "t:names.divider",
+                  "settings": {
+                    "thickness": 1,
+                    "corner_radius": "square",
+                    "divider_color": "#E1E6EB",
+                    "width_percent": 100,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0
+                  },
+                  "blocks": {}
+                },
                 "buy_buttons_RGzwUW": {
                   "type": "buy-buttons",
                   "settings": {
@@ -417,6 +430,7 @@
                 "image_9PYQF9",
                 "subscriptions_app_block_8Fe6G8",
                 "text_NFacFW",
+                "divider_EaWhy8",
                 "buy_buttons_RGzwUW"
               ]
             },
