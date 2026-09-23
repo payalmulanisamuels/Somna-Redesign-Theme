@@ -239,7 +239,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Strips, Tape, and the bundles that pair them</p>",
+            "text": "<p><strong>Strips, Tape, and the bundles that pair them</strong></p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "left",
@@ -248,7 +248,7 @@
             "font_size": "0.75rem",
             "line_height": "normal",
             "letter_spacing": "normal",
-            "case": "none",
+            "case": "uppercase",
             "wrap": "pretty",
             "text_color": "#2563EB",
             "background": false,
