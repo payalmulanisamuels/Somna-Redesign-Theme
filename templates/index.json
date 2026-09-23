@@ -2225,9 +2225,6 @@
               "type": "email-signup",
               "disabled": true,
               "settings": {
-                "form_type": "klaviyo",
-                "klaviyo_list_id": "S7fEZF",
-                "klaviyo_public_key": "Tr7JSM",
                 "width": "fill",
                 "custom_width": 100,
                 "heading": "",
