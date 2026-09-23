@@ -115,13 +115,11 @@
                 <span class="hz-price-sub-label">{{ section.settings.sub_label }}</span>
               </div>
             {% endif %}
- 
-            
-          {% if meta_item.content != blank %}
+          </div>
+
+                {% if meta_item.content != blank %}
             <p class="hz-bundle-subtitle">{{ meta_item.content }}</p>
           {% endif %}
-
-          </div>
 
           {% if section.settings.button_label != blank %}
             <a href="{{ button_link }}" class="hz-bundle-btn">
