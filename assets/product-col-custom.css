@@ -250,10 +250,11 @@ slideshow-arrows .slideshow-control {
   }
 
   .hz-not-sure-card-desc {
-    font-size: 14px;
-    color: #475569;
-    margin: 0 0 20px 0;
-    line-height: 1.4;
+    color: #0A1A4A;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 
   .hz-not-sure-card-media {
