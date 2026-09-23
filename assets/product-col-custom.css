@@ -212,9 +212,10 @@ slideshow-arrows .slideshow-control {
   }
 
   .hz-not-sure-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
     gap: 7px 18px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .hz-not-sure-grid > :nth-child(n+4) {
     grid-column: span 1.5;
@@ -225,14 +226,15 @@ slideshow-arrows .slideshow-control {
 
   .hz-not-sure-card {
     position: relative;
-    border: 1px solid #E1E6EB;  
+    border: 1px solid #E1E6EB;
     background: transparent;
     border-radius: 10px;
     padding: 11px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform .2s ease, box-shadow .2s ease;
+    flex: 0 0 calc(33.3% - 14px);
   }
 
   .hz-not-sure-card:hover {
