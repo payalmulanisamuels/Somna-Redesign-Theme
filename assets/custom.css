@@ -91,10 +91,6 @@ search-button.search-action.search-action--hidden-on-menu {
 /* Wave */
 .wave-container {
     position: relative;
-    z-index: 111;
-    left: 0;
-    right: 0;
-    width: 100%;
     background-repeat: repeat-x;
     background-position: top;
     background-size: cover;
