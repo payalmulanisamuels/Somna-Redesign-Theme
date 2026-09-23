@@ -66,7 +66,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>1. How Subscribe & Save Works</strong></h2>",
+            "text": "<h2><strong>1. Sleep Satisfaction Guarantee</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -92,7 +92,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>When you choose Subscribe & Save at checkout, your order is placed automatically on a recurring schedule at 10% off the one-time price. Your delivery frequency is set by the size you choose:</p><p>1 Bag / 1 Set — every month.</p><p>2 Bags / 2 Sets — every 2 months.</p><p>3+1 Bags / 3+1 Sets (4-month supply) — every 4 months.</p><p>The Colour Set and Season Bundle are delivered every 3 months.</p>",
+            "text": "<p>We stand behind every Somna product. If you are not completely satisfied with your purchase, you may return it under our 30-Night Money-Back Guarantee, calculated from the confirmed date of delivery.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -158,7 +158,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>2. Managing Your Subscription</strong></h2>",
+            "text": "<h2><strong>2. Eligibility for Returns</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -184,7 +184,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You can skip an upcoming order, change your product or colour, change your delivery frequency, update your quantity or tier, or update your payment and shipping details at any time from your account — no need to contact support. Visit [Manage my subscription →].</p>",
+            "text": "<p>To qualify for a refund under our satisfaction guarantee:</p><p>Initiation Window: The return request must be initiated within 30 nights of the delivery date.</p><p>Condition: For hygiene, safety, and health reasons, consumable items (Nasal Strips and Mouth Tape) must remain completely unused, sealed, and in their original, unopened packaging. Opened or partially used packs cannot be accepted.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -249,7 +249,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>3. Billing</strong></h2>",
+            "text": "<h2><strong>3. Return Process</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -275,7 +275,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Your payment method is charged automatically a few days before each scheduled order ships. If a payment fails, we will notify you by email and attempt to charge your payment method again before your subscription is affected.</p>",
+            "text": "<p>To initiate a return:</p><p>1. Email our support team at hello@somnasleep.com with your order number and reason for return.</p><p>2. If your return is approved, we will provide you with a Return Merchandise Authorization (RMA) number and instructions on where to send your package.</p><p>3. Do not send items back without first requesting an RMA. Items sent back without authorization will not be accepted or refunded.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -340,7 +340,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>4. Pausing or Cancelling</strong></h2>",
+            "text": "<h2><strong>4. Return Shipping Costs</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -366,7 +366,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You can pause or cancel your subscription at any time from your account, with no fees and no phone call required. A paused subscription can be restarted at any time. Cancelling stops all future orders immediately; it does not affect orders already placed or shipped.</p>",
+            "text": "<p>Customers are responsible for all return shipping costs. We recommend using a trackable shipping service or purchasing shipping insurance. We cannot guarantee that we will receive</p><p>your returned item and are not responsible for returns lost in transit. Original shipping charges are non-refundable.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -431,7 +431,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>5. Price Changes</strong></h2>",
+            "text": "<h2><strong>5. Refunds</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -457,7 +457,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>If the price of a product in your subscription changes, we will notify you by email before your next order processes at the new price. You are always free to cancel before that order ships.</p>",
+            "text": "<p>Once your return is received and inspected, we will send you an email to notify you of the approval or rejection of your refund. If approved, your refund will be processed, and a credit will automatically be applied to your original method of payment within 5–10 business days.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -522,7 +522,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>6. Order Adjustments</strong></h2>",
+            "text": "<h2><strong>6. Late or Missing Refunds</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -548,7 +548,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Skips, pauses, or other changes take effect immediately if made before your next order begins processing. Changes made after an order has begun processing will apply to the following cycle instead.</p>",
+            "text": "<p>If you haven't received a refund yet, first check your bank account again. Then contact your credit card company or bank, as it may take some time before your refund is officially posted. If you've done all of this and you still have not received your refund, please contact us at <a href=\"mailto:hello@somnasleep.com\" title=\"mailto:hello@somnasleep.com\">hello@somnasleep.com</a>.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
