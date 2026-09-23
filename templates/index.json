@@ -2218,6 +2218,9 @@
             "email_signup_TkptFH": {
               "type": "email-signup",
               "settings": {
+                "form_type": "klaviyo",
+                "klaviyo_list_id": "XyWydk",
+                "klaviyo_public_key": "Tr7JSM",
                 "width": "fill",
                 "custom_width": 100,
                 "heading": "",
