@@ -1088,22 +1088,16 @@
         "bottom_image": "{{ product.metafields.custom.comparison_bottom_image.value }}"
       }
     },
-    "bundle_feature_banner_Qrgcy3": {
-      "type": "bundle-feature-banner",
-      "name": "Bundle Feature Banner",
+    "pdp_bundle_feature_banner_wWE9yA": {
+      "type": "pdp-bundle-feature-banner",
+      "name": "Bundle Feature Banner - PDP",
       "settings": {
-        "product": "{{ product.metafields.custom.bundle_section.value.choose_bundle_product.value }}",
-        "bg_color": "#fff9ed",
-        "image": "{{ product.metafields.custom.bundle_section.value.bundle_image.value }}",
-        "title": "{{ product.metafields.custom.bundle_section.value.heading.value }}",
-        "subtitle": "{{ product.metafields.custom.bundle_section.value.subheading.value }}",
-        "sub_price_override": "",
+        "bg_color": "#FFF9ED",
         "sub_label": "Subscribe & Save",
-        "onetime_price_override": "",
         "onetime_label": "One-time",
-        "button_label": "{{ product.metafields.custom.bundle_section.value.call_to_action.value }}",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "button_label": "Shop the Breathe Bundle",
+        "padding_top": 60,
+        "padding_bottom": 60
       }
     },
     "section_BbCdDx": {
@@ -1438,7 +1432,7 @@
     "how_it_works_whQNVV",
     "steps_guide_GFjEFb",
     "pdp_comparison_JDftN9",
-    "bundle_feature_banner_Qrgcy3",
+    "pdp_bundle_feature_banner_wWE9yA",
     "section_BbCdDx",
     "faq_accordion_VVXzwx",
     "footer_m9NzUG"
