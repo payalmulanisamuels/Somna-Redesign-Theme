@@ -275,7 +275,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>To initiate a return:</p><p>1. Email our support team at hello@somnasleep.com with your order number and reason for return.</p><p>2. If your return is approved, we will provide you with a Return Merchandise Authorization (RMA) number and instructions on where to send your package.</p><p>3. Do not send items back without first requesting an RMA. Items sent back without authorization will not be accepted or refunded.</p>",
+            "text": "<p>Items marked as \"Final Sale,\" \"Clearance,\" or promotional free gifts are not eligible for returns or refunds.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -606,6 +606,97 @@
         "padding-block-end": 0
       }
     },
+    "section_xj6tme": {
+      "type": "section",
+      "blocks": {
+        "text_7xVHjy": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2><strong>7. Final Sale Items</strong></h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.5rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0a1a4a",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_Dwdb6g": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>To initiate a return:</p><p>1. Email our support team at hello@somnasleep.com with your order number and reason for return.</p><p>2. If your return is approved, we will provide you with a Return Merchandise Authorization (RMA) number and instructions on where to send your package.</p><p>3. Do not send items back without first requesting an RMA. Items sent back without authorization will not be accepted or refunded.</p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0a1a4a",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_7xVHjy",
+        "text_Dwdb6g"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/dark-yellow-bottom.svg",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#ffe795",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 20,
+        "padding-block-end": 0
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
@@ -760,6 +851,7 @@
     "section_xXDyC9",
     "section_B46NBr",
     "section_RixrEc",
+    "section_xj6tme",
     "footer_m9NzUG"
   ]
 }
