@@ -52,6 +52,7 @@
         "page-content"
       ],
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "content_direction": "column",
         "gap": 32,
         "background_color": "#fff9ed",
