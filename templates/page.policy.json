@@ -211,7 +211,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -302,7 +302,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -393,7 +393,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -484,7 +484,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -575,7 +575,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -666,7 +666,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -757,7 +757,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -848,7 +848,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -993,7 +993,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -1084,8 +1084,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 10,
-        "padding-block-end": 0
+        "padding-block-start": 40,
+        "padding-block-end": 20
       }
     },
     "section_Hre4A6": {
@@ -1175,7 +1175,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -1266,7 +1266,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -1357,7 +1357,7 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
+        "padding-block-start": 40,
         "padding-block-end": 20
       }
     },
@@ -1502,7 +1502,7 @@
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
+        "padding-block-start": 50,
         "padding-block-end": 50
       }
     }
