@@ -929,7 +929,7 @@
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
+        "padding-block-start": 50,
         "padding-block-end": 50
       }
     }
