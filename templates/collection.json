@@ -231,6 +231,82 @@
         "padding-block-end": 32
       }
     },
+        "featured_bundle_grid_6jFGFr": {
+      "type": "featured-bundle-grid",
+      "blocks": {
+        "bundle_gCFgge": {
+          "type": "bundle",
+          "settings": {
+            "product": "sleep-bundle",
+            "is_featured": false,
+            "custom_title": "Breathe (Blue), Bold (Red), or Night (Black)",
+            "custom_image": "shopify://shop_images/breat-bundle.jpg",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Sleep Bundle"
+          }
+        },
+        "bundle_6MqjwE": {
+          "type": "bundle",
+          "settings": {
+            "product": "the-colour-set",
+            "is_featured": false,
+            "custom_title": "All three colours, Strips only",
+            "custom_image": "shopify://shop_images/night.jpg",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Colour Set"
+          }
+        },
+        "bundle_LHB8m9": {
+          "type": "bundle",
+          "settings": {
+            "product": "season-bundle",
+            "is_featured": true,
+            "custom_title": "Three months, Black Strips + Black Tape",
+            "custom_image": "shopify://shop_images/night.jpg",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Season Bundle"
+          }
+        },
+        "bundle_rBjHFi": {
+          "type": "bundle",
+          "disabled": true,
+          "settings": {
+            "product": "mouth-tape",
+            "is_featured": false,
+            "custom_title": "",
+            "custom_image": "shopify://shop_images/Product_image_4x_f9860620-0334-4fdf-9589-9ce8c25178e4.png",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        },
+        "bundle_CGg3b8": {
+          "type": "bundle",
+          "disabled": true,
+          "settings": {
+            "product": "nasal-strips",
+            "is_featured": false,
+            "custom_title": "",
+            "custom_image": "shopify://shop_images/season.jpg",
+            "subtext": "Subscribe & Save",
+            "button_label": "Shop the Breathe Bundle"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_gCFgge",
+        "bundle_6MqjwE",
+        "bundle_LHB8m9",
+        "bundle_rBjHFi",
+        "bundle_CGg3b8"
+      ],
+      "name": "Featured Bundle Grid",
+      "settings": {
+        "heading": "Featured Bundle Block",
+        "bg_color": "#ffffff",
+        "padding_top": 20,
+        "padding_bottom": 10
+      }
+    },
     "custom_cards_slider_pyJahK": {
       "type": "custom-cards-slider",
       "blocks": {
@@ -361,6 +437,7 @@
   "order": [
     "section",
     "main",
+    "featured_bundle_grid_6jFGFr",
     "custom_cards_slider_pyJahK",
     "faq_accordion_XL3WiV"
   ]
