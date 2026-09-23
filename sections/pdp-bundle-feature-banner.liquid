@@ -118,7 +118,7 @@
           </div>
 
                 {% if meta_item.content != blank %}
-            <p class="hz-bundle-subtitle">{{ meta_item.content }}</p>
+            <p class="hz-bundle-content">{{ meta_item.content }}</p>
           {% endif %}
 
           {% if section.settings.button_label != blank %}
@@ -210,6 +210,13 @@
     line-height: 1;
     color: #0A1A4A;
     margin: 0 0 4px 0;
+    font-weight: 400;
+  }
+   .hz-bundle-content {
+    font-size: 10px;
+    line-height: 1;
+    color: #0A1A4A;
+    margin: 0 0 0px 0;
     font-weight: 400;
   }
   .hz-bundle-btn svg {
