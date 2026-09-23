@@ -153,7 +153,8 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign product = block.settings.product
-          assign title = block.settings.custom_title | default: product.title
+          assign title =   product.title
+          assign subtitle =   block.settings.custom_title 
           assign image = block.settings.custom_image | default: product.featured_image
           assign price = product.price | money
           assign link = product.url | default: '#'
@@ -269,7 +270,7 @@
         {
           "type": "text",
           "id": "custom_title",
-          "label": "Custom Title (Overrides Product Title)"
+          "label": "Sub Title"
         },
         {
           "type": "image_picker",
