@@ -2217,6 +2217,7 @@
             },
             "klaviyo_email_marketing_sms_form_embed_block_9bccLn": {
               "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+              "disabled": true,
               "settings": {
                 "formId": "S7fEZF"
               }
@@ -2225,7 +2226,7 @@
               "type": "email-signup",
               "settings": {
                 "form_type": "klaviyo",
-                "klaviyo_list_id": "XyWydk",
+                "klaviyo_list_id": "S7fEZF",
                 "klaviyo_public_key": "Tr7JSM",
                 "width": "fill",
                 "custom_width": 100,
