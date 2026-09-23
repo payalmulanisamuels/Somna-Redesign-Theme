@@ -347,7 +347,8 @@
         }
       },
       "custom_css": [
-        ".header_main h1,.header_main h1 strong {font-weight: normal !important; line-height: 32px;}"
+        ".header_main h1,.header_main h1 strong {font-weight: normal !important; line-height: 32px;}",
+        ".header_main p {font-weight: bold;}"
       ],
       "name": "t:names.featured_product_information",
       "settings": {
