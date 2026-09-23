@@ -984,11 +984,13 @@
       ],
       "name": "Collection Feature",
       "settings": {
-        "bg_color": "#F6F2E7",
+        "bg_color": "#F8F0DD",
         "text_color": "#0b1a30",
         "heading": "Not sure where to start?",
         "top_wave_image": "shopify://shop_images/col-top.svg",
-        "bottom_wave_image": "shopify://shop_images/col-bottom.svg"
+        "bottom_wave_image": "shopify://shop_images/col-bottom.svg",
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "faq_accordion_XL3WiV": {
