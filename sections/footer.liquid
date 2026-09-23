@@ -8,14 +8,14 @@
  {% comment %} Top Wave Divider {% endcomment %}
 
 {% if section.settings.top_wave_image != blank %}
- <div class="wave-container top" >
+ <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
 
-<img 
+{% comment %} <img 
       src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
       alt="top_wave_image" 
       loading="lazy" 
       class="custom-wave-img"
-    />
+    /> {% endcomment %}
 </div>
 {% endif %}
 
