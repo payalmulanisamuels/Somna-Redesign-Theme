@@ -19,6 +19,13 @@ html[scroll-lock] .wave-container {
     font-family: var(--headfont);
     line-height: 1;
 }
+.klaviyo-form-button {
+    margin-left: -30px;
+}
+
+.klaviyo-form.klaviyo-form.klaviyo-form {
+    padding: 0 !important;
+}
 /* Header */
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
