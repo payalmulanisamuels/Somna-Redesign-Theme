@@ -1,0 +1,40 @@
+{%- liquid
+  assign items_metaobject_list = product.metafields.custom.sunbscription_box_products.value
+-%}
+
+{%- if items_metaobject_list != blank -%}
+  <div class="hz-metaobject-showcase-section" {{ section.shopify_attributes }}>
+    <div class="hz-metaobject-grid">
+      {%- for item in items_metaobject_list -%}
+        <div class="hz-metaobject-card">
+          <div class="hz-metaobject-media">
+            {%- if item.image != blank -%}
+              {{ item.image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
+            {%- endif -%}
+          </div>
+          <div class="hz-metaobject-text-wrap">
+            {%- if item.title != blank -%}
+              <span class="hz-metaobject-title">{{ item.title }}</span>
+            {%- endif -%}
+            {%- if item.subtitle != blank -%}
+              <span class="hz-metaobject-subtitle">{{ item.subtitle }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Metaobject Showcase Grid",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Metaobject Showcase Grid"
+    }
+  ]
+}
+{% endschema %}
