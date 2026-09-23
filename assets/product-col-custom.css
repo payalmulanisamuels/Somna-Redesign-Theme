@@ -241,10 +241,12 @@ slideshow-arrows .slideshow-control {
   }
 
   .hz-not-sure-card-title {
-    font-size: 19px;
-    font-weight: 700;
-    color: #0b1a30;
-    margin: 0 0 8px 0;
+    margin: 0 0 8px;
+    color: #0A1A4A;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 
   .hz-not-sure-card-desc {
