@@ -177,8 +177,13 @@
           </div>
 
           <div class="bundle-card__content">
-            {%- if title != blank -%}
-                <h3 class="bundle-card__title">{{ title }}</h3>
+            {%- if title != blank or subtitle != blank -%}
+              <div class="brand-card-wrap">
+                  <h3 class="bundle-card__title">{{ title }}</h3>
+                  <div calss="bundle-subtext">
+                    {{ subtitle }}
+                  </div>
+              </div>
               {%- endif -%}
 
 
