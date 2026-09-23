@@ -54,7 +54,7 @@
       "settings": {
         "content_direction": "column",
         "gap": 15,
-        "background_color": "#FAF2DF",
+        "background_color": "#CBD6F4",
         "padding-block-start": 30,
         "padding-block-end": 30
       }
@@ -131,7 +131,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Personal Information We Collect or Process</h2>",
+            "text": "<h2><strong>Personal Information We Collect or Process</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -200,6 +200,97 @@
         "section_height_custom": 50,
         "background_media": "none",
         "background_color": "#FAF2DF",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    },
+    "section_63n6Lm": {
+      "type": "section",
+      "blocks": {
+        "text_p4jMXE": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2><strong>Personal Information Sources</strong></h2>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.5rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0A1A4A",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_UeXmRW": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>We may collect personal information from the following sources:<br/>· <strong>Directly from you</strong> including when you create an account, visit or use the Services, communicate with us, or otherwise provide us with your personal information;<br/>· <strong>Automatically through the Services </strong>including from your device when you use our products or services or visit our websites, and through the use of cookies and similar technologies;<br/>· <strong>From our service providers</strong> including when we engage them to enable certain technology and when they collect or process your personal information on our behalf;</p><p>·       <br/><strong>From our partners or other third parties.</strong></p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "left",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#0a1a4a",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_p4jMXE",
+        "text_UeXmRW"
+      ],
+      "name": "t:names.rich_text_section",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#CBD6F4",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -365,6 +456,7 @@
     "main",
     "section_nCrU7b",
     "section_iYG7xV",
+    "section_63n6Lm",
     "footer_m9NzUG"
   ]
 }
