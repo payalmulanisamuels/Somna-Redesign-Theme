@@ -1,0 +1,428 @@
+{%- liquid
+  # Pure Metafield resolution (no schema product fallback)
+  assign meta_bundles = product.metafields.custom.bundle_section.value
+  
+  # Resolve data depending on list size (= 1 uses original single-banner style, != 1 uses screenshot multi-cross-sell grid)
+  assign is_single_meta = false
+  assign meta_item = blank
+  if meta_bundles != blank
+    if meta_bundles.size == 1
+      assign is_single_meta = true
+      for single_entry in meta_bundles
+        assign meta_item = single_entry
+      endfor
+    elsif meta_bundles.size > 1
+      assign is_single_meta = false
+    endif
+  endif
+
+  # If single meta item, extract fields to match original design structure
+  if is_single_meta and meta_item != blank
+    assign target_product = meta_item.product | default: meta_item.target_product
+    assign section_title = meta_item.sub_headline | default: meta_item.title | default: target_product.title
+    assign banner_image = meta_item.subscription_image | default: meta_item.image | default: target_product.featured_image
+    
+    # Pricing handling from meta or target product
+    if target_product != blank
+      assign base_price = target_product.price
+      if target_product.compare_at_price > target_product.price
+        assign base_price = target_product.compare_at_price
+      endif
+      assign sub_price = target_product.price | money_without_trailing_zeros
+      assign onetime_price = base_price | money_without_trailing_zeros
+      assign button_link = target_product.url
+    else
+      assign sub_price = meta_item.sub_price | default: ''
+      assign onetime_price = meta_item.onetime_price | default: ''
+      assign button_link = meta_item.url | default: '#'
+    endif
+  endif
+-%}
+
+<div class="hz-bundle-section" id="hz-bundle-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  {% comment %} Top Wave Divider {% endcomment %}
+  {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})"></div>
+  {% endif %}
+
+  {% comment %} Bottom Wave Divider {% endcomment %}
+  {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})"></div>
+  {% endif %}
+
+  <div class="hz-bundle-container-main">
+    {% if meta_bundles != blank and meta_bundles.size > 1 %}
+      <!-- Screenshot Design (Multiple items cross-sell grid) -->
+      <div class="hz-crosssell-wrapper">
+        <h2 class="hz-crosssell-heading">Bundle / Cross-sell</h2>
+        <div class="hz-crosssell-grid">
+          {% for item in meta_bundles %}
+            <div class="hz-crosssell-card">
+              {% if item.sub_headline != blank %}
+                <h3 class="hz-crosssell-card-title">{{ item.sub_headline }}</h3>
+              {% elsif item.title != blank %}
+                <h3 class="hz-crosssell-card-title">{{ item.title }}</h3>
+              {% endif %}
+
+              {% if item.sub_content != blank %}
+                <p class="hz-crosssell-card-desc">{{ item.sub_content }}</p>
+              {% endif %}
+
+              <div class="hz-crosssell-media">
+                {% assign item_img = item.subscription_image | default: item.image %}
+                {% if item_img != blank %}
+                  <img src="{{ item_img | image_url: width: 600 }}" alt="" loading="lazy" />
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% elsif meta_bundles != blank and is_single_meta %}
+      <!-- Original/Single Design rendered purely from 1 Metafield entry -->
+      <div class="hz-bundle-container">
+        <!-- Left Media Column -->
+        <div class="hz-bundle-media">
+          {% if banner_image != blank %}
+            <div class="hz-bundle-image-wrap">
+              <img
+                src="{{ banner_image | image_url: width: 900 }}"
+                alt="{{ section_title | escape }}"
+                loading="lazy"
+                width="{{ banner_image.width | default: 600 }}"
+                height="{{ banner_image.height | default: 600 }}"
+              />
+            </div>
+          {% else %}
+            <div class="hz-bundle-placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'hz-placeholder' }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Right Content Column -->
+        <div class="hz-bundle-content">
+          {% if section_title != blank %}
+            <h2 class="hz-bundle-title">{{ section_title }}</h2>
+          {% endif %}
+
+          {% if meta_item.sub_content != blank %}
+            <p class="hz-bundle-subtitle">{{ meta_item.sub_content }}</p>
+          {% endif %}
+
+          <div class="hz-bundle-pricing-row">
+            {% if sub_price != blank %}
+              <div class="hz-bundle-sub-price">
+                <span class="hz-price-large">{{ sub_price }}</span>
+                <span class="hz-price-sub-label">{{ section.settings.sub_label }}</span>
+              </div>
+            {% endif %}
+
+            {% if onetime_price != blank and template contains 'index' %}
+              <div class="hz-bundle-divider" aria-hidden="true"></div>
+              <div class="hz-bundle-onetime-price">
+                <span class="hz-price-regular">{{ onetime_price }}</span>
+                <span class="hz-price-onetime-label">{{ section.settings.onetime_label }}</span>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if section.settings.button_label != blank %}
+            <a href="{{ button_link }}" class="hz-bundle-btn">
+              <span>{{ section.settings.button_label }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .bundle_feature_banner{
+    display: block;
+  }
+  .hz-bundle-section {
+    position: relative;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+  .hz-bundle-container-main{
+    padding-right: 15px;
+  }
+  .hz-bundle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  /* Left Side Image */
+  .hz-bundle-media {
+    flex: 0 0 48%;
+    max-width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hz-bundle-image-wrap {
+    width: 100%;
+    max-width: 480px;
+    line-height: 0;
+    margin-bottom: -55px;
+  }
+  .hz-bundle-image-wrap img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .hz-bundle-placeholder {
+    width: 100%;
+    max-width: 440px;
+    height: 320px;
+    background: #fdf5d6;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hz-bundle-placeholder svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.25;
+  }
+  /* Right Side Content */
+  .hz-bundle-content {
+    flex: 0 0 52%;
+    max-width: 52%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hz-bundle-title {
+    font-size: 14px;
+    font-family: var(--headfont);
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--color-text);
+    margin: 0 0 2px 0;
+  }
+  .hz-bundle-subtitle {
+    font-size: 10px;
+    line-height: 1;
+    color: #0A1A4A;
+    margin: 0 0 4px 0;
+    font-weight: 400;
+  }
+  .hz-bundle-btn svg {
+    width: 10px;
+    height: 10px;
+  }
+  /* Pricing Row */
+  .hz-bundle-pricing-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .hz-bundle-sub-price {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  .hz-price-large {
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1;
+    color: #064BD8;
+    letter-spacing: -0.02em;
+  }
+  .hz-price-sub-label {
+    font-size: 8px;
+    font-weight: 500;
+    color: #064BD8;
+  }
+  .hz-bundle-divider {
+    width: 1.5px;
+    height: 32px;
+    background-color: #d1d5db;
+  }
+  .hz-bundle-onetime-price {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+  }
+  .hz-price-regular {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+  }
+  .hz-price-onetime-label {
+    font-size: 8px;
+    color: #000;
+    font-weight: 400;
+  }
+  /* Pill Button */
+  .hz-bundle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 16px;
+    border-radius: 99px;
+    background-color: var(--color-text);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 8px;
+    margin-top: 8px;
+  }
+  .hz-bundle-btn:hover {
+    background-color: #162f61;
+    transform: translateY(-1px);
+  }
+
+  /* Cross-sell Multi-bundle layout (Screenshot style) */
+  .hz-crosssell-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .hz-crosssell-heading {
+    font-size: 28px;
+    font-family: var(--headfont), serif;
+    font-weight: 600;
+    color: var(--color-text, #0b1a30);
+    margin-bottom: 32px;
+  }
+  .hz-crosssell-grid {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .hz-crosssell-card {
+    flex: 1 1 360px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hz-crosssell-card-title {
+    font-size: 22px;
+    font-family: var(--headfont), serif;
+    font-weight: 600;
+    color: var(--color-text, #0b1a30);
+    margin: 0 0 10px 0;
+  }
+  .hz-crosssell-card-desc {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #0A1A4A;
+    margin: 0 0 24px 0;
+  }
+  .hz-crosssell-media {
+    width: 100%;
+  }
+  .hz-crosssell-media img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .wave-container {
+    width: 100%;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .wave-container.top {
+    margin-bottom: 24px;
+  }
+  .wave-container.bottom {
+    margin-top: 24px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Bundle Feature Banner",
+  "tag": "section",
+  "class": "section bundle_feature_banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#faedd2"
+    },
+    {
+      "type": "text",
+      "id": "sub_label",
+      "label": "Subscribe Label",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "onetime_label",
+      "label": "One-Time Label",
+      "default": "One-time"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop the Breathe Bundle"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Feature Banner - PDP"
+    }
+  ]
+}
+{% endschema %}
