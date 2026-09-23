@@ -39,7 +39,7 @@
   endif
 -%}
 
-
+{%  if meta_bundles != blank %}
 <div class="hz-bundle-section" id="hz-bundle-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   {% comment %} Top Wave Divider {% endcomment %}
   {% if section.settings.top_wave_image != blank %}
@@ -336,7 +336,7 @@
   }
 
 </style>
-
+{% endif %}
 {% schema %}
 {
   "name": "Bundle Feature - PDP",
