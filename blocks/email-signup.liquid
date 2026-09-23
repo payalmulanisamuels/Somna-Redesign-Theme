@@ -241,18 +241,19 @@
             data: {
               type: 'subscription',
               attributes: {
+                custom_source: 'Shopify Custom Signup Form',
                 profile: {
                   data: {
                     type: 'profile',
                     attributes: {
-                      email: email,
-                      subscriptions: {
-                        email: {
-                          marketing: {
-                            consent: 'SUBSCRIBED'
-                          }
-                        }
-                      }
+                      email: email
+                    }
+                  }
+                },
+                subscriptions: {
+                  email: {
+                    marketing: {
+                      consent: 'SUBSCRIBED'
                     }
                   }
                 }
