@@ -202,16 +202,15 @@ slideshow-arrows .slideshow-control {
     max-width: 1080px;
     margin: 0 auto;
   }
-
   .hz-not-sure-heading {
     font-family: var(--headfont);
     margin-bottom: 29px;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: 98%; 
+    text-align: center;
+    line-height: 98%;
   }
-
   .hz-not-sure-grid {
     display: flex;
     gap: 18px 7px;
