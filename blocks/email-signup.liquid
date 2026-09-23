@@ -24,8 +24,6 @@
       {{ block_settings.heading | escape }}
     </div>
   {% endif %}
-
-{%  if section.settings.form_type == 'default'  %}
   {%- form 'customer', class: 'email-signup__form spacing-style' %}
     {% comment %} --- Input group classes --- {% endcomment %}
     {%- liquid
@@ -131,143 +129,6 @@
       </div>
     {%- endif -%}
   {% endform %}
-{% else %}
-  {%- form 'customer', class: 'email-signup__form spacing-style', id: 'KlaviyoEmailForm', data-klaviyo-list-id: block_settings.klaviyo_list_id, data-klaviyo-public-key: block_settings.klaviyo_public_key -%}
-  {% comment %} --- Input group classes --- {% endcomment %}
-  {%- liquid
-    assign input_group_classes = 'email-signup__input-group'
-    if block_settings.integrated_button and block_settings.border_style != 'underline'
-      assign input_group_classes = input_group_classes | append: ' email-signup__input-group--integrated'
-    endif
-    if block_settings.border_style == 'underline'
-      assign input_group_classes = input_group_classes | append: ' email-signup__input-group--underline'
-    endif
-    if block_settings.border_style == 'none'
-      assign input_group_classes = input_group_classes | append: ' email-signup__input-group--no-border'
-    endif
-    if block_settings.display_type == 'arrow'
-      assign input_group_classes = input_group_classes | append: ' email-signup__input-group--arrow'
-    endif
-  -%}
-
-  <div
-    class="{{ input_group_classes }}"
-    style="
-      --border-width: {% if is_custom_input %}{{ block_settings.border_width }}px{% else %}var(--style-border-width-inputs){% endif %};
-      --border-radius: {% if is_custom_input %}{{ block_settings.border_radius }}px{% else %}var(--style-border-radius-inputs){% endif %};
-      {% if is_custom_input %}{% render 'input-custom-styles', block_settings: block_settings %}{% endif %}
-    "
-  >
-    <label
-      for="EmailInput-{{ block.id }}"
-      class="visually-hidden"
-    >
-      {{ 'blocks.email_signup.label' | t }}
-    </label>
-    <input
-      id="EmailInput-{{ block.id }}"
-      class="email-signup__input email-signup__input--{{ block_settings.border_style }} {% if is_custom_input %}{{ block_settings.input_type_preset }}{% else %}{{ settings.type_preset }}{% endif %} {{ block_settings.border_variation }}"
-      type="email"
-      name="email"
-      autocorrect="off"
-      autocapitalize="off"
-      autocomplete="email"
-      placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
-      required
-    >
-    <button
-      type="submit"
-      class="email-signup__button {% if block_settings.integrated_button or block_settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block_settings.display_type }} {{ block_settings.button_type_preset }} {{ block_settings.style_class }} {{ block_settings.style_class }}--{{ block.id }}"
-      {% if block_settings.display_type != 'text' %}
-        aria-label="{{ 'actions.sign_up' | t }}"
-      {% endif %}
-    >
-      {% if block_settings.display_type == 'text' %}
-        {{ block_settings.label }}
-      {% else %}
-        <svg
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-          focusable="false"
-          aria-hidden="true"
-          class="email-signup__button-icon"
-        >
-          {% render 'icon', icon: 'arrow' %}
-        </svg>
-      {% endif %}
-    </button>
-  </div>
-
-  <div id="Klaviyo-message-error" class="email-signup__message" tabindex="-1" style="display: none;">
-    <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" class="icon-error">
-      {%- render 'icon', icon: 'error' -%}
-    </svg>
-    <span class="klaviyo-error-text">Something went wrong. Please try again.</span>
-  </div>
-
-  <div id="Klaviyo-message-success" class="email-signup__message" tabindex="-1" style="display: none;">
-    <span class="svg-wrapper icon-success">
-      {{ 'icon-checkmark.svg' | inline_asset_content }}
-    </span>
-    <p class="email-signup__message-text">{{ 'blocks.email_signup.success' | t }}</p>
-  </div>
-{%- endform -%}
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('KlaviyoEmailForm');
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const emailInput = form.querySelector('input[type="email"]');
-      const email = emailInput ? emailInput.value.trim() : '';
-      const listId = form.getAttribute('data-klaviyo-list-id');
-      const publicKey = form.getAttribute('data-klaviyo-public-key');
-      
-      const errorMsg = document.getElementById('Klaviyo-message-error');
-      const successMsg = document.getElementById('Klaviyo-message-success');
-      if (errorMsg) errorMsg.style.display = 'none';
-      if (successMsg) successMsg.style.display = 'none';
-
-      try {
-        const response = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${publicKey}`, {
-          method: 'POST',
-          headers: {
-            'revision': '2024-10-15',
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            data: {
-              type: 'subscription',
-              attributes: {
-                list_id: listId,
-                email: email
-              }
-            }
-          })
-        });
-
-        if (response.ok || response.status === 202) {
-          if (successMsg) successMsg.style.display = 'flex';
-          form.reset();
-        } else {
-          const errData = await response.json();
-          if (errorMsg) {
-            errorMsg.querySelector('.klaviyo-error-text').textContent = errData.errors?.[0]?.detail || 'Subscription failed.';
-            errorMsg.style.display = 'flex';
-          }
-        }
-      } catch (err) {
-        if (errorMsg) {
-          errorMsg.querySelector('.klaviyo-error-text').textContent = 'Network error. Please try again.';
-          errorMsg.style.display = 'flex';
-        }
-      }
-    });
-  });
-</script>
-{% endif %}
 </div>
 
 {% stylesheet %}
@@ -549,36 +410,6 @@
   "name": "t:names.email_signup",
   "tag": null,
   "settings": [
-    {
-      "type": "header",
-      "content": "Customer Form"
-    },
-    {
-      "type": "select",
-      "id": "form_type",
-      "label": "Form Type",
-      "options": [
-        {
-          "value": "default",
-          "label": "t:options.fill"
-        },
-        {
-          "value": "klaviyo",
-          "label": "Klaviyo"
-        }
-      ],
-      "default": "default"
-    },
-    {
-      "type": "text",
-      "id":"klaviyo_list_id",
-      "label": "Klaviyo List ID"
-    },
-    {
-      "type": "text",
-      "id":"klaviyo_public_key",
-      "label": "Klaviyo List Public Key"
-    },
     {
       "type": "paragraph",
       "content": "t:content.email_signups_create_customer_profiles"
