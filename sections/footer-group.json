@@ -58,11 +58,11 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/logo.png",
+                "image": "shopify://shop_images/footer-logo.svg",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "custom",
-                "custom_width": 29,
+                "custom_width": 25,
                 "width_mobile": "custom",
                 "custom_width_mobile": 55,
                 "height": "fill",
