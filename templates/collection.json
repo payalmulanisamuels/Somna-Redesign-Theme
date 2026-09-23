@@ -958,40 +958,40 @@
         "faq_item_BwPQYY": {
           "type": "faq_item",
           "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>",
+            "question": "What's the difference between the bundles?",
+            "answer": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colours of Strips only,<br/><br/>no Tape. Season Bundle is a three-month supply in Black.</p>",
             "default_open": false
           }
         },
         "faq_item_idCe84": {
           "type": "faq_item",
           "settings": {
-            "question": "Are any purchases final sale?",
-            "answer": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>",
+            "question": "Can I buy Strips or Tape separately?",
+            "answer": "<p>Yes — both are available as singles if you'd rather start with one.</p>",
             "default_open": false
           }
         },
         "faq_item_pFRRyj": {
           "type": "faq_item",
           "settings": {
-            "question": "When will I get my order?",
-            "answer": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>",
+            "question": "How does Subscribe & Save work?",
+            "answer": "<p>10% off, delivered automatically on your schedule, skip or cancel anytime.</p>",
             "default_open": false
           }
         },
         "faq_item_MMB6LR": {
           "type": "faq_item",
           "settings": {
-            "question": "Where are your products manufactured?",
-            "answer": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>",
+            "question": "How long does delivery take?",
+            "answer": "<p>7–9 business days. We'll email you tracking as soon as it ships.</p>",
             "default_open": false
           }
         },
         "faq_item_nBDg3T": {
           "type": "faq_item",
           "settings": {
-            "question": "How much does shipping cost?",
-            "answer": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>",
+            "question": "What's your return policy?",
+            "answer": "<p>Every product is covered by our 30-Night Money-Back Guarantee, counted from delivery.</p>",
             "default_open": false
           }
         }
