@@ -346,6 +346,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".header_main h1,.header_main h1 strong {font-weight: normal !important; line-height: 32px;}"
+      ],
       "name": "t:names.featured_product_information",
       "settings": {
         "product": "sleep-bundle",
