@@ -411,6 +411,31 @@
   "tag": null,
   "settings": [
     {
+      "type": "header",
+      "content": "Customer Form"
+    },
+    {
+      "type": "select",
+      "id": "form_type",
+      "label": "Form Type",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "klaviyo",
+          "label": "Klaviyo"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "text",
+      "id":"klaviyo_form",
+      "label": "Klaviyo List ID"
+    },
+    {
       "type": "paragraph",
       "content": "t:content.email_signups_create_customer_profiles"
     },
