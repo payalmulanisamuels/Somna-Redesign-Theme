@@ -338,7 +338,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "#0A1A4A",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -349,13 +349,19 @@
                   },
                   "blocks": {}
                 },
+                "product_showcase_k7C98M": {
+                  "type": "_product-showcase",
+                  "name": "Product Showcase Grid",
+                  "settings": {},
+                  "blocks": {}
+                },
                 "divider_EaWhy8": {
                   "type": "_divider",
                   "name": "t:names.divider",
                   "settings": {
                     "thickness": 1,
                     "corner_radius": "square",
-                    "divider_color": "#E1E6EB",
+                    "divider_color": "#e1e6eb",
                     "width_percent": 100,
                     "padding-block-start": 0,
                     "padding-block-end": 0
@@ -430,6 +436,7 @@
                 "image_9PYQF9",
                 "subscriptions_app_block_8Fe6G8",
                 "text_NFacFW",
+                "product_showcase_k7C98M",
                 "divider_EaWhy8",
                 "buy_buttons_RGzwUW"
               ]
