@@ -102,9 +102,10 @@ search-button.search-action.search-action--hidden-on-menu {
 }
 .wave-container img {
     object-fit: cover;
-    height: 20px;
+    height: 100%;
     object-position: bottom;
     width: 100%;
+    max-height: 20px;
 }
 .wave-container.bottom {
     bottom: -18px;
