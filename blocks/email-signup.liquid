@@ -24,6 +24,8 @@
       {{ block_settings.heading | escape }}
     </div>
   {% endif %}
+
+{%  if section.settings.form_type == 'default'  %}
   {%- form 'customer', class: 'email-signup__form spacing-style' %}
     {% comment %} --- Input group classes --- {% endcomment %}
     {%- liquid
@@ -129,6 +131,8 @@
       </div>
     {%- endif -%}
   {% endform %}
+{% else %}
+{% endif %}
 </div>
 
 {% stylesheet %}
