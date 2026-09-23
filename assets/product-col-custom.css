@@ -187,6 +187,38 @@ slideshow-arrows .slideshow-control {
     padding: 0;
     width: 100%;
 }
+.hz-metaobject-grid {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.hz-metaobject-media img {
+    height: 62px;
+    object-fit: contain;
+}
+.hz-metaobject-title {
+    color: #0A1A4A;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px; /* 160% */
+    width: 100%;
+}
+.hz-metaobject-text-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5px;
+}
+.hz-metaobject-subtitle {
+    color: #0A1A4A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14px;
+}
 /* Collection Feature section */
   .hz-not-sure-section {
     position: relative;
