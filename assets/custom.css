@@ -98,21 +98,17 @@ search-button.search-action.search-action--hidden-on-menu {
     background-repeat: repeat-x;
     background-position: top;
     background-size: cover;
-    height: 20px;
+    height: 25px;
 }
-.wave-container svg {
-    width: 100%;
-    object-fit: contain;
-}
-.wave-container img {
+/* .wave-container img {
     object-fit: cover;
     height: 100%;
     object-position: bottom;
     width: 1450px;
     max-height: 20px;
-}
+} */
 .wave-container.bottom {
-    bottom: -18px;
+    bottom: -24px;
     background-position: bottom;
 }
 .wave-container.top {
