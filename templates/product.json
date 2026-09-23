@@ -1092,7 +1092,7 @@
       "type": "pdp-bundle-feature-banner",
       "name": "Bundle Feature Banner - PDP",
       "settings": {
-        "bg_color": "#FFF9ED",
+        "bg_color": "#fff9ed",
         "sub_label": "Subscribe & Save",
         "onetime_label": "One-time",
         "button_label": "Shop the Breathe Bundle",
@@ -1236,7 +1236,7 @@
       ],
       "name": "t:names.rich_text_section",
       "settings": {
-        "top_wave_image": "shopify://shop_images/review-svg-top.svg",
+        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
         "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
