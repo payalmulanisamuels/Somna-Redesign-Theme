@@ -7,7 +7,7 @@
   {% if section.settings.bottom_wave_image != blank %}
     <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})"></div>
   {% endif %}
-  <div class="hz-not-sure-container">
+  <div class="section section--page-width">
     {% if section.settings.heading != blank %}
       <h2 class="hz-not-sure-heading" style="color: {{ section.settings.text_color }};">
         {{ section.settings.heading }}
