@@ -227,6 +227,7 @@ slideshow-arrows .slideshow-control {
   .hz-not-sure-card {
     position: relative;
     border: 1px solid #E1E6EB;  
+    background: transparent;
     border-radius: 20px;
     padding: 11px;
     display: flex;
