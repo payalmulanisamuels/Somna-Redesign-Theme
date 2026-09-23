@@ -225,8 +225,8 @@
       const listId = form.getAttribute('data-klaviyo-list-id');
       const publicKey = form.getAttribute('data-klaviyo-public-key');
       
-      const errorMsg = document.getElementById('Klaviyo-message-error-{{ section.id }}');
-      const successMsg = document.getElementById('Klaviyo-message-success-{{ section.id }}');
+      const errorMsg = document.getElementById('Klaviyo-message-error');
+      const successMsg = document.getElementById('Klaviyo-message-success');
       if (errorMsg) errorMsg.style.display = 'none';
       if (successMsg) successMsg.style.display = 'none';
 
@@ -235,14 +235,35 @@
           method: 'POST',
           headers: {
             'revision': '2024-10-15',
-            'content-type': 'application/json'
+            'content-type': 'application/vnd.api+json'
           },
           body: JSON.stringify({
             data: {
               type: 'subscription',
               attributes: {
-                list_id: listId,
-                email: email
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email: email,
+                      subscriptions: {
+                        email: {
+                          marketing: {
+                            consent: 'SUBSCRIBED'
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: listId
+                  }
+                }
               }
             }
           })
