@@ -69,6 +69,7 @@
         "text_tqQTNE",
         "text_twGGkJ"
       ],
+      "disabled": true,
       "name": "t:names.heading",
       "settings": {
         "content_direction": "column",
@@ -231,7 +232,7 @@
         "padding-block-end": 32
       }
     },
-        "featured_bundle_grid_6jFGFr": {
+    "featured_bundle_grid_6jFGFr": {
       "type": "featured-bundle-grid",
       "blocks": {
         "bundle_gCFgge": {
