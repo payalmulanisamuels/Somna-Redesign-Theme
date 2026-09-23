@@ -69,7 +69,7 @@
               {% endif %}
 
               <div class="hz-crosssell-media">
-                {% assign item_img = item.subscription_image | default: item.image %}
+                {% assign item_img = item.bundle_image %}
                 {% if item_img != blank %}
                   <img src="{{ item_img | image_url: width: 600 }}" alt="" loading="lazy" />
                 {% endif %}
