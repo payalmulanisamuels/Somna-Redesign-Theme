@@ -228,7 +228,7 @@ slideshow-arrows .slideshow-control {
     position: relative;
     border: 1px solid #E1E6EB;  
     background: transparent;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 11px;
     display: flex;
     flex-direction: column;
