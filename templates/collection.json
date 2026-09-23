@@ -358,7 +358,7 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 0,
-        "background_color": "#FFF9ED",
+        "background_color": "#fff9ed",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -926,6 +926,69 @@
         "title": ""
       }
     },
+    "collection_feature_kyHPTY": {
+      "type": "collection-feature",
+      "blocks": {
+        "guide_card_f3tzTU": {
+          "type": "guide_card",
+          "settings": {
+            "title": "New to both?",
+            "description": "Start with the Sleep Bundle\nin Blue (Breathe).",
+            "target_product": "",
+            "custom_image": "shopify://shop_images/sleep.jpg"
+          }
+        },
+        "guide_card_jYkhU6": {
+          "type": "guide_card",
+          "settings": {
+            "title": "Already know youneed help breathingeasier at night?",
+            "description": "Nasal Strips.",
+            "target_product": "",
+            "custom_image": "shopify://shop_images/strip1.png"
+          }
+        },
+        "guide_card_XfLtwa": {
+          "type": "guide_card",
+          "settings": {
+            "title": "Mostly wake with adry mouth?",
+            "description": "Mouth Tape.",
+            "target_product": "",
+            "custom_image": "shopify://shop_images/tape1_98d47ffe-ff7f-48d9-b93e-1e3f10e9a6f2.png"
+          }
+        },
+        "guide_card_8AqeXX": {
+          "type": "guide_card",
+          "settings": {
+            "title": "Want to try everycolour?",
+            "description": "The Colour Set.",
+            "target_product": "",
+            "custom_image": "shopify://shop_images/thecolorset.jpg"
+          }
+        },
+        "guide_card_znmh7M": {
+          "type": "guide_card",
+          "settings": {
+            "title": "Ready to commit to afull season?",
+            "description": "Season Bundle.",
+            "target_product": "",
+            "custom_image": "shopify://shop_images/sleep-black.png"
+          }
+        }
+      },
+      "block_order": [
+        "guide_card_f3tzTU",
+        "guide_card_jYkhU6",
+        "guide_card_XfLtwa",
+        "guide_card_8AqeXX",
+        "guide_card_znmh7M"
+      ],
+      "name": "Collection Feature",
+      "settings": {
+        "bg_color": "#fdf8ee",
+        "text_color": "#0b1a30",
+        "heading": "Not sure where to start?"
+      }
+    },
     "faq_accordion_XL3WiV": {
       "type": "faq-accordion",
       "blocks": {
@@ -994,6 +1057,7 @@
     "section_zELtyM",
     "featured_bundle_grid_6jFGFr",
     "custom_cards_slider_pyJahK",
+    "collection_feature_kyHPTY",
     "faq_accordion_XL3WiV"
   ]
 }
