@@ -72,15 +72,14 @@
    {% comment %} Top Wave Divider {% endcomment %}
 
     {% if section.settings.top_wave_image != blank %}
-    <div class="wave-container top">
-
-    <img 
-        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-        alt="top_wave_image" 
-        loading="lazy" 
-        class="custom-wave-img"
-        />
-    </div>
+   <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+{% comment %} <img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    /> {% endcomment %}
+</div>
     {% endif %}
 
     {% comment %} Bottom Wave Divider {% endcomment %}
