@@ -1830,7 +1830,7 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
 
 
 .klaviyo-form-button {
-    margin-left: -30px;
+    margin-left: -30px !important;
 }
 .klaviyo-form.klaviyo-form.klaviyo-form {
     padding: 0 !important;
