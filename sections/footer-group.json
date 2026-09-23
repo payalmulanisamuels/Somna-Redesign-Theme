@@ -200,7 +200,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "top_wave_image": "shopify://shop_images/footer-curved.svg",
+        "top_wave_image": "shopify://shop_images/Footer_Curved_edge.svg",
         "section_width": "page-width",
         "gap": 20,
         "background_color": "#071a4b",
