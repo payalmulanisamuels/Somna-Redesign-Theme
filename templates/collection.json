@@ -270,7 +270,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 0,
             "sticky_details_desktop": true,
             "background_media": "none",
             "background_color": "",
@@ -282,7 +282,7 @@
             "border_color": "",
             "border_radius": 0,
             "padding-block-start": 24,
-            "padding-block-end": 24,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -302,7 +302,7 @@
                 "letter_spacing": "normal",
                 "case": "uppercase",
                 "wrap": "pretty",
-                "text_color": "#2563EB",
+                "text_color": "#2563eb",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -317,8 +317,8 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Two Essentials.<br/>Every Way to Get Them.</h2>",
-                "width": "fit-content",
+                "text": "<h2><strong>Two Essentials.<br/>Every Way to Get Them.</strong></h2>",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
@@ -328,7 +328,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0A1A4A",
+                "text_color": "#0a1a4a",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -354,9 +354,9 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 0,
-        "background_color": "",
+        "background_color": "#FFF9ED",
         "padding-block-start": 0,
-        "padding-block-end": 40
+        "padding-block-end": 0
       }
     },
     "section_zELtyM": {
