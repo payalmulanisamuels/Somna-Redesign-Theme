@@ -40,6 +40,7 @@
         },
         "page-content": {
           "type": "page-content",
+          "disabled": true,
           "settings": {
             "text_color": ""
           },
@@ -53,7 +54,7 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
-        "background_color": "#FFF9ED",
+        "background_color": "#fff9ed",
         "padding-block-start": 40,
         "padding-block-end": 80
       }
