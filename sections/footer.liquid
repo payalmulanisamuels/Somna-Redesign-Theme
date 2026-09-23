@@ -21,13 +21,13 @@
 {% comment %} Bottom Wave Divider {% endcomment %}
 
 {% if section.settings.bottom_wave_image != blank %}
- <div class="wave-container bottom">
-<img 
+ <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+  {% comment %} <img 
       src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
       alt="bottom_wave_image" 
       loading="lazy" 
       class="custom-wave-img"
-    />
+    /> {% endcomment %}
 </div>
 {% endif %}
 
