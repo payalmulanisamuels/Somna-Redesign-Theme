@@ -986,7 +986,9 @@
       "settings": {
         "bg_color": "#fdf8ee",
         "text_color": "#0b1a30",
-        "heading": "Not sure where to start?"
+        "heading": "Not sure where to start?",
+        "top_wave_image": "shopify://shop_images/col-top.svg",
+        "bottom_wave_image": "shopify://shop_images/col-bottom.svg"
       }
     },
     "faq_accordion_XL3WiV": {
