@@ -230,7 +230,7 @@
         "padding-block-end": 32
       }
     },
-       "custom_cards_slider_pyJahK": {
+    "custom_cards_slider_pyJahK": {
       "type": "custom-cards-slider",
       "blocks": {
         "card_XExw3D": {
@@ -351,7 +351,9 @@
       "settings": {
         "bg_color": "#fdf8ee",
         "divider_color": "#cbd3d8",
-        "heading": "FAQ"
+        "heading": "FAQ",
+        "padding_top": 20,
+        "padding_bottom": 64
       }
     }
   },
