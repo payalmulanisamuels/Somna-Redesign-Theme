@@ -213,7 +213,7 @@ slideshow-arrows .slideshow-control {
 
   .hz-not-sure-grid {
     display: flex;
-    gap: 7px 18px;
+    gap: 18px 7px;
     justify-content: center;
     flex-wrap: wrap;
   }
