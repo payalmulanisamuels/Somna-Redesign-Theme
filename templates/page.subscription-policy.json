@@ -66,7 +66,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>1. Acceptance of Terms</strong></h2>",
+            "text": "<h2><strong>1. How Subscribe & Save Works</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -92,7 +92,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>By accessing or using the website, products, or services of Somna Sleep Co. (\"Somna\", \"we\", \"us\", or \"our\"), you agree to be bound by these Terms of Service. If you do not agree, you must not use our website or purchase our products.</p>",
+            "text": "<p>When you choose Subscribe & Save at checkout, your order is placed automatically on a recurring schedule at 10% off the one-time price. Your delivery frequency is set by the size you choose:</p><p>1 Bag / 1 Set — every month.</p><p>2 Bags / 2 Sets — every 2 months.</p><p>3+1 Bags / 3+1 Sets (4-month supply) — every 4 months.</p><p>The Colour Set and Season Bundle are delivered every 3 months.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -158,7 +158,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>2. Medical Disclaimer (CRITICAL)</strong></h2>",
+            "text": "<h2><strong>2. Managing Your Subscription</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -184,7 +184,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>SOMNA PRODUCTS ARE NOT MEDICAL DEVICES. THEY ARE NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE OR MEDICAL CONDITION, INCLUDING BUT NOT LIMITED TO SLEEP APNEA. All information provided by Somna on our website, packaging, or marketing materials is for informational purposes only and is not a substitute for professional medical advice. Always consult a physician or qualified healthcare provider regarding any medical condition or sleep disorder. By using our products, you acknowledge and agree that Somna is not providing medical advice.</p>",
+            "text": "<p>You can skip an upcoming order, change your product or colour, change your delivery frequency, update your quantity or tier, or update your payment and shipping details at any time from your account — no need to contact support. Visit [Manage my subscription →].</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -249,7 +249,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>3. Product Use and Assumption of Risk</strong></h2>",
+            "text": "<h2><strong>3. Billing</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -275,7 +275,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You agree to use Somna products strictly according to the provided instructions. You acknowledge that individual results may vary. You assume all risks associated with the use of our products. Somna shall not be held liable for any adverse reactions, skin irritations, or other issues arising from the use or misuse of our products.</p>",
+            "text": "<p>Your payment method is charged automatically a few days before each scheduled order ships. If a payment fails, we will notify you by email and attempt to charge your payment method again before your subscription is affected.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -340,7 +340,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>4. Limitation of Liability</strong></h2>",
+            "text": "<h2><strong>4. Pausing or Cancelling</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -366,7 +366,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, SOMNA AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR USE, ARISING OUT OF OR IN ANY WAY CONNECTED WITH YOUR USE OF OUR WEBSITE OR PRODUCTS. IN NO EVENT SHALL SOMNA'S TOTAL LIABILITY EXCEED THE AMOUNT YOU PAID FOR THE SPECIFIC PRODUCT GIVING RISE TO THE CLAIM.</p>",
+            "text": "<p>You can pause or cancel your subscription at any time from your account, with no fees and no phone call required. A paused subscription can be restarted at any time. Cancelling stops all future orders immediately; it does not affect orders already placed or shipped.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -431,7 +431,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>5. Indemnification</strong></h2>",
+            "text": "<h2><strong>5. Price Changes</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -457,7 +457,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>You agree to indemnify, defend, and hold harmless Somna from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising from your violation of these Terms of Service or your use or misuse of our products.</p>",
+            "text": "<p>If the price of a product in your subscription changes, we will notify you by email before your next order processes at the new price. You are always free to cancel before that order ships.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -522,7 +522,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>6. Arbitration and Class Action Waiver</strong></h2>",
+            "text": "<h2><strong>6. Order Adjustments</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -548,7 +548,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>PLEASE READ THIS SECTION CAREFULLY—IT AFFECTS YOUR LEGAL RIGHTS. Any dispute or claim arising out of or relating to these Terms of Service, your use of the website, or your purchase of Somna products shall be resolved by binding arbitration, rather than in court. You and Somna agree to waive any right to a jury trial or to participate in a class action. Arbitration shall be conducted in San Francisco, California, under the rules of the American Arbitration Association</p>",
+            "text": "<p>Skips, pauses, or other changes take effect immediately if made before your next order begins processing. Changes made after an order has begun processing will apply to the following cycle instead.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -591,188 +591,6 @@
         "section_height_custom": 50,
         "background_media": "none",
         "background_color": "#cbd6f4",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      }
-    },
-    "section_NwyYHk": {
-      "type": "section",
-      "blocks": {
-        "text_LKVcdm": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2><strong>7. Governing Law</strong></h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1.5rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_rBVeXD": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>These Terms of Service shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law principles.</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "paragraph",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_LKVcdm",
-        "text_rBVeXD"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#e0e8d7",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      }
-    },
-    "section_TkMKVc": {
-      "type": "section",
-      "blocks": {
-        "text_9dhzrg": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2><strong>8. Changes to Terms</strong></h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1.5rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_j9WFqN": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>We reserve the right to modify these Terms of Service at any time. Changes will be effective immediately upon posting to the website. Your continued use of the website constitutes acceptance of the modified terms.</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "paragraph",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_9dhzrg",
-        "text_j9WFqN"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -942,8 +760,6 @@
     "section_xXDyC9",
     "section_B46NBr",
     "section_RixrEc",
-    "section_NwyYHk",
-    "section_TkMKVc",
     "footer_m9NzUG"
   ]
 }
