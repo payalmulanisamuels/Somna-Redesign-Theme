@@ -66,7 +66,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>1. Sleep Satisfaction Guarantee</strong></h2>",
+            "text": "<h2><strong>1. Processing Time</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -92,7 +92,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>We stand behind every Somna product. If you are not completely satisfied with your purchase, you may return it under our 30-Night Money-Back Guarantee, calculated from the confirmed date of delivery.</p>",
+            "text": "<p>All orders are processed within 1 to 2 business days (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -158,7 +158,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>2. Eligibility for Returns</strong></h2>",
+            "text": "<h2><strong>2. Shipping Rates and Estimatesa</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -184,7 +184,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>To qualify for a refund under our satisfaction guarantee:</p><p>Initiation Window: The return request must be initiated within 30 nights of the delivery date.</p><p>Condition: For hygiene, safety, and health reasons, consumable items (Nasal Strips and Mouth Tape) must remain completely unused, sealed, and in their original, unopened packaging. Opened or partially used packs cannot be accepted.</p>",
+            "text": "<p>We currently ship within the United States only.</p><p>Shipping is free on every order, with no minimum purchase required.</p><p>Delivery typically takes 7–9 business days from the date your order ships.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -249,7 +249,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>3. Return Process</strong></h2>",
+            "text": "<h2><strong>3. How Do I Check the Status of My Order?</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -275,7 +275,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Items marked as \"Final Sale,\" \"Clearance,\" or promotional free gifts are not eligible for returns or refunds.</p>",
+            "text": "<p>When your order has shipped, you will receive an email notification from us which will include a tracking number you can use to check its status. Please allow 48 hours for the tracking information to become available. You can also track your order directly on our Track Your Order page.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -340,7 +340,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>4. Return Shipping Costs</strong></h2>",
+            "text": "<h2><strong>4. Lost, Stolen, or Damaged Packages</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -366,7 +366,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Customers are responsible for all return shipping costs. We recommend using a trackable shipping service or purchasing shipping insurance. We cannot guarantee that we will receive</p><p>your returned item and are not responsible for returns lost in transit. Original shipping charges are non-refundable.</p>",
+            "text": "<p>Somna is not liable for any products damaged or lost during shipping. If you received your order damaged, please contact the shipment carrier to file a claim. Please save all packaging materials and damaged goods before filing a claim. We are not responsible for packages marked as \"Delivered\" by the carrier that are subsequently stolen from your property.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -431,7 +431,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2><strong>5. Refunds</strong></h2>",
+            "text": "<h2><strong>5. Incorrect Shipping Addresses</strong></h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -457,7 +457,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Once your return is received and inspected, we will send you an email to notify you of the approval or rejection of your refund. If approved, your refund will be processed, and a credit will automatically be applied to your original method of payment within 5–10 business days.</p>",
+            "text": "<p>Customers are responsible for providing the correct shipping address. If a package is returned to us due to an incorrect or incomplete address provided by the customer, the customer will be responsible for the return shipping cost as well as the redelivery cost.</p><p>Somna is not responsible for packages delivered to incorrect addresses provided by the customer.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",
@@ -500,188 +500,6 @@
         "section_height_custom": 50,
         "background_media": "none",
         "background_color": "#faf2df",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
-      }
-    },
-    "section_RixrEc": {
-      "type": "section",
-      "blocks": {
-        "text_f8NRLK": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2><strong>6. Late or Missing Refunds</strong></h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1.5rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_JmCkgQ": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>If you haven't received a refund yet, first check your bank account again. Then contact your credit card company or bank, as it may take some time before your refund is officially posted. If you've done all of this and you still have not received your refund, please contact us at <a href=\"mailto:hello@somnasleep.com\" title=\"mailto:hello@somnasleep.com\">hello@somnasleep.com</a>.</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "paragraph",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_f8NRLK",
-        "text_JmCkgQ"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "bottom_wave_image": "shopify://shop_images/purple-wave-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#cbd6f4",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
-      }
-    },
-    "section_xj6tme": {
-      "type": "section",
-      "blocks": {
-        "text_7xVHjy": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2><strong>7. Final Sale Items</strong></h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "1.5rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_Dwdb6g": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>To initiate a return:</p><p>1. Email our support team at hello@somnasleep.com with your order number and reason for return.</p><p>2. If your return is approved, we will provide you with a Return Merchandise Authorization (RMA) number and instructions on where to send your package.</p><p>3. Do not send items back without first requesting an RMA. Items sent back without authorization will not be accepted or refunded.</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "left",
-            "type_preset": "paragraph",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "#0a1a4a",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_7xVHjy",
-        "text_Dwdb6g"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "bottom_wave_image": "shopify://shop_images/dark-yellow-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "small",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#ffe795",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -850,8 +668,6 @@
     "section_63n6Lm",
     "section_xXDyC9",
     "section_B46NBr",
-    "section_RixrEc",
-    "section_xj6tme",
     "footer_m9NzUG"
   ]
 }
