@@ -148,7 +148,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "section_iYG7xV": {
@@ -239,7 +239,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "section_63n6Lm": {
@@ -330,7 +330,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "section_xXDyC9": {
@@ -421,7 +421,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "section_B46NBr": {
@@ -603,7 +603,7 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-end": 0
       }
     },
     "footer_m9NzUG": {
