@@ -204,11 +204,13 @@ slideshow-arrows .slideshow-control {
   }
 
   .hz-not-sure-heading {
-    text-align: center;
-    font-size: 32px;
-    font-family: serif;
-    font-weight: 600;
-    margin: 0 0 36px 0;
+    color: #0A1A4A;
+    font-family: var(--headfont);
+    margin-bottom: 29px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 98%; 
   }
 
   .hz-not-sure-grid {
