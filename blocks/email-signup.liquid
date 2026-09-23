@@ -132,7 +132,7 @@
     {%- endif -%}
   {% endform %}
 {% else %}
-  {%- form 'customer', class: 'email-signup__form spacing-style', id: 'KlaviyoEmailForm-{{ section.id }}', data-klaviyo-list-id: block_settings.klaviyo_list_id, data-klaviyo-public-key: block_settings.klaviyo_public_key -%}
+  {%- form 'customer', class: 'email-signup__form spacing-style', id: 'KlaviyoEmailForm', data-klaviyo-list-id: block_settings.klaviyo_list_id, data-klaviyo-public-key: block_settings.klaviyo_public_key -%}
   {% comment %} --- Input group classes --- {% endcomment %}
   {%- liquid
     assign input_group_classes = 'email-signup__input-group'
@@ -215,7 +215,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('KlaviyoEmailForm-{{ block.id }}');
+    const form = document.getElementById('KlaviyoEmailForm');
     if (!form) return;
 
     form.addEventListener('submit', async (e) => {
