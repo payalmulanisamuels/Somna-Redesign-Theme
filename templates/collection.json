@@ -451,6 +451,19 @@
             "group_wM8wQa"
           ]
         },
+        "divider_ypr6En": {
+          "type": "_divider",
+          "name": "t:names.divider",
+          "settings": {
+            "thickness": 1,
+            "corner_radius": "square",
+            "divider_color": "{{ settings.color_palette.foreground }}",
+            "width_percent": 100,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
         "group_zLUwAy": {
           "type": "group",
           "settings": {
@@ -486,8 +499,8 @@
             "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
-            "padding-inline-start": 21,
-            "padding-inline-end": 21
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {
             "icon_kGqw7f": {
@@ -576,6 +589,19 @@
             "icon_kGqw7f",
             "group_iQxNQf"
           ]
+        },
+        "divider_JUCkxk": {
+          "type": "_divider",
+          "name": "t:names.divider",
+          "settings": {
+            "thickness": 1,
+            "corner_radius": "square",
+            "divider_color": "{{ settings.color_palette.foreground }}",
+            "width_percent": 100,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
         },
         "group_LzUj4c": {
           "type": "group",
@@ -702,6 +728,19 @@
             "icon_rxWgFC",
             "group_nW8ikE"
           ]
+        },
+        "divider_CimJ7p": {
+          "type": "_divider",
+          "name": "t:names.divider",
+          "settings": {
+            "thickness": 1,
+            "corner_radius": "square",
+            "divider_color": "{{ settings.color_palette.foreground }}",
+            "width_percent": 100,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
         },
         "group_iMHtRg": {
           "type": "group",
@@ -832,8 +871,11 @@
       },
       "block_order": [
         "group_iHdB3h",
+        "divider_ypr6En",
         "group_zLUwAy",
+        "divider_JUCkxk",
         "group_LzUj4c",
+        "divider_CimJ7p",
         "group_iMHtRg"
       ],
       "custom_css": [],
