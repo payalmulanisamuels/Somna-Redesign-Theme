@@ -168,6 +168,12 @@ slideshow-arrows .slideshow-control {
 .slideshow-controls__thumbnails {
     gap: 2px !important;
 }
+.slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
+    outline: none;
+    border: 2px solid #000;
+}
+
+.slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
 .accordion .details{
     border-bottom: 3.01px solid #B9B7AC;
 }
