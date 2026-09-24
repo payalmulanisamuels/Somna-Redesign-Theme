@@ -45,7 +45,7 @@
 }
 .variant-option__button-label:has(:checked) {
     background: #C9E5FE;
-    border: 2px solid #0A1A4A !important;
+    border: 2px solid #000 !important;
 }
 .variant-option__button-label:has(:checked) .variant-card__title,.variant-option__button-label:hover .variant-card__title  {
     color: #0A1A4A;
