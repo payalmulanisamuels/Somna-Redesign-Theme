@@ -304,7 +304,7 @@
                     "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                     "alignment": "left",
                     "padding-block-start": 0,
-                    "padding-block-end": 8,
+                    "padding-block-end": 17,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
                   },
@@ -378,7 +378,7 @@
                     "input_border_color": "{{ settings.color_palette.foreground }}",
                     "border_width": 1,
                     "border_radius": 0,
-                    "padding-block-start": 0,
+                    "padding-block-start": 9,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
