@@ -133,12 +133,13 @@
   .variant-card__sub-title {
     margin-bottom: 6px;
     display: block;
-    color: #061C42;
+    color: #061c42;
     font-family: Inter;
     font-size: 6.5px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    margin-top: 2px;
   }
   .variant-card__img-wrap {
     display: flex;
