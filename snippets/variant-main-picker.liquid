@@ -327,8 +327,8 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Integrated with Theme Variant Picker)
-      =========================================================    {%- endcomment -%} 
+         SUBSCRIPTION APP EMBED WRAPPER (Safely Synced via Event Delegation)
+      ========================================================= {%  endcomment %} 
       <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
         <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
         <link href="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/styles.css" rel="stylesheet" type="text/css">
@@ -367,7 +367,7 @@
                       <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio">
                       <div>
                         <span style="font-weight: bold; display: block;">Autoship & Save</span>
-                        <span style="font-size: 12px; color: #666;" class="dynamic-per-night-text">{{ night_price | money }} Per Night</span>
+                        <span style="font-size: 12px; color: #666;">{{ night_price | money }} Per Night</span>
                       </div>
                     </div>
                     <div style="text-align: right;">
@@ -413,59 +413,65 @@
         <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Robust Script to Force Theme URL & State Sync on Variant Card Click -->
+      <!-- Safe, Non-Recursive Sync Script -->
       <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const picker = document.querySelector('variant-picker');
-          if (!picker) return;
+        (function() {
+          document.addEventListener('DOMContentLoaded', () => {
+            const picker = document.querySelector('variant-picker');
+            if (!picker) return;
 
-          // Listen for clicks on card labels or radio inputs
-          picker.addEventListener('change', (e) => {
-            const input = e.target.closest('input[type="radio"][data-variant-id]');
-            if (!input) return;
+            let isUpdating = false;
 
-            const variantId = input.getAttribute('data-variant-id');
-            const targetUrl = input.getAttribute('data-connected-product-url');
+            function syncVariantDisplay() {
+              if (isUpdating) return;
+              isUpdating = true;
 
-            // 1. Toggle visibility of subscription app block sections
-            picker.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
-              if (section.getAttribute('data-variant-id') === variantId) {
-                section.classList.remove('shopify_subscriptions_app_block--hidden');
-              } else {
-                section.classList.add('shopify_subscriptions_app_block--hidden');
+              const checkedRadio = picker.querySelector('fieldset input[type="radio"]:checked');
+              if (checkedRadio) {
+                const variantId = checkedRadio.getAttribute('data-variant-id');
+                if (variantId) {
+                  picker.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
+                    if (section.getAttribute('data-variant-id') === variantId) {
+                      section.classList.remove('shopify_subscriptions_app_block--hidden');
+                    } else {
+                      section.classList.add('shopify_subscriptions_app_block--hidden');
+                    }
+                  });
+                }
+              }
+              isUpdating = false;
+            }
+
+            picker.addEventListener('change', (e) => {
+              if (e.target.matches('fieldset input[type="radio"]')) {
+                syncVariantDisplay();
               }
             });
 
-            // 2. Update browser URL without reload to trigger theme state changes if supported
-            if (targetUrl && window.history.replaceState) {
-              window.history.replaceState({ path: targetUrl }, '', targetUrl);
-            }
+            document.addEventListener('click', (e) => {
+              const box = e.target.closest('.subscription-option-box');
+              if (!box) return;
 
-            // 3. Trigger native theme event updates so buy buttons/prices re-render
-            const changeEvent = new CustomEvent('change', { bubbles: true, cancelable: true });
-            input.dispatchEvent(changeEvent);
+              const radio = box.querySelector('input[type="radio"]');
+              if (radio && !radio.checked) {
+                radio.checked = true;
+                radio.dispatchEvent(new Event('change', { bubbles: true }));
+
+                const parentContainer = box.closest('.subscription-widget-container');
+                if (parentContainer) {
+                  parentContainer.querySelectorAll('.subscription-option-box').forEach(b => {
+                    b.style.borderColor = '#ccc';
+                    b.style.borderWidth = '1px';
+                  });
+                }
+                box.style.borderColor = '#0055ff';
+                box.style.borderWidth = '2px';
+              }
+            });
+
+            syncVariantDisplay();
           });
-
-          // Handle clicks on subscription boxes
-          document.addEventListener('click', (e) => {
-            const box = e.target.closest('.subscription-option-box');
-            if (!box) return;
-
-            const radio = box.querySelector('input[type="radio"]');
-            if (radio && !radio.checked) {
-              radio.checked = true;
-              radio.dispatchEvent(new Event('change', { bubbles: true }));
-
-              const parentContainer = box.closest('.subscription-widget-container');
-              parentContainer.querySelectorAll('.subscription-option-box').forEach(b => {
-                b.style.borderColor = '#ccc';
-                b.style.borderWidth = '1px';
-              });
-              box.style.borderColor = '#0055ff';
-              box.style.borderWidth = '2px';
-            }
-          });
-        });
+        })();
       </script>
 
       <script type="application/json">
