@@ -285,15 +285,11 @@
     line-height: normal;
   }
   .somna-save-pill {
-    position: absolute;
-    right: 12px;
-    top: 38px;
-    background: #1354c4;
-    color: #fff;
-    font-size: 0.62rem;
+    color: #FFF;
+    font-size: 10px;
+    font-style: normal;
     font-weight: 700;
-    padding: 2px 5px;
-    border-radius: 4px;
+    line-height: normal;
   }
   .somna-perks-list {
     list-style: none;
