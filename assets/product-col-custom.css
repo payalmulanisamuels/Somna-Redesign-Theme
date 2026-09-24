@@ -94,15 +94,10 @@
 /* Subscription box*/
 /* Custom card and subscription box styling matching exact layout */
   .variant-option__button-label--card {
-    position: relative;
     border-radius: 16px;
-    padding: 12px 6px;
-    text-align: center;
+    padding: 12px 9px;
     background: #fff;
-    cursor: pointer;
-    display: flex;
     flex-direction: column;
-    align-items: center;
   }
   .variant-option__button-label--card.selected,
   .variant-option__button-label--card:has(input:checked) {
@@ -133,11 +128,14 @@
     object-fit: contain;
   }
   .variant-card__gift {
-    font-size: 0.58rem;
-    font-weight: 600;
     margin-top: 4px;
-    color: #0a1a4a;
     display: block;
+    color: #061C42;
+    font-family: var(--headfont);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
   .variant-card__bottom-save-pill {
     position: absolute;
