@@ -388,6 +388,8 @@
   .somna-timeline-line {
     height: 4px;
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .somna-timeline-box-icon {
     position: relative;
