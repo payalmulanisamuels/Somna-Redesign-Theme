@@ -362,9 +362,9 @@
   }
 .somna-delivery-timeline {
     border: 1px solid #cbd3d8;
-    padding: 10px;
+    padding: 8px 12px;
     text-align: left;
-    border-radius: 8px 12px;
+    border-radius: 10px;
     background: #fff9ee;
     width: 100%;
 }
