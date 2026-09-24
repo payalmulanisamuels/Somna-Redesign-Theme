@@ -10,10 +10,6 @@
 {% assign block_settings = block.settings %}
 
 {% liquid
-  # Custom styling applies to:
-  #   - dropdowns + buttons when variant_style_class == 'custom' (unselected colors)
-  #   - buttons only when selected_variant_style_class == 'custom' (selected colors)
-  # The 'buttons' label is kept for backwards-compat of the class name.
   assign has_custom_variant_buttons = false
   if block_settings.variant_style_class == 'custom'
     assign has_custom_variant_buttons = true
@@ -33,9 +29,9 @@
     style="
       {% render 'spacing-style', settings: block_settings %}
        {% if block_settings.option_label_text_color != blank %}
-        --variant-option-label-color: rgba({{ block_settings.option_label_text_color.rgba }});
-        --variant-option-label-color-subdued: rgba({{ block_settings.option_label_text_color.rgb }} / var(--opacity-subdued-text));
-      {% endif %}
+         --variant-option-label-color: rgba({{ block_settings.option_label_text_color.rgba }});
+         --variant-option-label-color-subdued: rgba({{ block_settings.option_label_text_color.rgb }} / var(--opacity-subdued-text));
+       {% endif %}
     "
     data-section-id="{{ section.id }}"
     data-product-id="{{ product_resource.id }}"
@@ -140,12 +136,11 @@
 
 {%- if is_size_option -%}
   {% comment %} =========================================================
-    SIZE / QUANTITY CARDS ONLY (with subscription and duration prices)
+    SIZE / QUANTITY CARDS ONLY
   ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
-    {% comment %} Badge {% endcomment %}
     {% if current_variant.metafields.custom.badge != blank %}
       <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
     {% elsif product_option_value.name contains '2' %}
@@ -192,24 +187,21 @@
       <span class="variant-card__onetime-price-inner">
         {{ one_time_price | money_without_trailing_zeros }} one-time
       </span>
-  <span class="variant-card__duration">
+      <span class="variant-card__duration">
         {% if duration_text != blank %}
           {{ duration_text }}
         {% else %}
           {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
         {% endif %}
       </span>
-
       </span>
-    
     </div>
-
     {% render 'strikethrough-variant', product_option: product_option_value %}
   </label>
 
 {%- else -%}
   {% comment %} =========================================================
-    ALL OTHER OPTIONS (Color, Style, etc. remain standard)
+    ALL OTHER OPTIONS (Color, Style, etc.)
   ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
@@ -276,30 +268,9 @@
           </fieldset>
           {%- assign fieldset_index = fieldset_index | plus: 1 -%}
         {%- elsif block_settings.variant_style == 'dropdowns' -%}
-          {%
-            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
-            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
-            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
-          %}
-          {% liquid
-            assign property_being_updated = false
-            if settings.variant_swatch_width != settings.variant_swatch_height
-              assign property_being_updated = true
-              # (original width / original height) x new height (20px at the moment) = new width
-              assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
-            endif
-          %}
-
           <div class="variant-option variant-option--dropdowns">
             <label for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ product_option.name | escape }}</label>
-            <div
-              class="variant-option__select-wrapper"
-              style="
-                {%- if property_being_updated  -%}
-                  --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
-                {%- endif -%}
-              "
-            >
+            <div class="variant-option__select-wrapper">
               <select
                 id="Option-{{ block.id }}-{{ forloop.index0 }}"
                 name="options[{{ product_option.name | escape }}]"
@@ -317,27 +288,14 @@
                       selected="selected"
                     {% endif %}
                   >
-                    {% if product_option_value.available == false %}
-                      {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
-                    {% else %}
-                      {{ product_option_value | escape }}
-                    {% endif %}
+                    {{ product_option_value | escape }}
                   </option>
                 {%- endfor -%}
               </select>
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                class="icon icon-caret"
-                viewBox="0 0 10 6"
-              >
-                {%- render 'icon', icon: 'caret' -%}
-              </svg>
             </div>
           </div>
         {%- endif -%}
       {%- endfor -%}
-
       <script type="application/json">
         {{ product_resource.selected_or_first_available_variant | json }}
       </script>
@@ -345,6 +303,116 @@
   </variant-picker>
 {% endunless %}
 
+{% comment %} =========================================================
+  CUSTOM SUBSCRIPTION & SAVE / ONE-TIME BOXES (SEPARATE CONTAINER)
+========================================================= {% endcomment %}
+<div class="custom-subscription-container">
+  <!-- Subscribe and Save Box -->
+  <div class="cs-purchase-box active" data-purchase-card="subscribe">
+    <div class="cs-box-header">
+      <strong>Subscribe and save</strong>
+    </div>
+    <div class="cs-radio-group">
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_type_selection" value="sub_monthly" checked>
+        <span class="cs-label-text">Deliver every month, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_type_selection" value="sub_2months">
+        <span class="cs-label-text">Deliver every 2 months, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_type_selection" value="sub_4months">
+        <span class="cs-label-text">Deliver every 4 months, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- One-Time Purchase Box -->
+  <div class="cs-purchase-box" data-purchase-card="onetime">
+    <label class="cs-radio-row cs-onetime-row">
+      <input type="radio" name="purchase_type_selection" value="onetime">
+      <span class="cs-label-text"><strong>One-time purchase</strong></span>
+      <span class="cs-price-text">$150.00 USD</span>
+    </label>
+  </div>
+
+  <div class="cs-footer-note">
+    Auto-renews, skip or cancel anytime.
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const purchaseBoxes = document.querySelectorAll('.cs-purchase-box');
+    purchaseBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        purchaseBoxes.forEach(b => b.classList.remove('active'));
+        box.classList.add('active');
+        const radio = box.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
+    });
+  });
+</script>
+
+<style>
+  .custom-subscription-container {
+    font-family: var(--font-body--family);
+    color: #0a1a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 16px;
+  }
+  .cs-purchase-box {
+    border: 1.5px solid #cbd3d8;
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .cs-purchase-box.active {
+    border-color: #071a4b;
+    box-shadow: 0 0 0 1px #071a4b;
+  }
+  .cs-box-header {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .cs-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cs-radio-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .cs-onetime-row {
+    margin: 0;
+  }
+  .cs-label-text {
+    flex: 1;
+    font-weight: 500;
+  }
+  .cs-price-text {
+    font-weight: 600;
+  }
+  .cs-footer-note {
+    font-size: 0.75rem;
+    color: #4e5875;
+    margin-top: 4px;
+  }
+</style>
+
 {% render 'swatch-styles' %}
 {% render 'variant-picker-styles' %}
-{% render 'custom-subscription-box' %}
