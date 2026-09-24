@@ -223,9 +223,9 @@
     opacity: 0;
   }
   .somna-radio-bullet {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #1354c4;
+    width: 14px;
+    height: 14px;
+    border: 1.2px solid #0B57E3;
     border-radius: 50%;
     display: inline-block;
     position: relative;
