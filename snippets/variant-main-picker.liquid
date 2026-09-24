@@ -153,7 +153,7 @@
 
     <input
       type="radio"
-      name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+      name="options[{{ product_option.name | escape }}]"
       value="{{ product_option_value | escape }}"
       aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
       {% if product_option_value.available == false %}
@@ -186,9 +186,9 @@
         </div>
       {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-price" data-variant-sub-price="{{ sub_price }}">{{ sub_price | money_without_trailing_zeros }}</span>
+      <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-        <span class="variant-card__onetime-price-inner" data-variant-onetime-price="{{ one_time_price }}">
+        <span class="variant-card__onetime-price-inner">
           {{ one_time_price | money_without_trailing_zeros }} one-time
         </span>
         <span class="variant-card__duration">
@@ -210,7 +210,7 @@
   >
     <input
       type="radio"
-      name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+      name="options[{{ product_option.name | escape }}]"
       value="{{ product_option_value | escape }}"
       aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
       {% if product_option_value.available == false %}
@@ -327,7 +327,7 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Integrated with app scripts)
+         SUBSCRIPTION APP EMBED WRAPPER (Integrated with theme variant changes)
       ========================================================= {% endcomment %}
       <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
         <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
@@ -348,7 +348,6 @@
               break
             endfor
             
-            # Tier night estimation
             assign nights = 30
             if forloop.index == 2
               assign nights = 60
@@ -365,7 +364,7 @@
                 <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; cursor: pointer;">
                   <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio">
                       <div>
                         <span style="font-weight: bold; display: block;">Autoship & Save</span>
                         <span style="font-size: 12px; color: #666;" class="dynamic-per-night-text">{{ night_price | money }} Per Night</span>
@@ -385,7 +384,6 @@
                     <li>✓ Skip, pause, or cancel anytime</li>
                   </ul>
 
-                  <!-- Frequency Selector Dropdown -->
                   <div style="margin-top: 12px;">
                     <select class="group_dropdown subscription-frequency-selector" style="width: 100%;">
                       {%- for alloc in variant.selling_plan_allocations -%}
@@ -399,7 +397,7 @@
                 <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; cursor: pointer;">
                   <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;" class="app-onetime-radio">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;" class="app-onetime-radio">
                       <span style="font-weight: bold;">One-Time Purchase</span>
                     </div>
                     <span style="font-weight: bold; font-size: 16px;">{{ variant.price | money }}</span>
@@ -411,34 +409,42 @@
           </section>
         {%- endfor -%}
 
-        <!-- Hidden input required by the subscription app to submit selling plan to cart -->
+        <!-- Hidden input required by the subscription app -->
         <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Coordination script to connect theme variant selection with subscription app blocks -->
+      <!-- Script to sync theme variant changes with subscription blocks -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const container = document.querySelector('.variant-picker');
           if (!container) return;
 
-          // Sync variant radio buttons with subscription app blocks
           const variantInputs = container.querySelectorAll('input[type="radio"][data-variant-id]');
+          
+          function updateActiveVariantBlock(variantId) {
+            container.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
+              if (section.getAttribute('data-variant-id') === variantId) {
+                section.classList.remove('shopify_subscriptions_app_block--hidden');
+              } else {
+                section.classList.add('shopify_subscriptions_app_block--hidden');
+              }
+            });
+          }
+
           variantInputs.forEach(input => {
             input.addEventListener('change', () => {
               const variantId = input.getAttribute('data-variant-id');
-              if (!variantId) return;
-
-              container.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
-                if (section.getAttribute('data-variant-id') === variantId) {
-                  section.classList.remove('shopify_subscriptions_app_block--hidden');
-                } else {
-                  section.classList.add('shopify_subscriptions_app_block--hidden');
-                }
-              });
+              if (variantId) updateActiveVariantBlock(variantId);
             });
           });
 
-          // Handle click/selection states for Autoship vs One-Time boxes
+          // Also check initial checked variant on load
+          const checkedVariantInput = container.querySelector('input[type="radio"][data-variant-id]:checked');
+          if (checkedVariantInput) {
+            updateActiveVariantBlock(checkedVariantInput.getAttribute('data-variant-id'));
+          }
+
+          // Handle clicks on subscription boxes
           document.addEventListener('click', (e) => {
             const box = e.target.closest('.subscription-option-box');
             if (!box) return;
@@ -448,7 +454,6 @@
               radio.checked = true;
               radio.dispatchEvent(new Event('change', { bubbles: true }));
 
-              // Highlight active box border
               const parentContainer = box.closest('.subscription-widget-container');
               parentContainer.querySelectorAll('.subscription-option-box').forEach(b => {
                 b.style.borderColor = '#ccc';
