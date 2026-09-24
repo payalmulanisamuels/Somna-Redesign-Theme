@@ -344,12 +344,12 @@
     appearance: none;
   }
   .somna-widget-meta-footer {
-    font-size: 0.65rem;
-    text-align: center;
     display: flex;
-    flex-direction: column;
     gap: 8px;
     margin-top: 4px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .somna-policy-link {
     text-decoration: underline;
