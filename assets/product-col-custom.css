@@ -92,7 +92,23 @@
   background:#F4FAFF;
 }
 /* Subscription box*/
-/* Custom card and subscription box styling matching exact layout */
+ .variant-card__gift {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.variant-card__gift svg {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    text-align: center;
+    stroke-width: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    stroke: #000 !important;
+    max-width: 18px;
+}
   .variant-option__button-label--card {
     border-radius: 16px;
     padding: 12px 9px;
