@@ -1230,6 +1230,7 @@
         "group_QgaMyg",
         "image_wdnJNN"
       ],
+      "disabled": true,
       "custom_css": [
         ".image-block {position: absolute; max-width: 36px; right: 0; top: 40%; transform: translateY(-50%);}",
         ".group-block.group-block--height-fit {max-width: 295px;}"
