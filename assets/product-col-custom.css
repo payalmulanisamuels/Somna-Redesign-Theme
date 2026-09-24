@@ -138,6 +138,7 @@
     font-weight: 500;
     line-height: normal;
     margin-top: 2px;
+    width: 100%;
   }
   .variant-card__img-wrap {
     display: flex;
