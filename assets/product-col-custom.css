@@ -68,6 +68,7 @@
     font-weight: 700;
     line-height: normal;
     font-family: var(--headfont);
+    width: 100%;
 }
 .variant-picker__form legend {
     display: none;
