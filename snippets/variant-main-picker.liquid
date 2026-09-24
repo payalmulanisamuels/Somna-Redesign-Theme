@@ -328,7 +328,7 @@
 
       {%- comment -%} =========================================================
          SUBSCRIPTION & ONE-TIME PURCHASE SELLING PLAN WIDGET
-      ========================================================= {%- endcomment -%}
+      =========================================================  {%- endcomment -%} 
       {% assign selected_variant = product_resource.selected_or_first_available_variant %}
       {%- liquid
         assign current_sub_price = selected_variant.price
@@ -363,6 +363,7 @@
             </div>
           </label>
 
+          <!-- Standard Shopify selling plan input compatible with third-party subscription apps -->
           <input type="hidden" name="selling_plan" value="{% if selected_variant.selling_plan_allocations.size > 0 %}{{ selected_variant.selling_plan_allocations[0].selling_plan.id }}{% endif %}" class="selling-plan-hidden-input">
 
           <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333; border-top: 1px solid #eee; padding-top: 10px;">
@@ -392,13 +393,13 @@
               <input type="radio" name="purchase_type" value="one-time" style="accent-color: #0055ff;" class="purchase-type-radio" data-type="one-time">
               <span style="font-weight: bold;">One-Time Purchase</span>
             </div>
-            <span style="font-weight: bold; font-size: 16px;" class="onetime-final-price">{{ selected_variant.price | money }}</span>
+            <span style="font-weight: bold; font-size: 16px;" class="onetime-final-persistant-price">{{ selected_variant.price | money }}</span>
           </label>
         </div>
 
       </div>
 
-      <!-- Script to enforce separate clickable states and block theme interference -->
+      <!-- Script to handle selling plan value injection without breaking native subscription app hooks -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const container = document.querySelector('.variant-picker');
@@ -409,6 +410,13 @@
           const autoshipRadio = container.querySelector('input[value="subscription"]');
           const onetimeRadio = container.querySelector('input[value="one-time"]');
           const sellingPlanInput = container.querySelector('.selling-plan-hidden-input');
+          const frequencySelect = container.querySelector('.subscription-frequency-selector');
+
+          function updateSellingPlanValue() {
+            if (frequencySelect && sellingPlanInput && autoshipRadio.checked) {
+              sellingPlanInput.value = frequencySelect.value;
+            }
+          }
 
           function selectOneTime() {
             if (onetimeRadio) onetimeRadio.checked = true;
@@ -416,9 +424,11 @@
             onetimeBox.style.borderWidth = '2px';
             autoshipBox.style.borderColor = '#ccc';
             autoshipBox.style.borderWidth = '1px';
+            
+            // Clear selling plan completely so cart adds a standard one-time item
             if (sellingPlanInput) {
-              sellingPlanInput.disabled = true;
               sellingPlanInput.value = '';
+              sellingPlanInput.removeAttribute('name'); // Removes form submission key for subscription app
             }
           }
 
@@ -428,29 +438,29 @@
             autoshipBox.style.borderWidth = '2px';
             onetimeBox.style.borderColor = '#ccc';
             onetimeBox.style.borderWidth = '1px';
+            
+            // Restore selling plan name attribute and assign active frequency value
             if (sellingPlanInput) {
-              sellingPlanInput.disabled = false;
-              // Restore first allocation selling plan ID if available
-              const firstOpt = container.querySelector('.subscription-frequency-selector option');
-              if (firstOpt) sellingPlanInput.value = firstOpt.value;
+              sellingPlanInput.setAttribute('name', 'selling_plan');
+              updateSellingPlanValue();
             }
           }
 
-          // Click handler for entire One-Time box
+          if (frequencySelect) {
+            frequencySelect.addEventListener('change', updateSellingPlanValue);
+          }
+
           onetimeBox.addEventListener('click', (e) => {
             e.stopPropagation();
             selectOneTime();
           });
 
-          // Click handler for entire Autoship box
           autoshipBox.addEventListener('click', (e) => {
-            // Avoid triggering if clicking inside the frequency dropdown itself
             if (e.target.closest('.subscription-frequency-selector')) return;
             e.stopPropagation();
             selectAutoship();
           });
 
-          // Radio change events
           autoshipRadio.addEventListener('change', () => {
             if (autoshipRadio.checked) selectAutoship();
           });
