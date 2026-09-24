@@ -345,5 +345,270 @@
   </variant-picker>
 {% endunless %}
 
+{% comment %} =========================================================
+  CUSTOM SUBSCRIPTION BOX (AUTOSHIP & SAVE + ONE-TIME PURCHASE)
+========================================================= {% endcomment %}
+<div class="somna-custom-subscription-container">
+  <!-- Option 1: Autoship & Save Box -->
+  <div class="somna-purchase-box active" data-purchase-card="subscribe">
+    <div class="somna-box-banner">10% OFF YOUR FIRST ORDER</div>
+    <div class="somna-box-inner">
+      <div class="somna-box-top-row">
+        <label class="somna-radio-label">
+          <input type="radio" name="selling_plan_group" value="subscribe" checked>
+          <span class="somna-radio-bullet"></span>
+          <span class="somna-box-title">Autoship & Save</span>
+        </label>
+        <div class="somna-price-stack">
+          <span class="somna-per-night">$1.32 Per Night</span>
+          <div class="somna-pricing-row">
+            <span class="somna-strike-price">$88</span>
+            <span class="somna-active-price">$79</span>
+          </div>
+        </div>
+      </div>
+      <div class="somna-save-pill">SAVE $9</div>
+
+      <ul class="somna-perks-list">
+        <li>✓ Same price, it never goes up</li>
+        <li>✓ <strong>FREE</strong> shipping</li>
+        <li>✓ FREE Gifts included in Every Delivery</li>
+        <li>✓ Skip, pause, or cancel anytime</li>
+      </ul>
+
+      <div class="somna-dropdown-wrap">
+        <select class="somna-frequency-dropdown" name="purchase_frequency">
+          <option value="60">Delivery every 60 Days</option>
+          <option value="30">Delivery every 30 Days</option>
+          <option value="90">Delivery every 90 Days</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option 2: One-Time Purchase Box -->
+  <div class="somna-purchase-box" data-purchase-card="onetime">
+    <div class="somna-box-inner">
+      <div class="somna-box-top-row">
+        <label class="somna-radio-label">
+          <input type="radio" name="selling_plan_group" value="onetime">
+          <span class="somna-radio-bullet"></span>
+          <span class="somna-box-title">One-Time Purchase</span>
+        </label>
+        <div class="somna-price-stack">
+          <span class="somna-active-price">$88</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guarantees & Timeline Footer -->
+  <div class="somna-widget-meta-footer">
+    <div class="somna-guarantee-text">
+      🛡️ 30-Night Money-Back Guarantee &nbsp;|&nbsp; Made in USA &nbsp;|&nbsp; <a href="/pages/return-refund-policy" class="somna-policy-link">Learn more →</a>
+    </div>
+    <div class="somna-delivery-timeline">
+      <div class="somna-timeline-header">
+        <span>Order Today</span>
+        <span>Arrives in 7 to 9 business days</span>
+      </div>
+      <div class="somna-timeline-line">
+        <div class="somna-timeline-box-icon">📦</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const purchaseBoxes = document.querySelectorAll('.somna-purchase-box');
+    purchaseBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        purchaseBoxes.forEach(b => b.classList.remove('active'));
+        box.classList.add('active');
+        const radio = box.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
+    });
+  });
+</script>
+
+<style>
+  .somna-custom-subscription-container {
+    background-color: #dbeafe;
+    border-radius: 16px;
+    padding: 14px;
+    font-family: var(--font-body--family);
+    color: #0a1a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 12px;
+    box-sizing: border-box;
+  }
+  .somna-purchase-box {
+    background: #fffdf9;
+    border: 1.5px solid #cbd3d8;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .somna-purchase-box.active {
+    border-color: #1354c4;
+    box-shadow: 0 0 0 1px #1354c4;
+  }
+  .somna-box-banner {
+    background: #1354c4;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 4px;
+    letter-spacing: 0.05em;
+  }
+  .somna-box-inner {
+    padding: 12px;
+    position: relative;
+  }
+  .somna-box-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .somna-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .somna-radio-label input {
+    position: absolute;
+    opacity: 0;
+  }
+  .somna-radio-bullet {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #1354c4;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  .somna-purchase-box.active .somna-radio-bullet::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 6px;
+    height: 6px;
+    background: #1354c4;
+    border-radius: 50%;
+  }
+  .somna-box-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: #0a1a4a;
+  }
+  .somna-price-stack {
+    text-align: right;
+  }
+  .somna-per-night {
+    font-size: 0.62rem;
+    color: #4e5875;
+    display: block;
+  }
+  .somna-pricing-row {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+  .somna-strike-price {
+    text-decoration: line-through;
+    color: #8f8d8d;
+    font-size: 0.8rem;
+  }
+  .somna-active-price {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0a1a4a;
+  }
+  .somna-save-pill {
+    position: absolute;
+    right: 12px;
+    top: 38px;
+    background: #1354c4;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+  .somna-perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    font-size: 0.7rem;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .somna-dropdown-wrap {
+    margin-top: 10px;
+  }
+  .somna-frequency-dropdown {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd3d8;
+    background: #fff;
+    font-size: 0.78rem;
+    font-family: inherit;
+    color: #0a1a4a;
+    cursor: pointer;
+  }
+  .somna-widget-meta-footer {
+    font-size: 0.65rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .somna-policy-link {
+    color: #0a1a4a;
+    text-decoration: underline;
+  }
+  .somna-delivery-timeline {
+    background: #fffdf9;
+    border: 1px solid #cbd3d8;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+  }
+  .somna-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.65rem;
+    margin-bottom: 6px;
+  }
+  .somna-timeline-line {
+    height: 4px;
+    background: #0a1a4a;
+    border-radius: 2px;
+    position: relative;
+    margin: 8px 0 2px;
+  }
+  .somna-timeline-box-icon {
+    position: absolute;
+    right: -4px;
+    top: -9px;
+    font-size: 11px;
+  }
+</style>
+
 {% render 'swatch-styles' %}
 {% render 'variant-picker-styles' %}
