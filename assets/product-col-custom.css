@@ -178,16 +178,16 @@
     margin-top: 0;
   }
   .somna-purchase-box {
-    background: #fffdf9;
-    border: 1.5px solid #cbd3d8;
+    background: #FFF9EE;
+    border: 1px solid #000;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all .2s ease;
   }
   .somna-purchase-box.active {
     border-color: #1354c4;
-    box-shadow: 0 0 0 1px #1354c4;
+    background: #F4FAFF;
   }
   .somna-box-banner {
     background: #1354c4;
