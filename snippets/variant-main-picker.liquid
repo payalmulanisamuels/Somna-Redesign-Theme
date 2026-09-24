@@ -186,9 +186,9 @@
         </div>
       {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
+      <span class="variant-card__sub-price" data-variant-sub-price="{{ sub_price }}">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-        <span class="variant-card__onetime-price-inner">
+        <span class="variant-card__onetime-price-inner" data-variant-onetime-price="{{ one_time_price }}">
           {{ one_time_price | money_without_trailing_zeros }} one-time
         </span>
         <span class="variant-card__duration">
@@ -327,146 +327,136 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION & ONE-TIME PURCHASE SELLING PLAN WIDGET
-      =========================================================  {%- endcomment -%} 
-      {% assign selected_variant = product_resource.selected_or_first_available_variant %}
-      {%- liquid
-        assign current_sub_price = selected_variant.price
-        for alloc in selected_variant.selling_plan_allocations
-          assign current_sub_price = alloc.price
-          break
-        endfor
-        assign initial_sub_per_night = current_sub_price | times: 1.0 | divided_by: 30
-      -%}
-      <div class="subscription-widget-container" style="margin-top: 20px;">
+         SUBSCRIPTION APP EMBED WRAPPER (Integrated with app scripts)
+      ========================================================= {% endcomment %}
+      <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
+        <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
+        <link href="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/styles.css" rel="stylesheet" type="text/css">
         
-        <!-- Autoship & Save Option Box -->
-        <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; transition: all 0.2s ease; cursor: pointer;">
-          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <input type="radio" name="purchase_type" value="subscription" checked style="accent-color: #0055ff;" class="purchase-type-radio" data-type="subscription">
-              <div>
-                <span style="font-weight: bold; display: block;">Autoship & Save</span>
-                <span style="font-size: 12px; color: #666;" class="dynamic-per-night-text">{{ initial_sub_per_night | money }} Per Night</span>
+        {%- for variant in product_resource.variants -%}
+          {%- liquid
+            assign is_active_variant = false
+            if variant.id == product_resource.selected_or_first_available_variant.id
+              assign is_active_variant = true
+            endif
+
+            assign var_sub_price = variant.price
+            assign var_selling_plan_id = ''
+            for alloc in variant.selling_plan_allocations
+              assign var_sub_price = alloc.price
+              assign var_selling_plan_id = alloc.selling_plan.id
+              break
+            endfor
+            
+            # Tier night estimation
+            assign nights = 30
+            if forloop.index == 2
+              assign nights = 60
+            elsif forloop.index >= 3
+              assign nights = 120
+            endif
+            assign night_price = var_sub_price | times: 1.0 | divided_by: nights
+          -%}
+          <section data-variant-id="{{ variant.id }}" class="shopify_subscriptions_app_block {% unless is_active_variant %}shopify_subscriptions_app_block--hidden{% endunless %}">
+            <fieldset class="shopify_subscriptions_fieldset">
+              <div class="subscription-widget-container" style="margin-top: 10px;">
+                
+                <!-- Autoship & Save Box -->
+                <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; cursor: pointer;">
+                  <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio">
+                      <div>
+                        <span style="font-weight: bold; display: block;">Autoship & Save</span>
+                        <span style="font-size: 12px; color: #666;" class="dynamic-per-night-text">{{ night_price | money }} Per Night</span>
+                      </div>
+                    </div>
+                    <div style="text-align: right;">
+                      <span style="text-decoration: line-through; color: #888; font-size: 14px; margin-right: 4px;">{{ variant.compare_at_price | default: variant.price | money }}</span>
+                      <span style="font-weight: bold; font-size: 16px; color: #000;">{{ var_sub_price | money }}</span>
+                      <div style="background: #0055ff; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">SAVE 10%</div>
+                    </div>
+                  </label>
+
+                  <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333; border-top: 1px solid #eee; padding-top: 10px;">
+                    <li style="margin-bottom: 4px;">✓ Same price, it never goes up</li>
+                    <li style="margin-bottom: 4px;">✓ <strong>FREE</strong> shipping</li>
+                    <li style="margin-bottom: 4px;">✓ FREE Gifts included in Every Delivery</li>
+                    <li>✓ Skip, pause, or cancel anytime</li>
+                  </ul>
+
+                  <!-- Frequency Selector Dropdown -->
+                  <div style="margin-top: 12px;">
+                    <select class="group_dropdown subscription-frequency-selector" style="width: 100%;">
+                      {%- for alloc in variant.selling_plan_allocations -%}
+                        <option value="{{ alloc.selling_plan.id }}">{{ alloc.selling_plan.name }}</option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                </div>
+
+                <!-- One-Time Purchase Box -->
+                <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; cursor: pointer;">
+                  <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;" class="app-onetime-radio">
+                      <span style="font-weight: bold;">One-Time Purchase</span>
+                    </div>
+                    <span style="font-weight: bold; font-size: 16px;">{{ variant.price | money }}</span>
+                  </label>
+                </div>
+
               </div>
-            </div>
-            <div style="text-align: right;">
-              <span style="text-decoration: line-through; color: #888; font-size: 14px; margin-right: 4px;" class="sub-compare-price">{{ selected_variant.compare_at_price | default: selected_variant.price | money }}</span>
-              <span style="font-weight: bold; font-size: 16px; color: #000;" class="sub-final-price">
-                {%- if selected_variant.selling_plan_allocations.size > 0 -%}
-                  {{ selected_variant.selling_plan_allocations[0].price | money }}
-                {%- else -%}
-                  {{ selected_variant.price | money }}
-                {%- endif -%}
-              </span>
-              <div style="background: #0055ff; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">SAVE 10%</div>
-            </div>
-          </label>
+            </fieldset>
+          </section>
+        {%- endfor -%}
 
-          <!-- Standard Shopify selling plan input compatible with third-party subscription apps -->
-          <input type="hidden" name="selling_plan" value="{% if selected_variant.selling_plan_allocations.size > 0 %}{{ selected_variant.selling_plan_allocations[0].selling_plan.id }}{% endif %}" class="selling-plan-hidden-input">
-
-          <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333; border-top: 1px solid #eee; padding-top: 10px;">
-            <li style="margin-bottom: 4px;">✓ Same price, it never goes up</li>
-            <li style="margin-bottom: 4px;">✓ <strong>FREE</strong> shipping</li>
-            <li style="margin-bottom: 4px;">✓ FREE Gifts included in Every Delivery</li>
-            <li>✓ Skip, pause, or cancel anytime</li>
-          </ul>
-
-          <div style="margin-top: 12px;" class="frequency-dropdown-wrap">
-            <select name="subscription_frequency" class="subscription-frequency-selector" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: #f9f9f9;">
-              {%- if selected_variant.selling_plan_allocations.size > 0 -%}
-                {%- for allocation in selected_variant.selling_plan_allocations -%}
-                  <option value="{{ allocation.selling_plan.id }}">{{ allocation.selling_plan.name }}</option>
-                {%- endfor -%}
-              {%- else -%}
-                <option value="">Delivery every 60 Days</option>
-              {%- endif -%}
-            </select>
-          </div>
-        </div>
-
-        <!-- One-Time Purchase Option Box -->
-        <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; transition: all 0.2s ease; cursor: pointer;">
-          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <input type="radio" name="purchase_type" value="one-time" style="accent-color: #0055ff;" class="purchase-type-radio" data-type="one-time">
-              <span style="font-weight: bold;">One-Time Purchase</span>
-            </div>
-            <span style="font-weight: bold; font-size: 16px;" class="onetime-final-persistant-price">{{ selected_variant.price | money }}</span>
-          </label>
-        </div>
-
+        <!-- Hidden input required by the subscription app to submit selling plan to cart -->
+        <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Script to handle selling plan value injection without breaking native subscription app hooks -->
+      <!-- Coordination script to connect theme variant selection with subscription app blocks -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const container = document.querySelector('.variant-picker');
           if (!container) return;
 
-          const autoshipBox = container.querySelector('.subscription-box--autoship');
-          const onetimeBox = container.querySelector('.subscription-box--onetime');
-          const autoshipRadio = container.querySelector('input[value="subscription"]');
-          const onetimeRadio = container.querySelector('input[value="one-time"]');
-          const sellingPlanInput = container.querySelector('.selling-plan-hidden-input');
-          const frequencySelect = container.querySelector('.subscription-frequency-selector');
+          // Sync variant radio buttons with subscription app blocks
+          const variantInputs = container.querySelectorAll('input[type="radio"][data-variant-id]');
+          variantInputs.forEach(input => {
+            input.addEventListener('change', () => {
+              const variantId = input.getAttribute('data-variant-id');
+              if (!variantId) return;
 
-          function updateSellingPlanValue() {
-            if (frequencySelect && sellingPlanInput && autoshipRadio.checked) {
-              sellingPlanInput.value = frequencySelect.value;
-            }
-          }
-
-          function selectOneTime() {
-            if (onetimeRadio) onetimeRadio.checked = true;
-            onetimeBox.style.borderColor = '#0055ff';
-            onetimeBox.style.borderWidth = '2px';
-            autoshipBox.style.borderColor = '#ccc';
-            autoshipBox.style.borderWidth = '1px';
-            
-            // Clear selling plan completely so cart adds a standard one-time item
-            if (sellingPlanInput) {
-              sellingPlanInput.value = '';
-              sellingPlanInput.removeAttribute('name'); // Removes form submission key for subscription app
-            }
-          }
-
-          function selectAutoship() {
-            if (autoshipRadio) autoshipRadio.checked = true;
-            autoshipBox.style.borderColor = '#0055ff';
-            autoshipBox.style.borderWidth = '2px';
-            onetimeBox.style.borderColor = '#ccc';
-            onetimeBox.style.borderWidth = '1px';
-            
-            // Restore selling plan name attribute and assign active frequency value
-            if (sellingPlanInput) {
-              sellingPlanInput.setAttribute('name', 'selling_plan');
-              updateSellingPlanValue();
-            }
-          }
-
-          if (frequencySelect) {
-            frequencySelect.addEventListener('change', updateSellingPlanValue);
-          }
-
-          onetimeBox.addEventListener('click', (e) => {
-            e.stopPropagation();
-            selectOneTime();
+              container.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
+                if (section.getAttribute('data-variant-id') === variantId) {
+                  section.classList.remove('shopify_subscriptions_app_block--hidden');
+                } else {
+                  section.classList.add('shopify_subscriptions_app_block--hidden');
+                }
+              });
+            });
           });
 
-          autoshipBox.addEventListener('click', (e) => {
-            if (e.target.closest('.subscription-frequency-selector')) return;
-            e.stopPropagation();
-            selectAutoship();
-          });
+          // Handle click/selection states for Autoship vs One-Time boxes
+          document.addEventListener('click', (e) => {
+            const box = e.target.closest('.subscription-option-box');
+            if (!box) return;
 
-          autoshipRadio.addEventListener('change', () => {
-            if (autoshipRadio.checked) selectAutoship();
-          });
+            const radio = box.querySelector('input[type="radio"]');
+            if (radio && !radio.checked) {
+              radio.checked = true;
+              radio.dispatchEvent(new Event('change', { bubbles: true }));
 
-          onetimeRadio.addEventListener('change', () => {
-            if (onetimeRadio.checked) selectOneTime();
+              // Highlight active box border
+              const parentContainer = box.closest('.subscription-widget-container');
+              parentContainer.querySelectorAll('.subscription-option-box').forEach(b => {
+                b.style.borderColor = '#ccc';
+                b.style.borderWidth = '1px';
+              });
+              box.style.borderColor = '#0055ff';
+              box.style.borderWidth = '2px';
+            }
           });
         });
       </script>
