@@ -78,7 +78,7 @@ span.variant-card__title {
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 16px 16px 0 0;
-    width: calc(100% + 12px);
+    width: calc(100% + 32px);
     white-space: nowrap;
 }
 
