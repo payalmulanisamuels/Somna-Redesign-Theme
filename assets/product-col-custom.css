@@ -382,10 +382,14 @@
     top: -9px;
     font-size: 11px;
   }
-  .button[id^=BuyButtons-ProductSubmitButton-] {
+.button[id^=BuyButtons-ProductSubmitButton-] {
     --button-border-color: transparent;
     border-radius: 999px;
-    text-transform: uppercase;
+    color: #FFF;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 /* Subscription box*/
 .title_and_price_wrapper {
