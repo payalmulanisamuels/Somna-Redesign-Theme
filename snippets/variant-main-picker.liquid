@@ -10,10 +10,6 @@
 {% assign block_settings = block.settings %}
 
 {% liquid
-  # Custom styling applies to:
-  #   - dropdowns + buttons when variant_style_class == 'custom' (unselected colors)
-  #   - buttons only when selected_variant_style_class == 'custom' (selected colors)
-  # The 'buttons' label is kept for backwards-compat of the class name.
   assign has_custom_variant_buttons = false
   if block_settings.variant_style_class == 'custom'
     assign has_custom_variant_buttons = true
@@ -104,18 +100,15 @@
                 {% assign longest_value = product_option_value.size %}
               {% endif %}
           {%- liquid
-  # Target the variant object for this option value
   assign current_variant = product_option_value.variant
 
-  # Check if current option is Size / Quantity / Set
   assign option_name_downcase = product_option.name | downcase
   assign is_size_option = false
-  if option_name_downcase contains 'size' or option_name_downcase contains 'quantity' or option_name_downcase contains 'set'
+  if option_name_downcase contains 'size' or option_name_downcase contains 'quantity' or option_name_downcase contains 'set' or option_name_downcase contains 'bag'
     assign is_size_option = true
   endif
 
   if is_size_option
-    # Subscription / Selling Plan pricing
     assign has_selling_plan = false
     assign sub_price = current_variant.price
     assign one_time_price = current_variant.price
@@ -127,7 +120,6 @@
       break
     endfor
 
-    # Metafield fallbacks
     if current_variant.metafields.custom.subscription_price != blank
       assign sub_price = current_variant.metafields.custom.subscription_price.value
     endif
@@ -139,13 +131,9 @@
 -%}
 
 {%- if is_size_option -%}
-  {% comment %} =========================================================
-    SIZE / QUANTITY CARDS ONLY (with subscription and duration prices)
-  ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
-    {% comment %} Badge {% endcomment %}
     {% if current_variant.metafields.custom.badge != blank %}
       <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
     {% elsif product_option_value.name contains '2' %}
@@ -189,28 +177,23 @@
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
       <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-      <span class="variant-card__onetime-price-inner">
-        {{ one_time_price | money_without_trailing_zeros }} one-time
+        <span class="variant-card__onetime-price-inner">
+          {{ one_time_price | money_without_trailing_zeros }} one-time
+        </span>
+        <span class="variant-card__duration">
+          {% if duration_text != blank %}
+            {{ duration_text }}
+          {% else %}
+            {% if forloop.index == 1 %}30 nights, one month{% elsif forloop.index == 2 %}60 nights, two months{% elsif forloop.index == 3 %}120 nights, four months{% endif %}
+          {% endif %}
+        </span>
       </span>
-  <span class="variant-card__duration">
-        {% if duration_text != blank %}
-          {{ duration_text }}
-        {% else %}
-          {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
-        {% endif %}
-      </span>
-
-      </span>
-    
     </div>
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
   </label>
 
 {%- else -%}
-  {% comment %} =========================================================
-    ALL OTHER OPTIONS (Color, Style, etc. remain standard)
-  ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
@@ -258,7 +241,7 @@
         <span class="variant-option__button-label__pill" data-key="variant-option-pill"></span>
       {% endif %}
       <span class="variant-option__button-label__text" data-key="variant-option-text">
-        {{- product_option_value  -}}
+        {{- product_option_value -}}
       </span>
     {% endif %}
 
@@ -276,16 +259,10 @@
           </fieldset>
           {%- assign fieldset_index = fieldset_index | plus: 1 -%}
         {%- elsif block_settings.variant_style == 'dropdowns' -%}
-          {%
-            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
-            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
-            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
-          %}
           {% liquid
             assign property_being_updated = false
             if settings.variant_swatch_width != settings.variant_swatch_height
               assign property_being_updated = true
-              # (original width / original height) x new height (20px at the moment) = new width
               assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
             endif
           %}
@@ -295,7 +272,7 @@
             <div
               class="variant-option__select-wrapper"
               style="
-                {%- if property_being_updated  -%}
+                {%- if property_being_updated -%}
                   --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
                 {%- endif -%}
               "
@@ -337,6 +314,76 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
+
+      {%- comment -%} =========================================================
+         SUBSCRIPTION & ONE-TIME PURCHASE SELLING PLAN WIDGET
+         App-compatible structure for standard Shopify subscription apps
+      ========================================================= {%- endcomment -%}
+      {%- assign selected_variant = product_resource.selected_or_first_available_variant -%}
+      <div class="subscription-widget-container" style="margin-top: 20px;">
+        
+        <!-- Autoship & Save Option Box -->
+        <div class="subscription-option-box subscription-box--active" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff;">
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <input type="radio" name="purchase_type" value="subscription" checked style="accent-color: #0055ff;">
+              <div>
+                <span style="font-weight: bold; display: block;">Autoship & Save</span>
+                <span style="font-size: 12px; color: #666;">$1.32 Per Night</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span style="text-decoration: line-through; color: #888; font-size: 14px; margin-right: 4px;">{{ selected_variant.compare_at_price | default: selected_variant.price | money }}</span>
+              <span style="font-weight: bold; font-size: 16px; color: #000;">
+                {%- if selected_variant.selling_plan_allocations.size > 0 -%}
+                  {{ selected_variant.selling_plan_allocations[0].price | money }}
+                {%- else -%}
+                  {{ selected_variant.price | money }}
+                {%- endif -%}
+              </span>
+              <div style="background: #0055ff; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">SAVE 10%</div>
+            </div>
+          </label>
+
+          <!-- Hidden input required by Shopify selling plans architecture -->
+          {%- if selected_variant.selling_plan_allocations.size > 0 -%}
+            <input type="hidden" name="selling_plan" value="{{ selected_variant.selling_plan_allocations[0].selling_plan.id }}">
+          {%- endif -%}
+
+          <!-- Subscription Perks List -->
+          <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333; border-top: 1px solid #eee; padding-top: 10px;">
+            <li style="margin-bottom: 4px;">✓ Same price, it never goes up</li>
+            <li style="margin-bottom: 4px;">✓ <strong>FREE</strong> shipping</li>
+            <li style="margin-bottom: 4px;">✓ FREE Gifts included in Every Delivery</li>
+            <li>✓ Skip, pause, or cancel anytime</li>
+          </ul>
+
+          <!-- Delivery frequency dropdown dropdown selector -->
+          <div style="margin-top: 12px;">
+            <select name="subscription_frequency" class="subscription-frequency-selector" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: #f9f9f9;">
+              {%- if selected_variant.selling_plan_allocations.size > 0 -%}
+                {%- for allocation in selected_variant.selling_plan_allocations -%}
+                  <option value="{{ allocation.selling_plan.id }}">{{ allocation.selling_plan.name }}</option>
+                {%- endfor -%}
+              {%- else -%}
+                <option value="">Delivery every 60 Days</option>
+              {%- endif -%}
+            </select>
+          </div>
+        </div>
+
+        <!-- One-Time Purchase Option Box -->
+        <div class="subscription-option-box" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff;">
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <input type="radio" name="purchase_type" value="one-time" style="accent-color: #0055ff;">
+              <span style="font-weight: bold;">One-Time Purchase</span>
+            </div>
+            <span style="font-weight: bold; font-size: 16px;">{{ selected_variant.price | money }}</span>
+          </label>
+        </div>
+
+      </div>
 
       <script type="application/json">
         {{ product_resource.selected_or_first_available_variant | json }}
