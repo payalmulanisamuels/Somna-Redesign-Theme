@@ -370,9 +370,7 @@
   .somna-timeline-header {
     display: flex;
     justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.65rem;
-    margin-bottom: 6px;
+    align-items: center;
   }
   .somna-timeline-line {
     height: 4px;
