@@ -155,7 +155,9 @@
     data-nights="{{ nights_count }}"
   >
     {% comment %} Top Badges {% endcomment %}
-    {% if forloop.index == 2 %}
+    {% if forloop.index == 1 %}
+      <span class="variant-card__badge popular" style="opacity:0">None</span>
+    {% elsif forloop.index == 2 %}
       <span class="variant-card__badge popular">MOST POPULAR</span>
     {% elsif forloop.index >= 3 %}
       <span class="variant-card__badge free-bag">4th BAG FREE</span>
