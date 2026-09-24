@@ -330,13 +330,6 @@
         {%- endif -%}
       {%- endfor -%}
 
-      <script type="application/json">
-        {{ product_resource.selected_or_first_available_variant | json }}
-      </script>
-    </form>
-  </variant-picker>
-{% endunless %}
-
 {% comment %} =========================================================
   CUSTOM SUBSCRIPTION BOX (AUTOSHIP & SAVE + ONE-TIME PURCHASE)
 ========================================================= {% endcomment %}
@@ -418,6 +411,13 @@
     </div>
   </div>
 </div>
+      <script type="application/json">
+        {{ product_resource.selected_or_first_available_variant | json }}
+      </script>
+    </form>
+  </variant-picker>
+{% endunless %}
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
