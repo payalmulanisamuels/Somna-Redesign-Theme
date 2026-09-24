@@ -299,6 +299,7 @@
     padding: 0 2px;
   }
   .somna-perks-list {
+    list-style: none;
     padding: 0;
     margin: 6px 0;
     display: flex;
