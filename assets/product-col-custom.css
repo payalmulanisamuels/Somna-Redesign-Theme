@@ -321,13 +321,13 @@
   .somna-frequency-dropdown {
     width: 100%;
     padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid #cbd3d8;
-    background: #fff;
-    font-size: 0.78rem;
-    font-family: inherit;
-    color: #0a1a4a;
+    font-size: 9px;
+    color: #0A1A4A;
+    border-radius: 39px;
+    border: 0.7px solid #505050;
+    background: #FFF;
     cursor: pointer;
+    font-family: var(--headfont);
   }
   .somna-widget-meta-footer {
     font-size: 0.65rem;
