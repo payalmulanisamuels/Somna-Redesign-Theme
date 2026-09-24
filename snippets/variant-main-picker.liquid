@@ -327,8 +327,8 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Safely Synced via Event Delegation)
-      ========================================================= {%  endcomment %} 
+         SUBSCRIPTION APP EMBED WRAPPER (Safely Synced via Custom Element Event Handling)
+      ========================================================= {% endcomment %}
       <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
         <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
         <link href="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/styles.css" rel="stylesheet" type="text/css">
@@ -364,7 +364,7 @@
                 <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; cursor: pointer;">
                   <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="selling_plan" data-selling-plan-id="{{ var_selling_plan_id }}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;" class="app-sub-radio" data-option-value-id="sub-{{ variant.id }}">
                       <div>
                         <span style="font-weight: bold; display: block;">Autoship & Save</span>
                         <span style="font-size: 12px; color: #666;">{{ night_price | money }} Per Night</span>
@@ -397,7 +397,7 @@
                 <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; cursor: pointer;">
                   <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;" class="app-onetime-radio">
+                      <input type="radio" name="purchaseOption_{{ section.id }}_{% if variant.id %}{{ variant.id }}{% else %}{{ forloop.index }}{% endif %}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;" class="app-onetime-radio" data-option-value-id="ot-{{ variant.id }}">
                       <span style="font-weight: bold;">One-Time Purchase</span>
                     </div>
                     <span style="font-weight: bold; font-size: 16px;">{{ variant.price | money }}</span>
@@ -413,19 +413,14 @@
         <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Safe, Non-Recursive Sync Script -->
+      <!-- Safe Synchronization Script -->
       <script>
         (function() {
           document.addEventListener('DOMContentLoaded', () => {
             const picker = document.querySelector('variant-picker');
             if (!picker) return;
 
-            let isUpdating = false;
-
             function syncVariantDisplay() {
-              if (isUpdating) return;
-              isUpdating = true;
-
               const checkedRadio = picker.querySelector('fieldset input[type="radio"]:checked');
               if (checkedRadio) {
                 const variantId = checkedRadio.getAttribute('data-variant-id');
@@ -439,7 +434,6 @@
                   });
                 }
               }
-              isUpdating = false;
             }
 
             picker.addEventListener('change', (e) => {
