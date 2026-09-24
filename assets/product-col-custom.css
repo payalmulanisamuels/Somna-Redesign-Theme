@@ -264,19 +264,25 @@
   }
   .somna-pricing-row {
     display: flex;
-    gap: 6px;
+    gap: 3px;
     align-items: baseline;
     justify-content: flex-end;
   }
   .somna-strike-price {
     text-decoration: line-through;
-    color: #8f8d8d;
-    font-size: 0.8rem;
+    color: #000;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: line-through;
   }
   .somna-active-price {
+    color: #0A1A4A;
+    font-size: 10px;
+    font-style: normal;
     font-weight: 700;
-    font-size: 1rem;
-    color: #0a1a4a;
+    line-height: normal;
   }
   .somna-save-pill {
     position: absolute;
