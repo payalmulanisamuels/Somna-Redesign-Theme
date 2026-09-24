@@ -351,32 +351,48 @@
 {% comment %} =========================================================
   CUSTOM SUBSCRIPTION BOX (FULLY DYNAMIC PRICE, PER NIGHT & SAVINGS)
 ========================================================= {% endcomment %}
+{%- liquid
+  assign initial_var = product_resource.selected_or_first_available_variant
+  assign init_sub_price = initial_var.price
+  assign init_one_time = initial_var.compare_at_price | default: initial_var.price
+  for alloc in initial_var.selling_plan_allocations
+    assign init_sub_price = alloc.price
+    assign init_one_time = alloc.compare_at_price | default: initial_var.price
+    break
+  endfor
+  assign init_sub_numeric = init_sub_price | divided_by: 100.0
+  assign init_nights = 30
+  if init_sub_numeric > 50 and init_sub_numeric < 100
+    assign init_nights = 60
+  elsif init_sub_numeric >= 100
+    assign init_nights = 120
+  endif
+  assign init_per_night = init_sub_numeric | divided_by: init_nights | round: 2
+  assign init_savings = init_one_time | minus: init_sub_price
+-%}
+
 <div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
   <!-- Option 1: Autoship & Save Box -->
   <div class="somna-purchase-box active" data-purchase-card="subscribe">
     <div class="somna-box-banner">10% OFF YOUR FIRST ORDER</div>
-      <div class="somna-box-top-row">
-        <label class="somna-radio-label">
-          <input type="radio" name="somna_purchase_type" value="subscribe" checked>
-          <span class="somna-radio-bullet"></span>
-          <div class="somna-title-stack">
-            <span class="somna-box-title">Autoship & Save</span>
-            <span class="somna-per-night" id="SomnaPerNightPrice">$1.32 Per Night</span>
-          </div>
-        </label>
-        <div class="somna-price-stack">
-          <div class="somna-pricing-row">
-            <span class="somna-strike-price" id="SomnaStrikePrice">$88</span>
-            <span class="somna-active-price" id="SomnaSubPrice">$79</span>
-          </div>
-
-      <div class="somna-save-pill" id="SomnaSavePill">SAVE $9</div>
-
+    <div class="somna-box-top-row">
+      <label class="somna-radio-label">
+        <input type="radio" name="somna_purchase_type" value="subscribe" checked>
+        <span class="somna-radio-bullet"></span>
+        <div class="somna-title-stack">
+          <span class="somna-box-title">Autoship & Save</span>
+          <span class="somna-per-night" id="SomnaPerNightPrice">${{ init_per_night }} Per Night</span>
         </div>
+      </label>
+      <div class="somna-price-stack">
+        <div class="somna-pricing-row">
+          <span class="somna-strike-price" id="SomnaStrikePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
+          <span class="somna-active-price" id="SomnaSubPrice">{{ init_sub_price | money_without_trailing_zeros }}</span>
+        </div>
+        <div class="somna-save-pill" id="SomnaSavePill" {% if init_savings <= 0 %}style="display:none;"{% endif %}>SAVE {{ init_savings | money_without_trailing_zeros }}</div>
       </div>
+    </div>
     <div class="somna-box-inner">
-    
-
       <ul class="somna-perks-list">
         <li>✓ Same price, for as long as you stay subscribed</li>
         <li>✓ <strong>FREE</strong> shipping</li>
@@ -387,15 +403,12 @@
       <div class="somna-dropdown-wrap">
         <select class="somna-frequency-dropdown" id="SomnaSellingPlanSelect" name="selling_plan">
           {%- liquid
-            assign current_var = product_resource.selected_or_first_available_variant
-            for allocation in current_var.selling_plan_allocations
+            for allocation in initial_var.selling_plan_allocations
               echo '<option value="' | append: allocation.selling_plan.id | append: '">' | append: allocation.selling_plan.name | append: '</option>'
             endfor
           -%}
-          {% if current_var.selling_plan_allocations.size == 0 %}
+          {% if initial_var.selling_plan_allocations.size == 0 %}
             <option value="60">Delivery every 60 Days</option>
-            <option value="30">Delivery every 30 Days</option>
-            <option value="90">Delivery every 90 Days</option>
           {% endif %}
         </select>
       </div>
@@ -412,15 +425,12 @@
           <span class="somna-box-title">One-Time Purchase</span>
         </label>
         <div class="somna-price-stack">
-          <span class="somna-active-price" id="SomnaOneTimePrice">$88</span>
+          <span class="somna-active-price" id="SomnaOneTimePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('SomnaSubscriptionWidget');
