@@ -166,7 +166,7 @@ slideshow-arrows .slideshow-control {
 }
 
 .slideshow-controls__thumbnails {
-    gap: 4px !important;
+    gap: 2px !important;
 }
 .accordion .details{
     border-bottom: 3.01px solid #B9B7AC;
