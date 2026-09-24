@@ -86,53 +86,7 @@
     width: calc(100% + 32px);
     white-space: nowrap;
 }
-
-.variant-card__sub-price {
-    display: block;
-    width: 100%;
-    color: #0B57E3;
-    text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-}
-
-.variant-card__onetime-price {
-    display: block;
-    margin: 0 auto;
-    color: #5E6C84;
-    text-align: center;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.variant-card__duration {
-    display: block;
-    width: 100%;
-}
-.subscription_group {
-    border: 1px solid #E1E6EB !important;
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-}
-.most_popular{
-    overflow: visible !important;
-}
-.subscription_group:first-child{
-    order: 1
-}
-.plan_card {
-    border: 0 !important;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-}
+   
 .subscription_group:has(input[type="radio"]:checked) {
   border-color: #0A4FD6 !important;
   background:#FCF9F5;
