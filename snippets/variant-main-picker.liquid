@@ -327,8 +327,8 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Integrated with theme variant changes)
-      ========================================================= {% endcomment %}
+         SUBSCRIPTION APP EMBED WRAPPER (Integrated with Theme Variant Picker)
+      =========================================================    {%- endcomment -%} 
       <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
         <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
         <link href="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/styles.css" rel="stylesheet" type="text/css">
@@ -409,40 +409,42 @@
           </section>
         {%- endfor -%}
 
-        <!-- Hidden input required by the subscription app -->
+        <!-- Hidden input required by subscription app -->
         <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Script to sync theme variant changes with subscription blocks -->
+      <!-- Robust Script to Force Theme URL & State Sync on Variant Card Click -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
-          const container = document.querySelector('.variant-picker');
-          if (!container) return;
+          const picker = document.querySelector('variant-picker');
+          if (!picker) return;
 
-          const variantInputs = container.querySelectorAll('input[type="radio"][data-variant-id]');
-          
-          function updateActiveVariantBlock(variantId) {
-            container.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
+          // Listen for clicks on card labels or radio inputs
+          picker.addEventListener('change', (e) => {
+            const input = e.target.closest('input[type="radio"][data-variant-id]');
+            if (!input) return;
+
+            const variantId = input.getAttribute('data-variant-id');
+            const targetUrl = input.getAttribute('data-connected-product-url');
+
+            // 1. Toggle visibility of subscription app block sections
+            picker.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
               if (section.getAttribute('data-variant-id') === variantId) {
                 section.classList.remove('shopify_subscriptions_app_block--hidden');
               } else {
                 section.classList.add('shopify_subscriptions_app_block--hidden');
               }
             });
-          }
 
-          variantInputs.forEach(input => {
-            input.addEventListener('change', () => {
-              const variantId = input.getAttribute('data-variant-id');
-              if (variantId) updateActiveVariantBlock(variantId);
-            });
+            // 2. Update browser URL without reload to trigger theme state changes if supported
+            if (targetUrl && window.history.replaceState) {
+              window.history.replaceState({ path: targetUrl }, '', targetUrl);
+            }
+
+            // 3. Trigger native theme event updates so buy buttons/prices re-render
+            const changeEvent = new CustomEvent('change', { bubbles: true, cancelable: true });
+            input.dispatchEvent(changeEvent);
           });
-
-          // Also check initial checked variant on load
-          const checkedVariantInput = container.querySelector('input[type="radio"][data-variant-id]:checked');
-          if (checkedVariantInput) {
-            updateActiveVariantBlock(checkedVariantInput.getAttribute('data-variant-id'));
-          }
 
           // Handle clicks on subscription boxes
           document.addEventListener('click', (e) => {
