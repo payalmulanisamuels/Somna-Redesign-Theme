@@ -200,7 +200,7 @@ span.variant-card__title {
     white-space: nowrap;
   }
 .variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
-    inset: inherit;
+    inset: inherit !important;
 }
   /* Subscription Box Styles */
   .somna-custom-subscription-container {
