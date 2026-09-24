@@ -64,12 +64,13 @@
     color: #0A1A4A !important;
 }
  
-span.variant-card__title {
+.variant-card__title {
     color: #061C42;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    font-family: var(--headfont);
 }
 .variant-picker__form legend {
     display: none;
