@@ -393,6 +393,16 @@
     height: 34px !important;
     padding: 0;
 }
+.somna-guarantee-text {
+    color: #000;
+    font-size: 7.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
 /* Subscription box*/
 .title_and_price_wrapper {
     color: #0A1A4A;
