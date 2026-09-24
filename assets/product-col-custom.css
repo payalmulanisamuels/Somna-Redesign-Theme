@@ -31,8 +31,7 @@
     letter-spacing: -1px;
 }
 .variant-option__button-label {
-    border: 1px solid #E5E5EA !important;
-    overflow: inherit;
+    overflow: inherit !important;
 }
 .variant-card__inner {
     display: flex;
@@ -93,12 +92,18 @@
   background:#F4FAFF;
 }
 /* Subscription box*/
- .variant-card__gift {
+  .variant-card__gift {
     display: flex;
     gap: 5px;
     align-items: center;
+    margin-top: 4px;
+    color: #061C42;
+    font-family: var(--headfont);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
 }
-.variant-card__gift svg {
+.variant-option__button-label .variant-card__gift svg {
     width: 18px;
     height: 18px;
     position: relative;
@@ -144,16 +149,7 @@
     height: 36px;
     object-fit: contain;
   }
-  .variant-card__gift {
-    margin-top: 4px;
-    display: block;
-    color: #061C42;
-    font-family: var(--headfont);
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
+
   .variant-card__bottom-save-pill {
     position: absolute;
     bottom: -8px;
