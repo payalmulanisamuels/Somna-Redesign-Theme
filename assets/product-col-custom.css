@@ -144,8 +144,6 @@ span.variant-card__title {
 }
 
 slideshow-arrows[position=center].pagination-arrows {
-    align-items: flex-end;
-    bottom: 30px;
     mix-blend-mode: normal;
     margin: 0 10px;
 }
@@ -166,9 +164,7 @@ slideshow-arrows .slideshow-control {
 .media-gallery--carousel slideshow-arrows .slideshow-control svg {
     width: 14px;
 }
-.slideshow-controls__thumbnails-container{
-    padding: 0 20px;
-}
+
 .slideshow-controls__thumbnails {
     gap: 4px !important;
 }
