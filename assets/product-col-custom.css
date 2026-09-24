@@ -65,9 +65,11 @@
 }
  
 span.variant-card__title {
-    width: 100%;
-    color: #0A1A4A;
-    font-weight: bold;
+    color: #061C42;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 .variant-card__badge {
