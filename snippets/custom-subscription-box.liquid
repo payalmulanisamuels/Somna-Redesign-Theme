@@ -1,0 +1,220 @@
+{%- comment -%}
+  Custom Subscription Box Component matching the target design
+{%- endcomment -%}
+
+<div class="custom-subscription-widget">
+  <!-- Size / Package Selection Cards -->
+  <div class="cs-section-title">Size</div>
+  <div class="cs-size-cards">
+    <!-- Option 1: 1 Bag -->
+    <label class="cs-card" data-card-option>
+      <input type="radio" name="bundle_size" value="1-bag" checked class="visually-hidden">
+      <div class="cs-card-inner">
+        <div class="cs-card-img">
+          <img src="{{ 'product1.png' | asset_url }}" alt="1 Bag" loading="lazy">
+        </div>
+        <div class="cs-card-title">1 Bag</div>
+        <div class="cs-card-price">$45</div>
+        <div class="cs-card-sub">$50 one-time<br>1 month</div>
+      </div>
+    </label>
+
+    <!-- Option 2: 2 Bags -->
+    <label class="cs-card" data-card-option>
+      <input type="radio" name="bundle_size" value="2-bags" class="visually-hidden">
+      <div class="cs-card-badge">MOST POPULAR</div>
+      <div class="cs-card-inner">
+        <div class="cs-card-img">
+          <img src="{{ 'breat-bundle.jpg' | asset_url }}" alt="2 Bags" loading="lazy">
+        </div>
+        <div class="cs-card-title">2 Bags</div>
+        <div class="cs-card-price">$79.20</div>
+        <div class="cs-card-sub">$88 one-time<br>2 months</div>
+      </div>
+    </label>
+
+    <!-- Option 3: 3+1 Bags -->
+    <label class="cs-card" data-card-option>
+      <input type="radio" name="bundle_size" value="3-1-bags" class="visually-hidden">
+      <div class="cs-card-inner">
+        <div class="cs-card-img">
+          <img src="{{ 'night.jpg' | asset_url }}" alt="3+1 Bags" loading="lazy">
+        </div>
+        <div class="cs-card-title">3+1 Bags</div>
+        <div class="cs-card-price">$135</div>
+        <div class="cs-card-sub">$150 one-time<br>4 months</div>
+      </div>
+    </label>
+  </div>
+
+  <!-- Purchase Type Box: Subscribe & Save -->
+  <div class="cs-purchase-box cs-subscribe-box active" data-purchase-type="subscribe">
+    <div class="cs-box-header">
+      <strong>Subscribe and save</strong>
+    </div>
+    <div class="cs-radio-group">
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_mode" value="sub_1" checked>
+        <span class="cs-label-text">Deliver every month, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_mode" value="sub_2">
+        <span class="cs-label-text">Deliver every 2 months, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+      <label class="cs-radio-row">
+        <input type="radio" name="purchase_mode" value="sub_4">
+        <span class="cs-label-text">Deliver every 4 months, 10% off</span>
+        <span class="cs-price-text">$135.00 USD</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Purchase Type Box: One-time purchase -->
+  <div class="cs-purchase-box cs-onetime-box" data-purchase-type="onetime">
+    <label class="cs-radio-row cs-onetime-row">
+      <input type="radio" name="purchase_mode" value="onetime">
+      <span class="cs-label-text"><strong>One-time purchase</strong></span>
+      <span class="cs-price-text">$150.00 USD</span>
+    </label>
+  </div>
+
+  <div class="cs-footer-note">
+    Auto-renews, skip or cancel anytime.
+  </div>
+</div>
+
+<script>
+  // Simple interaction script for active states matching reference layout
+  document.querySelectorAll('.cs-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.cs-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+    });
+  });
+
+  document.querySelectorAll('.cs-purchase-box').forEach(box => {
+    box.addEventListener('click', (e) => {
+      document.querySelectorAll('.cs-purchase-box').forEach(b => b.classList.remove('active'));
+      box.classList.add('active');
+      const radio = box.querySelector('input[type="radio"]');
+      if(radio) radio.checked = true;
+    });
+  });
+</script>
+
+<style>
+  .custom-subscription-widget {
+    font-family: var(--font-body--family);
+    color: #0a1a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .cs-section-title {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .cs-size-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .cs-card {
+    position: relative;
+    border: 1.5px solid #cbd3d8;
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .cs-card.selected, .cs-card:has(input:checked) {
+    border-color: #071a4b;
+    background-color: #eaf1fb;
+  }
+  .cs-card-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #071a4b;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .cs-card-img img {
+    height: 45px;
+    object-fit: contain;
+    margin-bottom: 4px;
+  }
+  .cs-card-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+  }
+  .cs-card-price {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #071a4b;
+    margin-bottom: 4px;
+  }
+  .cs-card-sub {
+    font-size: 0.65rem;
+    color: #6d7175;
+    line-height: 1.2;
+  }
+  .cs-purchase-box {
+    border: 1.5px solid #cbd3d8;
+    border-radius: 12px;
+    padding: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .cs-purchase-box.active {
+    border-color: #071a4b;
+  }
+  .cs-box-header {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .cs-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cs-radio-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85srem;
+    cursor: pointer;
+  }
+  .cs-onetime-row {
+    margin: 0;
+  }
+  .cs-label-text {
+    flex: 1;
+    font-weight: 500;
+  }
+  .cs-price-text {
+    font-weight: 600;
+  }
+  .cs-footer-note {
+    font-size: 0.8rem;
+    color: #4e5875;
+  }
+  @media(max-width: 749px) {
+    .cs-size-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
