@@ -195,7 +195,9 @@ span.variant-card__title {
     border-radius: 10px;
     white-space: nowrap;
   }
-
+.variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
+    inset: inherit;
+}
   /* Subscription Box Styles */
   .somna-custom-subscription-container {
     background-color: #dbeafe;
