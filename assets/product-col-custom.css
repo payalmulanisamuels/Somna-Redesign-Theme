@@ -317,6 +317,7 @@
   }
   .somna-dropdown-wrap {
     margin-top: 6px;
+    position: relative;
   }
   .somna-frequency-dropdown {
     width: 100%;
