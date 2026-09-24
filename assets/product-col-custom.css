@@ -138,15 +138,11 @@ span.variant-card__title {
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
 .slideshow-controls__thumbnails .slideshow-control {
-    width: 82px !important;
-    height: 52px !important;
+    width: 74px !important;
+    height: 71px !important;
     border-radius: 8px !important;
-    border: 2px solid #98A3DE !important;
 }
-slideshow-controls[pagination-position=center][thumbnails] {
-    position: absolute;
-    bottom: 4px;
-}
+
 slideshow-arrows[position=center].pagination-arrows {
     align-items: flex-end;
     bottom: 30px;
