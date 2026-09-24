@@ -131,22 +131,34 @@
       assign one_time_price = current_variant.metafields.custom.one_time_price.value
     endif
     assign duration_text = current_variant.metafields.custom.duration.value | default: current_variant.metafields.custom.subtitle.value
+
+    # Nights calculation for per-night dynamic pricing
+    assign nights_count = 30
+    if forloop.index == 2
+      assign nights_count = 60
+    elsif forloop.index >= 3
+      assign nights_count = 120
+    endif
   endif
 -%}
 
 {%- if is_size_option -%}
   {% comment %} =========================================================
-    SIZE / QUANTITY CARDS ONLY (with dynamic price data attributes)
+    SIZE / QUANTITY CARDS (DYNAMIC DATA ATTRIBUTES ENABLED)
   ========================================================= {% endcomment %}
   <label
-    class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+    class="variant-option__button-label variant-option__button-label--card {% if forloop.index == 2 %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
     data-sub-formatted="{{ sub_price | money_without_trailing_zeros }}"
     data-onetime-formatted="{{ one_time_price | money_without_trailing_zeros }}"
+    data-sub-numeric="{{ sub_price | divided_by: 100.0 }}"
+    data-onetime-numeric="{{ one_time_price | divided_by: 100.0 }}"
+    data-nights="{{ nights_count }}"
   >
-    {% if current_variant.metafields.custom.badge != blank %}
-      <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
-    {% elsif product_option_value.name contains '2' %}
-      <span class="variant-card__badge">MOST POPULAR</span>
+    {% comment %} Top Badges {% endcomment %}
+    {% if forloop.index == 2 %}
+      <span class="variant-card__badge popular">MOST POPULAR</span>
+    {% elsif forloop.index >= 3 %}
+      <span class="variant-card__badge free-bag">4th BAG FREE</span>
     {% endif %}
 
     <input
@@ -177,27 +189,25 @@
     >
 
     <div class="variant-card__inner">
-      {%- assign var_img = current_variant.metafields.custom.variant_image.value -%}
-      {%- if var_img != blank -%}
-        <div class="variant-card__image-wrapper">
-          {{ var_img | image_url: width: 200 | image_tag: loading: 'lazy', class: 'variant-card__img' }}
-        </div>
-      {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
-      <span class="variant-card__onetime-price">
-        <span class="variant-card__onetime-price-inner">
-          {{ one_time_price | money_without_trailing_zeros }} one-time
-        </span>
-        <span class="variant-card__duration">
-          {% if duration_text != blank %}
-            {{ duration_text }}
-          {% else %}
-            {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
-          {% endif %}
-        </span>
+      <span class="variant-card__sub-title">
+        {% if forloop.index == 1 %}30 nights . one month{% elsif forloop.index == 2 %}60 nights - two months{% else %}120 nights - four months{% endif %}
       </span>
+      <div class="variant-card__img-wrap">
+        {%- assign var_img = current_variant.metafields.custom.variant_image.value | default: product.featured_image -%}
+        {%- if var_img != blank -%}
+          {{ var_img | image_url: width: 200 | image_tag: loading: 'lazy', class: 'variant-card__img' }}
+        {%- endif -%}
+      </div>
+      <span class="variant-card__gift">+2 free gifts</span>
     </div>
+
+    {%- liquid
+      assign diff_amount = one_time_price | minus: sub_price
+    -%}
+    {% if forloop.index >= 3 and diff_amount > 0 %}
+      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount | money_without_trailing_zeros }}</span>
+    {% endif %}
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
   </label>
@@ -335,7 +345,7 @@
 {% endunless %}
 
 {% comment %} =========================================================
-  CUSTOM SUBSCRIPTION BOX (DYNAMIC PRICE SYNC ENABLED)
+  CUSTOM SUBSCRIPTION BOX (FULLY DYNAMIC PRICE, PER NIGHT & SAVINGS)
 ========================================================= {% endcomment %}
 <div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
   <!-- Option 1: Autoship & Save Box -->
@@ -346,7 +356,10 @@
         <label class="somna-radio-label">
           <input type="radio" name="somna_purchase_type" value="subscribe" checked>
           <span class="somna-radio-bullet"></span>
-          <span class="somna-box-title">Autoship & Save</span>
+          <div class="somna-title-stack">
+            <span class="somna-box-title">Autoship & Save</span>
+            <span class="somna-per-night" id="SomnaPerNightPrice">$1.32 Per Night</span>
+          </div>
         </label>
         <div class="somna-price-stack">
           <div class="somna-pricing-row">
@@ -355,10 +368,10 @@
           </div>
         </div>
       </div>
-      <div class="somna-save-pill">SAVE 10%</div>
+      <div class="somna-save-pill" id="SomnaSavePill">SAVE $9</div>
 
       <ul class="somna-perks-list">
-        <li>✓ Same price, it never goes up</li>
+        <li>✓ Same price, for as long as you stay subscribed</li>
         <li>✓ <strong>FREE</strong> shipping</li>
         <li>✓ FREE Gifts included in Every Delivery</li>
         <li>✓ Skip, pause, or cancel anytime</li>
@@ -423,7 +436,6 @@
     const purchaseBoxes = container.querySelectorAll('.somna-purchase-box');
     const sellingPlanSelect = document.getElementById('SomnaSellingPlanSelect');
     
-    // Hidden selling plan input sync
     const productForm = document.querySelector('form[action*="/cart/add"]') || document.querySelector('.variant-picker__form');
     let hiddenSellingPlanInput = productForm ? productForm.querySelector('input[name="selling_plan"][type="hidden"]') : null;
 
@@ -447,21 +459,38 @@
       }
     }
 
-    // Dynamic price updater from selected card data attributes
+    // Dynamic price, per-night and savings calculator
     function syncSubscriptionPrices() {
       const selectedCard = document.querySelector('label.variant-option__button-label--card.selected') || document.querySelector('label.variant-option__button-label--card:has(input:checked)');
       if (!selectedCard) return;
 
       const subFormatted = selectedCard.getAttribute('data-sub-formatted');
       const onetimeFormatted = selectedCard.getAttribute('data-onetime-formatted');
+      const subNumeric = parseFloat(selectedCard.getAttribute('data-sub-numeric') || '0');
+      const onetimeNumeric = parseFloat(selectedCard.getAttribute('data-onetime-numeric') || '0');
+      const nights = parseInt(selectedCard.getAttribute('data-nights') || '30', 10);
 
       const subPriceEl = document.getElementById('SomnaSubPrice');
       const oneTimePriceEl = document.getElementById('SomnaOneTimePrice');
       const strikePriceEl = document.getElementById('SomnaStrikePrice');
+      const perNightEl = document.getElementById('SomnaPerNightPrice');
+      const savePillEl = document.getElementById('SomnaSavePill');
 
       if (subPriceEl && subFormatted) subPriceEl.textContent = subFormatted;
       if (oneTimePriceEl && onetimeFormatted) oneTimePriceEl.textContent = onetimeFormatted;
       if (strikePriceEl && onetimeFormatted) strikePriceEl.textContent = onetimeFormatted;
+
+      // Calculate Per Night
+      if (perNightEl && nights > 0 && subNumeric > 0) {
+        const perNight = (subNumeric / nights).toFixed(2);
+        perNightEl.textContent = `$${perNight} Per Night`;
+      }
+
+      // Calculate Exact Savings ($)
+      if (savePillEl && onetimeNumeric > subNumeric) {
+        const savedAmount = Math.round(onetimeNumeric - subNumeric);
+        savePillEl.textContent = `SAVE $${savedAmount}`;
+      }
     }
 
     updateFormSellingPlan();
@@ -483,7 +512,6 @@
       });
     }
 
-    // Listen for clicks on size cards to update prices instantly
     document.querySelectorAll('label.variant-option__button-label--card').forEach(card => {
       card.addEventListener('click', () => {
         setTimeout(syncSubscriptionPrices, 50);
@@ -493,6 +521,82 @@
 </script>
 
 <style>
+  /* Custom card and subscription box styling matching exact layout */
+  .variant-option__button-label--card {
+    position: relative;
+    border: 1.5px solid #cbd3d8;
+    border-radius: 12px;
+    padding: 12px 6px;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .variant-option__button-label--card.selected,
+  .variant-option__button-label--card:has(input:checked) {
+    border-color: #1354c4;
+    background-color: #fdfaf5;
+  }
+  .variant-card__badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 7.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .variant-card__badge.popular { background: #1354c4; }
+  .variant-card__badge.free-bag { background: #0a1a4a; }
+
+  .variant-card__title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #0a1a4a;
+  }
+  .variant-card__sub-title {
+    font-size: 0.52rem;
+    color: #4e5875;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .variant-card__img-wrap {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .variant-card__img {
+    height: 36px;
+    object-fit: contain;
+  }
+  .variant-card__gift {
+    font-size: 0.58rem;
+    font-weight: 600;
+    margin-top: 4px;
+    color: #0a1a4a;
+    display: block;
+  }
+  .variant-card__bottom-save-pill {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1354c4;
+    color: #fff;
+    font-size: 7.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  /* Subscription Box Styles */
   .somna-custom-subscription-container {
     background-color: #dbeafe;
     border-radius: 16px;
@@ -564,10 +668,18 @@
     background: #1354c4;
     border-radius: 50%;
   }
+  .somna-title-stack {
+    display: flex;
+    flex-direction: column;
+  }
   .somna-box-title {
     font-weight: 700;
     font-size: 0.88rem;
     color: #0a1a4a;
+  }
+  .somna-per-night {
+    font-size: 0.62rem;
+    color: #4e5875;
   }
   .somna-price-stack {
     text-align: right;
