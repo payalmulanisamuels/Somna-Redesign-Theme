@@ -71,7 +71,9 @@ span.variant-card__title {
     font-weight: 700;
     line-height: normal;
 }
-
+.variant-picker__form legend {
+    display: none;
+}
 .variant-card__badge {
     position: relative;
     top: -12px;
