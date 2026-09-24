@@ -327,7 +327,7 @@
       {%- endfor -%}
 
       {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Safely Synced via Custom Element Event Handling)
+         SUBSCRIPTION APP EMBED WRAPPER (Fully Synchronized with One-Time & Autoship States)
       ========================================================= {% endcomment %}
       <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
         <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
@@ -409,16 +409,18 @@
           </section>
         {%- endfor -%}
 
-        <!-- Hidden input required by subscription app -->
+        <!-- Hidden input bound directly to subscription app functionality -->
         <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
       </div>
 
-      <!-- Safe Synchronization Script -->
+      <!-- Robust Trigger Script for One-Time & Autoship States -->
       <script>
         (function() {
           document.addEventListener('DOMContentLoaded', () => {
             const picker = document.querySelector('variant-picker');
             if (!picker) return;
+
+            const sellingPlanHiddenInput = picker.querySelector('.selected-selling-plan-id');
 
             function syncVariantDisplay() {
               const checkedRadio = picker.querySelector('fieldset input[type="radio"]:checked');
@@ -428,6 +430,17 @@
                   picker.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
                     if (section.getAttribute('data-variant-id') === variantId) {
                       section.classList.remove('shopify_subscriptions_app_block--hidden');
+                      
+                      // Auto-sync the hidden selling plan value based on active radio in this visible block
+                      const activeSubRadio = section.querySelector('.app-sub-radio');
+                      const activeDropdown = section.querySelector('.subscription-frequency-selector');
+                      const activeOnetimeRadio = section.querySelector('.app-onetime-radio');
+
+                      if (activeOnetimeRadio && activeOnetimeRadio.checked) {
+                        if (sellingPlanHiddenInput) sellingPlanHiddenInput.value = '';
+                      } else if (activeSubRadio && activeSubRadio.checked && activeDropdown) {
+                        if (sellingPlanHiddenInput) sellingPlanHiddenInput.value = activeDropdown.value;
+                      }
                     } else {
                       section.classList.add('shopify_subscriptions_app_block--hidden');
                     }
@@ -436,12 +449,14 @@
               }
             }
 
+            // Sync when variant changes
             picker.addEventListener('change', (e) => {
               if (e.target.matches('fieldset input[type="radio"]')) {
                 syncVariantDisplay();
               }
             });
 
+            // Handle selection clicks on subscription option boxes
             document.addEventListener('click', (e) => {
               const box = e.target.closest('.subscription-option-box');
               if (!box) return;
@@ -449,7 +464,6 @@
               const radio = box.querySelector('input[type="radio"]');
               if (radio && !radio.checked) {
                 radio.checked = true;
-                radio.dispatchEvent(new Event('change', { bubbles: true }));
 
                 const parentContainer = box.closest('.subscription-widget-container');
                 if (parentContainer) {
@@ -460,6 +474,27 @@
                 }
                 box.style.borderColor = '#0055ff';
                 box.style.borderWidth = '2px';
+
+                // Update hidden selling plan input depending on selection type
+                if (radio.classList.contains('app-onetime-radio')) {
+                  if (sellingPlanHiddenInput) sellingPlanHiddenInput.value = '';
+                } else if (radio.classList.contains('app-sub-radio')) {
+                  const dropdown = box.closest('.shopify_subscriptions_app_block').querySelector('.subscription-frequency-selector');
+                  if (dropdown && sellingPlanHiddenInput) {
+                    sellingPlanHiddenInput.value = dropdown.value;
+                  }
+                }
+              }
+            });
+
+            // Update selling plan when frequency dropdown changes
+            document.addEventListener('change', (e) => {
+              if (e.target.matches('.subscription-frequency-selector')) {
+                const activeSection = e.target.closest('.shopify_subscriptions_app_block');
+                const subRadio = activeSection ? activeSection.querySelector('.app-sub-radio') : null;
+                if (subRadio && subRadio.checked && sellingPlanHiddenInput) {
+                  sellingPlanHiddenInput.value = e.target.value;
+                }
               }
             });
 
