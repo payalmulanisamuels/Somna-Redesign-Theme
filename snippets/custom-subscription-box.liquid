@@ -1,14 +1,14 @@
 {%- comment -%}
-  Custom Subscription Box Component matching the target design
+  Custom Subscription Box Layout for Product Page
 {%- endcomment -%}
-
-<div class="custom-subscription-widget">
-  <!-- Size / Package Selection Cards -->
+<div class="custom-subscription-widget" data-custom-subscription>
+  <!-- Size / Quantity Selection Header -->
   <div class="cs-section-title">Size</div>
+
+  <!-- Size Options Grid -->
   <div class="cs-size-cards">
-    <!-- Option 1: 1 Bag -->
-    <label class="cs-card" data-card-option>
-      <input type="radio" name="bundle_size" value="1-bag" checked class="visually-hidden">
+    <label class="cs-card selected" data-size-option>
+      <input type="radio" name="properties[Bundle Size]" value="1 Bag" checked class="visually-hidden">
       <div class="cs-card-inner">
         <div class="cs-card-img">
           <img src="{{ 'product1.png' | asset_url }}" alt="1 Bag" loading="lazy">
@@ -19,9 +19,8 @@
       </div>
     </label>
 
-    <!-- Option 2: 2 Bags -->
-    <label class="cs-card" data-card-option>
-      <input type="radio" name="bundle_size" value="2-bags" class="visually-hidden">
+    <label class="cs-card" data-size-option>
+      <input type="radio" name="properties[Bundle Size]" value="2 Bags" class="visually-hidden">
       <div class="cs-card-badge">MOST POPULAR</div>
       <div class="cs-card-inner">
         <div class="cs-card-img">
@@ -33,9 +32,8 @@
       </div>
     </label>
 
-    <!-- Option 3: 3+1 Bags -->
-    <label class="cs-card" data-card-option>
-      <input type="radio" name="bundle_size" value="3-1-bags" class="visually-hidden">
+    <label class="cs-card" data-size-option>
+      <input type="radio" name="properties[Bundle Size]" value="3+1 Bags" class="visually-hidden">
       <div class="cs-card-inner">
         <div class="cs-card-img">
           <img src="{{ 'night.jpg' | asset_url }}" alt="3+1 Bags" loading="lazy">
@@ -47,34 +45,34 @@
     </label>
   </div>
 
-  <!-- Purchase Type Box: Subscribe & Save -->
-  <div class="cs-purchase-box cs-subscribe-box active" data-purchase-type="subscribe">
+  <!-- Purchase Type: Subscribe & Save -->
+  <div class="cs-purchase-box active" data-purchase-type="subscribe">
     <div class="cs-box-header">
       <strong>Subscribe and save</strong>
     </div>
     <div class="cs-radio-group">
       <label class="cs-radio-row">
-        <input type="radio" name="purchase_mode" value="sub_1" checked>
+        <input type="radio" name="selling_plan_group" value="monthly" checked>
         <span class="cs-label-text">Deliver every month, 10% off</span>
         <span class="cs-price-text">$135.00 USD</span>
       </label>
       <label class="cs-radio-row">
-        <input type="radio" name="purchase_mode" value="sub_2">
+        <input type="radio" name="selling_plan_group" value="2-months">
         <span class="cs-label-text">Deliver every 2 months, 10% off</span>
         <span class="cs-price-text">$135.00 USD</span>
       </label>
       <label class="cs-radio-row">
-        <input type="radio" name="purchase_mode" value="sub_4">
+        <input type="radio" name="selling_plan_group" value="4-months">
         <span class="cs-label-text">Deliver every 4 months, 10% off</span>
         <span class="cs-price-text">$135.00 USD</span>
       </label>
     </div>
   </div>
 
-  <!-- Purchase Type Box: One-time purchase -->
-  <div class="cs-purchase-box cs-onetime-box" data-purchase-type="onetime">
+  <!-- Purchase Type: One-time purchase -->
+  <div class="cs-purchase-box" data-purchase-type="onetime">
     <label class="cs-radio-row cs-onetime-row">
-      <input type="radio" name="purchase_mode" value="onetime">
+      <input type="radio" name="selling_plan_group" value="onetime">
       <span class="cs-label-text"><strong>One-time purchase</strong></span>
       <span class="cs-price-text">$150.00 USD</span>
     </label>
@@ -86,20 +84,27 @@
 </div>
 
 <script>
-  // Simple interaction script for active states matching reference layout
-  document.querySelectorAll('.cs-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.cs-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
+  document.addEventListener('DOMContentLoaded', () => {
+    // Size Card selection handler
+    const cards = document.querySelectorAll('[data-size-option]');
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        const radio = card.querySelector('input');
+        if (radio) radio.checked = true;
+      });
     });
-  });
 
-  document.querySelectorAll('.cs-purchase-box').forEach(box => {
-    box.addEventListener('click', (e) => {
-      document.querySelectorAll('.cs-purchase-box').forEach(b => b.classList.remove('active'));
-      box.classList.add('active');
-      const radio = box.querySelector('input[type="radio"]');
-      if(radio) radio.checked = true;
+    // Purchase Box active state handler
+    const boxes = document.querySelectorAll('[data-purchase-type]');
+    boxes.forEach(box => {
+      box.addEventListener('click', () => {
+        boxes.forEach(b => b.classList.remove('active'));
+        box.classList.add('active');
+        const radio = box.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      });
     });
   });
 </script>
@@ -112,11 +117,11 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-block: 12px;
   }
   .cs-section-title {
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   .cs-size-cards {
     display: grid;
@@ -131,11 +136,12 @@
     text-align: center;
     cursor: pointer;
     background: #fff;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    transition: all 0.2s ease;
   }
-  .cs-card.selected, .cs-card:has(input:checked) {
+  .cs-card.selected {
     border-color: #071a4b;
     background-color: #eaf1fb;
+    box-shadow: 0 0 0 1px #071a4b;
   }
   .cs-card-badge {
     position: absolute;
@@ -144,30 +150,31 @@
     transform: translateX(-50%);
     background: #071a4b;
     color: #fff;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 4px;
     letter-spacing: 0.05em;
+    white-space: nowrap;
   }
   .cs-card-img img {
-    height: 45px;
+    height: 42px;
     object-fit: contain;
     margin-bottom: 4px;
   }
   .cs-card-title {
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 2px;
   }
   .cs-card-price {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #071a4b;
     margin-bottom: 4px;
   }
   .cs-card-sub {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: #6d7175;
     line-height: 1.2;
   }
@@ -177,13 +184,14 @@
     padding: 14px;
     background: #fff;
     cursor: pointer;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
   }
   .cs-purchase-box.active {
     border-color: #071a4b;
+    box-shadow: 0 0 0 1px #071a4b;
   }
   .cs-box-header {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 10px;
   }
   .cs-radio-group {
@@ -195,7 +203,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 0.85srem;
+    font-size: 0.8rem;
     cursor: pointer;
   }
   .cs-onetime-row {
@@ -209,7 +217,7 @@
     font-weight: 600;
   }
   .cs-footer-note {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #4e5875;
   }
   @media(max-width: 749px) {
