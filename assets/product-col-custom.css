@@ -85,6 +85,7 @@
     border-radius: 16px 16px 0 0;
     width: calc(100% + 32px);
     white-space: nowrap;
+    text-align: center;
 }
    
 .subscription_group:has(input[type="radio"]:checked) {
