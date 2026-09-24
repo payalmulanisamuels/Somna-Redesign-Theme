@@ -250,8 +250,11 @@
     line-height: normal;
   }
   .somna-per-night {
-    font-size: 0.62rem;
-    color: #4e5875;
+    color: #061C42;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
   .somna-price-stack {
     text-align: right;
