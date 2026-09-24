@@ -328,6 +328,7 @@
     background: #FFF;
     cursor: pointer;
     font-family: var(--headfont);
+    appearance: none;
   }
   .somna-widget-meta-footer {
     font-size: 0.65rem;
