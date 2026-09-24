@@ -360,13 +360,13 @@
     line-height: normal;
     text-decoration-line: underline;
   }
-  .somna-delivery-timeline {
-    background: #fffdf9;
-    border: 1px solid #cbd3d8;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: left;
-  }
+    .somna-delivery-timeline {
+        border: 1px solid #cbd3d8;
+        padding: 10px;
+        text-align: left;
+        border-radius: 10px;
+        background: #FFF9EE;
+    }
   .somna-timeline-header {
     display: flex;
     justify-content: space-between;
