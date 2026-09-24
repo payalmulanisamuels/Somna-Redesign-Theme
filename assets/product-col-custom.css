@@ -43,7 +43,7 @@
 .variant-card__image-wrapper img {
     max-height: 40px;
 }
-
+ 
 .variant-option--equal-width-buttons .variant-option__button-label {
     border: 1px solid #000 !important;
 }
@@ -122,7 +122,7 @@
   .variant-option__button-label--card.selected,
   .variant-option__button-label--card:has(input:checked) {
     border-color: #1354c4 !important;
-    background-color: #fdfaf5 !important;
+    background-color: #C9E5FE !important;
   }
 
   .variant-card__badge.popular { background: #1354c4; }
