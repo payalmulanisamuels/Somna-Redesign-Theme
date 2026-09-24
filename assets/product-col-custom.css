@@ -352,8 +352,13 @@
     margin-top: 4px;
   }
   .somna-policy-link {
-    color: #0a1a4a;
     text-decoration: underline;
+    color: #000;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration-line: underline;
   }
   .somna-delivery-timeline {
     background: #fffdf9;
