@@ -88,8 +88,8 @@
 }
    
 .subscription_group:has(input[type="radio"]:checked) {
-  border-color: #0A4FD6 !important;
-  background:#FCF9F5;
+  border-color: #0E63E9 !important;
+  background:#F4FAFF;
 }
 /* Subscription box*/
 /* Custom card and subscription box styling matching exact layout */
@@ -113,10 +113,14 @@
   .variant-card__badge.popular { background: #1354c4; }
   .variant-card__badge.free-bag { background: #0a1a4a; }
   .variant-card__sub-title {
-    font-size: 0.52rem;
-    color: #4e5875;
     margin-bottom: 6px;
     display: block;
+    color: #061C42;
+    font-family: Inter;
+    font-size: 6.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
   .variant-card__img-wrap {
     height: 38px;
