@@ -311,7 +311,6 @@
                 },
                 "subscriptions_app_block_8Fe6G8": {
                   "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-                  "disabled": true,
                   "settings": {
                     "widget_style": "card",
                     "widget_style_card_selector": "radio_button",
