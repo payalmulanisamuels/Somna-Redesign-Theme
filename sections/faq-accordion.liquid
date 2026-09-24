@@ -1,15 +1,14 @@
 <div class="hz-faq-wrapper" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0 ;background-color: {{ section.settings.bg_color }};">
   {% comment %} Top Wave Divider {% endcomment %}
-  {% if section.settings.top_wave_image != blank %}
-    <div class="hz-faq-wave hz-faq-wave--top">
-      <img 
-        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-        alt="" 
-        loading="lazy" 
-        class="hz-faq-wave-img"
-      />
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
     </div>
-  {% endif %}
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
 
   <div class="section section--page-width">
     {% if section.settings.heading != blank %}
@@ -55,17 +54,7 @@
     </div>
   </div>
 
-  {% comment %} Bottom Wave Divider {% endcomment %}
-  {% if section.settings.bottom_wave_image != blank %}
-    <div class="hz-faq-wave hz-faq-wave--bottom">
-      <img 
-        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
-        alt="" 
-        loading="lazy" 
-        class="hz-faq-wave-img"
-      />
-    </div>
-  {% endif %}
+  
 </div>
 
 
