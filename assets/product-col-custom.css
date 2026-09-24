@@ -191,12 +191,14 @@
   }
   .somna-box-banner {
     background: #1354c4;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
     text-align: center;
-    padding: 4px;
-    letter-spacing: 0.05em;
+    padding: 3.5px 0;
+    letter-spacing: .05em;
+    color: #FFF;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
   .somna-box-inner {
     padding: 12px;
