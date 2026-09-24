@@ -10,6 +10,10 @@
 {% assign block_settings = block.settings %}
 
 {% liquid
+  # Custom styling applies to:
+  #   - dropdowns + buttons when variant_style_class == 'custom' (unselected colors)
+  #   - buttons only when selected_variant_style_class == 'custom' (selected colors)
+  # The 'buttons' label is kept for backwards-compat of the class name.
   assign has_custom_variant_buttons = false
   if block_settings.variant_style_class == 'custom'
     assign has_custom_variant_buttons = true
@@ -100,24 +104,30 @@
                 {% assign longest_value = product_option_value.size %}
               {% endif %}
           {%- liquid
+  # Target the variant object for this option value
   assign current_variant = product_option_value.variant
 
+  # Check if current option is Size / Quantity / Set
   assign option_name_downcase = product_option.name | downcase
   assign is_size_option = false
-  if option_name_downcase contains 'size' or option_name_downcase contains 'quantity' or option_name_downcase contains 'set' or option_name_downcase contains 'bag'
+  if option_name_downcase contains 'size' or option_name_downcase contains 'quantity' or option_name_downcase contains 'set'
     assign is_size_option = true
   endif
 
   if is_size_option
+    # Subscription / Selling Plan pricing
+    assign has_selling_plan = false
     assign sub_price = current_variant.price
     assign one_time_price = current_variant.price
 
     for alloc in current_variant.selling_plan_allocations
+      assign has_selling_plan = true
       assign sub_price = alloc.price
       assign one_time_price = alloc.compare_at_price | default: current_variant.price
       break
     endfor
 
+    # Metafield fallbacks
     if current_variant.metafields.custom.subscription_price != blank
       assign sub_price = current_variant.metafields.custom.subscription_price.value
     endif
@@ -125,33 +135,26 @@
       assign one_time_price = current_variant.metafields.custom.one_time_price.value
     endif
     assign duration_text = current_variant.metafields.custom.duration.value | default: current_variant.metafields.custom.subtitle.value
-
-    assign nights_count = 30
-    if forloop.index == 2
-      assign nights_count = 60
-    elsif forloop.index >= 3
-      assign nights_count = 120
-    endif
-    
-    assign sub_per_night = sub_price | times: 1.0 | divided_by: nights_count
   endif
 -%}
 
 {%- if is_size_option -%}
+  {% comment %} =========================================================
+    SIZE / QUANTITY CARDS ONLY (with subscription and duration prices)
+  ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
+    {% comment %} Badge {% endcomment %}
     {% if current_variant.metafields.custom.badge != blank %}
       <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
-    {% elsif product_option_value.name contains '2' or forloop.index == 2 %}
+    {% elsif product_option_value.name contains '2' %}
       <span class="variant-card__badge">MOST POPULAR</span>
-    {% elsif product_option_value.name contains '4' or forloop.index >= 3 %}
-      <span class="variant-card__badge" style="background: #0b1d3a; color: #fff;">4th BAG FREE</span>
     {% endif %}
 
     <input
       type="radio"
-      name="options[{{ product_option.name | escape }}]"
+      name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
       value="{{ product_option_value | escape }}"
       aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
       {% if product_option_value.available == false %}
@@ -186,29 +189,34 @@
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
       <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-        <span class="variant-card__onetime-price-inner">
-          {{ one_time_price | money_without_trailing_zeros }} one-time
-        </span>
-        <span class="variant-card__duration">
-          {% if duration_text != blank %}
-            {{ duration_text }}
-          {% else %}
-            {% if forloop.index == 1 %}30 nights · one month{% elsif forloop.index == 2 %}60 nights · two months{% else %}120 nights · four months{% endif %}
-          {% endif %}
-        </span>
+      <span class="variant-card__onetime-price-inner">
+        {{ one_time_price | money_without_trailing_zeros }} one-time
       </span>
+  <span class="variant-card__duration">
+        {% if duration_text != blank %}
+          {{ duration_text }}
+        {% else %}
+          {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
+        {% endif %}
+      </span>
+
+      </span>
+    
     </div>
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
   </label>
 
 {%- else -%}
+  {% comment %} =========================================================
+    ALL OTHER OPTIONS (Color, Style, etc. remain standard)
+  ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
   >
     <input
       type="radio"
-      name="options[{{ product_option.name | escape }}]"
+      name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
       value="{{ product_option_value | escape }}"
       aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
       {% if product_option_value.available == false %}
@@ -250,7 +258,7 @@
         <span class="variant-option__button-label__pill" data-key="variant-option-pill"></span>
       {% endif %}
       <span class="variant-option__button-label__text" data-key="variant-option-text">
-        {{- product_option_value -}}
+        {{- product_option_value  -}}
       </span>
     {% endif %}
 
@@ -268,10 +276,16 @@
           </fieldset>
           {%- assign fieldset_index = fieldset_index | plus: 1 -%}
         {%- elsif block_settings.variant_style == 'dropdowns' -%}
+          {%
+            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
+            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
+            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
+          %}
           {% liquid
             assign property_being_updated = false
             if settings.variant_swatch_width != settings.variant_swatch_height
               assign property_being_updated = true
+              # (original width / original height) x new height (20px at the moment) = new width
               assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
             endif
           %}
@@ -281,7 +295,7 @@
             <div
               class="variant-option__select-wrapper"
               style="
-                {%- if property_being_updated -%}
+                {%- if property_being_updated  -%}
                   --variant-picker-swatch-width: clamp(10px,{{ new_width }}px, 50px);
                 {%- endif -%}
               "
@@ -323,118 +337,6 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
-
-      {%- comment -%} =========================================================
-         SUBSCRIPTION APP EMBED WRAPPER (Native App Integration)
-      ========================================================= {% endcomment %}
-      <div class="shopify_subscriptions_app_container" data-section-id="{{ section.id }}" data-product-id="{{ product_resource.id }}">
-        <script src="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/app-block.js" defer=""></script>
-        <link href="https://cdn.shopify.com/extensions/01a0c96d-1498-75b1-a054-a1005caf3767/subscriptions-remix-90/assets/styles.css" rel="stylesheet" type="text/css">
-        
-        {%- for variant in product_resource.variants -%}
-          {%- liquid
-            assign is_active_variant = false
-            if variant.id == product_resource.selected_or_first_available_variant.id
-              assign is_active_variant = true
-            endif
-
-            assign var_sub_price = variant.price
-            for alloc in variant.selling_plan_allocations
-              assign var_sub_price = alloc.price
-              break
-            endfor
-            
-            assign nights = 30
-            if forloop.index == 2
-              assign nights = 60
-            elsif forloop.index >= 3
-              assign nights = 120
-            endif
-            assign night_price = var_sub_price | times: 1.0 | divided_by: nights
-          -%}
-          <section data-variant-id="{{ variant.id }}" class="shopify_subscriptions_app_block {% unless is_active_variant %}shopify_subscriptions_app_block--hidden{% endunless %}">
-            <fieldset class="shopify_subscriptions_fieldset">
-              <div class="plan_card" style="margin-top: 15px; border: 1px solid #8f8d8d; background: #fff; border-radius: 12px; padding: 16px;">
-                
-                <!-- Autoship & Save Option -->
-                <div class="subscription_group" style="padding: 0 0 16px 0; border-bottom: 1px solid #eee; margin-bottom: 16px;">
-                  <label class="title_and_price_wrapper" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="selling_plan" data-selling-plan-id="{% if variant.selling_plan_allocations.size > 0 %}{{ variant.selling_plan_allocations[0].selling_plan.id }}{% endif %}" data-variant-price="{{ var_sub_price | money }}" data-variant-compare-at-price="{{ variant.compare_at_price | money }}" {% if variant.selling_plan_allocations.size > 0 %}checked{% endif %} style="accent-color: #0055ff;">
-                      <div>
-                        <span style="font-weight: bold; display: block;">Autoship & Save</span>
-                        <span style="font-size: 12px; color: #666;">{{ night_price | money }} Per Night</span>
-                      </div>
-                    </div>
-                    <div style="text-align: right;">
-                      <span style="text-decoration: line-through; color: #888; font-size: 14px; margin-right: 4px;">{{ variant.compare_at_price | default: variant.price | money }}</span>
-                      <span style="font-weight: bold; font-size: 16px; color: #000;">{{ var_sub_price | money }}</span>
-                      <div style="background: #0055ff; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">SAVE 10%</div>
-                    </div>
-                  </label>
-
-                  <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333;">
-                    <li style="margin-bottom: 4px;">✓ Same price, it never goes up</li>
-                    <li style="margin-bottom: 4px;">✓ <strong>FREE</strong> shipping</li>
-                    <li style="margin-bottom: 4px;">✓ FREE Gifts included in Every Delivery</li>
-                    <li>✓ Skip, pause, or cancel anytime</li>
-                  </ul>
-
-                  {%- if variant.selling_plan_allocations.size > 0 -%}
-                    <div style="margin-top: 12px;">
-                      <select class="group_dropdown" style="width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc;">
-                        {%- for alloc in variant.selling_plan_allocations -%}
-                          <option value="{{ alloc.selling_plan.id }}">{{ alloc.selling_plan.name }}</option>
-                        {%- endfor -%}
-                      </select>
-                    </div>
-                  {%- endif -%}
-                </div>
-
-                <!-- One-Time Purchase Option -->
-                <div class="subscription_group" style="padding: 0;">
-                  <label class="title_and_price_wrapper" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <input type="radio" name="purchaseOption_{{ section.id }}_{{ variant.id }}" data-radio-type="one_time_purchase" data-variant-id="{{ variant.id }}" data-variant-price="{{ variant.price | money }}" style="accent-color: #0055ff;">
-                      <span style="font-weight: bold;">One-Time Purchase</span>
-                    </div>
-                    <span style="font-weight: bold; font-size: 16px;">{{ variant.price | money }}</span>
-                  </label>
-                </div>
-
-              </div>
-            </fieldset>
-          </section>
-        {%- endfor -%}
-
-        <!-- Hidden Input managed by app script -->
-        <input name="selling_plan" class="selected-selling-plan-id" type="hidden" value="">
-      </div>
-
-      <!-- Sync Script to Toggle App Section on Variant Change -->
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const picker = document.querySelector('variant-picker');
-          if (!picker) return;
-
-          picker.addEventListener('change', () => {
-            setTimeout(() => {
-              const checkedRadio = picker.querySelector('fieldset input[type="radio"]:checked');
-              if (!checkedRadio) return;
-              const variantId = checkedRadio.getAttribute('data-variant-id');
-              if (!variantId) return;
-
-              picker.querySelectorAll('.shopify_subscriptions_app_block').forEach(section => {
-                if (section.getAttribute('data-variant-id') === variantId) {
-                  section.classList.remove('shopify_subscriptions_app_block--hidden');
-                } else {
-                  section.classList.add('shopify_subscriptions_app_block--hidden');
-                }
-              });
-            }, 50);
-          });
-        });
-      </script>
 
       <script type="application/json">
         {{ product_resource.selected_or_first_available_variant | json }}
