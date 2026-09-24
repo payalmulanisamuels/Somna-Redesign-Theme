@@ -10,10 +10,6 @@
 {% assign block_settings = block.settings %}
 
 {% liquid
-  # Custom styling applies to:
-  #   - dropdowns + buttons when variant_style_class == 'custom' (unselected colors)
-  #   - buttons only when selected_variant_style_class == 'custom' (selected colors)
-  # The 'buttons' label is kept for backwards-compat of the class name.
   assign has_custom_variant_buttons = false
   if block_settings.variant_style_class == 'custom'
     assign has_custom_variant_buttons = true
@@ -140,12 +136,13 @@
 
 {%- if is_size_option -%}
   {% comment %} =========================================================
-    SIZE / QUANTITY CARDS ONLY (with subscription and duration prices)
+    SIZE / QUANTITY CARDS ONLY (with dynamic price data attributes)
   ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label variant-option__button-label--card {% if product_option_value.name contains '2' %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+    data-sub-formatted="{{ sub_price | money_without_trailing_zeros }}"
+    data-onetime-formatted="{{ one_time_price | money_without_trailing_zeros }}"
   >
-    {% comment %} Badge {% endcomment %}
     {% if current_variant.metafields.custom.badge != blank %}
       <span class="variant-card__badge">{{ current_variant.metafields.custom.badge.value }}</span>
     {% elsif product_option_value.name contains '2' %}
@@ -187,18 +184,18 @@
         </div>
       {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-price" data-sub-price="{{ sub_price }}">{{ sub_price | money_without_trailing_zeros }}</span>
+      <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-      <span class="variant-card__onetime-price-inner" data-onetime-price="{{ one_time_price }}">
-        {{ one_time_price | money_without_trailing_zeros }} one-time
-      </span>
-      <span class="variant-card__duration">
-        {% if duration_text != blank %}
-          {{ duration_text }}
-        {% else %}
-          {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
-        {% endif %}
-      </span>
+        <span class="variant-card__onetime-price-inner">
+          {{ one_time_price | money_without_trailing_zeros }} one-time
+        </span>
+        <span class="variant-card__duration">
+          {% if duration_text != blank %}
+            {{ duration_text }}
+          {% else %}
+            {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
+          {% endif %}
+        </span>
       </span>
     </div>
 
@@ -207,7 +204,7 @@
 
 {%- else -%}
   {% comment %} =========================================================
-    ALL OTHER OPTIONS (Color, Style, etc. remain standard)
+    ALL OTHER OPTIONS (Color, Style, etc.)
   ========================================================= {% endcomment %}
   <label
     class="variant-option__button-label {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
@@ -330,8 +327,15 @@
         {%- endif -%}
       {%- endfor -%}
 
+      <script type="application/json">
+        {{ product_resource.selected_or_first_available_variant | json }}
+      </script>
+    </form>
+  </variant-picker>
+{% endunless %}
+
 {% comment %} =========================================================
-  CUSTOM SUBSCRIPTION BOX (AUTOSHIP & SAVE + ONE-TIME PURCHASE)
+  CUSTOM SUBSCRIPTION BOX (DYNAMIC PRICE SYNC ENABLED)
 ========================================================= {% endcomment %}
 <div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
   <!-- Option 1: Autoship & Save Box -->
@@ -345,14 +349,13 @@
           <span class="somna-box-title">Autoship & Save</span>
         </label>
         <div class="somna-price-stack">
-          <span class="somna-per-night" id="SomnaPerNightPrice">$1.32 Per Night</span>
           <div class="somna-pricing-row">
             <span class="somna-strike-price" id="SomnaStrikePrice">$88</span>
             <span class="somna-active-price" id="SomnaSubPrice">$79</span>
           </div>
         </div>
       </div>
-      <div class="somna-save-pill" id="SomnaSavePill">SAVE $9</div>
+      <div class="somna-save-pill">SAVE 10%</div>
 
       <ul class="somna-perks-list">
         <li>✓ Same price, it never goes up</li>
@@ -411,13 +414,6 @@
     </div>
   </div>
 </div>
-      <script type="application/json">
-        {{ product_resource.selected_or_first_available_variant | json }}
-      </script>
-    </form>
-  </variant-picker>
-{% endunless %}
-
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -427,7 +423,7 @@
     const purchaseBoxes = container.querySelectorAll('.somna-purchase-box');
     const sellingPlanSelect = document.getElementById('SomnaSellingPlanSelect');
     
-    // Find or create hidden selling_plan input inside the main add-to-cart form
+    // Hidden selling plan input sync
     const productForm = document.querySelector('form[action*="/cart/add"]') || document.querySelector('.variant-picker__form');
     let hiddenSellingPlanInput = productForm ? productForm.querySelector('input[name="selling_plan"][type="hidden"]') : null;
 
@@ -438,7 +434,6 @@
       productForm.appendChild(hiddenSellingPlanInput);
     }
 
-    // Set initial selling plan value if subscription is active by default
     function updateFormSellingPlan() {
       const activeBox = container.querySelector('.somna-purchase-box.active');
       if (activeBox && activeBox.getAttribute('data-purchase-card') === 'subscribe') {
@@ -452,7 +447,25 @@
       }
     }
 
+    // Dynamic price updater from selected card data attributes
+    function syncSubscriptionPrices() {
+      const selectedCard = document.querySelector('label.variant-option__button-label--card.selected') || document.querySelector('label.variant-option__button-label--card:has(input:checked)');
+      if (!selectedCard) return;
+
+      const subFormatted = selectedCard.getAttribute('data-sub-formatted');
+      const onetimeFormatted = selectedCard.getAttribute('data-onetime-formatted');
+
+      const subPriceEl = document.getElementById('SomnaSubPrice');
+      const oneTimePriceEl = document.getElementById('SomnaOneTimePrice');
+      const strikePriceEl = document.getElementById('SomnaStrikePrice');
+
+      if (subPriceEl && subFormatted) subPriceEl.textContent = subFormatted;
+      if (oneTimePriceEl && onetimeFormatted) oneTimePriceEl.textContent = onetimeFormatted;
+      if (strikePriceEl && onetimeFormatted) strikePriceEl.textContent = onetimeFormatted;
+    }
+
     updateFormSellingPlan();
+    syncSubscriptionPrices();
 
     purchaseBoxes.forEach(box => {
       box.addEventListener('click', () => {
@@ -470,19 +483,12 @@
       });
     }
 
-    // Sync prices dynamically when variant changes on the page
-    const observer = new MutationObserver(() => {
-      // Pull updated active prices from the selected card label if needed
-      const selectedCard = document.querySelector('label.variant-option__button-label--card.selected, input.variant-option__button-label--card input:checked');
-      if (selectedCard) {
-        // Dynamic price update hooks can be processed here
-      }
+    // Listen for clicks on size cards to update prices instantly
+    document.querySelectorAll('label.variant-option__button-label--card').forEach(card => {
+      card.addEventListener('click', () => {
+        setTimeout(syncSubscriptionPrices, 50);
+      });
     });
-
-    const variantPickerEl = document.querySelector('variant-picker');
-    if (variantPickerEl) {
-      observer.observe(variantPickerEl, { childList: true, subtree: true, attributes: true });
-    }
   });
 </script>
 
@@ -565,11 +571,6 @@
   }
   .somna-price-stack {
     text-align: right;
-  }
-  .somna-per-night {
-    font-size: 0.62rem;
-    color: #4e5875;
-    display: block;
   }
   .somna-pricing-row {
     display: flex;
