@@ -289,6 +289,8 @@
     font-size: 10px;
     font-style: normal;
     font-weight: 700;
+    border-radius: 2px;
+    background: #0B57E3;
     line-height: normal;
   }
   .somna-perks-list {
