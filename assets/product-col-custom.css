@@ -387,10 +387,7 @@
   }
   .somna-timeline-line {
     height: 4px;
-    background: #0a1a4a;
-    border-radius: 2px;
     position: relative;
-    margin: 8px 0 2px;
   }
   .somna-timeline-box-icon {
     position: absolute;
