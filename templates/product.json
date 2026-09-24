@@ -1288,7 +1288,7 @@
         "bg_color": "#fdf8ee",
         "divider_color": "#cbd3d8",
         "heading": "FAQ",
-        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
+        "top_wave_image": "shopify://shop_images/faq_top_curve.svg",
         "padding_top": 20,
         "padding_bottom": 20
       }
