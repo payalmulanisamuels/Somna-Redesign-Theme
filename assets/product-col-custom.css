@@ -382,6 +382,11 @@
     top: -9px;
     font-size: 11px;
   }
+  .button[id^=BuyButtons-ProductSubmitButton-] {
+    --button-border-color: transparent;
+    border-radius: 999px;
+    text-transform: uppercase;
+}
 /* Subscription box*/
 .title_and_price_wrapper {
     color: #0A1A4A;
