@@ -140,13 +140,12 @@
     line-height: normal;
   }
   .variant-card__img-wrap {
-    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .variant-card__img {
-    height: 36px;
+    height: 55px;
     object-fit: contain;
   }
 
