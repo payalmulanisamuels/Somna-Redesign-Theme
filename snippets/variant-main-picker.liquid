@@ -187,21 +187,19 @@
         </div>
       {%- endif -%}
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-price">{{ sub_price | money_without_trailing_zeros }}</span>
+      <span class="variant-card__sub-price" data-sub-price="{{ sub_price }}">{{ sub_price | money_without_trailing_zeros }}</span>
       <span class="variant-card__onetime-price">
-      <span class="variant-card__onetime-price-inner">
+      <span class="variant-card__onetime-price-inner" data-onetime-price="{{ one_time_price }}">
         {{ one_time_price | money_without_trailing_zeros }} one-time
       </span>
-  <span class="variant-card__duration">
+      <span class="variant-card__duration">
         {% if duration_text != blank %}
           {{ duration_text }}
         {% else %}
           {% if forloop.index == 1 %}1 month{% elsif forloop.index == 2 %}2 months{% elsif forloop.index == 3 %}4 months{% endif %}
         {% endif %}
       </span>
-
       </span>
-    
     </div>
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
@@ -276,16 +274,10 @@
           </fieldset>
           {%- assign fieldset_index = fieldset_index | plus: 1 -%}
         {%- elsif block_settings.variant_style == 'dropdowns' -%}
-          {%
-            # There is an opportunity to build a custom select component that will allow us to style the select element further (animation for dropdown, swatches shown in the dropdown options, etc)
-            # It's too bad as it mean rebuilding baked in behaviours but I think we've already done that for the locale selectors
-            # in dawn. So it might mean more time spent in setting it up but worth it for future updates/styling.
-          %}
           {% liquid
             assign property_being_updated = false
             if settings.variant_swatch_width != settings.variant_swatch_height
               assign property_being_updated = true
-              # (original width / original height) x new height (20px at the moment) = new width
               assign new_width = settings.variant_swatch_width | times: 1.0 | divided_by: settings.variant_swatch_height | times: 20
             endif
           %}
@@ -348,26 +340,26 @@
 {% comment %} =========================================================
   CUSTOM SUBSCRIPTION BOX (AUTOSHIP & SAVE + ONE-TIME PURCHASE)
 ========================================================= {% endcomment %}
-<div class="somna-custom-subscription-container">
+<div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
   <!-- Option 1: Autoship & Save Box -->
   <div class="somna-purchase-box active" data-purchase-card="subscribe">
     <div class="somna-box-banner">10% OFF YOUR FIRST ORDER</div>
     <div class="somna-box-inner">
       <div class="somna-box-top-row">
         <label class="somna-radio-label">
-          <input type="radio" name="selling_plan_group" value="subscribe" checked>
+          <input type="radio" name="somna_purchase_type" value="subscribe" checked>
           <span class="somna-radio-bullet"></span>
           <span class="somna-box-title">Autoship & Save</span>
         </label>
         <div class="somna-price-stack">
-          <span class="somna-per-night">$1.32 Per Night</span>
+          <span class="somna-per-night" id="SomnaPerNightPrice">$1.32 Per Night</span>
           <div class="somna-pricing-row">
-            <span class="somna-strike-price">$88</span>
-            <span class="somna-active-price">$79</span>
+            <span class="somna-strike-price" id="SomnaStrikePrice">$88</span>
+            <span class="somna-active-price" id="SomnaSubPrice">$79</span>
           </div>
         </div>
       </div>
-      <div class="somna-save-pill">SAVE $9</div>
+      <div class="somna-save-pill" id="SomnaSavePill">SAVE $9</div>
 
       <ul class="somna-perks-list">
         <li>✓ Same price, it never goes up</li>
@@ -377,10 +369,18 @@
       </ul>
 
       <div class="somna-dropdown-wrap">
-        <select class="somna-frequency-dropdown" name="purchase_frequency">
-          <option value="60">Delivery every 60 Days</option>
-          <option value="30">Delivery every 30 Days</option>
-          <option value="90">Delivery every 90 Days</option>
+        <select class="somna-frequency-dropdown" id="SomnaSellingPlanSelect" name="selling_plan">
+          {%- liquid
+            assign current_var = product_resource.selected_or_first_available_variant
+            for allocation in current_var.selling_plan_allocations
+              echo '<option value="' | append: allocation.selling_plan.id | append: '">' | append: allocation.selling_plan.name | append: '</option>'
+            endfor
+          -%}
+          {% if current_var.selling_plan_allocations.size == 0 %}
+            <option value="60">Delivery every 60 Days</option>
+            <option value="30">Delivery every 30 Days</option>
+            <option value="90">Delivery every 90 Days</option>
+          {% endif %}
         </select>
       </div>
     </div>
@@ -391,12 +391,12 @@
     <div class="somna-box-inner">
       <div class="somna-box-top-row">
         <label class="somna-radio-label">
-          <input type="radio" name="selling_plan_group" value="onetime">
+          <input type="radio" name="somna_purchase_type" value="onetime">
           <span class="somna-radio-bullet"></span>
           <span class="somna-box-title">One-Time Purchase</span>
         </label>
         <div class="somna-price-stack">
-          <span class="somna-active-price">$88</span>
+          <span class="somna-active-price" id="SomnaOneTimePrice">$88</span>
         </div>
       </div>
     </div>
@@ -421,15 +421,68 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const purchaseBoxes = document.querySelectorAll('.somna-purchase-box');
+    const container = document.getElementById('SomnaSubscriptionWidget');
+    if (!container) return;
+
+    const purchaseBoxes = container.querySelectorAll('.somna-purchase-box');
+    const sellingPlanSelect = document.getElementById('SomnaSellingPlanSelect');
+    
+    // Find or create hidden selling_plan input inside the main add-to-cart form
+    const productForm = document.querySelector('form[action*="/cart/add"]') || document.querySelector('.variant-picker__form');
+    let hiddenSellingPlanInput = productForm ? productForm.querySelector('input[name="selling_plan"][type="hidden"]') : null;
+
+    if (productForm && !hiddenSellingPlanInput) {
+      hiddenSellingPlanInput = document.createElement('input');
+      hiddenSellingPlanInput.type = 'hidden';
+      hiddenSellingPlanInput.name = 'selling_plan';
+      productForm.appendChild(hiddenSellingPlanInput);
+    }
+
+    // Set initial selling plan value if subscription is active by default
+    function updateFormSellingPlan() {
+      const activeBox = container.querySelector('.somna-purchase-box.active');
+      if (activeBox && activeBox.getAttribute('data-purchase-card') === 'subscribe') {
+        if (hiddenSellingPlanInput && sellingPlanSelect) {
+          hiddenSellingPlanInput.value = sellingPlanSelect.value;
+        }
+      } else {
+        if (hiddenSellingPlanInput) {
+          hiddenSellingPlanInput.value = '';
+        }
+      }
+    }
+
+    updateFormSellingPlan();
+
     purchaseBoxes.forEach(box => {
       box.addEventListener('click', () => {
         purchaseBoxes.forEach(b => b.classList.remove('active'));
         box.classList.add('active');
         const radio = box.querySelector('input[type="radio"]');
         if (radio) radio.checked = true;
+        updateFormSellingPlan();
       });
     });
+
+    if (sellingPlanSelect) {
+      sellingPlanSelect.addEventListener('change', () => {
+        updateFormSellingPlan();
+      });
+    }
+
+    // Sync prices dynamically when variant changes on the page
+    const observer = new MutationObserver(() => {
+      // Pull updated active prices from the selected card label if needed
+      const selectedCard = document.querySelector('label.variant-option__button-label--card.selected, input.variant-option__button-label--card input:checked');
+      if (selectedCard) {
+        // Dynamic price update hooks can be processed here
+      }
+    });
+
+    const variantPickerEl = document.querySelector('variant-picker');
+    if (variantPickerEl) {
+      observer.observe(variantPickerEl, { childList: true, subtree: true, attributes: true });
+    }
   });
 </script>
 
