@@ -242,7 +242,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "background_media": "none",
-                "background_color": "#B7DCFF",
+                "background_color": "#b7dcff",
                 "video_position": "cover",
                 "background_image_position": "cover",
                 "toggle_overlay": false,
@@ -431,6 +431,14 @@
                     }
                   },
                   "block_order": []
+                },
+                "custom_liquid_4QjPX8": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<!-- Guarantees & Timeline Footer -->\n  <div class=\"somna-widget-meta-footer\">\n    <div class=\"somna-guarantee-text\">\n      🛡️ 30-Night Money-Back Guarantee &nbsp;|&nbsp; Made in USA &nbsp;|&nbsp; <a href=\"/pages/return-refund-policy\" class=\"somna-policy-link\">Learn more →</a>\n    </div>\n    <div class=\"somna-delivery-timeline\">\n      <div class=\"somna-timeline-header\">\n        <span>Order Today</span>\n        <span>Arrives in 7 to 9 business days</span>\n      </div>\n      <div class=\"somna-timeline-line\">\n        <div class=\"somna-timeline-box-icon\">📦</div>\n      </div>\n    </div>\n  </div>"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -440,7 +448,8 @@
                 "text_NFacFW",
                 "product_showcase_k7C98M",
                 "divider_EaWhy8",
-                "buy_buttons_RGzwUW"
+                "buy_buttons_RGzwUW",
+                "custom_liquid_4QjPX8"
               ]
             },
             "accordion_63cAMn": {
