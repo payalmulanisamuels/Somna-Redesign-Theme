@@ -390,10 +390,8 @@
     position: relative;
   }
   .somna-timeline-box-icon {
-    position: absolute;
-    right: -4px;
-    top: -9px;
-    font-size: 11px;
+    position: relative;
+    left: -2px;
   }
 .button[id^=BuyButtons-ProductSubmitButton-] {
     --button-border-color: transparent;
