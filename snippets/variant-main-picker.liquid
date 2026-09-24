@@ -128,7 +128,6 @@
     endif
     assign duration_text = current_variant.metafields.custom.duration.value | default: current_variant.metafields.custom.subtitle.value
 
-    # Determine nights count strictly based on tier index
     assign nights_count = 30
     if forloop.index == 2
       assign nights_count = 60
@@ -136,7 +135,6 @@
       assign nights_count = 120
     endif
     
-    # Calculate Per Night strictly using subscription/selling plan price
     assign sub_per_night = sub_price | times: 1.0 | divided_by: nights_count
   endif
 -%}
@@ -330,7 +328,7 @@
 
       {%- comment -%} =========================================================
          SUBSCRIPTION & ONE-TIME PURCHASE SELLING PLAN WIDGET
-      ========================================================= {% endcomment -%}
+      ========================================================= {%- endcomment -%}
       {% assign selected_variant = product_resource.selected_or_first_available_variant %}
       {%- liquid
         assign current_sub_price = selected_variant.price
@@ -338,13 +336,12 @@
           assign current_sub_price = alloc.price
           break
         endfor
-        # Base subscription per-night calculation for initial view (defaulting to 30 nights)
         assign initial_sub_per_night = current_sub_price | times: 1.0 | divided_by: 30
       -%}
       <div class="subscription-widget-container" style="margin-top: 20px;">
         
         <!-- Autoship & Save Option Box -->
-        <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; transition: all 0.2s ease;">
+        <div class="subscription-option-box subscription-box--autoship" style="border: 2px solid #0055ff; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; transition: all 0.2s ease; cursor: pointer;">
           <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <input type="radio" name="purchase_type" value="subscription" checked style="accent-color: #0055ff;" class="purchase-type-radio" data-type="subscription">
@@ -360,20 +357,14 @@
                   {{ selected_variant.selling_plan_allocations[0].price | money }}
                 {%- else -%}
                   {{ selected_variant.price | money }}
-                %}{%- endif -%}
+                {%- endif -%}
               </span>
               <div style="background: #0055ff; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 2px;">SAVE 10%</div>
             </div>
           </label>
 
-          <!-- Hidden input required by Shopify selling plans architecture -->
-          {%- if selected_variant.selling_plan_allocations.size > 0 -%}
-            <input type="hidden" name="selling_plan" value="{{ selected_variant.selling_plan_allocations[0].selling_plan.id }}" class="selling-plan-hidden-input">
-          {%- else -%}
-            <input type="hidden" name="selling_plan" value="" class="selling-plan-hidden-input">
-          {%- endif -%}
+          <input type="hidden" name="selling_plan" value="{% if selected_variant.selling_plan_allocations.size > 0 %}{{ selected_variant.selling_plan_allocations[0].selling_plan.id }}{% endif %}" class="selling-plan-hidden-input">
 
-          <!-- Subscription Perks List -->
           <ul style="list-style: none; padding: 0; margin: 12px 0 0 0; font-size: 12px; color: #333; border-top: 1px solid #eee; padding-top: 10px;">
             <li style="margin-bottom: 4px;">✓ Same price, it never goes up</li>
             <li style="margin-bottom: 4px;">✓ <strong>FREE</strong> shipping</li>
@@ -381,7 +372,6 @@
             <li>✓ Skip, pause, or cancel anytime</li>
           </ul>
 
-          <!-- Delivery frequency dropdown selector -->
           <div style="margin-top: 12px;" class="frequency-dropdown-wrap">
             <select name="subscription_frequency" class="subscription-frequency-selector" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; background: #f9f9f9;">
               {%- if selected_variant.selling_plan_allocations.size > 0 -%}
@@ -396,7 +386,7 @@
         </div>
 
         <!-- One-Time Purchase Option Box -->
-        <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; transition: all 0.2s ease;">
+        <div class="subscription-option-box subscription-box--onetime" style="border: 1px solid #ccc; border-radius: 12px; padding: 14px 16px; background: #fff; transition: all 0.2s ease; cursor: pointer;">
           <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; width: 100%;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <input type="radio" name="purchase_type" value="one-time" style="accent-color: #0055ff;" class="purchase-type-radio" data-type="one-time">
@@ -408,33 +398,65 @@
 
       </div>
 
-      <!-- Script to handle box highlighting & prevent unwanted radio resets -->
+      <!-- Script to enforce separate clickable states and block theme interference -->
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const container = document.querySelector('.variant-picker');
           if (!container) return;
 
-          const radios = container.querySelectorAll('.purchase-type-radio');
           const autoshipBox = container.querySelector('.subscription-box--autoship');
           const onetimeBox = container.querySelector('.subscription-box--onetime');
+          const autoshipRadio = container.querySelector('input[value="subscription"]');
+          const onetimeRadio = container.querySelector('input[value="one-time"]');
           const sellingPlanInput = container.querySelector('.selling-plan-hidden-input');
 
-          radios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-              if (e.target.value === 'one-time') {
-                onetimeBox.style.borderColor = '#0055ff';
-                onetimeBox.style.borderWidth = '2px';
-                autoshipBox.style.borderColor = '#ccc';
-                autoshipBox.style.borderWidth = '1px';
-                if (sellingPlanInput) sellingPlanInput.disabled = true; 
-              } else {
-                autoshipBox.style.borderColor = '#0055ff';
-                autoshipBox.style.borderWidth = '2px';
-                onetimeBox.style.borderColor = '#ccc';
-                onetimeBox.style.borderWidth = '1px';
-                if (sellingPlanInput) sellingPlanInput.disabled = false; 
-              }
-            });
+          function selectOneTime() {
+            if (onetimeRadio) onetimeRadio.checked = true;
+            onetimeBox.style.borderColor = '#0055ff';
+            onetimeBox.style.borderWidth = '2px';
+            autoshipBox.style.borderColor = '#ccc';
+            autoshipBox.style.borderWidth = '1px';
+            if (sellingPlanInput) {
+              sellingPlanInput.disabled = true;
+              sellingPlanInput.value = '';
+            }
+          }
+
+          function selectAutoship() {
+            if (autoshipRadio) autoshipRadio.checked = true;
+            autoshipBox.style.borderColor = '#0055ff';
+            autoshipBox.style.borderWidth = '2px';
+            onetimeBox.style.borderColor = '#ccc';
+            onetimeBox.style.borderWidth = '1px';
+            if (sellingPlanInput) {
+              sellingPlanInput.disabled = false;
+              // Restore first allocation selling plan ID if available
+              const firstOpt = container.querySelector('.subscription-frequency-selector option');
+              if (firstOpt) sellingPlanInput.value = firstOpt.value;
+            }
+          }
+
+          // Click handler for entire One-Time box
+          onetimeBox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            selectOneTime();
+          });
+
+          // Click handler for entire Autoship box
+          autoshipBox.addEventListener('click', (e) => {
+            // Avoid triggering if clicking inside the frequency dropdown itself
+            if (e.target.closest('.subscription-frequency-selector')) return;
+            e.stopPropagation();
+            selectAutoship();
+          });
+
+          // Radio change events
+          autoshipRadio.addEventListener('change', () => {
+            if (autoshipRadio.checked) selectAutoship();
+          });
+
+          onetimeRadio.addEventListener('change', () => {
+            if (onetimeRadio.checked) selectOneTime();
           });
         });
       </script>
