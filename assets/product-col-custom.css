@@ -157,12 +157,6 @@ span.variant-card__title {
 
   .variant-card__badge.popular { background: #1354c4; }
   .variant-card__badge.free-bag { background: #0a1a4a; }
-
-  .variant-card__title {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #0a1a4a;
-  }
   .variant-card__sub-title {
     font-size: 0.52rem;
     color: #4e5875;
