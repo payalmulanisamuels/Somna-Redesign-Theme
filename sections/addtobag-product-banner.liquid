@@ -12,7 +12,7 @@
 -%}
 {% assign alignment = product.metafields.custom.bottom_section.value %} 
 {{alignment.set_true_if_need_left_content }}
-<div class="hz-banner-section hz-banner-align--{{ section.settings.content_alignment }}" style="background-color: {{ section.settings.bg_color }};">
+<div class="hz-banner-section {% if alignment.set_true_if_need_left_content == false %} hz-banner-align--right{% endif %}" style="background-color: {{ section.settings.bg_color }};">
 {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
     <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
@@ -81,9 +81,7 @@
     position: absolute;
   }
   /* Alignment Variants */
-  .hz-banner-align--left .hz-banner-card {
-    justify-content: flex-start;
-  }
+
   .hz-banner-align--right .hz-banner-card {
     justify-content: flex-end;
   }
