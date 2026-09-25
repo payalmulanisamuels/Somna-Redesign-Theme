@@ -131,7 +131,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0A1A4A",
+                "text_color": "#0a1a4a",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -188,76 +188,20 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 9,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_VDbt3L",
-            "text_eT6TMz",
-            "text_Lqf6bA"
-          ]
-        },
-        "group_iMPm3G": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "custom_liquid_iRWbVt": {
-              "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
-              "disabled": true,
-              "settings": {
-                "custom_liquid": "<span class=\"bundle\">Bundles from $59 · Subscribe & Save</span>"
-              },
-              "blocks": {}
             },
-            "button_x76i7w": {
+            "button_6EgajN": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "Shop the Breathe Bundle",
                 "link": "shopify://products/sleep-bundle",
                 "open_in_new_tab": false,
-                "style_class": "button-custom",
+                "style_class": "button",
                 "custom_button_background": "#071a4b",
                 "custom_button_text": "{{ settings.color_palette.background }}",
                 "custom_button_border": "{{ settings.color_palette.background }}",
@@ -271,14 +215,15 @@
             }
           },
           "block_order": [
-            "custom_liquid_iRWbVt",
-            "button_x76i7w"
+            "text_VDbt3L",
+            "text_eT6TMz",
+            "text_Lqf6bA",
+            "button_6EgajN"
           ]
         }
       },
       "block_order": [
-        "group_47iMdX",
-        "group_iMPm3G"
+        "group_47iMdX"
       ],
       "name": "t:names.hero",
       "settings": {
