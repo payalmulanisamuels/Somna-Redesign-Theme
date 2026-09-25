@@ -59,3 +59,15 @@ document.addEventListener('submit', function(e) {
     btn.textContent = originalText;
   });
 });
+
+
+if(document.querySelector(".hz-banner-btn")){
+  document.querySelectorAll(".hz-banner-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+      document
+        .querySelector("product-form-component .add-to-cart-button")
+        ?.click();
+    });
+  });
+}
