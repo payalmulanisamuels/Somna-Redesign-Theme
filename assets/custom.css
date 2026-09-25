@@ -677,7 +677,7 @@ a.cart-items__title {
     line-height: 20px; /* 142.857% */
 }
 .cart-items__quantity {
-    margin-block-start: 0;
+    margin-block-start: 0 !important;
 }
 .cart-items .quantity-selector {
     border-radius: 9999px;
