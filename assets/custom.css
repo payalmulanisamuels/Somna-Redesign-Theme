@@ -682,6 +682,7 @@ a.cart-items__title {
     border: 1px solid rgba(203, 213, 225, 0.60);
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    height: 33px !important;
 }
 
 .quantity-selector svg {
@@ -1101,6 +1102,10 @@ ul.custom-payment-icons-list li {
     background: #4660E8; 
     border-radius: 999.9px;
     transition: width 0.3s ease;
+}
+.progress-icon-cart{
+    transform: translate(-50%, -50%);
+    position: absolute; top: 50%;
 }
 .progress-icon{
     transform: translate(-50%, -50%);
