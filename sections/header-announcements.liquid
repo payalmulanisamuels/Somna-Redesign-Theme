@@ -10,11 +10,39 @@
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
+
+ {% comment %} Top Wave Divider {% endcomment %}
+
+{% if section.settings.top_wave_image != blank %}
+ <div class="wave-container top">
+
+<img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
+
+{% comment %} Bottom Wave Divider {% endcomment %}
+
+{% if section.settings.bottom_wave_image != blank %}
+ <div class="wave-container bottom">
+<img 
+      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+      alt="bottom_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    />
+</div>
+{% endif %}
 <div class="section-background color-custom-{{ section.id }}"></div>
 <aside
   class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
   style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %}"
 >
+
   {% liquid
     assign autoplay = false
     assign show_arrows = false
@@ -39,6 +67,16 @@
     </div>
   </announcement-bar-component>
 </aside>
+
+{% comment %}
+<div class="wave-container bottom" style="color: #071a4b;">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="393" height="40" viewBox="0 0 393 40" fill="none">
+<path d="M0 16.6539C67 -6.34608 77.5 -1.84612 132 8.26906C190 29.846 230 -7.42325 286 10.2306C330 23.9614 366 11.5387 393 1.15387V39.6537H0V16.6539Z" fill="currentColor"></path>
+</svg>
+</div>
+{% endcomment %}
+
 
 {% stylesheet %}
   .announcement-bar {
@@ -137,6 +175,22 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
     {
       "type": "range",
       "id": "speed",

@@ -1,0 +1,73 @@
+{%- comment -%}
+  Sleep Guide Progress Bar Component (Horizon compatible)
+  Rules:
+  - 1 Bag / 1 month -> no guides (0%)
+  - 2 Bags / 2 months -> both guides (100%)
+  - 3+1 Bags / 4 months -> both guides (100%)
+  - Colour Set + Season Bundle -> 3 months -> both guides (100%)
+  - Sleep Bundle -> same rule for 2-Set and 3+1-Set tiers -> both guides (100%)
+{%- endcomment -%}
+
+{%- liquid
+  assign total_bags = 0
+  assign has_guides = false
+  assign progress_percent = 0
+  assign message = 'You unlocked 2 free Sleep Guides!'
+
+  for item in cart.items
+    assign title_down = item.title | downcase | default: item.product.title | downcase
+    assign qty = item.quantity
+
+    if title_down contains '1 bag' or title_down contains '1-month'
+      # 1 Bag (1 month) -> no guides
+    elsif title_down contains '2 bags' or title_down contains '2-month' or title_down contains '2-set'
+      assign total_bags = total_bags | plus: qty 
+      assign has_guides = true
+    elsif title_down contains '3+1' or title_down contains '4-month' or title_down contains '3+1-set'
+      assign total_bags = total_bags | plus: qty  
+      assign has_guides = true
+    elsif title_down contains 'colour set' and title_down contains 'season bundle'
+      assign has_guides = true
+    elsif title_down contains 'sleep bundle'
+      # handled by tier checks above if tagged or parsed via title variant
+    endif
+  endfor
+
+  # Fallback calculation logic for Cart/Bundle rule mapping:
+  if has_guides and total_bags >= 2
+    assign progress_percent = 100
+    assign message = 'You unlocked 2 free Sleep Guides!'
+  elsif total_bags == 1
+    assign progress_percent = 50
+    assign message = "You're 1 bag away from 2 free Sleep Guides"
+else
+    assign progress_percent = 0
+    assign message = "You're 2 bag away from 2 free Sleep Guides"
+  endif
+-%}
+
+
+<div class="sleep-guide-progress-wrapper">
+  <!-- Background SVG Image -->
+  <div class="bg-svg">
+    <img src="https://cdn.shopify.com/s/files/1/0796/2545/3799/files/bar-bg.svg?v=1790076591" alt="Background wave" style="width: 100%; height: 100%; object-fit: cover;" [cite: 2] />
+  </div>
+
+  <!-- Content Layer -->
+  <div class="progressbar-content">
+    <div class="message_cotent">
+       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <rect width="24" height="24" fill="url(#pattern0_857_2060)"/> <defs> <pattern id="pattern0_857_2060" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_857_2060" transform="scale(0.01)"/> </pattern> <image id="image0_857_2060" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADYElEQVR4nO2dO2tUURRGl6Y2QtBGO0VBxQciio2iIJapLLQS8fEDtBB8kUpFEQuNSEylNrsW/AGWvvAHKLHTzhAQDElGTriBMExOJuOee77r7AUbAvdu+NbeTHLmprgQBEEQBEEQDC7bgWPAKHAUGOmiZ6S6d7Tq3VZDzv+azcA94BvQaqs54B1wFli/rCf9fK66Nteh7ytwF9hU0KuRXAamOwy0U30EdgA7gc9d9vwCLpaWbAqPuxzq8ppewwKX16PSsupc72Go/1rXSkurcgCYL7CQ9Ldmb2l5Rd4WWMZSvSktr8ZWYCEzsCngFnABGAf+dDHkdM/Tquc28D1zb/pkbik9BCWurHKK2tB2/5FVlpKuHW7rGQY+ZXou1egrz8PMoE6s0PMs05M+GZ04mel50Ee/xvEyM6jhFXrOZ3rStU4MZ3pShqBiPDOoXSv0nMn0pGud2JPpedJHv8ZxNTOo544Lmcj0pAxBxf7MoBaqpewGhnpYyFDVO7HKSS5laCz7gMnqODrbxRF0UGq2msmLur5srgPGCn2jbjWs0ozuVDPrG2MCoq2GVVpK335NxSeDNdd89ZzOnUkBuVZDKx0o3JkSEGs1tNJ/Pd2J0xQ9V3q25k5pqVbDKxaCVsVC0KpYCFoVC0GrYiFolTvpCWoUPVcQBEEQBEHQOEzgXG8NzueOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO5oy5s4vncURc28XzuqAubeD531IVNPJ876sImns8ddWETz+eOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO581pc2ATyvapxH4sv0CotbOILuV/jPjgtIGziCzlV4z4WX5Pd7ZuZB3EhX9peK14Lh4DfsRDaK83kIIU4DvyMhbBUP4BjFGYjcBP4AMwM4EJmgPfAjcxLMIMgCIIgCIIgCIIgoIn8BabFMXoRIeglAAAAAElFTkSuQmCC"/> </defs> </svg>
+      <span>{{ message }}</span>
+    </div>
+
+    <!-- Progress Track -->
+    <div class="progress-track">
+      <!-- Filled Track -->
+      <div class="fill-track" style="width: {{ progress_percent }}%;"></div>
+      <!-- Progress Indicator Icon Badge -->
+      <div class="progress-icon" style=" left: {{ progress_percent }}%; ">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <rect width="24" height="24" fill="url(#pattern0_857_2060)"/> <defs> <pattern id="pattern0_857_2060" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_857_2060" transform="scale(0.01)"/> </pattern> <image id="image0_857_2060" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADYElEQVR4nO2dO2tUURRGl6Y2QtBGO0VBxQciio2iIJapLLQS8fEDtBB8kUpFEQuNSEylNrsW/AGWvvAHKLHTzhAQDElGTriBMExOJuOee77r7AUbAvdu+NbeTHLmprgQBEEQBEEQDC7bgWPAKHAUGOmiZ6S6d7Tq3VZDzv+azcA94BvQaqs54B1wFli/rCf9fK66Nteh7ytwF9hU0KuRXAamOwy0U30EdgA7gc9d9vwCLpaWbAqPuxzq8ppewwKX16PSsupc72Go/1rXSkurcgCYL7CQ9Ldmb2l5Rd4WWMZSvSktr8ZWYCEzsCngFnABGAf+dDHkdM/Tquc28D1zb/pkbik9BCWurHKK2tB2/5FVlpKuHW7rGQY+ZXou1egrz8PMoE6s0PMs05M+GZ04mel50Ee/xvEyM6jhFXrOZ3rStU4MZ3pShqBiPDOoXSv0nMn0pGud2JPpedJHv8ZxNTOo544Lmcj0pAxBxf7MoBaqpewGhnpYyFDVO7HKSS5laCz7gMnqODrbxRF0UGq2msmLur5srgPGCn2jbjWs0ozuVDPrG2MCoq2GVVpK335NxSeDNdd89ZzOnUkBuVZDKx0o3JkSEGs1tNJ/Pd2J0xQ9V3q25k5pqVbDKxaCVsVC0KpYCFoVC0GrYiFolTvpCWoUPVcQBEEQBEHQOEzgXG8NzueOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO5oy5s4vncURc28XzuqAubeD531IVNPJ876sImns8ddWETz+eOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO581pc2ATyvapxH4sv0CotbOILuV/jPjgtIGziCzlV4z4WX5Pd7ZuZB3EhX9peK14Lh4DfsRDaK83kIIU4DvyMhbBUP4BjFGYjcBP4AMwM4EJmgPfAjcxLMIMgCIIgCIIgCIIgoIn8BabFMXoRIeglAAAAAElFTkSuQmCC"/> </defs> </svg>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,250 @@
+{%- assign how_it_works_items = product.metafields.custom.how_it_works.value -%}
+{%- assign item_count = how_it_works_items.count | default: how_it_works_items.size -%}
+
+{%- if item_count > 0 -%}
+  <div class="hz-hiw-section" id="hz-hiw-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+    
+    {% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+      <div class="hz-hiw-wave hz-hiw-wave--top">
+        <img 
+          src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+          alt="" 
+          loading="lazy" 
+          class="hz-hiw-wave-img"
+        />
+      </div>
+    {% endif %}
+
+    <div class="section section--page-width">
+      {%- if item_count > 1 -%}
+        {% comment %} ========================================================
+          LAYOUT A: 2+ Items (Side-by-side Cards)
+        ======================================================== {% endcomment %}
+        {% if section.settings.heading != blank %}
+          <h2 class="custom-header">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        <div class="hz-hiw-grid">
+          {% for item in how_it_works_items %}
+            <div class="hz-hiw-card">
+              <div class="hz-hiw-card-inner">
+            
+                  <div class="hz-hiw-card-header">
+                    <div class="hz-hiw-card-info">
+                      {% if item.heading != blank %}
+                        <h3 class="hz-hiw-card-title">{{ item.heading }}</h3>
+                      {% endif %}
+                      {% if item.content != blank %}
+                        <div class="hz-hiw-card-desc">{{ item.content | metafield_tag }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                  {% if item.image != blank %}
+                    <div class="hz-hiw-card-bottom-image">
+                      {{ item.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                    </div>
+                  {% endif %}
+              </div>
+                {% if item.bottom_image != blank %}
+                    <div class="hz-bottom_image">
+                      {{ item.bottom_image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+                    </div>
+                  {% endif %}
+
+            </div>
+          {% endfor %}
+        </div>
+
+      {%- else -%}
+        {% comment %} ========================================================
+          LAYOUT B: 1 Item (Horizontal Exploded View)
+        ======================================================== {% endcomment %}
+        {% for single_item in how_it_works_items %}
+        <div class="hz-hiw-single-row">
+          <div class="hz-hiw-single-content">
+            <h2 class="hz-hiw-single-title">
+              {{ single_item.heading.value | default: section.settings.heading }}
+            </h2>
+
+            {% if single_item.content != blank %}
+              <div class="hz-hiw-single-desc">
+                {{ single_item.content | metafield_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if single_item.image != blank %}
+            <div class="hz-hiw-single-media">
+              {{ single_item.image | image_url: width: 700 | image_tag: loading: 'lazy' }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {%- endif -%}
+    </div>
+
+    {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+      <div class="hz-hiw-wave hz-hiw-wave--bottom">
+        <img 
+          src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+          alt="" 
+          loading="lazy" 
+          class="hz-hiw-wave-img"
+        />
+      </div>
+    {% endif %}
+
+  </div>
+{%- endif -%}
+
+<style>
+  .hz-hiw-section {
+    position: relative;
+    padding: 70px 0 35px 0px;
+  }
+  .hz-hiw-wave-img {
+    display: block;
+    width: 100%;
+    height: 60px;
+    object-fit: fill;
+  }
+  .hz-hiw-main-title {
+    text-align: center;
+    font-size: 38px;
+    font-family: serif;
+    font-weight: 500;
+    color: #0b1a30;
+    margin: 0 0 40px 0;
+  }
+
+  /* ------------------- Double Card Layout ------------------- */
+  .hz-hiw-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .hz-hiw-card {
+    background-color: #dceaf7;
+    border-radius: 24px;
+    padding: 12px 10px;
+  }
+  .hz-hiw-card-inner{
+    display: flex;
+    justify-content: space-between;
+  }
+  .hz-hiw-card:nth-child(2) {
+    background-color: #eee9e0;
+  }
+
+  .hz-hiw-card-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+  }
+
+  .hz-hiw-card-info {
+    flex: 1;
+  }
+
+  .hz-hiw-card-title {
+    font-size: 24px;
+    font-family: serif;
+    font-weight: 600;
+    color: #0b1a30;
+    margin: 0 0 12px 0;
+    line-height: 1.15;
+  }
+
+  .hz-hiw-card-desc {
+    font-size: 8px;
+    line-height: 1.55;
+    color: #1a2a3e;
+  }
+  .hz-hiw-card-bottom-image {
+    max-width: 167px;
+  }
+  /* ------------------- Single Item Layout ------------------- */
+  .hz-hiw-single-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .hz-hiw-single-content {
+    flex: 1;
+  }
+
+  .hz-hiw-single-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0A1A4A;
+    margin: 0 0 5px 0;
+    font-family: var(--headfont);
+  }
+  .hz-hiw-single-desc {
+    font-size: 10px;
+    line-height: 1.5;
+    color: #0A1A4A;
+  }
+  .hz-hiw-single-desc p {
+    margin: 0;
+  }
+
+  .hz-hiw-single-media {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hz-hiw-single-media img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "How It Works (Dynamic)",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#fbf7ee"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading (For Multi-card view)",
+      "default": "How It Works"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top Wave SVG Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom Wave SVG Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works (Dynamic)"
+    }
+  ]
+}
+{% endschema %}

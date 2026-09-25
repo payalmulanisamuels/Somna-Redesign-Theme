@@ -336,7 +336,16 @@
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
-
+ {% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
 <header-component
   id="header-component"
   class="{{ class }}"
@@ -1249,6 +1258,22 @@
   "tag": "header",
   "class": "header-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
     {
       "type": "header",
       "content": "t:content.logo"

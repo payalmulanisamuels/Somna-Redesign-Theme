@@ -8,6 +8,110 @@
 {% render 'text-component-shimmer-styles' %}
 {% render 'cart-typography-styles' %}
 
+<div class="hz-perks-section">
+  <div class="hz-perks-container">
+    {%- for i in (1..3) -%}
+      {%- liquid
+        assign show_perk = true
+        assign icon_type = 'gift'
+        assign custom_img = blank
+        assign text_val = ''
+
+        if i == 1
+          assign show_perk = settings.show_perk_1
+          assign icon_type = settings.icon_1_type
+          assign custom_img = settings.icon_1_image
+          assign text_val = settings.perk_1_text
+        elsif i == 2
+          assign show_perk = settings.show_perk_2
+          assign icon_type = settings.icon_2_type
+          assign custom_img = settings.icon_2_image
+          assign text_val = settings.perk_2_text
+        elsif i == 3
+          assign show_perk = settings.show_perk_3
+          assign icon_type = settings.icon_3_type
+          assign custom_img = settings.icon_3_image
+          assign text_val = settings.perk_3_text
+        endif
+      -%}
+
+      {%- if show_perk and text_val != blank -%}
+        <div class="hz-perk-item">
+          <div class="hz-perk-icon-wrap">
+            {%- if custom_img != blank -%}
+              <img src="{{ custom_img | image_url: width: 80 }}" alt="" class="hz-perk-img" loading="lazy" width="24" height="24">
+            {%- else -%}
+              {%- case icon_type -%}
+                {%- when 'gift' -%}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+                {%- when 'refresh' -%}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                {%- when 'shield' -%}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+          <span class="hz-perk-text" style="color: {{ settings.text_color }};">
+            {{ text_val | newline_to_br }}
+          </span>
+        </div>
+
+        {%- if i < 3 -%}
+          <div class="hz-perk-divider" style="background-color: {{ settings.divider_color }};"></div>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+
+{%- liquid
+  # Calculate dynamic original total vs active cart total including subscription savings
+  assign calculated_original_total = 0
+  assign calculated_active_total = cart.total_price
+
+  for item in cart.items
+    assign orig_price = item.variant.price | default: item.original_price
+    if item.selling_plan_allocation != blank
+      assign orig_price = item.variant.price
+    endif
+    assign line_orig = orig_price | times: item.quantity
+    assign calculated_original_total = calculated_original_total | plus: line_orig
+  endfor
+
+  # Total cart discount + subscription value difference
+  assign subscription_savings = calculated_original_total | minus: cart.total_price
+  assign total_saved = cart.total_discount | plus: subscription_savings
+  if total_saved < 0
+    assign total_saved = 0
+  endif
+-%}
+
+<div class="hz-cart-totals-summary">
+  <div class="hz-cart-totals-row">
+    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
+    <text-component value="{{ cart.total_price | money }}">
+      {{ cart.total_price | money }}
+    </text-component>
+  </div>
+
+  {%- if total_saved > 0 -%}
+    <div class="hz-cart-totals-row hz-cart-totals-saved">
+      <span>You saved</span>
+      <text-component value="-{{ total_saved | money }}">
+        -{{ total_saved | money }}
+      </text-component>
+    </div>
+  {%- endif -%}
+
+  <div class="hz-cart-totals-row">
+    <span>Shipping</span>
+    <span>{% if cart.total_price >= 5000 %}Free{% else %}Calculated at checkout{% endif %}</span>
+  </div>
+</div>
+
+
+
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
@@ -251,9 +355,9 @@
         {% endform %}
       </span>
     {% endif %}
-    <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
+    {% comment %} <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
       {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
-    </div>
+    </div> {% endcomment %}
   </div>
 </div>
 
@@ -269,9 +373,169 @@
     form="cart-form"
   >
     <span class="button-text">
-      {{ 'content.checkout' | t }}
+      {{ 'content.checkout' | t }} - {{ cart.total_price | money }}
     </span>
   </button>
+
+
+<div class="hz-trust-badges-wrapper">
+  {% comment %} Badge 1 {% endcomment %}
+  {% if settings.show_trust_badge_1 and settings.trust_badge_1_text != blank %}
+    <div 
+      class="hz-trust-pill"
+      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
+    >
+      {% if settings.trust_badge_1_image != blank %}
+        <img 
+          src="{{ settings.trust_badge_1_image | image_url: width: 40 }}" 
+          alt="" 
+          class="hz-trust-pill__img"
+          loading="lazy"
+          width="16"
+          height="16"
+        >
+      {% elsif settings.trust_badge_1_emoji != blank %}
+        <span class="hz-trust-pill__icon">{{ settings.trust_badge_1_emoji }}</span>
+      {% endif %}
+      <span class="hz-trust-pill__text">{{ settings.trust_badge_1_text }}</span>
+    </div>
+  {% endif %}
+
+  {% comment %} Badge 2 {% endcomment %}
+  {% if settings.show_trust_badge_2 and settings.trust_badge_2_text != blank %}
+    <div 
+      class="hz-trust-pill"
+      style="background-color: {{ settings.trust_badge_bg }}; color: {{ settings.trust_badge_color }};"
+    >
+      {% if settings.trust_badge_2_image != blank %}
+        <img 
+          src="{{ settings.trust_badge_2_image | image_url: width: 40 }}" 
+          alt="" 
+          class="hz-trust-pill__img"
+          loading="lazy"
+          width="16"
+          height="16"
+        >
+      {% elsif settings.trust_badge_2_emoji != blank %}
+        <span class="hz-trust-pill__icon">{{ settings.trust_badge_2_emoji }}</span>
+      {% endif %}
+      <span class="hz-trust-pill__text">{{ settings.trust_badge_2_text }}</span>
+    </div>
+  {% endif %}
+</div>
+
+
+
+
+
+<div class="custom-payment-icons-wrapper">
+
+  <div class="express_checkout">
+    <span>or express checkout</span>
+  </div>
+  <ul class="custom-payment-icons-list" role="list">
+    
+    {% comment %} Amex {% endcomment %}
+    {% if settings.show_payment_amex %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_amex != blank %}
+          <img src="{{ settings.payment_image_amex | image_url: width: 120 }}" alt="Amex" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'american_express' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Apple Pay {% endcomment %}
+    {% if settings.show_payment_apple_pay %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_apple_pay != blank %}
+          <img src="{{ settings.payment_image_apple_pay | image_url: width: 120 }}" alt="Apple Pay" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'apple_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Bancontact {% endcomment %}
+    {% if settings.show_payment_bancontact %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_bancontact != blank %}
+          <img src="{{ settings.payment_image_bancontact | image_url: width: 120 }}" alt="Bancontact" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'bancontact' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Diners Club {% endcomment %}
+    {% if settings.show_payment_diners_club %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_diners_club != blank %}
+          <img src="{{ settings.payment_image_diners_club | image_url: width: 120 }}" alt="Diners Club" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'diners_club' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Discover {% endcomment %}
+    {% if settings.show_payment_discover %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_discover != blank %}
+          <img src="{{ settings.payment_image_discover | image_url: width: 120 }}" alt="Discover" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'discover' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Google Pay {% endcomment %}
+    {% if settings.show_payment_google_pay %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_google_pay != blank %}
+          <img src="{{ settings.payment_image_google_pay | image_url: width: 120 }}" alt="Google Pay" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'google_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Mastercard {% endcomment %}
+    {% if settings.show_payment_mastercard %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_mastercard != blank %}
+          <img src="{{ settings.payment_image_mastercard | image_url: width: 120 }}" alt="Mastercard" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Shop Pay {% endcomment %}
+    {% if settings.show_payment_shop_pay %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_shop_pay != blank %}
+          <img src="{{ settings.payment_image_shop_pay | image_url: width: 120 }}" alt="Shop Pay" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'shopify_pay' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% comment %} Visa {% endcomment %}
+    {% if settings.show_payment_visa %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_visa != blank %}
+          <img src="{{ settings.payment_image_visa | image_url: width: 120 }}" alt="Visa" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+  </ul>
+</div>
 
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div

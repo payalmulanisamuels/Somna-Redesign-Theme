@@ -20,10 +20,6 @@
   assign center = ''
   assign right = ''
 
-  if first != blank
-    assign left = 'first '
-  endif
-
   for item in order
     assign column_key = item | append: '_position'
     assign row_key = item | append: '_row'
@@ -31,7 +27,9 @@
     assign item_column = settings[column_key] | default: 'left'
 
     case item
-      when 'actions'
+      when 'logo'
+        assign item_column = 'left'
+      when 'actions', 'search', 'drawer_search'
         assign item_column = 'right'
     endcase
 
@@ -46,6 +44,11 @@
       endcase
     endif
   endfor
+
+  # Move the hamburger menu toggle ('first') to the end of the right column
+  if first != blank
+    assign right = right | append: 'first '
+  endif
 
   assign columns = 'left,center,right' | split: ','
 -%}

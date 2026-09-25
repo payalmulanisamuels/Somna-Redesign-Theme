@@ -18,6 +18,7 @@
 {% enddoc %}
 
 <div class="theme-drawer__header">
+  <div class="header_left">
   <h2
     class="theme-drawer__title h4"
     {% if heading_id %}
@@ -27,7 +28,10 @@
     {{ title }}
     {{ title_append }}
   </h2>
-
+<div class="cart-content">
+  <p>{{ 'content.cart_content' | t }}</p>
+</div>
+</div>
   <button
     class="theme-drawer__close-button"
     on:click="#{{ drawer_id }}/close"

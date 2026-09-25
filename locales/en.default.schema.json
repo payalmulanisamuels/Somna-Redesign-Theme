@@ -276,7 +276,7 @@
     "card": "Card",
     "carousel": "Carousel",
     "carousel_content": "Carousel content",
-    "cart": "Cart",
+    "cart": "Your cart",
     "cart_items": "Cart items",
     "cart_products": "Cart products",
     "collection": "Collection",
@@ -791,7 +791,7 @@
     "cart_count": "Cart count",
     "cart_items": "Cart items",
     "cart_related_products": "Related products",
-    "cart_title": "Cart",
+    "cart_title": "Your cart",
     "cart_total": "Cart total",
     // Setting label for cart display format (page vs drawer)
     "cart_type": "Type",

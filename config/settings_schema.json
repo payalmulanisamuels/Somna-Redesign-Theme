@@ -1621,6 +1621,375 @@
       }
     ]
   },
+ 
+{
+  "name": "Cart Drawer",
+  "settings": [
+      {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Color",
+      "default": "#cbd3d8"
+    },
+    {
+      "type": "header",
+      "content": "Perk Item 1 (Left)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_perk_1",
+      "label": "Show Perk 1",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "icon_1_type",
+      "label": "Built-in Icon 1",
+      "options": [
+        { "value": "gift", "label": "Gift Box / Shipping" },
+        { "value": "refresh", "label": "Refresh / Rotate" },
+        { "value": "shield", "label": "Shield Check" }
+      ],
+      "default": "gift"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1_image",
+      "label": "Custom Icon 1 Image (Overrides Built-in)"
+    },
+    {
+      "type": "textarea",
+      "id": "perk_1_text",
+      "label": "Perk 1 Text",
+      "default": "Free shipping,\nalways"
+    },
+    {
+      "type": "header",
+      "content": "Perk Item 2 (Middle)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_perk_2",
+      "label": "Show Perk 2",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "icon_2_type",
+      "label": "Built-in Icon 2",
+      "options": [
+        { "value": "gift", "label": "Gift Box / Shipping" },
+        { "value": "refresh", "label": "Refresh / Rotate" },
+        { "value": "shield", "label": "Shield Check" }
+      ],
+      "default": "refresh"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2_image",
+      "label": "Custom Icon 2 Image (Overrides Built-in)"
+    },
+    {
+      "type": "textarea",
+      "id": "perk_2_text",
+      "label": "Perk 2 Text",
+      "default": "Cancel\nanytime"
+    },
+    {
+      "type": "header",
+      "content": "Perk Item 3 (Right)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_perk_3",
+      "label": "Show Perk 3",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "icon_3_type",
+      "label": "Built-in Icon 3",
+      "options": [
+        { "value": "gift", "label": "Gift Box / Shipping" },
+        { "value": "refresh", "label": "Refresh / Rotate" },
+        { "value": "shield", "label": "Shield Check" }
+      ],
+      "default": "shield"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3_image",
+      "label": "Custom Icon 3 Image (Overrides Built-in)"
+    },
+    {
+      "type": "textarea",
+      "id": "perk_3_text",
+      "label": "Perk 3 Text",
+      "default": "Secure\ncheckout"
+    },
+    {
+      "type": "header",
+      "content": "Badge 1 (e.g. Returns)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badge_1",
+      "label": "Show Badge 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge_1_image",
+      "label": "Badge 1 Custom Icon (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_1_emoji",
+      "label": "Badge 1 Emoji / Icon Text (Fallback)",
+      "default": "🚚"
+    },
+    {
+      "type": "richtext",
+      "id": "trust_badge_1_text",
+      "label": "Badge 1 Text"
+    },
+    {
+      "type": "header",
+      "content": "Badge 2 (e.g. Secure Checkout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badge_2",
+      "label": "Show Badge 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge_2_image",
+      "label": "Badge 2 Custom Icon (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_emoji",
+      "label": "Badge 2 Emoji / Icon Text (Fallback)",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "trust_badge_2_text",
+      "label": "Badge 2 Text",
+      "default": "Secure Checkout"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "color",
+      "id": "trust_badge_bg",
+      "label": "Badge Background Color",
+      "default": "#f3f5f8"
+    },
+    {
+      "type": "color",
+      "id": "trust_badge_color",
+      "label": "Badge Text Color",
+      "default": "#18283d"
+    },
+    {
+      "type": "header",
+      "content": "Payment Icons",
+      
+    },
+    {
+      "type": "header",
+      "content": "American Express"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_amex",
+      "label": "Show American Express",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_amex",
+      "label": "Custom Amex Icon"
+    },
+    {
+      "type": "header",
+      "content": "Apple Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_apple_pay",
+      "label": "Show Apple Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_apple_pay",
+      "label": "Custom Apple Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Bancontact"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_bancontact",
+      "label": "Show Bancontact",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_bancontact",
+      "label": "Custom Bancontact Icon"
+    },
+    {
+      "type": "header",
+      "content": "Diners Club"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_diners_club",
+      "label": "Show Diners Club",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_diners_club",
+      "label": "Custom Diners Club Icon"
+    },
+    {
+      "type": "header",
+      "content": "Discover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_discover",
+      "label": "Show Discover",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_discover",
+      "label": "Custom Discover Icon"
+    },
+    {
+      "type": "header",
+      "content": "Google Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_google_pay",
+      "label": "Show Google Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_google_pay",
+      "label": "Custom Google Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Mastercard"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_mastercard",
+      "label": "Show Mastercard",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_mastercard",
+      "label": "Custom Mastercard Icon"
+    },
+    {
+      "type": "header",
+      "content": "Shop Pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_shop_pay",
+      "label": "Show Shop Pay",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_shop_pay",
+      "label": "Custom Shop Pay Icon"
+    },
+    {
+      "type": "header",
+      "content": "Visa"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_visa",
+      "label": "Show Visa",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_image_visa",
+      "label": "Custom Visa Icon"
+    }
+  ]
+},
+{
+  "name": "Cart Upsell Rules",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Pair 1: Tape in Cart → Strips Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_tape_trigger",
+      "label": "Trigger Product (Tape)"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_tape_recommend",
+      "label": "Recommended Product (Strips)"
+    },
+    {
+      "type": "header",
+      "content": "Pair 2: Strips in Cart → Tape Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_strips_trigger",
+      "label": "Trigger Product (Strips)"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_strips_recommend",
+      "label": "Recommended Product (Tape)"
+    },
+    {
+      "type": "header",
+      "content": "Pair 3: Both/Bundle → Upgrade Upsell"
+    },
+    {
+      "type": "product",
+      "id": "upsell_pair_upgrade_recommend",
+      "label": "Recommended Upgrade Product (Bundle)"
+    }
+  ]
+},
   {
     "name": "t:names.drawers",
     "settings": [

@@ -1,0 +1,88 @@
+{%- liquid
+  assign has_strips = false
+  assign has_tape = false
+  assign matched_upsell_product = blank
+  assign matched_tag = 'Complete the ritual'
+  assign matched_desc = 'Pairs perfectly with your current items for even better results.'
+
+  for item in cart.items
+    # 1. Check exact trigger product setting match if configured
+    if settings.upsell_pair_tape_trigger != blank and item.product.id == settings.upsell_pair_tape_trigger.id
+      assign has_tape = true
+    endif
+    if settings.upsell_pair_strips_trigger != blank and item.product.id == settings.upsell_pair_strips_trigger.id
+      assign has_strips = true
+    endif
+
+    # 2. Fallback title check
+    assign title_clean = item.product.title | downcase
+    if title_clean contains 'nasal strips'
+      assign has_strips = true
+    endif
+    if title_clean contains 'mouth tape'
+      assign has_tape = true
+    endif
+  endfor
+
+  # 3. Apply rule engine based on state
+  if has_tape and has_strips and has_bundle == false
+    # Both in cart -> Next tier or matching Bundle
+    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend 
+    assign matched_tag = 'Best Value Upgrade'
+    assign matched_desc = 'Upgrade to the complete sleep bundle system.'
+  elsif has_tape and has_strips == false
+    # Tape in cart -> Recommend matching Strips
+    assign matched_upsell_product = settings.upsell_pair_tape_recommend 
+    assign matched_tag = 'Complete the ritual'
+    assign matched_desc = 'Pair your mouth tape with nasal strips for unobstructed airflow.'
+  elsif has_strips and has_tape == false
+    # Strips in cart -> Recommend matching Tape
+    assign matched_upsell_product = settings.upsell_pair_strips_recommend
+    assign matched_tag = 'Complete the ritual'
+    assign matched_desc = 'Seal your mouth and protect nasal breathing alignment.'
+  else
+    assign matched_upsell_product = settings.upsell_pair_upgrade_recommend
+  endif
+
+  if matched_upsell_product == blank
+    assign matched_upsell_product = all_products['mouth-tape']
+  endif
+-%}
+
+
+{%- if matched_upsell_product != blank and matched_upsell_product.available -%}
+  {%- assign upsell_variant = matched_upsell_product.selected_or_first_available_variant -%}
+  <div class="hz-minicart-upsell">
+    <div class="hz-minicart-upsell__card">
+      <div class="hz-minicart-upsell__media">
+        {%- if matched_upsell_product.featured_image != blank -%}
+          {{ matched_upsell_product.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
+        {%- endif -%}
+      </div>
+      
+      <div class="hz-minicart-upsell__content">
+        <span class="hz-minicart-upsell__tag">{{ matched_tag }}</span>
+        <h4 class="hz-minicart-upsell__title">{{ matched_upsell_product.title }}</h4>
+        <p class="hz-minicart-upsell__desc">{{ matched_desc }}</p>
+
+        <div class="hz-minicart-upsell__bottom">
+          <div class="hz-minicart-upsell__price-wrap">
+            <span class="hz-minicart-upsell__price">{{ upsell_variant.price | money }}</span>
+            {%- if upsell_variant.compare_at_price > upsell_variant.price -%}
+              <s class="hz-minicart-upsell__compare">{{ upsell_variant.compare_at_price | money }}</s>
+            {%- endif -%}
+          </div>
+
+          <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form" data-ajax-form>
+            <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="hz-upsell-add-btn">
+              Add to Cart
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+ 

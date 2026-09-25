@@ -1,0 +1,385 @@
+<div class="hz-slider-section" id="hz-slider-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  <div class="section section--page-width">
+{% if section.settings.title != ''  %}
+  <div class="hz-slider-header">
+    <h2 class="hz-slider-title">{{ section.settings.title }}</h2>
+  </div>
+{% endif %}
+  <div class="hz-slider-viewport">
+    <div class="hz-slider-track" id="track-{{ section.id }}">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign current_product = block.settings.product_selected
+          
+          # Dynamic Title fallback
+          assign card_title = block.settings.title
+          if card_title == blank and current_product != blank
+            assign card_title = current_product.title
+          endif
+
+          # Dynamic Price fallback
+          assign card_price = block.settings.price
+          if card_price == blank and current_product != blank
+            assign card_price = current_product.price | money_without_trailing_zeros
+          endif
+
+          # Dynamic Image fallback
+          assign card_image = block.settings.image
+          if card_image == blank and current_product != blank and current_product.featured_image != blank
+            assign card_image = current_product.featured_image
+          endif
+
+          # Dynamic Link fallback
+          assign card_link = block.settings.button_link
+          if card_link == blank and current_product != blank
+            assign card_link = current_product.url
+          endif
+        -%}
+
+        <div class="hz-card" style="background-color: {{ block.settings.card_bg }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+          <div class="hz-card-media">
+            {% if card_image != blank %}
+              <img 
+                src="{{ card_image | image_url: width: 600 }}" 
+                alt="{{ card_title | escape }}"
+                loading="lazy"
+                width="300"
+                height="320"
+              />
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'hz-placeholder' }}
+            {% endif %}
+          </div>
+          <div class="hz-card-content">
+            {% if card_title != blank %}
+              <h3 class="hz-card-title" style="color: {{ block.settings.text_color }};">{{ card_title }}</h3>
+            {% endif %}
+
+            {% if card_price != blank %}
+              <div class="hz-card-price" style="color: {{ block.settings.text_color }};">{{ card_price }}</div>
+            {% endif %}
+
+            {% if block.settings.button_label != blank %}
+              <a href="{{ card_link }}" class="hz-card-btn" style="color: {{ block.settings.text_color }}; border-color: {{ block.settings.text_color }};">
+                <span>{{ block.settings.button_label }}</span>
+              
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% comment %}
+  <div class="hz-slider-pagination" id="dots-{{ section.id }}">
+    {% for block in section.blocks %}
+      <button 
+        type="button" 
+        class="hz-dot {% if forloop.first %}is-active{% endif %}" 
+        data-index="{{ forloop.index0 }}" 
+        aria-label="Go to slide {{ forloop.index }}">
+      </button>
+    {% endfor %}
+  </div>
+{% endcomment %}
+  </div>
+
+ 
+</div>
+
+<style>
+  .hz-slider-section {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 20px;
+  }
+  .hz-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .hz-wave svg {
+    display: block;
+    width: 100%;
+    height: 45px;
+  }
+  .hz-wave--top { top: 0; }
+  .hz-wave--bottom { bottom: 0; }
+
+  .hz-slider-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 0 20px;
+  }
+  .hz-slider-title {
+    font-size: 46px;
+    font-weight: 700;
+    color: #0b1a30;
+    margin: 0;
+    line-height: 1.15;
+  }
+  .hz-slider-title em, .hz-slider-title i {
+    font-style: italic;
+    font-weight: 400;
+    font-family: serif;
+  }
+
+  .hz-slider-viewport {
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 10px calc(50vw - 300px);
+    box-sizing: border-box;
+  }
+  .hz-slider-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hz-slider-track {
+    display: flex;
+    gap: 15px;
+  }
+
+  /* Card container - sets fixed height & relative position */
+  .hz-card {
+   flex: 0 0 300px;
+    max-width: 300px;
+    aspect-ratio: 2 / 1; /* Matches 600x300 perfectly */
+    height: auto;
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+  }
+
+  /* Image pinned behind everything covering 100% of card */
+  .hz-card-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .hz-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center left;
+    display: block;
+  }
+  .hz-placeholder {
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+  }
+
+  /* Overlay text positioned directly over the image */
+  .hz-card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 50%;
+    margin-left: auto;
+    padding: 25px 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .hz-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.01em;
+  }
+  .hz-card-price {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .hz-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    border-radius: 40px;
+    border: 1.5px solid;
+    text-decoration: none;
+    font-size: 11px;
+    background: #0B1D55;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: all 0.25s ease;
+  }
+  .hz-card-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Dot navigation */
+  .hz-slider-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+  }
+  .hz-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid #4a5c68;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .hz-dot.is-active {
+    background-color: #4a5c68;
+    transform: scale(1.1);
+  }
+ 
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const root = document.getElementById('hz-slider-{{ section.id }}');
+    if (!root) return;
+
+    const viewport = root.querySelector('.hz-slider-viewport');
+    const cards = root.querySelectorAll('.hz-card');
+    const dots = root.querySelectorAll('.hz-dot');
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index'));
+        if (cards[index]) {
+          cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(cards).indexOf(entry.target);
+          if (index !== -1) {
+            dots.forEach(d => d.classList.remove('is-active'));
+            if (dots[index]) dots[index].classList.add('is-active');
+          }
+        }
+      });
+    }, { root: viewport, threshold: 0.6 });
+
+    cards.forEach(card => observer.observe(card));
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Custom Cards Slider",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f4f1ea"
+    },
+  
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Find your nightly <em>favorite.</em>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product Slide",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product_selected",
+          "label": "Select Product (for dynamic price/link)"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "label": "Card Background",
+          "default": "#1858c2"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Photo (overrides product image)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (leave blank to use product title)",
+          "default": "Nasal Strips"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Custom Price Override (leave blank for dynamic price)"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop strips"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link (leave blank to use product page URL)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Cards Slider",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "Nasal Strips",
+            "button_label": "Shop strips",
+            "card_bg": "#1354c4"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "Mouth Tape",
+            "button_label": "Shop tape",
+            "card_bg": "#b298e8"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

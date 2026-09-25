@@ -1,0 +1,225 @@
+<div class="hz-circle-section" id="hz-circle-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  
+{% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+    
+  <div class="hz-circle-wrapper">
+    {% if section.settings.heading != blank %}
+      <h2 class="hz-circle-main-heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="hz-circle-scroll-track">
+      {% for block in section.blocks %}
+        {%- assign item_link = block.settings.link -%}
+        <{% if item_link != blank %}a href="{{ item_link }}"{% else %}div{% endif %} 
+          class="hz-circle-item" 
+          {{ block.shopify_attributes }}>
+          
+          <div class="hz-circle-avatar" style="border-color: {{ block.settings.border_color }};">
+            {% if block.settings.image != blank %}
+              <img 
+                src="{{ block.settings.image | image_url: width: 220, height: 220, crop: 'center' }}" 
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy"
+                width="110"
+                height="110"
+              />
+            {% else %}
+              {{ 'image' | placeholder_svg_tag: 'hz-circle-placeholder' }}
+            {% endif %}
+          </div>
+
+          {% if block.settings.title != blank %}
+            <span class="hz-circle-title" style="color: {{ section.settings.text_color }};">
+              {{ block.settings.title }}
+            </span>
+          {% endif %}
+
+        </{% if item_link != blank %}a{% else %}div{% endif %}>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .hz-circle-section {
+    width: 100%;
+    position: relative;
+    padding-bottom: 5px;
+  }
+  .hz-circle-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hz-circle-main-heading {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #0b1a30;
+    margin: 0 0 24px 0;
+    padding: 0 20px;
+  }
+
+  /* Horizontal touch-scrollable rail */
+  .hz-circle-scroll-track {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    box-sizing: border-box;
+    padding: 0 15px;
+  }
+
+  .hz-circle-scroll-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hz-circle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .hz-circle-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .hz-circle-avatar {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 12px;
+    position: relative;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    background-color: #e5e5e5;
+  }
+
+  .hz-circle-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hz-circle-placeholder {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+
+  .hz-circle-title {
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+  }
+
+ 
+</style>
+
+{% schema %}
+{
+  "name": "Circle Categories",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading (Optional)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "circle_item",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Circle Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "Bestsellers"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border Color (Optional)",
+          "default": "transparent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circle Categories",
+      "blocks": [
+        { "type": "circle_item", "settings": { "title": "Bestsellers" } },
+        { "type": "circle_item", "settings": { "title": "Snoring" } },
+        { "type": "circle_item", "settings": { "title": "Mouth breathing" } },
+        { "type": "circle_item", "settings": { "title": "Waking up tired" } },
+        { "type": "circle_item", "settings": { "title": "Shop all" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

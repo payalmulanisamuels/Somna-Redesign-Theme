@@ -26,6 +26,9 @@
       >
         <div class="cart-page__title">
           {%- content_for 'block', id: 'cart-page-title', type: '_cart-title', force_empty: true %}
+          <div class="cart-content">
+            <p>{{ 'content.cart_content' | t }}</p>
+          </div>
         </div>
         <div class="cart-page__items">
           {%- content_for 'block', id: 'cart-page-items', type: '_cart-products', force_empty: true %}
@@ -45,6 +48,9 @@
     >
       <div class="cart-page__title">
         {%- content_for 'block', id: 'cart-page-title', type: '_cart-title' %}
+         <div class="cart-content">
+            <p>{{ 'content.cart_content' | t }}</p>
+          </div>
       </div>
 
       <div class="cart-page__items">

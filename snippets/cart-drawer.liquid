@@ -78,6 +78,7 @@
             </div>
           {%- else -%}
             {% capture cart_badge_html %}
+              (
               <span
                 class="theme-drawer__badge{% if cart.item_count == 0 %} visually-hidden{% endif %}"
                 aria-hidden="true"
@@ -86,7 +87,7 @@
                 {% endif %}
               >
                 {{- cart.item_count -}}
-              </span>
+              </span>)
               {% if cart.item_count > 0 %}
                 <span class="visually-hidden">
                   {{ 'accessibility.cart_count' | t }}: {{ cart.item_count }}
@@ -113,7 +114,7 @@
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
-
+{% render 'cart-upsell' %}
                 <div class="cart-drawer__summary">
                   {% render 'cart-summary', section_id: 'cart-drawer-section' %}
                 </div>

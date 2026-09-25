@@ -1,0 +1,219 @@
+{%  assign problem = section.settings.problem_heading | split:'|' %}
+{%  assign solution = section.settings.solution_heading | split:'|' %}
+
+{% if problem[0] != blank or solution[0] != blank %}
+
+<div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+  
+   {% comment %} Top Wave Divider {% endcomment %}
+
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top">
+
+    <img 
+        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+        alt="top_wave_image" 
+        loading="lazy" 
+        class="custom-wave-img"
+        />
+    </div>
+    {% endif %}
+
+    {% comment %} Bottom Wave Divider {% endcomment %}
+
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom">
+    <img 
+        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+        alt="bottom_wave_image" 
+        loading="lazy" 
+        class="custom-wave-img"
+        />
+    </div>
+    {% endif %}
+  <div class="section section--page-width">
+  <div class="hz-ps-container">
+    {% comment %} Problem Column {% endcomment %}
+    <div class="hz-ps-col hz-ps-problem">
+      {% if section.settings.problem_tag != blank %}
+        <span class="hz-ps-tag">{{ section.settings.problem_tag }}</span>
+      {% endif %}
+
+      {%  assign problem = section.settings.problem_heading | split:'|' %}
+
+      {% if problem[0] != blank %}
+        <h3 class="hz-ps-heading">{{ problem[0] }}</h3>
+      {% endif %}
+
+      {% if problem[1] != blank %}
+        <div class="hz-ps-text">{{  problem[1] }}</div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.solution_heading != blank %}
+
+    {% comment %} Arrow Indicator {% endcomment %}
+    <div class="hz-ps-arrow-wrapper">
+      <div class="hz-ps-arrow-circle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if section.settings.solution_heading != blank %}
+        {% comment %} Solution Column {% endcomment %}
+        <div class="hz-ps-col hz-ps-solution">
+        {% if section.settings.solution_tag != blank %}
+            <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
+        {% endif %}
+
+        {%  assign solution = section.settings.solution_heading | split:'|' %}
+
+        {% if solution[0] != blank %}
+            <h3 class="hz-ps-heading">{{ solution[0] }}</h3>
+        {% endif %}
+
+        {% if solution[1] != blank %}
+            <div class="hz-ps-text">{{ solution[1] }}</div>
+        {% endif %}
+        </div>
+    {% endif %}
+  </div>
+ 
+</div>
+</div>
+
+<style>
+.hz-prob-sol-section {
+  padding: 20px 0;
+}
+.hz-ps-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 31px;
+  position: relative;
+  z-index: 2;
+}
+.hz-ps-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hz-ps-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #064BD8;
+  margin-bottom: 0px;
+}
+.hz-ps-heading {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: serif;
+  color: #0A1A4A;
+  line-height: 1.2;
+  margin: 0 0 3px 0;
+}
+.hz-ps-text {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #0A1A4A;
+  font-weight: 400;
+}
+.hz-ps-text p {
+  margin: 0;
+}
+.hz-ps-arrow-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hz-ps-arrow-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #0A1A4A;
+  border: 1px solid #0A1A4A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+</style>
+    {% endif %}
+
+{% schema %}
+{
+  "name": "Problem Solution",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "header",
+      "content": "Problem Settings"
+    },
+    {
+      "type": "text",
+      "id": "problem_tag",
+      "label": "Tag",
+      "default": "PROBLEM"
+    },
+    {
+      "type": "text",
+      "id": "problem_heading",
+      "label": "Heading",
+      "default": "Restless, disrupted sleep"
+    },
+   
+    {
+      "type": "header",
+      "content": "Solution Settings"
+    },
+    {
+      "type": "text",
+      "id": "solution_tag",
+      "label": "Tag",
+      "default": "SOLUTION"
+    },
+    {
+      "type": "text",
+      "id": "solution_heading",
+      "label": "Heading",
+      "default": "Strips are designed"
+    },
+   
+  ],
+  "presets": [
+    {
+      "name": "Problem Solution"
+    }
+  ]
+}
+{% endschema %}

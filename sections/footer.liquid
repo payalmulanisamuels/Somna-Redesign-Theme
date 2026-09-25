@@ -5,13 +5,47 @@
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
 %}
+ {% comment %} Top Wave Divider {% endcomment %}
+
+{% if section.settings.top_wave_image != blank %}
+ <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+{% comment %} <img 
+      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
+      alt="top_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    /> {% endcomment %}
+</div>
+{% endif %}
+
+{% comment %} Bottom Wave Divider {% endcomment %}
+
+{% if section.settings.bottom_wave_image != blank %}
+ <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+  {% comment %} <img 
+      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
+      alt="bottom_wave_image" 
+      loading="lazy" 
+      class="custom-wave-img"
+    /> {% endcomment %}
+</div>
+{% endif %}
 
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 <div
   class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+{% if section.settings.background_image != blank %}
+style="background-image:url({{ section.settings.background_image |  image_url }});background-size: cover;background-position: center;"
+{% endif %}
 >
+
+
+ 
+
+ 
+
   {% liquid
     assign total_blocks = section.blocks.size
 
@@ -147,10 +181,29 @@
       "type": "email-signup"
     }
   ],
-  "enabled_on": {
-    "groups": ["footer"]
-  },
+
   "settings": [
+   {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Section Background Image",
+    },
     {
       "type": "select",
       "id": "section_width",

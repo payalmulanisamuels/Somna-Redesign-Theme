@@ -57,6 +57,10 @@
     {{- custom_style -}}
   "
 >
+
+
+
+
   {% if cart.empty? or force_empty %}
     {%- if shop.customer_accounts_enabled and customer == null -%}
       <p>
@@ -73,6 +77,8 @@
       </span>
     </a>
   {%- else -%}
+{% render 'cart-progressbar' %}
+
     <span
       class="visually-hidden"
       ref="cartItemCount"
@@ -280,7 +286,9 @@
                       {%- endif -%}
 
                       {%- if item.selling_plan_allocation -%}
-                        <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        <p class="selling_plan_allocation">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+
+                        <div class="subcription_badge">Subscribe & save 10%</div>
                       {%- endif -%}
 
                       {%- if item.line_level_discount_allocations.size > 0 -%}
@@ -296,35 +304,7 @@
                     {%- endif -%}
                   </div>
 
-                  <div class="cart-items__unit-price-wrapper">
-                    <div>
-                      {% if item.original_price != item.final_price %}
-                        <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
-                        <span>{{ item.final_price | money }}</span>
-                        <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
-                        <s class="compare-at-price">
-                          {% if item.variant.compare_at_price > item.original_price %}
-                            {{ item.variant.compare_at_price | money }}
-                          {% else %}
-                            {{ item.original_price | money }}
-                          {% endif %}
-                        </s>
-                      {% else %}
-                        {% if item.variant.compare_at_price > item.original_price %}
-                          <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
-                        {% else %}
-                          <span class="visually-hidden">{{ 'content.price' | t }}</span>
-                        {% endif %}
-
-                        <span>{{ item.original_price | money }}</span>
-
-                        {% if item.variant.compare_at_price > item.original_price %}
-                          <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
-                          <s class="compare-at-price">{{ item.variant.compare_at_price | money }}</s>
-                        {% endif %}
-                      {% endif %}
-                    </div>
-                  </div>
+           
                 </td>
                 <td
                   class="cart-items__quantity"
@@ -399,7 +379,69 @@
                   role="cell"
                   headers="productTotal"
                 >
-                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
+                  {% comment %} <div class="cart-items__unit-price-wrapper">
+                    <div>
+                      {% if item.original_price != item.final_price %}
+                        <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
+                        <span>{{ item.final_price | money }}</span>
+                        <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                        <s class="compare-at-price">
+                          {% if item.variant.compare_at_price > item.original_price %}
+                            {{ item.variant.compare_at_price | money }}
+                          {% else %}
+                            {{ item.original_price | money }}
+                          {% endif %}
+                        </s>
+                      {% else %}
+                        {% if item.variant.compare_at_price > item.original_price %}
+                          <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
+                        {% else %}
+                          <span class="visually-hidden">{{ 'content.price' | t }}</span>
+                        {% endif %}
+
+                        <span>{{ item.original_price | money }}</span>
+
+                        {% if item.variant.compare_at_price > item.original_price %}
+                          <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                          <s class="compare-at-price">{{ item.variant.compare_at_price | money }}</s>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </div> {% endcomment %}
+  {%- liquid
+  # Base default prices for the cart item (per unit first)
+  assign active_unit_price = item.final_price
+  assign compare_unit_price = item.original_price | default: item.variant.price
+
+  # Check if a selling plan allocation is active on this specific cart line item
+  if item.selling_plan_allocation != blank
+    assign active_unit_price = item.selling_plan_allocation.price
+    if item.variant.price > active_unit_price
+      assign compare_unit_price = item.variant.price
+    elsif item.original_price > active_unit_price
+      assign compare_unit_price = item.original_price
+    endif
+  endif
+
+  # Multiply per-unit price by quantity for total line display
+  # Alternatively, item.final_line_price handles total active discounted line price natively
+  assign total_active_price = active_unit_price | times: item.quantity
+  assign total_compare_price = compare_unit_price | times: item.quantity
+-%}
+
+<div class="hz-price-stack">
+  <text-component class="hz-price-main" value="{{ total_active_price | money }}">
+    {{ total_active_price | money }}
+  </text-component>
+
+  {%- if total_compare_price > total_active_price -%}
+    <text-component class="hz-price-compare" value="{{ total_compare_price | money }}">
+      <s>{{ total_compare_price | money }}</s>
+    </text-component>
+  {%- endif -%}
+</div>
+
+                 {% comment %} <text-component value="{{ price | strip_html }}">{{ price }}</text-component> {% endcomment %}
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
@@ -531,10 +573,6 @@
       font-size: var(--font-size--sm);
     }
 
-    .cart-items__price {
-      min-width: auto;
-      width: max-content;
-    }
   }
 
   .cart-items__table-row.cart-items__nested-line td:first-child {

@@ -69,12 +69,12 @@
         }}
       {%- endif -%}
     {%- else -%}
-      {%- liquid
+      {% comment %} {%- liquid
         assign modulo_result = block_index | modulo: 2
         assign placeholder_variant = 2 | minus: modulo_result
         assign placeholder_name = 'hero-apparel-' | append: placeholder_variant
       -%}
-      {{ placeholder_name | placeholder_svg_tag: 'layered-slideshow__image' }}
+      {{ placeholder_name | placeholder_svg_tag: 'layered-slideshow__image' }} {% endcomment %}
     {%- endif -%}
     <div
       class="layered-slideshow__content spacing-style{% if block.settings.background_color != blank %} color-custom-{{ block.id }}{% endif %} background-transparent"

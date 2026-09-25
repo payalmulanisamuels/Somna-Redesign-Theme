@@ -1,0 +1,162 @@
+<div class="hz-faq-wrapper" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0 ;background-color: {{ section.settings.bg_color }};">
+  {% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+
+  <div class="section section--page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="custom-header">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div 
+      class="accordion accordion--plus border-style spacing-style accordion--dividers"
+      style="
+        --summary-font-family: inherit;
+        --summary-font-weight: 500;
+        --summary-font-size: 1.125rem;
+        --border-color: {{ section.settings.divider_color }};
+      "
+    >
+      {% for block in section.blocks %}
+        {% if block.settings.question != blank %}
+          <div class="accordion-item" {{ block.shopify_attributes }}>
+            <details class="details" data-testid="accordion-details" {% if block.settings.default_open %}open{% endif %}>
+              <summary class="details__header">
+                <span class="details__title">{{ block.settings.question }}</span>
+                <span class="details__icon" aria-hidden="true">
+                  <span class="svg-wrapper icon-caret icon-animated"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 5.5L7 9.5L3 5.5" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                  </span>
+                        <span class="svg-wrapper icon-plus"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="vertical" d="M2.75 7H11.25" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"></path>
+                    <path class="horizontal" d="M7 2.75L7 11.25" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"></path>
+                  </svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="custom spacing-style text-block custom-typography custom-font-size">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </details>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  
+</div>
+
+
+
+{% schema %}
+{
+  "name": "FAQ Accordion - PDP",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Border Color",
+      "default": "#cbd3d8"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQ"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image"
+    },
+     {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the return policy?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We offer a 30-night risk-free guarantee. If you are not completely satisfied, reach out to our team for a full refund.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion - PDP",
+      "blocks": [
+        { "type": "faq_item", "settings": { "question": "What is the return policy?" } },
+        { "type": "faq_item", "settings": { "question": "Are any purchases final sale?" } },
+        { "type": "faq_item", "settings": { "question": "When will I get my order?" } },
+        { "type": "faq_item", "settings": { "question": "Where are your products manufactured?" } },
+        { "type": "faq_item", "settings": { "question": "How much does shipping cost?" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

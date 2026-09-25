@@ -1,0 +1,120 @@
+{%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.bottom_image != blank -%}
+  <div 
+    class="hz-simple-comp-section" 
+    id="hz-comp-{{ section.id }}"
+    style="{% if section.settings.background_image != blank %}background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}'); background-size: cover; background-position: center;{% else %}background-color: #fbf7ee;{% endif %}"
+  >
+    
+{% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+{% comment %} Bottom Wave Divider {% endcomment %}
+{% if section.settings.bottom_wave_image != blank %}
+<div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+</div>
+{% endif %}
+
+
+    <div class="section section--page-width">
+      {% if section.settings.heading != blank %}
+        <h2 class="hz-simple-comp-heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <div class="hz-simple-comp-subheading">{{ section.settings.subheading }}</div>
+      {% endif %}
+
+      {% if section.settings.bottom_image != blank %}
+        <div class="hz-simple-comp-media">
+          {{ section.settings.bottom_image | image_url: width: 1400 | image_tag: loading: 'lazy' }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .hz-simple-comp-section {
+    position: relative;
+    padding: 20px 0px;
+    width: 100%;
+    background: #fff9ed;
+  }
+  .hz-simple-comp-heading {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0A1A4A;
+    margin: 0 0 8px;
+    line-height: 1.2;
+    font-family: var(--headfont);
+    text-align: center;
+  }
+  .hz-simple-comp-subheading {
+    font-size: 10px;
+    color: #0A1A4A;
+    margin: 0 auto;
+    max-width: 580px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .hz-simple-comp-media {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 21px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Comparison Simple",
+  "settings": [
+      {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top SVG Wave Image",
+      "info": "Upload your custom top wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom SVG Wave Image",
+      "info": "Upload your custom bottom wave SVG file."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Comparison"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Simple"
+    }
+  ]
+}
+{% endschema %}
