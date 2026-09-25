@@ -301,7 +301,6 @@ p.announcement-bar__text {
   grid-column: span 2;
   background-color: #ffffff;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
   align-items: center;
 }
 
