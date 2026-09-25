@@ -1213,9 +1213,11 @@
         "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "bg_color": "#faf2df",
         "problem_tag": "PROBLEM",
-        "problem_heading": "{{ product.metafields.custom.problem.value }}",
+        "problem_heading": "{{ product.metafields.custom.problem_content.value.heading.value }}",
+        "problem_content": "{{ product.metafields.custom.problem_content.value.content.value }}",
         "solution_tag": "SOLUTION",
-        "solution_heading": "{{ product.metafields.custom.solution.value }}"
+        "solution_heading": "{{ product.metafields.custom.solution_content.value.heading.value }}",
+        "solution_content": "{{ product.metafields.custom.solution_content.value.content.value }}"
       }
     },
     "how_it_works_whQNVV": {
