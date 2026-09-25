@@ -1,0 +1,251 @@
+{%- liquid
+  assign current_product = section.settings.product_selected
+  assign banner_image = section.settings.image
+  if banner_image == blank and current_product != blank and current_product.featured_image != blank
+    assign banner_image = current_product.featured_image
+  endif
+
+  assign heading_text = section.settings.heading
+  if heading_text == blank and current_product != blank
+    assign heading_text = current_product.title
+  endif
+
+  assign button_url = section.settings.button_link
+  if button_url == blank and current_product != blank
+    assign button_url = current_product.url
+  else
+    assign button_url = button_url | default: '#'
+  endif
+-%}
+
+<div class="hz-banner-section hz-banner-align--{{ section.settings.content_alignment }}" style="background-color: {{ section.settings.bg_color }};">
+  {%- if section.settings.top_wave_image != blank -%}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})"></div>
+  {%- endif -%}
+
+  <div class="hz-banner-container">
+    <div class="hz-banner-card">
+      <div class="hz-banner-media">
+        {%- if banner_image != blank -%}
+          <img src="{{ banner_image | image_url: width: 1000 }}" alt="{{ heading_text | escape }}" loading="lazy" width="{{ banner_image.width }}" height="{{ banner_image.height }}" />
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'hz-placeholder' }}
+        {%- endif -%}
+      </div>
+      <div class="hz-banner-content">
+        {%- if heading_text != blank -%}
+          <h2 class="hz-banner-heading" style="color: {{ section.settings.text_color }};">{{ heading_text | newline_to_br }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ button_url }}" class="hz-banner-btn" style="color: {{ section.settings.button_text_color }}; background-color: {{ section.settings.button_bg_color }};">
+            <span>{{ section.settings.button_label }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.bottom_wave_image != blank -%}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})"></div>
+  {%- endif -%}
+</div>
+
+<style>
+  .hz-banner-section {
+    position: relative;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .hz-banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .hz-banner-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-height: 380px;
+  }
+  .hz-banner-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .hz-banner-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hz-banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  /* Alignment Variants */
+  .hz-banner-align--left .hz-banner-card {
+    justify-content: flex-start;
+  }
+  .hz-banner-align--right .hz-banner-card {
+    justify-content: flex-end;
+  }
+  .hz-banner-heading {
+    font-size: 36px;
+    font-family: serif;
+    font-weight: 600;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .hz-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    transition: opacity 0.2s ease;
+  }
+  .hz-banner-btn:hover {
+    opacity: 0.9;
+  }
+  .wave-container {
+    width: 100%;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .wave-container.top {
+    margin-bottom: 24px;
+  }
+  .wave-container.bottom {
+    margin-top: 24px;
+  }
+
+</style>
+
+{% schema %}
+{
+  "name": "Custom Product Banner",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product_selected",
+      "label": "Choose Product (Auto-fills title, image, and link)"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image (Overrides product image)"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (Overrides product title)",
+      "default": "Breathe Easier.\nSleep Deeper."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Add to bag"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link (Overrides product URL)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Text Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top Wave Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom Wave Image"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Banner"
+    }
+  ]
+}
+{% endschema %}
