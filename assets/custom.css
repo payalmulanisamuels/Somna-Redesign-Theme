@@ -551,6 +551,10 @@ height: 100%;
 /* Hero section */
 
 /* Cart Drawer */
+.theme-drawer__close-button {
+    box-shadow: none !important;
+    border: 0 !important;
+}
 .theme-drawer__header {
     border-bottom: 1px solid #BABABA;
     padding: 19px;
