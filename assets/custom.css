@@ -676,7 +676,9 @@ a.cart-items__title {
     font-weight: 600;
     line-height: 20px; /* 142.857% */
 }
-
+.cart-items__quantity {
+    margin-block-start: 0;
+}
 .cart-items .quantity-selector {
     border-radius: 9999px;
     border: 1px solid rgba(203, 213, 225, 0.60);
