@@ -18,6 +18,7 @@
 
 
     <div class="section section--page-width">
+    <div class="comp-container">
       {% if section.settings.heading != blank %}
         <h2 class="hz-simple-comp-heading">{{ section.settings.heading }}</h2>
       {% endif %}
@@ -31,6 +32,7 @@
           {{ section.settings.bottom_image | image_url: width: 1400 | image_tag: loading: 'lazy' }}
         </div>
       {% endif %}
+    </div>
     </div>
   </div>
 {%- endif -%}
@@ -109,6 +111,31 @@
       "type": "image_picker",
       "id": "bottom_image",
       "label": "Bottom Image"
+    },
+    
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
     }
   ],
   "presets": [
