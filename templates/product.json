@@ -62,7 +62,7 @@
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 24,
+            "padding-block-start": 0,
             "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -108,6 +108,14 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "custom_liquid_Ma9DDc": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<div class=\"review_content\">\n4.6<svg width=\"67\" height=\"11\" viewBox=\"0 0 67 11\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M6.2207 4.11719L6.58887 4.92871L7.47754 4.99316L7.73438 5.01172L7.6416 5.08496L6.86914 5.69141L7.11621 6.64258L7.18848 6.9209L6.73242 6.66602L6 6.25586L5.26758 6.66602L4.81055 6.9209L4.88379 6.64258L5.13086 5.69141L4.3584 5.08496L4.26465 5.01172L4.52246 4.99316L5.41113 4.92871L5.7793 4.11719L6 3.62988L6.2207 4.11719Z\" fill=\"#F1C644\" stroke=\"#F1C644\" stroke-width=\"3\"/>\n<path d=\"M20.2207 4.11719L20.5889 4.92871L21.4775 4.99316L21.7344 5.01172L21.6416 5.08496L20.8691 5.69141L21.1162 6.64258L21.1885 6.9209L20.7324 6.66602L20 6.25586L19.2676 6.66602L18.8105 6.9209L18.8838 6.64258L19.1309 5.69141L18.3584 5.08496L18.2646 5.01172L18.5225 4.99316L19.4111 4.92871L19.7793 4.11719L20 3.62988L20.2207 4.11719Z\" fill=\"#F1C644\" stroke=\"#F1C644\" stroke-width=\"3\"/>\n<path d=\"M33.5693 4.07324L33.9219 4.91992L34.835 4.99316L35.0156 5.00684L34.8779 5.12598L34.1826 5.72168L34.3945 6.61328L34.4365 6.78906L34.2822 6.69531L33.5 6.21777L32.7178 6.69531L32.5625 6.78906L32.6055 6.61328L32.8174 5.72168L32.1221 5.12598L31.9834 5.00684L32.165 4.99316L33.0781 4.91992L33.4307 4.07324L33.5 3.90625L33.5693 4.07324Z\" fill=\"#F1C644\" stroke=\"#F1C644\" stroke-width=\"3\"/>\n<path d=\"M47.2207 4.11719L47.5889 4.92871L48.4775 4.99316L48.7344 5.01172L48.6416 5.08496L47.8691 5.69141L48.1162 6.64258L48.1885 6.9209L47.7324 6.66602L47 6.25586L46.2676 6.66602L45.8105 6.9209L45.8838 6.64258L46.1309 5.69141L45.3584 5.08496L45.2646 5.01172L45.5225 4.99316L46.4111 4.92871L46.7793 4.11719L47 3.62988L47.2207 4.11719Z\" fill=\"#F1C644\" stroke=\"#F1C644\" stroke-width=\"3\"/>\n<path d=\"M61 0L62.587 3.49768L66.7063 3.80041L63.5679 6.26482L64.5267 9.94959L61 7.975L57.4733 9.94959L58.4321 6.26482L55.2937 3.80041L59.413 3.49768L61 0Z\" fill=\"#D4D4D4\"/>\n<path d=\"M61 0L62.587 3.49768L66.7063 3.80041L63.5679 6.26482L64.5267 9.94959L61 7.975L57.4733 9.94959L58.4321 6.26482L55.2937 3.80041L59.413 3.49768L61 0Z\" fill=\"url(#paint0_linear_1276_518)\"/>\n<defs>\n<linearGradient id=\"paint0_linear_1276_518\" x1=\"55\" y1=\"5.5\" x2=\"67\" y2=\"5.5\" gradientUnits=\"userSpaceOnUse\">\n<stop stop-color=\"#F1C644\"/>\n<stop offset=\"0.7\" stop-color=\"#F1C644\"/>\n<stop offset=\"0.7\" stop-color=\"#F1C644\" stop-opacity=\"0\"/>\n<stop offset=\"1\" stop-color=\"#F1C644\" stop-opacity=\"0\"/>\n</linearGradient>\n</defs>\n</svg>\n(248)\n</div>"
+                  },
+                  "blocks": {}
+                },
                 "text_xrnftG": {
                   "type": "text",
                   "name": "t:names.product_title",
@@ -216,6 +224,7 @@
                 }
               },
               "block_order": [
+                "custom_liquid_Ma9DDc",
                 "text_xrnftG",
                 "text_Da8zQC",
                 "text_VDdr8z",
@@ -403,7 +412,7 @@
                       "static": true,
                       "settings": {
                         "style_class": "button-custom",
-                        "custom_button_background": "#0B57E3",
+                        "custom_button_background": "#0b57e3",
                         "custom_button_text": "{{ settings.color_palette.background }}",
                         "custom_button_border": "{{ settings.color_palette.background }}"
                       },
@@ -607,7 +616,7 @@
         "padding-block-end": 0
       }
     },
-  "section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -1163,10 +1172,12 @@
         "divider_CimJ7p",
         "group_iMHtRg"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".custom-section-content {display: flex; align-items: center;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon-bg.svg",
+        "bg_image": "shopify://shop_images/icon_bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
