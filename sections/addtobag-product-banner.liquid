@@ -1,19 +1,12 @@
 {%- liquid
-  assign current_product = section.settings.product_selected
   assign banner_image = section.settings.image
-  if banner_image == blank and current_product != blank and current_product.featured_image != blank
-    assign banner_image = current_product.featured_image
-  endif
+ 
 
   assign heading_text = section.settings.heading
-  if heading_text == blank and current_product != blank
-    assign heading_text = current_product.title
-  endif
+ 
 
   assign button_url = section.settings.button_link
-  if button_url == blank and current_product != blank
-    assign button_url = current_product.url
-  else
+  if button_url == blank 
     assign button_url = button_url | default: '#'
   endif
 -%}
@@ -139,11 +132,7 @@
 {
   "name": "Custom Product Banner",
   "settings": [
-    {
-      "type": "product",
-      "id": "product_selected",
-      "label": "Choose Product (Auto-fills title, image, and link)"
-    },
+  
     {
       "type": "select",
       "id": "content_alignment",
