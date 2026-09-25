@@ -13,7 +13,7 @@
     margin-bottom: 2px;
 }
 .hz-faq-wrapper {
-    padding: 20px 0px;
+    margin: -29px 0 0 0;
 }
 .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
     object-fit: cover !important;
