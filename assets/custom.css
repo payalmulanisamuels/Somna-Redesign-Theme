@@ -1097,7 +1097,7 @@ ul.custom-payment-icons-list li {
     line-height: 20px; /* 125% */
 }
 .progress-track{
-    width: 100%; height: 10px; background-color: #C8C7F7; border-radius: 999.9px; position: relative; overflow: visible;
+    width: calc(100% - 16px); height: 10px; background-color: #C8C7F7; border-radius: 999.9px; position: relative; overflow: visible;
 }
 .fill-track{
     height: 100%; 
