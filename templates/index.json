@@ -924,7 +924,7 @@
       "settings": {
         "heading": "Featured Bundle Block",
         "bg_color": "#ffffff",
-        "padding_top": 10,
+        "padding_top": 0,
         "padding_bottom": 10
       }
     },
