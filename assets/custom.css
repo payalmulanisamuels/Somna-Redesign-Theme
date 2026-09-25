@@ -21,9 +21,7 @@ html[scroll-lock] .wave-container {
 }
 
 /* Header */
-.shopify-section-group-header-group .wave-container.bottom {
-    bottom: -10px;
-}
+ 
 #header-component {
     position: relative;
     z-index: 1111;
