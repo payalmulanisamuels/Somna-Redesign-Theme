@@ -38,7 +38,7 @@
         "speed": 5,
         "section_width": "page-width",
         "background_color": "#071a4b",
-        "divider_width": 1,
+        "divider_width": 0,
         "divider_color": "#ffffff",
         "padding-block-start": 15,
         "padding-block-end": 0
