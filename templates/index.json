@@ -126,12 +126,12 @@
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
+                "font_size": "0.625rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
+                "text_color": "#0A1A4A",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -178,7 +178,7 @@
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "0.75rem",
+                "font_size": "0.625rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -283,12 +283,12 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_09_55_59_PM.png",
+        "image_1": "shopify://shop_images/Subtract-banner.png",
         "media_type_2": "image",
         "stack_media_on_mobile": true,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/banner_image.jpg",
+        "image_1_mobile": "shopify://shop_images/mobile-banner.jpg",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -314,7 +314,7 @@
         "padding-block-end": 35
       }
     },
-"section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
