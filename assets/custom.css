@@ -639,7 +639,7 @@ p.selling_plan_allocation {
 }
 
 .cart-items__table-row--full-width-variants {
-    grid-template-columns: 140px auto !important;
+    grid-template-columns: 125px auto !important;
 }
 a.cart-items__media-container {
     border-radius: 13.179px;
