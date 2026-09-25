@@ -36,7 +36,7 @@
           endif
         -%}
 
-        <div class="hz-card" style="background-color: {{ block.settings.card_bg }}; color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+        <div class="hz-card" style=" color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
           <div class="hz-card-media">
             {% if card_image != blank %}
               <img 
@@ -273,12 +273,7 @@
           "id": "product_selected",
           "label": "Select Product (for dynamic price/link)"
         },
-        {
-          "type": "color",
-          "id": "card_bg",
-          "label": "Card Background",
-          "default": "#1858c2"
-        },
+  
         {
           "type": "color",
           "id": "text_color",
@@ -324,7 +319,6 @@
           "settings": {
             "title": "Nasal Strips",
             "button_label": "Shop strips",
-            "card_bg": "#1354c4"
           }
         },
         {
@@ -332,7 +326,6 @@
           "settings": {
             "title": "Mouth Tape",
             "button_label": "Shop tape",
-            "card_bg": "#b298e8"
           }
         }
       ]
