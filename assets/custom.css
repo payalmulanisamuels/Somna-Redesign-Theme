@@ -963,11 +963,17 @@ ul.custom-payment-icons-list li {
 }
 
 /* upsell */
+h2.upsell_heading {
+    color: #0D1B38;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 21.25px; /* 132.813% */
+    margin-bottom: 12px;
+}
 .hz-minicart-upsell {
     padding: 0 8px 29px 8px;
     width: 100%;
-    box-sizing: border-box;
-
 }
 .hz-minicart-upsell__card {
     padding: 14px;
