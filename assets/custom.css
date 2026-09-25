@@ -27,6 +27,7 @@ html[scroll-lock] .wave-container {
 #header-component {
     position: relative;
     z-index: 1111;
+    padding-top: 10px;
 }
 .announcement-bar {
     position: relative;
@@ -93,9 +94,7 @@ search-button.search-action.search-action--hidden-on-menu {
     line-height: 1.2;
     font-weight: normal;
 }
-#header-component {
-    padding-top: 10px;
-}
+ 
 .header__drawer {
     --header-drawer-min-height: 25px;
 }
