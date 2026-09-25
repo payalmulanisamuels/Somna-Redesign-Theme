@@ -872,7 +872,7 @@
             "product": "the-colour-set",
             "is_featured": false,
             "custom_title": "All three colours, Strips only",
-            "custom_image": "shopify://shop_images/night.jpg",
+            "custom_image": "shopify://shop_images/colorset.jpg",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Colour Set"
           }
