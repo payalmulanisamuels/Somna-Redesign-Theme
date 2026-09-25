@@ -10,26 +10,18 @@
       {% for block in section.blocks %}
         {%- liquid
           assign current_product = block.settings.product_selected
-          
-          # Dynamic Title fallback
           assign card_title = block.settings.title
           if card_title == blank and current_product != blank
             assign card_title = current_product.title
           endif
-
-          # Dynamic Price fallback
           assign card_price = block.settings.price
           if card_price == blank and current_product != blank
             assign card_price = current_product.price | money_without_trailing_zeros
           endif
-
-          # Dynamic Image fallback
           assign card_image = block.settings.image
           if card_image == blank and current_product != blank and current_product.featured_image != blank
             assign card_image = current_product.featured_image
           endif
-
-          # Dynamic Link fallback
           assign card_link = block.settings.button_link
           if card_link == blank and current_product != blank
             assign card_link = current_product.url
@@ -70,11 +62,7 @@
       {% endfor %}
     </div>
   </div>
-
- 
   </div>
-
- 
 </div>
 
  
