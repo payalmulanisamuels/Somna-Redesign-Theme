@@ -35,6 +35,12 @@
   <div class="hz-ps-container">
     {% comment %} Problem Column {% endcomment %}
     <div class="hz-ps-col hz-ps-problem">
+
+      <div class="pro_solu_image">
+          {%- if section.settings.problem_image != blank -%}
+            {{ section.settings.problem_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
+          {%- endif -%}
+      </div>
       {% if section.settings.problem_tag != blank %}
         <span class="hz-ps-tag">{{ section.settings.problem_tag }}</span>
       {% endif %}
@@ -63,6 +69,11 @@
 
     {% if section.settings.solution_heading != blank %}
         {% comment %} Solution Column {% endcomment %}
+             <div class="pro_solu_image">
+          {%- if section.settings.solution_image != blank -%}
+            {{ section.settings.solution_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
+          {%- endif -%}
+      </div>
         <div class="hz-ps-col hz-ps-solution">
         {% if section.settings.solution_tag != blank %}
             <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
