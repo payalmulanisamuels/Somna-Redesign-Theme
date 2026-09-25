@@ -1071,7 +1071,7 @@ ul.custom-payment-icons-list li {
 }
 .progressbar-content {
     position: absolute;
-    top: calc(50% - 14px);
+    top: calc(50%);
     transform: translateY(-50%);
     width: 100%;
     padding: 0 25px;
