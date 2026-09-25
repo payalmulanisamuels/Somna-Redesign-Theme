@@ -1234,7 +1234,9 @@
         "background_image": "{{ product.metafields.custom[\"comparison-content\"].value.background_image.value }}",
         "heading": "Comparison",
         "subheading": "<p>{{ product.metafields.custom[\"comparison-content\"].value.content.value }}</p>",
-        "bottom_image": "{{ product.metafields.custom[\"comparison-content\"].value.bottom_image.value }}"
+        "bottom_image": "{{ product.metafields.custom[\"comparison-content\"].value.bottom_image.value }}",
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
     "pdp_bundle_feature_banner_wWE9yA": {
