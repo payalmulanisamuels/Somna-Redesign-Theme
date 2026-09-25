@@ -19,11 +19,19 @@
 -%}
 
 <div class="hz-banner-section hz-banner-align--{{ section.settings.content_alignment }}" style="background-color: {{ section.settings.bg_color }};">
-  {%- if section.settings.top_wave_image != blank -%}
-    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})"></div>
-  {%- endif -%}
+{% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+    
 
-  <div class="hz-banner-container">
+  <div class="section section--page-width">
     <div class="hz-banner-card">
       <div class="hz-banner-media">
         {%- if banner_image != blank -%}
@@ -46,9 +54,7 @@
     </div>
   </div>
 
-  {%- if section.settings.bottom_wave_image != blank -%}
-    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})"></div>
-  {%- endif -%}
+ 
 </div>
 
 <style>
@@ -58,11 +64,7 @@
     width: 100%;
     overflow: hidden;
   }
-  .hz-banner-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
+
   .hz-banner-card {
     position: relative;
     border-radius: 24px;
