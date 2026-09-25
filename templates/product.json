@@ -1257,7 +1257,7 @@
       "settings": {
         "content_alignment": "left",
         "image": "{{ product.metafields.custom.bottom_section.value.background_image.value }}",
-        "heading": "Breathe Easier.\nSleep Deeper.",
+        "heading": "{{ product.metafields.custom.bottom_section.value.heading.value }}",
         "button_label": "Add to bag",
         "button_link": "",
         "bg_color": "rgba(0,0,0,0)",
