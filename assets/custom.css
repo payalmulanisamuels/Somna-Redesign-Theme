@@ -1115,6 +1115,10 @@ ul.custom-payment-icons-list li {
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     position: absolute; top: 50%;
 }
+.progress-icon-dot{
+    transform: translate(-50%, -50%);
+    position: absolute; top: 50%;
+}
 .progress-icon svg {
     width: 13px;
 }
