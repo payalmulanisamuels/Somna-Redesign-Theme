@@ -55,7 +55,7 @@ search-button.search-action.search-action--hidden-on-menu {
     padding-top: 10px;
 }
 .header__row {
-    margin-top: 5px;
+    margin-top: 0px;
     margin-bottom: -10px;
 }
 .custom-header {
