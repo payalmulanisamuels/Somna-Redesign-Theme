@@ -299,7 +299,7 @@
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
-        "gap": 11,
+        "gap": 3,
         "background_color": "#0a1a4a",
         "padding-block-start": 12,
         "padding-block-end": 12
