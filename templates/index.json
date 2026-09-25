@@ -1585,8 +1585,8 @@
             "gradient_direction": "to top",
             "padding-block-start": 40,
             "padding-block-end": 40,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32
+            "padding-inline-start": 15,
+            "padding-inline-end": 25
           },
           "blocks": {
             "text_QmeLq9": {
