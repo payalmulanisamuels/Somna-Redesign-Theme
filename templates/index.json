@@ -146,7 +146,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>Calm nights.<br/>Clearer</strong> <em>mornings</em>.</h2>",
+                "text": "<h2>Calm nights.<br/>Clearer <em>mornings</em>.</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
