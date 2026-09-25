@@ -978,8 +978,8 @@ ul.custom-payment-icons-list li {
     border: 1px solid #000;
 }
 .hz-minicart-upsell__media {
-    width: 140px;
-    height: 140px;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
     border-radius: 12px;
     overflow: hidden;
