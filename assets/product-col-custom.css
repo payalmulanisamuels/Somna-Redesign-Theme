@@ -11,6 +11,7 @@
     font-weight: 400;
     line-height: 150%; /* 13.5px */
     margin-bottom: 2px;
+    gap: 2px;
 }
 .hz-faq-wrapper {
     margin: -29px 0 0 0;
