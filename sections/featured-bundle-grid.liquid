@@ -19,11 +19,44 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign product = block.settings.product
-          assign title =   product.title
-          assign subtitle =   block.settings.custom_title 
+          assign title = product.title
+          assign subtitle = block.settings.custom_title 
           assign image = block.settings.custom_image | default: product.featured_image
-          assign price = product.price | money
           assign link = product.url | default: '#'
+
+          # Calculate Subscription Price dynamically
+          assign base_price = product.price | default: 0
+          if product.compare_at_price > product.price
+            assign base_price = product.compare_at_price
+          endif
+
+          assign auto_discount_percent = 0
+          if product != blank
+            for group in product.selling_plan_groups
+              for plan in group.selling_plans
+                for adjustment in plan.price_adjustments
+                  if adjustment.value_type == 'percentage'
+                    assign auto_discount_percent = adjustment.value
+                    break
+                  endif
+                endfor
+                if auto_discount_percent > 0
+                  break
+                endif
+              endfor
+              if auto_discount_percent > 0
+                break
+              endif
+            endfor
+          endif
+
+          if auto_discount_percent > 0
+            assign discount_multiplier = 100 | minus: auto_discount_percent
+            assign calculated_price = base_price | times: discount_multiplier | divided_by: 100
+            assign price = calculated_price | money
+          else
+            assign price = product.price | money
+          endif
         -%}
 
         <div class="bundle-card {% if block.settings.is_featured %}bundle-card--featured{% endif %}" {{ block.shopify_attributes }}>
@@ -46,19 +79,19 @@
             {%- if title != blank or subtitle != blank -%}
               <div class="brand-card-wrap">
                   <h3 class="bundle-card__title">{{ title }}</h3>
-                {%- if  subtitle != blank -%}
+                {%- if subtitle != blank -%}
                   <div class="bundle-subtext">
                     {{ subtitle }}
                   </div>
                 {% endif %}
               </div>
-              {%- endif -%}
+            {%- endif -%}
 
 
           <div class="bundle-card__content-wrapper">
 
             <div class="bundle-card__info">
-            
+
               {%- if product != blank -%}
                 <p class="bundle-card__price">{{ price }}</p>
               {%- endif -%}
@@ -71,7 +104,6 @@
             {%- if block.settings.button_label != blank -%}
               <a href="{{ link }}" class="bundle-card__button">
                 <span>{{ block.settings.button_label }}</span>
-              
               </a>
             {%- endif -%}
           </div>
