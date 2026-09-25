@@ -1,7 +1,7 @@
 {%  assign problem = section.settings.problem_heading  %}
 {%  assign solution = section.settings.solution_heading  %}
 
-{% if problem[0] != blank or solution[0] != blank %}
+{% if problem != blank or solution  != blank %}
 
 <div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
