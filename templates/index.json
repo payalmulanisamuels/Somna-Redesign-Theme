@@ -309,7 +309,7 @@
               "settings": {
                 "icon": "eye",
                 "image_upload": "shopify://shop_images/Gift.png",
-                "width": 20,
+                "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
                 "icon_color": ""
@@ -358,7 +358,7 @@
                 "text_8jxQPc": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Free gift with<br/>every bundle</strong></p>",
+                    "text": "<p><strong>Free shipping</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -636,7 +636,7 @@
                 "text_mznam6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Secure<br/>checkout</strong></p>",
+                    "text": "<p><strong>Delivered in&nbsp;<br/>7–9 business days</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -831,7 +831,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 10,
+        "gap": 0,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
@@ -2200,6 +2200,6 @@
     "bundle_feature_banner_Qrgcy3",
     "steps_guide_GFjEFb",
     "section_BbCdDx",
-    "section_HiaPwG",
+    "section_HiaPwG"
   ]
 }
