@@ -468,7 +468,9 @@ slideshow-arrows .slideshow-control {
     border-bottom: 3.01px solid #B9B7AC;
 }
 .hz-faq-wrapper .accordion--dividers .details-content,.accordion--dividers .details-content p {
-    color: #0A1A4A;
+  color: #0a1a4a;
+  line-height: 1.2;
+  font-size: 12px;
 }
 .hz-faq-wrapper .accordion .details__header {
  justify-content: space-between;
