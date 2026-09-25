@@ -41,12 +41,12 @@
 
       {%  assign problem = section.settings.problem_heading | split:'|' %}
 
-      {% if problem[0] != blank %}
-        <h3 class="hz-ps-heading">{{ problem[0] }}</h3>
+      {% if section.settings.problem_heading != blank %}
+        <h3 class="hz-ps-heading">{{ section.settings.problem_heading}}</h3>
       {% endif %}
 
-      {% if problem[1] != blank %}
-        <div class="hz-ps-text">{{  problem[1] }}</div>
+      {% if section.settings.problem_content != blank %}
+        <div class="hz-ps-text">{{  section.settings.problem_content }}</div>
       {% endif %}
     </div>
 
@@ -191,7 +191,12 @@
       "label": "Heading",
       "default": "Restless, disrupted sleep"
     },
-   
+   {
+      "type": "text",
+      "id": "problem_content",
+      "label": "Content",
+      "default": "Restless, disrupted sleep"
+    },
     {
       "type": "header",
       "content": "Solution Settings"
@@ -208,7 +213,12 @@
       "label": "Heading",
       "default": "Strips are designed"
     },
-   
+    {
+      "type": "text",
+      "id": "solution_content",
+      "label": "content",
+      "default": "Strips are designed"
+    },
   ],
   "presets": [
     {
