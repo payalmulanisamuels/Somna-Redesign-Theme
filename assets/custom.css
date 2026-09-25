@@ -929,41 +929,6 @@ ul.custom-payment-icons-list li {
     color: #34A853;
 }
 
-.hz-perks-section {
-    width: 100%;
-}
-.hz-perks-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 16px;
-}
-.hz-perk-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    justify-content: center;
-}
-.hz-perk-icon-wrap {
-    flex-shrink: 0;
-    color: var(--color-foreground, #0b1a30);
-}
-.hz-perk-img {
-    display: block;
-    object-fit: contain;
-}
-.hz-perk-text {
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-}
-.hz-perk-divider {
-    width: 1px;
-    height: 32px;
-}
-
 /* upsell */
 h2.upsell_heading {
     color: #0D1B38;
