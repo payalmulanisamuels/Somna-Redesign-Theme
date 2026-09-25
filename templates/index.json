@@ -1619,7 +1619,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Strips open your nasal passages so you<br/>breathe easier through the night. Tape<br/>encourages nasal breathing instead <br/>of mouth breathing while you sleep. <br/>Used together, they support one simple<br/>habit breathingthe way your body<br/> actually rests best.</p>",
+                "text": "<p>Strips open your nasal passages so you<br/>breathe easier through the night. Tape<br/>encourages nasal breathing instead&nbsp;<br/>of mouth breathing while you sleep.&nbsp;<br/>Used together, they support one simple<br/>habit breathingthe way your body<br/>&nbsp;actually rests best.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -2258,7 +2258,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
+                "text": "<p>A welcome code for your first&nbsp;<br/>night with Somna.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
