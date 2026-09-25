@@ -1249,6 +1249,24 @@
         "padding_bottom": 20
       }
     },
+    "addtobag_product_banner_eG4ByC": {
+      "type": "addtobag-product-banner",
+      "name": "Custom Product Banner",
+      "settings": {
+        "product_selected": "nasal-strips",
+        "content_alignment": "left",
+        "image": "shopify://shop_images/Breathe_Easier.png",
+        "heading": "Breathe Easier.\nSleep Deeper.",
+        "button_label": "Add to bag",
+        "button_link": "",
+        "bg_color": "#fdf8ee",
+        "text_color": "#0b1a30",
+        "button_bg_color": "#0b1a30",
+        "button_text_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "section_BbCdDx": {
       "type": "section",
       "blocks": {
@@ -1451,6 +1469,7 @@
     "steps_guide_GFjEFb",
     "pdp_comparison_JDftN9",
     "pdp_bundle_feature_banner_wWE9yA",
+    "addtobag_product_banner_eG4ByC",
     "section_BbCdDx",
     "faq_accordion_VVXzwx"
   ]
