@@ -909,9 +909,9 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#1354c4",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/nasal-pro.png",
+            "alignment": false,
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -922,9 +922,9 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#b298e8",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/tape-image.png",
+            "alignment": true,
             "title": "Mouth Tape",
             "price": "$35",
             "button_label": "Subscribe & Save",
