@@ -21,6 +21,11 @@ html[scroll-lock] .wave-container {
 }
 
 /* Header */
+.announcement-bar {
+    position: relative;
+    z-index: 1111;
+}
+
 /* Ensure left column aligns start and right column groups to the end */
 .header__column--left {
   display: flex !important;
