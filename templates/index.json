@@ -887,38 +887,12 @@
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Season Bundle"
           }
-        },
-        "bundle_rBjHFi": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "mouth-tape",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/Product_image_4x_f9860620-0334-4fdf-9589-9ce8c25178e4.png",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
-          }
-        },
-        "bundle_CGg3b8": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "nasal-strips",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/season.jpg",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
-          }
         }
       },
       "block_order": [
         "bundle_gCFgge",
         "bundle_6MqjwE",
-        "bundle_LHB8m9",
-        "bundle_rBjHFi",
-        "bundle_CGg3b8"
+        "bundle_LHB8m9"
       ],
       "name": "Featured Bundle Grid",
       "settings": {
@@ -956,37 +930,11 @@
             "button_label": "Subscribe & Save",
             "button_link": ""
           }
-        },
-        "card_dCixMV": {
-          "type": "card",
-          "settings": {
-            "product_selected": "",
-            "card_bg": "#1354c4",
-            "text_color": "#ffffff",
-            "title": "Night Bundle",
-            "price": "$70",
-            "button_label": "Subscribe & Save",
-            "button_link": ""
-          }
-        },
-        "card_eMfLa8": {
-          "type": "card",
-          "settings": {
-            "product_selected": "",
-            "card_bg": "#1858c2",
-            "text_color": "#ffffff",
-            "title": "Nasal Strips",
-            "price": "",
-            "button_label": "Subscribe & Save",
-            "button_link": ""
-          }
         }
       },
       "block_order": [
         "card_XExw3D",
-        "card_f7AQym",
-        "card_dCixMV",
-        "card_eMfLa8"
+        "card_f7AQym"
       ],
       "name": "Custom Cards Slider",
       "settings": {
