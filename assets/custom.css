@@ -300,7 +300,7 @@ p.announcement-bar__text {
 .bundle-card--featured {
   grid-column: span 2;
   background-color: #ffffff;
-  display: grid;
+  display: flex;
   grid-template-columns: 1.2fr 1fr;
   gap: 20px;
   align-items: center;
