@@ -622,7 +622,9 @@ p.selling_plan_allocation {
     font-size: 11px;
 }
 .cart-drawer__items .cart-items__table-row {
-    border-bottom: 1px solid #E2E8F0 !important;
+    border-bottom: 0px solid #E2E8F0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 10px !important;
 }
 .theme-drawer__badge[data-maintain-ratio],h2.h4.theme-drawer__title {
     background: transparent;
