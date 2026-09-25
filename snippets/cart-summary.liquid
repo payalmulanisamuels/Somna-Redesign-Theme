@@ -34,14 +34,7 @@
 -%}
 
 <div class="hz-cart-totals-summary">
-  <div class="hz-cart-totals-row">
-    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
-    <text-component value="{{ cart.total_price | money }}">
-      {{ cart.total_price | money }}
-    </text-component>
-  </div>
-
-  {%- if total_saved > 0 -%}
+    {%- if total_saved > 0 -%}
     <div class="hz-cart-totals-row hz-cart-totals-saved">
       <span>You saved</span>
       <text-component value="-{{ total_saved | money }}">
@@ -49,6 +42,14 @@
       </text-component>
     </div>
   {%- endif -%}
+  <div class="hz-cart-totals-row">
+    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
+    <text-component value="{{ cart.total_price | money }}">
+      {{ cart.total_price | money }}
+    </text-component>
+  </div>
+
+
 
 
 </div>
