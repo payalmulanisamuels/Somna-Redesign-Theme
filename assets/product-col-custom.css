@@ -42,6 +42,7 @@
     text-align: center;
     gap: 0px;
     justify-content: center;
+    padding-top: 9px;
 }
 .variant-card__image-wrapper img {
     max-height: 40px;
