@@ -204,7 +204,6 @@ p.announcement-bar__text {
   position: relative;
   border-radius: 7px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
   background: #f4f4f4;
 }
 .bundle-card__image {
