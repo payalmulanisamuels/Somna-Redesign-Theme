@@ -1255,9 +1255,8 @@
       "type": "addtobag-product-banner",
       "name": "Custom Product Banner",
       "settings": {
-        "product_selected": "nasal-strips",
         "content_alignment": "left",
-        "image": "shopify://shop_images/Breathe_Easier.png",
+        "image": "{{ product.metafields.custom.bottom_section.value.background_image.value }}",
         "heading": "Breathe Easier.\nSleep Deeper.",
         "button_label": "Add to bag",
         "button_link": "",
