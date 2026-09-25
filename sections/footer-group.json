@@ -237,7 +237,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p><a href=\"/pages/terms-of-service\" title=\"Terms of Service\">Terms of Service</a> · <a href=\"/pages/shipping-policy\" title=\"Shipping Policy\">Shipping Policy</a> · <a href=\"/pages/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a> · <a href=\"/pages/order-cancellation-policy\" title=\"Order Cancellation Policy\">Order Cancellation Policy</a> · <a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">Return & Refund Policy</a> · <a href=\"/pages/subscription-policy\" title=\"Subscription Policy\">Subscription Policy</a></p>",
+            "text": "<ul><li><a href=\"/pages/terms-of-service\" title=\"Terms of Service\">Terms of Service</a></li><li><a href=\"/pages/shipping-policy\" title=\"Shipping Policy\">Shipping Policy</a>&nbsp;</li><li><a href=\"/pages/privacy-policy\" title=\"Privacy Policy\">Privacy Policy</a>&nbsp;</li><li><a href=\"/pages/order-cancellation-policy\" title=\"Order Cancellation Policy\">Order Cancellation Policy</a>&nbsp;</li><li><a href=\"/pages/return-refund-policy\" title=\"Return & Refund Policy\">Return & Refund Policy</a>&nbsp;</li><li><a href=\"/pages/subscription-policy\" title=\"Subscription Policy\">Subscription Policy</a></li></ul>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
