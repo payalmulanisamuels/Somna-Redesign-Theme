@@ -85,7 +85,7 @@
                 "content_direction": "row",
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-end",
-                "vertical_alignment": "center",
+                "vertical_alignment": "flex-start",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
@@ -180,12 +180,34 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "menu_UJ3tdt": {
+                  "type": "menu",
+                  "name": "t:names.menu",
+                  "settings": {
+                    "menu": "connect",
+                    "heading": "",
+                    "menu_spacing": 0,
+                    "show_as_accordion": false,
+                    "accordion_icon": "caret",
+                    "accordion_dividers": false,
+                    "background_color": "",
+                    "text_color": "",
+                    "heading_preset": "h5",
+                    "link_preset": "paragraph",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "menu_WQdApY",
                 "menu_jcaTfU",
-                "menu_dAj6Hj"
+                "menu_dAj6Hj",
+                "menu_UJ3tdt"
               ]
             }
           },
