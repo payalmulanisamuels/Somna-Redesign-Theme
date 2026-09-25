@@ -11,7 +11,7 @@
   endif
 -%}
 {% assign alignment = product.metafields.custom.bottom_section.value %} 
-{{alignment }}
+{{alignment.set_true_if_need_left_content }}
 <div class="hz-banner-section hz-banner-align--{{ section.settings.content_alignment }}" style="background-color: {{ section.settings.bg_color }};">
 {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
