@@ -32,7 +32,9 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".wave-container.bottom {bottom: -10px;}"
+      ],
       "name": "t:names.announcement_bar",
       "settings": {
         "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
