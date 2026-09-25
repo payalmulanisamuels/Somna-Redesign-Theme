@@ -460,6 +460,15 @@ p.announcement-bar__text {
 }
 /* Small Product */
 /* Signup Form*/
+
+.klaviyo-form-button {
+    margin-left: -30px !important;
+    font-weight: normal !important;
+}
+.klaviyo-form.klaviyo-form.klaviyo-form {
+    padding: 0 !important;
+}
+
 .email-signup__input-group--integrated .email-signup__input {
 padding: 0px 10px;
 font-size: 10px !important;
