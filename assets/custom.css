@@ -12,8 +12,8 @@ html[scroll-lock] .wave-container {
 .bg_image {
     background-size: cover !important;
     background-position: center !important;
-    height: 55px;
-    top: -12px;
+    height: 76px;
+    top: -20px;
 }
 .header_main strong {
     font-family: var(--headfont);
