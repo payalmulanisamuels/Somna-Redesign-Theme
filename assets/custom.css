@@ -402,10 +402,11 @@ p.announcement-bar__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 .hz-card-content.alignment-right {
   width: 100%;
+  align-items: flex-start;
 }
 .hz-card-title {
   font-size: 14px;
