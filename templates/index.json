@@ -818,7 +818,9 @@
         "divider_CimJ7p",
         "group_iMHtRg"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".custom-section-content {display: flex; align-items: center;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
         "bg_image": "shopify://shop_images/icon_bg.svg",
