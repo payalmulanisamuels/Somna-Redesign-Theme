@@ -878,10 +878,12 @@
         "divider_CimJ7p",
         "group_iMHtRg"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".custom-section-content {display: flex; align-items: center;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon-bg.svg",
+        "bg_image": "shopify://shop_images/icon_bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -993,7 +995,6 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#1354c4",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/product1.png",
             "title": "Nasal Strips",
@@ -1006,7 +1007,6 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#b298e8",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/product2.png",
             "title": "Mouth Tape",
