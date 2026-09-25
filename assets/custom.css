@@ -233,8 +233,17 @@ p.announcement-bar__text {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
 }
-
+.bundle-card--featured .bundle-card__content {
+    flex-wrap: wrap;
+}
+.bundle-card--featured .brand-card-wrap {
+    width: 100%;
+}
+.bundle-card--featured .bundle-subtext {
+    max-width: 100%;
+}
 .bundle-card__title {
   font-size: 12px;
   font-weight: 600;
