@@ -915,7 +915,7 @@
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
-            "button_link": ""
+            "button_link": "shopify://products/nasal-strips"
           }
         },
         "card_f7AQym": {
@@ -928,7 +928,7 @@
             "title": "Mouth Tape",
             "price": "$35",
             "button_label": "Subscribe & Save",
-            "button_link": ""
+            "button_link": "shopify://products/mouth-tape"
           }
         }
       },
