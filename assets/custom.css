@@ -551,6 +551,11 @@ height: 100%;
 /* Hero section */
 
 /* Cart Drawer */
+.theme-drawer__header {
+    border-bottom: 1px solid #BABABA;
+    padding: 19px;
+    margin-bottom: 14px;
+}
 .cart-drawer__inner {
     background: #FFF9ED;
 }
