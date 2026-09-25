@@ -1231,10 +1231,10 @@
       "type": "pdp-comparison",
       "name": "Comparison Simple",
       "settings": {
-        "background_image": "{{ product.metafields.custom.comparison_background_image.value }}",
+        "background_image": "{{ product.metafields.custom[\"comparison-content\"].value.background_image.value }}",
         "heading": "Comparison",
-        "subheading": "{{ product.metafields.custom.comparison | metafield_tag }}",
-        "bottom_image": "{{ product.metafields.custom.comparison_bottom_image.value }}"
+        "subheading": "<p>{{ product.metafields.custom[\"comparison-content\"].value.content.value }}</p>",
+        "bottom_image": "{{ product.metafields.custom[\"comparison-content\"].value.bottom_image.value }}"
       }
     },
     "pdp_bundle_feature_banner_wWE9yA": {
