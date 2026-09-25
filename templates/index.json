@@ -1671,7 +1671,7 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
-        "product": "season-bundle",
+        "product": "sleep-bundle",
         "bg_color": "{{ settings.color_palette.background }}",
         "image": "shopify://shop_images/The_breathe_bundle.png",
         "title": "The Breathe Bundle",
