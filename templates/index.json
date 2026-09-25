@@ -860,8 +860,8 @@
           "settings": {
             "product": "sleep-bundle",
             "is_featured": false,
-            "custom_title": "Breathe (Blue), Bold (Red), or Night (Black)",
-            "custom_image": "shopify://shop_images/breat-bundle.jpg",
+            "custom_title": "Strips + Tape, choose Breathe (Blue),Bold (Red), or Night (Black)",
+            "custom_image": "shopify://shop_images/sleep-bundle.jpg",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Sleep Bundle"
           }
