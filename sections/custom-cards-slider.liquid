@@ -50,7 +50,7 @@
               {{ 'image' | placeholder_svg_tag: 'hz-placeholder' }}
             {% endif %}
           </div>
-          <div class="hz-card-content">
+          <div class="hz-card-content {%  unless block.settings.alignment %}alignment-right{% endunless %}">
             {% if card_title != blank %}
               <h3 class="hz-card-title" style="color: {{ block.settings.text_color }};">{{ card_title }}</h3>
             {% endif %}
