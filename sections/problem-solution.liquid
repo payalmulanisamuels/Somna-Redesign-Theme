@@ -41,12 +41,10 @@
             {{ section.settings.problem_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
           {%- endif -%}
       </div>
-      {% if section.settings.problem_tag != blank %}
-        <span class="hz-ps-tag">{{ section.settings.problem_tag }}</span>
-      {% endif %}
+ 
 
       {% if section.settings.problem_heading != blank %}
-        <h3 class="hz-ps-heading">{{ section.settings.problem_heading}}</h3>
+        <h3 class="hz-ps-tag">{{ section.settings.problem_heading}}</h3>
       {% endif %}
 
       {% if section.settings.problem_content != blank %}
@@ -77,13 +75,11 @@
             {{ section.settings.solution_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
           {%- endif -%}
       </div>
-        {% if section.settings.solution_tag != blank %}
-            <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
-        {% endif %}
+ 
 
 
         {% if section.settings.solution_heading != blank %}
-            <h3 class="hz-ps-heading">{{ section.settings.solution_heading }}</h3>
+            <h3 class="hz-ps-tag">{{ section.settings.solution_heading }}</h3>
         {% endif %}
 
         {% if section.settings.solution_content != blank %}
@@ -192,12 +188,7 @@
       "type": "header",
       "content": "Problem Settings"
     },
-    {
-      "type": "text",
-      "id": "problem_tag",
-      "label": "Tag",
-      "default": "PROBLEM"
-    },
+
     {
       "type": "image_picker",
       "id": "problem_image",
@@ -224,12 +215,7 @@
       "id": "solution_image",
       "label": "Solution Image",
     },
-    {
-      "type": "text",
-      "id": "solution_tag",
-      "label": "Tag",
-      "default": "SOLUTION"
-    },
+    
     {
       "type": "text",
       "id": "solution_heading",
