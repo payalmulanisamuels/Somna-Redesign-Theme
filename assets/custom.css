@@ -302,7 +302,7 @@ p.announcement-bar__text {
   background-color: #ffffff;
   display: flex;
   grid-template-columns: 1.2fr 1fr;
-  gap: 20px;
+  gap: 6px;
   align-items: center;
 }
 
