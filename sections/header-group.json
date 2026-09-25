@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Free shipping, always.",
+            "text": "Free shipping.",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.625rem",

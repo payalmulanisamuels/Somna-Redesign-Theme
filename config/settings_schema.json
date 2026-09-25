@@ -1671,7 +1671,7 @@
       "type": "textarea",
       "id": "perk_1_text",
       "label": "Perk 1 Text",
-      "default": "Free shipping,\nalways"
+      "default": "Free shipping."
     },
     {
       "type": "header",
