@@ -233,32 +233,6 @@
     "footer_wtgjpB": {
       "type": "footer",
       "blocks": {
-        "text_7E4TmC": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>The Breathe Bundle · $59 Subscribe & Save</p>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "0.625rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "text_rcUxmF": {
           "type": "text",
           "name": "t:names.text",
@@ -284,11 +258,37 @@
             "padding-inline-end": 0
           },
           "blocks": {}
+        },
+        "text_7E4TmC": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>@2026 Somna.</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "0.625rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "text_7E4TmC",
-        "text_rcUxmF"
+        "text_rcUxmF",
+        "text_7E4TmC"
       ],
       "name": "t:names.footer",
       "settings": {
