@@ -64,7 +64,7 @@
                 "width": "custom",
                 "custom_width": 25,
                 "width_mobile": "custom",
-                "custom_width_mobile": 55,
+                "custom_width_mobile": 50,
                 "height": "fill",
                 "border": "none",
                 "border_width": 1,
