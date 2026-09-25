@@ -290,6 +290,11 @@
         "text_rcUxmF",
         "text_7E4TmC"
       ],
+      "custom_css": [
+        ".footer-content li a {font-size: 4px;}",
+        ".footer-content li {display: block;}",
+        ".footer-content ul {display: flex;}"
+      ],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
