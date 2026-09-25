@@ -243,39 +243,7 @@
  
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const root = document.getElementById('hz-slider-{{ section.id }}');
-    if (!root) return;
 
-    const viewport = root.querySelector('.hz-slider-viewport');
-    const cards = root.querySelectorAll('.hz-card');
-    const dots = root.querySelectorAll('.hz-dot');
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const index = parseInt(dot.getAttribute('data-index'));
-        if (cards[index]) {
-          cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
-      });
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = Array.from(cards).indexOf(entry.target);
-          if (index !== -1) {
-            dots.forEach(d => d.classList.remove('is-active'));
-            if (dots[index]) dots[index].classList.add('is-active');
-          }
-        }
-      });
-    }, { root: viewport, threshold: 0.6 });
-
-    cards.forEach(card => observer.observe(card));
-  });
-</script>
 
 {% schema %}
 {
