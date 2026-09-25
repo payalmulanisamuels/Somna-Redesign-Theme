@@ -33,7 +33,7 @@
         "announcement_BxgCk9"
       ],
       "custom_css": [
-        ".wave-container.bottom {bottom: -15px;}"
+        ".wave-container.bottom {bottom: -10px;}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
