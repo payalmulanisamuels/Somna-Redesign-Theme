@@ -298,11 +298,9 @@ p.announcement-bar__text {
 
 /* --- 4. Featured Large Card --- */
 .bundle-card--featured {
-  grid-column: span 2;
   background-color: #ffffff;
   display: flex;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 6px;
+  gap: 0px;
   align-items: center;
 }
 
