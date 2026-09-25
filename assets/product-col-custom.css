@@ -322,6 +322,7 @@
   .somna-perks-list li{
     display: flex;
     align-items: center;
+    gap: 5px;
   }
   .somna-dropdown-wrap {
     margin-top: 6px;
