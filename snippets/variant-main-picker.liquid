@@ -362,9 +362,13 @@
   assign initial_var = product_resource.selected_or_first_available_variant
   assign init_sub_price = initial_var.price
   assign init_one_time = initial_var.compare_at_price | default: initial_var.price
+  assign init_discount = 10
   for alloc in initial_var.selling_plan_allocations
     assign init_sub_price = alloc.price
     assign init_one_time = alloc.compare_at_price | default: initial_var.price
+    if init_one_time > init_sub_price
+      assign init_discount = init_one_time | minus: init_sub_price | times: 100.0 | divided_by: init_one_time | round
+    endif
     break
   endfor
   assign init_sub_numeric = init_sub_price | divided_by: 100.0
@@ -379,48 +383,48 @@
 -%}
 
 <div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
-  <!-- Option 1: Autoship & Save Box -->
-  <div class="somna-purchase-box active" data-purchase-card="subscribe">
-    <div class="somna-box-banner">10% OFF YOUR FIRST ORDER</div>
-    <div class="somna-box-top-row">
-      <label class="somna-radio-label">
-        <input type="radio" name="somna_purchase_type" value="subscribe" checked>
-        <span class="somna-radio-bullet"></span>
-        <div class="somna-title-stack">
-          <span class="somna-box-title">Autoship & Save</span>
-          <span class="somna-per-night" id="SomnaPerNightPrice">${{ init_per_night }} Per Night</span>
-        </div>
-      </label>
-      <div class="somna-price-stack">
-        <div class="somna-pricing-row">
-          <span class="somna-strike-price" id="SomnaStrikePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
-          <span class="somna-active-price" id="SomnaSubPrice">{{ init_sub_price | money_without_trailing_zeros }}</span>
-        </div>
-        <div class="somna-save-pill" id="SomnaSavePill" {% if init_savings <= 0 %}style="display:none;"{% endif %}>SAVE {{ init_savings | money_without_trailing_zeros }}</div>
-      </div>
-    </div>
-    <div class="somna-box-inner">
-      <ul class="somna-perks-list">
-        <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
-</svg>
- Same price, for as long as you stay subscribed</li>
-        <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
-</svg>
- <strong>FREE</strong> shipping</li>
-        <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
-</svg>
- <b>FREE 2 Gifts</b> with every subscription</li>
-        <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
-</svg>
- FREE 30-Night Sleep Tracker with every subscription</li>
-        <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
-</svg>
- Skip, pause, or cancel anytime</li>
+        <!-- Option 1: Autoship & Save Box -->
+        <div class="somna-purchase-box active" data-purchase-card="subscribe">
+          <div class="somna-box-banner">{{init_discount}}% OFF YOUR FIRST ORDER</div>
+          <div class="somna-box-top-row">
+            <label class="somna-radio-label">
+              <input type="radio" name="somna_purchase_type" value="subscribe" checked>
+              <span class="somna-radio-bullet"></span>
+              <div class="somna-title-stack">
+                <span class="somna-box-title">Autoship & Save</span>
+                <span class="somna-per-night" id="SomnaPerNightPrice">${{ init_per_night }} Per Night</span>
+              </div>
+            </label>
+            <div class="somna-price-stack">
+              <div class="somna-pricing-row">
+                <span class="somna-strike-price" id="SomnaStrikePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
+                <span class="somna-active-price" id="SomnaSubPrice">{{ init_sub_price | money_without_trailing_zeros }}</span>
+              </div>
+              <div class="somna-save-pill" id="SomnaSavePill" {% if init_savings <= 0 %}style="display:none;"{% endif %}>SAVE {{ init_savings | money_without_trailing_zeros }}</div>
+            </div>
+          </div>
+          <div class="somna-box-inner">
+            <ul class="somna-perks-list">
+              <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
+        </svg>
+        Same price, for as long as you stay subscribed</li>
+                <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
+      </svg>
+      <strong>FREE</strong> shipping</li>
+              <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
+      </svg>
+      <b>FREE 2 Gifts</b> with every subscription</li>
+              <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
+      </svg>
+      FREE 30-Night Sleep Tracker with every subscription</li>
+              <li><svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/>
+      </svg>
+      Skip, pause, or cancel anytime</li>
       </ul>
 
       <div class="somna-dropdown-wrap">
@@ -453,6 +457,7 @@
       </div>
     </div>
   </div>
+
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
