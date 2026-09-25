@@ -885,7 +885,7 @@ ul.custom-payment-icons-list li {
     width: 100%;
 }
 .hz-cart-totals-summary {
-    width: calc(100% + 46px);
+    width: calc(100% + 32px);
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
