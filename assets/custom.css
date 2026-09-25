@@ -970,12 +970,12 @@ ul.custom-payment-icons-list li {
 
 }
 .hz-minicart-upsell__card {
-    background-color: #E7F5FF;
-    border-radius: 12px;
     padding: 14px;
     display: flex;
     gap: 10px;
     align-items: center;
+    border-radius: 12px;
+    border: 1px solid #000;
 }
 .hz-minicart-upsell__media {
     width: 140px;
