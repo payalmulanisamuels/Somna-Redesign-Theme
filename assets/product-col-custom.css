@@ -319,6 +319,10 @@
     font-weight: 400;
     line-height: normal;
   }
+  .somna-perks-list li{
+    display: flex;
+    align-items: center;
+  }
   .somna-dropdown-wrap {
     margin-top: 6px;
     position: relative;
