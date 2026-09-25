@@ -159,6 +159,9 @@ p.announcement-bar__text {
 /* Header */
 
 /* Footer */
+li.menu__item.paragraph a {
+    font-size: 10px;
+}
 .footer-content summary.menu__heading.h5 {
     padding: 0 0 5px 0;
     color: #98A3DE;
