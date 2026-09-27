@@ -106,7 +106,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Returns & Guarantee</p>",
+                "text": "<p><strong>Returns & Guarantee</strong></p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
