@@ -372,16 +372,22 @@
         "padding_bottom": 64
       }
     },
-        "pdp_bundle_feature_banner_wWE9yA": {
-      "type": "pdp-bundle-feature-banner",
-      "name": "Bundle Feature Banner - PDP",
+    "bundle_feature_banner_Qrgcy3": {
+      "type": "bundle-feature-banner",
+      "name": "Bundle Feature Banner",
       "settings": {
-        "bg_color": "#fff9ed",
+        "product": "sleep-bundle",
+        "bg_color": "{{ settings.color_palette.background }}",
+        "image": "shopify://shop_images/The_breathe_bundle.png",
+        "title": "The Breathe Bundle",
+        "subtitle": "Blue Strips + Blue Tape, one month supply",
+        "sub_price_override": "",
         "sub_label": "Subscribe & Save",
+        "onetime_price_override": "",
         "onetime_label": "One-time",
         "button_label": "Shop the Breathe Bundle",
-        "padding_top": 60,
-        "padding_bottom": 20
+        "padding_top": 28,
+        "padding_bottom": 28
       }
     },
   },
@@ -390,7 +396,7 @@
     "steps_guide_GFjEFb",
     "layered_image_with_text_BndA69",
     "steps_guide_ed4FP7",
-    "pdp_bundle_feature_banner_wWE9yA",
+    "bundle_feature_banner_Qrgcy3",
     "pdp_comparison_JDftN9",
     "faq_accordion_XL3WiV"
   ]
