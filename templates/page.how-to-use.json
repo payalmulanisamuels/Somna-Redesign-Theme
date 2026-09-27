@@ -113,7 +113,50 @@
         "padding-block-end": 0
       }
     },
-    "layered_image_with_text_BndA69": {
+  
+    "steps_guide_GFjEFb": {
+      "type": "steps-guide",
+      "blocks": {
+        "step_a9NE7E": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape1.png",
+            "title": "<p>Clean and dry the bridge of your nose.</p>"
+          }
+        },
+        "step_c9jNqU": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape2.png",
+            "title": "<p>Centre the strip and smooth each side outward.</p>"
+          }
+        },
+        "step_EaXaXR": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape3.png",
+            "title": "<p>Press gently along the edges until it holds.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_a9NE7E",
+        "step_c9jNqU",
+        "step_EaXaXR"
+      ],
+      "name": "Steps Guide",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
+        "bg_color": "#e0e8d7",
+        "show_waves": false,
+        "title": "How To Use",
+        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
+      }
+    },
+      "layered_image_with_text_BndA69": {
       "type": "layered-image-with-text",
       "blocks": {
         "layered_slide_F3RQc7": {
@@ -215,48 +258,6 @@
         "background_color": "",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "steps_guide_GFjEFb": {
-      "type": "steps-guide",
-      "blocks": {
-        "step_a9NE7E": {
-          "type": "step",
-          "settings": {
-            "step_number": "",
-            "image": "shopify://shop_images/tape1.png",
-            "title": "<p>Clean and dry the bridge of your nose.</p>"
-          }
-        },
-        "step_c9jNqU": {
-          "type": "step",
-          "settings": {
-            "step_number": "",
-            "image": "shopify://shop_images/tape2.png",
-            "title": "<p>Centre the strip and smooth each side outward.</p>"
-          }
-        },
-        "step_EaXaXR": {
-          "type": "step",
-          "settings": {
-            "step_number": "",
-            "image": "shopify://shop_images/tape3.png",
-            "title": "<p>Press gently along the edges until it holds.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_a9NE7E",
-        "step_c9jNqU",
-        "step_EaXaXR"
-      ],
-      "name": "Steps Guide",
-      "settings": {
-        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
-        "bg_color": "#e0e8d7",
-        "show_waves": false,
-        "title": "How To Use",
-        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
       }
     },
     "steps_guide_ed4FP7": {
