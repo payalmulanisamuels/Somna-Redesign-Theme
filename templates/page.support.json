@@ -134,7 +134,7 @@
               "settings": {
                 "image": "shopify://shop_images/Guarantee-faq.png",
                 "link": "",
-                "image_ratio": "square",
+                "image_ratio": "adapt",
                 "width": "custom",
                 "custom_width": 5,
                 "width_mobile": "custom",
