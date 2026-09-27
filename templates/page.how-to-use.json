@@ -114,50 +114,32 @@
         "padding-block-end": 0
       }
     },
-     "steps_guide_GFjEFb": {
+    "steps_guide_GFjEFb": {
       "type": "steps-guide",
       "blocks": {
         "step_a9NE7E": {
           "type": "step",
           "settings": {
-            "step_number": "01",
-            "image": "shopify://shop_images/step1.png",
-            "title": "<p>Clean & dry</p>"
-          }
-        },
-        "step_Xi3rtx": {
-          "type": "step",
-          "settings": {
-            "step_number": "02",
-            "image": "shopify://shop_images/step2.png",
-            "title": "<p>Peel & place</p>"
-          }
-        },
-        "step_dwFEQe": {
-          "type": "step",
-          "settings": {
-            "step_number": "03",
-            "image": "shopify://shop_images/step3.png",
-            "title": "<p>Press gently</p>"
+            "step_number": "",
+            "image": "",
+            "title": ""
           }
         }
       },
       "block_order": [
-        "step_a9NE7E",
-        "step_Xi3rtx",
-        "step_dwFEQe"
+        "step_a9NE7E"
       ],
-      "disabled": true,
       "name": "Steps Guide",
       "settings": {
+        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
         "bg_color": "#e0e8d7",
         "show_waves": true,
-        "title": "<strong>Peel. Place.</strong> <em>Unwind.</em>",
-        "subheading_bottom": "Follow the directions on your pack."
+        "title": "How To Use",
+        "subheading_bottom": ""
       }
-    },
+    }
   },
-   
   "order": [
     "layered_image_with_text_LEPfjJ",
     "steps_guide_GFjEFb"
