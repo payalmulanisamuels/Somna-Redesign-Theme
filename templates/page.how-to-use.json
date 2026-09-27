@@ -40,7 +40,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Nasal Strips</p>",
+                "text": "<p><strong>Nasal Strips</strong></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
