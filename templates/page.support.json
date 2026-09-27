@@ -548,7 +548,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Got an order on the way? Check its status here.</p>",
+                    "text": "<p>Got an order on the way? Check its&nbsp;<br/>status here.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
