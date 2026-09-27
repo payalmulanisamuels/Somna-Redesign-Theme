@@ -107,16 +107,16 @@
               "name": "t:names.heading",
               "settings": {
                 "text": "<p>Returns & Guarantee</p>",
-                "width": "fit-content",
-                "max_width": "normal",
+                "width": "100%",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "1.5rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
+                "line_height": "tight",
+                "letter_spacing": "tight",
                 "case": "none",
-                "wrap": "pretty",
+                "wrap": "nowrap",
                 "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
@@ -269,8 +269,8 @@
         "accordion_hefkBf"
       ],
       "custom_css": [
-        ".layout-panel-flex--row:not(.mobile-column)>.image-block img {max-width: 52px;}",
-        ".layout-panel-flex--row:not(.mobile-column)>.image-block {justify-content: flex-end;}"
+        ".layout-panel-flex--row:not(.mobile-column) > .image-block img {max-width: 52px;}",
+        ".layout-panel-flex--row:not(.mobile-column) > .image-block {justify-content: flex-end;}"
       ],
       "name": "t:names.faq_section",
       "settings": {
