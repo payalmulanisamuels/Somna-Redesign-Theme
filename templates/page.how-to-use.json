@@ -113,7 +113,6 @@
         "padding-block-end": 0
       }
     },
-  
     "steps_guide_GFjEFb": {
       "type": "steps-guide",
       "blocks": {
@@ -156,7 +155,7 @@
         "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
       }
     },
-      "layered_image_with_text_BndA69": {
+    "layered_image_with_text_BndA69": {
       "type": "layered-image-with-text",
       "blocks": {
         "layered_slide_F3RQc7": {
@@ -302,6 +301,17 @@
         "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use."
       }
     },
+    "pdp_comparison_JDftN9": {
+      "type": "pdp-comparison",
+      "name": "Comparison Simple",
+      "settings": {
+        "background_image": "shopify://shop_images/pdpbanner.png",
+        "heading": "Settling In",
+        "subheading": "<p>Most people notice it feels routine within the first week. If anything feels wrong too tight, too irritating, not holding reposition or size down before deciding it's not for you. You have 30 nights to find out either way.</p>",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "faq_accordion_XL3WiV": {
       "type": "faq-accordion",
       "blocks": {
@@ -361,19 +371,7 @@
         "padding_top": 20,
         "padding_bottom": 64
       }
-    },
-    "pdp_comparison_JDftN9": {
-      "type": "pdp-comparison",
-      "name": "Comparison Simple",
-      "settings": {
-        "background_image": "",
-        "heading": "Comparison",
-        "subheading": "",
-        "bottom_image": "",
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
+    }
   },
   "order": [
     "layered_image_with_text_LEPfjJ",
