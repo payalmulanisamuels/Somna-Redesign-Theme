@@ -683,6 +683,7 @@
       ],
       "name": "t:names.faq_section",
       "settings": {
+        "top_wave_image": "shopify://shop_images/feature-top-svg.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -927,6 +928,8 @@
       ],
       "name": "t:names.faq_section",
       "settings": {
+        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -939,7 +942,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E0E8D7",
+        "background_color": "#FAF2DF",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1170,6 +1173,7 @@
       ],
       "name": "t:names.faq_section",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -1413,6 +1417,7 @@
       ],
       "name": "t:names.faq_section",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/dark-yellow-bottom.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -1425,7 +1430,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#EFD374",
+        "background_color": "#FFE795",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
