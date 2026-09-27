@@ -361,13 +361,26 @@
         "padding_top": 20,
         "padding_bottom": 64
       }
-    }
+    },
+    "pdp_comparison_JDftN9": {
+      "type": "pdp-comparison",
+      "name": "Comparison Simple",
+      "settings": {
+        "background_image": "",
+        "heading": "Comparison",
+        "subheading": "",
+        "bottom_image": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
   },
   "order": [
     "layered_image_with_text_LEPfjJ",
     "steps_guide_GFjEFb",
     "layered_image_with_text_BndA69",
     "steps_guide_ed4FP7",
+    "pdp_comparison_JDftN9",
     "faq_accordion_XL3WiV"
   ]
 }
