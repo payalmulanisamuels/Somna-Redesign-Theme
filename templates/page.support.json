@@ -50,28 +50,30 @@
         "heading",
         "page-content"
       ],
+      "disabled": true,
       "settings": {
         "content_direction": "column",
         "gap": 32,
-        "background_color": "#FFF9ED",
+        "background_color": "#fff9ed",
         "padding-block-start": 40,
         "padding-block-end": 80
       }
     },
-    "footer_m9NzUG": {
-      "type": "footer",
+    "section_DxebWP": {
+      "type": "section",
       "blocks": {
-        "group_H6VpwJ": {
+        "group_iYLMBM": {
           "type": "group",
+          "name": "t:names.group",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
+            "content_direction": "row",
+            "vertical_on_mobile": false,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 7,
+            "gap": 12,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -100,21 +102,22 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_LWt8Pz": {
+            "text_6wUFbq": {
               "type": "text",
+              "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
-                "width": "100%",
+                "text": "<p>Returns & Guarantee</p>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "custom",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
+                "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -125,56 +128,23 @@
               },
               "blocks": {}
             },
-            "text_f9CFLH": {
-              "type": "text",
+            "image_aUw8dc": {
+              "type": "image",
+              "name": "t:names.image",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "email_signup_TkptFH": {
-              "type": "email-signup",
-              "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "heading": "",
-                "heading_text_color": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "input_style": "custom",
+                "image": "shopify://shop_images/Guarantee-faq.png",
+                "link": "",
+                "image_ratio": "square",
+                "width": "custom",
+                "custom_width": 5,
+                "width_mobile": "custom",
+                "custom_width_mobile": 1,
+                "height": "fit",
+                "border": "none",
                 "border_width": 1,
-                "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.background }}",
-                "input_text_color": "{{ settings.color_palette.color1 }}",
-                "input_border_color": "#0a1a4a",
-                "input_type_preset": "paragraph",
-                "style_class": "button-unstyled",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "{{ settings.color_palette.background }}",
-                "display_type": "text",
-                "label": "Unlock 10% off →",
-                "integrated_button": true,
-                "button_type_preset": "paragraph",
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -184,28 +154,153 @@
             }
           },
           "block_order": [
-            "text_LWt8Pz",
-            "text_f9CFLH",
-            "email_signup_TkptFH"
+            "text_6wUFbq",
+            "image_aUw8dc"
+          ]
+        },
+        "accordion_hefkBf": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "divider_color": "",
+            "type_preset": "h5",
+            "background_color": "",
+            "text_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_row_HEzWqR": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "What's your return policy?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_breViw": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_breViw"
+              ]
+            },
+            "accordion_row_iCJpcN": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "What if my item arrives damaged?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_RQXRnV": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_RQXRnV"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_row_HEzWqR",
+            "accordion_row_iCJpcN"
           ]
         }
       },
       "block_order": [
-        "group_H6VpwJ"
+        "group_iYLMBM",
+        "accordion_hefkBf"
       ],
-      "name": "t:names.footer",
+      "name": "t:names.faq_section",
       "settings": {
-        "background_image": "shopify://shop_images/footer-bg.jpg",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
         "section_width": "page-width",
-        "gap": 7,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 50
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#CBD6F4",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     }
   },
   "order": [
     "main",
-    "footer_m9NzUG"
+    "section_DxebWP"
   ]
 }
