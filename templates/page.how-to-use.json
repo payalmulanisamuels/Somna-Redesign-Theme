@@ -301,6 +301,24 @@
         "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use."
       }
     },
+    "bundle_feature_banner_Qrgcy3": {
+      "type": "bundle-feature-banner",
+      "name": "Bundle Feature Banner",
+      "settings": {
+        "product": "",
+        "bg_color": "{{ settings.color_palette.background }}",
+        "image": "shopify://shop_images/The_breathe_bundle.png",
+        "title": "Using Them Together",
+        "subtitle": "Clean, dry skin nose and lips. Apply the strip, then the tape, as the last step before lights out. Give it a few nights to feel like routine, not a new habit.",
+        "sub_price_override": "",
+        "sub_label": "",
+        "onetime_price_override": "",
+        "onetime_label": "",
+        "button_label": "",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
     "pdp_comparison_JDftN9": {
       "type": "pdp-comparison",
       "name": "Comparison Simple",
@@ -371,25 +389,7 @@
         "padding_top": 20,
         "padding_bottom": 64
       }
-    },
-    "bundle_feature_banner_Qrgcy3": {
-      "type": "bundle-feature-banner",
-      "name": "Bundle Feature Banner",
-      "settings": {
-        "product": "sleep-bundle",
-        "bg_color": "{{ settings.color_palette.background }}",
-        "image": "shopify://shop_images/The_breathe_bundle.png",
-        "title": "The Breathe Bundle",
-        "subtitle": "Blue Strips + Blue Tape, one month supply",
-        "sub_price_override": "",
-        "sub_label": "Subscribe & Save",
-        "onetime_price_override": "",
-        "onetime_label": "One-time",
-        "button_label": "Shop the Breathe Bundle",
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
+    }
   },
   "order": [
     "layered_image_with_text_LEPfjJ",
