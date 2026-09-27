@@ -152,12 +152,55 @@
         "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "How To Use",
-        "subheading_bottom": ""
+        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
+      }
+    },
+    "steps_guide_ed4FP7": {
+      "type": "steps-guide",
+      "blocks": {
+        "step_3AyEjy": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape-1.png",
+            "title": "<p>Apply to clean, dry lips shortly before bed.</p>"
+          }
+        },
+        "step_grpfPp": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tap-2.png",
+            "title": "<p>It should feel snug</p>"
+          }
+        },
+        "step_tBXEhD": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape-3.png",
+            "title": "<p>Never tight</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_3AyEjy",
+        "step_grpfPp",
+        "step_tBXEhD"
+      ],
+      "name": "Steps Guide",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
+        "bg_color": "#e0e8d7",
+        "show_waves": false,
+        "title": "How To Use",
+        "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use."
       }
     }
   },
   "order": [
     "layered_image_with_text_LEPfjJ",
-    "steps_guide_GFjEFb"
+    "steps_guide_GFjEFb",
+    "steps_guide_ed4FP7"
   ]
 }
