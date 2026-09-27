@@ -16,7 +16,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/White_Gradient_overlay_image.png",
+            "image_1": "shopify://shop_images/Breathe_Easier.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -40,7 +40,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>It's simple.<br/>Breathe through your nose.</p>",
+                "text": "<p>Nasal Strips</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -66,7 +66,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Strips open your nasal passages so you<br/>breathe easier through the night. Tape<br/>encourages nasal breathing instead&nbsp;<br/>of mouth breathing while you sleep.&nbsp;<br/>Used together, they support one simple<br/>habit breathingthe way your body<br/>&nbsp;actually rests best.</p>",
+                "text": "<p><strong>How it works:</strong> Flexible fabric backing,&nbsp;<br/>a gentle spring structure, and a<br/>hypoallergenic adhesive layer designed to stay comfortable through&nbsp;<br/>the night without irritating skin.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -103,7 +103,6 @@
       ],
       "name": "Layered Image with Text",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
         "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
@@ -121,20 +120,37 @@
           "type": "step",
           "settings": {
             "step_number": "",
-            "image": "",
-            "title": ""
+            "image": "shopify://shop_images/tape1.png",
+            "title": "<p>Clean and dry the bridge of your nose.</p>"
+          }
+        },
+        "step_c9jNqU": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape2.png",
+            "title": "<p>Centre the strip and smooth each side outward.</p>"
+          }
+        },
+        "step_EaXaXR": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape3.png",
+            "title": "<p>Press gently along the edges until it holds.</p>"
           }
         }
       },
       "block_order": [
-        "step_a9NE7E"
+        "step_a9NE7E",
+        "step_c9jNqU",
+        "step_EaXaXR"
       ],
       "name": "Steps Guide",
       "settings": {
-        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
         "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
         "bg_color": "#e0e8d7",
-        "show_waves": true,
+        "show_waves": false,
         "title": "How To Use",
         "subheading_bottom": ""
       }
