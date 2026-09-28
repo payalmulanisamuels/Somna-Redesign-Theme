@@ -22,13 +22,13 @@ html[scroll-lock] .wave-container {
 
 /* Header */
  .announcement-bar__slide[aria-hidden=true] {
-    opacity: 1;
-    visibility: visible;
-    width: auto;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: auto !important;
 }
 
 slideshow-component[actioned] slideshow-slide, slideshow-slide[aria-hidden=false] {
-    width: auto;
+    width: auto !important;
 }
 #header-component {
     position: relative;
