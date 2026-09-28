@@ -1220,4 +1220,76 @@ h3.somna-bundle-main-title {
     margin-bottom: 16px;
     font-family: var(--headfont);
 }
+.somna-bundles-grid {
+    display: grid;
+    grid-template-columns: calc(50% - 6px) calc(50% - 6px);
+    gap: 12px;
+    margin-bottom: 7px;
+}
+
+.somna-bundle-details {
+    overflow: hidden;
+    color: #FFF;
+    text-overflow: ellipsis;
+    font-family: Inter;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    height: 34px;
+    padding: 8px 10px;
+    justify-content: space-between;
+    align-items: center;
+    background: #0A1A4A;
+    align-self: stretch;
+    border-radius: 0 0 8px 8px;
+}
+
+.somna-bundle-item a {
+    border-radius: 8px;
+    display: block;
+}
+
+.somna-bundle-img-wrap img {
+    border-radius: 8px 8px 0 0;
+    height: 115px;
+    object-fit: cover;
+}
+
+.somna-featured-horizontal-card {
+    display: flex;
+    align-items: center;
+    background: #FFF6CE;
+    border-radius: 8px;
+}
+
+.somna-hz-img-side img {
+    border-radius: 8px 0 0 8px;
+}
+
+.somna-hz-content-side {
+    flex: 0 0 40%;
+    padding: 12px;
+}
+
+h4.somna-hz-title {
+    color: #0A1A4A;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: var(--headfont);
+    margin-bottom: 4px;
+    max-width: 65px;
+    letter-spacing: 0;
+}
+
+.somna-hz-price {
+    color: #0A1A4A;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
 /* Menu Drawer*/
