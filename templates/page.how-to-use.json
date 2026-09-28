@@ -165,7 +165,7 @@
       ],
       "name": "t:names.image_with_text",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve-light.svg",
         "content_direction": "row",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
