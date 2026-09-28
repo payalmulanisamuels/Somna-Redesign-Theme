@@ -893,7 +893,7 @@ ul.custom-payment-icons-list li {
     line-height: 18.75px; /* 150% */
 }
 .cart-drawer__summary {
-    gap: 0;
+    gap: 0 !important;
     padding-top: 0 !important;
 }
 
