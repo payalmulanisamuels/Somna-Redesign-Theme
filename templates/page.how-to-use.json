@@ -305,7 +305,7 @@
       "type": "bundle-feature-banner",
       "name": "Bundle Feature Banner",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/header-wave.svg",
+        "bottom_wave_image": "shopify://shop_images/header-top-wave.svg",
         "product": "",
         "bg_color": "{{ settings.color_palette.background }}",
         "image": "shopify://shop_images/The_breathe_bundle.png",
