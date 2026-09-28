@@ -1292,4 +1292,28 @@ h4.somna-hz-title {
     font-weight: 700;
     line-height: normal;
 }
+.somna-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h2.somna-section-title {
+    margin: 0;
+    color: #0A1A4A;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: var(--headfont);
+}
+
+a.somna-view-all {
+    color: #0A1A4A;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: var(--headfont);
+}
 /* Menu Drawer*/
