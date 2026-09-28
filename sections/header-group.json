@@ -48,7 +48,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "&nbsp;33% off subscriptions &nbsp;",
+            "text": "33% off subscriptions",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
