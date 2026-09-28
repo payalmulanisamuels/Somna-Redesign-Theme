@@ -95,6 +95,8 @@
     "bundle_product_3": "",
     "bundle_product_4": "",
     "season_bundle_product": "season-bundle",
+    "btn_text": "Shop all products",
+    "btn_link": "shopify://collections/all",
     "link_mobile": "mobile-menu",
     "upsell_mode": "fixed_two",
     "fixed_product_1": "sleep-bundle",
