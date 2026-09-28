@@ -1,5 +1,3 @@
-
-
 {% if section.blocks.size > 1 %}
   <script
     src="{{ 'announcement-bar.js' | asset_url }}"
@@ -10,43 +8,27 @@
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
-
- {% comment %} Top Wave Divider {% endcomment %}
-
-{% if section.settings.top_wave_image != blank %}
- <div class="wave-container top">
-
-<img 
-      src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-      alt="top_wave_image" 
-      loading="lazy" 
-      class="custom-wave-img"
-    />
-</div>
-{% endif %}
-
-{% comment %} Bottom Wave Divider {% endcomment %}
-
-{% if section.settings.bottom_wave_image != blank %}
- <div class="wave-container bottom">
-<img 
-      src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
-      alt="bottom_wave_image" 
-      loading="lazy" 
-      class="custom-wave-img"
-    />
-</div>
-{% endif %}
+{% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+    
 <div class="section-background color-custom-{{ section.id }}"></div>
 <aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %}"
+  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }} announcement-bar--{{ section.settings.display_mode }}"
+  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %} --marquee-speed: {{ section.settings.marquee_speed }}s;"
 >
 
   {% liquid
     assign autoplay = false
     assign show_arrows = false
-    if section.blocks.size > 1
+    if section.blocks.size > 1 and section.settings.display_mode == 'slider'
       assign autoplay = true
       assign show_arrows = true
     endif
@@ -58,29 +40,27 @@
       autoplay="{{ section.settings.speed }}" aria-live="polite"
     {% endif %}
   >
-    {% if show_arrows %}
+    {% if show_arrows and section.settings.display_mode == 'slider' %}
       {% render 'slideshow-arrows', icon_style: 'chevron' %}
     {% endif %}
 
-    <div class="announcement-bar__slides">
+    {%- capture announcement_blocks -%}
       {% content_for 'blocks' %}
+    {%- endcapture -%}
+
+    <div class="announcement-bar__slides {% if section.settings.display_mode == 'marquee' %}announcement-bar__slides--marquee{% endif %}">
+      {{ announcement_blocks }}
+      {% if section.settings.display_mode == 'marquee' %}
+        {{ announcement_blocks }}
+      {% endif %}
     </div>
   </announcement-bar-component>
 </aside>
 
-{% comment %}
-<div class="wave-container bottom" style="color: #071a4b;">
-
-<svg xmlns="http://www.w3.org/2000/svg" width="393" height="40" viewBox="0 0 393 40" fill="none">
-<path d="M0 16.6539C67 -6.34608 77.5 -1.84612 132 8.26906C190 29.846 230 -7.42325 286 10.2306C330 23.9614 366 11.5387 393 1.15387V39.6537H0V16.6539Z" fill="currentColor"></path>
-</svg>
-</div>
-{% endcomment %}
-
-
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
+    overflow: hidden;
   }
 
   .announcement-bar__slider {
@@ -88,6 +68,8 @@
     flex-direction: row;
     align-items: center;
     position: relative;
+    width: 100%;
+    overflow: hidden;
 
     @media screen and (max-width: 749px) {
       grid-column: 1 / -1;
@@ -97,13 +79,40 @@
   .announcement-bar__slides {
     display: grid;
     grid: [stack] auto / [stack] auto;
-    width: calc(100% - var(--button-size) * 2);
     max-width: 680px;
     margin-inline: auto;
   }
 
+  .announcement-bar--slider .announcement-bar__slides {
+    width: 100%;
+  }
+
   .announcement-bar__slides > * {
     grid-area: stack;
+  }
+
+  /* Marquee Mode Styles */
+  .announcement-bar__slides--marquee {
+    display: flex !important;
+    width: max-content !important;
+    max-width: none !important;
+    animation: announcement-marquee var(--marquee-speed, 20s) linear infinite;
+    gap: 4rem;
+  }
+
+  .announcement-bar__slides--marquee > * {
+    position: static !important;
+    grid-area: unset !important;
+    flex-shrink: 0;
+  }
+
+  @keyframes announcement-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .announcement-bar__slide {
@@ -177,6 +186,46 @@
   "settings": [
     {
       "type": "header",
+      "content": "Behavior & Layout"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Display Style",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Slider (Auto-rotating)"
+        },
+        {
+          "value": "marquee",
+          "label": "Marquee (Continuous scroll)"
+        }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Slider Rotation Speed",
+      "min": 2,
+      "max": 10,
+      "default": 5,
+      "unit": "sec"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee Scroll Speed",
+      "min": 5,
+      "max": 40,
+      "step": 1,
+      "default": 20,
+      "unit": "s",
+      "info": "Lower duration means faster continuous scrolling."
+    },
+    {
+      "type": "header",
       "content": "Wave Dividers"
     },
     {
@@ -190,15 +239,6 @@
       "id": "bottom_wave_image",
       "label": "Bottom SVG Wave Image",
       "info": "Upload your custom bottom wave SVG file."
-    },
-    {
-      "type": "range",
-      "id": "speed",
-      "label": "t:settings.scroll_speed",
-      "min": 2,
-      "max": 10,
-      "default": 5,
-      "unit": "sec"
     },
     {
       "type": "header",
@@ -240,8 +280,7 @@
       "type": "color",
       "id": "divider_color",
       "label": "t:settings.divider_color",
-      "placeholder": "t:settings.default",
-      "visible_if": "{{ section.settings.divider_width > 0 }}"
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
