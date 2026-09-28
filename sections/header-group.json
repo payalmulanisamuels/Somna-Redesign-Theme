@@ -44,26 +44,11 @@
           },
           "blocks": {}
         },
-        "announcement_6AWeGM": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
-          "settings": {
-            "text": "Delivered in&nbsp;7–9 business days&nbsp;",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": ""
-          },
-          "blocks": {}
-        },
         "announcement_wwtXFc": {
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Secure&nbsp;Payment",
+            "text": "Free Gifts",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -92,7 +77,6 @@
       "block_order": [
         "announcement_dwf6Jk",
         "announcement_cn4LB6",
-        "announcement_6AWeGM",
         "announcement_wwtXFc",
         "announcement_BxgCk9"
       ],
