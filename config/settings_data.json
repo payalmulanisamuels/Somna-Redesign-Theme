@@ -87,6 +87,8 @@
     "payment_image_mastercard": "shopify://shop_images/mastercard.png",
     "show_payment_shop_pay": false,
     "payment_image_visa": "shopify://shop_images/visa-icon.png",
+    "fixed_product_1": "sleep-bundle",
+    "fixed_product_2": "season-bundle",
     "upsell_pair_tape_trigger": "mouth-tape",
     "upsell_pair_tape_recommend": "nasal-strips",
     "upsell_pair_strips_trigger": "nasal-strips",
