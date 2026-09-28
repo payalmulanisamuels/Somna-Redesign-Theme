@@ -1914,6 +1914,16 @@
       "type": "header",
       "content": "Account Footer"
     },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text"
+    },
+     {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
      {
       "type": "link_list",
       "id": "link_mobile",
