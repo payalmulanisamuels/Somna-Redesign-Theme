@@ -1180,6 +1180,6 @@ ul.menu-drawer__menu.has-submenu a {
     line-height: normal;
 }
 .menu-drawer__navigation {
-    padding: 40px 0 56px 0;
+    padding: 40px 0 56px !important;
 }
 /* Menu Drawer*/
