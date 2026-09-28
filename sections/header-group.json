@@ -33,7 +33,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% off subscriptions&nbsp;",
+            "text": "<strong>&nbsp;Free shipping</strong>",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -48,7 +48,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% off subscriptions",
+            "text": "30-night guarantee",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
