@@ -1732,12 +1732,12 @@
     },
     {
       "type": "header",
-      "content": "Bancontact"
+      "content": "PayPal"
     },
     {
       "type": "checkbox",
-      "id": "show_payment_bancontact",
-      "label": "Show Bancontact",
+      "id": "show_payment_paypal",
+      "label": "Show PayPal",
       "default": true
     },
     {
