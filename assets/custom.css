@@ -737,7 +737,7 @@ a.cart-items__title {
 ul.custom-payment-icons-list {
     display: flex;
     gap: 20px;
-    margin: 0 auto 21px;
+    margin: 0 auto 4px;
     flex-wrap: wrap;
     justify-content: center;
     padding: 0;
