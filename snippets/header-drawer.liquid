@@ -151,6 +151,7 @@
             assign bundle_key = 'bundle_product_' | append: i
             assign bundle_item = settings[bundle_key]
           -%}
+          {% if bundle_item %}
           <div class="somna-bundle-item">
             <a href="{{ bundle_item.url | default: '#' }}" class="somna-bundle-link">
               <div class="somna-bundle-img-wrap">
@@ -168,6 +169,7 @@
               </div>
             </a>
           </div>
+        {% endif %}
         {%- endfor -%}
       </div>
 
