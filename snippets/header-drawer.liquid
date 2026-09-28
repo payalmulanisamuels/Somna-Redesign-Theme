@@ -156,17 +156,13 @@
               <div class="somna-bundle-img-wrap">
                 {%- if bundle_item.featured_image != blank -%}
                   {{ bundle_item.featured_image | image_url: width: 400 | image_tag: class: 'somna-bundle-img' }}
-                {%- else -%}
-                  {{ 'collection-1' | placeholder_svg_tag: 'somna-bundle-img placeholder-svg' }}
                 {%- endif -%}
               </div>
               <div class="somna-bundle-details">
-                <span class="somna-bundle-name">{{ bundle_item.title | default: 'The Breathe Bundle' }}</span>
+                <span class="somna-bundle-name">{{ bundle_item.title }}</span>
                 <span class="somna-bundle-price">
                   {%- if bundle_item.price != blank -%}
                     {{ bundle_item.price | money }}
-                  {%- else -%}
-                    $59
                   {%- endif -%}
                 </span>
               </div>
