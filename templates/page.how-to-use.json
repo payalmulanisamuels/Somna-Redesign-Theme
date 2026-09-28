@@ -165,6 +165,7 @@
       ],
       "name": "t:names.image_with_text",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "content_direction": "row",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -177,7 +178,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "#FFF9ED",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
