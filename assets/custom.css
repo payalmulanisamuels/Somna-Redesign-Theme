@@ -703,7 +703,9 @@ a.cart-items__title {
     max-width: 370px;
     margin: 0 auto;
 }
-
+.cart-drawer__summary {
+    gap: 0;
+}
 .cart__ctas .cart__checkout-button span {
     color: #fff;
     text-align: center;
