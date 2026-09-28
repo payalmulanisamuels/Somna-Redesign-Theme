@@ -1842,12 +1842,12 @@
   "settings": [
     {
       "type": "header",
-      "content": "Bestsellers Section"
+      "content": "Bestsellers Settings"
     },
     {
       "type": "text",
       "id": "bestseller_heading",
-      "label": "Bestseller Heading",
+      "label": "Heading",
       "default": "Bestsellers"
     },
     {
@@ -1856,20 +1856,71 @@
       "label": "View All Link"
     },
     {
+      "type": "product",
+      "id": "bestseller_product_1",
+      "label": "Bestseller Product 1"
+    },
+    {
+      "type": "product",
+      "id": "bestseller_product_2",
+      "label": "Bestseller Product 2"
+    },
+   {
       "type": "header",
-      "content": "Featured Bundle Section"
+      "content": "Find Your Bundle Section"
     },
     {
       "type": "checkbox",
       "id": "show_bundle_section",
-      "label": "Show 'Find your bundle' banner",
+      "label": "Show Bundle Section",
       "default": true
     },
     {
       "type": "text",
       "id": "bundle_title",
-      "label": "Bundle Title HTML",
+      "label": "Section Title HTML",
       "default": "Find your <i>bundle.</i>"
+    },
+    {
+      "type": "product",
+      "id": "bundle_product_1",
+      "label": "Bundle Card 1"
+    },
+    {
+      "type": "product",
+      "id": "bundle_product_2",
+      "label": "Bundle Card 2"
+    },
+    {
+      "type": "product",
+      "id": "bundle_product_3",
+      "label": "Bundle Card 3"
+    },
+    {
+      "type": "product",
+      "id": "bundle_product_4",
+      "label": "Bundle Card 4"
+    },
+    {
+      "type": "header",
+      "content": "Featured Season Bundle"
+    },
+    {
+      "type": "image_picker",
+      "id": "season_bundle_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "season_bundle_title",
+      "label": "Bundle Title",
+      "default": "The Season Bundle"
+    },
+    {
+      "type": "text",
+      "id": "season_bundle_price",
+      "label": "Price",
+      "default": "$149"
     },
     {
       "type": "header",
