@@ -422,10 +422,10 @@
     {% endif %}
 
     {% comment %} Bancontact {% endcomment %}
-    {% if settings.show_payment_bancontact %}
+    {% if settings.show_payment_paypal %}
       <li class="custom-payment-icon-item">
-        {% if settings.payment_image_bancontact != blank %}
-          <img src="{{ settings.payment_image_bancontact | image_url: width: 120 }}" alt="Bancontact" class="payment-icon" loading="lazy" width="48" height="30">
+        {% if settings.payment_image_paypal != blank %}
+          <img src="{{ settings.payment_image_paypal | image_url: width: 120 }}" alt="PayPal" class="payment-icon" loading="lazy" width="48" height="30">
         {% else %}
           {{ 'bancontact' | payment_type_svg_tag: class: 'payment-icon' }}
         {% endif %}
