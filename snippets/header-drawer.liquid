@@ -138,10 +138,10 @@
 
 
         <!-- Find Your Bundle Banner Section -->
-  {%- if block.settings.show_bundle_section -%}
+  {%- if settings.show_bundle_section -%}
     <div class="somna-bundle-banner-wrap">
       <div class="somna-bundle-header">
-        <h3 class="somna-bundle-main-title">{{ block.settings.bundle_title }}</h3>
+        <h3 class="somna-bundle-main-title">{{ settings.bundle_title }}</h3>
       </div>
 
       <!-- 2x2 Grid for Bundles -->
@@ -149,7 +149,7 @@
         {%- for i in (1..4) -%}
           {%- liquid
             assign bundle_key = 'bundle_product_' | append: i
-            assign bundle_item = block.settings[bundle_key]
+            assign bundle_item = settings[bundle_key]
           -%}
           <div class="somna-bundle-item">
             <a href="{{ bundle_item.url | default: '#' }}" class="somna-bundle-link">
@@ -178,17 +178,17 @@
       <!-- Featured Horizontal Banner Item (The Season Bundle) -->
       <div class="somna-featured-horizontal-card">
         <div class="somna-hz-img-side">
-          {%- if block.settings.season_bundle_image != blank -%}
-            {{ block.settings.season_bundle_image | image_url: width: 400 | image_tag: class: 'somna-hz-img' }}
+          {%- if settings.season_bundle_image != blank -%}
+            {{ settings.season_bundle_image | image_url: width: 400 | image_tag: class: 'somna-hz-img' }}
           {%- else -%}
             {{ 'collection-2' | placeholder_svg_tag: 'somna-hz-img placeholder-svg' }}
           {%- endif -%}
         </div>
         <div class="somna-hz-content-side">
-          <h4 class="somna-hz-title">{{ block.settings.season_bundle_title | default: 'The Season Bundle' }}</h4>
+          <h4 class="somna-hz-title">{{ settings.season_bundle_title | default: 'The Season Bundle' }}</h4>
           <div class="somna-hz-price">
-            {%- if block.settings.season_bundle_price != blank -%}
-              {{ block.settings.season_bundle_price }}
+            {%- if settings.season_bundle_price != blank -%}
+              {{ settings.season_bundle_price }}
             {%- else -%}
               $149
             {%- endif -%}
