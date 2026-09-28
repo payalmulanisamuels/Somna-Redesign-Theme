@@ -698,6 +698,31 @@
           {% endif %}
         </ul>
       </nav>
+      <div class="somna-footer-wrapper">
+  <!-- Decorative Top Curved Wave -->
+  <div class="somna-wave-divider">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,90 350,-40 600,45 C850,130 1050,10 1200,40 L1200,120 L0,120 Z" fill="#F4E2A7"></path>
+    </svg>
+  </div>
+
+  <div class="somna-footer-content">
+    <a href="{{ routes.account_register_url | default: '#' }}" class="somna-account-btn">
+      <span class="svg-wrapper somna-account-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </span>
+      <span class="somna-account-text">{{ settings.account_text }} &rarr;</span>
+    </a>
+    
+    <div class="somna-signin-row">
+      <span>{{ settings.signin_subtext }}</span>
+      <a href="{{ routes.account_login_url | default: '#' }}" class="somna-signin-link">Sign in</a>
+    </div>
+  </div>
+</div>
       <div
         class="menu-drawer__utility-links menu-drawer__animated-element"
         style="--menu-drawer-animation-index: {{ linklist.links.size }};"
