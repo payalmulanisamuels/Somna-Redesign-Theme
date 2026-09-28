@@ -821,7 +821,7 @@
             "divider_color": "",
             "type_preset": "h5",
             "background_color": "",
-            "text_color": "",
+            "text_color": "#0A1A4A",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
