@@ -226,7 +226,7 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
-            "border_radius": 0,
+            "border_radius": 12,
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
@@ -240,7 +240,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/truck-icon_a110b250-a7d2-4bb4-a725-3b683c05f91f.png",
+                "image_upload": "shopify://shop_images/truck-icon-new.png",
                 "width": 24,
                 "link": "",
                 "open_in_new_tab": false,
@@ -251,8 +251,8 @@
             "group_mMPMnF": {
               "type": "group",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
@@ -311,10 +311,19 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_aVFWaJ": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<svg width=\"11\" height=\"11\" viewBox=\"0 0 11 11\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M2.29102 5.50002H8.70842M5.49972 8.70872L8.70842 5.50002L5.49972 2.29132\" stroke=\"#071B3B\" stroke-width=\"1.5\" stroke-linecap=\"round\"/>\n</svg>"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_3D6VtV"
+                "text_3D6VtV",
+                "custom_liquid_aVFWaJ"
               ]
             }
           },
@@ -341,7 +350,7 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
-            "background_color": "#DDEAF8",
+            "background_color": "#F8F0E5",
             "video_position": "cover",
             "background_image_position": "cover",
             "toggle_overlay": false,
@@ -352,7 +361,7 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
-            "border_radius": 0,
+            "border_radius": 12,
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
@@ -366,7 +375,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/truck-icon_a110b250-a7d2-4bb4-a725-3b683c05f91f.png",
+                "image_upload": "shopify://shop_images/refresh-ccw-new.png",
                 "width": 24,
                 "link": "",
                 "open_in_new_tab": false,
@@ -377,8 +386,8 @@
             "group_jFY7nM": {
               "type": "group",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
@@ -416,7 +425,7 @@
                 "text_h8PY37": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Track your order</strong></p>",
+                    "text": "<p><strong>Manage your subscription</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -437,10 +446,19 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_jGJVPd": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<svg width=\"11\" height=\"11\" viewBox=\"0 0 11 11\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M2.29102 5.50002H8.70842M5.49972 8.70872L8.70842 5.50002L5.49972 2.29132\" stroke=\"#071B3B\" stroke-width=\"1.5\" stroke-linecap=\"round\"/>\n</svg>"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_h8PY37"
+                "text_h8PY37",
+                "custom_liquid_jGJVPd"
               ]
             }
           },
@@ -478,7 +496,7 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
-            "border_radius": 0,
+            "border_radius": 12,
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
@@ -492,7 +510,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/truck-icon_a110b250-a7d2-4bb4-a725-3b683c05f91f.png",
+                "image_upload": "shopify://shop_images/file-text-new.png",
                 "width": 24,
                 "link": "",
                 "open_in_new_tab": false,
@@ -503,8 +521,8 @@
             "group_AzGDpG": {
               "type": "group",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
@@ -542,7 +560,7 @@
                 "text_nVigzz": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Track your order</strong></p>",
+                    "text": "<p><strong>Read the&nbsp;<br/>FAQ</strong></p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -563,10 +581,19 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_wBiCKF": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<svg width=\"11\" height=\"11\" viewBox=\"0 0 11 11\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M2.29102 5.50002H8.70842M5.49972 8.70872L8.70842 5.50002L5.49972 2.29132\" stroke=\"#071B3B\" stroke-width=\"1.5\" stroke-linecap=\"round\"/>\n</svg>"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_nVigzz"
+                "text_nVigzz",
+                "custom_liquid_wBiCKF"
               ]
             }
           },
