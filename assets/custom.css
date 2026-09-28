@@ -1187,6 +1187,6 @@ ul.menu-drawer__menu.has-submenu a {
     padding: 40px 0 56px !important;
 }
 .menu-drawer__menu .menu-drawer__list-item--flat {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 }
 /* Menu Drawer*/
