@@ -33,7 +33,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "<strong>&nbsp;Free shipping</strong>",
+            "text": "Free shipping",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -48,7 +48,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "30-night guarantee",
+            "text": "Delivered in&nbsp;7–9 business days&nbsp;",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -63,7 +63,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% off subscriptions &nbsp;",
+            "text": "Secure&nbsp;Payment",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
