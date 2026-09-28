@@ -29,43 +29,14 @@
           },
           "blocks": {}
         },
-        "announcement_cn4LB6": {
-          "type": "_announcement",
-          "name": "t:names.announcement",
-          "settings": {
-            "text": "Free shipping",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": ""
-          },
-          "blocks": {}
-        },
         "announcement_wwtXFc": {
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Free Gifts",
+            "text": "Free Gifts with Subscription",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": ""
-          },
-          "blocks": {}
-        },
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "33% off subscriptions &nbsp;",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.625rem",
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
@@ -76,9 +47,7 @@
       },
       "block_order": [
         "announcement_dwf6Jk",
-        "announcement_cn4LB6",
-        "announcement_wwtXFc",
-        "announcement_BxgCk9"
+        "announcement_wwtXFc"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}"
