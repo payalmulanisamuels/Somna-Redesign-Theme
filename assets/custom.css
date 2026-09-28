@@ -1320,4 +1320,9 @@ a.somna-view-all {
     align-items: center;
     gap: 5px;
 }
+.somna-products-grid {
+    display: grid;
+    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    gap: 16px;
+}
 /* Menu Drawer*/
