@@ -324,7 +324,9 @@
     },
     "pdp_comparison_JDftN9": {
       "type": "pdp-comparison",
-      "custom_css": [],
+      "custom_css": [
+        ".hz-simple-comp-section {background: transparent;}"
+      ],
       "name": "Comparison Simple",
       "settings": {
         "background_image": "shopify://shop_images/Subtract-howtouse.png",
