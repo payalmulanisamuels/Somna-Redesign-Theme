@@ -80,7 +80,13 @@
             "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
+            "drawer_dividers": false,
+            "bestseller_heading": "Bestsellers",
+            "bestseller_link": "shopify://collections/all",
+            "show_bundle_section": true,
+            "bundle_title": "Find your bundle.",
+            "account_text": "Create an account",
+            "signin_subtext": "Already a member?"
           },
           "blocks": {}
         }
