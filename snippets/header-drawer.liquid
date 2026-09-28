@@ -91,6 +91,52 @@
           {{- 'icon-close-menu.svg' | inline_asset_content -}}
         </span>
       </button>
+
+      <div>
+<div class="somna-drawer-section">
+  <!-- Bestsellers Header -->
+  {%- if block.settings.bestseller_heading != blank -%}
+    <div class="somna-section-header">
+      <h2 class="somna-section-title">{{ block.settings.bestseller_heading }}</h2>
+      {%- if block.settings.bestseller_link != blank -%}
+        <a href="{{ block.settings.bestseller_link }}" class="somna-view-all">View all</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <!-- Bestsellers 2-Column Grid -->
+  <div class="somna-products-grid">
+    {%- for i in (1..2) -%}
+      {%- liquid
+        assign prod_key = 'bestseller_product_' | append: i
+        assign product_item = block.settings[prod_key]
+      -%}
+      <div class="somna-product-card">
+        <a href="{{ product_item.url | default: '#' }}" class="somna-card-link">
+          <div class="somna-image-wrapper">
+            {%- if product_item.featured_image != blank -%}
+              {{ product_item.featured_image | image_url: width: 400 | image_tag: class: 'somna-card-img' }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'somna-card-img placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="somna-product-info">
+            <h4 class="somna-product-title">{{ product_item.title | default: 'Nasal Strips' }}</h4>
+            <span class="somna-product-price">
+              {%- if product_item.price != blank -%}
+                {{ product_item.price | money }}
+              {%- else -%}
+                $45
+              {%- endif -%}
+            </span>
+          </div>
+        </a>
+      </div>
+    {%- endfor -%}
+  </div>
+
+</div>
+
       <nav
         class="menu-drawer__navigation"
         style="
