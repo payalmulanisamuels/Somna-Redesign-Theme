@@ -1184,7 +1184,7 @@ ul.menu-drawer__menu.has-submenu a {
     font-family: var(--headfont);
 }
 .menu-drawer__navigation {
-    padding: 40px 0 56px !important;
+    padding: 0px 0 56px !important;
 }
 .menu-drawer__menu .menu-drawer__list-item--flat {
     margin-bottom: 0 !important;
