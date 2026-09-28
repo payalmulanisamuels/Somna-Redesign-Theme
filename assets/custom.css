@@ -1296,6 +1296,7 @@ h4.somna-hz-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 12px;
 }
 
 h2.somna-section-title {
@@ -1315,5 +1316,8 @@ a.somna-view-all {
     font-weight: 600;
     line-height: normal;
     font-family: var(--headfont);
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 /* Menu Drawer*/
