@@ -1134,10 +1134,7 @@ h2.upsell_heading {
     position: relative;
     background: #EFD374;
 }
-.somna-bundle-banner-wrap {
-    position: relative;
-    background: #DEE5F8;
-}
+
 .somna-footer-content .somna-account-text {
     text-align: center;
     color: #0A1A4A;
@@ -1207,5 +1204,20 @@ ul.menu-drawer__menu.has-submenu a {
     border-radius: 100px;
     background: #0A1A4A;
     color: #fff;
+}
+.somna-bundle-banner-wrap {
+    position: relative;
+    background: #DEE5F8;
+    padding: 0 16px;
+}
+h3.somna-bundle-main-title {
+    color: #0A1A4A;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+    margin-bottom: 16px;
+    font-family: var(--headfont);
 }
 /* Menu Drawer*/
