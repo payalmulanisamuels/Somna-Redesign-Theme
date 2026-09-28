@@ -1168,6 +1168,18 @@ h2.upsell_heading {
     text-decoration-skip-ink: auto;
     text-decoration-thickness: auto;
     text-underline-offset: auto;
-    text-underline-position: from-font;
+}
+ul.menu-drawer__menu.has-submenu {
+    padding: 0;
+}
+
+ul.menu-drawer__menu.has-submenu a {
+    color: #0A1A4A;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+}
+.menu-drawer__navigation {
+    padding: 40px 0 56px 0;
 }
 /* Menu Drawer*/
