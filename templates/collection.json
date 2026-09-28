@@ -322,7 +322,7 @@
         "padding-block-end": 35
       }
     },
-      "section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -997,6 +997,7 @@
             "product_selected": "nasal-strips",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/product1.png",
+            "alignment": true,
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -1009,6 +1010,7 @@
             "product_selected": "nasal-strips",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/product2.png",
+            "alignment": true,
             "title": "Mouth Tape",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -1149,7 +1151,7 @@
         "bg_color": "#fdf8ee",
         "divider_color": "#cbd3d8",
         "heading": "FAQ",
-        "padding_top": 20,
+        "padding_top": 56,
         "padding_bottom": 64
       }
     }
