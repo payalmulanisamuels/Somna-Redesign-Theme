@@ -1,7 +1,6 @@
 {%- liquid
   assign display_mode = settings.upsell_mode | default: 'dynamic'
 -%}
-
 {%- if display_mode == 'dynamic' -%}
   {%- liquid
     assign has_strips = false
