@@ -1235,11 +1235,51 @@
               "block_order": [
                 "text_YwxEwT"
               ]
+            },
+            "accordion_row_Aczqx6": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "How do I change my order before it ships?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_kRa6XQ": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Visit [Manage my subscription →] from your account, or contact us at hello@somnasleep.com if your order hasn't shipped yet.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 5,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_kRa6XQ"
+              ]
             }
           },
           "block_order": [
             "accordion_row_MYeFqt",
-            "accordion_row_4wVfn9"
+            "accordion_row_4wVfn9",
+            "accordion_row_Aczqx6"
           ]
         }
       },
