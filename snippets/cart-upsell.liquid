@@ -73,45 +73,48 @@
   {%- endif -%}
 
 {%- else -%}
-  {%- comment -%} Fixed Two Products Mode {%- endcomment -%}
-  {%- assign fixed_products = "sleep-bundle,season-bundle" | split: ',' -%}
-  <div class="hz-minicart-upsell">
-    <h2 class="upsell_heading">{{ section.settings.fixed_heading | default: 'Complete your sleep system' }}</h2>
-    
-    {%- for field_key in fixed_products -%}
-      {%- liquid
-        assign fixed_prod = settings[field_key]
-      -%}
-      {%- if fixed_prod != blank and fixed_prod.available -%}
-        {%- assign fixed_variant = fixed_prod.selected_or_first_available_variant -%}
-        <div class="hz-minicart-upsell__card" style="margin-bottom: 10px;">
-          <div class="hz-minicart-upsell__media">
-            {%- if fixed_prod.featured_image != blank -%}
-              {{ fixed_prod.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
-            {%- endif -%}
-          </div>
-          
-          <div class="hz-minicart-upsell__content">
-            <h4 class="hz-minicart-upsell__title">{{ fixed_prod.title }}</h4>
-            <div class="hz-minicart-upsell__bottom">
-              <div class="hz-minicart-upsell__price-wrap">
-                <span class="hz-minicart-upsell__price">{{ fixed_variant.price | money }}</span>
-                {%- if fixed_variant.compare_at_price > fixed_variant.price -%}
-                  <s class="hz-minicart-upsell__compare">{{ fixed_variant.compare_at_price | money }}</s>
-                {%- endif -%}
-              </div>
+  {%- comment -%} Fixed Two Products Mode from Theme Settings {%- endcomment -%}
+<div class="hz-minicart-upsell">
+  <h2 class="upsell_heading">{{ section.settings.fixed_heading | default: 'Complete your sleep system' }}</h2>
+  
+  {%- liquid
+    assign fixed_products = "fixed_product_1,fixed_product_2" | split: ','
+  -%}
 
-              <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form" data-ajax-form>
-                <input type="hidden" name="id" value="{{ fixed_variant.id }}">
-                <input type="hidden" name="quantity" value="1">
-                <button type="submit" class="hz-upsell-add-btn">Add</button>
-              </form>
+  {%- for field_key in fixed_products -%}
+    {%- liquid
+      assign fixed_prod = settings[field_key]
+    -%}
+    {%- if fixed_prod != blank and fixed_prod.available -%}
+      {%- assign fixed_variant = fixed_prod.selected_or_first_available_variant -%}
+      <div class="hz-minicart-upsell__card" style="margin-bottom: 10px;">
+        <div class="hz-minicart-upsell__media">
+          {%- if fixed_prod.featured_image != blank -%}
+            {{ fixed_prod.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
+          {%- endif -%}
+        </div>
+        
+        <div class="hz-minicart-upsell__content">
+          <h4 class="hz-minicart-upsell__title">{{ fixed_prod.title }}</h4>
+          <div class="hz-minicart-upsell__bottom">
+            <div class="hz-minicart-upsell__price-wrap">
+              <span class="hz-minicart-upsell__price">{{ fixed_variant.price | money }}</span>
+              {%- if fixed_variant.compare_at_price > fixed_variant.price -%}
+                <s class="hz-minicart-upsell__compare">{{ fixed_variant.compare_at_price | money }}</s>
+              {%- endif -%}
             </div>
+
+            <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form" data-ajax-form>
+              <input type="hidden" name="id" value="{{ fixed_variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="hz-upsell-add-btn">Add</button>
+            </form>
           </div>
         </div>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
 {%- endif -%}
 
  
