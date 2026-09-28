@@ -1914,6 +1914,11 @@
       "type": "header",
       "content": "Account Footer"
     },
+     {
+      "type": "link_list",
+      "id": "link_mobile",
+      "label": "Mobile Menu"
+    },
     {
       "type": "text",
       "id": "account_text",
