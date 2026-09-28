@@ -1138,4 +1138,36 @@ h2.upsell_heading {
     position: relative;
     background: #DEE5F8;
 }
+.somna-footer-content .somna-account-text {
+    text-align: center;
+    color: #0A1A4A;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.somna-footer-content {
+    text-align: center;
+    padding: 20px 0;
+}
+.somna-signin-row span {
+    color: rgba(10, 26, 74, 0.60);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.somna-signin-row a {
+    color: #0A1A4A;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
 /* Menu Drawer*/
