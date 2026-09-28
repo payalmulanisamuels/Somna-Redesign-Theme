@@ -1089,7 +1089,7 @@
       ],
       "name": "Collection Feature",
       "settings": {
-        "bg_color": "#f8f0dd",
+        "bg_color": "#FAF2DF",
         "text_color": "#0a1a4a",
         "heading": "Not sure where to start?",
         "top_wave_image": "shopify://shop_images/col-top.svg",
