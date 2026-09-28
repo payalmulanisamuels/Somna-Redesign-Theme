@@ -60,6 +60,9 @@
     ref="details"
     scroll-lock
   >
+
+
+    <div class="menu_header">
     <summary
       class="header__icon header__icon--menu header__icon--summary"
       aria-label="{{ 'accessibility.menu' | t }}"
@@ -72,6 +75,11 @@
         {{- 'icon-close-menu.svg' | inline_asset_content -}}
       </span>
     </summary>
+    {{ content_for 'block', type: '_header-logo', id: 'header-logo' }}
+  </div>
+
+
+
     <div
       ref="menuDrawer"
       class="
