@@ -743,6 +743,9 @@ ul.custom-payment-icons-list {
     padding: 0;
     align-items: center;
 }
+.cart-drawer__content {
+    mask-image: none !important;
+}
 .cart__ctas {
     gap: 0 !important;
 }
