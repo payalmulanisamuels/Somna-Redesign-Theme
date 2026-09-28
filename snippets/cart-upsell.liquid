@@ -80,7 +80,7 @@
     
     {%- for field_key in fixed_products -%}
       {%- liquid
-        assign fixed_prod = section.settings[field_key]
+        assign fixed_prod = settings[field_key]
       -%}
       {%- if fixed_prod != blank and fixed_prod.available -%}
         {%- assign fixed_variant = fixed_prod.selected_or_first_available_variant -%}
