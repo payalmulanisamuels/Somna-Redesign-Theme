@@ -162,7 +162,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Breathe_Easier.png",
+            "image_1": "shopify://shop_images/Quiet_Nights.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -186,8 +186,8 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Nasal Strips</strong></p>",
-                "width": "100%",
+                "text": "<p><strong>Mouth Tape</strong></p>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
@@ -212,8 +212,8 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><strong>How it works:</strong> Flexible fabric backing,&nbsp;<br/>a gentle spring structure, and a<br/>hypoallergenic adhesive layer designed to stay comfortable through&nbsp;<br/>the night without irritating skin.</p>",
-                "width": "fit-content",
+                "text": "<p><strong>How it works:</strong> A soft, breathable fabric with a gentle adhesive layer, designed to stay comfortable through the night without pulling at the skin.</p>",
+                "width": "100%",
                 "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "custom",
@@ -294,6 +294,7 @@
       ],
       "name": "Steps Guide",
       "settings": {
+        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
         "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
         "bg_color": "#e0e8d7",
         "show_waves": false,
