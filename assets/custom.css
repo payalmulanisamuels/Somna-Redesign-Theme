@@ -29,7 +29,7 @@ html[scroll-lock] .wave-container {
 .announcement-bar__slides--marquee {
     gap: 20px !important;
 }
-slideshow-component[actioned] slideshow-slide, slideshow-slide[aria-hidden=false] {
+.announcement-bar slideshow-component[actioned] slideshow-slide,.announcement-bar  slideshow-slide[aria-hidden=false] {
     width: auto !important;
 }
 #header-component {
