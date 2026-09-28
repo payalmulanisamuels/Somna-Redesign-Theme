@@ -1135,6 +1135,7 @@ h2.upsell_heading {
     background: #EFD374;
 }
 .somna-bundle-banner-wrap {
+    position: relative;
     background: #DEE5F8;
 }
 /* Menu Drawer*/
