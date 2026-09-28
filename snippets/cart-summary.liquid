@@ -375,6 +375,29 @@
 <div class="custom-payment-icons-wrapper">
 
   <ul class="custom-payment-icons-list" role="list">
+
+      {% comment %} Visa {% endcomment %}
+    {% if settings.show_payment_visa %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_visa != blank %}
+          <img src="{{ settings.payment_image_visa | image_url: width: 120 }}" alt="Visa" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+      {% comment %} Mastercard {% endcomment %}
+    {% if settings.show_payment_mastercard %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_mastercard != blank %}
+          <img src="{{ settings.payment_image_mastercard | image_url: width: 120 }}" alt="Mastercard" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+    
     
     {% comment %} Amex {% endcomment %}
     {% if settings.show_payment_amex %}
@@ -442,16 +465,7 @@
       </li>
     {% endif %}
 
-    {% comment %} Mastercard {% endcomment %}
-    {% if settings.show_payment_mastercard %}
-      <li class="custom-payment-icon-item">
-        {% if settings.payment_image_mastercard != blank %}
-          <img src="{{ settings.payment_image_mastercard | image_url: width: 120 }}" alt="Mastercard" class="payment-icon" loading="lazy" width="48" height="30">
-        {% else %}
-          {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
-        {% endif %}
-      </li>
-    {% endif %}
+  
 
     {% comment %} Shop Pay {% endcomment %}
     {% if settings.show_payment_shop_pay %}
@@ -464,17 +478,7 @@
       </li>
     {% endif %}
 
-    {% comment %} Visa {% endcomment %}
-    {% if settings.show_payment_visa %}
-      <li class="custom-payment-icon-item">
-        {% if settings.payment_image_visa != blank %}
-          <img src="{{ settings.payment_image_visa | image_url: width: 120 }}" alt="Visa" class="payment-icon" loading="lazy" width="48" height="30">
-        {% else %}
-          {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
-        {% endif %}
-      </li>
-    {% endif %}
-
+  
   </ul>
 </div>
 
