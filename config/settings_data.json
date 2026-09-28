@@ -87,6 +87,7 @@
     "payment_image_mastercard": "shopify://shop_images/mastercard.png",
     "show_payment_shop_pay": false,
     "payment_image_visa": "shopify://shop_images/visa-icon.png",
+    "bestseller_link": "shopify://collections/all",
     "bestseller_product_1": "nasal-strips",
     "bestseller_product_2": "mouth-tape",
     "bundle_product_1": "sleep-bundle",
