@@ -136,6 +136,68 @@
 
         </div>
 
+
+        <!-- Find Your Bundle Banner Section -->
+  {%- if block.settings.show_bundle_section -%}
+    <div class="somna-bundle-banner-wrap">
+      <div class="somna-bundle-header">
+        <h3 class="somna-bundle-main-title">{{ block.settings.bundle_title }}</h3>
+      </div>
+
+      <!-- 2x2 Grid for Bundles -->
+      <div class="somna-bundles-grid">
+        {%- for i in (1..4) -%}
+          {%- liquid
+            assign bundle_key = 'bundle_product_' | append: i
+            assign bundle_item = block.settings[bundle_key]
+          -%}
+          <div class="somna-bundle-item">
+            <a href="{{ bundle_item.url | default: '#' }}" class="somna-bundle-link">
+              <div class="somna-bundle-img-wrap">
+                {%- if bundle_item.featured_image != blank -%}
+                  {{ bundle_item.featured_image | image_url: width: 400 | image_tag: class: 'somna-bundle-img' }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'somna-bundle-img placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="somna-bundle-details">
+                <span class="somna-bundle-name">{{ bundle_item.title | default: 'The Breathe Bundle' }}</span>
+                <span class="somna-bundle-price">
+                  {%- if bundle_item.price != blank -%}
+                    {{ bundle_item.price | money }}
+                  {%- else -%}
+                    $59
+                  {%- endif -%}
+                </span>
+              </div>
+            </a>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Featured Horizontal Banner Item (The Season Bundle) -->
+      <div class="somna-featured-horizontal-card">
+        <div class="somna-hz-img-side">
+          {%- if block.settings.season_bundle_image != blank -%}
+            {{ block.settings.season_bundle_image | image_url: width: 400 | image_tag: class: 'somna-hz-img' }}
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'somna-hz-img placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="somna-hz-content-side">
+          <h4 class="somna-hz-title">{{ block.settings.season_bundle_title | default: 'The Season Bundle' }}</h4>
+          <div class="somna-hz-price">
+            {%- if block.settings.season_bundle_price != blank -%}
+              {{ block.settings.season_bundle_price }}
+            {%- else -%}
+              $149
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
       
       <nav
         class="menu-drawer__navigation"
