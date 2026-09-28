@@ -792,7 +792,7 @@ ul.custom-payment-icons-list li {
     justify-content: center;
     gap: 12px;
     width: 100%;
-    margin: 0;
+    margin: 16px auto 18px;
     flex-wrap: wrap;
 }
 .hz-trust-pill {
