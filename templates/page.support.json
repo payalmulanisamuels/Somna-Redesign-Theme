@@ -324,7 +324,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#CBD6F4",
+        "background_color": "#cbd6f4",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -533,7 +533,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "#0F1F3D",
+                    "text_color": "#0f1f3d",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -559,7 +559,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "#3B4B60",
+                    "text_color": "#3b4b60",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -696,7 +696,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#EFD374",
+        "background_color": "#efd374",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -836,7 +836,7 @@
             "accordion_row_crQWVq": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What's your return policy?",
+                "heading": "What's the difference between Nasal Strips and Mouth Tape?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -845,13 +845,13 @@
                 "text_eMQL3j": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>Strips are designed to gently open the nasal passages. Tape is designed to encourage nasal breathing instead of mouth breathing while you sleep. Many people use both together.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -860,7 +860,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 0,
+                    "padding-block-start": 5,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
@@ -872,25 +872,25 @@
                 "text_eMQL3j"
               ]
             },
-            "accordion_row_hTYpC6": {
+            "accordion_row_hdPB7D": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What if my item arrives damaged?",
+                "heading": "What's the difference between the bundles?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
               },
               "blocks": {
-                "text_TaxjME": {
+                "text_p4baqB": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "text": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same two products, Strips and Tape, same price either way. The Colour Set includes all three colours of Strips, without Tape. The Season Bundle is a 3-month supply of Black Strips and Black Tape.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -899,7 +899,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 0,
+                    "padding-block-start": 5,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
@@ -908,13 +908,93 @@
                 }
               },
               "block_order": [
-                "text_TaxjME"
+                "text_p4baqB"
+              ]
+            },
+            "accordion_row_X3KdEA": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "Can I buy Strips or Tape on their own?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_yghXJH": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Yes — both are available individually if you'd rather start with one.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 5,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_yghXJH"
+              ]
+            },
+            "accordion_row_QTtyKU": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "Is Mouth Tape safe to use?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_6D4CqA": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Most people adjust within a few nights. If you have a cold, congestion, or any breathing condition, check with a doctor before use.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.75rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 5,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_6D4CqA"
               ]
             }
           },
           "block_order": [
             "accordion_row_crQWVq",
-            "accordion_row_hTYpC6"
+            "accordion_row_hdPB7D",
+            "accordion_row_X3KdEA",
+            "accordion_row_QTtyKU"
           ]
         }
       },
@@ -942,7 +1022,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FAF2DF",
+        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1081,7 +1161,7 @@
             "accordion_row_MYeFqt": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What's your return policy?",
+                "heading": "How does Subscribe & Save work?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1090,13 +1170,13 @@
                 "text_DxteKA": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>It's 10% off every order, delivered automatically on a schedule based on the size you choose. Skip, pause, swap, or cancel anytime from your account.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1120,7 +1200,7 @@
             "accordion_row_4wVfn9": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What if my item arrives damaged?",
+                "heading": "Can I cancel anytime?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1129,13 +1209,13 @@
                 "text_YwxEwT": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "text": "<p>Yes — pausing and cancelling are both available anytime from your account, with no fees.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1144,7 +1224,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 0,
+                    "padding-block-start": 5,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
@@ -1186,7 +1266,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E0E8D7",
+        "background_color": "#e0e8d7",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1430,7 +1510,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FFE795",
+        "background_color": "#ffe795",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1673,7 +1753,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#CBD6F4",
+        "background_color": "#cbd6f4",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
