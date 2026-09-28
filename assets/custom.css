@@ -1184,9 +1184,28 @@ ul.menu-drawer__menu.has-submenu a {
     font-family: var(--headfont);
 }
 .menu-drawer__navigation {
-    padding: 0px 0 56px !important;
+    padding: 16px 0 56px !important;
 }
 .menu-drawer__menu .menu-drawer__list-item--flat {
     margin-bottom: 0 !important;
+}
+.shop_all {
+    padding-top: 40px;
+    padding-left: 16px;
+    text-align: center;
+    padding-right: 16px;
+}
+
+.shop_all a {
+    width: 100%;
+    display: flex;
+    padding: 14px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 100px;
+    background: #0A1A4A;
+    color: #fff;
 }
 /* Menu Drawer*/
