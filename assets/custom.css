@@ -910,6 +910,9 @@ ul.custom-payment-icons-list li {
 .hz-cart-totals-row.hz-cart-totals-saved text-component,.hz-cart-totals-row.hz-cart-totals-saved span {
     color: #34A853;
 }
+.cart-drawer__items {
+    overflow-y: unset !important;
+}
 /* upsell */
 h2.upsell_heading {
     color: #0D1B38;
