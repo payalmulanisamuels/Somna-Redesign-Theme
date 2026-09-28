@@ -737,6 +737,9 @@ ul.custom-payment-icons-list {
     padding: 0;
     align-items: center;
 }
+.cart__ctas {
+    gap: 0;
+}
 text-component.cart-totals__total-value {
     color: #0D162D;
     font-size: 20px;
