@@ -98,7 +98,13 @@
             <div class="somna-section-header">
               <h2 class="somna-section-title">{{ settings.bestseller_heading }}</h2>
               {%- if block.settings.bestseller_link != blank -%}
-                <a href="{{ settings.bestseller_link }}" class="somna-view-all">View all</a>
+                <a href="{{ settings.bestseller_link }}" class="somna-view-all">View all
+
+                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.3536 4.03544C10.5488 3.84018 10.5488 3.52359 10.3536 3.32833L7.17157 0.146351C6.97631 -0.0489113 6.65973 -0.0489113 6.46447 0.146351C6.2692 0.341613 6.2692 0.658195 6.46447 0.853458L9.29289 3.68188L6.46447 6.51031C6.2692 6.70557 6.2692 7.02216 6.46447 7.21742C6.65973 7.41268 6.97631 7.41268 7.17157 7.21742L10.3536 4.03544ZM0 3.68188V4.18188H10V3.68188V3.18188H0V3.68188Z" fill="black"/>
+</svg>
+
+                </a>
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -207,6 +213,10 @@
     <div class="shop_all">
       <a href="{{ settings.btn_link }}">
         {{settings.btn_text }}
+        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.3536 4.03544C10.5488 3.84018 10.5488 3.52359 10.3536 3.32833L7.17157 0.146351C6.97631 -0.0489113 6.65973 -0.0489113 6.46447 0.146351C6.2692 0.341613 6.2692 0.658195 6.46447 0.853458L9.29289 3.68188L6.46447 6.51031C6.2692 6.70557 6.2692 7.02216 6.46447 7.21742C6.65973 7.41268 6.97631 7.41268 7.17157 7.21742L10.3536 4.03544ZM0 3.68188V4.18188H10V3.68188V3.18188H0V3.68188Z" fill="#fff"/>
+</svg>
+
       </a>
     </div>
   {% endif %}
