@@ -29,6 +29,36 @@
           },
           "blocks": {}
         },
+        "announcement_cn4LB6": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "33% off subscriptions&nbsp;",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_6AWeGM": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "&nbsp;33% off subscriptions &nbsp;",
+            "link": "",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
         "announcement_wwtXFc": {
           "type": "_announcement",
           "name": "t:names.announcement",
@@ -61,6 +91,8 @@
       },
       "block_order": [
         "announcement_dwf6Jk",
+        "announcement_cn4LB6",
+        "announcement_6AWeGM",
         "announcement_wwtXFc",
         "announcement_BxgCk9"
       ],
@@ -69,8 +101,10 @@
       ],
       "name": "t:names.announcement_bar",
       "settings": {
+        "display_mode": "marquee",
+        "speed": 8,
+        "marquee_speed": 12,
         "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
-        "speed": 5,
         "section_width": "page-width",
         "background_color": "#071a4b",
         "divider_width": 0,
