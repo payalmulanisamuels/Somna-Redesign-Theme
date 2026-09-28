@@ -705,12 +705,16 @@ a.cart-items__title {
 }
 
 .cart__ctas .cart__checkout-button span {
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 150% */
+    line-height: 24px;
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    align-items: center;
 }
 .cart-discount__label {
     color: #1E293B;
