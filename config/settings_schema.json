@@ -1841,6 +1841,36 @@
   "name": "Cart Upsell Rules",
   "settings": [
     {
+      "type": "select",
+      "id": "upsell_mode",
+      "label": "Upsell Display Mode",
+      "options": [
+        { "value": "dynamic", "label": "Dynamically Show (Rule-based)" },
+        { "value": "fixed_two", "label": "Fixed 2 Bundle Show" }
+      ],
+      "default": "dynamic"
+    },
+    {
+      "type": "header",
+      "content": "Fixed Two Products Settings"
+    },
+    {
+      "type": "text",
+      "id": "fixed_heading",
+      "label": "Heading for Fixed Mode",
+      "default": "Complete your sleep system"
+    },
+    {
+      "type": "product",
+      "id": "fixed_product_1",
+      "label": "Fixed Product 1"
+    },
+    {
+      "type": "product",
+      "id": "fixed_product_2",
+      "label": "Fixed Product 2"
+    },
+    {
       "type": "header",
       "content": "Pair 1: Tape in Cart → Strips Upsell"
     },
