@@ -77,7 +77,7 @@
     "trust_badge_2_image": "shopify://shop_images/lock.svg",
     "trust_badge_bg": "#E7F5FF",
     "payment_image_amex": "shopify://shop_images/amex.png",
-    "show_payment_apple_pay": false,
+    "show_payment_apple_pay": true,
     "payment_image_apple_pay": "shopify://shop_images/aplle-pay.png",
     "show_payment_bancontact": false,
     "show_payment_diners_club": false,
