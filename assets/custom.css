@@ -21,7 +21,15 @@ html[scroll-lock] .wave-container {
 }
 
 /* Header */
- 
+ .announcement-bar__slide[aria-hidden=true] {
+    opacity: 1;
+    visibility: visible;
+    width: auto;
+}
+
+slideshow-component[actioned] slideshow-slide, slideshow-slide[aria-hidden=false] {
+    width: auto;
+}
 #header-component {
     position: relative;
     z-index: 1111;

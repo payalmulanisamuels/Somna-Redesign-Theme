@@ -103,7 +103,7 @@
       "settings": {
         "display_mode": "marquee",
         "speed": 8,
-        "marquee_speed": 12,
+        "marquee_speed": 20,
         "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
         "section_width": "page-width",
         "background_color": "#071a4b",
