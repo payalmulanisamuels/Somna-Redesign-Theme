@@ -874,7 +874,9 @@ ul.custom-payment-icons-list li {
     justify-content: space-between;
     width: 100%;
 }
-
+.cart-drawer__summary{
+    border-top: 1px solid #E2E8F0;
+}
 .hz-cart-totals-summary {
     width: 100%;
     display: flex;
