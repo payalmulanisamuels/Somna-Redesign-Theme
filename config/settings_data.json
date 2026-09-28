@@ -76,6 +76,7 @@
     "show_trust_badge_2": false,
     "trust_badge_2_image": "shopify://shop_images/lock.svg",
     "trust_badge_bg": "#E7F5FF",
+    "payment_image_visa": "shopify://shop_images/visa-icon.png",
     "upsell_pair_tape_trigger": "mouth-tape",
     "upsell_pair_tape_recommend": "nasal-strips",
     "upsell_pair_strips_trigger": "nasal-strips",
