@@ -1127,8 +1127,41 @@ h2.upsell_heading {
     background: #fff9ed !important;
 }
 .somna-drawer-section {
-    padding: 16px;
-    background-color: #FBF7EE;
+    padding: 16px 16px 40px 16px;
+    border-top: 1px solid rgba(10, 26, 74, 0.11);
+}
+.somna-products-grid {
+    display: grid;
+    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
+    gap: 16px;
+}
+h4.somna-product-title {
+    overflow: hidden;
+    color: #0A1A4A;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: var(--headfont);
+    margin-bottom: 0;
+}
+
+span.somna-product-price {
+    color: rgba(10, 26, 74, 0.60);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.somna-image-wrapper img {
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.somna-image-wrapper {
+    margin-bottom: 5px;
 }
 .somna-footer-wrapper {
     position: relative;
@@ -1320,9 +1353,5 @@ a.somna-view-all {
     align-items: center;
     gap: 5px;
 }
-.somna-products-grid {
-    display: grid;
-    grid-template-columns: calc(50% - 8px) calc(50% - 8px);
-    gap: 16px;
-}
+
 /* Menu Drawer*/
