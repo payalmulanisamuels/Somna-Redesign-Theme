@@ -1092,7 +1092,7 @@
         "top_wave_image": "shopify://shop_images/col-top.svg",
         "bottom_wave_image": "shopify://shop_images/col-bottom.svg",
         "padding_top": 20,
-        "padding_bottom": 20
+        "padding_bottom": 0
       }
     },
     "faq_accordion_XL3WiV": {
