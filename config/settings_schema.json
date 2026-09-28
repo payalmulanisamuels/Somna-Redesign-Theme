@@ -1742,8 +1742,8 @@
     },
     {
       "type": "image_picker",
-      "id": "payment_image_bancontact",
-      "label": "Custom Bancontact Icon"
+      "id": "payment_image_paypal",
+      "label": "Custom PayPal Icon"
     },
     {
       "type": "header",
