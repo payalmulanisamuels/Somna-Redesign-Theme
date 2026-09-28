@@ -1906,21 +1906,9 @@
       "content": "Featured Season Bundle"
     },
     {
-      "type": "image_picker",
-      "id": "season_bundle_image",
-      "label": "Banner Image"
-    },
-    {
-      "type": "text",
-      "id": "season_bundle_title",
-      "label": "Bundle Title",
-      "default": "The Season Bundle"
-    },
-    {
-      "type": "text",
-      "id": "season_bundle_price",
-      "label": "Price",
-      "default": "$149"
+      "type": "product",
+      "id": "season_bundle_product",
+      "label": "Season Bundle Product"
     },
     {
       "type": "header",
