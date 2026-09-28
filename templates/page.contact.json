@@ -972,7 +972,7 @@
                 "text_AVzR3C": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>You can also reach us directly at <a href=\"mailto:hello@somnasleep.com\" title=\"mailto:hello@somnasleep.com\">hello@somnasleep.com</a>. We typically respond within 1 business day.</p>",
+                    "text": "<p>You can also reach us directly at<br/><a href=\"mailto:hello@somnasleep.com\" title=\"mailto:hello@somnasleep.com\"><strong>hello@somnasleep.com</strong></a><strong>.&nbsp;</strong><br/>We typically respond within 1 business day.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
