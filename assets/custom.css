@@ -913,6 +913,13 @@ ul.custom-payment-icons-list li {
 .cart-drawer__items {
     overflow-y: unset !important;
 }
+.cart-totals__tax-note{
+    color: #000;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18.75px; /* 150% */
+}
 /* upsell */
 h2.upsell_heading {
     color: #0D1B38;
