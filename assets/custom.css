@@ -297,6 +297,9 @@ li.menu__item.paragraph a {
     min-height: 25px;
 }
 
+.bundle-card--featured .bundle-subtext{
+    min-height: auto;
+}
 .bundle-card__price {
   font-size: 11px;
   font-weight: 800;
