@@ -1659,6 +1659,7 @@
       ],
       "name": "Layered Image with Text",
       "settings": {
+        "top_wave_image": "shopify://shop_images/faq-home.png",
         "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
         "section_width": "full-width",
         "height": "auto",
