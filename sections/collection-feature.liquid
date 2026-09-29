@@ -1,8 +1,6 @@
+  <div class="sleep-tabs-section-main">
 
- 
-
-<div class="sleep-tabs-section section-{{ section.id }}-padding">
-  {% comment %} Top Wave Divider {% endcomment %}
+ {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
     <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
     </div>
@@ -13,6 +11,10 @@
     </div>
     {% endif %}
   <div class="section section--page-width">
+ 
+
+<div class="sleep-tabs-section section-{{ section.id }}-padding">
+ 
     <div class="sleep-tabs-header">
       <h2>{{ section.settings.heading }}</h2>
     </div>
@@ -108,6 +110,7 @@
     </div>
 
 
+</div>
 </div>
 </div>
 
