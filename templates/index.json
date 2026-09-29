@@ -1596,7 +1596,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>It's simple.<br/>Breathe through your nose.</p>",
+                "text": "<p>It's simple.&nbsp;<br/>Breathe through your nose.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
