@@ -60,7 +60,7 @@
         -%}
 
         <div class="bundle-card {% if block.settings.is_featured %}bundle-card--featured{% endif %}" {{ block.shopify_attributes }}>
-          {% if block.settings.tag %}
+          {% if block.settings.tag != blank %}
             <div class="tag_text">
               {{block.settings.tag }}
             </div>
