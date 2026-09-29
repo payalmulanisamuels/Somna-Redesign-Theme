@@ -1193,6 +1193,10 @@ span.somna-product-price {
 .somna-image-wrapper {
     margin-bottom: 5px;
 }
+.footer-content .shopify-block.shopify-app-block {
+  width: 100%;
+  max-width: 250px;
+}
 .somna-footer-wrapper {
     position: relative;
     background: #EFD374;

@@ -220,9 +220,7 @@
       "block_order": [
         "group_FzU8mx"
       ],
-      "custom_css": [
-        ".shopify-block.shopify-app-block {width: 100%; max-width: 250px;}"
-      ],
+      "custom_css": [],
       "name": "t:names.footer",
       "settings": {
         "top_wave_image": "shopify://shop_images/Footer_Curved_edge.svg",
