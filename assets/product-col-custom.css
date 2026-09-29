@@ -1,6 +1,6 @@
-.footer-content a.button {
-    font-size: 10px;
-    padding: 6px 16px;
+
+.product-information__grid {
+    padding: 0 5px;
 }
 .review_content {
     display: flex;
