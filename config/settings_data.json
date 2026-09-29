@@ -15,7 +15,7 @@
     "page_text_color": "{{ settings.color_palette.foreground }}",
     "type_body_font": "inter_n4",
     "type_subheading_font": "inter_n5",
-    "type_heading_font": "lora_n4",
+    "type_heading_font": "lora_n5",
     "type_accent_font": "inter_n7",
     "type_size_paragraph": "14",
     "type_line_height_paragraph": "body-loose",
@@ -146,6 +146,12 @@
     "icon_1_image": "shopify://shop_images/Gift.png",
     "icon_2_image": "shopify://shop_images/Refresh.png",
     "icon_3_image": "shopify://shop_images/guarantee.png",
+    "sections": {
+      "somna-scratch-popup": {
+        "type": "somna-scratch-popup",
+        "settings": {}
+      }
+    },
     "content_for_index": [],
     "blocks": {
       "2567389343055140935": {
