@@ -965,7 +965,7 @@
         "padding_bottom": 5
       }
     },
-    "custom_cards_slider_pyJahK": {
+  "custom_cards_slider_pyJahK": {
       "type": "custom-cards-slider",
       "blocks": {
         "card_XExw3D": {
@@ -973,8 +973,8 @@
           "settings": {
             "product_selected": "nasal-strips",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product1.png",
-            "alignment": true,
+            "image": "shopify://shop_images/nasal-product.png",
+            "alignment": false,
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -986,10 +986,10 @@
           "settings": {
             "product_selected": "nasal-strips",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product2.png",
+            "image": "shopify://shop_images/tap-product.png",
             "alignment": true,
             "title": "Mouth Tape",
-            "price": "",
+            "price": "$35",
             "button_label": "Subscribe & Save",
             "button_link": "shopify://products/mouth-tape"
           }
