@@ -1163,7 +1163,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FAF2DF",
+        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1227,8 +1227,44 @@
         "subheading_bottom": "{{ product.metafields.custom.how_to_use_subtext.value }}"
       }
     },
+    "hero_Djj4xR": {
+      "type": "hero",
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "image_1": "{{ product.metafields.custom.comparison_image.value }}",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "auto",
+        "section_height_custom": 50,
+        "background_color": "",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    },
     "pdp_comparison_JDftN9": {
       "type": "pdp-comparison",
+      "disabled": true,
       "name": "Comparison Simple",
       "settings": {
         "background_image": "{{ product.metafields.custom[\"comparison-content\"].value.background_image.value }}",
@@ -1611,7 +1647,7 @@
         "padding-block-start": 30,
         "padding-block-end": 50
       }
-    },
+    }
   },
   "order": [
     "main",
@@ -1619,11 +1655,12 @@
     "problem_solution_bcG9jR",
     "how_it_works_whQNVV",
     "steps_guide_GFjEFb",
+    "hero_Djj4xR",
     "pdp_comparison_JDftN9",
     "pdp_bundle_feature_banner_wWE9yA",
     "addtobag_product_banner_eG4ByC",
     "section_BbCdDx",
     "faq_accordion_VVXzwx",
-    "footer_m9NzUG",
+    "footer_m9NzUG"
   ]
 }
