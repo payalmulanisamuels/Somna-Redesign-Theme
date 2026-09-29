@@ -10,7 +10,8 @@
     assign button_url = button_url | default: '#'
   endif
 -%}
-{% assign alignment = product.metafields.custom.bottom_section.value %} 
+{% assign alignment = product.metafields.custom.bottom_section.value %}
+{% if banner_image %} 
 <div class="hz-banner-section {% if alignment.set_true_if_need_left_content == false %} hz-banner-align--right{% endif %}" style="background-color: {{ section.settings.bg_color }};">
 {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
@@ -110,6 +111,8 @@
   }
 
 </style>
+
+{%  endif %}
 
 {% schema %}
 {
