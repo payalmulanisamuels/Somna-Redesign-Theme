@@ -912,7 +912,7 @@
         "padding-block-end": 0
       }
     },
-  "featured_bundle_grid_6jFGFr": {
+    "featured_bundle_grid_6jFGFr": {
       "type": "featured-bundle-grid",
       "blocks": {
         "bundle_gCFgge": {
@@ -965,7 +965,7 @@
         "padding_bottom": 5
       }
     },
-  "custom_cards_slider_pyJahK": {
+    "custom_cards_slider_pyJahK": {
       "type": "custom-cards-slider",
       "blocks": {
         "card_XExw3D": {
@@ -1008,71 +1008,29 @@
     "collection_feature_kyHPTY": {
       "type": "collection-feature",
       "blocks": {
-        "guide_card_f3tzTU": {
-          "type": "guide_card",
+        "sleep_option_C9Qb3X": {
+          "type": "sleep_option",
           "settings": {
-            "title": "New to both?",
-            "description": "Start with the Sleep Bundle\nin Blue (Breathe).",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/sleep.jpg"
-          }
-        },
-        "guide_card_jYkhU6": {
-          "type": "guide_card",
-          "settings": {
-            "title": "Already know youneed help breathingeasier at night?",
-            "description": "Nasal Strips.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/strip1.png"
-          }
-        },
-        "guide_card_XfLtwa": {
-          "type": "guide_card",
-          "settings": {
-            "title": "Mostly wake with adry mouth?",
-            "description": "Mouth Tape.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/tape1_98d47ffe-ff7f-48d9-b93e-1e3f10e9a6f2.png"
-          }
-        },
-        "guide_card_8AqeXX": {
-          "type": "guide_card",
-          "settings": {
-            "title": "Want to try everycolour?",
-            "description": "The Colour Set.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/thecolorset.jpg"
-          }
-        },
-        "guide_card_znmh7M": {
-          "type": "guide_card",
-          "settings": {
-            "title": "Ready to commit to afull season?",
-            "description": "Season Bundle.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/sleep-black.png"
+            "tab_title": "Blocked nose",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text": "From <strong>$59</strong> with Subscribe and Save",
+            "button_label": "View Sleep Bundle",
+            "button_link": "shopify://products/sleep-bundle"
           }
         }
       },
       "block_order": [
-        "guide_card_f3tzTU",
-        "guide_card_jYkhU6",
-        "guide_card_XfLtwa",
-        "guide_card_8AqeXX",
-        "guide_card_znmh7M"
+        "sleep_option_C9Qb3X"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: 5px;}"
       ],
       "name": "Collection Feature",
       "settings": {
-        "bg_color": "#FAF2DF",
-        "text_color": "#0a1a4a",
-        "heading": "Not sure where to start?",
-        "top_wave_image": "shopify://shop_images/col-top.svg",
-        "bottom_wave_image": "shopify://shop_images/col-bottom.svg",
-        "padding_top": 20,
-        "padding_bottom": 52
+        "heading": "Not sure where to start?"
       }
     },
     "faq_accordion_XL3WiV": {
