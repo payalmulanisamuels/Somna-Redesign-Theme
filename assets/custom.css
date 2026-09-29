@@ -1489,12 +1489,15 @@ a.somna-view-all {
   }
 
   .sleep-card-subtitle {
-    font-size: 13px;
-    font-weight: 600;
-    color: #2563eb;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    letter-spacing: .5px;
+    margin-bottom: 14px;
+    color: #0B57E3;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 
   .sleep-card-image-wrapper {
