@@ -1539,9 +1539,13 @@ a.somna-view-all {
   }
 
   .sleep-card-description {
-    font-size: 14px;
-    color: #4b5563;
-    margin: 0 0 16px 0;
+    margin: 0 0 14px;
+    color: #0B57E3;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 
   .sleep-card-price {
