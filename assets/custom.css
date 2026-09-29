@@ -1504,7 +1504,7 @@ a.somna-view-all {
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     aspect-ratio: 16 / 10;
     background: #f3f4f6;
   }
