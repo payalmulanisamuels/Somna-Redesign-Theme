@@ -73,7 +73,7 @@
   {%- endif -%}
 
 {%- else -%}
- {%- comment -%} Fixed Two Products Mode from Theme Settings with Subscription Price & Discount {%- endcomment -%}
+ {%- comment -%} Fixed Two Products Mode from Theme Settings with Dynamic Save Badge {%- endcomment -%}
 <div class="hz-minicart-upsell">
   <h2 class="upsell_heading">{{ section.settings.fixed_heading | default: 'Complete your sleep system' }}</h2>
   
@@ -87,7 +87,7 @@
     -%}
     {%- if fixed_prod != blank and fixed_prod.available -%}
       {%- liquid
-        # 1. Look for a variant with selling plans (subscription variant), otherwise fallback to first available
+        # 1. Select variant with selling plan or first available
         assign target_variant = blank
         for variant in fixed_prod.variants
           if variant.selling_plan_allocations.size > 0 and variant.available
@@ -100,7 +100,7 @@
           assign target_variant = fixed_prod.selected_or_first_available_variant
         endif
 
-        # 2. Calculate subscription price and discount percentage if selling plans exist
+        # 2. Calculate subscription price and dynamic discount percentage
         assign sub_price = target_variant.price
         assign auto_discount_percent = 0
 
@@ -116,9 +116,22 @@
             break
           endif
         endfor
+
+        # Fallback calculation if percentage isn't explicitly set in selling plan
+        if auto_discount_percent == 0 and target_variant.compare_at_price > sub_price
+          assign discount_amount = target_variant.compare_at_price | minus: sub_price
+          assign auto_discount_percent = discount_amount | times: 100 | divided_by: target_variant.compare_at_price
+        elsif auto_discount_percent == 0 and target_variant.price > sub_price
+          assign discount_amount = target_variant.price | minus: sub_price
+          assign auto_discount_percent = discount_amount | times: 100 | divided_by: target_variant.price
+        endif
       -%}
 
-      <div class="hz-minicart-upsell__card" style="margin-bottom: 10px;">
+      <div class="hz-minicart-upsell__card" style="position: relative; margin-bottom: 16px;">
+        {%- if auto_discount_percent > 0 -%}
+          <div class="hz-save-badge">SAVE {{ auto_discount_percent | round }}%</div>
+        {%- endif -%}
+
         <div class="hz-minicart-upsell__media">
           {%- if fixed_prod.featured_image != blank -%}
             {{ fixed_prod.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'hz-upsell-img' }}
@@ -129,15 +142,12 @@
           <h4 class="hz-minicart-upsell__title">{{ fixed_prod.title }}</h4>
           <div class="hz-minicart-upsell__bottom">
             <div class="hz-minicart-upsell__price-wrap">
-              <span class="hz-minicart-upsell__price">{{ sub_price | money }}</span>
               {%- if target_variant.compare_at_price > sub_price -%}
                 <s class="hz-minicart-upsell__compare">{{ target_variant.compare_at_price | money }}</s>
               {%- elsif target_variant.price > sub_price -%}
                 <s class="hz-minicart-upsell__compare">{{ target_variant.price | money }}</s>
               {%- endif -%}
-              {%- if auto_discount_percent > 0 -%}
-                <span class="hz-upsell-discount-badge">{{ auto_discount_percent }}% Off</span>
-              {%- endif -%}
+              <span class="hz-minicart-upsell__price">{{ sub_price | money }}</span>
             </div>
 
             <form action="{{ routes.cart_add_url }}" method="post" class="hz-upsell-form" data-ajax-form>
@@ -154,6 +164,8 @@
     {%- endif -%}
   {%- endfor -%}
 </div>
+
+ 
 {%- endif -%}
 
  
