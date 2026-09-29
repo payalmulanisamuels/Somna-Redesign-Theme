@@ -401,7 +401,7 @@ li.menu__item.paragraph a {
 }
 .hz-slider-track {
   display: flex;
-  gap: 15px;
+  gap: 5px;
 }
 .hz-card {
   flex: 0 0 300px;
