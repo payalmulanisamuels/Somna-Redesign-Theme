@@ -1,0 +1,646 @@
+{%- liquid
+  assign bundle_product = section.settings.product
+  if bundle_product == blank and request.visual_preview_mode
+    assign bundle_product = collections.all.products.first
+  endif
+
+  if bundle_product != blank
+    # Colour option: first option named Color/Colour, otherwise the first option
+    assign color_option = bundle_product.options_with_values.first
+    for option in bundle_product.options_with_values
+      assign option_name_check = option.name | downcase
+      if option_name_check contains 'color' or option_name_check contains 'colour'
+        assign color_option = option
+        break
+      endif
+    endfor
+
+    # "From" price: lowest subscription price across variants, else lowest price
+    assign from_price = bundle_product.price_min
+    for variant in bundle_product.variants
+      assign variant_price = variant.price
+      for allocation in variant.selling_plan_allocations
+        if allocation.price < variant_price
+          assign variant_price = allocation.price
+        endif
+      endfor
+      if variant_price < from_price
+        assign from_price = variant_price
+      endif
+    endfor
+
+    assign bundle_title = section.settings.title | default: bundle_product.title
+    assign bundle_image = section.settings.image | default: bundle_product.featured_image
+
+    assign rating = bundle_product.metafields.reviews.rating.value
+    assign rating_count = bundle_product.metafields.reviews.rating_count.value | default: 0
+    if rating != blank
+      assign rating_percent = rating.rating | times: 100.0 | divided_by: rating.scale_max
+    endif
+
+    # Button link: specific variant chosen by name (e.g. "Breathe") or variant ID, else the product
+    assign bundle_url = bundle_product.url
+    assign button_variant_setting = section.settings.button_variant | strip
+    if button_variant_setting != blank
+      assign button_variant_check = button_variant_setting | downcase
+      for variant in bundle_product.variants
+        assign variant_id_string = variant.id | append: ''
+        assign variant_title_check = variant.title | downcase
+        if variant_id_string == button_variant_setting or variant_title_check contains button_variant_check
+          assign bundle_url = variant.url
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+
+{% if bundle_product != blank %}
+  <div
+    class="somna-sleep-bundle section-{{ section.id }}"
+    style="
+      --ssb-section-bg: {{ section.settings.section_bg }};
+      --ssb-card-bg: {{ section.settings.card_bg }};
+      --ssb-border: {{ section.settings.border_color }};
+      --ssb-accent: {{ section.settings.accent_color }};
+      --ssb-text: {{ section.settings.text_color }};
+      --ssb-muted: {{ section.settings.muted_color }};
+      --ssb-btn-bg: {{ section.settings.button_bg }};
+      --ssb-btn-text: {{ section.settings.button_text_color }};
+      --ssb-pt: {{ section.settings.padding_top }}px;
+      --ssb-pb: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    <div class="somna-sleep-bundle__card">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="somna-sleep-bundle__badge">
+          {%- if section.settings.show_badge_icon -%}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7V7h2v5h7a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1 1 0 1 1 1-1v1H9Zm6 0h-1V6a1 1 0 1 1 1 1ZM4 14v6a1 1 0 0 0 1 1h6v-7H4Zm9 7h6a1 1 0 0 0 1-1v-6h-7v7Z"/>
+            </svg>
+          {%- endif -%}
+          {{ section.settings.badge_text | escape }}
+        </span>
+      {%- endif -%}
+
+      <div class="somna-sleep-bundle__top">
+        <a href="{{ bundle_url }}" class="somna-sleep-bundle__media" tabindex="-1" aria-hidden="true">
+          {%- if bundle_image != blank -%}
+            {{
+              bundle_image
+              | image_url: width: 400
+              | image_tag:
+                loading: 'lazy',
+                widths: '200, 300, 400',
+                sizes: '(min-width: 750px) 200px, 120px',
+                alt: bundle_title,
+                class: 'somna-sleep-bundle__image'
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'somna-sleep-bundle__image' }}
+          {%- endif -%}
+        </a>
+
+        <div class="somna-sleep-bundle__info">
+          {%- if section.settings.show_rating and rating != blank -%}
+            <div class="somna-sleep-bundle__rating">
+              <span>{{ rating.rating | round: 1 }}</span>
+              <span class="somna-sleep-bundle__stars" style="--ssb-rating: {{ rating_percent }}%;" aria-label="{{ rating.rating | round: 1 }} / {{ rating.scale_max }}">★★★★★</span>
+              <span>({{ rating_count }})</span>
+            </div>
+          {%- endif -%}
+
+          <h2 class="somna-sleep-bundle__title">{{ bundle_title | escape }}</h2>
+
+          {%- if section.settings.subtitle != blank -%}
+            <p class="somna-sleep-bundle__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+
+          <p class="somna-sleep-bundle__price">
+            <strong>
+              {%- if section.settings.price_prefix != blank %}{{ section.settings.price_prefix }} {% endif -%}
+              {%- if section.settings.price_override != blank -%}
+                {{- section.settings.price_override -}}
+              {%- else -%}
+                {{- from_price | money_without_trailing_zeros -}}
+              {%- endif -%}
+            </strong>
+            {%- if section.settings.price_label != blank %} <span>{{ section.settings.price_label }}</span>{% endif -%}
+          </p>
+
+          {%- if section.settings.per_night_text != blank -%}
+            <p class="somna-sleep-bundle__per-night">{{ section.settings.per_night_text }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if color_option.values.size > 1 -%}
+        <ul class="somna-sleep-bundle__colors" aria-label="{{ color_option.name | escape }}">
+          {%- for value in color_option.values -%}
+            {%- liquid
+              assign value_label = value.name | split: ' (' | first
+              assign value_check = value.name | downcase
+              assign dot_color = ''
+
+              for block in section.blocks
+                assign block_value = block.settings.option_value | strip | downcase
+                if block_value != blank and value_check contains block_value
+                  assign dot_color = block.settings.color
+                  break
+                endif
+              endfor
+
+              if dot_color == blank
+                if value.swatch.color
+                  assign dot_color = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                elsif value_check contains 'blue' or value_check contains 'breathe'
+                  assign dot_color = '#0b57e3'
+                elsif value_check contains 'red' or value_check contains 'bold'
+                  assign dot_color = '#e3121e'
+                elsif value_check contains 'black' or value_check contains 'night'
+                  assign dot_color = '#000000'
+                else
+                  assign dot_color = '#d9d9d9'
+                endif
+              endif
+            -%}
+            <li class="somna-sleep-bundle__color">
+              <span class="somna-sleep-bundle__dot" style="background: {{ dot_color }};" aria-hidden="true"></span>
+              {{ value_label | escape }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ bundle_url }}" class="somna-sleep-bundle__button">
+          <span>{{ section.settings.button_label | escape }}</span>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 10h12m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .somna-sleep-bundle {
+    background: var(--ssb-section-bg);
+    padding: var(--ssb-pt) 16px var(--ssb-pb);
+  }
+
+  .somna-sleep-bundle__card {
+    position: relative;
+    display: block;
+    max-width: 640px;
+    margin: 18px auto 0;
+    padding: 28px 18px 20px;
+    background: var(--ssb-card-bg);
+    border: 2px solid var(--ssb-border);
+    border-radius: 18px;
+    color: var(--ssb-text);
+  }
+
+  .somna-sleep-bundle__badge {
+    position: absolute;
+    top: -15px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--ssb-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .somna-sleep-bundle__top {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .somna-sleep-bundle__media {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .somna-sleep-bundle__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .somna-sleep-bundle__info > * {
+    margin: 0;
+  }
+
+  .somna-sleep-bundle__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    color: var(--ssb-text);
+  }
+
+  .somna-sleep-bundle__stars {
+    position: relative;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #e0e0e0;
+    line-height: 1;
+  }
+
+  .somna-sleep-bundle__stars::before {
+    content: '★★★★★';
+    position: absolute;
+    inset: 0;
+    width: var(--ssb-rating, 100%);
+    overflow: hidden;
+    color: #f4c342;
+  }
+
+  .somna-sleep-bundle__title {
+    margin-top: 2px !important;
+    font-family: var(--headfont, var(--font-heading--family));
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ssb-text);
+  }
+
+  .somna-sleep-bundle__subtitle {
+    margin-top: 6px !important;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--ssb-muted);
+  }
+
+  .somna-sleep-bundle__price {
+    margin-top: 4px !important;
+    font-size: 15px;
+    line-height: 1.3;
+    color: var(--ssb-muted);
+  }
+
+  .somna-sleep-bundle__price strong {
+    color: var(--ssb-accent);
+    font-weight: 700;
+  }
+
+  .somna-sleep-bundle__per-night {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ssb-text);
+  }
+
+  .somna-sleep-bundle__colors {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .somna-sleep-bundle__color {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 70px;
+    padding: 5px 14px;
+    background: #fff;
+    border: 1px solid #c1c0b6;
+    border-radius: 999px;
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .somna-sleep-bundle__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .somna-sleep-bundle__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: var(--ssb-btn-bg);
+    color: var(--ssb-btn-text);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgb(11 87 227 / 0.15);
+    transition: opacity 0.2s ease;
+  }
+
+  .somna-sleep-bundle__button:hover {
+    opacity: 0.9;
+  }
+
+  .somna-sleep-bundle__button[aria-busy='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: progress;
+  }
+
+  .somna-sleep-bundle__error {
+    margin: 8px 0 0;
+    font-size: 13px;
+    text-align: center;
+    color: #c8102e;
+  }
+
+  @media screen and (min-width: 750px) {
+    .somna-sleep-bundle__card {
+      padding: 40px 36px 32px;
+      border-radius: 24px;
+    }
+
+    .somna-sleep-bundle__badge {
+      top: -18px;
+      left: 24px;
+      padding: 7px 18px;
+      font-size: 15px;
+    }
+
+    .somna-sleep-bundle__top {
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+    }
+
+    .somna-sleep-bundle__media {
+      border-radius: 16px;
+    }
+
+    .somna-sleep-bundle__rating {
+      font-size: 13px;
+    }
+
+    .somna-sleep-bundle__stars {
+      font-size: 15px;
+    }
+
+    .somna-sleep-bundle__title {
+      font-size: 32px;
+    }
+
+    .somna-sleep-bundle__subtitle {
+      font-size: 16px;
+    }
+
+    .somna-sleep-bundle__price {
+      font-size: 22px;
+    }
+
+    .somna-sleep-bundle__per-night {
+      font-size: 18px;
+    }
+
+    .somna-sleep-bundle__colors {
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .somna-sleep-bundle__color {
+      min-width: 110px;
+      padding: 8px 20px;
+      font-size: 15px;
+    }
+
+    .somna-sleep-bundle__button {
+      margin-top: 16px;
+      padding: 18px 24px;
+      font-size: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "The Sleep Bundle",
+  "tag": "section",
+  "class": "section-sleep-bundle",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "3 Colors"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge_icon",
+      "label": "Show gift icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave empty to use the product image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "default": true,
+      "info": "Uses the product's review metafields (Judge.me)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Sleep Bundle",
+      "info": "Leave empty to use the product title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Strips + Tape in all three colors"
+    },
+    {
+      "type": "text",
+      "id": "price_prefix",
+      "label": "Price prefix",
+      "default": "From"
+    },
+    {
+      "type": "text",
+      "id": "price_override",
+      "label": "Price override",
+      "info": "Leave empty to show the lowest subscription price automatically"
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Price label",
+      "default": "Subscribe & Save"
+    },
+    {
+      "type": "text",
+      "id": "per_night_text",
+      "label": "Offer text",
+      "default": "3+1 sets. $1.46/night"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "See the Breathe Bundle"
+    },
+    {
+      "type": "text",
+      "id": "button_variant",
+      "label": "Button links to variant",
+      "default": "Breathe",
+      "info": "Variant name (or part of it, e.g. Breathe, Bold, Night) or a variant ID. Leave empty to link to the product page."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Card border",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (badge & price)",
+      "default": "#0b57e3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Secondary text",
+      "default": "#5b6b94"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "swatch",
+      "name": "Color dot override",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Optional. Dots use the variant's swatch color from Shopify admin, or Breathe/Blue, Bold/Red, Night/Black automatically."
+        },
+        {
+          "type": "text",
+          "id": "option_value",
+          "label": "Color name",
+          "default": "Breathe"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Dot color",
+          "default": "#0b57e3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Sleep Bundle"
+    }
+  ]
+}
+{% endschema %}

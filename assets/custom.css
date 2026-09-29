@@ -967,51 +967,58 @@ ul.custom-payment-icons-list li {
     line-height: 18.75px; /* 150% */
 }
 /* upsell */
-h2.upsell_heading {
-    color: #0D1B38;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 21.25px; /* 132.813% */
-    margin-bottom: 12px;
-}
+/* Cart drawer "Complete your sleep system" – snippets/cart-upsell.liquid + cart-upsell-card.liquid */
 .hz-minicart-upsell {
-    padding: 0 8px 29px 8px;
     width: 100%;
+    padding: 24px 8px 24px;
     border-bottom: 1px solid #E2E8F0;
+}
+h2.upsell_heading {
+    margin: 0 0 16px;
+    color: #0A1A4A;
+    font-family: var(--headfont);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+.hz-minicart-upsell__list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.hz-minicart-upsell__card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px 6px 6px;
+    border: 1.5px solid #0A1A4A;
+    border-radius: 14px;
+    background: #fff;
 }
 .hz-save-badge {
     position: absolute;
-    top: -7px;
-    right: 12px;
+    top: -10px;
+    right: 10px;
+    padding: 1px 7px;
+    border: 1px solid #0A1A4A;
     border-radius: 20px;
-    border: 0.5px solid #000;
     background: #0B57E3;
-    color: #FFF;
-    font-size: 10px;
-    font-style: normal;
+    color: #fff;
+    font-size: 11px;
     font-weight: 500;
-    line-height: normal;
-    padding: 1px 5px;
-  }
-.hz-minicart-upsell__card {
-    padding: 5px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    border-radius: 12px;
-    border: 1px solid #000;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
 .hz-minicart-upsell__media {
+    display: block;
+    flex-shrink: 0;
     width: 80px;
     height: 80px;
-    flex-shrink: 0;
-    border-radius: 12px;
     overflow: hidden;
+    border-radius: 10px;
     background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .hz-upsell-img {
     width: 100%;
@@ -1019,37 +1026,39 @@ h2.upsell_heading {
     object-fit: cover;
 }
 .hz-minicart-upsell__content {
-    flex: 1;
-    min-width: 0;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    gap: 3px;
+    gap: 2px;
+    min-width: 0;
 }
-.hz-minicart-upsell__tag {
-    color: #334155;
-    font-size: 12.5px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18.75px; 
-    margin: 0;
-    text-transform: uppercase;
+.hz-minicart-upsell__stars {
+    position: relative;
+    align-self: flex-start;
+    color: #E0E0E0;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+.hz-minicart-upsell__stars::before {
+    content: "★★★★★";
+    position: absolute;
+    inset: 0;
+    width: var(--hz-rating, 100%);
+    overflow: hidden;
+    color: #F1C644;
 }
 .hz-minicart-upsell__title {
-    color: #0D1B38;
+    margin: 0;
+    color: #0A1A4A;
     font-family: var(--headfont);
-    font-size: 16px;
-    font-style: normal;
+    font-size: 17px;
     font-weight: 600;
-    line-height: 21.25px;
-    margin: 0;
+    line-height: 1.3;
 }
-.hz-minicart-upsell__desc {
-    color: #334155;
-    font-size: 12.5px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18.75px; 
-    margin: 0;
+.hz-minicart-upsell__title a {
+    color: inherit;
+    text-decoration: none;
 }
 .hz-minicart-upsell__bottom {
     display: flex;
@@ -1060,33 +1069,37 @@ h2.upsell_heading {
 .hz-minicart-upsell__price-wrap {
     display: flex;
     align-items: baseline;
+    flex-wrap: wrap;
     gap: 6px;
 }
 .hz-minicart-upsell__price {
-    color: #0D1B38;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 22.5px; /* 160.714% */
+    color: #0A1A4A;
+    font-size: 13px;
+    font-weight: 500;
 }
 .hz-minicart-upsell__compare {
-    font-size: 12px;
-    color: #64748b;
+    color: #0A1A4A;
+    font-size: 13px;
+    opacity: 0.7;
 }
 .hz-upsell-add-btn {
-    background-color: #0A1A4A;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 400;
+    padding: 6px 20px;
     border: none;
     border-radius: 999px;
-    padding: 5px 13px;
-    cursor: pointer;
+    background-color: #0A1A4A;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
     white-space: nowrap;
+    cursor: pointer;
     transition: opacity 0.2s ease;
 }
 .hz-upsell-add-btn:hover {
     opacity: 0.9;
+}
+.hz-upsell-add-btn:disabled {
+    opacity: 0.6;
+    cursor: progress;
 }
 /* upsell */
 

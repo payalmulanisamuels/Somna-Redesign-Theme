@@ -1,0 +1,843 @@
+{%- comment -%}
+  PDP offer cards ("Stock up: 3+1 Sets", "Add The Colour Set", ...)
+
+  Content comes from the product metafield  custom.product_offer_cards
+  (list of metaobjects of type  pdp_offer_card). Metaobject fields:
+    badge_text            Single line text     e.g. "1 Set Free"
+    card_style            Single line text     "Featured" (navy border, filled button) or "Outline"
+    title                 Single line text     e.g. "Stock up: 3+1 Sets"
+    subtitle              Multi-line text
+    image                 File (image)         optional, falls back to variant / product image
+    variant               Product variant      use to add / link a specific variant
+    product               Product              use to add / link a product's first available variant
+    price_text            Single line text     optional, overrides the calculated price
+    price_label           Single line text     e.g. "Subscribe & Save"
+    offer_text            Single line text     e.g. "$1.82/night" or "3 months · $0.99/night"
+    offer_strike_text     Single line text     e.g. "$1.82 on 2 Sets" (shown crossed out)
+    button_label          Single line text     e.g. "Switch to 3+1 Sets" / "Add to bag"
+    button_action         Single line text     "Add to cart" (AJAX + cart drawer) or "Redirect"
+    add_as_subscription   True or false        add / price with the variant's first subscription plan
+  Star rating comes from the chosen product's review metafields (Judge.me).
+{%- endcomment -%}
+
+{%- assign offer_cards = product.metafields.custom.product_offer_cards.value -%}
+
+{%- if offer_cards != blank -%}
+  <div
+    class="somna-offers section-{{ section.id }}"
+    style="
+      --so-section-bg: {{ section.settings.section_bg }};
+      --so-card-bg: {{ section.settings.card_bg }};
+      --so-featured-border: {{ section.settings.featured_border }};
+      --so-outline-border: {{ section.settings.outline_border }};
+      --so-accent: {{ section.settings.accent_color }};
+      --so-text: {{ section.settings.text_color }};
+      --so-muted: {{ section.settings.muted_color }};
+      --so-btn-bg: {{ section.settings.button_bg }};
+      --so-btn-text: {{ section.settings.button_text_color }};
+      --so-pt: {{ section.settings.padding_top }}px;
+      --so-pb: {{ section.settings.padding_bottom }}px;
+    "
+  >
+    <somna-offer-cards class="somna-offers__list">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="somna-offers__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- for card in offer_cards -%}
+        {%- liquid
+          # Target: chosen variant, else the chosen product's first available variant
+          assign card_variant = card.variant.value
+          assign card_product = card.product.value
+          if card_variant != blank
+            assign card_product = card_variant.product
+          elsif card_product != blank
+            assign card_variant = card_product.selected_or_first_available_variant
+          endif
+
+          if card_variant == blank
+            continue
+          endif
+
+          # Subscription plan (first plan) when enabled or required by the product
+          assign card_selling_plan = ''
+          assign card_price = card_variant.price
+          if card.add_as_subscription.value == true or card_product.requires_selling_plan
+            assign card_allocation = card_variant.selling_plan_allocations.first
+            if card_allocation
+              assign card_selling_plan = card_allocation.selling_plan.id
+              assign card_price = card_allocation.price
+            endif
+          endif
+
+          assign card_image = card.image.value | default: card_variant.featured_image | default: card_product.featured_image
+          assign card_title = card.title.value | default: card_product.title
+
+          assign card_style = card.card_style.value | downcase
+          assign card_action = card.button_action.value | downcase
+          assign is_ajax = false
+          if card_action contains 'cart'
+            assign is_ajax = true
+          endif
+
+          assign card_rating = card_product.metafields.reviews.rating.value
+          assign card_rating_count = card_product.metafields.reviews.rating_count.value | default: 0
+          if card_rating != blank
+            assign card_rating_percent = card_rating.rating | times: 100.0 | divided_by: card_rating.scale_max
+          endif
+
+          assign card_use_plan = false
+          if card.add_as_subscription.value == true or card_product.requires_selling_plan
+            assign card_use_plan = true
+          endif
+
+          # Color option of the card's product (shown as pills when it has more than one value)
+          assign card_color_option = nil
+          assign card_color_index = -1
+          for option in card_product.options_with_values
+            assign option_name_check = option.name | downcase
+            if option_name_check contains 'color' or option_name_check contains 'colour'
+              assign card_color_option = option
+              assign card_color_index = forloop.index0
+              break
+            endif
+          endfor
+        -%}
+
+        <div
+          class="somna-offer{% if card_style contains 'outline' %} somna-offer--outline{% else %} somna-offer--featured{% endif %}"
+          {% if card.price_text.value == blank %}data-dynamic-price{% endif %}
+          {% if card.image.value == blank %}data-dynamic-image{% endif %}
+        >
+          {%- if card.badge_text.value != blank -%}
+            <span class="somna-offer__badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7V7h2v5h7a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1 1 0 1 1 1-1v1H9Zm6 0h-1V6a1 1 0 1 1 1 1ZM4 14v6a1 1 0 0 0 1 1h6v-7H4Zm9 7h6a1 1 0 0 0 1-1v-6h-7v7Z"/>
+              </svg>
+              {{ card.badge_text.value | escape }}
+            </span>
+          {%- endif -%}
+
+          <div class="somna-offer__top">
+            <a href="{{ card_variant.url }}" class="somna-offer__media" tabindex="-1" aria-hidden="true">
+              {%- if card_image != blank -%}
+                {{
+                  card_image
+                  | image_url: width: 400
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '200, 300, 400',
+                    sizes: '(min-width: 750px) 160px, 100px',
+                    alt: card_title,
+                    class: 'somna-offer__image'
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'somna-offer__image' }}
+              {%- endif -%}
+            </a>
+
+            <div class="somna-offer__info">
+              {%- if section.settings.show_rating and card_rating != blank -%}
+                <div class="somna-offer__rating">
+                  <span>{{ card_rating.rating | round: 1 }}</span>
+                  <span class="somna-offer__stars" style="--so-rating: {{ card_rating_percent }}%;" aria-label="{{ card_rating.rating | round: 1 }} / {{ card_rating.scale_max }}">★★★★★</span>
+                  <span>({{ card_rating_count }})</span>
+                </div>
+              {%- endif -%}
+
+              <h3 class="somna-offer__title">{{ card_title | escape }}</h3>
+
+              {%- if card.subtitle.value != blank -%}
+                <p class="somna-offer__subtitle">{{ card.subtitle.value | escape | newline_to_br }}</p>
+              {%- endif -%}
+
+              <p class="somna-offer__price">
+                <strong class="somna-offer__price-amount">
+                  {%- if card.price_text.value != blank -%}
+                    {{- card.price_text.value | escape -}}
+                  {%- else -%}
+                    {{- card_price | money_without_trailing_zeros -}}
+                  {%- endif -%}
+                </strong>
+                {%- if card.price_label.value != blank %} <span>· {{ card.price_label.value | escape }}</span>{% endif -%}
+              </p>
+
+              {%- if card.offer_text.value != blank or card.offer_strike_text.value != blank -%}
+                <p class="somna-offer__offer">
+                  {%- if card.offer_text.value != blank -%}
+                    <strong>{{ card.offer_text.value | escape }}</strong>
+                  {%- endif -%}
+                  {%- if card.offer_strike_text.value != blank %} <s>{{ card.offer_strike_text.value | escape }}</s>{% endif -%}
+                </p>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if card_color_option != nil and card_color_option.values.size > 1 -%}
+            <div class="somna-offer__colors" role="radiogroup" aria-label="{{ card_color_option.name | escape }}">
+              {%- for value in card_color_option.values -%}
+                {%- liquid
+                  # Variant with this color that keeps the card variant's other options (e.g. "4 Bags")
+                  assign color_variant = nil
+                  for candidate in card_product.variants
+                    assign is_match = true
+                    for candidate_option in candidate.options
+                      if forloop.index0 == card_color_index
+                        if candidate_option != value.name
+                          assign is_match = false
+                          break
+                        endif
+                      else
+                        assign base_option = card_variant.options[forloop.index0]
+                        if candidate_option != base_option
+                          assign is_match = false
+                          break
+                        endif
+                      endif
+                    endfor
+                    if is_match
+                      assign color_variant = candidate
+                      break
+                    endif
+                  endfor
+                  if color_variant == nil
+                    assign color_variant = value.variant | default: card_variant
+                  endif
+
+                  assign color_selling_plan = ''
+                  assign color_price = color_variant.price
+                  if card_use_plan
+                    assign color_allocation = color_variant.selling_plan_allocations.first
+                    if color_allocation
+                      assign color_selling_plan = color_allocation.selling_plan.id
+                      assign color_price = color_allocation.price
+                    endif
+                  endif
+
+                  assign value_label = value.name | split: ' (' | first
+                  assign value_check = value.name | downcase
+                  if value.swatch.color
+                    assign dot_color = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                  elsif value_check contains 'blue' or value_check contains 'breathe'
+                    assign dot_color = '#0b57e3'
+                  elsif value_check contains 'red' or value_check contains 'bold'
+                    assign dot_color = '#e3121e'
+                  elsif value_check contains 'black' or value_check contains 'night'
+                    assign dot_color = '#000000'
+                  else
+                    assign dot_color = '#d9d9d9'
+                  endif
+                -%}
+                <button
+                  type="button"
+                  class="somna-offer__color"
+                  role="radio"
+                  aria-checked="{% if color_variant.id == card_variant.id %}true{% else %}false{% endif %}"
+                  data-variant-id="{{ color_variant.id }}"
+                  data-url="{{ color_variant.url }}"
+                  data-selling-plan="{{ color_selling_plan }}"
+                  data-price="{{ color_price | money_without_trailing_zeros | escape }}"
+                  {% if color_variant.featured_image %}
+                    data-image="{{ color_variant.featured_image | image_url: width: 400 }}"
+                  {% endif %}
+                  {% if color_variant.available == false %}data-unavailable{% endif %}
+                >
+                  <span class="somna-offer__dot" style="background: {{ dot_color }};" aria-hidden="true"></span>
+                  {{ value_label | escape }}
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          {%- assign card_button_label = card.button_label.value | default: 'View product' -%}
+          <a
+            href="{{ card_variant.url }}"
+            class="somna-offer__button"
+            {% if is_ajax %}
+              data-offer-add
+              data-variant-id="{{ card_variant.id }}"
+              data-selling-plan="{{ card_selling_plan }}"
+              data-product-id="{{ card_product.id }}"
+            {% endif %}
+          >
+            {%- if card_style contains 'outline' -%}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 8h14l-1 12H6L5 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M9 8V6a3 3 0 0 1 6 0v2M9.5 12.5a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            {%- endif -%}
+            <span>{{ card_button_label | escape }}</span>
+            {%- unless card_style contains 'outline' -%}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 10h12m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {%- endunless -%}
+          </a>
+          {%- if is_ajax -%}
+            <p class="somna-offer__error" role="alert" hidden></p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </somna-offer-cards>
+  </div>
+{%- endif -%}
+
+<script type="module">
+  import { CartLinesUpdateEvent, CartErrorEvent } from '@shopify/events';
+
+  if (!customElements.get('somna-offer-cards')) {
+    customElements.define(
+      'somna-offer-cards',
+      class SomnaOfferCards extends HTMLElement {
+        connectedCallback() {
+          this.addEventListener('click', this.#onClick);
+        }
+
+        disconnectedCallback() {
+          this.removeEventListener('click', this.#onClick);
+        }
+
+        #onClick = (event) => {
+          const color = event.target.closest('.somna-offer__color');
+          if (color) {
+            this.#selectColor(color);
+            return;
+          }
+
+          const button = event.target.closest('[data-offer-add]');
+          if (!button) return;
+          event.preventDefault();
+          this.#addToCart(button);
+        };
+
+        #selectColor(color) {
+          const card = color.closest('.somna-offer');
+          if (!card) return;
+
+          card.querySelectorAll('.somna-offer__color').forEach((el) => {
+            el.setAttribute('aria-checked', String(el === color));
+          });
+
+          const { variantId, url, sellingPlan, price, image } = color.dataset;
+
+          card.querySelectorAll('.somna-offer__button, .somna-offer__media').forEach((link) => {
+            if (url) link.href = url;
+          });
+
+          const button = card.querySelector('[data-offer-add]');
+          if (button) {
+            button.dataset.variantId = variantId || '';
+            button.dataset.sellingPlan = sellingPlan || '';
+          }
+
+          const priceEl = card.querySelector('.somna-offer__price-amount');
+          if (priceEl && price && card.hasAttribute('data-dynamic-price')) priceEl.textContent = price;
+
+          const imageEl = card.querySelector('.somna-offer__image');
+          if (imageEl && imageEl.tagName === 'IMG' && image && card.hasAttribute('data-dynamic-image')) {
+            imageEl.removeAttribute('srcset');
+            imageEl.src = image;
+          }
+
+          const errorEl = card.querySelector('.somna-offer__error');
+          if (errorEl) errorEl.hidden = true;
+        }
+
+        async #addToCart(button) {
+          const { variantId, sellingPlan, productId } = button.dataset;
+          if (!variantId || button.getAttribute('aria-busy') === 'true') return;
+
+          const errorEl = button.closest('.somna-offer')?.querySelector('.somna-offer__error');
+          const showError = (message) => {
+            if (!errorEl) return;
+            errorEl.textContent = message || '';
+            errorEl.hidden = !message;
+          };
+
+          button.setAttribute('aria-busy', 'true');
+          showError('');
+
+          // Re-render the cart drawer / cart page sections in the same request
+          const sectionIds = [...document.querySelectorAll('cart-items-component')]
+            .map((el) => el.dataset.sectionId)
+            .filter(Boolean);
+
+          const item = { id: Number(variantId), quantity: 1 };
+          if (sellingPlan) item.selling_plan = Number(sellingPlan);
+
+          const deferred = CartLinesUpdateEvent.createPromise();
+          button.dispatchEvent(
+            new CartLinesUpdateEvent({
+              action: 'add',
+              context: 'product',
+              lines: [{ merchandiseId: variantId, quantity: 1 }],
+              promise: deferred.promise,
+            })
+          );
+
+          try {
+            const response = await fetch(Theme.routes.cart_add_url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({ items: [item], sections: sectionIds.join(',') }),
+            });
+            const data = await response.json();
+            const cart = await fetch(`${Theme.routes.cart_url}.js`, { headers: { Accept: 'application/json' } }).then(
+              (res) => res.json()
+            );
+
+            if (data.status) {
+              deferred.resolve({
+                cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart),
+                detail: { didError: true, items: cart.items, source: 'somna-offer-cards' },
+              });
+              button.dispatchEvent(
+                new CartErrorEvent({
+                  error: data.message || 'Add to cart failed',
+                  code: 'INVALID',
+                  detail: { description: data.description },
+                })
+              );
+              showError(data.description || data.message);
+              return;
+            }
+
+            deferred.resolve({
+              cart: CartLinesUpdateEvent.createCartFromAjaxResponse(cart),
+              detail: {
+                didError: false,
+                items: cart.items,
+                itemCount: 1,
+                productId,
+                sections: data.sections,
+                source: 'somna-offer-cards',
+              },
+            });
+
+            // Open the cart drawer (works even when "auto open cart drawer" is off)
+            requestAnimationFrame(() => {
+              const drawer = document.querySelector('cart-drawer-component')?.closest('theme-drawer');
+              if (drawer) {
+                if (!drawer.isOpen) drawer.open();
+              } else {
+                window.location.href = Theme.routes.cart_url;
+              }
+            });
+          } catch (error) {
+            console.error(error);
+            deferred.reject(error);
+            showError('Something went wrong. Please try again.');
+          } finally {
+            button.removeAttribute('aria-busy');
+          }
+        }
+      }
+    );
+  }
+</script>
+
+{% stylesheet %}
+  .somna-offers {
+    background: var(--so-section-bg);
+    padding: var(--so-pt) 16px var(--so-pb);
+  }
+
+  .somna-offers__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .somna-offers__heading {
+    margin: 0;
+    text-align: center;
+    font-family: var(--headfont, var(--font-heading--family));
+    color: var(--so-text);
+  }
+
+  .somna-offer {
+    position: relative;
+    padding: 24px 18px 20px;
+    background: var(--so-card-bg);
+    border-radius: 18px;
+    color: var(--so-text);
+  }
+
+  .somna-offer--featured {
+    margin-top: 14px;
+    border: 2px solid var(--so-featured-border);
+  }
+
+  .somna-offer--outline {
+    border: 1px solid var(--so-outline-border);
+    box-shadow: 0 6px 20px rgb(10 26 74 / 0.06);
+  }
+
+  .somna-offer__badge {
+    position: absolute;
+    top: -14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: var(--so-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .somna-offer__top {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .somna-offer__media {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .somna-offer__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .somna-offer__info > * {
+    margin: 0;
+  }
+
+  .somna-offer__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .somna-offer__stars {
+    position: relative;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #e0e0e0;
+    line-height: 1;
+  }
+
+  .somna-offer__stars::before {
+    content: '★★★★★';
+    position: absolute;
+    inset: 0;
+    width: var(--so-rating, 100%);
+    overflow: hidden;
+    color: #f4c342;
+  }
+
+  .somna-offer__title {
+    margin-top: 2px !important;
+    font-family: var(--headfont, var(--font-heading--family));
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--so-text);
+  }
+
+  .somna-offer__subtitle {
+    margin-top: 6px !important;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--so-muted);
+  }
+
+  .somna-offer__price {
+    margin-top: 4px !important;
+    font-size: 15px;
+    line-height: 1.3;
+    color: var(--so-muted);
+  }
+
+  .somna-offer__price strong {
+    font-weight: 700;
+    color: var(--so-text);
+  }
+
+  .somna-offer--featured .somna-offer__price strong {
+    color: var(--so-accent);
+  }
+
+  .somna-offer__offer {
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--so-muted);
+  }
+
+  .somna-offer--featured .somna-offer__offer strong {
+    color: var(--so-text);
+  }
+
+  .somna-offer__offer s {
+    margin-left: 4px;
+  }
+
+  .somna-offer__colors {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .somna-offer__color {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 70px;
+    padding: 5px 14px;
+    background: #fff;
+    border: 1px solid #c1c0b6;
+    border-radius: 999px;
+    color: #000;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .somna-offer__color[aria-checked='true'] {
+    border-color: var(--so-featured-border);
+    box-shadow: inset 0 0 0 1px var(--so-featured-border);
+  }
+
+  .somna-offer__color[data-unavailable] {
+    opacity: 0.5;
+  }
+
+  .somna-offer__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .somna-offer__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .somna-offer--featured .somna-offer__button {
+    border-radius: 999px;
+    background: var(--so-btn-bg);
+    color: var(--so-btn-text);
+    box-shadow: 0 8px 20px rgb(11 87 227 / 0.15);
+  }
+
+  .somna-offer--outline .somna-offer__button {
+    gap: 10px;
+    border: 1.5px solid var(--so-btn-bg);
+    border-radius: 14px;
+    background: transparent;
+    color: var(--so-btn-bg);
+  }
+
+  .somna-offer__button:hover {
+    opacity: 0.85;
+  }
+
+  .somna-offer__button[aria-busy='true'] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: progress;
+  }
+
+  .somna-offer__error {
+    margin: 8px 0 0;
+    font-size: 13px;
+    text-align: center;
+    color: #c8102e;
+  }
+
+  @media screen and (min-width: 750px) {
+    .somna-offer {
+      padding: 36px 32px 28px;
+      border-radius: 24px;
+    }
+
+    .somna-offer__badge {
+      top: -16px;
+      left: 24px;
+      font-size: 13px;
+      padding: 6px 16px;
+    }
+
+    .somna-offer__top {
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+    }
+
+    .somna-offer__rating {
+      font-size: 12px;
+    }
+
+    .somna-offer__stars {
+      font-size: 14px;
+    }
+
+    .somna-offer__title {
+      font-size: 26px;
+    }
+
+    .somna-offer__subtitle {
+      font-size: 15px;
+    }
+
+    .somna-offer__price {
+      font-size: 20px;
+    }
+
+    .somna-offer__offer {
+      font-size: 16px;
+    }
+
+    .somna-offer__button {
+      margin-top: 24px;
+      padding: 16px 24px;
+      font-size: 18px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PDP offer cards",
+  "tag": "section",
+  "class": "section-pdp-offer-cards",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Cards come from the product metafield custom.product_offer_cards (list of 'PDP offer card' metaobjects). The section is hidden on products without it."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show star rating",
+      "default": true,
+      "info": "Uses the review metafields of each card's product (Judge.me)"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "featured_border",
+      "label": "Featured card border",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "outline_border",
+      "label": "Outline card border",
+      "default": "#e9dfc7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (badge & price)",
+      "default": "#0b57e3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Secondary text",
+      "default": "#5b6b94"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button",
+      "default": "#0a1a4a"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text (featured)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP offer cards"
+    }
+  ]
+}
+{% endschema %}

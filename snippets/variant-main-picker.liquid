@@ -67,9 +67,87 @@
             assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
             assign longest_value = 0
           endif
+
+          # Somna: Color / Colour option renders as round color swatches
+          assign option_name_check = product_option.name | downcase
+          assign is_color_option = false
+          if option_name_check contains 'color' or option_name_check contains 'colour'
+            assign is_color_option = true
+          endif
         -%}
 
-        {%- if product_option.values.size == 1 and variant_style != 'swatch' -%}
+        {%- if is_color_option -%}
+          {% comment %} =========================================================
+            SOMNA COLOR SWATCHES  ("Color: Blue"  ● ● ●)
+          ========================================================= {% endcomment %}
+          <fieldset
+            class="variant-option somna-color-option"
+            data-fieldset-index="{{ fieldset_index }}"
+            ref="fieldsets[]"
+          >
+            <legend class="visually-hidden">{{ product_option.name | escape }}</legend>
+            <div class="somna-color-option__label" aria-hidden="true">
+              {{ product_option.name | escape }}: <strong>{{ product_option.selected_value | escape }}</strong>
+            </div>
+            <div class="somna-color-option__swatches">
+              {%- for product_option_value in product_option.values -%}
+                {%- liquid
+                  assign swatch_value_name = product_option_value.name | downcase
+                  assign swatch_bg = ''
+                  if product_option_value.swatch.image
+                    assign swatch_bg = product_option_value.swatch.image | image_url: width: 80 | prepend: 'url(' | append: ') center / cover'
+                  elsif product_option_value.swatch.color
+                    assign swatch_bg = 'rgb(' | append: product_option_value.swatch.color.rgb | append: ')'
+                  elsif swatch_value_name contains 'blue'
+                    assign swatch_bg = '#306ff9'
+                  elsif swatch_value_name contains 'red'
+                    assign swatch_bg = '#ff0a0a'
+                  elsif swatch_value_name contains 'black'
+                    assign swatch_bg = '#242424'
+                  endif
+                -%}
+                <label
+                  class="somna-color-swatch{% if product_option_value.available == false %} somna-color-swatch--unavailable{% endif %}"
+                  title="{{ product_option_value.name | escape }}"
+                  style="{% if swatch_bg != blank %}--somna-swatch: {{ swatch_bg }};{% endif %}"
+                >
+                  <input
+                    type="radio"
+                    name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                    value="{{ product_option_value | escape }}"
+                    aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
+                    {% if product_option_value.available == false %}
+                      aria-disabled="true"
+                    {% endif %}
+                    data-previous-checked="false"
+                    data-fieldset-index="{{ fieldset_index }}"
+                    data-input-index="{{ forloop.index0 }}"
+                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                    data-option-name="{{ product_option.name | escape }}"
+                    data-option-value-id="{{ product_option_value.id }}"
+                    data-option-available="{{ product_option_value.available }}"
+                    data-connected-product-url="{{ product_option_value.product_url }}"
+                    {% if product_option_value.variant.id %}
+                      data-variant-id="{{ product_option_value.variant.id }}"
+                    {% endif %}
+                    {% if product_option_value.selected %}
+                      data-current-checked="true"
+                      checked
+                    {% else %}
+                      data-current-checked="false"
+                    {% endif %}
+                  >
+                  <span class="somna-color-swatch__dot" aria-hidden="true">
+                    <svg class="somna-color-swatch__check" viewBox="0 0 14 11" fill="none">
+                      <path d="M1.5 5.5L5.25 9.25L12.5 1.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+          {%- assign fieldset_index = fieldset_index | plus: 1 -%}
+        {%- elsif product_option.values.size == 1 and variant_style != 'swatch' -%}
           <div
             class="variant-option"
             data-testid="variant-option-single"
