@@ -1530,10 +1530,12 @@ a.somna-view-all {
   }
 
   .sleep-card-title {
-    font-size: 20px;
+    margin: 0 0 4px;
+    color: #0A1A4A;
+    font-size: 16px;
+    font-style: normal;
     font-weight: 700;
-    color: #111827;
-    margin: 0 0 6px 0;
+    line-height: normal;
   }
 
   .sleep-card-description {
