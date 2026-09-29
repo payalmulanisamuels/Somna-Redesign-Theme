@@ -29,8 +29,6 @@
       <div class="hz-banner-media">
         {%- if banner_image != blank -%}
           <img src="{{ banner_image | image_url: width: 1000 }}" alt="{{ heading_text | escape }}" loading="lazy" width="{{ banner_image.width }}" height="{{ banner_image.height }}" />
-        {%- else -%}
-          {{ 'lifestyle-1' | placeholder_svg_tag: 'hz-placeholder' }}
         {%- endif -%}
       </div>
       <div class="hz-banner-content">
