@@ -216,6 +216,29 @@ li.menu__item.paragraph a {
   box-sizing: border-box;
   padding: 5px;
   border-radius: 10px;
+  position: relative;
+}
+.tag_text {
+    display: inline-flex;
+    padding: 3px 8px;
+    align-items: flex-start;
+    border-radius: 4px;
+    background: #0A1A4A;
+    color: #FFF;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+    justify-content: center;
+    max-width: max-content;
+    position: absolute;
+    top: -10px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 .bundle-card__image-wrapper {
   position: relative;
