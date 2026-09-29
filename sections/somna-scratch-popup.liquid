@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (imageData.data[i] < 128) transparentCount++;
       }
 
-      if (transparentCount > totalPixels * 0.35 && !canvas.classList.getAttribute('revealed')) {
+      if (transparentCount > totalPixels * 0.35 && !canvas.hasAttribute('revealed')) {
         canvas.setAttribute('revealed', 'true');
         setTimeout(() => {
           screen1.classList.add('somna-hidden');
