@@ -1671,6 +1671,9 @@
     },
     "bundle_feature_banner_Qrgcy3": {
       "type": "bundle-feature-banner",
+      "custom_css": [
+        ".wave-container.top{top: -26px;}"
+      ],
       "name": "Bundle Feature Banner",
       "settings": {
         "top_wave_image": "shopify://shop_images/bundle-curved.svg",
