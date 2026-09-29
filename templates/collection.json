@@ -1012,11 +1012,12 @@
           "type": "sleep_option",
           "settings": {
             "tab_title": "Blocked nose",
+            "product": "",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
             "card_description": "Strips + Tape, 1-month set",
-            "price_text": "From <strong>$59</strong> with Subscribe and Save",
+            "price_text_override": "",
             "button_label": "View Sleep Bundle",
             "button_link": "shopify://products/sleep-bundle"
           }
@@ -1025,11 +1026,12 @@
           "type": "sleep_option",
           "settings": {
             "tab_title": "Dry mouth",
+            "product": "",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
             "card_description": "Strips + Tape, 1-month set",
-            "price_text": "From <strong>$59</strong> with Subscribe and Save",
+            "price_text_override": "",
             "button_label": "View Sleep Bundle",
             "button_link": ""
           }
@@ -1100,7 +1102,7 @@
       ],
       "name": "FAQ Accordion - PDP",
       "settings": {
-        "bg_color": "#fdf8ee",
+        "bg_color": "{{ settings.color_palette.background }}",
         "divider_color": "#cbd3d8",
         "heading": "FAQ",
         "padding_top": 56,
