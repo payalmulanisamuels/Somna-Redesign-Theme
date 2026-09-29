@@ -1659,6 +1659,7 @@
       ],
       "name": "Layered Image with Text",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
         "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
@@ -1671,12 +1672,8 @@
     },
     "bundle_feature_banner_Qrgcy3": {
       "type": "bundle-feature-banner",
-      "custom_css": [
-        ".wave-container.top{top: -26px;}"
-      ],
       "name": "Bundle Feature Banner",
       "settings": {
-        "top_wave_image": "shopify://shop_images/bundle-curved.svg",
         "product": "sleep-bundle",
         "bg_color": "{{ settings.color_palette.background }}",
         "image": "shopify://shop_images/breath-bundle.png",
