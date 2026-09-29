@@ -278,39 +278,40 @@ document.addEventListener("DOMContentLoaded", function () {
     const listId = 'XyWydk';
  
 
-        const payload = {
-        data: {
-            type: "subscription",
-            attributes: {
-            list_id: listId,
-            email: emailInput,
-            custom_source: "Scratch Popup"
-            }
-        }
-        };
 
-        try {
-        const response = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${publicApiKey}`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'Revision': '2024-10-15'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok || response.status === 202) {
-            screen2.classList.add('somna-hidden');
-            screen3.classList.remove('somna-hidden');
-        } else {
-            // If user is already subscribed or payload throws validation error
-            errorContainer.textContent = "You're already on the list. Check your inbox for your welcome code.";
+    const payload = {
+      data: {
+        type: "subscription",
+        attributes: {
+          list_id: listId,
+          email: emailInput,
+          custom_source: "Scratch Popup"
         }
-        } catch (err) {
-        // Graceful fallback transition if network/adblockers interfere
+      }
+    };
+
+    try {
+      const response = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${publicApiKey}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Revision': '2024-10-15'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok || response.status === 202) {
         screen2.classList.add('somna-hidden');
         screen3.classList.remove('somna-hidden');
-        }
+      } else {
+        // If user is already subscribed or payload throws validation error
+        errorContainer.textContent = "You're already on the list. Check your inbox for your welcome code.";
+      }
+    } catch (err) {
+      // Graceful fallback transition if network/adblockers interfere
+      screen2.classList.add('somna-hidden');
+      screen3.classList.remove('somna-hidden');
+    }
   });
 
   // Copy Code Logic
