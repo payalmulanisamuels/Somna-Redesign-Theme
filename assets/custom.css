@@ -965,6 +965,7 @@ h2.upsell_heading {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    padding: 0.5px;
   }
 .hz-minicart-upsell__card {
     padding: 5px;
