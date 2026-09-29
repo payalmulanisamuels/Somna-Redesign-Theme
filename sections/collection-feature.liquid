@@ -184,12 +184,49 @@
   <!-- Dynamic Content Area -->
   <div class="sleep-card-container">
     {%- for block in section.blocks -%}
+      {%- assign selected_product = block.settings.product -%}
+      
+      {%- liquid
+        # Fallbacks to selected product data if custom fields are left blank
+        if block.settings.card_title != blank
+          assign card_title = block.settings.card_title
+        elsif selected_product != blank
+          assign card_title = selected_product.title
+        else
+          assign card_title = "Sleep Bundle — Breathe"
+        endif
+
+        if block.settings.card_description != blank
+          assign card_description = block.settings.card_description
+        elsif selected_product != blank
+          assign card_description = selected_product.metafields.custom.subtitle | default: selected_product.description | strip_html | truncate: 60
+        else
+          assign card_description = "Strips + Tape, 1-month set"
+        endif
+
+        if block.settings.image != blank
+          assign card_image = block.settings.image
+        elsif selected_product != blank and selected_product.featured_image != blank
+          assign card_image = selected_product.featured_image
+        else
+          assign card_image = blank
+        endif
+
+        if block.settings.button_link != blank
+          assign button_link = block.settings.button_link
+        elsif selected_product != blank
+          assign button_link = selected_product.url
+        else
+          assign button_link = "#"
+        endif
+      -%}
+
       <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
         <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
         
         <div class="sleep-card-image-wrapper">
-          {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+          {%- if card_image != blank -%}
+            {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
           {%- else -%}
             {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
@@ -198,15 +235,21 @@
           {%- endif -%}
         </div>
 
-        <h3 class="sleep-card-title">{{ block.settings.card_title }}</h3>
-        <p class="sleep-card-description">{{ block.settings.card_description }}</p>
+        <h3 class="sleep-card-title">{{ card_title }}</h3>
+        <p class="sleep-card-description">{{ card_description }}</p>
         
         <div class="sleep-card-price">
-          {{ block.settings.price_text }}
+          {%- if block.settings.price_text_override != blank -%}
+            {{ block.settings.price_text_override }}
+          {%- elsif selected_product != blank -%}
+            From <strong>{{ selected_product.price | money }}</strong> with Subscribe and Save
+          {%- else -%}
+            From <strong>$59</strong> with Subscribe and Save
+          {%- endif -%}
         </div>
 
-        {%- if block.settings.button_link != blank -%}
-          <a href="{{ block.settings.button_link }}" class="sleep-card-button">
+        {%- if button_link != blank -%}
+          <a href="{{ button_link }}" class="sleep-card-button">
             {{ block.settings.button_label }}
           </a>
         {%- endif -%}
@@ -264,15 +307,22 @@
           "default": "Blocked nose"
         },
         {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
           "type": "text",
           "id": "badge_subtitle",
-          "label": "Card Subtitle",
-          "default": "Your best start"
+          "label": "Card Subtitle (Optional)",
+          "default": "Your best start",
+          "info": "Overrides default styling badge text above the image."
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Bundle Image"
+          "label": "Custom Image Override",
+          "info": "Leaves blank to use selected product's image automatically."
         },
         {
           "type": "text",
@@ -283,20 +333,20 @@
         {
           "type": "text",
           "id": "card_title",
-          "label": "Bundle Title",
-          "default": "Sleep Bundle — Breathe"
+          "label": "Custom Title Override",
+          "info": "Leaves blank to use selected product's title automatically."
         },
         {
           "type": "text",
           "id": "card_description",
-          "label": "Bundle Description",
-          "default": "Strips + Tape, 1-month set"
+          "label": "Custom Description Override",
+          "info": "Leaves blank to use product snippet."
         },
         {
           "type": "html",
-          "id": "price_text",
-          "label": "Price Text HTML",
-          "default": "From <strong>$59</strong> with Subscribe and Save"
+          "id": "price_text_override",
+          "label": "Custom Price Text HTML",
+          "info": "Leaves blank to automatically pull product price."
         },
         {
           "type": "text",
@@ -307,7 +357,8 @@
         {
           "type": "url",
           "id": "button_link",
-          "label": "Button Link"
+          "label": "Custom Button Link Override",
+          "info": "Leaves blank to link directly to the selected product page."
         }
       ]
     }
@@ -315,7 +366,7 @@
   "presets": [
     {
       "name": "Interactive Sleep Tabs",
-  
+     
     }
   ]
 }
