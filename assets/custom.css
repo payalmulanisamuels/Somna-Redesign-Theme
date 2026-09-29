@@ -1482,11 +1482,10 @@ a.somna-view-all {
 
   /* Dynamic Card Container */
   .sleep-card-container {
-    background-color: #ffffff;
-    border: 1px solid #f3f4f6;
+    padding: 16px;
     border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    border: 1px solid #EAE5DC;
+    background: #FFF;
   }
 
   .sleep-card-subtitle {
