@@ -19,6 +19,9 @@ html[scroll-lock] .wave-container {
     font-family: var(--headfont);
     line-height: 1;
 }
+.theme-drawer__close-button:focus-visible {
+    outline: none;
+}
 
 /* Header */
  .announcement-bar__slide[aria-hidden=true] {
