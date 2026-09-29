@@ -327,7 +327,7 @@
   {{ media_slot_2 }}
 
   {% if media_count == 0 %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }}
+    {% comment %} {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }} {% endcomment %}
   {%- endif -%}
 {% endcapture %}
 
@@ -359,7 +359,7 @@
     }}
   {% endif %}
   {% if media_count == 0 %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }}
+    {% comment %} {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }} {% endcomment %}
   {% endif %}
 {% endcapture %}
 
@@ -443,7 +443,7 @@
             }}
         {% endif %}
         {% if media_count == 0 %}
-          {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }}
+          {% comment %} {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }} {% endcomment %}
         {% endif %}
       {% endif %}
     {% endif %}
