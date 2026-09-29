@@ -1046,6 +1046,7 @@
       ],
       "name": "Collection Feature",
       "settings": {
+        "top_wave_image": "shopify://shop_images/curve-top.png",
         "heading": "What keeps you from sleeping well?"
       }
     },

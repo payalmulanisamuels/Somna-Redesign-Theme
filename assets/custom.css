@@ -1435,11 +1435,13 @@ a.somna-view-all {
   }
 
   .sleep-tabs-header h2 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #111827;
-    line-height: 1.2;
     margin: 0;
+    color: #0A1A4A;
+    font-family: Lora;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
   }
 
   /* Tab Buttons Container */
