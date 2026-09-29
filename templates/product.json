@@ -1229,6 +1229,9 @@
     },
     "hero_Djj4xR": {
       "type": "hero",
+      "custom_css": [
+        ".hero__container {padding-top: 40px; padding-bottom: 40px;}"
+      ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
