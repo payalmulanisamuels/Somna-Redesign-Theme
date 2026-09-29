@@ -1676,7 +1676,7 @@
       "settings": {
         "product": "sleep-bundle",
         "bg_color": "{{ settings.color_palette.background }}",
-        "image": "shopify://shop_images/The_breathe_bundle.png",
+        "image": "shopify://shop_images/breath-bundle.png",
         "title": "The Breathe Bundle",
         "subtitle": "Blue Strips + Blue Tape, one month supply",
         "sub_price_override": "",
