@@ -1489,8 +1489,6 @@ a.somna-view-all {
   }
 
   .sleep-card-subtitle {
-    text-transform: uppercase;
-    letter-spacing: .5px;
     margin-bottom: 14px;
     color: #0B57E3;
     font-family: Inter;
