@@ -1474,11 +1474,10 @@ a.somna-view-all {
   }
 
   .sleep-tab-btn.active {
-    background-color: #eff6ff;
-    border-color: #2563eb;
-    color: #1d4ed8;
+    background-color: #DCE9F6;
+    color: #2563eb;
     font-weight: 600;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+    border: 1.5px solid #0B57E3;
   }
 
   /* Dynamic Card Container */

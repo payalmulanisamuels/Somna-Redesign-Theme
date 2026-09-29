@@ -1012,8 +1012,9 @@
           "type": "sleep_option",
           "settings": {
             "tab_title": "Blocked nose",
-            "product": "",
+            "product": "sleep-bundle",
             "badge_subtitle": "Your best start",
+            "image": "shopify://shop_images/best-image.jpg",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
             "card_description": "Strips + Tape, 1-month set",
