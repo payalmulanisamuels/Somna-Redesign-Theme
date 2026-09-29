@@ -1655,7 +1655,7 @@
         "layered_slide_jqmf8i"
       ],
       "custom_css": [
-        ".wave-container img {height: 50px; object-position: top;}"
+        ".wave-container.bottom {background-position: top; bottom: 0;}"
       ],
       "name": "Layered Image with Text",
       "settings": {
