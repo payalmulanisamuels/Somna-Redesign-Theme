@@ -1020,10 +1020,24 @@
             "button_label": "View Sleep Bundle",
             "button_link": "shopify://products/sleep-bundle"
           }
+        },
+        "sleep_option_eCWVJt": {
+          "type": "sleep_option",
+          "settings": {
+            "tab_title": "Dry mouth",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text": "From <strong>$59</strong> with Subscribe and Save",
+            "button_label": "View Sleep Bundle",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
-        "sleep_option_C9Qb3X"
+        "sleep_option_C9Qb3X",
+        "sleep_option_eCWVJt"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: 5px;}"
