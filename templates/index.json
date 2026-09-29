@@ -2238,7 +2238,7 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
+                "text": "<p>Get 10% off your<br/>first order.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
