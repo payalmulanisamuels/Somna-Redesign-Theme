@@ -408,7 +408,7 @@ li.menu__item.paragraph a {
   max-width: 300px;
   aspect-ratio: 2 / 1;  
   height: auto;
-  border-radius: 28px;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
   scroll-snap-align: center;
