@@ -955,7 +955,7 @@ h2.upsell_heading {
 }
 .hz-save-badge {
     position: absolute;
-    top: -5px;
+    top: -7px;
     right: 12px;
     border-radius: 20px;
     border: 0.5px solid #000;
