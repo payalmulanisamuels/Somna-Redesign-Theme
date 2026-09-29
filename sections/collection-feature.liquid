@@ -2,99 +2,113 @@
  
 
 <div class="sleep-tabs-section section-{{ section.id }}-padding">
-  <div class="sleep-tabs-header">
-    <h2>{{ section.settings.heading }}</h2>
-  </div>
+  {% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  <div class="section section--page-width">
+    <div class="sleep-tabs-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
 
-  <!-- Interactive Tab List -->
-  <div class="sleep-tabs-list" role="tablist">
-    {%- for block in section.blocks -%}
-      <button 
-        type="button"
-        class="sleep-tab-btn {% if forloop.first %}active{% endif %}"
-        data-target="tab-content-{{ block.id }}"
-        role="tab"
-        {{ block.shopify_attributes }}>
-        {{ block.settings.tab_title }}
-      </button>
-    {%- endfor -%}
-  </div>
+    <!-- Interactive Tab List -->
+    <div class="sleep-tabs-list" role="tablist">
+      {%- for block in section.blocks -%}
+        <button 
+          type="button"
+          class="sleep-tab-btn {% if forloop.first %}active{% endif %}"
+          data-target="tab-content-{{ block.id }}"
+          role="tab"
+          {{ block.shopify_attributes }}>
+          {{ block.settings.tab_title }}
+        </button>
+      {%- endfor -%}
+    </div>
 
-  <!-- Dynamic Content Area -->
-  <div class="sleep-card-container">
-    {%- for block in section.blocks -%}
-      {%- assign selected_product = block.settings.product -%}
-      
-      {%- liquid
-        # Fallbacks to selected product data if custom fields are left blank
-        if block.settings.card_title != blank
-          assign card_title = block.settings.card_title
-        elsif selected_product != blank
-          assign card_title = selected_product.title
-        else
-          assign card_title = "Sleep Bundle — Breathe"
-        endif
-
-        if block.settings.card_description != blank
-          assign card_description = block.settings.card_description
-        elsif selected_product != blank
-          assign card_description = selected_product.metafields.custom.subtitle | default: selected_product.description | strip_html | truncate: 60
-        else
-          assign card_description = "Strips + Tape, 1-month set"
-        endif
-
-        if block.settings.image != blank
-          assign card_image = block.settings.image
-        elsif selected_product != blank and selected_product.featured_image != blank
-          assign card_image = selected_product.featured_image
-        else
-          assign card_image = blank
-        endif
-
-        if block.settings.button_link != blank
-          assign button_link = block.settings.button_link
-        elsif selected_product != blank
-          assign button_link = selected_product.url
-        else
-          assign button_link = "#"
-        endif
-      -%}
-
-      <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
-        <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
+    <!-- Dynamic Content Area -->
+    <div class="sleep-card-container">
+      {%- for block in section.blocks -%}
+        {%- assign selected_product = block.settings.product -%}
         
-        <div class="sleep-card-image-wrapper">
-          {%- if card_image != blank -%}
-            {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
-          {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-          {%- if block.settings.overlay_badge != blank -%}
-            <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
+        {%- liquid
+          # Fallbacks to selected product data if custom fields are left blank
+          if block.settings.card_title != blank
+            assign card_title = block.settings.card_title
+          elsif selected_product != blank
+            assign card_title = selected_product.title
+          else
+            assign card_title = "Sleep Bundle — Breathe"
+          endif
+
+          if block.settings.card_description != blank
+            assign card_description = block.settings.card_description
+          elsif selected_product != blank
+            assign card_description = selected_product.metafields.custom.subtitle | default: selected_product.description | strip_html | truncate: 60
+          else
+            assign card_description = "Strips + Tape, 1-month set"
+          endif
+
+          if block.settings.image != blank
+            assign card_image = block.settings.image
+          elsif selected_product != blank and selected_product.featured_image != blank
+            assign card_image = selected_product.featured_image
+          else
+            assign card_image = blank
+          endif
+
+          if block.settings.button_link != blank
+            assign button_link = block.settings.button_link
+          elsif selected_product != blank
+            assign button_link = selected_product.url
+          else
+            assign button_link = "#"
+          endif
+        -%}
+
+        <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
+          <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
+          
+          <div class="sleep-card-image-wrapper">
+            {%- if card_image != blank -%}
+              {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            {%- if block.settings.overlay_badge != blank -%}
+              <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
+            {%- endif -%}
+          </div>
+
+          <h3 class="sleep-card-title">{{ card_title }}</h3>
+          <p class="sleep-card-description">{{ card_description }}</p>
+          
+          <div class="sleep-card-price">
+            {%- if block.settings.price_text_override != blank -%}
+              {{ block.settings.price_text_override }}
+            {%- elsif selected_product != blank -%}
+              From <strong>{{ selected_product.price | money }}</strong> with Subscribe and Save
+            {%- else -%}
+              From <strong>$59</strong> with Subscribe and Save
+            {%- endif -%}
+          </div>
+
+          {%- if button_link != blank -%}
+            <a href="{{ button_link }}" class="sleep-card-button">
+              {{ block.settings.button_label }}
+            </a>
           {%- endif -%}
         </div>
+      {%- endfor -%}
+    </div>
 
-        <h3 class="sleep-card-title">{{ card_title }}</h3>
-        <p class="sleep-card-description">{{ card_description }}</p>
-        
-        <div class="sleep-card-price">
-          {%- if block.settings.price_text_override != blank -%}
-            {{ block.settings.price_text_override }}
-          {%- elsif selected_product != blank -%}
-            From <strong>{{ selected_product.price | money }}</strong> with Subscribe and Save
-          {%- else -%}
-            From <strong>$59</strong> with Subscribe and Save
-          {%- endif -%}
-        </div>
 
-        {%- if button_link != blank -%}
-          <a href="{{ button_link }}" class="sleep-card-button">
-            {{ block.settings.button_label }}
-          </a>
-        {%- endif -%}
-      </div>
-    {%- endfor -%}
-  </div>
+</div>
 </div>
 
 <script>
