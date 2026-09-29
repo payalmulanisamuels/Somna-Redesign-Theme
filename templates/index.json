@@ -2164,6 +2164,7 @@
       ],
       "name": "t:names.faq_section",
       "settings": {
+        "top_wave_image": "shopify://shop_images/faq-home.png",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
