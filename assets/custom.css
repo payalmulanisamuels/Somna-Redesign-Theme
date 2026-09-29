@@ -955,7 +955,7 @@ h2.upsell_heading {
 }
 .hz-save-badge {
     position: absolute;
-    top: -10px;
+    top: -5px;
     right: 12px;
     border-radius: 20px;
     border: 0.5px solid #000;
@@ -965,7 +965,7 @@ h2.upsell_heading {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    padding: 0.5px;
+    padding: 1px 5px;
   }
 .hz-minicart-upsell__card {
     padding: 5px;
