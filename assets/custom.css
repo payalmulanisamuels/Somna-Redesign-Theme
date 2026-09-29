@@ -1549,13 +1549,14 @@ a.somna-view-all {
   }
 
   .sleep-card-price {
-    font-size: 15px;
-    color: #1f2937;
+    color: #0B57E3;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
     margin-bottom: 16px;
   }
 
   .sleep-card-price strong {
-    font-size: 18px;
     color: #111827;
   }
 
