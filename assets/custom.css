@@ -1733,4 +1733,7 @@ a.somna-view-all {
     .wave-container.bottom {
         bottom: -80px;
     }
+    .wave-container.top {
+        top: -70px;
+    }
 }
