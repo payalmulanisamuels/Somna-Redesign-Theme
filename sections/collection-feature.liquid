@@ -1,6 +1,6 @@
-  <div class="sleep-tabs-section-main">
+<div class="sleep-tabs-section-main">
 
- {% comment %} Top Wave Divider {% endcomment %}
+  {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
     <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
     </div>
@@ -11,10 +11,10 @@
     </div>
     {% endif %}
   <div class="section section--page-width">
- 
+  
 
 <div class="sleep-tabs-section section-{{ section.id }}-padding">
- 
+  
     <div class="sleep-tabs-header">
       <h2>{{ section.settings.heading }}</h2>
     </div>
@@ -72,44 +72,44 @@
             assign button_link = "#"
           endif
 
-
-          
-          
           # Calculate Subscription Price dynamically
           assign base_price = selected_product.price | default: 0
-          if selected_product.compare_at_price > selected_product.price
-            assign base_price = selected_product.compare_at_price
-          endif
+          assign calculated_price = base_price
+          assign has_subscription_discount = false
 
-          assign auto_discount_percent = 0
-          if selected_product != blank
+          if selected_product != blank and selected_product.selling_plan_groups != blank
             for group in selected_product.selling_plan_groups
               for plan in group.selling_plans
                 for adjustment in plan.price_adjustments
                   if adjustment.value_type == 'percentage'
-                    assign auto_discount_percent = adjustment.value
-                    break
+                    assign discount_multiplier = 100 | minus: adjustment.value
+                    assign temp_price = base_price | times: discount_multiplier | divided_by: 100
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
+                  elsif adjustment.value_type == 'fixed_amount'
+                    assign temp_price = base_price | minus: adjustment.value
+                    if temp_price < 0
+                      assign temp_price = 0
+                    endif
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
+                  elsif adjustment.value_type == 'price'
+                    assign temp_price = adjustment.value
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
                   endif
                 endfor
-                if auto_discount_percent > 0
-                  break
-                endif
               endfor
-              if auto_discount_percent > 0
-                break
-              endif
             endfor
           endif
 
-          if auto_discount_percent > 0
-            assign discount_multiplier = 100 | minus: auto_discount_percent
-            assign calculated_price = base_price | times: discount_multiplier | divided_by: 100
-            assign price = calculated_price | money
-          else
-            assign price = selected_product.price | money
-          endif
-
-
+          assign price = calculated_price | money
         -%}
 
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
@@ -127,11 +127,11 @@
           </div>
 
             {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
-              {%  assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value   %}
+              {%  assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value  %}
               <div class="review_content">
               {{ review_count_rating }} 
               </div>
-              {% endif %}
+            {% endif %}
           <h3 class="sleep-card-title">{{ card_title }}</h3>
           <p class="sleep-card-description">{{ card_description }}</p>
           
@@ -139,7 +139,7 @@
             {%- if block.settings.price_text_override != blank -%}
               {{ block.settings.price_text_override }}
             {%- elsif selected_product != blank -%}
-              From <strong>{{ price | money }}</strong> with Subscribe and Save
+              From <strong>{{ price }}</strong> with Subscribe and Save
             {%- else -%}
               From <strong>$59</strong> with Subscribe and Save
             {%- endif -%}
@@ -281,8 +281,7 @@
   ],
   "presets": [
     {
-      "name": "Interactive Sleep Tabs",
-     
+      "name": "Interactive Sleep Tabs"
     }
   ]
 }
