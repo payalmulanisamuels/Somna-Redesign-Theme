@@ -72,8 +72,9 @@
             assign button_link = "#"
           endif
 
-          # Calculate Subscription Price dynamically
-          assign base_price = selected_product.price | default: 0
+          # Current Variant & Base Price
+          assign current_variant = selected_product.selected_or_first_available_variant
+          assign base_price = current_variant.price | default: 0
           assign calculated_price = base_price
           assign has_subscription_discount = false
 
@@ -115,9 +116,9 @@
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
           <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
           
-          <div class="sleep-card-image-wrapper">
+          <div class="sleep-card-image-wrapper" id="image-wrapper-{{ block.id }}">
             {%- if card_image != blank -%}
-              {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+              {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'sleep-card-main-image' }}
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
@@ -126,27 +127,51 @@
             {%- endif -%}
           </div>
 
-            {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
-              {%  assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value  %}
-              <div class="review_content">
+          {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
+            {% assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value %}
+            <div class="review_content">
               {{ review_count_rating }} 
-              </div>
-            {% endif %}
+            </div>
+          {% endif %}
+          
           <h3 class="sleep-card-title">{{ card_title }}</h3>
           <p class="sleep-card-description">{{ card_description }}</p>
+
+          <!-- Variant Selectors -->
+          {%- if selected_product != blank and selected_product.has_only_default_variant == false -%}
+            <div class="sleep-card-variants" data-block-id="{{ block.id }}">
+              {%- for option in selected_product.options_with_values -%}
+                <div class="variant-option-group">
+                  <label class="variant-option-label" for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <select id="Option-{{ block.id }}-{{ forloop.index0 }}" class="sleep-variant-select" data-option-index="{{ forloop.index0 }}">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            </div>
+            
+            <!-- Product Variants JSON for JS -->
+            <script type="application/json" id="VariantsJson-{{ block.id }}">
+              {{ selected_product.variants | json }}
+            </script>
+          {%- endif -%}
           
-          <div class="sleep-card-price">
+          <div class="sleep-card-price" id="price-container-{{ block.id }}">
             {%- if block.settings.price_text_override != blank -%}
               {{ block.settings.price_text_override }}
             {%- elsif selected_product != blank -%}
-              From <strong>{{ price }}</strong> with Subscribe and Save
+              From <strong id="price-value-{{ block.id }}">{{ price }}</strong> with Subscribe and Save
             {%- else -%}
               From <strong>$59</strong> with Subscribe and Save
             {%- endif -%}
           </div>
 
           {%- if button_link != blank -%}
-            <a href="{{ button_link }}" class="sleep-card-button">
+            <a href="{{ button_link }}{% if current_variant %}?variant={{ current_variant.id }}{% endif %}" class="sleep-card-button" id="card-button-{{ block.id }}">
               {{ block.settings.button_label }}
             </a>
           {%- endif -%}
@@ -154,13 +179,13 @@
       {%- endfor -%}
     </div>
 
-
 </div>
 </div>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    // Tabs Navigation
     const tabButtons = document.querySelectorAll(".sleep-tab-btn");
     const tabContents = document.querySelectorAll(".sleep-tab-content");
 
@@ -168,16 +193,63 @@
       button.addEventListener("click", () => {
         const targetId = button.getAttribute("data-target");
 
-        // Remove active class from all buttons and contents
         tabButtons.forEach(btn => btn.classList.remove("active"));
         tabContents.forEach(content => content.classList.remove("active"));
 
-        // Add active class to clicked button and targeted content
         button.classList.add("active");
         const targetContent = document.getElementById(targetId);
         if (targetContent) {
           targetContent.classList.add("active");
         }
+      });
+    });
+
+    // Variant Selection Handling
+    document.querySelectorAll(".sleep-card-variants").forEach(variantContainer => {
+      const blockId = variantContainer.getAttribute("data-block-id");
+      const selects = variantContainer.querySelectorAll(".sleep-variant-select");
+      const variantsJsonEl = document.getElementById(`VariantsJson-${blockId}`);
+      
+      if (!variantsJsonEl) return;
+      const variants = JSON.parse(variantsJsonEl.textContent);
+
+      function updateSelectedVariant() {
+        const selectedOptions = Array.from(selects).map(sel => sel.value);
+        
+        // Find matching variant
+        const matchedVariant = variants.find(variant => {
+          return variant.options.every((opt, index) => opt === selectedOptions[index]);
+        });
+
+        if (matchedVariant) {
+          // Update Price (applying a generic calculation or falling back to variant price)
+          const priceEl = document.getElementById(`price-value-${blockId}`);
+          if (priceEl) {
+            // Format money simply or let shopify handle standard formatting
+            const formattedPrice = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            priceEl.textContent = formattedPrice;
+          }
+
+          // Update Button Link with Variant ID
+          const buttonEl = document.getElementById(`card-button-${blockId}`);
+          if (buttonEl) {
+            let baseUrl = buttonEl.getAttribute("href").split('?')[0];
+            buttonEl.setAttribute("href", `${baseUrl}?variant=${matchedVariant.id}`);
+          }
+
+          // Update Image if variant has one
+          if (matchedVariant.featured_image) {
+            const imageWrapper = document.getElementById(`image-wrapper-${blockId}`);
+            const imgEl = imageWrapper ? imageWrapper.querySelector('img') : null;
+            if (imgEl && matchedVariant.featured_image.src) {
+              imgEl.src = matchedVariant.featured_image.src;
+            }
+          }
+        }
+      }
+
+      selects.forEach(select => {
+        select.addEventListener("change", updateSelectedVariant);
       });
     });
   });
