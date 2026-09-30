@@ -272,30 +272,6 @@
                 "padding-inline-end": 16
               },
               "blocks": {
-                "image_9PYQF9": {
-                  "type": "image",
-                  "name": "t:names.image",
-                  "settings": {
-                    "image": "{{ product.metafields.custom.subscription_image.value }}",
-                    "link": "",
-                    "image_ratio": "adapt",
-                    "width": "custom",
-                    "custom_width": 30,
-                    "width_mobile": "custom",
-                    "custom_width_mobile": 50,
-                    "height": "fill",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_color": "",
-                    "border_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
                 "variant_picker_Ka7XHY": {
                   "type": "variant-picker",
                   "name": "t:names.product_variant_picker",
@@ -333,12 +309,6 @@
                     "border_radius": 0,
                     "product": "{{closest.product}}"
                   }
-                },
-                "product_showcase_k7C98M": {
-                  "type": "_product-showcase",
-                  "name": "Product Showcase Grid",
-                  "settings": {},
-                  "blocks": {}
                 },
                 "buy_buttons_RGzwUW": {
                   "type": "buy-buttons",
@@ -412,10 +382,8 @@
                 }
               },
               "block_order": [
-                "image_9PYQF9",
                 "variant_picker_Ka7XHY",
                 "subscriptions_app_block_8Fe6G8",
-                "product_showcase_k7C98M",
                 "buy_buttons_RGzwUW",
                 "custom_liquid_4QjPX8"
               ]
@@ -1216,7 +1184,7 @@
         "muted_color": "#5b6b94",
         "button_bg": "#0a1a4a",
         "button_text_color": "#ffffff",
-        "padding_top": 32,
+        "padding_top": 8,
         "padding_bottom": 8
       }
     },
