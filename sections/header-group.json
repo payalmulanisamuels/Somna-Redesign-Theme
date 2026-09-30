@@ -18,7 +18,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% Off Subscriptions&nbsp;",
+            "text": "33% OFF Subscriptions&nbsp;",
             "link": "",
             "separator_image": "shopify://shop_images/somna-discount.png",
             "font": "var(--font-subheading--family)",
