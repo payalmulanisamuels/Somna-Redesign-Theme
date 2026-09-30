@@ -866,7 +866,14 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
   display: none;
 }
-
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+  color: #FFF;
+  text-align: center;
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 9.35px */
+}
 @media screen and (max-width: 749px) {
   .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
     bottom: max(12px, var(--safe-area-inset-bottom));
@@ -875,10 +882,6 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     padding-block-end: 10px;
   }
 
-  /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
-  .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
-    display: initial;
-  }
 
   .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
     width: auto;
