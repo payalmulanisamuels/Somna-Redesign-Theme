@@ -8,6 +8,9 @@ margin-top: 7px;
 .hz-faq-wrapper {
     margin: -29px 0 0 0;
 }
+.hz-faq-wrapper .custom-header{
+  margin-bottom: 0;
+}
 .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
     object-fit: cover !important;
     border-radius: 0 0 20px 20px;
