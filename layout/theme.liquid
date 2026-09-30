@@ -182,6 +182,7 @@
       </main>
 
       <footer>
+    {% section 'somna-scratch-popup' %}
         {% sections 'footer-group' %}
       </footer>
     </div>
@@ -194,6 +195,5 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
-    {% section 'somna-scratch-popup' %}
   </body>
 </html>
