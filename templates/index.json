@@ -929,7 +929,7 @@
             "image": "shopify://shop_images/tap-product.png",
             "alignment": true,
             "title": "Mouth Tape",
-            "price": "$35",
+            "price": "",
             "button_label": "Subscribe & Save",
             "button_link": "shopify://products/mouth-tape"
           }
