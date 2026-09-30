@@ -69,7 +69,8 @@
         "announcement_34JFi9"
       ],
       "custom_css": [
-        ".wave-container.bottom {bottom: -10px;}"
+        ".wave-container.bottom {bottom: -10px;}",
+        "@media(min-width:768px){.wave-container.bottom {bottom: -25px;}}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
