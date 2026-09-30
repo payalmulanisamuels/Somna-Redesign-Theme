@@ -1983,12 +1983,6 @@
       "info": "Uses the product's review metafields (Judge.me)"
     },
     {
-      "type": "checkbox",
-      "id": "upsell_hide_in_cart",
-      "label": "Hide variants already in the cart",
-      "default": true
-    },
-    {
       "type": "header",
       "content": "Fixed 2 Bundle Show"
     },
