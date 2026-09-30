@@ -1104,7 +1104,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What's the difference between the bundles?",
-            "answer": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colours of Strips only,<br/><br/>no Tape. Season Bundle is a three-month supply in Black.</p>",
+            "answer": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colours of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
             "default_open": false
           }
         },
