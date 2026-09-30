@@ -465,7 +465,7 @@ slideshow-arrows .slideshow-control {
 }
 .slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
 .accordion .details{
-    border-bottom: 3.01px solid #B9B7AC;
+    border-bottom: 1px solid #B9B7AC;
 }
 .hz-faq-wrapper .accordion--dividers .details-content,.accordion--dividers .details-content p {
   color: #0a1a4a;
