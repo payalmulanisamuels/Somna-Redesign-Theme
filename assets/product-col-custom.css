@@ -800,6 +800,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   color: var(--somna-navy-dark);
   text-align: left;
   cursor: pointer;
+  font-family: var(--font-paragraph--family);
 }
 
 .somna-sticky__row:hover,
