@@ -87,6 +87,12 @@
             {%- endif -%}
           </div>
 
+            {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
+              {%  assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value   %}
+              <div class="review_content">
+              {{ review_count_rating }} 
+              </div>
+              {% endif %}
           <h3 class="sleep-card-title">{{ card_title }}</h3>
           <p class="sleep-card-description">{{ card_description }}</p>
           
