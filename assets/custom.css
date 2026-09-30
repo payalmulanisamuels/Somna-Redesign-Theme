@@ -16,7 +16,7 @@ html[scroll-lock] .wave-container {
     top: -20px;
 }
 .header_main strong {
-    font-family: var(--headfont);
+    font-family: var(--font-family);
     line-height: 1;
 }
 .theme-drawer__close-button:focus-visible {
