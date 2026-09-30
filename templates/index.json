@@ -1670,231 +1670,32 @@
         "padding-block-end": 0
       }
     },
-    "bundle_feature_banner_Qrgcy3": {
-      "type": "bundle-feature-banner",
-      "name": "Bundle Feature Banner",
+    "sleep_bundle_zRUkmH": {
+      "type": "sleep-bundle",
+      "name": "The Sleep Bundle",
       "settings": {
         "product": "sleep-bundle",
-        "bg_color": "{{ settings.color_palette.background }}",
-        "image": "shopify://shop_images/breath-bundle.png",
-        "title": "The Breathe Bundle",
-        "subtitle": "Blue Strips + Blue Tape, one month supply",
-        "sub_price_override": "",
-        "sub_label": "Subscribe & Save",
-        "onetime_price_override": "",
-        "onetime_label": "One-time",
-        "button_label": "Shop the Breathe Bundle",
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
-    "steps_guide_GFjEFb": {
-      "type": "steps-guide",
-      "blocks": {
-        "step_a9NE7E": {
-          "type": "step",
-          "settings": {
-            "step_number": "01",
-            "image": "shopify://shop_images/step1.png",
-            "title": "<p>Clean & dry</p>"
-          }
-        },
-        "step_Xi3rtx": {
-          "type": "step",
-          "settings": {
-            "step_number": "02",
-            "image": "shopify://shop_images/step2.png",
-            "title": "<p>Peel & place</p>"
-          }
-        },
-        "step_dwFEQe": {
-          "type": "step",
-          "settings": {
-            "step_number": "03",
-            "image": "shopify://shop_images/step3.png",
-            "title": "<p>Press gently</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_a9NE7E",
-        "step_Xi3rtx",
-        "step_dwFEQe"
-      ],
-      "disabled": true,
-      "name": "Steps Guide",
-      "settings": {
-        "bg_color": "#e0e8d7",
-        "show_waves": true,
-        "title": "<strong>Peel. Place.</strong> <em>Unwind.</em>",
-        "subheading_bottom": "Follow the directions on your pack."
-      }
-    },
-    "section_BbCdDx": {
-      "type": "section",
-      "blocks": {
-        "group_QgaMyg": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 5,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_9nwNVx": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>Real people. Rested Morning</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_YaB99C": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>20+ genuine settled reviews. Never a placeholder testimonial, star rating, or review count in the meantime.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_9nwNVx",
-            "text_YaB99C"
-          ]
-        },
-        "image_wdnJNN": {
-          "type": "image",
-          "name": "t:names.image",
-          "settings": {
-            "image": "shopify://shop_images/message.png",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "custom",
-            "custom_width": 26,
-            "width_mobile": "custom",
-            "custom_width_mobile": 20,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_QgaMyg",
-        "image_wdnJNN"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".image-block {position: absolute; max-width: 36px; right: 0; top: 40%; transform: translateY(-50%);}",
-        ".group-block.group-block--height-fit {max-width: 295px;}"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "top_wave_image": "shopify://shop_images/review-svg-top.svg",
-        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 5,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#e0e8d7",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 26,
-        "padding-block-end": 26
+        "badge_text": "3 Colors",
+        "show_badge_icon": true,
+        "show_rating": true,
+        "title": "The Sleep Bundle",
+        "subtitle": "Strips + Tape in all three colors",
+        "price_prefix": "From",
+        "price_override": "",
+        "price_label": "Subscribe & Save",
+        "per_night_text": "3+1 sets. $1.46/night",
+        "button_label": "See the Breathe Bundle",
+        "button_variant": "Breathe",
+        "section_bg": "#ffffff",
+        "card_bg": "#ffffff",
+        "border_color": "#0a1a4a",
+        "accent_color": "#0b57e3",
+        "text_color": "#0a1a4a",
+        "muted_color": "#5b6b94",
+        "button_bg": "#0a1a4a",
+        "button_text_color": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "section_HiaPwG": {
@@ -2355,9 +2156,7 @@
     "custom_cards_slider_pyJahK",
     "section_ibM3ft",
     "layered_image_with_text_LEPfjJ",
-    "bundle_feature_banner_Qrgcy3",
-    "steps_guide_GFjEFb",
-    "section_BbCdDx",
+    "sleep_bundle_zRUkmH",
     "section_HiaPwG",
     "footer_m9NzUG"
   ]
