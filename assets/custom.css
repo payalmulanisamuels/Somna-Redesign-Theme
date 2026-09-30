@@ -1709,3 +1709,7 @@ a.somna-view-all {
     to { opacity: 1; transform: translateY(0); }
   }
 /* Collection Feature*/
+
+@media(min-width:768px){
+
+}
