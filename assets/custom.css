@@ -1711,6 +1711,9 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
+    h2.custom-header {
+        font-size: 32px !important;
+    }
     p.announcement-bar__text{
         font-size: 14px;
     }
