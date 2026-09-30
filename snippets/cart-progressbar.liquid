@@ -9,40 +9,63 @@
 {%- endcomment -%}
 
 {%- liquid
+  # Bags per line = units in the variant's Size / Quantity / Set / Supply option x quantity:
+  #   "1 Bag" / "1 Set" = 1, "2 Bags" / "2 Sets" = 2, "3+1 Bags" / "3+1 Sets" = 4,
+  #   "4 Bags — 120 nights" = 4, "90 nights — 90 strips" = 3 (30 nights = 1 bag).
+  # The Colour Set and Season Bundle unlock the guides on their own.
+  # Free ($0) lines, e.g. the gifted e-books, are ignored.
   assign total_bags = 0
   assign has_guides = false
   assign progress_percent = 0
   assign message = 'You unlocked 2 free Sleep Guides!'
 
   for item in cart.items
-    assign title_down = item.title | downcase | default: item.product.title | downcase
-    assign qty = item.quantity
-
-    if title_down contains '1 bag' or title_down contains '1-month'
-      # 1 Bag (1 month) -> no guides
-    elsif title_down contains '2 bags' or title_down contains '2-month' or title_down contains '2-set'
-      assign total_bags = total_bags | plus: qty 
-      assign has_guides = true
-    elsif title_down contains '3+1' or title_down contains '4-month' or title_down contains '3+1-set'
-      assign total_bags = total_bags | plus: qty  
-      assign has_guides = true
-    elsif title_down contains 'colour set' and title_down contains 'season bundle'
-      assign has_guides = true
-    elsif title_down contains 'sleep bundle'
-      # handled by tier checks above if tagged or parsed via title variant
+    if item.original_price == 0
+      continue
     endif
+
+    assign product_title = item.product.title | downcase
+    if product_title contains 'colour set' or product_title contains 'color set' or product_title contains 'season bundle'
+      assign has_guides = true
+      continue
+    endif
+
+    assign item_bags = 0
+    for option in item.options_with_values
+      assign option_name = option.name | downcase
+      unless option_name contains 'size' or option_name contains 'quantity' or option_name contains 'set' or option_name contains 'supply'
+        continue
+      endunless
+
+      assign option_value = option.value | downcase
+      assign first_token = option_value | split: ' ' | first
+      if first_token contains '+'
+        # "3+1 Bags" -> 3 + 1
+        assign token_parts = first_token | split: '+'
+        for token_part in token_parts
+          assign item_bags = item_bags | plus: token_part
+        endfor
+      elsif option_value contains 'bag' or option_value contains 'set'
+        assign item_bags = first_token | plus: 0
+      elsif option_value contains 'night'
+        assign item_bags = first_token | plus: 0 | divided_by: 30
+      endif
+      break
+    endfor
+
+    assign line_bags = item_bags | times: item.quantity
+    assign total_bags = total_bags | plus: line_bags
   endfor
 
-  # Fallback calculation logic for Cart/Bundle rule mapping:
-  if has_guides and total_bags >= 2
+  if has_guides or total_bags >= 2
     assign progress_percent = 100
     assign message = 'You unlocked 2 <b>FREE Gifts</b>!'
   elsif total_bags == 1
     assign progress_percent = 50
     assign message = "You're 1 bag away from 2 <b>FREE Gifts</b>"
-else
+  else
     assign progress_percent = 0
-    assign message = "You are 1 bag away from 2 <b>FREE Gifts</b>"
+    assign message = "You're 2 bags away from 2 <b>FREE Gifts</b>"
   endif
 -%}
 
