@@ -426,9 +426,7 @@
     background: #0A4FD6 !important;
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
-.slideshow-controls__thumbnails {
-  padding-inline: 0;
-}
+ 
 .slideshow-controls__thumbnails .slideshow-control {
     width: 74px !important;
     height: 71px !important;
@@ -458,7 +456,8 @@ slideshow-arrows .slideshow-control {
 }
 
 .slideshow-controls__thumbnails {
-    gap: 2px !important;
+  gap: 2px !important;
+  padding-inline: 0 !important;
 }
 .slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
     outline: none !important;
