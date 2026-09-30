@@ -964,6 +964,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 /* Problem solution section*/
 @media(min-width:768px){
   .hz-ps-text{
-    font-size: 32px;
+    font-size: 22px;
+    line-height: 1.2;
   }
 }
