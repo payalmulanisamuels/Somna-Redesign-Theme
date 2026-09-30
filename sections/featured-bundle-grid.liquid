@@ -60,67 +60,65 @@
         -%}
 
         <div class="bundle-card {% if block.settings.is_featured %}bundle-card--featured{% endif %}" {{ block.shopify_attributes }}>
-            {% if block.settings.tag != blank %}
-              <div class="tag_text">
-                {{block.settings.tag }}
-              </div>
-            {%endif %}
-            <div class="bundle-card__image-wrapper">
-              {%- if image != blank -%}
-                <img
-                  src="{{ image | image_url: width: 1000 }}"
-                  alt="{{ title | escape }}"
-                  loading="lazy"
-                  class="bundle-card__image"
-                  width="{{ image.width }}"
-                  height="{{ image.height }}"
-                >
-              {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag: 'bundle-card__image' }}
-              {%- endif -%}
-            </div>
-
-            <div class="bundle-card__content">
-              {%- if title != blank or subtitle != blank -%}
-                <div class="brand-card-wrap">
-                  {% if product.metafields.custom.custom_review_rating_review_count.value %}
-                        {%  assign review_count_rating = product.metafields.custom.custom_review_rating_review_count.value   %}
-                        <div class="review_content">
-                        {{ review_count_rating }} 
-                        </div>
-                        {% endif %}
-                    <h3 class="bundle-card__title">{{ title }}</h3>
-                  {%- if subtitle != blank -%}
-                    <div class="bundle-subtext">
-                      {{ subtitle }}
-                    </div>
-                  {% endif %}
+              {% if block.settings.tag != blank %}
+                <div class="tag_text">
+                  {{block.settings.tag }}
                 </div>
-              {%- endif -%}
-
-
-            <div class="bundle-card__content-wrapper">
-
-              <div class="bundle-card__info">
-
-                {%- if product != blank -%}
-                  <p class="bundle-card__price">{{ price }}</p>
-                {%- endif -%}
-
-                {%- if block.settings.subtext != blank -%}
-                  <p class="bundle-card__subtext">{{ block.settings.subtext }}</p>
+              {%endif %}
+              <div class="bundle-card__image-wrapper">
+                {%- if image != blank -%}
+                  <img
+                    src="{{ image | image_url: width: 1000 }}"
+                    alt="{{ title | escape }}"
+                    loading="lazy"
+                    class="bundle-card__image"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                  >
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'bundle-card__image' }}
                 {%- endif -%}
               </div>
 
-              {%- if block.settings.button_label != blank -%}
-                <a href="{{ link }}" class="bundle-card__button">
-                  <span>{{ block.settings.button_label }}</span>
-                </a>
-              {%- endif -%}
-            </div>
+              <div class="bundle-card__content">
+                {%- if title != blank or subtitle != blank -%}
+                  <div class="brand-card-wrap">
+                    {% if product.metafields.custom.custom_review_rating_review_count.value %}
+                          {%  assign review_count_rating = product.metafields.custom.custom_review_rating_review_count.value   %}
+                          <div class="review_content">
+                          {{ review_count_rating }} 
+                          </div>
+                          {% endif %}
+                      <h3 class="bundle-card__title">{{ title }}</h3>
+                    {%- if subtitle != blank -%}
+                      <div class="bundle-subtext">
+                        {{ subtitle }}
+                      </div>
+                    {% endif %}
+                  </div>
+                {%- endif -%}
 
 
-            </div>
+                <div class="bundle-card__content-wrapper">
+
+                  <div class="bundle-card__info">
+
+                    {%- if product != blank -%}
+                      <p class="bundle-card__price">{{ price }}</p>
+                    {%- endif -%}
+
+                    {%- if block.settings.subtext != blank -%}
+                      <p class="bundle-card__subtext">{{ block.settings.subtext }}</p>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if block.settings.button_label != blank -%}
+                    <a href="{{ link }}" class="bundle-card__button">
+                      <span>{{ block.settings.button_label }}</span>
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
         </div>
       {%- endfor -%}
     </div>
