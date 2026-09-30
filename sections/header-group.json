@@ -18,8 +18,9 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% off subscriptions&nbsp;",
+            "text": "33% Off Subscriptions&nbsp;",
             "link": "",
+            "separator_image": "shopify://shop_images/somna-discount.png",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -35,6 +36,22 @@
           "settings": {
             "text": "Free Gifts with Subscription",
             "link": "",
+            "separator_image": "shopify://shop_images/somna-gift.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_34JFi9": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Free Shipping",
+            "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -47,7 +64,8 @@
       },
       "block_order": [
         "announcement_dwf6Jk",
-        "announcement_wwtXFc"
+        "announcement_wwtXFc",
+        "announcement_34JFi9"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}"
@@ -57,6 +75,8 @@
         "display_mode": "marquee",
         "speed": 8,
         "marquee_speed": 20,
+        "separator_size": 16,
+        "separator_gap": 24,
         "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
         "section_width": "page-width",
         "background_color": "#071a4b",
