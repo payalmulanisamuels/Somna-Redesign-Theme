@@ -71,6 +71,45 @@
           else
             assign button_link = "#"
           endif
+
+
+          
+          
+          # Calculate Subscription Price dynamically
+          assign base_price = selected_product.price | default: 0
+          if selected_product.compare_at_price > selected_product.price
+            assign base_price = selected_product.compare_at_price
+          endif
+
+          assign auto_discount_percent = 0
+          if selected_product != blank
+            for group in selected_product.selling_plan_groups
+              for plan in group.selling_plans
+                for adjustment in plan.price_adjustments
+                  if adjustment.value_type == 'percentage'
+                    assign auto_discount_percent = adjustment.value
+                    break
+                  endif
+                endfor
+                if auto_discount_percent > 0
+                  break
+                endif
+              endfor
+              if auto_discount_percent > 0
+                break
+              endif
+            endfor
+          endif
+
+          if auto_discount_percent > 0
+            assign discount_multiplier = 100 | minus: auto_discount_percent
+            assign calculated_price = base_price | times: discount_multiplier | divided_by: 100
+            assign price = calculated_price | money
+          else
+            assign price = selected_product.price | money
+          endif
+
+
         -%}
 
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
@@ -100,7 +139,7 @@
             {%- if block.settings.price_text_override != blank -%}
               {{ block.settings.price_text_override }}
             {%- elsif selected_product != blank -%}
-              From <strong>{{ selected_product.price | money }}</strong> with Subscribe and Save
+              From <strong>{{ price | money }}</strong> with Subscribe and Save
             {%- else -%}
               From <strong>$59</strong> with Subscribe and Save
             {%- endif -%}
