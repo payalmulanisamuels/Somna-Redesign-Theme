@@ -112,7 +112,7 @@
                   "type": "custom-liquid",
                   "name": "t:names.custom_liquid",
                   "settings": {
-                    "custom_liquid": "{% if product.metafields.custom.custom.custom_review_rating_review_count .value %}\n{%  assign review_count_rating = product.metafields.custom.custom.custom_review_rating_review_count  .value   %}\n<div class=\"review_content\">\n{{ review_count_rating }} \n</div>\n{% endif %}"
+                    "custom_liquid": "{% if product.metafields.custom.custom_review_rating_review_count.value %}\n{%  assign review_count_rating = product.metafields.custom.custom.custom_review_rating_review_count  .value   %}\n<div class=\"review_content\">\n{{ review_count_rating }} \n</div>\n{% endif %}"
                   },
                   "blocks": {}
                 },
