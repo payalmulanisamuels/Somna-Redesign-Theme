@@ -79,7 +79,7 @@
         "marquee_speed": 20,
         "separator_size": 16,
         "separator_gap": 24,
-        "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
+        "bottom_wave_image": "shopify://shop_images/annoucement.png",
         "section_width": "page-width",
         "background_color": "#071a4b",
         "divider_width": 0,
