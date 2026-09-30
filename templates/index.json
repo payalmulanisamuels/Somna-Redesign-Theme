@@ -1572,7 +1572,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/White_Gradient_overlay_image.png",
+            "image_1": "shopify://shop_images/breath-banner.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
