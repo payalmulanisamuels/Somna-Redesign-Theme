@@ -20,6 +20,7 @@
           "settings": {
             "text": "33% off subscriptions&nbsp;",
             "link": "",
+            "separator_image": "shopify://shop_images/off.png",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -35,6 +36,7 @@
           "settings": {
             "text": "Free Gifts with Subscription",
             "link": "",
+            "separator_image": "shopify://shop_images/gift_7abaa172-d653-41d6-9c7e-4e47c6626654.png",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -57,6 +59,8 @@
         "display_mode": "marquee",
         "speed": 8,
         "marquee_speed": 20,
+        "separator_size": 16,
+        "separator_gap": 24,
         "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
         "section_width": "page-width",
         "background_color": "#071a4b",
