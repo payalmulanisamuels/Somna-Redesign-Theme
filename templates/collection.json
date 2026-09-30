@@ -984,12 +984,12 @@
         "card_f7AQym": {
           "type": "card",
           "settings": {
-            "product_selected": "nasal-strips",
+            "product_selected": "mouth-tape",
             "text_color": "#ffffff",
             "image": "shopify://shop_images/tap-product.png",
             "alignment": true,
             "title": "Mouth Tape",
-            "price": "$35",
+            "price": "",
             "button_label": "Subscribe & Save",
             "button_link": "shopify://products/mouth-tape"
           }
