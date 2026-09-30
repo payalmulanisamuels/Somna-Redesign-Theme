@@ -1694,8 +1694,8 @@
         "muted_color": "#5b6b94",
         "button_bg": "#0a1a4a",
         "button_text_color": "#ffffff",
-        "padding_top": 32,
-        "padding_bottom": 32
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "section_HiaPwG": {
