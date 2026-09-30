@@ -70,7 +70,7 @@
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}",
-        "@media(min-width:768px){.wave-container.bottom {bottom: -25px;}}"
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -25px; }}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
@@ -133,7 +133,7 @@
         }
       },
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/header-top-wave.svg",
+        "bottom_wave_image": "shopify://shop_images/home-banner.png",
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
