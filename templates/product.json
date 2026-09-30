@@ -1201,6 +1201,25 @@
         "heading": "How It Works"
       }
     },
+    "pdp_offer_cards_GLpARJ": {
+      "type": "pdp-offer-cards",
+      "name": "PDP offer cards",
+      "settings": {
+        "heading": "",
+        "show_rating": true,
+        "section_bg": "#ffffff",
+        "card_bg": "#ffffff",
+        "featured_border": "#0a1a4a",
+        "outline_border": "#e9dfc7",
+        "accent_color": "#0b57e3",
+        "text_color": "#0a1a4a",
+        "muted_color": "#5b6b94",
+        "button_bg": "#0a1a4a",
+        "button_text_color": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
     "steps_guide_GFjEFb": {
       "type": "steps-guide",
       "blocks": {
@@ -1265,19 +1284,6 @@
         "padding-block-end": 0
       }
     },
-    "pdp_comparison_JDftN9": {
-      "type": "pdp-comparison",
-      "disabled": true,
-      "name": "Comparison Simple",
-      "settings": {
-        "background_image": "{{ product.metafields.custom[\"comparison-content\"].value.background_image.value }}",
-        "heading": "Comparison",
-        "subheading": "<p>{{ product.metafields.custom[\"comparison-content\"].value.content.value }}</p>",
-        "bottom_image": "{{ product.metafields.custom[\"comparison-content\"].value.bottom_image.value }}",
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
     "pdp_bundle_feature_banner_wWE9yA": {
       "type": "pdp-bundle-feature-banner",
       "name": "Bundle Feature Banner - PDP",
@@ -1304,173 +1310,6 @@
         "button_text_color": "#ffffff",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "section_BbCdDx": {
-      "type": "section",
-      "blocks": {
-        "group_QgaMyg": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 5,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_9nwNVx": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>Real people. Rested Morning</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_YaB99C": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>20+ genuine settled reviews. Never a placeholder testimonial, star rating, or review count in the meantime.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_9nwNVx",
-            "text_YaB99C"
-          ]
-        },
-        "image_wdnJNN": {
-          "type": "image",
-          "name": "t:names.image",
-          "settings": {
-            "image": "shopify://shop_images/message.png",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "custom",
-            "custom_width": 26,
-            "width_mobile": "custom",
-            "custom_width_mobile": 20,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_QgaMyg",
-        "image_wdnJNN"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".image-block {position: absolute; max-width: 36px; right: 0; top: 40%; transform: translateY(-50%);}",
-        ".group-block.group-block--height-fit {max-width: 295px;}"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
-        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 5,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#e0e8d7",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 26,
-        "padding-block-end": 26
       }
     },
     "faq_accordion_VVXzwx": {
@@ -1657,12 +1496,11 @@
     "section_zELtyM",
     "problem_solution_bcG9jR",
     "how_it_works_whQNVV",
+    "pdp_offer_cards_GLpARJ",
     "steps_guide_GFjEFb",
     "hero_Djj4xR",
-    "pdp_comparison_JDftN9",
     "pdp_bundle_feature_banner_wWE9yA",
     "addtobag_product_banner_eG4ByC",
-    "section_BbCdDx",
     "faq_accordion_VVXzwx",
     "footer_m9NzUG"
   ]
