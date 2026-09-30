@@ -257,10 +257,10 @@
             {% endif %}
           >
             {%- if card_style contains 'outline' -%}
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 8h14l-1 12H6L5 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M9 8V6a3 3 0 0 1 6 0v2M9.5 12.5a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6667 6.66652C10.6667 7.37382 10.3857 8.05216 9.88562 8.55229C9.38552 9.05243 8.70724 9.3334 8 9.3334C7.29276 9.3334 6.61448 9.05243 6.11438 8.55229C5.61428 8.05216 5.33333 7.37382 5.33333 6.66652M2.06836 4.02243H13.931M2.26667 3.64428C2.09357 3.8751 2 4.15583 2 4.44435V13.3337C2 13.6874 2.14048 14.0265 2.39052 14.2766C2.64057 14.5267 2.97971 14.6672 3.33333 14.6672H12.6667C13.0203 14.6672 13.3594 14.5267 13.6095 14.2766C13.8595 14.0265 14 13.6874 14 13.3337V4.44435C14 4.15583 13.9064 3.8751 13.7333 3.64428L12.4 1.86614C12.2758 1.70053 12.1148 1.56612 11.9296 1.47354C11.7445 1.38096 11.5403 1.33276 11.3333 1.33276H4.66667C4.45967 1.33276 4.25552 1.38096 4.07038 1.47354C3.88524 1.56612 3.7242 1.70053 3.6 1.86614L2.26667 3.64428Z" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
             {%- endif -%}
             <span>{{ card_button_label | escape }}</span>
             {%- unless card_style contains 'outline' -%}
