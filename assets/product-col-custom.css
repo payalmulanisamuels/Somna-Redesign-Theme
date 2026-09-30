@@ -735,8 +735,13 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 }
 
 .somna-sticky__trigger-meta {
-  color: rgb(10 26 74 / 0.65);
-  font-size: 11px;
+  overflow: hidden;
+  color: #0a1a4a70;
+  text-overflow: ellipsis;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .somna-sticky__caret {
