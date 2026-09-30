@@ -83,7 +83,7 @@
           <div class="bundle-card__content">
             {%- if title != blank or subtitle != blank -%}
               <div class="brand-card-wrap">
-                {% if product.metafields.custom.custom.custom_review_rating_review_count .value %}
+                {% if product.metafields.custom.custom_review_rating_review_count.value %}
                       {%  assign review_count_rating = product.metafields.custom.custom_review_rating_review_count.value   %}
                       <div class="review_content">
                       {{ review_count_rating }} 
