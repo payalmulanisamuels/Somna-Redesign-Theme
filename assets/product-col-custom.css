@@ -881,6 +881,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     width: calc(100% - 24px);
     border-radius: 22px;
     padding-block-end: 10px;
+    z-index: 11111;
   }
 
   /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
