@@ -1720,4 +1720,8 @@ a.somna-view-all {
     .product-details {
         margin-top: 40px;
     }
+    .bg_image {
+        height: 265px;
+        top: -50px;
+    }
 }
