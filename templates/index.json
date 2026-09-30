@@ -199,7 +199,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop the Breathe Bundle",
-                "link": "shopify://products/sleep-bundle",
+                "link": "/products/sleep-bundle?variant=52629425979623",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "custom_button_background": "#071a4b",
