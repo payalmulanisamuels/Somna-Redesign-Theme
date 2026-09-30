@@ -1714,4 +1714,7 @@ a.somna-view-all {
     p.announcement-bar__text{
         font-size: 14px;
     }
+    .header__columns {
+        --header-padding: 20px;
+    }
 }
