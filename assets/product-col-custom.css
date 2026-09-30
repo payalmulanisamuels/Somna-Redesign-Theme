@@ -664,7 +664,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   flex-wrap: wrap;
   gap: 10px;
   width: min(420px, calc(100% - 32px));
-  padding: 10px;
+  padding:0 10px 10px 10px;
   border-radius: 22px;
   background: var(--somna-navy);
   color: var(--somna-navy-dark);
