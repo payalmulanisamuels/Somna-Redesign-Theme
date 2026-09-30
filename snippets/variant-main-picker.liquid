@@ -505,13 +505,16 @@
 
       <div class="somna-dropdown-wrap">
         <select class="somna-frequency-dropdown" id="SomnaSellingPlanSelect" name="selling_plan">
-          {%- liquid
-            for allocation in initial_var.selling_plan_allocations
+  {%- liquid
+            assign current_var = product_resource.selected_or_first_available_variant
+            for allocation in current_var.selling_plan_allocations
               echo '<option value="' | append: allocation.selling_plan.id | append: '">' | append: allocation.selling_plan.name | append: '</option>'
             endfor
           -%}
-          {% if initial_var.selling_plan_allocations.size == 0 %}
+          {% if current_var.selling_plan_allocations.size == 0 %}
             <option value="60">Delivery every 60 Days</option>
+            <option value="30">Delivery every 30 Days</option>
+            <option value="90">Delivery every 90 Days</option>
           {% endif %}
         </select>
       </div>
