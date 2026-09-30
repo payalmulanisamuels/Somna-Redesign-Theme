@@ -55,9 +55,11 @@
             assign current_variant = selected_product.selected_or_first_available_variant
           endif
 
-          # Fallbacks to selected product data if custom fields are left blank
+          # Fallbacks to selected product/variant data if custom fields are left blank
           if block.settings.card_title != blank
             assign card_title = block.settings.card_title
+          elsif current_variant != blank and current_variant.title != 'Default Title'
+            assign card_title = selected_product.title | append: ' - ' | append: current_variant.title
           elsif selected_product != blank
             assign card_title = selected_product.title
           else
@@ -90,8 +92,8 @@
             assign button_link = "#"
           endif
 
-          # Base Price Calculation based on active variant
-          assign base_price = current_variant.price | default: selected_product.price | default: 0
+          # Calculate Subscription Price dynamically for this specific variant
+          assign base_price = current_variant.price | default: 0
           assign calculated_price = base_price
           assign has_subscription_discount = false
 
@@ -133,7 +135,7 @@
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
           <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
           
-          <div class="sleep-card-image-wrapper" id="image-wrapper-{{ block.id }}">
+          <div class="sleep-card-image-wrapper">
             {%- if card_image != blank -%}
               {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'sleep-card-main-image' }}
             {%- else -%}
@@ -153,66 +155,19 @@
           
           <h3 class="sleep-card-title">{{ card_title }}</h3>
           <p class="sleep-card-description">{{ card_description }}</p>
-
-          <!-- Variant Selectors (Controlled via Schema Settings) -->
-          {%- if block.settings.show_variant_picker and selected_product != blank and selected_product.has_only_default_variant == false -%}
-            
-            {%- if block.settings.variant_picker_type == 'button' -%}
-              <!-- Button / Pill Style -->
-              <div class="sleep-card-variants sleep-card-variants-pills" data-block-id="{{ block.id }}">
-                {%- for option in selected_product.options_with_values -%}
-                  {%- assign option_index = forloop.index0 -%}
-                  <div class="variant-option-group">
-                    <label class="variant-option-label">{{ option.name }}</label>
-                    <div class="variant-pills-list" data-option-index="{{ option_index }}">
-                      {%- for value in option.values -%}
-                        <button type="button" 
-                                class="sleep-variant-pill {% if current_variant.options[option_index] == value %}active{% endif %}" 
-                                data-value="{{ value | escape }}">
-                          {{ value }}
-                        </button>
-                      {%- endfor -%}
-                    </div>
-                  </div>
-                {%- endfor -%}
-              </div>
-            {%- else -%}
-              <!-- Dropdown Style -->
-              <div class="sleep-card-variants sleep-card-variants-dropdown" data-block-id="{{ block.id }}">
-                {%- for option in selected_product.options_with_values -%}
-                  {%- assign option_index = forloop.index0 -%}
-                  <div class="variant-option-group">
-                    <label class="variant-option-label" for="Option-{{ block.id }}-{{ option_index }}">{{ option.name }}</label>
-                    <select id="Option-{{ block.id }}-{{ option_index }}" class="sleep-variant-select" data-option-index="{{ option_index }}">
-                      {%- for value in option.values -%}
-                        <option value="{{ value | escape }}" {% if current_variant.options[option_index] == value %}selected="selected"{% endif %}>
-                          {{ value }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                  </div>
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
-            
-            <!-- Product Variants JSON for JS Handling -->
-            <script type="application/json" id="VariantsJson-{{ block.id }}">
-              {{ selected_product.variants | json }}
-            </script>
-          {%- endif -%}
           
-          <div class="sleep-card-price" id="price-container-{{ block.id }}">
+          <div class="sleep-card-price">
             {%- if block.settings.price_text_override != blank -%}
               {{ block.settings.price_text_override }}
             {%- elsif selected_product != blank -%}
-              From <strong id="price-value-{{ block.id }}">{{ price }}</strong> with Subscribe and Save
+              From <strong>{{ price }}</strong> with Subscribe and Save
             {%- else -%}
               From <strong>$59</strong> with Subscribe and Save
             {%- endif -%}
           </div>
 
           {%- if button_link != blank -%}
-            <a href="{{ button_link }}{% if current_variant %}?variant={{ current_variant.id }}{% endif %}" class="sleep-card-button" id="card-button-{{ block.id }}">
+            <a href="{{ button_link }}{% if current_variant %}?variant={{ current_variant.id }}{% endif %}" class="sleep-card-button">
               {{ block.settings.button_label }}
             </a>
           {%- endif -%}
@@ -226,7 +181,6 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Tabs Navigation
     const tabButtons = document.querySelectorAll(".sleep-tab-btn");
     const tabContents = document.querySelectorAll(".sleep-tab-content");
 
@@ -242,75 +196,6 @@
         if (targetContent) {
           targetContent.classList.add("active");
         }
-      });
-    });
-
-    // Variant Selection Handling (Supports both Dropdowns and Buttons)
-    document.querySelectorAll(".sleep-card-variants").forEach(variantContainer => {
-      const blockId = variantContainer.getAttribute("data-block-id");
-      const variantsJsonEl = document.getElementById(`VariantsJson-${blockId}`);
-      
-      if (!variantsJsonEl) return;
-      const variants = JSON.parse(variantsJsonEl.textContent);
-
-      function updateSelectedVariant() {
-        let selectedOptions = [];
-
-        if (variantContainer.classList.contains("sleep-card-variants-dropdown")) {
-          const selects = variantContainer.querySelectorAll(".sleep-variant-select");
-          selectedOptions = Array.from(selects).map(sel => sel.value);
-        } else if (variantContainer.classList.contains("sleep-card-variants-pills")) {
-          const pillGroups = variantContainer.querySelectorAll(".variant-pills-list");
-          selectedOptions = Array.from(pillGroups).map(group => {
-            const activePill = group.querySelector(".sleep-variant-pill.active");
-            return activePill ? activePill.getAttribute("data-value") : null;
-          });
-        }
-        
-        // Find matching variant
-        const matchedVariant = variants.find(variant => {
-          return variant.options.every((opt, index) => opt === selectedOptions[index]);
-        });
-
-        if (matchedVariant) {
-          // Update Price display
-          const priceEl = document.getElementById(`price-value-${blockId}`);
-          if (priceEl) {
-            const formattedPrice = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            priceEl.textContent = formattedPrice;
-          }
-
-          // Update Button Link with Variant ID
-          const buttonEl = document.getElementById(`card-button-${blockId}`);
-          if (buttonEl) {
-            let baseUrl = buttonEl.getAttribute("href").split('?')[0];
-            buttonEl.setAttribute("href", `${baseUrl}?variant=${matchedVariant.id}`);
-          }
-
-          // Update Image if variant has a featured image
-          if (matchedVariant.featured_image) {
-            const imageWrapper = document.getElementById(`image-wrapper-${blockId}`);
-            const imgEl = imageWrapper ? imageWrapper.querySelector('img') : null;
-            if (imgEl && matchedVariant.featured_image.src) {
-              imgEl.src = matchedVariant.featured_image.src;
-            }
-          }
-        }
-      }
-
-      // Attach event listeners for dropdowns
-      variantContainer.querySelectorAll(".sleep-variant-select").forEach(select => {
-        select.addEventListener("change", updateSelectedVariant);
-      });
-
-      // Attach event listeners for pill buttons
-      variantContainer.querySelectorAll(".sleep-variant-pill").forEach(pill => {
-        pill.addEventListener("click", function() {
-          const parentGroup = this.closest(".variant-pills-list");
-          parentGroup.querySelectorAll(".sleep-variant-pill").forEach(p => p.classList.remove("active"));
-          this.classList.add("active");
-          updateSelectedVariant();
-        });
       });
     });
   });
@@ -361,37 +246,10 @@
           "label": "Select Product"
         },
         {
-          "type": "header",
-          "content": "Variant Selector Settings"
-        },
-        {
           "type": "text",
           "id": "variant_id",
-          "label": "Specific Variant ID (Optional)",
-          "info": "Paste a specific Variant ID if you want to pre-select a particular variant by default. Leave blank to use the first available variant."
-        },
-        {
-          "type": "checkbox",
-          "id": "show_variant_picker",
-          "label": "Show Variant Selector",
-          "default": true,
-          "info": "Display product options/variants on this tab card."
-        },
-        {
-          "type": "select",
-          "id": "variant_picker_type",
-          "label": "Variant Picker Style",
-          "default": "dropdown",
-          "options": [
-            {
-              "value": "dropdown",
-              "label": "Dropdown Menu"
-            },
-            {
-              "value": "button",
-              "label": "Clickable Buttons / Pills"
-            }
-          ]
+          "label": "Specific Variant ID",
+          "info": "Paste the exact Variant ID for this specific option/tab. (Leave blank to use the first available variant)."
         },
         {
           "type": "header",
@@ -408,7 +266,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Custom Image Override",
-          "info": "Leave blank to use selected product's image automatically."
+          "info": "Leave blank to use the variant or product's image automatically."
         },
         {
           "type": "text",
@@ -420,7 +278,7 @@
           "type": "text",
           "id": "card_title",
           "label": "Custom Title Override",
-          "info": "Leave blank to use selected product's title automatically."
+          "info": "Leave blank to combine product and variant title automatically."
         },
         {
           "type": "text",
@@ -432,7 +290,7 @@
           "type": "html",
           "id": "price_text_override",
           "label": "Custom Price Text HTML",
-          "info": "Leave blank to automatically pull product price."
+          "info": "Leave blank to automatically pull variant price."
         },
         {
           "type": "text",
@@ -444,7 +302,7 @@
           "type": "url",
           "id": "button_link",
           "label": "Custom Button Link Override",
-          "info": "Leave blank to link directly to the selected product page."
+          "info": "Leave blank to link directly to the product page with this variant selected."
         }
       ]
     }
