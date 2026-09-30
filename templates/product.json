@@ -1197,7 +1197,7 @@
       "type": "how-it-works",
       "name": "How It Works (Dynamic)",
       "settings": {
-        "bg_color": "#fbf7ee",
+        "bg_color": "{{ settings.color_palette.background }}",
         "heading": "How It Works"
       }
     },
