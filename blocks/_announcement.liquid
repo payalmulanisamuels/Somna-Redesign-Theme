@@ -29,6 +29,8 @@
     {{ block.shopify_attributes }}
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
+
+    <div class="annoucement_bar_wrap">
       {%- if section.settings.display_mode == 'marquee' and block_settings.separator_image != blank -%}
     <span class="announcement-bar__separator" aria-hidden="true">
       {{
@@ -52,6 +54,7 @@
         </span>
       </a>
     {% endif %}
+    </div>
   </slideshow-slide>
 
 
