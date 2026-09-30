@@ -738,10 +738,11 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   overflow: hidden;
   color: #0a1a4a70;
   text-overflow: ellipsis;
-  font-size: 7px;
+  font-size: 9px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-top: 2px;
 }
 
 .somna-sticky__caret {
