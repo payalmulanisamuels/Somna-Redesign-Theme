@@ -726,10 +726,12 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 
 .somna-sticky__trigger-title {
   overflow: hidden;
-  font-size: 14px;
-  font-weight: 700;
+  color: #0A1A4A;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .somna-sticky__trigger-meta {
