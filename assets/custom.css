@@ -1748,4 +1748,10 @@ a.somna-view-all {
     .accordion .details__header {
         font-size: 22px !important;
     }
+    li.menu__item.paragraph a {
+        font-size: 18px;
+    }
+    .footer-content summary.menu__heading.h5 {
+        font-size: 20px;
+    }
 }
