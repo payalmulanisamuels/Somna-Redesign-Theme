@@ -660,7 +660,6 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   --somna-sky: #DEE6FA;
   --somna-row-active: #eef3ff;
   --somna-onetime: #d2461e;
-
   flex-wrap: wrap;
   gap: 10px;
   width: min(420px, calc(100% - 32px));
@@ -674,7 +673,9 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
   display: none;
 }
-
+.sticky-add-to-cart__bar{
+  z-index: 1111;
+}
 .somna-sticky__banner {
   flex: 1 0 100%;
   display: flex;
