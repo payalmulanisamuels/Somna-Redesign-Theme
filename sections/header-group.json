@@ -52,6 +52,7 @@
           "settings": {
             "text": "Free Shipping",
             "link": "",
+            "separator_image": "shopify://shop_images/free-shipping.png",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
