@@ -1230,7 +1230,7 @@
     "hero_Djj4xR": {
       "type": "hero",
       "custom_css": [
-        ".hero__container {padding-top: 40px; padding-bottom: 40px;}"
+        ".hero__container {padding-top: 30px; padding-bottom: 20px;}"
       ],
       "name": "t:names.hero",
       "settings": {
