@@ -21,10 +21,7 @@
         {% comment %} ========================================================
           LAYOUT A: 2+ Items (Side-by-side Cards)
         ======================================================== {% endcomment %}
-        {% if section.settings.heading != blank %}
-          <h2 class="custom-header">{{ section.settings.heading }}</h2>
-        {% endif %}
-
+      
         <div class="hz-hiw-grid">
           {% for item in how_it_works_items %}
             <div class="hz-hiw-card">
