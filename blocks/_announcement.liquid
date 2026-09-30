@@ -29,6 +29,15 @@
     {{ block.shopify_attributes }}
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
   >
+      {%- if section.settings.display_mode == 'marquee' and block_settings.separator_image != blank -%}
+    <span class="announcement-bar__separator" aria-hidden="true">
+      {{
+        block_settings.separator_image
+        | image_url: width: 200
+        | image_tag: loading: 'lazy', alt: '', class: 'announcement-bar__separator-image'
+      }}
+    </span>
+  {%- endif -%}
     <p class="announcement-bar__text 11">
       {{ block.settings.text }}
     </p>
@@ -45,15 +54,7 @@
     {% endif %}
   </slideshow-slide>
 
-  {%- if section.settings.display_mode == 'marquee' and block_settings.separator_image != blank -%}
-    <span class="announcement-bar__separator" aria-hidden="true">
-      {{
-        block_settings.separator_image
-        | image_url: width: 200
-        | image_tag: loading: 'lazy', alt: '', class: 'announcement-bar__separator-image'
-      }}
-    </span>
-  {%- endif -%}
+
 {%- endunless -%}
 
 {% schema %}
