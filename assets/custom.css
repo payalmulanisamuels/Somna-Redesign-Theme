@@ -1711,5 +1711,7 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
-
+    p.announcement-bar__text{
+        font-size: 14px;
+    }
 }
