@@ -657,7 +657,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   --somna-navy: #1c2a6b;
   --somna-navy-dark: #0a1a4a;
   --somna-blue: #1354c4;
-  --somna-sky: #dfe7fb;
+  --somna-sky: #DEE6FA;
   --somna-row-active: #eef3ff;
   --somna-onetime: #d2461e;
 
@@ -686,8 +686,10 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   border-radius: 22px 22px 0 0;
   background: var(--somna-sky);
   color: var(--somna-navy-dark);
-  font-size: 13px;
+  font-size: 11px;
+  font-style: normal;
   font-weight: 600;
+  line-height: normal;
 }
 
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
