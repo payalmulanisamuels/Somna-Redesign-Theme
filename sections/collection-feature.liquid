@@ -137,24 +137,46 @@
           <h3 class="sleep-card-title">{{ card_title }}</h3>
           <p class="sleep-card-description">{{ card_description }}</p>
 
-          <!-- Variant Selectors -->
-          {%- if selected_product != blank and selected_product.has_only_default_variant == false -%}
-            <div class="sleep-card-variants" data-block-id="{{ block.id }}">
-              {%- for option in selected_product.options_with_values -%}
-                <div class="variant-option-group">
-                  <label class="variant-option-label" for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
-                  <select id="Option-{{ block.id }}-{{ forloop.index0 }}" class="sleep-variant-select" data-option-index="{{ forloop.index0 }}">
-                    {%- for value in option.values -%}
-                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
-                        {{ value }}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                </div>
-              {%- endfor -%}
-            </div>
+          <!-- Variant Selectors (Controlled via Schema Settings) -->
+          {%- if block.settings.show_variant_picker and selected_product != blank and selected_product.has_only_default_variant == false -%}
             
-            <!-- Product Variants JSON for JS -->
+            {%- if block.settings.variant_picker_type == 'button' -%}
+              <!-- Button / Pill Style -->
+              <div class="sleep-card-variants sleep-card-variants-pills" data-block-id="{{ block.id }}">
+                {%- for option in selected_product.options_with_values -%}
+                  <div class="variant-option-group">
+                    <label class="variant-option-label">{{ option.name }}</label>
+                    <div class="variant-pills-list" data-option-index="{{ forloop.index0 }}">
+                      {%- for value in option.values -%}
+                        <button type="button" 
+                                class="sleep-variant-pill {% if option.selected_value == value %}active{% endif %}" 
+                                data-value="{{ value | escape }}">
+                          {{ value }}
+                        </button>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <!-- Dropdown Style -->
+              <div class="sleep-card-variants sleep-card-variants-dropdown" data-block-id="{{ block.id }}">
+                {%- for option in selected_product.options_with_values -%}
+                  <div class="variant-option-group">
+                    <label class="variant-option-label" for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                    <select id="Option-{{ block.id }}-{{ forloop.index0 }}" class="sleep-variant-select" data-option-index="{{ forloop.index0 }}">
+                      {%- for value in option.values -%}
+                        <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                          {{ value }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+            
+            <!-- Product Variants JSON for JS Handling -->
             <script type="application/json" id="VariantsJson-{{ block.id }}">
               {{ selected_product.variants | json }}
             </script>
@@ -204,17 +226,27 @@
       });
     });
 
-    // Variant Selection Handling
+    // Variant Selection Handling (Supports both Dropdowns and Buttons)
     document.querySelectorAll(".sleep-card-variants").forEach(variantContainer => {
       const blockId = variantContainer.getAttribute("data-block-id");
-      const selects = variantContainer.querySelectorAll(".sleep-variant-select");
       const variantsJsonEl = document.getElementById(`VariantsJson-${blockId}`);
       
       if (!variantsJsonEl) return;
       const variants = JSON.parse(variantsJsonEl.textContent);
 
       function updateSelectedVariant() {
-        const selectedOptions = Array.from(selects).map(sel => sel.value);
+        let selectedOptions = [];
+
+        if (variantContainer.classList.contains("sleep-card-variants-dropdown")) {
+          const selects = variantContainer.querySelectorAll(".sleep-variant-select");
+          selectedOptions = Array.from(selects).map(sel => sel.value);
+        } else if (variantContainer.classList.contains("sleep-card-variants-pills")) {
+          const pillGroups = variantContainer.querySelectorAll(".variant-pills-list");
+          selectedOptions = Array.from(pillGroups).map(group => {
+            const activePill = group.querySelector(".sleep-variant-pill.active");
+            return activePill ? activePill.getAttribute("data-value") : null;
+          });
+        }
         
         // Find matching variant
         const matchedVariant = variants.find(variant => {
@@ -222,10 +254,9 @@
         });
 
         if (matchedVariant) {
-          // Update Price (applying a generic calculation or falling back to variant price)
+          // Update Price display
           const priceEl = document.getElementById(`price-value-${blockId}`);
           if (priceEl) {
-            // Format money simply or let shopify handle standard formatting
             const formattedPrice = (matchedVariant.price / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
             priceEl.textContent = formattedPrice;
           }
@@ -237,7 +268,7 @@
             buttonEl.setAttribute("href", `${baseUrl}?variant=${matchedVariant.id}`);
           }
 
-          // Update Image if variant has one
+          // Update Image if variant has a featured image
           if (matchedVariant.featured_image) {
             const imageWrapper = document.getElementById(`image-wrapper-${blockId}`);
             const imgEl = imageWrapper ? imageWrapper.querySelector('img') : null;
@@ -248,8 +279,19 @@
         }
       }
 
-      selects.forEach(select => {
+      // Attach event listeners for dropdowns
+      variantContainer.querySelectorAll(".sleep-variant-select").forEach(select => {
         select.addEventListener("change", updateSelectedVariant);
+      });
+
+      // Attach event listeners for pill buttons
+      variantContainer.querySelectorAll(".sleep-variant-pill").forEach(pill => {
+        pill.addEventListener("click", function() {
+          const parentGroup = this.closest(".variant-pills-list");
+          parentGroup.querySelectorAll(".sleep-variant-pill").forEach(p => p.classList.remove("active"));
+          this.classList.add("active");
+          updateSelectedVariant();
+        });
       });
     });
   });
@@ -260,7 +302,7 @@
   "name": "Interactive Sleep Tabs",
   "tag": "section", 
   "settings": [
-      {
+    {
       "type": "header",
       "content": "Wave Dividers"
     },
@@ -300,6 +342,37 @@
           "label": "Select Product"
         },
         {
+          "type": "header",
+          "content": "Variant Selector Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_variant_picker",
+          "label": "Show Variant Selector",
+          "default": true,
+          "info": "Display product options/variants on this tab card."
+        },
+        {
+          "type": "select",
+          "id": "variant_picker_type",
+          "label": "Variant Picker Style",
+          "default": "dropdown",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "Dropdown Menu"
+            },
+            {
+              "value": "button",
+              "label": "Clickable Buttons / Pills"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Card Content Overrides"
+        },
+        {
           "type": "text",
           "id": "badge_subtitle",
           "label": "Card Subtitle (Optional)",
@@ -310,7 +383,7 @@
           "type": "image_picker",
           "id": "image",
           "label": "Custom Image Override",
-          "info": "Leaves blank to use selected product's image automatically."
+          "info": "Leave blank to use selected product's image automatically."
         },
         {
           "type": "text",
@@ -322,19 +395,19 @@
           "type": "text",
           "id": "card_title",
           "label": "Custom Title Override",
-          "info": "Leaves blank to use selected product's title automatically."
+          "info": "Leave blank to use selected product's title automatically."
         },
         {
           "type": "text",
           "id": "card_description",
           "label": "Custom Description Override",
-          "info": "Leaves blank to use product snippet."
+          "info": "Leave blank to use product snippet."
         },
         {
           "type": "html",
           "id": "price_text_override",
           "label": "Custom Price Text HTML",
-          "info": "Leaves blank to automatically pull product price."
+          "info": "Leave blank to automatically pull product price."
         },
         {
           "type": "text",
@@ -346,7 +419,7 @@
           "type": "url",
           "id": "button_link",
           "label": "Custom Button Link Override",
-          "info": "Leaves blank to link directly to the selected product page."
+          "info": "Leave blank to link directly to the selected product page."
         }
       ]
     }
