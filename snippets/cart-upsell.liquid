@@ -7,7 +7,7 @@
   if settings.upsell_mode == 'fixed_two'
     capture upsell_cards
       render 'cart-upsell-card', product: settings.fixed_product_1, variant_setting: settings.fixed_variant_1, title: settings.fixed_title_1, badge: settings.fixed_badge_1
-      render 'cart-upsell-card', product: settings.fixed_product_2, variant_setting: settings.fixed_variant_2, title: settings.fixed_title_2, badge: settings.fixed_badge_2
+      render 'cart-upsell-card', product: settings.fixed_product_2, variant_setting: settings.fixed_variant_2, title: settings.fixed_title_2, badge: settings.fixed_badge_2, is_last: true
     endcapture
   else
     # Rule-based: recommend the missing half of Strips + Tape, or the upgrade bundle

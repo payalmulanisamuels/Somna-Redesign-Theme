@@ -5,6 +5,7 @@
   @param {string} [variant_setting] - Variant name (or part of it) or variant ID. Empty = first variant with a subscription plan.
   @param {string} [title] - Title override. Empty = product title.
   @param {string} [badge] - Badge text. Empty = subscription saving ("SAVE 33%").
+  @param {boolean} [is_last] - Last card in the list: always shows the "FREE GIFT" badge.
 {%- enddoc -%}
 
 {%- liquid
@@ -48,18 +49,8 @@
     endif
   endif
 
-  # 2. Hide when this variant is already in the cart
-  if show_card and settings.upsell_hide_in_cart
-    for item in cart.items
-      if item.variant_id == upsell_variant.id
-        assign show_card = false
-        break
-      endif
-    endfor
-  endif
-
   if show_card
-    # 3. Price: subscription price (first plan) when enabled or required
+    # 2. Price: subscription price (first plan) when enabled or required
     assign upsell_price = upsell_variant.price
     assign upsell_selling_plan = ''
     if settings.upsell_add_as_subscription or product.requires_selling_plan
@@ -75,9 +66,11 @@
       assign upsell_compare = upsell_variant.compare_at_price
     endif
 
-    # 4. Badge: custom text, else saving percentage
+    # 3. Badge: last card is always "FREE GIFT", else custom text, else saving percentage
     assign upsell_badge = badge | strip
-    if upsell_badge == blank and upsell_compare > upsell_price
+    if is_last
+      assign upsell_badge = 'FREE GIFT'
+    elsif upsell_badge == blank and upsell_compare > upsell_price
       assign upsell_save_percent = upsell_compare | minus: upsell_price | times: 100.0 | divided_by: upsell_compare | round
       assign upsell_badge = 'SAVE ' | append: upsell_save_percent | append: '%'
     endif
@@ -85,12 +78,10 @@
     assign upsell_title = title | strip | default: product.title
     assign upsell_image = upsell_variant.featured_image | default: product.featured_image
 
-    assign upsell_rating = product.metafields.reviews.rating.value
-    if upsell_rating != blank
-      assign upsell_rating_percent = upsell_rating.rating | times: 100.0 | divided_by: upsell_rating.scale_max
-    endif
+    assign upsell_rating = product.metafields.custom.custom_review_rating_review_count.value
+    
   endif
--%}
+-%}  
 
 {%- if show_card -%}
   <div class="hz-minicart-upsell__card">
@@ -106,12 +97,9 @@
 
     <div class="hz-minicart-upsell__content">
       {%- if settings.upsell_show_rating and upsell_rating != blank -%}
-        <span
-          class="hz-minicart-upsell__stars"
-          style="--hz-rating: {{ upsell_rating_percent }}%;"
-          role="img"
-          aria-label="{{ upsell_rating.rating | round: 1 }} / {{ upsell_rating.scale_max }}"
-        >★★★★★</span>
+              <div class="review_content">
+              {{ upsell_rating }} 
+              </div>
       {%- endif -%}
 
       <h4 class="hz-minicart-upsell__title">
