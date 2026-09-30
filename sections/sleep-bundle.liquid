@@ -102,13 +102,12 @@
         </a>
 
         <div class="somna-sleep-bundle__info">
-          {%- if section.settings.show_rating and rating != blank -%}
-            <div class="somna-sleep-bundle__rating">
-              <span>{{ rating.rating | round: 1 }}</span>
-              <span class="somna-sleep-bundle__stars" style="--ssb-rating: {{ rating_percent }}%;" aria-label="{{ rating.rating | round: 1 }} / {{ rating.scale_max }}">★★★★★</span>
-              <span>({{ rating_count }})</span>
-            </div>
-          {%- endif -%}
+              {% if bundle_product.metafields.custom.custom_review_rating_review_count.value %}
+              {%  assign review_count_rating = bundle_product.metafields.custom.custom_review_rating_review_count.value   %}
+              <div class="review_content">
+              {{ review_count_rating }} 
+              </div>
+              {% endif %}
 
           <h2 class="somna-sleep-bundle__title">{{ bundle_title | escape }}</h2>
 
