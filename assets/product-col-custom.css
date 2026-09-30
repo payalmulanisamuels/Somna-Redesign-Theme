@@ -853,7 +853,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
   width: auto;
   max-width: 120px;
-  height: 52px;
+  height: 45px;
   padding: 6px 14px;
   border-radius: 10px;
   background: var(--somna-navy-dark);
