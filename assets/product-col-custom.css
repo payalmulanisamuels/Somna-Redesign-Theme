@@ -694,7 +694,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
   height: 48px;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .somna-sticky {
