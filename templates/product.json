@@ -546,7 +546,7 @@
         ".custom-font-size.custom-color h5 {font-family: var(--headfont);}"
       ],
       "settings": {
-        "content_width": "content-center-aligned",
+        "content_width": "content-full-width",
         "desktop_media_position": "left",
         "equal_columns": true,
         "limit_details_width": false,

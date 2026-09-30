@@ -1717,4 +1717,7 @@ a.somna-view-all {
     .header__columns {
         --header-padding: 20px;
     }
+    .product-details {
+        margin-top: 40px;
+    }
 }
