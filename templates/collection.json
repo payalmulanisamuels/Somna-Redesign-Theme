@@ -1013,6 +1013,9 @@
           "settings": {
             "tab_title": "Blocked nose",
             "product": "nasal-strips",
+            "variant_id": "",
+            "show_variant_picker": true,
+            "variant_picker_type": "dropdown",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
@@ -1027,6 +1030,9 @@
           "settings": {
             "tab_title": "Dry mouth",
             "product": "mouth-tape",
+            "variant_id": "",
+            "show_variant_picker": true,
+            "variant_picker_type": "dropdown",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
@@ -1041,6 +1047,9 @@
           "settings": {
             "tab_title": "Both, I'm new",
             "product": "sleep-bundle",
+            "variant_id": "",
+            "show_variant_picker": true,
+            "variant_picker_type": "dropdown",
             "badge_subtitle": "Your best start",
             "image": "shopify://shop_images/best-image.jpg",
             "overlay_badge": "FREE GIFTS with subscription",
@@ -1056,6 +1065,9 @@
           "settings": {
             "tab_title": "Want variety",
             "product": "the-colour-set",
+            "variant_id": "",
+            "show_variant_picker": true,
+            "variant_picker_type": "dropdown",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
@@ -1070,6 +1082,9 @@
           "settings": {
             "tab_title": "Stocking up",
             "product": "season-bundle",
+            "variant_id": "52629426045159",
+            "show_variant_picker": true,
+            "variant_picker_type": "dropdown",
             "badge_subtitle": "Your best start",
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — Breathe",
