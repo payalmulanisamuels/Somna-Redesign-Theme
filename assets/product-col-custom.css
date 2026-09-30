@@ -642,3 +642,237 @@ slideshow-arrows .slideshow-control {
   .somna-custom-subscription-container [hidden] {
     display: none !important;
   }
+
+/* =========================================================
+   Somna sticky add-to-cart (inspiration/stickybar, stickybar-flow)
+   Markup: snippets/somna-sticky-options.liquid + sections/product-information.liquid
+   Mode is set on <sticky-add-to-cart data-purchase-mode> by assets/sticky-add-to-cart.js
+   ========================================================= */
+sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__mode--subscribe,
+sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onetime {
+  display: none !important;
+}
+
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+  --somna-navy: #1c2a6b;
+  --somna-navy-dark: #0a1a4a;
+  --somna-blue: #1354c4;
+  --somna-sky: #dfe7fb;
+  --somna-row-active: #eef3ff;
+  --somna-onetime: #d2461e;
+
+  flex-wrap: wrap;
+  gap: 10px;
+  width: min(420px, calc(100% - 32px));
+  padding: 10px;
+  border-radius: 22px;
+  background: var(--somna-navy);
+  color: var(--somna-navy-dark);
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
+}
+
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
+  display: none;
+}
+
+.somna-sticky__banner {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: -10px -10px 0;
+  padding: 7px 12px;
+  border-radius: 22px 22px 0 0;
+  background: var(--somna-sky);
+  color: var(--somna-navy-dark);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+  height: 52px;
+  border-radius: 10px;
+}
+
+.somna-sticky {
+  flex: 1;
+  min-width: 0;
+}
+
+.somna-sticky__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+}
+
+.somna-sticky__trigger-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.somna-sticky__trigger-title {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.somna-sticky__trigger-meta {
+  color: rgb(10 26 74 / 0.65);
+  font-size: 11px;
+}
+
+.somna-sticky__caret {
+  flex-shrink: 0;
+  width: 10px;
+  transition: transform 0.2s ease;
+}
+
+.somna-sticky__trigger[aria-expanded='true'] .somna-sticky__caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown opens upward, spanning the bar (the fixed bar is the containing block) */
+.somna-sticky__panel {
+  position: absolute;
+  right: 10px;
+  bottom: calc(100% + 8px);
+  left: 10px;
+  padding: 10px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.2);
+}
+
+.somna-sticky__panel[hidden] {
+  display: none;
+}
+
+.somna-sticky__panel-heading {
+  margin: 0 0 8px;
+  color: rgb(10 26 74 / 0.65);
+  font-size: 12px;
+}
+
+.somna-sticky__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.somna-sticky__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+}
+
+.somna-sticky__row:hover,
+.somna-sticky__row[aria-selected='true'] {
+  border-left-color: var(--somna-blue);
+  background: var(--somna-row-active);
+}
+
+.somna-sticky__row:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.somna-sticky__row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.somna-sticky__row-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.somna-sticky__row-meta {
+  color: rgb(10 26 74 / 0.65);
+  font-size: 11px;
+}
+
+sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
+  color: var(--somna-onetime);
+}
+
+.somna-sticky__badge {
+  padding: 2px 7px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.somna-sticky__badge--popular {
+  background: var(--somna-blue);
+}
+
+.somna-sticky__badge--free {
+  background: var(--somna-navy-dark);
+}
+
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+  width: auto;
+  max-width: 120px;
+  height: 52px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--somna-navy-dark);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+    bottom: max(12px, var(--safe-area-inset-bottom));
+    width: calc(100% - 24px);
+    border-radius: 22px;
+    padding-block-end: 10px;
+  }
+
+  /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
+  .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+    display: initial;
+  }
+
+  .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+    width: auto;
+    padding: 6px 12px;
+  }
+}

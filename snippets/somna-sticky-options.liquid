@@ -1,0 +1,140 @@
+{%- doc -%}
+  Somna sticky add-to-cart dropdown (inspiration/stickybar + stickybar-flow).
+
+  Lists the Size option values (e.g. 3+1 Bags / 2 Bags / 1 Bag) for the currently
+  selected other options, with subscription and one-time prices. Subscription prices
+  come from each variant's native selling plan allocations, keyed by selling plan id.
+
+  Which prices show (subscribe vs one-time, and which selling plan) is mirrored from
+  the top Buy Box by assets/sticky-add-to-cart.js — this markup only holds the data.
+  Rendered inside the sticky bar, so it is re-rendered (morphed) on every variant change.
+
+  @param {object} product - The product object.
+  @param {object} supply_option - The Size / Quantity / Set option (from product.options_with_values).
+{%- enddoc -%}
+
+{%- liquid
+  assign initial_mode = 'onetime'
+  if product.selected_or_first_available_variant.selling_plan_allocations.size > 0
+    assign initial_mode = 'subscribe'
+  endif
+-%}
+
+<div class="somna-sticky" data-somna-sticky>
+  <button
+    type="button"
+    class="somna-sticky__trigger"
+    data-somna-sticky-toggle
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-controls="SomnaStickyPanel-{{ product.id }}"
+  >
+    <span class="somna-sticky__trigger-text">
+      <span class="somna-sticky__trigger-title">
+        {{- supply_option.selected_value | escape }} ·
+        <span class="somna-sticky__mode--subscribe">Subscribe</span>
+        <span class="somna-sticky__mode--onetime">One-time</span>
+      </span>
+      <span class="somna-sticky__trigger-meta">
+        <span data-somna-sticky-field="price"></span> ·
+        <span data-somna-sticky-field="per-night"></span>/night
+      </span>
+    </span>
+    <svg class="somna-sticky__caret" aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+      {%- render 'icon', icon: 'caret' -%}
+    </svg>
+  </button>
+
+  <div
+    class="somna-sticky__panel"
+    id="SomnaStickyPanel-{{ product.id }}"
+    data-somna-sticky-panel
+    hidden
+  >
+    <p class="somna-sticky__panel-heading">
+      <span class="somna-sticky__mode--subscribe">
+        Subscribe · <span data-somna-sticky-field="plan-label"></span>
+      </span>
+      <span class="somna-sticky__mode--onetime">One-time purchase</span>
+    </p>
+
+    <ul class="somna-sticky__list" role="listbox" aria-label="{{ supply_option.name | escape }}">
+      {%- for option_value in supply_option.values reversed -%}
+        {%- liquid
+          assign row_variant = option_value.variant
+          if row_variant == blank
+            continue
+          endif
+
+          # Position in the original (not reversed) option order: 1 = 1 Bag, 2 = 2 Bags, 3 = 3+1 Bags
+          assign supply_index = forloop.rindex
+          assign row_nights = 30
+          if supply_index == 2
+            assign row_nights = 60
+          elsif supply_index >= 3
+            assign row_nights = 120
+          endif
+          if row_variant.metafields.custom.nights != blank
+            assign row_nights = row_variant.metafields.custom.nights.value | plus: 0
+          endif
+
+          assign row_badge = ''
+          assign row_badge_class = ''
+          if supply_index == 2
+            assign row_badge = 'Most popular'
+            assign row_badge_class = 'popular'
+          elsif supply_index >= 3
+            assign row_badge = '1 bag free'
+            assign row_badge_class = 'free'
+          endif
+        -%}
+
+        {%- capture row_plans -%}
+          { {%- for alloc in row_variant.selling_plan_allocations -%}
+            {%- capture plan_label -%}{%- render 'somna-plan-label', selling_plan: alloc.selling_plan -%}{%- endcapture -%}
+            "{{ alloc.selling_plan.id }}": {
+              "price": {{ alloc.price | money_without_trailing_zeros | json }},
+              "perNight": {{ alloc.price | divided_by: row_nights | money | json }},
+              "label": {{ plan_label | strip | json }}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%} }
+        {%- endcapture -%}
+
+        <li>
+          <button
+            type="button"
+            role="option"
+            class="somna-sticky__row"
+            data-somna-sticky-row
+            data-option-value-id="{{ option_value.id }}"
+            data-onetime-price="{{ row_variant.price | money_without_trailing_zeros | escape }}"
+            data-onetime-per-night="{{ row_variant.price | divided_by: row_nights | money | escape }}"
+            data-plans="{{ row_plans | strip_newlines | escape }}"
+            aria-selected="{{ option_value.selected }}"
+            {% unless row_variant.available %}
+              disabled
+            {% endunless %}
+          >
+            <span class="somna-sticky__row-top">
+              <span class="somna-sticky__row-title">{{ option_value | escape }}</span>
+              {%- if row_badge != blank -%}
+                <span class="somna-sticky__badge somna-sticky__badge--{{ row_badge_class }}">{{ row_badge }}</span>
+              {%- endif -%}
+            </span>
+            <span class="somna-sticky__row-meta">
+              {{ row_nights }} nights ·
+              <span class="somna-sticky__row-per-night" data-somna-sticky-field="per-night">
+                {%- if initial_mode == 'subscribe' and row_variant.selling_plan_allocations.size > 0 -%}
+                  {{- row_variant.selling_plan_allocations.first.price | divided_by: row_nights | money -}}
+                {%- else -%}
+                  {{- row_variant.price | divided_by: row_nights | money -}}
+                {%- endif -%}
+              </span>/night
+              {%- unless row_variant.available %} · {{ 'products.product.sold_out' | t }}{% endunless -%}
+            </span>
+          </button>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>

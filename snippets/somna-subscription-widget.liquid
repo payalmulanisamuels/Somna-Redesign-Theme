@@ -291,6 +291,18 @@
             planInput.value = '';
             planInput.disabled = true;
           }
+
+          // Programmatic changes fire no `change` event, so announce the new purchase option
+          // (the sticky add-to-cart bar mirrors it — see assets/sticky-add-to-cart.js).
+          container.dispatchEvent(
+            new CustomEvent('somna:purchase-option-change', {
+              bubbles: true,
+              detail: {
+                mode: planInput.disabled ? 'onetime' : 'subscribe',
+                sellingPlanId: planInput.value,
+              },
+            })
+          );
         };
 
         const activate = (box) => {
