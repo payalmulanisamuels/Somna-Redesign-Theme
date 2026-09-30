@@ -59,7 +59,7 @@
           endif
         -%}
 
-        <a href="{{ link }}" class="bundle-card {% if block.settings.is_featured %}bundle-card--featured{% endif %}" {{ block.shopify_attributes }}>
+        <div class="bundle-card {% if block.settings.is_featured %}bundle-card--featured{% endif %}" {{ block.shopify_attributes }}>
             {% if block.settings.tag != blank %}
               <div class="tag_text">
                 {{block.settings.tag }}
@@ -119,9 +119,9 @@
               {%- endif -%}
             </div>
 
-            </a>
 
-          </div>
+            </div>
+        </div>
       {%- endfor -%}
     </div>
   </div>
