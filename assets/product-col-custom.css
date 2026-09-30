@@ -967,4 +967,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     font-size: 22px;
     line-height: 1.2;
   }
+  h3.hz-ps-tag {
+    font-size: 25px;
+  }
 }
