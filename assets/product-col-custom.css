@@ -975,4 +975,11 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   .hz-prob-sol-section {
     padding: 0 0 70px 0;
   }
+  .hz-hiw-single-desc {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  h2.hz-hiw-single-title {
+    font-size: 32px;
+  }
 }
