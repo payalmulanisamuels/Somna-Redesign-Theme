@@ -1064,7 +1064,7 @@
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "The Color Set",
             "card_description": "All three Strips colors · 3 months",
-            "price_text_override": "$0.99/night · $89 with Subscribe &amp; Save",
+            "price_text_override": "$0.99/night · <strong>$89</strong> with Subscribe &amp; Save",
             "button_label": "View The Color Set",
             "button_link": ""
           }
@@ -1079,7 +1079,7 @@
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — 3+1 Sets",
             "card_description": "Strips + Tape, 4 months · 1 set free",
-            "price_text_override": "$1.46/night · $175 with Subscribe &amp; Save",
+            "price_text_override": "$1.46/night · <strong>$175</strong> with Subscribe &amp; Save",
             "button_label": "View 3+1 Sets",
             "button_link": ""
           }
