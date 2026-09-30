@@ -70,7 +70,7 @@
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}",
-        "@media (min-width: 768px) {.wave-container.bottom {bottom: -25px; }}"
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -24px; }}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
@@ -132,6 +132,9 @@
           "blocks": {}
         }
       },
+      "custom_css": [
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -25px;height: 25px;}}"
+      ],
       "settings": {
         "bottom_wave_image": "shopify://shop_images/home-banner.png",
         "logo_position": "left",

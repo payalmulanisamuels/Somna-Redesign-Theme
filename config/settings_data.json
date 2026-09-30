@@ -154,7 +154,16 @@
     "sections": {
       "somna-scratch-popup": {
         "type": "somna-scratch-popup",
-        "settings": {}
+        "settings": {
+          "enabled": true,
+          "delay_seconds": 10,
+          "dismiss_days": 14,
+          "discount_code": "WELCOME10",
+          "shop_redirect": "/collections/all",
+          "klaviyo_company_id": "Tr7JSM",
+          "klaviyo_list_id": "XyWydk",
+          "excluded_paths": "/pages/nasal-strips\n/pages/mouth-tape\n/policies"
+        }
       }
     },
     "content_for_index": [],
