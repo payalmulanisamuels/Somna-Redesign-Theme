@@ -137,13 +137,13 @@
             </a>
 
             <div class="somna-offer__info">
-              {%- if section.settings.show_rating and card_rating != blank -%}
-                <div class="somna-offer__rating">
-                  <span>{{ card_rating.rating | round: 1 }}</span>
-                  <span class="somna-offer__stars" style="--so-rating: {{ card_rating_percent }}%;" aria-label="{{ card_rating.rating | round: 1 }} / {{ card_rating.scale_max }}">★★★★★</span>
-                  <span>({{ card_rating_count }})</span>
-                </div>
-              {%- endif -%}
+                      {% if bundle_product.metafields.custom.custom_review_rating_review_count.value %}
+              {%  assign review_count_rating = bundle_product.metafields.custom.custom_review_rating_review_count.value   %}
+              <div class="review_content">
+              {{ review_count_rating }} 
+              </div>
+              {% endif %}
+
 
               <h3 class="somna-offer__title">{{ card_title | escape }}</h3>
 
