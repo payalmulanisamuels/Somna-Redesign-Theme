@@ -1036,11 +1036,56 @@
             "button_label": "View Sleep Bundle",
             "button_link": ""
           }
+        },
+        "sleep_option_cEJEFR": {
+          "type": "sleep_option",
+          "settings": {
+            "tab_title": "Both, I'm new",
+            "product": "",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text_override": "",
+            "button_label": "View Sleep Bundle",
+            "button_link": ""
+          }
+        },
+        "sleep_option_BNKpYJ": {
+          "type": "sleep_option",
+          "settings": {
+            "tab_title": "Want variety",
+            "product": "",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text_override": "",
+            "button_label": "View Sleep Bundle",
+            "button_link": ""
+          }
+        },
+        "sleep_option_66YfmJ": {
+          "type": "sleep_option",
+          "settings": {
+            "tab_title": "Stocking up",
+            "product": "",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text_override": "",
+            "button_label": "View Sleep Bundle",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
         "sleep_option_C9Qb3X",
-        "sleep_option_eCWVJt"
+        "sleep_option_eCWVJt",
+        "sleep_option_cEJEFR",
+        "sleep_option_BNKpYJ",
+        "sleep_option_66YfmJ"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: 5px;}"
