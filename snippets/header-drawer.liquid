@@ -160,20 +160,56 @@
           {%- liquid
             assign bundle_key = 'bundle_product_' | append: i
             assign bundle_item = settings[bundle_key]
+
+            # Per-card overrides: variant (name or ID), title and image — so the same
+            # product can be used on several cards, one per variant.
+            assign bundle_variant_key = 'bundle_card_variant_' | append: i
+            assign bundle_title_key = 'bundle_card_title_' | append: i
+            assign bundle_image_key = 'bundle_card_image_' | append: i
+            assign bundle_variant_setting = settings[bundle_variant_key] | strip
+            assign bundle_title_setting = settings[bundle_title_key] | strip
+
+            assign bundle_variant = nil
+            if bundle_item != blank and bundle_variant_setting != blank
+              # Exact variant ID or title first, then the first title containing the text
+              assign bundle_variant_check = bundle_variant_setting | downcase
+              assign bundle_partial_match = nil
+              for variant in bundle_item.variants
+                assign variant_id_string = variant.id | append: ''
+                assign variant_title_check = variant.title | downcase
+                if variant_id_string == bundle_variant_setting or variant_title_check == bundle_variant_check
+                  assign bundle_variant = variant
+                  break
+                elsif bundle_partial_match == nil and variant_title_check contains bundle_variant_check
+                  assign bundle_partial_match = variant
+                endif
+              endfor
+              if bundle_variant == nil
+                assign bundle_variant = bundle_partial_match
+              endif
+            endif
+            if bundle_variant == nil and bundle_item != blank
+              assign bundle_variant = bundle_item.selected_or_first_available_variant
+            endif
+
+            assign bundle_url = bundle_variant.url | default: bundle_item.url
+            assign bundle_name = bundle_title_setting | default: bundle_item.title
+            assign bundle_price = bundle_variant.price | default: bundle_item.price
+            assign bundle_image = settings[bundle_image_key] | default: bundle_variant.featured_image | default: bundle_item.featured_image
           -%}
           {% if bundle_item != blank %}
           <div class="somna-bundle-item">
-            <a href="{{ bundle_item.url | default: '#' }}" class="somna-bundle-link">
+            <a href="{{ bundle_url | default: '#' }}" class="somna-bundle-link">
               <div class="somna-bundle-img-wrap">
-                {%- if bundle_item.featured_image != blank -%}
-                  {{ bundle_item.featured_image | image_url: width: 400 | image_tag: class: 'somna-bundle-img' }}
+                {%- if bundle_image != blank -%}
+                  {{ bundle_image | image_url: width: 400 | image_tag: class: 'somna-bundle-img', alt: bundle_name }}
                 {%- endif -%}
               </div>
               <div class="somna-bundle-details">
-                <span class="somna-bundle-name">{{ bundle_item.title }}</span>
+                <span class="somna-bundle-name">{{ bundle_name | escape }}</span>
                 <span class="somna-bundle-price">
-                  {%- if bundle_item.price != blank -%}
-                    {{ bundle_item.price | money }}
+                  {%- if bundle_price != blank -%}
+                    {{ bundle_price | money }}
                   {%- endif -%}
                 </span>
               </div>

@@ -1887,9 +1887,45 @@
       "label": "Bundle Card 1"
     },
     {
+      "type": "text",
+      "id": "bundle_card_variant_1",
+      "label": "Bundle Card 1 variant",
+      "info": "Variant name (e.g. Red / 2 Sets) or variant ID. Empty = first available variant."
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_title_1",
+      "label": "Bundle Card 1 title",
+      "info": "Empty = product title."
+    },
+    {
+      "type": "image_picker",
+      "id": "bundle_card_image_1",
+      "label": "Bundle Card 1 image",
+      "info": "Empty = variant image, then product image."
+    },
+    {
       "type": "product",
       "id": "bundle_product_2",
       "label": "Bundle Card 2"
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_variant_2",
+      "label": "Bundle Card 2 variant",
+      "info": "Variant name (e.g. Red / 2 Sets) or variant ID. Empty = first available variant."
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_title_2",
+      "label": "Bundle Card 2 title",
+      "info": "Empty = product title."
+    },
+    {
+      "type": "image_picker",
+      "id": "bundle_card_image_2",
+      "label": "Bundle Card 2 image",
+      "info": "Empty = variant image, then product image."
     },
     {
       "type": "product",
@@ -1897,9 +1933,45 @@
       "label": "Bundle Card 3"
     },
     {
+      "type": "text",
+      "id": "bundle_card_variant_3",
+      "label": "Bundle Card 3 variant",
+      "info": "Variant name (e.g. Red / 2 Sets) or variant ID. Empty = first available variant."
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_title_3",
+      "label": "Bundle Card 3 title",
+      "info": "Empty = product title."
+    },
+    {
+      "type": "image_picker",
+      "id": "bundle_card_image_3",
+      "label": "Bundle Card 3 image",
+      "info": "Empty = variant image, then product image."
+    },
+    {
       "type": "product",
       "id": "bundle_product_4",
       "label": "Bundle Card 4"
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_variant_4",
+      "label": "Bundle Card 4 variant",
+      "info": "Variant name (e.g. Red / 2 Sets) or variant ID. Empty = first available variant."
+    },
+    {
+      "type": "text",
+      "id": "bundle_card_title_4",
+      "label": "Bundle Card 4 title",
+      "info": "Empty = product title."
+    },
+    {
+      "type": "image_picker",
+      "id": "bundle_card_image_4",
+      "label": "Bundle Card 4 image",
+      "info": "Empty = variant image, then product image."
     },
     {
       "type": "header",

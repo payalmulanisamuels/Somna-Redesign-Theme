@@ -6,8 +6,10 @@
 *:focus-visible {
     outline: none;
 }
-html[scroll-lock] .wave-container {
-    z-index: 11;
+html[scroll-lock] .shopify-section-group-header-group > .wave-container {
+    opacity: 0;
+    transition: ease-out;
+    display: none;
 }
 .bg_image {
     background-size: cover !important;
@@ -1207,9 +1209,95 @@ h2.upsell_heading {
 .menu-drawer {
     background: #fff9ed !important;
 }
+
+/* Menu drawer opens from the top like a dropdown (Horizon default slides in from the left).
+   "header-drawer" prefix outranks the drawer's own .menu-drawer rules in header-drawer.liquid.
+   Width uses vw, not %: .header has `contain: layout` until the menu opens, which makes it the
+   containing block of this fixed drawer — a % width would jump from header width to viewport width. */
+header-drawer .menu-drawer {
+    /* Must be vw, not %: a fixed element's % width comes from its containing block, and .header
+       has `contain: layout`, so 100% resolved to a narrower box on iPhone (~370px of 390px),
+       leaving a strip on the right. vw is always the full screen width. */
+    width: 100%;
+    max-width: 100%;
+    border-right: 0;
+    transform: translateY(-100%);
+    left: 0;
+    right: 0;
+    /* Full-screen drop needs more time than Horizon's 0.2s side drawer, or it reads as a jump.
+       Closing: slightly quicker, ease-in. will-change keeps the layer ready so Safari
+       doesn't paint a blank first frame. */
+    transition: transform 0.3s cubic-bezier(0.55, 0, 0.75, 0.5), visibility 0.3s, opacity 0.3s;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+header-drawer .menu-open > .menu-drawer {
+    transform: translateY(0);
+    /* Opening: ease-out, so it drops in fast and settles smoothly */
+    transition: transform .4s linear, visibility .4s, opacity .4s;
+}
+@media (prefers-reduced-motion: reduce) {
+    header-drawer .menu-drawer,
+    header-drawer .menu-open > .menu-drawer {
+        transition: none;
+    }
+}
+
+/* Menu links: fade in instead of Horizon's translateX(-0.5rem) slide-in — on a top dropdown
+   that slide reads as content jumping left to right. Keeps Horizon's timing and stagger. */
+header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
+    animation-name: somna-menu-item-fade-in;
+}
+@keyframes somna-menu-item-fade-in {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* Scroll lock sets overflow: hidden, which removes the desktop scrollbar and shifts the page
+   sideways. Reserve the scrollbar's space so nothing moves. (No effect on mobile overlay scrollbars.) */
+html,
+.page-wrapper {
+    scrollbar-gutter: stable;
+}
+
+/* Fixed sizes for drawer cards so nothing resizes while images load or the drawer animates */
+.somna-products-grid > *,
+.somna-bundles-grid > * {
+    min-width: 0;
+}
+.somna-image-wrapper img,
+.somna-bundle-img-wrap img {
+    display: block;
+    width: 100%;
+}
+/* Season Bundle: the inner <a> repeats the flex class but had no width, so it shrank to its
+   content and grew when the image loaded. Make it fill the card with a fixed 60 / 40 split. */
+.somna-featured-horizontal-card > .somna-featured-horizontal-card {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+}
+.somna-hz-img-side {
+    flex: 0 0 60%;
+    min-width: 0;
+    align-self: stretch;
+}
+.somna-hz-img-side img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .somna-drawer-section {
     padding: 16px 16px 40px 16px;
     border-top: 1px solid rgba(10, 26, 74, 0.11);
+    width: 100%;
 }
 .somna-products-grid {
     display: grid;
@@ -1251,6 +1339,7 @@ span.somna-product-price {
 .somna-footer-wrapper {
     position: relative;
     background: #EFD374;
+    width: 100%;
 }
 
 .somna-footer-content .somna-account-text {
@@ -1286,6 +1375,7 @@ span.somna-product-price {
 }
 ul.menu-drawer__menu.has-submenu {
     padding: 0;
+    width: 100%;
 }
 
 ul.menu-drawer__menu.has-submenu a {
@@ -1300,6 +1390,8 @@ ul.menu-drawer__menu.has-submenu a {
 }
 .menu-drawer__navigation {
     padding: 16px 0 56px !important;
+    width: 100%;
+
 }
 .menu-drawer__menu .menu-drawer__list-item--flat {
     margin-bottom: 0 !important;
@@ -1309,6 +1401,7 @@ ul.menu-drawer__menu.has-submenu a {
     padding-left: 16px;
     text-align: center;
     padding-right: 16px;
+    width: 100%;
 }
 
 .shop_all a {
@@ -1327,6 +1420,7 @@ ul.menu-drawer__menu.has-submenu a {
     position: relative;
     background: #DEE5F8;
     padding: 25px 16px;
+    width: 100%;
 }
 h3.somna-bundle-main-title {
     color: #0A1A4A;
