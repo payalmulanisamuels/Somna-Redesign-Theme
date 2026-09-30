@@ -19,10 +19,17 @@
     </div>
     {% endif %}
     
+{%- assign has_separator = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.separator_image != blank -%}
+    {%- assign has_separator = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div class="section-background color-custom-{{ section.id }}"></div>
 <aside
   class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }} announcement-bar--{{ section.settings.display_mode }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %} --marquee-speed: {{ section.settings.marquee_speed }}s;"
+  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %} --marquee-speed: {{ section.settings.marquee_speed }}s; --separator-size: {{ section.settings.separator_size }}px; --marquee-gap: {% if has_separator %}{{ section.settings.separator_gap }}px{% else %}4rem{% endif %};"
 >
 
   {% liquid
@@ -97,7 +104,21 @@
     width: max-content !important;
     max-width: none !important;
     animation: announcement-marquee var(--marquee-speed, 20s) linear infinite;
-    gap: 4rem;
+    gap: var(--marquee-gap, 4rem);
+  }
+
+  .announcement-bar__separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .announcement-bar__separator-image {
+    display: block;
+    height: var(--separator-size, 16px);
+    width: auto;
+    object-fit: contain;
   }
 
   .announcement-bar__slides--marquee > * {
@@ -223,6 +244,26 @@
       "default": 20,
       "unit": "s",
       "info": "Lower duration means faster continuous scrolling."
+    },
+    {
+      "type": "range",
+      "id": "separator_size",
+      "label": "Separator image height",
+      "min": 8,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "separator_gap",
+      "label": "Space around separator",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 24
     },
     {
       "type": "header",

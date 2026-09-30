@@ -44,6 +44,16 @@
       </a>
     {% endif %}
   </slideshow-slide>
+
+  {%- if section.settings.display_mode == 'marquee' and block_settings.separator_image != blank -%}
+    <span class="announcement-bar__separator" aria-hidden="true">
+      {{
+        block_settings.separator_image
+        | image_url: width: 200
+        | image_tag: loading: 'lazy', alt: '', class: 'announcement-bar__separator-image'
+      }}
+    </span>
+  {%- endif -%}
 {%- endunless -%}
 
 {% schema %}
@@ -61,6 +71,12 @@
       "type": "url",
       "id": "link",
       "label": "t:settings.link"
+    },
+    {
+      "type": "image_picker",
+      "id": "separator_image",
+      "label": "Separator image",
+      "info": "Shown after this announcement in Marquee mode."
     },
     {
       "type": "header",
