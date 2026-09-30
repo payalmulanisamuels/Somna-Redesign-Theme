@@ -286,7 +286,7 @@
                       {%- endif -%}
 
                       {%- if item.selling_plan_allocation -%}
-                        <p class="selling_plan_allocation">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        <p class="selling_plan_allocation">{%- render 'somna-plan-label', selling_plan: item.selling_plan_allocation.selling_plan -%}</p>
 
                       {%- endif -%}
 

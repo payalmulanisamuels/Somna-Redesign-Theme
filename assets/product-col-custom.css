@@ -637,3 +637,8 @@ slideshow-arrows .slideshow-control {
     height: 18px;
   }
 }
+
+  .somna-purchase-box[hidden],
+  .somna-custom-subscription-container [hidden] {
+    display: none !important;
+  }

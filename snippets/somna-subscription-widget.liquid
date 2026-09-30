@@ -1,0 +1,374 @@
+{%- doc -%}
+  Somna "Autoship & Save" / "One-Time Purchase" box.
+
+  Works with any native selling plan (Shopify Subscriptions, or any app that
+  creates real selling plans). Delivery wording is shown in days via
+  `somna-plan-label` ("Deliver every 2 months" -> "Delivery every 60 days").
+  Checkout still shows the plan's own name from the Subscriptions app.
+
+  Variant "nights" (used to preselect the matching plan) come from the
+  `custom.nights` variant metafield, falling back to variant position
+  (1st = 30, 2nd = 60, 3rd+ = 120).
+
+  @param {object} product_resource - The product object.
+  @param {object} section - The section object.
+{%- enddoc -%}
+
+{%- liquid
+  assign current_var = product_resource.selected_or_first_available_variant
+
+  assign has_selling_plans = false
+  for v in product_resource.variants
+    if v.selling_plan_allocations.size > 0
+      assign has_selling_plans = true
+      break
+    endif
+  endfor
+
+  assign init_plan_id = ''
+  assign init_has_plans = false
+  assign init_diff = 100000
+
+  # Find the Size / Quantity / Set option (e.g. "1 Bag", "2 Sets", "3+1 Bags").
+  # A variant's supply is read from that option's position, not its position
+  # in the full variant list — so "Red / 1 Set" is 30 nights, not 120.
+  assign supply_option = nil
+  for product_option in product_resource.options_with_values
+    assign option_name_check = product_option.name | downcase
+    if option_name_check contains 'size' or option_name_check contains 'quantity' or option_name_check contains 'set'
+      assign supply_option = product_option
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_selling_plans -%}
+  <script type="application/json" id="SomnaSubscriptionData-{{ section.id }}">
+    {
+      "variants": {
+        {%- for v in product_resource.variants -%}
+          {%- liquid
+            assign supply_index = forloop.index
+            if supply_option
+              assign supply_value_index = supply_option.position | minus: 1
+              assign supply_value = v.options[supply_value_index]
+              for option_value in supply_option.values
+                if option_value.name == supply_value
+                  assign supply_index = forloop.index
+                  break
+                endif
+              endfor
+            endif
+            assign v_nights = 30
+            if supply_index == 2
+              assign v_nights = 60
+            elsif supply_index >= 3
+              assign v_nights = 120
+            endif
+            if v.metafields.custom.nights != blank
+              assign v_nights = v.metafields.custom.nights.value | plus: 0
+            endif
+            assign is_current = false
+            if v.id == current_var.id
+              assign is_current = true 
+            endif
+          -%}
+          "{{ v.id }}": {
+            "nights": {{ v_nights }},
+            "price": {{ v.price | money_without_trailing_zeros | json }},
+            "plans": [
+              {%- for alloc in v.selling_plan_allocations -%}
+                {%- liquid
+                  assign plan = alloc.selling_plan
+
+                  # Day length + "Delivery every X days" wording (shared with the cart).
+                  capture plan_days
+                    render 'somna-plan-label', selling_plan: plan, days_only: true
+                  endcapture
+                  assign plan_days = plan_days | plus: 0
+                  capture plan_label
+                    render 'somna-plan-label', selling_plan: plan
+                  endcapture
+                  assign plan_label = plan_label | strip
+
+                  assign regular = alloc.compare_at_price | default: v.price
+                  assign save_cents = regular | minus: alloc.price
+                  assign discount = 0
+                  if save_cents > 0
+                    assign discount = save_cents | times: 100.0 | divided_by: regular | round
+                  endif
+
+                  assign per_night = ''
+                  if plan_days > 0
+                    assign per_night = alloc.price | divided_by: plan_days | money
+                  endif
+
+                  if is_current
+                    assign init_has_plans = true
+                    # Preselect the plan closest to the variant's supply (30 / 60 / 120 nights).
+                    assign plan_diff = plan_days | minus: v_nights | abs
+                    if forloop.first or plan_diff < init_diff
+                      assign init_diff = plan_diff
+                      assign init_plan_id = plan.id
+                      assign init_name = plan_label
+                      assign init_price = alloc.price
+                      assign init_regular = regular
+                      assign init_save = save_cents
+                      assign init_discount = discount
+                      assign init_per_night = per_night
+                    endif
+                  endif
+                -%}
+                {
+                  "id": {{ plan.id | json }},
+                  "name": {{ plan.name | json }},
+                  "interval": {{ plan_label | json }},
+                  "days": {{ plan_days }},
+                  "price": {{ alloc.price | money_without_trailing_zeros | json }},
+                  "regular": {{ regular | money_without_trailing_zeros | json }},
+                  "save": {{ save_cents | money_without_trailing_zeros | json }},
+                  "saveCents": {{ save_cents }},
+                  "discount": {{ discount }},
+                  "perNight": {{ per_night | json }}
+                }{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ]
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      }
+    }
+  </script>
+
+  {%- liquid
+    assign one_time_selected = false
+    if init_has_plans == false
+      assign one_time_selected = true
+    endif
+  -%}
+
+  <div
+    class="somna-custom-subscription-container"
+    id="SomnaSubscriptionWidget-{{ section.id }}"
+    data-section-id="{{ section.id }}"
+  >
+    <!-- Option 1: Autoship & Save Box -->
+    <div
+      class="somna-purchase-box{% unless one_time_selected %} active{% endunless %}"
+      data-purchase-card="subscribe"
+      {% if one_time_selected %}hidden{% endif %}
+    >
+      <div class="somna-box-banner">
+        <span data-somna="discount">{{ init_discount | default: 0 }}</span>% + 2 FREE GIFTS ON YOUR FIRST ORDER
+      </div>
+      <div class="somna-box-top-row">
+        <label class="somna-radio-label">
+          <input type="radio" name="somna_purchase_type_{{ section.id }}" value="subscribe" {% unless one_time_selected %}checked{% endunless %}>
+          <span class="somna-radio-bullet"></span>
+          <div class="somna-title-stack">
+            <span class="somna-box-title">Autoship & Save</span>
+            <span class="somna-per-night" {% if init_per_night == blank %}hidden{% endif %}>
+              <span data-somna="per-night">{{ init_per_night }}</span> Per Night
+            </span>
+          </div>
+        </label>
+        <div class="somna-price-stack">
+          <div class="somna-pricing-row">
+            <span class="somna-strike-price" data-somna="regular" {% if init_save <= 0 %}hidden{% endif %}>
+              {{- init_regular | money_without_trailing_zeros -}}
+            </span>
+            <span class="somna-active-price" data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
+          </div>
+          <div class="somna-save-pill" {% if init_save <= 0 %}hidden{% endif %}>
+            SAVE <span data-somna="save">{{ init_save | money_without_trailing_zeros }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="somna-box-inner">
+        <ul class="somna-perks-list">
+          <li>
+            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
+            <b>
+              <span data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
+              · <span data-somna="interval">{{ init_name }}</span>
+              (<span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF ongoing)
+            </b>
+          </li>
+          <li>
+            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
+            <strong>FREE</strong> shipping
+          </li>
+          <li>
+            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
+            <b>FREE 2 Gifts</b> with every subscription
+          </li>
+          <li>
+            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
+            <b>FREE 30-Night Sleep Tracker</b> with every subscription
+          </li>
+        </ul>
+
+        <div class="somna-dropdown-wrap">
+          <select
+            class="somna-frequency-dropdown"
+            aria-label="Delivery frequency"
+            data-somna="plan-select"
+          >
+            {%- for alloc in current_var.selling_plan_allocations -%}
+              <option
+                value="{{ alloc.selling_plan.id }}"
+                {% if alloc.selling_plan.id == init_plan_id %}selected{% endif %}
+              >
+                {%- render 'somna-plan-label', selling_plan: alloc.selling_plan -%}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 2: One-Time Purchase Box -->
+    {%- unless product_resource.requires_selling_plan -%}
+      <div class="somna-purchase-box{% if one_time_selected %} active{% endif %}" data-purchase-card="onetime">
+        <div class="somna-box-inner">
+          <div class="somna-box-top-row">
+            <label class="somna-radio-label">
+              <input type="radio" name="somna_purchase_type_{{ section.id }}" value="onetime" {% if one_time_selected %}checked{% endif %}>
+              <span class="somna-radio-bullet"></span>
+              <span class="somna-box-title">One-Time Purchase</span>
+            </label>
+            <div class="somna-price-stack">
+              <span class="somna-active-price" data-somna="onetime-price">{{ current_var.price | money_without_trailing_zeros }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endunless -%}
+  </div>
+
+  <script>
+    (() => {
+      const sectionId = {{ section.id | json }};
+
+      const init = () => {
+        const container = document.getElementById(`SomnaSubscriptionWidget-${sectionId}`);
+        const dataEl = document.getElementById(`SomnaSubscriptionData-${sectionId}`);
+        if (!container || !dataEl || container.dataset.somnaReady) return;
+        container.dataset.somnaReady = 'true';
+
+        const data = JSON.parse(dataEl.textContent);
+        const subBox = container.querySelector('[data-purchase-card="subscribe"]');
+        const oneTimeBox = container.querySelector('[data-purchase-card="onetime"]');
+        const select = container.querySelector('[data-somna="plan-select"]');
+
+        const productForm =
+          document.getElementById(`BuyButtons-ProductForm-${sectionId}`) ||
+          container.closest('.shopify-section')?.querySelector('form[data-type="add-to-cart-form"]');
+        if (!productForm) return;
+
+        // The real selling plan id submitted to /cart/add. Disabled = one-time purchase.
+        let planInput = productForm.querySelector('input[name="selling_plan"]');
+        if (!planInput) {
+          planInput = document.createElement('input');
+          planInput.type = 'hidden';
+          planInput.name = 'selling_plan';
+          productForm.appendChild(planInput);
+        }
+
+        const variantIdInput = productForm.querySelector('input[name="id"]');
+        let plans = [];
+
+        const setText = (key, value) => {
+          container.querySelectorAll(`[data-somna="${key}"]`).forEach((el) => (el.textContent = value));
+        };
+
+        const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
+
+        const syncForm = () => {
+          if (isSubscribe() && select.value) {
+            planInput.value = select.value;
+            planInput.disabled = false;
+          } else {
+            planInput.value = '';
+            planInput.disabled = true;
+          }
+        };
+
+        const activate = (box) => {
+          container.querySelectorAll('.somna-purchase-box').forEach((b) => b.classList.toggle('active', b === box));
+          const radio = box?.querySelector('input[type="radio"]');
+          if (radio) radio.checked = true;
+          syncForm();
+        };
+
+        const renderPlan = () => {
+          const plan = plans.find((p) => String(p.id) === select.value);
+          if (!plan) return;
+          setText('discount', plan.discount);
+          setText('price', plan.price);
+          setText('regular', plan.regular);
+          setText('save', plan.save);
+          setText('per-night', plan.perNight);
+          setText('interval', plan.interval);
+          container.querySelector('[data-somna="regular"]').hidden = plan.saveCents <= 0;
+          container.querySelector('.somna-save-pill').hidden = plan.saveCents <= 0;
+          container.querySelector('.somna-per-night').hidden = !plan.perNight;
+          syncForm();
+        };
+
+        const renderVariant = (variantId) => {
+          const variant = data.variants[String(variantId)];
+          if (!variant) return;
+
+          setText('onetime-price', variant.price);
+          plans = variant.plans;
+
+          if (!plans.length) {
+            subBox.hidden = true;
+            activate(oneTimeBox);
+            return;
+          }
+
+          const wasHidden = subBox.hidden;
+          subBox.hidden = false;
+
+          // Rebuild the dropdown from this variant's real selling plans and
+          // preselect the plan closest to the variant's supply (30 / 60 / 120 nights).
+          select.replaceChildren(...plans.map((p) => new Option(p.interval, p.id)));
+          const distance = (p) => Math.abs(p.days - variant.nights);
+          const match = plans.reduce((best, p) => (distance(p) < distance(best) ? p : best), plans[0]);
+          select.value = String(match.id);
+
+          if (wasHidden || !oneTimeBox) activate(subBox);
+          renderPlan();
+        };
+
+        container.querySelectorAll('.somna-purchase-box').forEach((box) => {
+          box.addEventListener('click', () => activate(box));
+        });
+
+        select.addEventListener('change', renderPlan);
+
+        // Horizon fires this when a variant is picked; the promise resolves with the new variant.
+        const scope = container.closest('.shopify-section') || document;
+        scope.addEventListener('shopify:product:select', async (event) => {
+          if (event.target instanceof Element && event.target.closest('product-card')) return;
+          try {
+            const result = await event.promise;
+            const id = result?.detail?.resource?.id ?? variantIdInput?.value;
+            if (id) renderVariant(id);
+          } catch (e) {
+            /* aborted fetch — a newer selection will follow */
+          }
+        });
+
+        renderVariant(variantIdInput?.value || {{ current_var.id | json }});
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+{%- endif -%}
