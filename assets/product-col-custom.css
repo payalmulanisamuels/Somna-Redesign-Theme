@@ -970,4 +970,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   h3.hz-ps-tag {
     font-size: 25px;
   }
+  .hz-prob-sol-section {
+    padding: 0 0 70px 0;
+  }
 }
