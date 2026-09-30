@@ -80,11 +80,7 @@
             assign is_ajax = true
           endif
 
-          assign card_rating = card_product.metafields.reviews.rating.value
-          assign card_rating_count = card_product.metafields.reviews.rating_count.value | default: 0
-          if card_rating != blank
-            assign card_rating_percent = card_rating.rating | times: 100.0 | divided_by: card_rating.scale_max
-          endif
+       
 
           assign card_use_plan = false
           if card.add_as_subscription.value == true or card_product.requires_selling_plan
