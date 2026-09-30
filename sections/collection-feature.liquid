@@ -37,8 +37,24 @@
     <div class="sleep-card-container">
       {%- for block in section.blocks -%}
         {%- assign selected_product = block.settings.product -%}
+        {%- assign specified_variant_id = block.settings.variant_id | default: '' | strip | plus: 0 -%}
         
         {%- liquid
+          # Find specific variant if ID is provided
+          assign current_variant = blank
+          if specified_variant_id > 0 and selected_product != blank
+            for variant in selected_product.variants
+              if variant.id == specified_variant_id
+                assign current_variant = variant
+                break
+              endif
+            endfor
+          endif
+
+          if current_variant == blank and selected_product != blank
+            assign current_variant = selected_product.selected_or_first_available_variant
+          endif
+
           # Fallbacks to selected product data if custom fields are left blank
           if block.settings.card_title != blank
             assign card_title = block.settings.card_title
@@ -58,6 +74,8 @@
 
           if block.settings.image != blank
             assign card_image = block.settings.image
+          elsif current_variant != blank and current_variant.image != blank
+            assign card_image = current_variant.image
           elsif selected_product != blank and selected_product.featured_image != blank
             assign card_image = selected_product.featured_image
           else
@@ -72,9 +90,8 @@
             assign button_link = "#"
           endif
 
-          # Current Variant & Base Price
-          assign current_variant = selected_product.selected_or_first_available_variant
-          assign base_price = current_variant.price | default: 0
+          # Base Price Calculation based on active variant
+          assign base_price = current_variant.price | default: selected_product.price | default: 0
           assign calculated_price = base_price
           assign has_subscription_discount = false
 
@@ -144,12 +161,13 @@
               <!-- Button / Pill Style -->
               <div class="sleep-card-variants sleep-card-variants-pills" data-block-id="{{ block.id }}">
                 {%- for option in selected_product.options_with_values -%}
+                  {%- assign option_index = forloop.index0 -%}
                   <div class="variant-option-group">
                     <label class="variant-option-label">{{ option.name }}</label>
-                    <div class="variant-pills-list" data-option-index="{{ forloop.index0 }}">
+                    <div class="variant-pills-list" data-option-index="{{ option_index }}">
                       {%- for value in option.values -%}
                         <button type="button" 
-                                class="sleep-variant-pill {% if option.selected_value == value %}active{% endif %}" 
+                                class="sleep-variant-pill {% if current_variant.options[option_index] == value %}active{% endif %}" 
                                 data-value="{{ value | escape }}">
                           {{ value }}
                         </button>
@@ -162,11 +180,12 @@
               <!-- Dropdown Style -->
               <div class="sleep-card-variants sleep-card-variants-dropdown" data-block-id="{{ block.id }}">
                 {%- for option in selected_product.options_with_values -%}
+                  {%- assign option_index = forloop.index0 -%}
                   <div class="variant-option-group">
-                    <label class="variant-option-label" for="Option-{{ block.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
-                    <select id="Option-{{ block.id }}-{{ forloop.index0 }}" class="sleep-variant-select" data-option-index="{{ forloop.index0 }}">
+                    <label class="variant-option-label" for="Option-{{ block.id }}-{{ option_index }}">{{ option.name }}</label>
+                    <select id="Option-{{ block.id }}-{{ option_index }}" class="sleep-variant-select" data-option-index="{{ option_index }}">
                       {%- for value in option.values -%}
-                        <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                        <option value="{{ value | escape }}" {% if current_variant.options[option_index] == value %}selected="selected"{% endif %}>
                           {{ value }}
                         </option>
                       {%- endfor -%}
@@ -344,6 +363,12 @@
         {
           "type": "header",
           "content": "Variant Selector Settings"
+        },
+        {
+          "type": "text",
+          "id": "variant_id",
+          "label": "Specific Variant ID (Optional)",
+          "info": "Paste a specific Variant ID if you want to pre-select a particular variant by default. Leave blank to use the first available variant."
         },
         {
           "type": "checkbox",
