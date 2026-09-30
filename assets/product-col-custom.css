@@ -682,7 +682,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   justify-content: center;
   gap: 6px;
   margin: -10px -10px 0;
-  padding: 7px 12px;
+  padding: 4.5px 12px;
   border-radius: 22px 22px 0 0;
   background: var(--somna-sky);
   color: var(--somna-navy-dark);
