@@ -1735,5 +1735,6 @@ a.somna-view-all {
     }
     .wave-container.top {
         top: -70px;
+        z-index: 1;
     }
 }
