@@ -1784,8 +1784,12 @@ a.somna-view-all {
         font-size: 18px !important;
         height: 40px !important;
     }
-     .klaviyo-form .klaviyo-form-button {
+    .klaviyo-form .klaviyo-form-button {
         height: 23px !important;
         font-size: 18px !important;
+    }
+    .footer-content .shopify-block.shopify-app-block {
+        max-width: 400px;
+        margin-bottom: 45px;
      }
 }
