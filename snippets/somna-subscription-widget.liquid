@@ -100,7 +100,7 @@
 
                   assign per_night = ''
                   if plan_days > 0
-                    assign per_night = alloc.price | divided_by: plan_days   | money | ceil 
+                    assign per_night = alloc.price | divided_by: plan_days | money
                   endif
 
                   if is_current
