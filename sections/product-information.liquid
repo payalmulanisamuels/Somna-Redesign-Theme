@@ -492,6 +492,18 @@
     },
     {
       "type": "range",
+      "id": "media_width",
+      "label": "Media width (desktop)",
+      "info": "Applies from 990px. 50% = equal columns.",
+      "min": 40,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
+      "visible_if": "{{ section.settings.equal_columns }}"
+    },
+    {
+      "type": "range",
       "id": "gap",
       "label": "t:settings.gap",
       "min": 0,

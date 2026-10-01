@@ -59,6 +59,17 @@
     assign product_grid_class = product_grid_class | append: ' product-information--media-left'
   endif
 
+  # Somna: media / details split on desktop (inspiration/pdp-layout). 50 = equal columns.
+  assign media_width = settings.media_width | default: 50
+  assign details_width = 100 | minus: media_width
+  if settings.desktop_media_position == 'right'
+    assign grid_col_start = details_width
+    assign grid_col_end = media_width
+  else
+    assign grid_col_start = media_width
+    assign grid_col_end = details_width
+  endif
+
   if settings.equal_columns
     assign product_grid_class = product_grid_class | append: ' product-information__grid--half'
 
@@ -96,6 +107,7 @@
   {% endif %}
   <product-component
     class="{{ product_grid_class }}"
+    style="--product-col-start: {{ grid_col_start | divided_by: 100.0 }}; --product-col-end: {{ grid_col_end | divided_by: 100.0 }};"
     data-product-grid-content
     {% # theme-check-disable UnknownFilter %}
     view-event-payload="{{ product | standard_event_data: 'view' | escape }}"
@@ -251,6 +263,18 @@
             grid-column: 2 / 3;
           }
         }
+      }
+    }
+
+    /* Somna: uneven split (larger media) from desktop up; tablet stays 50/50 */
+    @media screen and (min-width: 990px) {
+      .product-information__grid.product-information__grid--half:not(.product-information--media-none),
+      .product-information__grid.product-information__grid--half:not(.product-information--media-none):has(.media-gallery--extend) {
+        grid-template-columns:
+          var(--full-page-grid-margin)
+          calc(var(--full-page-grid-central-column-width) * var(--product-col-start, 0.5))
+          calc(var(--full-page-grid-central-column-width) * var(--product-col-end, 0.5))
+          var(--full-page-grid-margin);
       }
     }
 
