@@ -1231,18 +1231,13 @@ h2.upsell_heading {
    Width uses vw, not %: .header has `contain: layout` until the menu opens, which makes it the
    containing block of this fixed drawer — a % width would jump from header width to viewport width. */
 header-drawer .menu-drawer {
-    /* Must be vw, not %: a fixed element's % width comes from its containing block, and .header
-       has `contain: layout`, so 100% resolved to a narrower box on iPhone (~370px of 390px),
-       leaving a strip on the right. vw is always the full screen width. */
+ 
     width: 100%;
     max-width: 100%;
     border-right: 0;
     transform: translateY(-100%);
     left: 0;
     right: 0;
-    /* Full-screen drop needs more time than Horizon's 0.2s side drawer, or it reads as a jump.
-       Closing: slightly quicker, ease-in. will-change keeps the layer ready so Safari
-       doesn't paint a blank first frame. */
     transition: transform 0.3s cubic-bezier(0.55, 0, 0.75, 0.5), visibility 0.3s, opacity 0.3s;
     will-change: transform;
     backface-visibility: hidden;
