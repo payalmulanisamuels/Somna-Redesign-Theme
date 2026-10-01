@@ -1702,7 +1702,9 @@ a.somna-view-all {
     to { opacity: 1; transform: translateY(0); }
   }
 /* Collection Feature*/
-
+.klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+    font-family: var(--font-paragraph--family) !important;
+}
 @media(min-width:768px){
     .header-logo span[data-testid=header-logo] {
         max-width: 173px;
@@ -1777,5 +1779,10 @@ a.somna-view-all {
     .review_content svg {
     height: 18px;
     width: 85px;
+    }
+    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+        font-size: 18px !important;
+        height: 40px !important;
+        font-family: var(--font-paragraph--family) !important;
     }
 }
