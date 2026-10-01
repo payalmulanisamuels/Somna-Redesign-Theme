@@ -166,7 +166,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 2,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -175,6 +175,7 @@
             "text_Lqf6bA": {
               "type": "text",
               "name": "t:names.text",
+              "disabled": true,
               "settings": {
                 "text": "<p>A simple, drug-free system<br/>for deeper, more restorative sleep.</p>",
                 "width": "fit-content",
