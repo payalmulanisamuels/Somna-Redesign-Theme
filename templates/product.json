@@ -1135,7 +1135,8 @@
         "group_iMHtRg"
       ],
       "custom_css": [
-        ".custom-section-content {display: flex; align-items: center;}"
+        ".custom-section-content {display: flex; align-items: center;}",
+        ".section-content-wrapper.section-content-wrapper{height: auto}"
       ],
       "name": "t:names.icons_with_text",
       "settings": {
