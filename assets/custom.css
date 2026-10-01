@@ -1711,6 +1711,13 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
+    .header__column--right {
+        gap: 37px !important;
+    }
+    .header-actions__action:not(.account-button) svg {
+        width: 28px;
+        height: 28px;
+    }
     .menu-list__link {
     --menu-top-level-font-size-desktop: 16px;
     }
