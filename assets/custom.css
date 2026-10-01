@@ -75,10 +75,9 @@ html[scroll-lock ] .announcement-bar {
     padding: 0;
 }
 .logo_mobile svg {
-    width: 28px;
-    height: 28px;
+    width: 28px !important;
+    height: 28px !important;
 }
-
 .logo_mobile .svg-wrapper {
     width: 28px;
     height: 28px;
