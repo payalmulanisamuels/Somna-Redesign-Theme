@@ -1711,6 +1711,9 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
+    .header-logo span[data-testid=header-logo] {
+        max-width: 173px;
+    }
     .header__column--right {
         gap: 37px !important;
     }
