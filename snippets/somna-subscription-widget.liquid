@@ -70,7 +70,13 @@
             endif
             assign is_current = false
             if v.id == current_var.id
-              assign is_current = true 
+              assign is_current = true
+            endif
+
+            # Bags in this variant (30 nights per bag: 1 / 2 / 4), used for the per-bag price.
+            assign v_bags = v_nights | divided_by: 30.0 | round
+            if v_bags < 1
+              assign v_bags = 1
             endif
           -%}
           "{{ v.id }}": {
@@ -98,9 +104,13 @@
                     assign discount = save_cents | times: 100.0 | divided_by: regular | round
                   endif
 
+                  # Subscription price per bag (1 / 2 / 4), kept in cents so it shows with decimals.
+                  assign per_bag = alloc.price | times: 1.0 | divided_by: v_bags | round
+
+                  # Per night across the nights this variant supplies (e.g. 4 bags = 120 nights).
                   assign per_night = ''
-                  if plan_days > 0
-                    assign per_night = alloc.price | divided_by: plan_days | money
+                  if v_nights > 0
+                    assign per_night = alloc.price | divided_by: v_nights | money
                   endif
 
                   if is_current
@@ -114,6 +124,7 @@
                       assign init_price = alloc.price
                       assign init_regular = regular
                       assign init_save = save_cents
+                      assign init_per_bag = per_bag
                       assign init_discount = discount
                       assign init_per_night = per_night
                     endif
@@ -128,6 +139,7 @@
                   "regular": {{ regular | money_without_trailing_zeros | json }},
                   "save": {{ save_cents | money_without_trailing_zeros | json }},
                   "saveCents": {{ save_cents }},
+                  "perBag": {{ per_bag | money_without_trailing_zeros | json }},
                   "discount": {{ discount }},
                   "perNight": {{ per_night | json }}
                 }{% unless forloop.last %},{% endunless %}
@@ -158,7 +170,7 @@
       {% if one_time_selected %}hidden{% endif %}
     >
       <div class="somna-box-banner">
-        <span data-somna="discount">{{ init_discount | default: 0 }}</span>% + 3 FREE GIFTS ON YOUR FIRST ORDER
+        <span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF + 3 FREE GIFTS ON YOUR FIRST ORDER
       </div>
       <div class="somna-box-top-row">
         <label class="somna-radio-label">
@@ -188,7 +200,7 @@
           <li>
             <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
             <b>
-              <span data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>/mo after first order
+              <span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo after first order
               {% comment %} · <span data-somna="interval">{{ init_name }}</span> {% endcomment %}
               (<span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF ongoing)
             </b>
@@ -280,10 +292,19 @@
         }
 
         const variantIdInput = productForm.querySelector('input[name="id"]');
+        const regularEl = container.querySelector('[data-somna="regular"]');
+        const savePill = container.querySelector('.somna-save-pill');
+        const perNightEl = container.querySelector('.somna-per-night');
         let plans = [];
+        let currentVariantId = null;
 
+        // The widget isn't re-rendered on variant change, so look each field's nodes up once.
+        const fieldEls = {};
         const setText = (key, value) => {
-          container.querySelectorAll(`[data-somna="${key}"]`).forEach((el) => (el.textContent = value));
+          fieldEls[key] ??= container.querySelectorAll(`[data-somna="${key}"]`);
+          fieldEls[key].forEach((el) => {
+            if (el.textContent !== value) el.textContent = value;
+          });
         };
 
         const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
@@ -310,31 +331,36 @@
           );
         };
 
-        const activate = (box) => {
-          container.querySelectorAll('.somna-purchase-box').forEach((b) => b.classList.toggle('active', b === box));
+        const boxes = container.querySelectorAll('.somna-purchase-box');
+        const activate = (box, sync = true) => {
+          boxes.forEach((b) => b.classList.toggle('active', b === box));
           const radio = box?.querySelector('input[type="radio"]');
           if (radio) radio.checked = true;
-          syncForm();
+          if (sync) syncForm();
         };
 
         const renderPlan = () => {
           const plan = plans.find((p) => String(p.id) === select.value);
           if (!plan) return;
-          setText('discount', plan.discount);
+          setText('discount', String(plan.discount));
           setText('price', plan.price);
+          setText('per-bag', plan.perBag);
           setText('regular', plan.regular);
           setText('save', plan.save);
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
-          container.querySelector('[data-somna="regular"]').hidden = plan.saveCents <= 0;
-          container.querySelector('.somna-save-pill').hidden = plan.saveCents <= 0;
-          container.querySelector('.somna-per-night').hidden = !plan.perNight;
+          regularEl.hidden = plan.saveCents <= 0;
+          savePill.hidden = plan.saveCents <= 0;
+          perNightEl.hidden = !plan.perNight;
           syncForm();
         };
 
         const renderVariant = (variantId) => {
+          // Skip repeat calls for the variant already shown.
+          if (String(variantId) === currentVariantId) return;
           const variant = data.variants[String(variantId)];
           if (!variant) return;
+          currentVariantId = String(variantId);
 
           setText('onetime-price', variant.price);
           plans = variant.plans;
@@ -355,27 +381,37 @@
           const match = plans.reduce((best, p) => (distance(p) < distance(best) ? p : best), plans[0]);
           select.value = String(match.id);
 
-          if (wasHidden || !oneTimeBox) activate(subBox);
+          // renderPlan() syncs the form, so don't sync (and fire the change event) twice.
+          if (wasHidden || !oneTimeBox) activate(subBox, false);
           renderPlan();
         };
 
-        container.querySelectorAll('.somna-purchase-box').forEach((box) => {
+        boxes.forEach((box) => {
           box.addEventListener('click', () => activate(box));
         });
 
         select.addEventListener('change', renderPlan);
 
-        // Horizon fires this when a variant is picked; the promise resolves with the new variant.
+        // Horizon fires this when a variant is picked. The clicked option's variant id is in
+        // event.detail straight away, so render from the local JSON now instead of waiting for
+        // the section re-render fetch. The promise is only a fallback (no variant id on the option,
+        // e.g. a combination that doesn't exist yet).
         const scope = container.closest('.shopify-section') || document;
-        scope.addEventListener('shopify:product:select', async (event) => {
+        scope.addEventListener('shopify:product:select', (event) => {
           if (event.target instanceof Element && event.target.closest('product-card')) return;
-          try {
-            const result = await event.promise;
-            const id = result?.detail?.resource?.id ?? variantIdInput?.value;
-            if (id) renderVariant(id);
-          } catch (e) {
-            /* aborted fetch — a newer selection will follow */
+          const variantId = event.detail?.variantId;
+          if (variantId) {
+            renderVariant(variantId);
+            return;
           }
+          event.promise
+            .then((result) => {
+              const id = result?.detail?.resource?.id ?? variantIdInput?.value;
+              if (id) renderVariant(id);
+            })
+            .catch(() => {
+              /* aborted fetch — a newer selection will follow */
+            });
         });
 
         renderVariant(variantIdInput?.value || {{ current_var.id | json }});

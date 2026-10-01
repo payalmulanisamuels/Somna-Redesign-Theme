@@ -217,6 +217,13 @@
     elsif forloop.index >= 3
       assign nights_count = 120
     endif
+
+    # Somna: "2 Bags" is the default on page load, unless the URL already picks a variant (?variant=).
+    assign is_default_size = false
+    assign value_start = product_option_value.name | downcase | strip | slice: 0, 5
+    if value_start == '2 bag' and product.selected_variant == blank and product.id == product_resource.id and product_option_value.selected == false and product_option_value.available
+      assign is_default_size = true
+    endif
   endif
 -%}
 
@@ -260,6 +267,9 @@
       {% if product_option_value.variant.id %}
         data-variant-id="{{ product_option_value.variant.id }}"
       {% endif %}
+      {% if is_default_size %}
+        data-somna-default-size
+      {% endif %}
       {% if product_option_value.selected %}
         data-current-checked="true"
         checked
@@ -295,7 +305,7 @@
       assign diff_amount = one_time_price | minus: sub_price 
     -%}
     {% if forloop.index >= 3 and diff_amount > 0 %}
-      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount   | money_without_trailing_zeros }}</span>
+      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount | divided_by: 100.0 | round | times: 100 | money_without_trailing_zeros }}</span>
     {% endif %}
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
@@ -434,6 +444,33 @@
 {% endunless %}
 
 {% render 'somna-subscription-widget', product_resource: product_resource, section: section %}
+
+{%- comment -%}
+  Somna: select "2 Bags" once on page load (only when the URL has no ?variant=).
+  Clicking the real radio runs the normal variant change, so prices, the subscription
+  widget, the sticky bar and the URL all update. The customer can change it afterwards.
+  Placed after the widget so its listeners are set up before the click.
+{%- endcomment -%}
+{%- unless product_resource.has_only_default_variant -%}
+  <script>
+    (() => {
+      const selectDefaultSize = () => {
+        const input = document.querySelector(
+          'variant-picker[data-section-id="{{ section.id }}"][data-block-id="{{ block.id }}"] input[data-somna-default-size]'
+        );
+        if (!input || input.checked || input.dataset.somnaDefaultDone) return;
+        input.dataset.somnaDefaultDone = 'true';
+        input.click();
+      };
+      const run = () => customElements.whenDefined('variant-picker').then(selectDefaultSize);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run);
+      } else {
+        run();
+      }
+    })();
+  </script>
+{%- endunless -%}
  
 
 {% render 'swatch-styles' %}
