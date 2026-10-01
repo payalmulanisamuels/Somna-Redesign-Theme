@@ -65,7 +65,7 @@
             "padding-block-start": 0,
             "padding-block-end": 24,
             "padding-inline-start": 0,
-            "padding-inline-end": 40
+            "padding-inline-end": 30
           },
           "blocks": {
             "group_icgrde": {
@@ -128,7 +128,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.875rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "uppercase",
@@ -156,7 +156,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "2rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -184,7 +184,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.625rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -560,9 +560,10 @@
       "settings": {
         "content_width": "content-full-width",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
-        "gap": 20,
+        "media_width": 60,
+        "gap": 16,
         "enable_sticky_add_to_cart": true,
         "background_color": "#fff9ed",
         "padding-block-start": 0,
@@ -673,7 +674,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -814,7 +815,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -955,7 +956,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1096,7 +1097,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1134,7 +1135,8 @@
         "group_iMHtRg"
       ],
       "custom_css": [
-        ".custom-section-content {display: flex; align-items: center;}"
+        ".custom-section-content {display: flex; align-items: center;}",
+        ".section-content-wrapper.section-content-wrapper {height: auto;}"
       ],
       "name": "t:names.icons_with_text",
       "settings": {
@@ -1376,7 +1378,7 @@
                 "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
                 "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_desktop": "3rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1403,7 +1405,7 @@
                 "font": "var(--font-body--family)",
                 "font_size": "0.625rem",
                 "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_desktop": "1.25rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",

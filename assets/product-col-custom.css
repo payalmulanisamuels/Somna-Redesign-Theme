@@ -257,6 +257,7 @@ margin-top: 7px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    font-family: var(--headfont);
   }
   .somna-per-night {
     color: #061C42;
@@ -1184,5 +1185,107 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   p.steps-subheading-bottom {
     font-size: 24px;
     margin-top: 40px;
+  }
+  .variant-card__title {
+    font-size: 22px;
+  }
+  .variant-card__sub-title {
+    font-size: 10px;
+  }
+  .variant-card__badge {
+    font-size: 11px;
+  }
+  .variant-card__inner {
+    padding-top: 20px;
+  }
+  .variant-card__gift {
+    font-size: 14px;
+  }
+  .variant-option__button-label .variant-card__gift svg {
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+  }
+  .variant-card__img {
+    height: 65px;
+  }
+  .somna-box-banner {
+    font-size: 13px;
+    padding: 5px 0;
+  }
+  .somna-box-title {
+    font-size: 18px;
+  }
+  .somna-per-night {
+    font-size: 15px;
+  }
+  .somna-guarantee-text {
+    font-size: 12px;
+  }
+  .somna-policy-link {
+    font-size: 11px;
+  }
+  .somna-strike-price {
+    font-size: 16px;
+  }
+  .somna-active-price {
+    font-size: 16px;
+  }
+  .somna-save-pill {
+    font-size: 16px;
+  }
+  .somna-perks-list li svg {
+    width: 12px;
+    height: 12px;
+  }
+  .somna-perks-list {
+    font-size: 15px;
+    gap: 10px;
+  }
+  .somna-frequency-dropdown {
+    font-size: 15px;
+    padding: 10px 23px;
+  }
+  .somna-dropdown-wrap:after {
+    width: 13px;
+    right: 23px;
+  }
+  .somna-box-inner {
+    padding: 10px 18px;
+  }
+  .button[id^=BuyButtons-ProductSubmitButton-] {
+    height: 57px !important;
+    font-size: 25px;
+  }
+  .svg-wrapper.add-to-cart-icon svg,.svg-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+  .somna-guarantee-text {
+    font-size: 12px;
+  }
+  .somna-policy-link {
+    font-size: 11px;
+  }
+  .somna-timeline-header span {
+    font-size: 13px;
+  }
+  .somna-timeline-header span:last-child {
+    max-width: 115px;
+  }
+  .somna-timeline-line svg {
+    width: 200px;
+    height: 10px;
+  }
+  .product-information__grid {
+    margin-bottom: 90px;
+  }
+  .footer-content .shopify-block.shopify-app-block {
+    max-width: 300px;
+    margin-bottom: 45px;
+  }
+
+  .klaviyo-form input[name="email"] {
+    font-size: 40px !important;
   }
 }

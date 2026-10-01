@@ -1711,6 +1711,19 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
+    .header-logo span[data-testid=header-logo] {
+        max-width: 173px;
+    }
+    .header__column--right {
+        gap: 37px !important;
+    }
+    .header-actions__action:not(.account-button) svg {
+        width: 28px;
+        height: 28px;
+    }
+    .menu-list__link {
+    --menu-top-level-font-size-desktop: 16px;
+    }
     h2.custom-header {
         font-size: 32px !important;
     }
@@ -1764,5 +1777,12 @@ a.somna-view-all {
     }
     .header__columns:has(.header__column--center header-menu) .header__column--left{
         flex: none;
+    }
+    .review_content {
+    font-size: 16px;
+    }
+    .review_content svg {
+    height: 18px;
+    width: 85px;
     }
 }
