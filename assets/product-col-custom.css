@@ -881,10 +881,9 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 
 @media screen and (max-width: 749px) {
   .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
-    bottom: max(12px, var(--safe-area-inset-bottom));
-    width: calc(100% - 24px);
-    border-radius: 22px;
-    padding-block-end: 10px;
+    width: 100%;
+    border-radius: 0;
+    padding-block-end: 0;
     z-index: 11111;
   }
 
