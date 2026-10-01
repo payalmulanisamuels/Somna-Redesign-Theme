@@ -1209,4 +1209,50 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   .variant-card__img {
     height: 65px;
   }
+  .somna-box-banner {
+    font-size: 13px;
+    padding: 5px 0;
+  }
+  .somna-box-title {
+    font-size: 18px;
+  }
+  .somna-per-night {
+    font-size: 15px;
+  }
+  .somna-strike-price {
+    font-size: 16px;
+  }
+  .somna-active-price {
+    font-size: 16px;
+  }
+  .somna-save-pill {
+    font-size: 16px;
+  }
+  .somna-perks-list li svg {
+    width: 12px;
+    height: 12px;
+  }
+  .somna-perks-list {
+    font-size: 15px;
+    gap: 10px;
+  }
+  .somna-frequency-dropdown {
+    font-size: 15px;
+    padding: 10px 23px;
+  }
+  .somna-dropdown-wrap:after {
+    width: 13px;
+    right: 23px;
+  }
+  .somna-box-inner {
+    padding: 10px 18px;
+  }
+  .button[id^=BuyButtons-ProductSubmitButton-] {
+    height: 57px !important;
+    font-size: 25px;
+  }
+  .svg-wrapper.add-to-cart-icon svg,.svg-wrapper {
+    width: 28px;
+    height: 28px;
+  }
 }
