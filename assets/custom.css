@@ -1238,7 +1238,7 @@ header-drawer .menu-drawer {
     transform: translateY(-100%);
     left: 0;
     right: 0;
-    transition: transform 0.3s cubic-bezier(0.55, 0, 0.75, 0.5), visibility 0.3s, opacity 0.3s;
+    transition: transform .4s linear,visibility .4s,opacity .4s;
     will-change: transform;
     backface-visibility: hidden;
 }
