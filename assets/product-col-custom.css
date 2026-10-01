@@ -257,6 +257,7 @@ margin-top: 7px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    font-family: var(--headfont);
   }
   .somna-per-night {
     color: #061C42;
