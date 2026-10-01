@@ -1039,7 +1039,7 @@
         "padding-block-end": 50
       }
     },
-    "section_zELtyM": {
+     "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -1142,6 +1142,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
+                    "font_size_tablet": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1281,6 +1283,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
+                    "font_size_tablet": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1420,6 +1424,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
+                    "font_size_tablet": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1559,6 +1565,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
+                    "font_size_tablet": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1596,7 +1604,8 @@
         "group_iMHtRg"
       ],
       "custom_css": [
-        ".custom-section-content {display: flex; align-items: center;}"
+        ".custom-section-content {display: flex; align-items: center;}",
+        ".section-content-wrapper.section-content-wrapper {height: auto;}"
       ],
       "name": "t:names.icons_with_text",
       "settings": {
@@ -1613,7 +1622,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "rgba(0,0,0,0)",
+        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1628,7 +1637,7 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    }
+    },
   },
   "order": [
     "section_mXKVY7",
