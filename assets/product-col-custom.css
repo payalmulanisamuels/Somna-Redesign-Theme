@@ -1185,4 +1185,27 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     font-size: 24px;
     margin-top: 40px;
   }
+  .variant-card__title {
+    font-size: 22px;
+  }
+  .variant-card__sub-title {
+    font-size: 10px;
+  }
+  .variant-card__badge {
+    font-size: 11px;
+  }
+  .variant-card__inner {
+    padding-top: 20px;
+  }
+  .variant-card__gift {
+    font-size: 14px;
+  }
+  .variant-option__button-label .variant-card__gift svg {
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+  }
+  .variant-card__img {
+    height: 65px;
+  }
 }
