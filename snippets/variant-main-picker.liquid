@@ -292,10 +292,10 @@
     </div>
 
     {%- liquid
-      assign diff_amount = one_time_price | minus: sub_price | round
+      assign diff_amount = one_time_price | minus: sub_price 
     -%}
     {% if forloop.index >= 3 and diff_amount > 0 %}
-      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount | money_without_trailing_zeros }}</span>
+      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount | round | money_without_trailing_zeros }}</span>
     {% endif %}
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
