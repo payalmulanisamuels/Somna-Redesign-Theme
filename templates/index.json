@@ -120,7 +120,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>THE SOMNA SLEEP SYSTEM</p>",
+                "text": "<p>THE somna SLEEP SYSTEM</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -854,7 +854,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
