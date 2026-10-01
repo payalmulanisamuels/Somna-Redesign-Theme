@@ -1785,6 +1785,7 @@ a.somna-view-all {
         height: 40px !important;
     }
      .klaviyo-form .klaviyo-form-button {
-        height: 40px !important;
+        height: 23px !important;
+        font-size: 18px !important;
      }
 }
