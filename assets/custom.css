@@ -1754,4 +1754,7 @@ a.somna-view-all {
     .footer-content summary.menu__heading.h5 {
         font-size: 20px;
     }
+    .shopify-section-group-footer-group:last-child .footer-content {
+        display: block;
+    }
 }
