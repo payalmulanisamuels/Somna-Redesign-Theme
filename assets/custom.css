@@ -1231,6 +1231,7 @@ header-drawer .menu-open > .menu-drawer {
     transform: translateY(0);
     /* Opening: ease-out, so it drops in fast and settles smoothly */
     transition: transform .4s linear, visibility .4s, opacity .4s;
+    overflow: hidden;
 }
 @media (prefers-reduced-motion: reduce) {
     header-drawer .menu-drawer,
