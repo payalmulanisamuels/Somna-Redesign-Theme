@@ -1233,6 +1233,9 @@ header-drawer .menu-open > .menu-drawer {
     transition: transform .4s linear, visibility .4s, opacity .4s;
     overflow: hidden;
 }
+.somna-drawer_main {
+    overflow: auto;
+}
 @media (prefers-reduced-motion: reduce) {
     header-drawer .menu-drawer,
     header-drawer .menu-open > .menu-drawer {
