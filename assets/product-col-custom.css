@@ -676,6 +676,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 }
 .sticky-add-to-cart__bar{
   z-index: 1111;
+  bottom: 0;
 }
 .somna-sticky__banner {
   flex: 1 0 100%;
