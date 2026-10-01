@@ -1762,4 +1762,7 @@ a.somna-view-all {
     .header__columns:has(.header__column--center header-menu){
         justify-content: space-between;
     }
+    .header__columns:has(.header__column--center header-menu) .header__column--left{
+        flex: none;
+    }
 }
