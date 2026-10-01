@@ -537,7 +537,7 @@ max-width: 190px;
 .email-signup__form {
 height: 100%;
 }
-.email-signup__input-group, .password-dialog__submit-button {
+.email-signup__input-group {
 height: 100%;
 }
 
