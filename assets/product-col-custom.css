@@ -1273,4 +1273,8 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   .somna-timeline-header span:last-child {
     max-width: 115px;
   }
+  .somna-timeline-line svg {
+    width: 200px;
+    height: 10px;
+  }
 }
