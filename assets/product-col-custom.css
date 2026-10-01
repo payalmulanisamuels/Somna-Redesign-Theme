@@ -1285,7 +1285,5 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     margin-bottom: 45px;
   }
 
-  .klaviyo-form input[name="email"] {
-    font-size: 40px !important;
-  }
+
 }
