@@ -65,7 +65,7 @@
             "padding-block-start": 0,
             "padding-block-end": 24,
             "padding-inline-start": 0,
-            "padding-inline-end": 40
+            "padding-inline-end": 30
           },
           "blocks": {
             "group_icgrde": {
@@ -128,7 +128,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.875rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "uppercase",
@@ -156,7 +156,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "1.125rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "2rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -184,7 +184,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "0.625rem",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
