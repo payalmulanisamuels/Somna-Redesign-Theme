@@ -1662,7 +1662,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>SOMNA Strips gently open nasal<br/>passages, while Tape encourages&nbsp;<br/>nasal breathing as you sleep.&nbsp;<br/>Together, they support one&nbsp;<br/>simple nightly habit.</p>",
+                "text": "<p>somna Strips gently open nasal<br/>passages, while Tape encourages&nbsp;<br/>nasal breathing as you sleep.&nbsp;<br/>Together, they support one&nbsp;<br/>simple nightly habit.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
