@@ -1711,6 +1711,9 @@ a.somna-view-all {
 /* Collection Feature*/
 
 @media(min-width:768px){
+    .menu-list__link {
+    --menu-top-level-font-size-desktop: 16px;
+    }
     h2.custom-header {
         font-size: 32px !important;
     }
