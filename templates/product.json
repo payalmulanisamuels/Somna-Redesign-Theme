@@ -562,7 +562,7 @@
         "desktop_media_position": "left",
         "equal_columns": true,
         "limit_details_width": false,
-        "media_width": 58,
+        "media_width": 60,
         "gap": 16,
         "enable_sticky_add_to_cart": true,
         "background_color": "#fff9ed",
