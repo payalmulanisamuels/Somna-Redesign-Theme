@@ -1705,6 +1705,9 @@ a.somna-view-all {
 .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
     font-family: var(--font-paragraph--family) !important;
 }
+.klaviyo-form-richtext, .klaviyo-form-richtext strong, .klaviyo-form-richtext p,.klaviyo-form-richtext p span {
+    color: #fff !important;
+}
 @media(min-width:768px){
     .header-logo span[data-testid=header-logo] {
         max-width: 173px;
