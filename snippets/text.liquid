@@ -40,6 +40,12 @@
       if block_settings.font_size != ''
         echo ' custom-font-size '
       endif
+      if block_settings.font_size_tablet != blank
+        echo ' custom-font-size-tablet '
+      endif
+      if block_settings.font_size_desktop != blank
+        echo ' custom-font-size-desktop '
+      endif
       if block_settings.color != ''
         echo ' custom-color '
       endif
@@ -61,6 +67,10 @@
   style="
     {% render 'spacing-padding', settings: block_settings %}
     {% render 'typography-style', settings: block_settings %}
+    {% if block_settings.type_preset == 'custom' %}
+      {% if block_settings.font_size_tablet != blank %}--font-size-tablet: {{ block_settings.font_size_tablet }};{% endif %}
+      {% if block_settings.font_size_desktop != blank %}--font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
+    {% endif %}
     {% if block_settings.text_color != blank %}
       --color: {{ block_settings.text_color }};
       --color-rgb: {{ block_settings.text_color.rgb }};
@@ -141,5 +151,20 @@
     max-inline-size: min(100%, var(--max-width, 100%));
     text-align: var(--text-align, var(--text-align-default));
     text-wrap: var(--text-wrap);
+  }
+
+  /* Responsive font size overrides (mobile size comes from --font-size) */
+  @media screen and (min-width: 750px) {
+    .text-block.custom-font-size-tablet,
+    .text-block.custom-font-size-tablet > * {
+      font-size: var(--font-size-tablet);
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .text-block.custom-font-size-desktop,
+    .text-block.custom-font-size-desktop > * {
+      font-size: var(--font-size-desktop);
+    }
   }
 {% endstylesheet %}
