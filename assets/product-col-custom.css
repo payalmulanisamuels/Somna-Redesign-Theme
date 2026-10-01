@@ -1219,6 +1219,12 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   .somna-per-night {
     font-size: 15px;
   }
+  .somna-guarantee-text {
+    font-size: 12px;
+  }
+  .somna-policy-link {
+    font-size: 11px;
+  }
   .somna-strike-price {
     font-size: 16px;
   }
