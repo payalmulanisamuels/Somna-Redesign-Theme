@@ -188,7 +188,6 @@
     border: 2px solid #1F3FAF; border-radius: 16px; box-sizing: border-box;
   }
   .somna-screen-enter { animation: somna-flip-in 0.45s ease both; }
-  /* Screen 1 fades out after the revealed offer has been shown for a moment */
   .somna-screen-leave { opacity: 0; transition: opacity 0.3s ease; }
   .somna-already-subscribed {
     width: 100%; margin: 0 0 12px; padding: 14px 16px; box-sizing: border-box;
@@ -243,14 +242,12 @@
     cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 99998;
     transition: bottom 0.3s ease;
   }
-  /* Keep the teaser clear of the sticky Add to Cart bar when it is showing */
   html:has(.sticky-add-to-cart__bar[data-stuck='true']) .somna-teaser-tab { bottom: 110px; }
 
   @media (max-width: 480px) {
     .somna-popup-container { width: 100vw; height: 100vh; height: 100dvh; max-width: none; min-height: 0; border-radius: 0; overflow-y: auto; }
   }
 
-  /* Desktop: split layout, content left, product image right */
   @media (min-width: 750px) {
     .somna-popup--has-image .somna-popup-container { max-width: 880px; min-height: 560px; }
     .somna-popup--has-image .somna-popup-image { display: block; flex: 0 0 48%; position: relative; }
@@ -275,14 +272,16 @@
     };
 
     const KEYS = {
-      dismissedAt: 'somna_popup_dismissed_at', // localStorage: closed without signing up
-      signedUp: 'somna_popup_signed_up',       // localStorage: never show again
-      suppressed: 'somna_popup_suppressed',    // localStorage: arrived from Klaviyo email etc.
-      teaser: 'somna_popup_teaser',            // sessionStorage: teaser for rest of session
+      dismissedAt: 'somna_popup_dismissed_at', 
+      signedUp: 'somna_popup_signed_up',      
+      suppressed: 'somna_popup_suppressed',    
+      teaser: 'somna_popup_teaser',            
+      scratched: 'somna_popup_scratched',      
     };
     const storage = {
       get(store, key) { try { return window[store].getItem(key); } catch (e) { return null; } },
       set(store, key, value) { try { window[store].setItem(key, value); } catch (e) {} },
+      remove(store, key) { try { window[store].removeItem(key); } catch (e) {} }
     };
 
     function track(name, data = {}) {
@@ -298,15 +297,13 @@
       const excluded = config.excludedPaths.map((p) => p.trim()).filter(Boolean);
       if (excluded.some((p) => path.includes(p))) return true;
 
-      if (storage.get('localStorage', KEYS.signedUp) || storage.get('localStorage', KEYS.suppressed)) return true;
+      if (storage.get('localStorage', KEYS.signedUp) || storage.get('localStorage', KEYS.suppressed) || storage.get('localStorage', KEYS.scratched)) return true;
 
-      // Arriving from a Klaviyo email link
       const params = new URLSearchParams(window.location.search);
       const fromKlaviyo =
         params.has('_kx') ||
         /klaviyo/i.test(params.get('utm_source') || '') ||
         (params.get('utm_medium') || '').toLowerCase() === 'email';
-      // Already identified by Klaviyo on this browser (subscribed / clicked an email before)
       let knownToKlaviyo = false;
       try {
         const cookie = document.cookie.split('; ').find((c) => c.startsWith('__kla_id='));
@@ -333,11 +330,10 @@
       let isOpen = false;
       let lastFocus = null;
       let openTimer = null;
+      let reopenTimer = null;
 
       if (isSuppressed()) return;
 
-      // Closed within the last N days: no automatic opening. The teaser tab stays for the
-      // rest of the session in which it was closed, and can still reopen the popup on click.
       const dismissedAt = Number(storage.get('localStorage', KEYS.dismissedAt) || 0);
       const withinCooldown = Boolean(dismissedAt) && Date.now() - dismissedAt < config.dismissDays * 86400000;
       if (withinCooldown && storage.get('sessionStorage', KEYS.teaser)) teaserTab?.classList.remove('somna-hidden');
@@ -376,6 +372,7 @@
         if (isOpen) return;
         isOpen = true;
         clearTimeout(openTimer);
+        clearTimeout(reopenTimer);
         lastFocus = document.activeElement;
         teaserTab?.classList.add('somna-hidden');
         overlay.classList.remove('somna-hidden');
@@ -384,7 +381,6 @@
         requestAnimationFrame(() => overlay.classList.add('somna-visible'));
         scratch.setup();
         document.addEventListener('keydown', onKeydown);
-        // Focus moves into the popup: the scratch card on screen 1, else the container
         const canvas = document.getElementById('somna-scratch-canvas');
         setTimeout(() => {
           if (!screens[0].classList.contains('somna-hidden') && canvas && !canvas.classList.contains('somna-scratch-done')) canvas.focus();
@@ -401,9 +397,16 @@
         document.documentElement.classList.remove('somna-popup-open');
         document.removeEventListener('keydown', onKeydown);
         const signedUp = storage.get('localStorage', KEYS.signedUp);
+        const hasScratched = storage.get('localStorage', KEYS.scratched);
+        
         setTimeout(() => {
           overlay.classList.add('somna-hidden');
-          if (!signedUp) {
+          if (!signedUp && !hasScratched) {
+            // User closed via icon or "No thanks" without scratching -> show again after 10 seconds
+            reopenTimer = setTimeout(() => {
+              openWhenClear('reopen_10s');
+            }, 10000);
+          } else if (!signedUp) {
             storage.set('localStorage', KEYS.dismissedAt, String(Date.now()));
             storage.set('sessionStorage', KEYS.teaser, '1');
             teaserTab?.classList.remove('somna-hidden');
@@ -477,7 +480,6 @@
           roundRect(0, 0, cssW, cssH, 16);
           ctx.fill();
 
-          // Night sky: periwinkle moons and stars
           ctx.fillStyle = '#DCE4FB';
           const s = cssW / 300;
           moon(34 * s, 34 * s, 10 * s);
@@ -502,7 +504,6 @@
 
         function point(event) {
           const rect = canvas.getBoundingClientRect();
-          // Scale from on-screen size to the canvas drawing size (handles zoom / resized card)
           return {
             x: ((event.clientX - rect.left) / rect.width) * cssW,
             y: ((event.clientY - rect.top) / rect.height) * cssH,
@@ -533,7 +534,6 @@
           }, 150);
         }
 
-        // Sample every 8th pixel instead of reading every pixel on every move
         function scratchedRatio() {
           const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
           let clear = 0;
@@ -548,12 +548,14 @@
         function reveal() {
           if (revealed) return;
           revealed = true;
+          // Mark that the user has scratched so it doesn't show popup anymore
+          storage.set('localStorage', KEYS.scratched, '1');
+          
           canvas.classList.add('somna-scratch-done');
           canvas.setAttribute('aria-hidden', 'true');
           canvas.tabIndex = -1;
           track('scratch_complete');
-          // Let the cover finish fading (0.45s), keep "10% off" on screen for a moment,
-          // then fade screen 1 out before the email step appears.
+          
           const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           const holdMs = reduceMotion ? 600 : 450 + 1500;
           setTimeout(() => {
@@ -582,7 +584,6 @@
         function onUp() {
           if (!drawing) return;
           drawing = false;
-          // A single tap / click (barely moved) reveals the whole card
           if (travelled < 8) reveal();
           else if (scratchedRatio() > 0.45) reveal();
           last = null;
@@ -621,7 +622,6 @@
         if (message) emailInput.focus();
       }
 
-      // Email already submitted on this browser: replace the form with a message
       function showAlreadySubscribed() {
         form?.classList.add('somna-hidden');
         overlay.querySelector('#somna-screen-2 .somna-consent-text')?.classList.add('somna-hidden');
@@ -698,11 +698,9 @@
           } else if (response.status === 400) {
             showError('Enter a valid email address.');
           } else {
-            // Klaviyo unavailable — still give the visitor their code
             success();
           }
         } catch (error) {
-          // Network / ad-blocker blocked Klaviyo — still give the visitor their code
           success();
         } finally {
           submitBtn.disabled = false;
@@ -716,7 +714,6 @@
         try {
           await navigator.clipboard.writeText(code);
         } catch (e) {
-          // Fallback for browsers without clipboard permission
           const range = document.createRange();
           range.selectNodeContents(document.getElementById('somna-discount-code-text'));
           const selection = window.getSelection();
@@ -735,9 +732,6 @@
         storage.set('localStorage', KEYS.signedUp, '1');
       });
 
-      // ---------- Trigger: after the delay; desktop also on exit intent ----------
-      // Shopify's cookie-consent banner sits above everything (z-index 2000000). If it is still
-      // open, wait until the visitor answers it, so it never covers the popup.
       function consentBannerOpen() {
         const banner = document.getElementById('shopify-pc__banner');
         if (!banner) return false;
