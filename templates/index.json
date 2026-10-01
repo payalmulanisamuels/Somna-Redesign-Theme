@@ -873,7 +873,7 @@
             "product": "the-colour-set",
             "tag": "",
             "is_featured": false,
-            "custom_title": "All three colours, Strips only",
+            "custom_title": "All three colors, Strips only",
             "custom_image": "shopify://shop_images/strip-product_d852a58d-5e95-47eb-b44e-f980135cf691.png",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Colour Set"
@@ -1760,7 +1760,7 @@
                 "text_4zJNzt": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colours of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
+                    "text": "<p>Sleep Bundle comes in three colors — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colors of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
