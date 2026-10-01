@@ -540,13 +540,6 @@ height: 100%;
 .email-signup__input-group, .password-dialog__submit-button {
 height: 100%;
 }
-.email-signup__button{
-    background: var(--color-text) !important;
-    margin: 0 !important;
-    font-size: 8px !important;
-    padding: 0 7px !important;
-    border: 0;
-}
 
 
 /* Signup Form*/
