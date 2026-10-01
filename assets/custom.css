@@ -1747,6 +1747,8 @@ a.somna-view-all {
     }
     .accordion .details__header {
         font-size: 22px !important;
+        padding-top: 30px;
+        padding-bottom: 10px;
     }
     li.menu__item.paragraph a {
         font-size: 18px;
