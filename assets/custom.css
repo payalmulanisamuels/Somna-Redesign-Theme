@@ -67,14 +67,21 @@ html[scroll-lock ] .announcement-bar {
     justify-content: space-between;
     padding: 20px 17px;
 }
-
 .logo_mobile .header-logo img {
     width: 130px;
     height: auto !important;
 }
-
 .menu-drawer__close-button.menu-drawer__close-button {
     padding: 0;
+}
+.logo_mobile svg {
+    width: 28px;
+    height: 28px;
+}
+
+.logo_mobile .svg-wrapper {
+    width: 28px;
+    height: 28px;
 }
 .header__column--left {
   display: flex !important;
