@@ -138,7 +138,7 @@
       "settings": {
         "bottom_wave_image": "shopify://shop_images/home-banner.png",
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
         "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
