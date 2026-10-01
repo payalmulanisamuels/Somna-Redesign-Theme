@@ -188,8 +188,8 @@
           <li>
             <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
             <b>
-              <span data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
-              · <span data-somna="interval">{{ init_name }}</span>
+              <span data-somna="price">{{ init_price | money_without_trailing_zeros }}/mo after first order</span>
+              {% comment %} · <span data-somna="interval">{{ init_name }}</span> {% endcomment %}
               (<span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF ongoing)
             </b>
           </li>
