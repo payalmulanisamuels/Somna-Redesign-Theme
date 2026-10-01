@@ -1759,4 +1759,7 @@ a.somna-view-all {
     .shopify-section-group-footer-group:last-child .footer-content {
         display: block;
     }
+    .header__columns:has(.header__column--center header-menu){
+        justify-content: space-between;
+    }
 }
