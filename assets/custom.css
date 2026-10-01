@@ -1780,8 +1780,11 @@ a.somna-view-all {
     height: 18px;
     width: 85px;
     }
-    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder, .klaviyo-form .klaviyo-form-button {
+    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
         font-size: 18px !important;
         height: 40px !important;
     }
+     .klaviyo-form .klaviyo-form-button {
+        height: 40px !important;
+     }
 }
