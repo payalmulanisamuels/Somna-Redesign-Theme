@@ -670,6 +670,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   color: var(--somna-navy-dark);
   box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
   max-width: 800px;
+  z-index: 11111 !important;
 }
 
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
