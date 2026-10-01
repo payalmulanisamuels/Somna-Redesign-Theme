@@ -699,7 +699,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
 .sticky_bar_main {
     width: 100%;
     display: flex;
-    padding: 0 15px;
+    padding:10px 15px 0;
     gap: 10px;
 }
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
