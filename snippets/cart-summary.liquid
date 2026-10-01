@@ -8,61 +8,7 @@
 {% render 'text-component-shimmer-styles' %}
 {% render 'cart-typography-styles' %}
 
-<div class="hz-perks-section">
-  <div class="hz-perks-container">
-    {%- for i in (1..3) -%}
-      {%- liquid
-        assign show_perk = true
-        assign icon_type = 'gift'
-        assign custom_img = blank
-        assign text_val = ''
 
-        if i == 1
-          assign show_perk = settings.show_perk_1
-          assign icon_type = settings.icon_1_type
-          assign custom_img = settings.icon_1_image
-          assign text_val = settings.perk_1_text
-        elsif i == 2
-          assign show_perk = settings.show_perk_2
-          assign icon_type = settings.icon_2_type
-          assign custom_img = settings.icon_2_image
-          assign text_val = settings.perk_2_text
-        elsif i == 3
-          assign show_perk = settings.show_perk_3
-          assign icon_type = settings.icon_3_type
-          assign custom_img = settings.icon_3_image
-          assign text_val = settings.perk_3_text
-        endif
-      -%}
-
-      {%- if show_perk and text_val != blank -%}
-        <div class="hz-perk-item">
-          <div class="hz-perk-icon-wrap">
-            {%- if custom_img != blank -%}
-              <img src="{{ custom_img | image_url: width: 80 }}" alt="" class="hz-perk-img" loading="lazy" width="24" height="24">
-            {%- else -%}
-              {%- case icon_type -%}
-                {%- when 'gift' -%}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-                {%- when 'refresh' -%}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                {%- when 'shield' -%}
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-              {%- endcase -%}
-            {%- endif -%}
-          </div>
-          <span class="hz-perk-text" style="color: {{ settings.text_color }};">
-            {{ text_val | newline_to_br }}
-          </span>
-        </div>
-
-        {%- if i < 3 -%}
-          <div class="hz-perk-divider" style="background-color: {{ settings.divider_color }};"></div>
-        {%- endif -%}
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
-</div>
 
 
 {%- liquid
@@ -88,14 +34,7 @@
 -%}
 
 <div class="hz-cart-totals-summary">
-  <div class="hz-cart-totals-row">
-    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
-    <text-component value="{{ cart.total_price | money }}">
-      {{ cart.total_price | money }}
-    </text-component>
-  </div>
-
-  {%- if total_saved > 0 -%}
+    {%- if total_saved > 0 -%}
     <div class="hz-cart-totals-row hz-cart-totals-saved">
       <span>You saved</span>
       <text-component value="-{{ total_saved | money }}">
@@ -103,16 +42,21 @@
       </text-component>
     </div>
   {%- endif -%}
-
   <div class="hz-cart-totals-row">
-    <span>Shipping</span>
-    <span>{% if cart.total_price >= 5000 %}Free{% else %}Calculated at checkout{% endif %}</span>
+    <span>Subtotal ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})</span>
+    <text-component value="{{ cart.total_price | money }}">
+      {{ cart.total_price | money }}
+    </text-component>
   </div>
+
+
+
+
 </div>
 
 
 
-<div class="cart-totals">
+{% comment %} <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -355,12 +299,12 @@
         {% endform %}
       </span>
     {% endif %}
-    {% comment %} <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
-    </div> {% endcomment %}
+    
   </div>
-</div>
-
+</div> {% endcomment %}
+<div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
+      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+    </div> 
 <div class="cart__ctas">
   <button
     type="submit"
@@ -373,7 +317,8 @@
     form="cart-form"
   >
     <span class="button-text">
-      {{ 'content.checkout' | t }} - {{ cart.total_price | money }}
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <mask id="mask0_1337_2094" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="18" height="18"> <rect width="17.5" height="17.5" fill="url(#pattern0_1337_2094)"/> </mask> <g mask="url(#mask0_1337_2094)"> <rect x="-0.546875" y="-1.09375" width="18.0469" height="19.1406" fill="white"/> </g> <defs> <pattern id="pattern0_1337_2094" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_1337_2094" transform="scale(0.01)"/> </pattern> <image id="image0_1337_2094" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEMUlEQVR4nO2dS6hVVRjHf11FRaOBWgkZRtAgejipNDWSDCSlIsqaRDXKEnGQlAWiPUykB+mwiKtGQV17FxFUAyd3ENJITWkYEYX4IivT3LLyu3A5pHuds/c569tr/3/wTQ7nnP2t9ePuu177OyCEEEK0g4nAPOBJYCvwJbAb2GOx217bau+5xT4jamQK8CDwKXAcKLqMY8AnwAr7LtEjlwIvA0d6kHC+OAxsAmamblyTmAJsAE7UKKIz/gDWA5NTN9Y7C4Cf+iiiMw4C81M32iMXAc8ApwYoYyz+AdZaDgKYALyVQETRETs0IjvXAR87kFFYfNRmKeEWsbPHjjsDHLDh7DZgi8U2e+1gBSnDbb19Pd+DhG+AR4HLIr4/vOcx4Fv7bDfXCiOwVrEE+LeLDvocuLHC9ebaDD72eqeBxbSES4BfIjvmEHBfjde+3yaHMdf+GbiYFvBGZIfsB+b04fpXAT9G5vAqmXNN5FxjLzCjj3mEpZN9kXOUq8mYtyM64VfgigHkciXwW0Q+b5Ips4CTESOpOweY09KIEdjfkaO6xvFU5Gx50LwXkdcaMuSHkkafBGYnyGuO/a+4UG7fkxmXR9wa3kmY37sRt9KwP5MND0XcFpYkzG9pRH4PkBGvlzT2qK36pmJixPZwVnOSsmWLr1InCHxdkuMXZETZ6usrqRMEXivJMczus+H3ksauSp0gsLokxzCJzIa/Shr7cOoEgUdKcvyTjCgbwYQzU6lZEZFnNkiIMyTEGRKSmCHgNuAFYHtEQ0eBkcQxGpHndjsLsMja2Aju7mJHrsmxH1iOczY76KhigBEWHV/CKc856KAiUTyNM26wozNFS+M0cB2O2OWgU4rE8QFOmNrnZzmKhkRYWpmGA+Y76IzCSdyMA+6NSHQkkyhKIvRFcrKe4XbQhBUHCUFCkiEhzpAQZ0iIMyTEGRLiDAlxhoQ4Q0KcISHOkJCSBzefAD60Awqjti+zso/1sCTkfxiy7eLjJVXknu3DyRAJ6WCyVXUoIuMzYBL1ISEdDHchYyzCo9h1ISHjWNyDjLofl5OQcXxXQUioCFQHEmLMqHjMKJTzmE51JMRYVEHGWCykOhJi3FODkPAdVZEQY2ENQm6lOhJiTK9YQlb/Q2oWUnWUFWo11oGEjOP2CkLuoB4kpIcCaJ0RijTXhYR0MMl+tiJWRqjhq7WsPgrBVnDX2Yru+a53zB6i0WrvAISMMdP2PnaN2w8JB6If72MBTQlxhoQ4Q0KcISHOkBBnSIgzJMQZEuIMCXGGhDhDQpwhIc5ohBBVcsBXJYd5EYm2JW7CAaoGxH9xwvrCBTF/zrnH+zji+pZXlDsFXIsz1jnomCJRhJ//dsmmHn53tslxBngR5yyzmrZF5rEPuIuGMGTncTfaU08jmcQwsAFY0KTK1kIIIYQQQgjBBTgL4YEB9NrnA8AAAAAASUVORK5CYII="/> </defs> </svg>
+    {{ 'content.checkout' | t }}  
     </span>
   </button>
 
@@ -430,10 +375,30 @@
 
 <div class="custom-payment-icons-wrapper">
 
-  <div class="express_checkout">
-    <span>or express checkout</span>
-  </div>
   <ul class="custom-payment-icons-list" role="list">
+
+      {% comment %} Visa {% endcomment %}
+    {% if settings.show_payment_visa %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_visa != blank %}
+          <img src="{{ settings.payment_image_visa | image_url: width: 120 }}" alt="Visa" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+
+      {% comment %} Mastercard {% endcomment %}
+    {% if settings.show_payment_mastercard %}
+      <li class="custom-payment-icon-item">
+        {% if settings.payment_image_mastercard != blank %}
+          <img src="{{ settings.payment_image_mastercard | image_url: width: 120 }}" alt="Mastercard" class="payment-icon" loading="lazy" width="48" height="30">
+        {% else %}
+          {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
+        {% endif %}
+      </li>
+    {% endif %}
+    
     
     {% comment %} Amex {% endcomment %}
     {% if settings.show_payment_amex %}
@@ -458,10 +423,10 @@
     {% endif %}
 
     {% comment %} Bancontact {% endcomment %}
-    {% if settings.show_payment_bancontact %}
+    {% if settings.show_payment_paypal %}
       <li class="custom-payment-icon-item">
-        {% if settings.payment_image_bancontact != blank %}
-          <img src="{{ settings.payment_image_bancontact | image_url: width: 120 }}" alt="Bancontact" class="payment-icon" loading="lazy" width="48" height="30">
+        {% if settings.payment_image_paypal != blank %}
+          <img src="{{ settings.payment_image_paypal | image_url: width: 120 }}" alt="PayPal" class="payment-icon" loading="lazy" width="48" height="30">
         {% else %}
           {{ 'bancontact' | payment_type_svg_tag: class: 'payment-icon' }}
         {% endif %}
@@ -501,16 +466,7 @@
       </li>
     {% endif %}
 
-    {% comment %} Mastercard {% endcomment %}
-    {% if settings.show_payment_mastercard %}
-      <li class="custom-payment-icon-item">
-        {% if settings.payment_image_mastercard != blank %}
-          <img src="{{ settings.payment_image_mastercard | image_url: width: 120 }}" alt="Mastercard" class="payment-icon" loading="lazy" width="48" height="30">
-        {% else %}
-          {{ 'master' | payment_type_svg_tag: class: 'payment-icon' }}
-        {% endif %}
-      </li>
-    {% endif %}
+  
 
     {% comment %} Shop Pay {% endcomment %}
     {% if settings.show_payment_shop_pay %}
@@ -523,17 +479,7 @@
       </li>
     {% endif %}
 
-    {% comment %} Visa {% endcomment %}
-    {% if settings.show_payment_visa %}
-      <li class="custom-payment-icon-item">
-        {% if settings.payment_image_visa != blank %}
-          <img src="{{ settings.payment_image_visa | image_url: width: 120 }}" alt="Visa" class="payment-icon" loading="lazy" width="48" height="30">
-        {% else %}
-          {{ 'visa' | payment_type_svg_tag: class: 'payment-icon' }}
-        {% endif %}
-      </li>
-    {% endif %}
-
+  
   </ul>
 </div>
 

@@ -1,0 +1,836 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_mXKVY7": {
+      "type": "section",
+      "blocks": {
+        "image_LPfK4d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/mobile-banner.jpg",
+            "link": "",
+            "image_ratio": "square",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 20,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_VdNWQe": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 4,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 15,
+            "padding-inline-end": 15
+          },
+          "blocks": {
+            "text_LhHWcH": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><strong>How To Use</strong></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "line_height": "tight",
+                "letter_spacing": "tight",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "text_color": "#2563eb",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_9AMpwg": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>Getting the most from your first night.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1.5rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0A1A4A",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_BBghpz": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Two small essentials, one simple routine. Here's how to use each one properly.</p>",
+                "width": "fit-content",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.625rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0A1A4A",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_LhHWcH",
+            "text_9AMpwg",
+            "text_BBghpz"
+          ]
+        }
+      },
+      "block_order": [
+        "image_LPfK4d",
+        "group_VdNWQe"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve-light.svg",
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "#fff9ed",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 40
+      }
+    },
+    "layered_image_with_text_LEPfjJ": {
+      "type": "layered-image-with-text",
+      "blocks": {
+        "layered_slide_jqmf8i": {
+          "type": "_layered-slide",
+          "settings": {
+            "media_type_1": "image",
+            "image_1": "shopify://shop_images/Breathe_Easier.png",
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 10,
+            "background_color": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 40,
+            "padding-block-end": 40,
+            "padding-inline-start": 15,
+            "padding-inline-end": 25
+          },
+          "blocks": {
+            "text_QmeLq9": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p><strong>Nasal Strips</strong></p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0a1a4a",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_jdwziN": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><strong>How it works:</strong> Flexible fabric backing,&nbsp;<br/>a gentle spring structure, and a<br/>hypoallergenic adhesive layer designed to stay comfortable through&nbsp;<br/>the night without irritating skin.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.625rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0a1a4a",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_QmeLq9",
+            "text_jdwziN"
+          ]
+        }
+      },
+      "block_order": [
+        "layered_slide_jqmf8i"
+      ],
+      "custom_css": [
+        ".wave-container img {height: 50px; object-position: top;}"
+      ],
+      "name": "Layered Image with Text",
+      "settings": {
+        "section_width": "full-width",
+        "height": "auto",
+        "corner_radius": 0,
+        "border_width": 1,
+        "drop_shadow": false,
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "steps_guide_GFjEFb": {
+      "type": "steps-guide",
+      "blocks": {
+        "step_a9NE7E": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape1.png",
+            "title": "<p>Clean and dry the bridge of your nose.</p>"
+          }
+        },
+        "step_c9jNqU": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape2.png",
+            "title": "<p>Centre the strip and smooth each side outward.</p>"
+          }
+        },
+        "step_EaXaXR": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape3.png",
+            "title": "<p>Press gently along the edges until it holds.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_a9NE7E",
+        "step_c9jNqU",
+        "step_EaXaXR"
+      ],
+      "name": "Steps Guide",
+      "settings": {
+        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
+        "bg_color": "#e0e8d7",
+        "show_waves": false,
+        "title": "",
+        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
+      }
+    },
+    "layered_image_with_text_BndA69": {
+      "type": "layered-image-with-text",
+      "blocks": {
+        "layered_slide_F3RQc7": {
+          "type": "_layered-slide",
+          "settings": {
+            "media_type_1": "image",
+            "image_1": "shopify://shop_images/Quiet_Nights.png",
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 10,
+            "background_color": "",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "padding-block-start": 40,
+            "padding-block-end": 40,
+            "padding-inline-start": 15,
+            "padding-inline-end": 5
+          },
+          "blocks": {
+            "text_QLq86c": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p><strong>Mouth Tape</strong></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0a1a4a",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_yUXBwV": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><strong>How it works:</strong> A soft, breathable fabric with a gentle adhesive layer, designed to stay comfortable through the night without pulling at the skin.</p>",
+                "width": "100%",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.625rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#0a1a4a",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_QLq86c",
+            "text_yUXBwV"
+          ]
+        }
+      },
+      "block_order": [
+        "layered_slide_F3RQc7"
+      ],
+      "custom_css": [
+        ".wave-container img {height: 50px; object-position: top;}",
+        ".group-block-content {width: 50%; margin: 0 0 0 auto !important;}"
+      ],
+      "name": "Layered Image with Text",
+      "settings": {
+        "section_width": "full-width",
+        "height": "auto",
+        "corner_radius": 0,
+        "border_width": 1,
+        "drop_shadow": false,
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "steps_guide_ed4FP7": {
+      "type": "steps-guide",
+      "blocks": {
+        "step_3AyEjy": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape-1.png",
+            "title": "<p>Apply to clean, dry lips shortly before bed.</p>"
+          }
+        },
+        "step_grpfPp": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tap-2.png",
+            "title": "<p>It should feel snug</p>"
+          }
+        },
+        "step_tBXEhD": {
+          "type": "step",
+          "settings": {
+            "step_number": "",
+            "image": "shopify://shop_images/tape-3.png",
+            "title": "<p>Never tight</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_3AyEjy",
+        "step_grpfPp",
+        "step_tBXEhD"
+      ],
+      "name": "Steps Guide",
+      "settings": {
+        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
+        "bg_color": "#e0e8d7",
+        "show_waves": false,
+        "title": "",
+        "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use."
+      }
+    },
+    "bundle_feature_banner_Qrgcy3": {
+      "type": "bundle-feature-banner",
+      "custom_css": [
+        ".bundle_feature_banner {margin-bottom: -30px;}"
+      ],
+      "name": "Bundle Feature Banner",
+      "settings": {
+        "product": "",
+        "bg_color": "{{ settings.color_palette.background }}",
+        "image": "shopify://shop_images/The_breathe_bundle.png",
+        "title": "Using Them Together",
+        "subtitle": "Clean, dry skin nose and lips. Apply the strip, then the tape, as the last step before lights out. Give it a few nights to feel like routine, not a new habit.",
+        "sub_price_override": "",
+        "sub_label": "",
+        "onetime_price_override": "",
+        "onetime_label": "",
+        "button_label": "",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "pdp_comparison_JDftN9": {
+      "type": "pdp-comparison",
+      "custom_css": [
+        ".hz-simple-comp-section {background: transparent;}"
+      ],
+      "name": "Comparison Simple",
+      "settings": {
+        "background_image": "shopify://shop_images/Subtract-howtouse.png",
+        "heading": "Settling In",
+        "subheading": "<p>Most people notice it feels routine within the first week. If anything feels wrong too tight, too irritating, not holding reposition or size down before deciding it's not for you. You have 30 nights to find out either way.</p>",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "section_q3qVem": {
+      "type": "section",
+      "blocks": {
+        "text_6VPgQf": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p><strong>FAQ</strong></p>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "accordion_R3LD8U": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "divider_color": "",
+            "type_preset": "h5",
+            "background_color": "",
+            "text_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_row_KNXU4r": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "What is the return policy?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_w7Hzgd": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_w7Hzgd"
+              ]
+            },
+            "accordion_row_VxBhQJ": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "Are any purchases final sale?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_wd3aYL": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_wd3aYL"
+              ]
+            },
+            "accordion_row_DGtye6": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "When will I get my order?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_M8RMrM": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_M8RMrM"
+              ]
+            },
+            "accordion_row_Fkcnwi": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Where are your products manufactured?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_nWzHDt": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_nWzHDt"
+              ]
+            },
+            "accordion_row_tef9ew": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "How much does shipping cost?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_4xpqrf": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_4xpqrf"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_row_KNXU4r",
+            "accordion_row_VxBhQJ",
+            "accordion_row_DGtye6",
+            "accordion_row_Fkcnwi",
+            "accordion_row_tef9ew"
+          ]
+        }
+      },
+      "block_order": [
+        "text_6VPgQf",
+        "accordion_R3LD8U"
+      ],
+      "custom_css": [
+        ".section-wrapper {margin-top: -20px;}"
+      ],
+      "name": "t:names.faq_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 50,
+        "padding-block-end": 50
+      }
+    }
+  },
+  "order": [
+    "section_mXKVY7",
+    "layered_image_with_text_LEPfjJ",
+    "steps_guide_GFjEFb",
+    "layered_image_with_text_BndA69",
+    "steps_guide_ed4FP7",
+    "bundle_feature_banner_Qrgcy3",
+    "pdp_comparison_JDftN9",
+    "section_q3qVem"
+  ]
+}

@@ -1,69 +1,211 @@
-<div class="hz-not-sure-section" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px 0 ;background-color: {{ section.settings.bg_color }};">
+<div class="sleep-tabs-section-main">
+
   {% comment %} Top Wave Divider {% endcomment %}
-  {% if section.settings.top_wave_image != blank %}
-    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})"></div>
-  {% endif %}
- {% comment %} Bottom Wave Divider {% endcomment %}
-  {% if section.settings.bottom_wave_image != blank %}
-    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})"></div>
-  {% endif %}
-  <div class="section section--page-width">
-    {% if section.settings.heading != blank %}
-      <h2 class="hz-not-sure-heading" style="color: {{ section.settings.text_color }};">
-        {{ section.settings.heading }}
-      </h2>
-    {% endif %}
-
-    <div class="hz-not-sure-grid">
-      {% for block in section.blocks %}
-        {% assign target_product = block.settings.target_product %}
-        <div class="hz-not-sure-card" {{ block.shopify_attributes }}>
-          <div class="hz-not-sure-card-content">
-            <h3 class="hz-not-sure-card-title">{{ block.settings.title }}</h3>
-            <p class="hz-not-sure-card-desc">{{ block.settings.description }}</p>
-          </div>
-          <div class="hz-not-sure-card-media">
-            {% if block.settings.custom_image != blank %}
-              <img src="{{ block.settings.custom_image | image_url: width: 600 }}" alt="" class="hz-not-sure-img" loading="lazy" width="300" height="300">
-            {% elsif target_product != blank and target_product.featured_image != blank %}
-              <img src="{{ target_product.featured_image | image_url: width: 600 }}" alt="" class="hz-not-sure-img" loading="lazy" width="300" height="300">
-            {% endif %}
-          </div>
-          {% if target_product != blank %}
-            <a href="{{ target_product.url }}" class="hz-not-sure-link-overlay" aria-label="{{ block.settings.title }}"></a>
-          {% endif %}
-        </div>
-    {% endfor %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
     </div>
-  </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  <div class="section section--page-width">
+  
 
- 
+<div class="sleep-tabs-section section-{{ section.id }}-padding">
+  
+    <div class="sleep-tabs-header">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <!-- Interactive Tab List -->
+    <div class="sleep-tabs-list" role="tablist">
+      {%- for block in section.blocks -%}
+        <button 
+          type="button"
+          class="sleep-tab-btn {% if forloop.first %}active{% endif %}"
+          data-target="tab-content-{{ block.id }}"
+          role="tab"
+          {{ block.shopify_attributes }}>
+          {{ block.settings.tab_title }}
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <!-- Dynamic Content Area -->
+    <div class="sleep-card-container">
+      {%- for block in section.blocks -%}
+        {%- assign selected_product = block.settings.product -%}
+        {%- assign specified_variant_id = block.settings.variant_id | default: '' | strip | plus: 0 -%}
+        
+        {%- liquid
+          # Find specific variant if ID is provided
+          assign current_variant = blank
+          if specified_variant_id > 0 and selected_product != blank
+            for variant in selected_product.variants
+              if variant.id == specified_variant_id
+                assign current_variant = variant
+                break
+              endif
+            endfor
+          endif
+
+          if current_variant == blank and selected_product != blank
+            assign current_variant = selected_product.selected_or_first_available_variant
+          endif
+
+          # Fallbacks to selected product/variant data if custom fields are left blank
+          if block.settings.card_title != blank
+            assign card_title = block.settings.card_title
+          elsif current_variant != blank and current_variant.title != 'Default Title'
+            assign card_title = selected_product.title | append: ' - ' | append: current_variant.title
+          elsif selected_product != blank
+            assign card_title = selected_product.title
+          else
+            assign card_title = "Sleep Bundle — Breathe"
+          endif
+
+          if block.settings.card_description != blank
+            assign card_description = block.settings.card_description
+          elsif selected_product != blank
+            assign card_description = selected_product.metafields.custom.subtitle | default: selected_product.description | strip_html | truncate: 60
+          else
+            assign card_description = "Strips + Tape, 1-month set"
+          endif
+
+          if block.settings.image != blank
+            assign card_image = block.settings.image
+          elsif current_variant != blank and current_variant.image != blank
+            assign card_image = current_variant.image
+          elsif selected_product != blank and selected_product.featured_image != blank
+            assign card_image = selected_product.featured_image
+          else
+            assign card_image = blank
+          endif
+
+          if block.settings.button_link != blank
+            assign button_link = block.settings.button_link
+          elsif selected_product != blank
+            assign button_link = selected_product.url
+          else
+            assign button_link = "#"
+          endif
+
+          # Calculate Subscription Price dynamically for this specific variant
+          assign base_price = current_variant.price | default: 0
+          assign calculated_price = base_price
+          assign has_subscription_discount = false
+
+          if selected_product != blank and selected_product.selling_plan_groups != blank
+            for group in selected_product.selling_plan_groups
+              for plan in group.selling_plans
+                for adjustment in plan.price_adjustments
+                  if adjustment.value_type == 'percentage'
+                    assign discount_multiplier = 100 | minus: adjustment.value
+                    assign temp_price = base_price | times: discount_multiplier | divided_by: 100
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
+                  elsif adjustment.value_type == 'fixed_amount'
+                    assign temp_price = base_price | minus: adjustment.value
+                    if temp_price < 0
+                      assign temp_price = 0
+                    endif
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
+                  elsif adjustment.value_type == 'price'
+                    assign temp_price = adjustment.value
+                    if has_subscription_discount == false or temp_price < calculated_price
+                      assign calculated_price = temp_price
+                      assign has_subscription_discount = true
+                    endif
+                  endif
+                endfor
+              endfor
+            endfor
+          endif
+
+          assign price = calculated_price | money
+        -%}
+
+        <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
+          <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
+          
+          <div class="sleep-card-image-wrapper">
+            {%- if card_image != blank -%}
+              {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'sleep-card-main-image' }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            {%- if block.settings.overlay_badge != blank -%}
+              <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
+            {%- endif -%}
+          </div>
+
+          {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
+            {% assign review_count_rating = selected_product.metafields.custom.custom_review_rating_review_count.value %}
+            <div class="review_content">
+              {{ review_count_rating }} 
+            </div>
+          {% endif %}
+          
+          <h3 class="sleep-card-title">{{ card_title }}</h3>
+          <p class="sleep-card-description">{{ card_description }}</p>
+          
+          <div class="sleep-card-price">
+            {%- if block.settings.price_text_override != blank -%}
+              {{ block.settings.price_text_override }}
+            {%- elsif selected_product != blank -%}
+              From <strong>{{ price }}</strong> with Subscribe and Save
+            {%- else -%}
+              From <strong>$59</strong> with Subscribe and Save
+            {%- endif -%}
+          </div>
+
+          {%- if button_link != blank -%}
+            <a href="{{ button_link }}{% if current_variant %}?variant={{ current_variant.id }}{% endif %}" class="sleep-card-button">
+              {{ block.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+</div>
+</div>
 </div>
 
- 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const tabButtons = document.querySelectorAll(".sleep-tab-btn");
+    const tabContents = document.querySelectorAll(".sleep-tab-content");
+
+    tabButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+
+        tabButtons.forEach(btn => btn.classList.remove("active"));
+        tabContents.forEach(content => content.classList.remove("active"));
+
+        button.classList.add("active");
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+          targetContent.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
 
 {% schema %}
 {
-  "name": "Collection Feature",
+  "name": "Interactive Sleep Tabs",
+  "tag": "section", 
   "settings": [
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Section Background",
-      "default": "#fdf8ee"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Heading Text Color",
-      "default": "#0b1a30"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Section Heading",
-      "default": "Not sure where to start?"
-    },
     {
       "type": "header",
       "content": "Wave Dividers"
@@ -80,65 +222,94 @@
       "label": "Bottom SVG Wave Image",
       "info": "Upload your custom bottom wave SVG file."
     },
-       {
-      "type": "header",
-      "content": "Padding"
-    },
     {
-      "type": "range",
-      "id": "padding_top",
-      "min": 20,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Top Padding",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 20,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Bottom Padding",
-      "default": 20
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "What keeps you from sleeping well?"
     }
   ],
   "blocks": [
     {
-      "type": "guide_card",
-      "name": "Guide Card",
+      "type": "sleep_option",
+      "name": "Tab Item",
       "settings": [
         {
           "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "New to both?"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Start with the Sleep Bundle in Blue (Breathe)."
+          "id": "tab_title",
+          "label": "Tab Name",
+          "default": "Blocked nose"
         },
         {
           "type": "product",
-          "id": "target_product",
-          "label": "Linked Product (Optional click link)"
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "variant_id",
+          "label": "Specific Variant ID",
+          "info": "Paste the exact Variant ID for this specific option/tab. (Leave blank to use the first available variant)."
+        },
+        {
+          "type": "header",
+          "content": "Card Content Overrides"
+        },
+        {
+          "type": "text",
+          "id": "badge_subtitle",
+          "label": "Card Subtitle (Optional)",
+          "default": "Your best start",
+          "info": "Overrides default styling badge text above the image."
         },
         {
           "type": "image_picker",
-          "id": "custom_image",
-          "label": "Override Image (Fallback to Product Image)"
+          "id": "image",
+          "label": "Custom Image Override",
+          "info": "Leave blank to use the variant or product's image automatically."
+        },
+        {
+          "type": "text",
+          "id": "overlay_badge",
+          "label": "Image Badge Text",
+          "default": "FREE GIFTS with subscription"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "Custom Title Override",
+          "info": "Leave blank to combine product and variant title automatically."
+        },
+        {
+          "type": "text",
+          "id": "card_description",
+          "label": "Custom Description Override",
+          "info": "Leave blank to use product snippet."
+        },
+        {
+          "type": "html",
+          "id": "price_text_override",
+          "label": "Custom Price Text HTML",
+          "info": "Leave blank to automatically pull variant price."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "View Sleep Bundle"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Custom Button Link Override",
+          "info": "Leave blank to link directly to the product page with this variant selected."
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Collection Feature",
- 
+      "name": "Interactive Sleep Tabs"
     }
   ]
 }

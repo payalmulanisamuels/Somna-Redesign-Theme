@@ -34,10 +34,50 @@
     assign current_variant = product.selected_or_first_available_variant
     # Get the initial quantity based on quantity rules
     assign initial_quantity = current_variant.quantity_rule.min | default: 1
+
+    # Somna: size dropdown + subscription / one-time mirroring (inspiration/stickybar, stickybar-flow).
+    # Used when the product has native selling plans and a Size / Quantity / Set option.
+    assign somna_supply_option = nil
+    for product_option in product.options_with_values
+      assign option_name_check = product_option.name | downcase
+      if option_name_check contains 'size' or option_name_check contains 'quantity' or option_name_check contains 'set'
+        assign somna_supply_option = product_option
+        break
+      endif
+    endfor
+
+    assign somna_sticky = false
+    if somna_supply_option and product.selling_plan_groups.size > 0
+      assign somna_sticky = true
+    endif
+
+    # Initial mode matches the Buy Box default; the JS keeps it in sync afterwards.
+    assign somna_purchase_mode = 'onetime'
+    if current_variant.selling_plan_allocations.size > 0
+      assign somna_purchase_mode = 'subscribe'
+    endif
+
+    # Subscription button text by size (1 Bag / 2 Bags / 3+1 Bags)
+    assign somna_cta_subscribe = 'products.product.add_to_cart' | t
+    if somna_sticky
+      for option_value in somna_supply_option.values
+        if option_value.selected
+          if forloop.index == 2
+            assign somna_cta_subscribe = 'Get my free guides'
+          elsif forloop.index >= 3
+            assign somna_cta_subscribe = 'Get my free month'
+          endif
+          break
+        endif
+      endfor
+    endif
   %}
 
   <sticky-add-to-cart
     class="sticky-add-to-cart"
+    {% if somna_sticky %}
+      data-purchase-mode="{{ somna_purchase_mode }}"
+    {% endif %}
     data-variant-available="{{ current_variant.available }}"
     data-product-id="{{ product.id }}"
     data-current-variant-id="{{ current_variant.id }}"
@@ -45,12 +85,19 @@
     data-default-variant-title="{{ 'products.product.default_title' | t }}"
   >
     <div
-      class="sticky-add-to-cart__bar color-custom-popover"
+      class="sticky-add-to-cart__bar color-custom-popover{% if somna_sticky %} sticky-add-to-cart__bar--somna{% endif %}"
       data-stuck="false"
       ref="stickyBar"
       role="region"
       aria-label="{{ 'products.product.sticky_add_to_cart' | t }}"
     >
+      {% if somna_sticky %}
+        <p class="somna-sticky__banner somna-sticky__mode--subscribe">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_1618_621)"> <path d="M6 3.49951V10.4995M6 3.49951C5.81914 2.75421 5.50772 2.11726 5.10637 1.67131C4.70501 1.22536 4.23234 0.991327 3.75 0.99973C3.41848 0.99973 3.10054 1.13143 2.86612 1.36585C2.6317 1.60027 2.5 1.91821 2.5 2.24973C2.5 2.58125 2.6317 2.89919 2.86612 3.13361C3.10054 3.36803 3.41848 3.49973 3.75 3.49973M6 3.49951C6.18086 2.75421 6.49228 2.11726 6.89363 1.67131C7.29499 1.22536 7.76766 0.991327 8.25 0.99973C8.58152 0.99973 8.89946 1.13143 9.13388 1.36585C9.3683 1.60027 9.5 1.91821 9.5 2.24973C9.5 2.58125 9.3683 2.89919 9.13388 3.13361C8.89946 3.36803 8.58152 3.49973 8.25 3.49973M10 5.49951V9.49951C10 9.76473 9.89464 10.0191 9.70711 10.2066C9.51957 10.3942 9.26522 10.4995 9 10.4995H3C2.73478 10.4995 2.48043 10.3942 2.29289 10.2066C2.10536 10.0191 2 9.76473 2 9.49951V5.49951M10 5.49951C10.2761 5.49951 10.5 5.27565 10.5 4.99951V3.99951C10.5 3.72337 10.2761 3.49951 10 3.49951H2C1.72386 3.49951 1.5 3.72337 1.5 3.99951V4.99951C1.5 5.27565 1.72386 5.49951 2 5.49951M10 5.49951H2" stroke="#1C2A62" stroke-width="2" stroke-linecap="round"/> </g> <defs> <clipPath id="clip0_1618_621"> <rect width="12" height="12" fill="white"/> </clipPath> </defs> </svg>
+          Free shipping + 2 free Sleep Guides
+        </p>
+      {% endif %}
+
       {% liquid
         assign image_to_show = current_variant.featured_image | default: product.featured_image
       %}
@@ -86,6 +133,9 @@
           assign has_image = true
         endif
       %}
+      {% if somna_sticky %}
+        {% render 'somna-sticky-options', product: product, supply_option: somna_supply_option %}
+      {% else %}
       <div
         class="sticky-add-to-cart__info"
         data-has-image="{{ has_image }}"
@@ -120,6 +170,7 @@
       >
         {% render 'price', product_resource: product, show_sale_price_first: true %}
       </div>
+      {% endif %}
 
       <button
         type="button"
@@ -140,7 +191,10 @@
           {% endif %}
           <span class="add-to-cart-text__content">
             <span>
-              {%- if current_variant.available -%}
+              {%- if current_variant.available and somna_sticky -%}
+                <span class="somna-sticky__mode--subscribe">{{- somna_cta_subscribe -}}</span>
+                <span class="somna-sticky__mode--onetime">{{- 'products.product.add_to_cart' | t -}}</span>
+              {%- elsif current_variant.available -%}
                 {{- 'products.product.add_to_cart' | t -}}
               {%- elsif current_variant == blank -%}
                 {{- 'products.product.unavailable' | t -}}
@@ -434,6 +488,18 @@
       "id": "limit_details_width",
       "label": "t:settings.limit_product_details_width",
       "default": false,
+      "visible_if": "{{ section.settings.equal_columns }}"
+    },
+    {
+      "type": "range",
+      "id": "media_width",
+      "label": "Media width (desktop)",
+      "info": "Applies from 990px. 50% = equal columns.",
+      "min": 40,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
       "visible_if": "{{ section.settings.equal_columns }}"
     },
     {

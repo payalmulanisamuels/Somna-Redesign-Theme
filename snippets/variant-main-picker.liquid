@@ -67,9 +67,87 @@
             assign option_id_attribute = 'data-option-id="' | append: fieldset_id | append: '"'
             assign longest_value = 0
           endif
+
+          # Somna: Color / Colour option renders as round color swatches
+          assign option_name_check = product_option.name | downcase
+          assign is_color_option = false
+          if option_name_check contains 'color' or option_name_check contains 'colour'
+            assign is_color_option = true
+          endif
         -%}
 
-        {%- if product_option.values.size == 1 and variant_style != 'swatch' -%}
+        {%- if is_color_option -%}
+          {% comment %} =========================================================
+            SOMNA COLOR SWATCHES  ("Color: Blue"  ● ● ●)
+          ========================================================= {% endcomment %}
+          <fieldset
+            class="variant-option somna-color-option"
+            data-fieldset-index="{{ fieldset_index }}"
+            ref="fieldsets[]"
+          >
+            <legend class="visually-hidden">{{ product_option.name | escape }}</legend>
+            <div class="somna-color-option__label" aria-hidden="true">
+              {{ product_option.name | escape }}: <strong>{{ product_option.selected_value | escape }}</strong>
+            </div>
+            <div class="somna-color-option__swatches">
+              {%- for product_option_value in product_option.values -%}
+                {%- liquid
+                  assign swatch_value_name = product_option_value.name | downcase
+                  assign swatch_bg = ''
+                  if product_option_value.swatch.image
+                    assign swatch_bg = product_option_value.swatch.image | image_url: width: 80 | prepend: 'url(' | append: ') center / cover'
+                  elsif product_option_value.swatch.color
+                    assign swatch_bg = 'rgb(' | append: product_option_value.swatch.color.rgb | append: ')'
+                  elsif swatch_value_name contains 'blue'
+                    assign swatch_bg = '#306ff9'
+                  elsif swatch_value_name contains 'red'
+                    assign swatch_bg = '#ff0a0a'
+                  elsif swatch_value_name contains 'black'
+                    assign swatch_bg = '#242424'
+                  endif
+                -%}
+                <label
+                  class="somna-color-swatch{% if product_option_value.available == false %} somna-color-swatch--unavailable{% endif %}"
+                  title="{{ product_option_value.name | escape }}"
+                  style="{% if swatch_bg != blank %}--somna-swatch: {{ swatch_bg }};{% endif %}"
+                >
+                  <input
+                    type="radio"
+                    name="{{ product_option.name | escape }}-{{ block.id }}-{{ product_resource.id }}"
+                    value="{{ product_option_value | escape }}"
+                    aria-label="{{ product_option_value.name | escape }}{% if product_option_value.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}"
+                    {% if product_option_value.available == false %}
+                      aria-disabled="true"
+                    {% endif %}
+                    data-previous-checked="false"
+                    data-fieldset-index="{{ fieldset_index }}"
+                    data-input-index="{{ forloop.index0 }}"
+                    data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+                    data-option-name="{{ product_option.name | escape }}"
+                    data-option-value-id="{{ product_option_value.id }}"
+                    data-option-available="{{ product_option_value.available }}"
+                    data-connected-product-url="{{ product_option_value.product_url }}"
+                    {% if product_option_value.variant.id %}
+                      data-variant-id="{{ product_option_value.variant.id }}"
+                    {% endif %}
+                    {% if product_option_value.selected %}
+                      data-current-checked="true"
+                      checked
+                    {% else %}
+                      data-current-checked="false"
+                    {% endif %}
+                  >
+                  <span class="somna-color-swatch__dot" aria-hidden="true">
+                    <svg class="somna-color-swatch__check" viewBox="0 0 14 11" fill="none">
+                      <path d="M1.5 5.5L5.25 9.25L12.5 1.75" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+          {%- assign fieldset_index = fieldset_index | plus: 1 -%}
+        {%- elsif product_option.values.size == 1 and variant_style != 'swatch' -%}
           <div
             class="variant-option"
             data-testid="variant-option-single"
@@ -201,9 +279,16 @@
           {{ var_img | image_url: width: 200 | image_tag: loading: 'lazy', class: 'variant-card__img' }}
         {%- endif -%}
       </div>
-      <span class="variant-card__gift">
+
+      <span class="variant-card__gift"   >
+        {% if forloop.index == 1 %}
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <mask id="mask0_1366_2731" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="15"> <rect width="15" height="15" fill="url(#pattern0_1366_2731)"/> </mask> <g mask="url(#mask0_1366_2731)"> <rect x="-2.5" y="-0.625" width="19.375" height="15.625" fill="black"/> </g> <defs> <pattern id="pattern0_1366_2731" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_1366_2731" transform="scale(0.01)"/> </pattern> <image id="image0_1366_2731" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEEklEQVR4nO2dy48MURSHP4+IhCGCxGMQJBYeCSKWFlhYiGBLRGyIeFtYW3nGH+CxsbHCggWricUsSEgYIkgsyIh4BRG0V8md3IlxVZvq6uo6t3p+X3ISMTNV55xvbp2a7qpqEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhLBgMnAMeAzUgKRN4hvwBDgBTKIiLANeRtC8pMXxAlhMBVbGUJCR+HgOTCBijkfQpLLjMBHzKIIGlR33iJh2GuBJxvhMxCRDNKLFujESEmDdGAkJsG6MhARYN0ZCAqwbIyEB1o2RkADrxkhIgHVjYhGS5IxPwF3gKDCHArBuTNWFJAPiO3AKGC0hRCGkP+4AMyWEaIS46AXmSgjRCHHxLM9KsW5MOwtJgFvAKAkhGiGJH/QSQjxCfgHrJYRohLh4B8yWEKIR4uJmlnli3ZgqCHkFbAHG0xj7UrZ1UkJoSoiTMZ18DAMup8yTtRJCbiGbaA53DdjTYJtvgBkSQi4hjR6m0liecnVPNzBSQmhYSFGkzRP3CrGEYCPEzZOLKfNknYRgIqTePHnlr6+WEAMh9ebJuSyJtHtYCXEcDPbxA1g0WCLtHpZCRgC3g/1cGCyRdg9LIY41wX5q/Xd4WTdmqArBXxwxcF97iKAxsQuZQOs4EOzrqoT8od73bad1LE253c68MbEL+QDMa5GQMSlzxLwxsQtJvJTtLTp8/ZOXdWOqICQpMy/rBCQECUkkJL4Isc5HQgKs85GQAOt8JCTAOh8JCbDOR0ICrPORkADrfCQkwDofCQmwzkdCAqzzkZCAthfSA+wFFvjX/cf4f+/1X6uakJ6S6im8UPcmy05gOP+/6mKX8dPsQmKpp3AZK8nOKkMpIbHUU2iR7jepUXZHLGSnQT19b08WUWCPX7qN4n7mfskyahmEWNTz3m3gRkFFuuGWl/0lC3mYQYhFPV3uhzcXVOT8JgpYWLKQIyk5xFBP391a7uzhegFFdjRRQEeJMnqBiSk5WNdzzd9D0sc4/x/tLqTXX5yWhmU917yDvxjmD19dOQd9rIesmp8ZR+qsjH7KrueD7/WmgSujGS4VOATDa1wvUj5Pq17PrgJPEx8UcP7fLKerXs9U4GuwYyepUfYE2/gKTKF8VqQcVoqo50uZ9ZxNOV67lw+ystp/JNHAbZzBju4W1ONWXmlM9U8lCIvYPchyH+F/k8LkX/ttWrEk5bWoZuspfbVvBH6mLPf7/i9Wd8Yx1sdCP/DCY2zit7Eee9Ju8K9cPdvqSMka7gb6HcTDoSZPtaOox62UtzmSd4e8DcTHVuBjznpiWOl9dPqb4LO8J1DzAzzvo4/KwD0B7rx/QHLWeqYRIZ1+EF71H+r4yYf70Mor/mvue6rCLP+HYsvr+Q3JGNeR99nMFgAAAABJRU5ErkJggg=="/> </defs> </svg>
+        free shipping
+        {%  else %}
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <rect width="18" height="18" fill="url(#pattern0_1178_1391)"/> <defs> <pattern id="pattern0_1178_1391" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_1178_1391" transform="scale(0.01)"/> </pattern> <image id="image0_1178_1391" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADYElEQVR4nO2dO2tUURRGl6Y2QtBGO0VBxQciio2iIJapLLQS8fEDtBB8kUpFEQuNSEylNrsW/AGWvvAHKLHTzhAQDElGTriBMExOJuOee77r7AUbAvdu+NbeTHLmprgQBEEQBEEQDC7bgWPAKHAUGOmiZ6S6d7Tq3VZDzv+azcA94BvQaqs54B1wFli/rCf9fK66Nteh7ytwF9hU0KuRXAamOwy0U30EdgA7gc9d9vwCLpaWbAqPuxzq8ppewwKX16PSsupc72Go/1rXSkurcgCYL7CQ9Ldmb2l5Rd4WWMZSvSktr8ZWYCEzsCngFnABGAf+dDHkdM/Tquc28D1zb/pkbik9BCWurHKK2tB2/5FVlpKuHW7rGQY+ZXou1egrz8PMoE6s0PMs05M+GZ04mel50Ee/xvEyM6jhFXrOZ3rStU4MZ3pShqBiPDOoXSv0nMn0pGud2JPpedJHv8ZxNTOo544Lmcj0pAxBxf7MoBaqpewGhnpYyFDVO7HKSS5laCz7gMnqODrbxRF0UGq2msmLur5srgPGCn2jbjWs0ozuVDPrG2MCoq2GVVpK335NxSeDNdd89ZzOnUkBuVZDKx0o3JkSEGs1tNJ/Pd2J0xQ9V3q25k5pqVbDKxaCVsVC0KpYCFoVC0GrYiFolTvpCWoUPVcQBEEQBEHQOEzgXG8NzueOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO5oy5s4vncURc28XzuqAubeD531IVNPJ876sImns8ddWETz+eOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO581pc2ATyvapxH4sv0CotbOILuV/jPjgtIGziCzlV4z4WX5Pd7ZuZB3EhX9peK14Lh4DfsRDaK83kIIU4DvyMhbBUP4BjFGYjcBP4AMwM4EJmgPfAjcxLMIMgCIIgCIIgCIIgoIn8BabFMXoRIeglAAAAAElFTkSuQmCC"/> </defs> </svg>
-        +2 free gifts</span>
+        +2 free gifts
+        {%  endif %}
+      </span>
     </div>
 
     {%- liquid
@@ -348,180 +433,7 @@
   </variant-picker>
 {% endunless %}
 
-{% comment %} =========================================================
-  CUSTOM SUBSCRIPTION BOX (FULLY DYNAMIC PRICE, PER NIGHT & SAVINGS)
-========================================================= {% endcomment %}
-{%- liquid
-  assign initial_var = product_resource.selected_or_first_available_variant
-  assign init_sub_price = initial_var.price
-  assign init_one_time = initial_var.compare_at_price | default: initial_var.price
-  for alloc in initial_var.selling_plan_allocations
-    assign init_sub_price = alloc.price
-    assign init_one_time = alloc.compare_at_price | default: initial_var.price
-    break
-  endfor
-  assign init_sub_numeric = init_sub_price | divided_by: 100.0
-  assign init_nights = 30
-  if init_sub_numeric > 50 and init_sub_numeric < 100
-    assign init_nights = 60
-  elsif init_sub_numeric >= 100
-    assign init_nights = 120
-  endif
-  assign init_per_night = init_sub_numeric | divided_by: init_nights | round: 2
-  assign init_savings = init_one_time | minus: init_sub_price
--%}
-
-<div class="somna-custom-subscription-container" id="SomnaSubscriptionWidget">
-  <!-- Option 1: Autoship & Save Box -->
-  <div class="somna-purchase-box active" data-purchase-card="subscribe">
-    <div class="somna-box-banner">10% OFF YOUR FIRST ORDER</div>
-    <div class="somna-box-top-row">
-      <label class="somna-radio-label">
-        <input type="radio" name="somna_purchase_type" value="subscribe" checked>
-        <span class="somna-radio-bullet"></span>
-        <div class="somna-title-stack">
-          <span class="somna-box-title">Autoship & Save</span>
-          <span class="somna-per-night" id="SomnaPerNightPrice">${{ init_per_night }} Per Night</span>
-        </div>
-      </label>
-      <div class="somna-price-stack">
-        <div class="somna-pricing-row">
-          <span class="somna-strike-price" id="SomnaStrikePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
-          <span class="somna-active-price" id="SomnaSubPrice">{{ init_sub_price | money_without_trailing_zeros }}</span>
-        </div>
-        <div class="somna-save-pill" id="SomnaSavePill" {% if init_savings <= 0 %}style="display:none;"{% endif %}>SAVE {{ init_savings | money_without_trailing_zeros }}</div>
-      </div>
-    </div>
-    <div class="somna-box-inner">
-      <ul class="somna-perks-list">
-        <li>✓ Same price, for as long as you stay subscribed</li>
-        <li>✓ <strong>FREE</strong> shipping</li>
-        <li>✓ FREE Gifts included in Every Delivery</li>
-        <li>✓ Skip, pause, or cancel anytime</li>
-      </ul>
-
-      <div class="somna-dropdown-wrap">
-        <select class="somna-frequency-dropdown" id="SomnaSellingPlanSelect" name="selling_plan">
-          {%- liquid
-            for allocation in initial_var.selling_plan_allocations
-              echo '<option value="' | append: allocation.selling_plan.id | append: '">' | append: allocation.selling_plan.name | append: '</option>'
-            endfor
-          -%}
-          {% if initial_var.selling_plan_allocations.size == 0 %}
-            <option value="60">Delivery every 60 Days</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- Option 2: One-Time Purchase Box -->
-  <div class="somna-purchase-box" data-purchase-card="onetime">
-    <div class="somna-box-inner">
-      <div class="somna-box-top-row">
-        <label class="somna-radio-label">
-          <input type="radio" name="somna_purchase_type" value="onetime">
-          <span class="somna-radio-bullet"></span>
-          <span class="somna-box-title">One-Time Purchase</span>
-        </label>
-        <div class="somna-price-stack">
-          <span class="somna-active-price" id="SomnaOneTimePrice">{{ init_one_time | money_without_trailing_zeros }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('SomnaSubscriptionWidget');
-    if (!container) return;
-
-    const purchaseBoxes = container.querySelectorAll('.somna-purchase-box');
-    const sellingPlanSelect = document.getElementById('SomnaSellingPlanSelect');
-    
-    const productForm = document.querySelector('form[action*="/cart/add"]') || document.querySelector('.variant-picker__form');
-    let hiddenSellingPlanInput = productForm ? productForm.querySelector('input[name="selling_plan"][type="hidden"]') : null;
-
-    if (productForm && !hiddenSellingPlanInput) {
-      hiddenSellingPlanInput = document.createElement('input');
-      hiddenSellingPlanInput.type = 'hidden';
-      hiddenSellingPlanInput.name = 'selling_plan';
-      productForm.appendChild(hiddenSellingPlanInput);
-    }
-
-    function updateFormSellingPlan() {
-      const activeBox = container.querySelector('.somna-purchase-box.active');
-      if (activeBox && activeBox.getAttribute('data-purchase-card') === 'subscribe') {
-        if (hiddenSellingPlanInput && sellingPlanSelect) {
-          hiddenSellingPlanInput.value = sellingPlanSelect.value;
-        }
-      } else {
-        if (hiddenSellingPlanInput) {
-          hiddenSellingPlanInput.value = '';
-        }
-      }
-    }
-
-    // Dynamic price, per-night and savings calculator
-    function syncSubscriptionPrices() {
-      const selectedCard = document.querySelector('label.variant-option__button-label--card.selected') || document.querySelector('label.variant-option__button-label--card:has(input:checked)');
-      if (!selectedCard) return;
-
-      const subFormatted = selectedCard.getAttribute('data-sub-formatted');
-      const onetimeFormatted = selectedCard.getAttribute('data-onetime-formatted');
-      const subNumeric = parseFloat(selectedCard.getAttribute('data-sub-numeric') || '0');
-      const onetimeNumeric = parseFloat(selectedCard.getAttribute('data-onetime-numeric') || '0');
-      const nights = parseInt(selectedCard.getAttribute('data-nights') || '30', 10);
-
-      const subPriceEl = document.getElementById('SomnaSubPrice');
-      const oneTimePriceEl = document.getElementById('SomnaOneTimePrice');
-      const strikePriceEl = document.getElementById('SomnaStrikePrice');
-      const perNightEl = document.getElementById('SomnaPerNightPrice');
-      const savePillEl = document.getElementById('SomnaSavePill');
-
-      if (subPriceEl && subFormatted) subPriceEl.textContent = subFormatted;
-      if (oneTimePriceEl && onetimeFormatted) oneTimePriceEl.textContent = onetimeFormatted;
-      if (strikePriceEl && onetimeFormatted) strikePriceEl.textContent = onetimeFormatted;
-
-      // Calculate Per Night
-      if (perNightEl && nights > 0 && subNumeric > 0) {
-        const perNight = (subNumeric / nights).toFixed(2);
-        perNightEl.textContent = `$${perNight} Per Night`;
-      }
-
-      // Calculate Exact Savings ($)
-      if (savePillEl && onetimeNumeric > subNumeric) {
-        const savedAmount = Math.round(onetimeNumeric - subNumeric);
-        savePillEl.textContent = `SAVE $${savedAmount}`;
-      }
-    }
-
-    updateFormSellingPlan();
-    syncSubscriptionPrices();
-
-    purchaseBoxes.forEach(box => {
-      box.addEventListener('click', () => {
-        purchaseBoxes.forEach(b => b.classList.remove('active'));
-        box.classList.add('active');
-        const radio = box.querySelector('input[type="radio"]');
-        if (radio) radio.checked = true;
-        updateFormSellingPlan();
-      });
-    });
-
-    if (sellingPlanSelect) {
-      sellingPlanSelect.addEventListener('change', () => {
-        updateFormSellingPlan();
-      });
-    }
-
-    document.querySelectorAll('label.variant-option__button-label--card').forEach(card => {
-      card.addEventListener('click', () => {
-        setTimeout(syncSubscriptionPrices, 50);
-      });
-    });
-  });
-</script>
+{% render 'somna-subscription-widget', product_resource: product_resource, section: section %}
  
 
 {% render 'swatch-styles' %}

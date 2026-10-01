@@ -1827,10 +1827,3 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
   }
 }
-
-.klaviyo-form-button {
-    margin-left: -30px !important;
-}
-.klaviyo-form.klaviyo-form.klaviyo-form {
-    padding: 0 !important;
-}

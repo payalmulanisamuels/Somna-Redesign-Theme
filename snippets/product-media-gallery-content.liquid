@@ -124,6 +124,14 @@
   else
     assign sorted_media = selected_product.media
   endif
+
+  # Arrows were decided from ALL product media above. With "Hide other variants' media" on,
+  # fewer items may actually be shown (e.g. Sleep Bundle: 3 images, 1 per colour -> 1 slide),
+  # which rendered arrows that had nothing to scroll to. Base it on what is shown.
+  if sorted_media.size <= 1
+    assign render_slideshow_arrows = false
+    assign slideshow_class = 'product-media-gallery__slideshow--single-media slideshow--single-media'
+  endif
   assign has_image_drop = sorted_media | has: 'media_type', 'image'
 
   # Determine if we're in single column mode (carousel or grid with one column)

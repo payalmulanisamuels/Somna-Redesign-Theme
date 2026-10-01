@@ -286,9 +286,8 @@
                       {%- endif -%}
 
                       {%- if item.selling_plan_allocation -%}
-                        <p class="selling_plan_allocation">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        <p class="selling_plan_allocation">{%- render 'somna-plan-label', selling_plan: item.selling_plan_allocation.selling_plan -%}</p>
 
-                        <div class="subcription_badge">Subscribe & save 10%</div>
                       {%- endif -%}
 
                       {%- if item.line_level_discount_allocations.size > 0 -%}

@@ -23,8 +23,16 @@
     size-style
     {{ block_settings.style_class }}
     {{ block_settings.style_class }}--{{ block.id }}
+    {% if block_settings.font_size != blank %}button-font-size{% endif %}
+    {% if block_settings.font_size_tablet != blank %}button-font-size-tablet{% endif %}
+    {% if block_settings.font_size_desktop != blank %}button-font-size-desktop{% endif %}
   "
-  style="{% render 'size-style', settings: block_settings %}"
+  style="
+    {% render 'size-style', settings: block_settings %}
+    {% if block_settings.font_size != blank %}--button-font-size: {{ block_settings.font_size }};{% endif %}
+    {% if block_settings.font_size_tablet != blank %}--button-font-size-tablet: {{ block_settings.font_size_tablet }};{% endif %}
+    {% if block_settings.font_size_desktop != blank %}--button-font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
+  "
   {%- if block_settings.open_in_new_tab -%}
     target="_blank"
     rel="noopener noreferrer"
@@ -34,3 +42,22 @@
   {{ block_settings.label }}
 </a>
 {%  endif %}
+
+{% stylesheet %}
+  /* Responsive button font size (mobile first) */
+  .size-style.button-font-size {
+    font-size: var(--button-font-size);
+  }
+
+  @media screen and (min-width: 750px) {
+    .size-style.button-font-size-tablet {
+      font-size: var(--button-font-size-tablet);
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .size-style.button-font-size-desktop {
+      font-size: var(--button-font-size-desktop);
+    }
+  }
+{% endstylesheet %}

@@ -1,52 +1,39 @@
-{%  assign problem = section.settings.problem_heading | split:'|' %}
-{%  assign solution = section.settings.solution_heading | split:'|' %}
+{%  assign problem = section.settings.problem_heading  %}
+{%  assign solution = section.settings.solution_heading  %}
 
-{% if problem[0] != blank or solution[0] != blank %}
+{% if problem != blank or solution  != blank %}
 
 <div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
-   {% comment %} Top Wave Divider {% endcomment %}
-
+  {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
-    <div class="wave-container top">
-
-    <img 
-        src="{{ section.settings.top_wave_image | image_url: width: 1440 }}" 
-        alt="top_wave_image" 
-        loading="lazy" 
-        class="custom-wave-img"
-        />
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
     </div>
     {% endif %}
-
-    {% comment %} Bottom Wave Divider {% endcomment %}
-
+  {% comment %} Bottom Wave Divider {% endcomment %}
     {% if section.settings.bottom_wave_image != blank %}
-    <div class="wave-container bottom">
-    <img 
-        src="{{ section.settings.bottom_wave_image | image_url: width: 1440 }}" 
-        alt="bottom_wave_image" 
-        loading="lazy" 
-        class="custom-wave-img"
-        />
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
     </div>
     {% endif %}
+    
   <div class="section section--page-width">
   <div class="hz-ps-container">
     {% comment %} Problem Column {% endcomment %}
     <div class="hz-ps-col hz-ps-problem">
-      {% if section.settings.problem_tag != blank %}
-        <span class="hz-ps-tag">{{ section.settings.problem_tag }}</span>
+
+      <div class="pro_solu_image">
+          {%- if section.settings.problem_image != blank -%}
+            {{ section.settings.problem_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
+          {%- endif -%}
+      </div>
+ 
+
+      {% if section.settings.problem_heading != blank %}
+        <h3 class="hz-ps-tag">{{ section.settings.problem_heading}}</h3>
       {% endif %}
 
-      {%  assign problem = section.settings.problem_heading | split:'|' %}
-
-      {% if problem[0] != blank %}
-        <h3 class="hz-ps-heading">{{ problem[0] }}</h3>
-      {% endif %}
-
-      {% if problem[1] != blank %}
-        <div class="hz-ps-text">{{  problem[1] }}</div>
+      {% if section.settings.problem_content != blank %}
+        <div class="hz-ps-text">{{  section.settings.problem_content }}</div>
       {% endif %}
     </div>
 
@@ -65,19 +52,23 @@
 
     {% if section.settings.solution_heading != blank %}
         {% comment %} Solution Column {% endcomment %}
+          
         <div class="hz-ps-col hz-ps-solution">
-        {% if section.settings.solution_tag != blank %}
-            <span class="hz-ps-tag">{{ section.settings.solution_tag }}</span>
+
+             <div class="pro_solu_image">
+          {%- if section.settings.solution_image != blank -%}
+            {{ section.settings.solution_image | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'hz-metaobject-img', width: 180, height: 180 }}
+          {%- endif -%}
+      </div>
+ 
+
+
+        {% if section.settings.solution_heading != blank %}
+            <h3 class="hz-ps-tag">{{ section.settings.solution_heading }}</h3>
         {% endif %}
 
-        {%  assign solution = section.settings.solution_heading | split:'|' %}
-
-        {% if solution[0] != blank %}
-            <h3 class="hz-ps-heading">{{ solution[0] }}</h3>
-        {% endif %}
-
-        {% if solution[1] != blank %}
-            <div class="hz-ps-text">{{ solution[1] }}</div>
+        {% if section.settings.solution_content != blank %}
+            <div class="hz-ps-text">{{ section.settings.solution_content }}</div>
         {% endif %}
         </div>
     {% endif %}
@@ -86,67 +77,7 @@
 </div>
 </div>
 
-<style>
-.hz-prob-sol-section {
-  padding: 20px 0;
-}
-.hz-ps-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 31px;
-  position: relative;
-  z-index: 2;
-}
-.hz-ps-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.hz-ps-tag {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #064BD8;
-  margin-bottom: 0px;
-}
-.hz-ps-heading {
-  font-size: 16px;
-  font-weight: 400;
-  font-family: serif;
-  color: #0A1A4A;
-  line-height: 1.2;
-  margin: 0 0 3px 0;
-}
-.hz-ps-text {
-  font-size: 10px;
-  line-height: 1.6;
-  color: #0A1A4A;
-  font-weight: 400;
-}
-.hz-ps-text p {
-  margin: 0;
-}
-.hz-ps-arrow-wrapper {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hz-ps-arrow-circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #0A1A4A;
-  border: 1px solid #0A1A4A;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-}
-</style>
+ 
     {% endif %}
 
 {% schema %}
@@ -179,11 +110,11 @@
       "type": "header",
       "content": "Problem Settings"
     },
+
     {
-      "type": "text",
-      "id": "problem_tag",
-      "label": "Tag",
-      "default": "PROBLEM"
+      "type": "image_picker",
+      "id": "problem_image",
+      "label": "Problem Image",
     },
     {
       "type": "text",
@@ -191,24 +122,34 @@
       "label": "Heading",
       "default": "Restless, disrupted sleep"
     },
-   
+   {
+      "type": "text",
+      "id": "problem_content",
+      "label": "Content",
+      "default": "Restless, disrupted sleep"
+    },
     {
       "type": "header",
       "content": "Solution Settings"
     },
-    {
-      "type": "text",
-      "id": "solution_tag",
-      "label": "Tag",
-      "default": "SOLUTION"
+     {
+      "type": "image_picker",
+      "id": "solution_image",
+      "label": "Solution Image",
     },
+    
     {
       "type": "text",
       "id": "solution_heading",
       "label": "Heading",
       "default": "Strips are designed"
     },
-   
+    {
+      "type": "text",
+      "id": "solution_content",
+      "label": "content",
+      "default": "Strips are designed"
+    },
   ],
   "presets": [
     {

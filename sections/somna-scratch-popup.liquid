@@ -1,0 +1,857 @@
+{%- comment -%}
+  SOMNA scratch-to-reveal welcome popup (inspiration/SOMNA_Scratch_Popup_Spec, popup.png).
+
+  - Shows on homepage, collections and product pages only; never for logged-in customers.
+  - Opens after N seconds (default 10); on desktop also on exit intent before that.
+  - Once per visitor: after closing, a teaser tab shows for the rest of the session and the
+    full popup does not reopen for N days (default 14). Never shows again after signing up.
+  - Suppressed for visitors arriving from a Klaviyo email link or already known to Klaviyo.
+  - Scratch works by drag, single tap/click, or keyboard Enter/Space.
+  - Fixed discount code (default WELCOME10), auto-applied via /discount/CODE.
+  - Tracking events (dataLayer, Shopify customer events, Klaviyo): somna_popup_view,
+    somna_popup_scratch_complete, somna_popup_email_submit, somna_popup_code_copied,
+    somna_popup_shop_now_click, somna_popup_close.
+{%- endcomment -%}
+
+{%- liquid
+  assign popup_page_allowed = false
+  if request.page_type == 'index' or request.page_type == 'collection' or request.page_type == 'product'
+    assign popup_page_allowed = true
+  endif
+
+  assign popup_code = section.settings.discount_code | strip | default: 'WELCOME10'
+  assign popup_redirect = section.settings.shop_redirect | strip | default: '/collections/all'
+  assign popup_shop_url = '/discount/' | append: popup_code | append: '?redirect=' | append: popup_redirect
+-%}
+
+{%- if section.settings.enabled and popup_page_allowed and customer == blank -%}
+<div
+  id="somna-overlay"
+  class="somna-popup-wrapper somna-hidden{% if section.settings.desktop_image != blank %} somna-popup--has-image{% endif %}"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="somna-screen-1-title"
+  aria-hidden="true"
+>
+  <div class="somna-popup-container" tabindex="-1">
+    <div class="somna-popup-content">
+      <button type="button" class="somna-close-btn" aria-label="Close popup">&times;</button>
+
+      <!-- SCREEN 1: Scratch -->
+      <div id="somna-screen-1" class="somna-screen">
+        
+        <h2 class="somna-headline" id="somna-screen-1-title">Scratch to reveal your welcome gift</h2>
+        <p class="somna-subhead">Everyone gets one. Scratch the card to see yours.</p>
+
+        <div class="somna-scratch-box-wrap">
+          <div class="somna-scratch-revealed" aria-hidden="true">
+            <span class="somna-reveal-title">10% off</span>
+            <span class="somna-reveal-sub">your first order</span>
+          </div>
+          <canvas
+            id="somna-scratch-canvas"
+            tabindex="0"
+            role="button"
+            aria-label="Scratch card. Press Enter to reveal your welcome gift."
+          ></canvas>
+        </div>
+        <p class="somna-helper-text">Tap or drag to scratch.</p>
+        <button type="button" class="somna-decline-link somna-close-trigger">No thanks</button>
+      </div>
+
+      <!-- SCREEN 2: Claim -->
+      <div id="somna-screen-2" class="somna-screen somna-hidden">
+        <div class="somna-revealed-card">
+          <span class="somna-reveal-title">10% off</span>
+          <span class="somna-reveal-sub">your first order</span>
+        </div>
+        <h2 class="somna-headline" id="somna-screen-2-title">You've unlocked 10% off</h2>
+        <p class="somna-subhead">Enter your email to claim it. We'll send your code straight to your inbox.</p>
+
+        <p id="somna-already-subscribed" class="somna-already-subscribed somna-hidden" role="status">User already subscribed</p>
+
+        <form id="somna-signup-form" novalidate>
+          <label for="somna-email-input" class="visually-hidden">Email address</label>
+          <input
+            type="email"
+            id="somna-email-input"
+            name="email"
+            placeholder="Email address"
+            required
+            autocomplete="email"
+            aria-describedby="somna-error-container"
+          >
+          <button type="submit" class="somna-primary-btn" id="somna-submit-btn">Unlock my 10% off</button>
+          <div class="somna-error-msg" id="somna-error-container" role="alert" aria-live="assertive"></div>
+        </form>
+
+        <p class="somna-consent-text">
+          By signing up, you agree to receive marketing emails from somna. Unsubscribe anytime.
+          <a href="{{ shop.privacy_policy.url | default: '/policies/privacy-policy' }}" target="_blank" rel="noopener">Privacy Policy</a>
+        </p>
+        <button type="button" class="somna-decline-link somna-close-trigger">No thanks</button>
+      </div>
+
+      <!-- SCREEN 3: Code -->
+      <div id="somna-screen-3" class="somna-screen somna-hidden">
+        <h2 class="somna-headline" id="somna-screen-3-title">Your code is ready</h2>
+
+        <div class="somna-code-box">
+          <span id="somna-discount-code-text">{{ popup_code | escape }}</span>
+        </div>
+        <button type="button" id="somna-copy-btn" class="somna-copy-link">Copy code</button>
+
+        <a href="{{ popup_shop_url }}" class="somna-primary-btn somna-shop-link" id="somna-shop-btn">Shop now, 10% applied</a>
+        <p class="somna-small-print">We've also sent it to your inbox. Valid on your first order for 7 days.</p>
+      </div>
+    </div>
+
+    {%- if section.settings.desktop_image != blank -%}
+      <div class="somna-popup-image">
+        {{
+          section.settings.desktop_image
+          | image_url: width: 1000
+          | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 750px) 420px, 1px'
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<!-- Minimised teaser tab -->
+<button type="button" id="somna-teaser-tab" class="somna-teaser-tab somna-hidden">Scratch for 10% off</button>
+
+<style>
+  .somna-popup-wrapper {
+    position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
+    background: rgba(20, 35, 92, 0.4); z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .somna-popup-wrapper.somna-visible { opacity: 1; }
+  .somna-hidden { display: none !important; }
+  html.somna-popup-open { overflow: hidden; }
+
+  .somna-popup-container {
+    background: #F7F1E5;
+    background-image: radial-gradient(#F1EADB 15%, transparent 16%);
+    background-size: 20px 20px;
+    width: 100%; max-width: 420px; min-height: 520px;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    position: relative; display: flex; box-sizing: border-box;
+  }
+  .somna-popup-container:focus { outline: none; }
+  .somna-popup-content {
+    flex: 1; min-width: 0;
+    padding: 32px 24px;
+    display: flex; flex-direction: column; justify-content: center;
+    box-sizing: border-box;
+  }
+  .somna-screen { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+  .somna-close-btn {
+    position: absolute; top: 12px; right: 12px; z-index: 2; background: none; border: none;
+    font-size: 30px; line-height: 1; color: #14235C; cursor: pointer; width: 44px; height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .somna-logo { font-size: 24px; font-weight: 800; color: #14235C; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .somna-headline { font-size: 22px; font-weight: 700; color: #14235C; margin: 0 0 8px 0; }
+  .somna-subhead { font-size: 16px; color: #4a5568; margin: 0 0 24px 0; line-height: 1.4; }
+
+  /* Scratch card: revealed layer underneath, canvas cover on top */
+  .somna-scratch-box-wrap {
+    position: relative; width: 300px; max-width: 100%; aspect-ratio: 300 / 190;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 10px 24px rgba(20,35,92,0.22), 0 2px 0 rgba(20,35,92,0.35);
+    margin-bottom: 12px;
+  }
+  .somna-scratch-revealed,
+  .somna-revealed-card {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: #FFFFFF;
+  }
+  .somna-scratch-revealed { position: absolute; inset: 0; border: 2px solid #1F3FAF; border-radius: 16px; box-sizing: border-box; }
+  #somna-scratch-canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    cursor: pointer; touch-action: none; border-radius: 16px;
+    transition: opacity 0.45s ease;
+  }
+  #somna-scratch-canvas:focus-visible { outline: 3px solid #14235C; outline-offset: 3px; }
+  #somna-scratch-canvas.somna-scratch-done { opacity: 0; pointer-events: none; }
+  .somna-reveal-title { font-size: 36px; font-weight: 800; color: #1F3FAF; line-height: 1.1; }
+  .somna-reveal-sub { font-size: 16px; color: #14235C; font-weight: 500; }
+
+  /* Screen 2: revealed card "flips" in */
+  .somna-revealed-card {
+    width: 100%; max-width: 280px; padding: 24px 16px; margin-bottom: 20px;
+    border: 2px solid #1F3FAF; border-radius: 16px; box-sizing: border-box;
+  }
+  .somna-screen-enter { animation: somna-flip-in 0.45s ease both; }
+  /* Screen 1 fades out after the revealed offer has been shown for a moment */
+  .somna-screen-leave { opacity: 0; transition: opacity 0.3s ease; }
+  .somna-already-subscribed {
+    width: 100%; margin: 0 0 12px; padding: 14px 16px; box-sizing: border-box;
+    background: #DCE4FB; color: #14235C; border-radius: 8px;
+    font-size: 16px; font-weight: 600;
+  }
+  @keyframes somna-flip-in {
+    from { opacity: 0; transform: perspective(800px) rotateY(-70deg); }
+    to { opacity: 1; transform: perspective(800px) rotateY(0); }
+  }
+
+  .somna-helper-text { font-size: 14px; color: #718096; margin: 0 0 16px; }
+
+  #somna-signup-form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+  #somna-email-input {
+    width: 100%; height: 48px; padding: 0 16px; font-size: 16px;
+    border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; box-sizing: border-box; color: #14235C;
+  }
+  #somna-email-input[aria-invalid="true"] { border-color: #e53e3e; }
+
+  .somna-primary-btn {
+    width: 100%; height: 48px; background: #14235C; color: #fff;
+    font-size: 16px; font-weight: 600; border: none; border-radius: 8px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none;
+    box-sizing: border-box; transition: background 0.2s;
+  }
+  .somna-primary-btn:hover { background: #1F3FAF; color: #fff; }
+  .somna-primary-btn[disabled] { opacity: 0.7; cursor: progress; }
+
+  .somna-code-box {
+    width: 100%; max-width: 260px; background: #fff; border: 2px dashed #1F3FAF; border-radius: 8px;
+    padding: 12px 16px; margin: 8px 0 4px; box-sizing: border-box; text-align: center;
+  }
+  #somna-discount-code-text { font-size: 20px; font-weight: 700; color: #14235C; letter-spacing: 1px; }
+  .somna-copy-link {
+    background: none; border: none; color: #1F3FAF; font-size: 14px; font-weight: 600;
+    text-decoration: underline; cursor: pointer; padding: 8px; margin-bottom: 16px;
+  }
+
+  .somna-consent-text { font-size: 12px; color: #718096; line-height: 1.4; margin-top: 12px; }
+  .somna-consent-text a { color: #14235C; text-decoration: underline; }
+  .somna-small-print { font-size: 13px; color: #718096; margin-top: 16px; line-height: 1.4; }
+  .somna-error-msg { font-size: 14px; color: #c53030; text-align: left; min-height: 18px; }
+
+  .somna-decline-link { background: none; border: none; color: #718096; font-size: 14px; text-decoration: underline; cursor: pointer; margin-top: 12px; padding: 8px; }
+
+  .somna-popup-image { display: none; }
+
+  .somna-teaser-tab {
+    position: fixed; bottom: 20px; left: 20px; background: #14235C; color: #fff; border: none;
+    padding: 10px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 99998;
+    transition: bottom 0.3s ease;
+  }
+  /* Keep the teaser clear of the sticky Add to Cart bar when it is showing */
+  html:has(.sticky-add-to-cart__bar[data-stuck='true']) .somna-teaser-tab { bottom: 110px; }
+
+  @media (max-width: 480px) {
+    .somna-popup-container { width: 100vw; height: 100vh; height: 100dvh; max-width: none; min-height: 0; border-radius: 0; overflow-y: auto; }
+  }
+
+  /* Desktop: split layout, content left, product image right */
+  @media (min-width: 750px) {
+    .somna-popup--has-image .somna-popup-container { max-width: 880px; min-height: 560px; }
+    .somna-popup--has-image .somna-popup-image { display: block; flex: 0 0 48%; position: relative; }
+    .somna-popup--has-image .somna-popup-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .somna-popup-wrapper, #somna-scratch-canvas { transition: none; }
+    .somna-screen-enter { animation: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    const config = {
+      delayMs: {{ section.settings.delay_seconds | times: 1000 | json }},
+      dismissDays: {{ section.settings.dismiss_days | json }},
+      code: {{ popup_code | json }},
+      klaviyoCompanyId: {{ section.settings.klaviyo_company_id | strip | json }},
+      klaviyoListId: {{ section.settings.klaviyo_list_id | strip | json }},
+      excludedPaths: {{ section.settings.excluded_paths | newline_to_br | split: '<br />' | json }},
+    };
+
+    const KEYS = {
+      dismissedAt: 'somna_popup_dismissed_at', // localStorage: closed without signing up
+      signedUp: 'somna_popup_signed_up',       // localStorage: never show again
+      suppressed: 'somna_popup_suppressed',    // localStorage: arrived from Klaviyo email etc.
+      teaser: 'somna_popup_teaser',            // sessionStorage: teaser for rest of session
+    };
+    const storage = {
+      get(store, key) { try { return window[store].getItem(key); } catch (e) { return null; } },
+      set(store, key, value) { try { window[store].setItem(key, value); } catch (e) {} },
+    };
+
+    function track(name, data = {}) {
+      const eventName = 'somna_popup_' + name;
+      const payload = { ...data, source: 'Scratch Popup' };
+      try { (window.dataLayer = window.dataLayer || []).push({ event: eventName, ...payload }); } catch (e) {}
+      try { window.Shopify?.analytics?.publish?.(eventName, payload); } catch (e) {}
+      try { window.klaviyo?.push?.(['track', 'Scratch Popup ' + name.replace(/_/g, ' '), payload]); } catch (e) {}
+    }
+
+    function isSuppressed() {
+      const path = window.location.pathname;
+      const excluded = config.excludedPaths.map((p) => p.trim()).filter(Boolean);
+      if (excluded.some((p) => path.includes(p))) return true;
+
+      if (storage.get('localStorage', KEYS.signedUp) || storage.get('localStorage', KEYS.suppressed)) return true;
+
+      // Arriving from a Klaviyo email link
+      const params = new URLSearchParams(window.location.search);
+      const fromKlaviyo =
+        params.has('_kx') ||
+        /klaviyo/i.test(params.get('utm_source') || '') ||
+        (params.get('utm_medium') || '').toLowerCase() === 'email';
+      // Already identified by Klaviyo on this browser (subscribed / clicked an email before)
+      let knownToKlaviyo = false;
+      try {
+        const cookie = document.cookie.split('; ').find((c) => c.startsWith('__kla_id='));
+        if (cookie) {
+          const data = JSON.parse(atob(decodeURIComponent(cookie.split('=')[1])));
+          knownToKlaviyo = Boolean(data.$exchange_id || data.$email);
+        }
+      } catch (e) {}
+      if (fromKlaviyo || knownToKlaviyo) {
+        storage.set('localStorage', KEYS.suppressed, '1');
+        return true;
+      }
+      return false;
+    }
+
+    function init() {
+      const overlay = document.getElementById('somna-overlay');
+      const teaserTab = document.getElementById('somna-teaser-tab');
+      if (!overlay || overlay.dataset.somnaReady) return;
+      overlay.dataset.somnaReady = 'true';
+
+      const container = overlay.querySelector('.somna-popup-container');
+      const screens = [1, 2, 3].map((n) => document.getElementById('somna-screen-' + n));
+      let isOpen = false;
+      let lastFocus = null;
+      let openTimer = null;
+
+      if (isSuppressed()) return;
+
+      // Closed within the last N days: no automatic opening. The teaser tab stays for the
+      // rest of the session in which it was closed, and can still reopen the popup on click.
+      const dismissedAt = Number(storage.get('localStorage', KEYS.dismissedAt) || 0);
+      const withinCooldown = Boolean(dismissedAt) && Date.now() - dismissedAt < config.dismissDays * 86400000;
+      if (withinCooldown && storage.get('sessionStorage', KEYS.teaser)) teaserTab?.classList.remove('somna-hidden');
+
+      function showScreen(index) {
+        screens.forEach((screen, i) => screen?.classList.toggle('somna-hidden', i !== index));
+        const screen = screens[index];
+        screen?.classList.add('somna-screen-enter');
+        overlay.setAttribute('aria-labelledby', 'somna-screen-' + (index + 1) + '-title');
+      }
+
+      function focusables() {
+        return [...overlay.querySelectorAll('button, [href], input, canvas[tabindex], [tabindex="0"]')].filter(
+          (el) => !el.disabled && el.offsetParent !== null && !el.classList.contains('somna-scratch-done')
+        );
+      }
+
+      function onKeydown(event) {
+        if (!isOpen) return;
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closePopup();
+          return;
+        }
+        if (event.key === 'Tab') {
+          const items = focusables();
+          if (!items.length) return;
+          const first = items[0];
+          const last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      }
+
+      function openPopup(trigger) {
+        if (isOpen) return;
+        isOpen = true;
+        clearTimeout(openTimer);
+        lastFocus = document.activeElement;
+        teaserTab?.classList.add('somna-hidden');
+        overlay.classList.remove('somna-hidden');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('somna-popup-open');
+        requestAnimationFrame(() => overlay.classList.add('somna-visible'));
+        scratch.setup();
+        document.addEventListener('keydown', onKeydown);
+        // Focus moves into the popup: the scratch card on screen 1, else the container
+        const canvas = document.getElementById('somna-scratch-canvas');
+        setTimeout(() => {
+          if (!screens[0].classList.contains('somna-hidden') && canvas && !canvas.classList.contains('somna-scratch-done')) canvas.focus();
+          else container.focus();
+        }, 50);
+        track('view', { trigger });
+      }
+
+      function closePopup() {
+        if (!isOpen) return;
+        isOpen = false;
+        overlay.classList.remove('somna-visible');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('somna-popup-open');
+        document.removeEventListener('keydown', onKeydown);
+        const signedUp = storage.get('localStorage', KEYS.signedUp);
+        setTimeout(() => {
+          overlay.classList.add('somna-hidden');
+          if (!signedUp) {
+            storage.set('localStorage', KEYS.dismissedAt, String(Date.now()));
+            storage.set('sessionStorage', KEYS.teaser, '1');
+            teaserTab?.classList.remove('somna-hidden');
+          }
+          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+        }, 300);
+        track('close');
+      }
+
+      overlay.querySelectorAll('.somna-close-btn, .somna-close-trigger').forEach((el) => el.addEventListener('click', closePopup));
+      overlay.addEventListener('click', (event) => { if (event.target === overlay) closePopup(); });
+      teaserTab?.addEventListener('click', () => openPopup('teaser'));
+
+      // ---------- Scratch card ----------
+      const scratch = (() => {
+        const canvas = document.getElementById('somna-scratch-canvas');
+        const ctx = canvas?.getContext('2d');
+        let ready = false;
+        let revealed = false;
+        let drawing = false;
+        let last = null;
+        let travelled = 0;
+        let checkQueued = false;
+        let cssW = 0;
+        let cssH = 0;
+
+        function roundRect(x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+
+        function star(x, y, r) {
+          ctx.beginPath();
+          for (let i = 0; i < 8; i++) {
+            const radius = i % 2 === 0 ? r : r * 0.35;
+            const angle = (Math.PI / 4) * i - Math.PI / 2;
+            ctx.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+          }
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        function moon(x, y, r) {
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.save();
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x + r * 0.45, y - r * 0.3, r * 0.85, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function drawCover() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 3);
+          const rect = canvas.getBoundingClientRect();
+          cssW = rect.width || 300;
+          cssH = rect.height || 190;
+          canvas.width = Math.round(cssW * dpr);
+          canvas.height = Math.round(cssH * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.globalCompositeOperation = 'source-over';
+
+          ctx.fillStyle = '#1F3FAF';
+          roundRect(0, 0, cssW, cssH, 16);
+          ctx.fill();
+
+          // Night sky: periwinkle moons and stars
+          ctx.fillStyle = '#DCE4FB';
+          const s = cssW / 300;
+          moon(34 * s, 34 * s, 10 * s);
+          moon(262 * s, 150 * s, 8 * s);
+          star(250 * s, 30 * s, 6 * s);
+          star(48 * s, 150 * s, 5 * s);
+          star(150 * s, 26 * s, 3.5 * s);
+          star(205 * s, 165 * s, 3.5 * s);
+          star(95 * s, 55 * s, 3 * s);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = `700 ${Math.round(30 * s)}px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('scratch here', cssW / 2, cssH / 2);
+
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.lineWidth = 44 * s;
+        }
+
+        function point(event) {
+          const rect = canvas.getBoundingClientRect();
+          // Scale from on-screen size to the canvas drawing size (handles zoom / resized card)
+          return {
+            x: ((event.clientX - rect.left) / rect.width) * cssW,
+            y: ((event.clientY - rect.top) / rect.height) * cssH,
+          };
+        }
+
+        function scratchTo(p) {
+          ctx.beginPath();
+          if (last) {
+            ctx.moveTo(last.x, last.y);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+            travelled += Math.hypot(p.x - last.x, p.y - last.y);
+          } else {
+            ctx.arc(p.x, p.y, ctx.lineWidth / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          last = p;
+          queueCheck();
+        }
+
+        function queueCheck() {
+          if (checkQueued || revealed) return;
+          checkQueued = true;
+          setTimeout(() => {
+            checkQueued = false;
+            if (scratchedRatio() > 0.45) reveal();
+          }, 150);
+        }
+
+        // Sample every 8th pixel instead of reading every pixel on every move
+        function scratchedRatio() {
+          const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          let clear = 0;
+          let total = 0;
+          for (let i = 3; i < data.length; i += 32) {
+            total++;
+            if (data[i] < 128) clear++;
+          }
+          return total ? clear / total : 0;
+        }
+
+        function reveal() {
+          if (revealed) return;
+          revealed = true;
+          canvas.classList.add('somna-scratch-done');
+          canvas.setAttribute('aria-hidden', 'true');
+          canvas.tabIndex = -1;
+          track('scratch_complete');
+          // Let the cover finish fading (0.45s), keep "10% off" on screen for a moment,
+          // then fade screen 1 out before the email step appears.
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const holdMs = reduceMotion ? 600 : 450 + 1500;
+          setTimeout(() => {
+            screens[0].classList.add('somna-screen-leave');
+            setTimeout(() => {
+              screens[0].classList.remove('somna-screen-leave');
+              showClaimScreen();
+            }, reduceMotion ? 0 : 300);
+          }, holdMs);
+        }
+
+        function onDown(event) {
+          if (revealed) return;
+          event.preventDefault();
+          canvas.setPointerCapture?.(event.pointerId);
+          drawing = true;
+          last = null;
+          travelled = 0;
+          scratchTo(point(event));
+        }
+        function onMove(event) {
+          if (!drawing || revealed) return;
+          event.preventDefault();
+          scratchTo(point(event));
+        }
+        function onUp() {
+          if (!drawing) return;
+          drawing = false;
+          // A single tap / click (barely moved) reveals the whole card
+          if (travelled < 8) reveal();
+          else if (scratchedRatio() > 0.45) reveal();
+          last = null;
+        }
+
+        return {
+          setup() {
+            if (!canvas || !ctx || ready) return;
+            ready = true;
+            drawCover();
+            canvas.addEventListener('pointerdown', onDown);
+            canvas.addEventListener('pointermove', onMove);
+            canvas.addEventListener('pointerup', onUp);
+            canvas.addEventListener('pointercancel', onUp);
+            canvas.addEventListener('keydown', (event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                reveal();
+              }
+            });
+            window.addEventListener('resize', () => { if (!revealed && !drawing) drawCover(); });
+          },
+        };
+      })();
+
+      // ---------- Email capture (Klaviyo) ----------
+      const form = document.getElementById('somna-signup-form');
+      const emailInput = document.getElementById('somna-email-input');
+      const errorBox = document.getElementById('somna-error-container');
+      const submitBtn = document.getElementById('somna-submit-btn');
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      function showError(message) {
+        errorBox.textContent = message;
+        emailInput.setAttribute('aria-invalid', message ? 'true' : 'false');
+        if (message) emailInput.focus();
+      }
+
+      // Email already submitted on this browser: replace the form with a message
+      function showAlreadySubscribed() {
+        form?.classList.add('somna-hidden');
+        overlay.querySelector('#somna-screen-2 .somna-consent-text')?.classList.add('somna-hidden');
+        const message = document.getElementById('somna-already-subscribed');
+        message?.classList.remove('somna-hidden');
+        message?.setAttribute('tabindex', '-1');
+        message?.focus();
+      }
+
+      function showClaimScreen() {
+        showScreen(1);
+        if (storage.get('localStorage', KEYS.signedUp)) showAlreadySubscribed();
+        else emailInput?.focus();
+      }
+
+      function success() {
+        storage.set('localStorage', KEYS.signedUp, '1');
+        showScreen(2);
+        document.getElementById('somna-copy-btn')?.focus();
+      }
+
+      form?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        showError('');
+
+        if (!EMAIL_RE.test(email)) {
+          showError('Enter a valid email address.');
+          return;
+        }
+        if (storage.get('localStorage', KEYS.signedUp)) {
+          showAlreadySubscribed();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        track('email_submit');
+
+        const payload = {
+          data: {
+            type: 'subscription',
+            attributes: {
+              custom_source: 'Scratch Popup',
+              profile: {
+                data: {
+                  type: 'profile',
+                  attributes: {
+                    email,
+                    subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } },
+                  },
+                },
+              },
+            },
+            relationships: { list: { data: { type: 'list', id: config.klaviyoListId } } },
+          },
+        };
+
+        try {
+          const response = await fetch(
+            `https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(config.klaviyoCompanyId)}`,
+            {
+              method: 'POST',
+              headers: {
+                Accept: 'application/vnd.api+json',
+                'Content-Type': 'application/vnd.api+json',
+                Revision: '2026-01-15',
+              },
+              body: JSON.stringify(payload),
+            }
+          );
+
+          if (response.ok) {
+            success();
+          } else if (response.status === 400) {
+            showError('Enter a valid email address.');
+          } else {
+            // Klaviyo unavailable — still give the visitor their code
+            success();
+          }
+        } catch (error) {
+          // Network / ad-blocker blocked Klaviyo — still give the visitor their code
+          success();
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+
+      // ---------- Code screen ----------
+      const copyBtn = document.getElementById('somna-copy-btn');
+      copyBtn?.addEventListener('click', async () => {
+        const code = document.getElementById('somna-discount-code-text')?.textContent.trim() || config.code;
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch (e) {
+          // Fallback for browsers without clipboard permission
+          const range = document.createRange();
+          range.selectNodeContents(document.getElementById('somna-discount-code-text'));
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(range);
+          try { document.execCommand('copy'); } catch (err) {}
+          selection.removeAllRanges();
+        }
+        copyBtn.textContent = 'Copied';
+        track('code_copied');
+        setTimeout(() => { copyBtn.textContent = 'Copy code'; }, 2000);
+      });
+
+      document.getElementById('somna-shop-btn')?.addEventListener('click', () => {
+        track('shop_now_click');
+        storage.set('localStorage', KEYS.signedUp, '1');
+      });
+
+      // ---------- Trigger: after the delay; desktop also on exit intent ----------
+      // Shopify's cookie-consent banner sits above everything (z-index 2000000). If it is still
+      // open, wait until the visitor answers it, so it never covers the popup.
+      function consentBannerOpen() {
+        const banner = document.getElementById('shopify-pc__banner');
+        if (!banner) return false;
+        const style = getComputedStyle(banner);
+        return style.display !== 'none' && style.visibility !== 'hidden' && banner.getBoundingClientRect().height > 0;
+      }
+
+      function openWhenClear(trigger) {
+        if (!consentBannerOpen()) {
+          openPopup(trigger);
+          return;
+        }
+        const check = () => {
+          if (consentBannerOpen()) return;
+          clearInterval(poll);
+          document.removeEventListener('visitorConsentCollected', check);
+          setTimeout(() => openPopup(trigger), 1000);
+        };
+        const poll = setInterval(check, 1000);
+        document.addEventListener('visitorConsentCollected', check);
+      }
+
+      if (withinCooldown) return;
+      openTimer = setTimeout(() => openWhenClear('timer'), config.delayMs);
+
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const onExitIntent = (event) => {
+          if (!event.relatedTarget && event.clientY <= 0) {
+            document.removeEventListener('mouseout', onExitIntent);
+            openWhenClear('exit_intent');
+          }
+        };
+        document.addEventListener('mouseout', onExitIntent);
+      }
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Scratch popup",
+  "class": "somna-scratch-popup-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "delay_seconds",
+      "label": "Open after",
+      "min": 3,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "dismiss_days",
+      "label": "Don't reopen after closing for",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "d",
+      "default": 14
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount code",
+      "default": "WELCOME10"
+    },
+    {
+      "type": "text",
+      "id": "shop_redirect",
+      "label": "\"Shop now\" goes to",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image (right side)",
+      "info": "Strips + Tape product photo. Leave empty for a single-column popup."
+    },
+    {
+      "type": "header",
+      "content": "Klaviyo"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_company_id",
+      "label": "Public API key (company ID)",
+      "default": "Tr7JSM"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "Newsletter list ID",
+      "default": "XyWydk"
+    },
+    {
+      "type": "textarea",
+      "id": "excluded_paths",
+      "label": "Don't show on these paths",
+      "info": "One per line. Cart, checkout and account pages are already excluded.",
+      "default": "/pages/nasal-strips\n/pages/mouth-tape\n/policies"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,217 @@
+{%- liquid
+  assign banner_image = section.settings.image
+ 
+
+  assign heading_text = section.settings.heading
+ 
+
+  assign button_url = section.settings.button_link
+  if button_url == blank 
+    assign button_url = button_url | default: '#'
+  endif
+-%}
+{% assign alignment = product.metafields.custom.bottom_section.value %}
+{% if banner_image %} 
+<div class="hz-banner-section {% if alignment.set_true_if_need_left_content == false %} hz-banner-align--right{% endif %}" style="background-color: {{ section.settings.bg_color }};">
+{% comment %} Top Wave Divider {% endcomment %}
+    {% if section.settings.top_wave_image != blank %}
+    <div class="wave-container top" style="background-image: url({{ section.settings.top_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+  {% comment %} Bottom Wave Divider {% endcomment %}
+    {% if section.settings.bottom_wave_image != blank %}
+    <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
+    </div>
+    {% endif %}
+    
+
+  <div class="banner-container">
+    <div class="hz-banner-card">
+      <div class="hz-banner-media">
+        {%- if banner_image != blank -%}
+          <img src="{{ banner_image | image_url: width: 1000 }}" alt="{{ heading_text | escape }}" loading="lazy" width="{{ banner_image.width }}" height="{{ banner_image.height }}" />
+        {%- endif -%}
+      </div>
+      <div class="hz-banner-content">
+        {%- if heading_text != blank -%}
+          <h2 class="hz-banner-heading" style="color: {{ section.settings.text_color }};">{{ heading_text | newline_to_br }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="#" class="hz-banner-btn" style="color: {{ section.settings.button_text_color }}; background-color: {{ section.settings.button_bg_color }};">
+            <span>{{ section.settings.button_label }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+ 
+</div>
+
+<style>
+  .hz-banner-section {
+    position: relative;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    width: 100%;
+    z-index: 1111;
+    top: -15px;
+  }
+
+  .hz-banner-card {
+    position: relative;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hz-banner-media img {
+    width: 100%;
+    display: block;
+  }
+  .hz-banner-media {
+    width: 100%;
+  }
+  .hz-banner-content {
+    z-index: 2;
+    padding: 20px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: absolute;
+  }
+  /* Alignment Variants */
+
+  .hz-banner-align--right .hz-banner-card {
+    justify-content: flex-end;
+  }
+  .hz-banner-heading {
+    color: #0A1A4A;
+    font-family: var(--headfont);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 98%; /* 17.64px */
+    margin-bottom: 0;
+  }
+  .hz-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    width: fit-content;
+    transition: opacity 0.2s ease;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .hz-banner-btn:hover {
+    opacity: 0.9;
+  }
+
+</style>
+
+{%  endif %}
+
+{% schema %}
+{
+  "name": "Custom Product Banner",
+  "settings": [
+  
+   
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner Image (Overrides product image)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (Overrides product title)",
+      "default": "Breathe Easier.\nSleep Deeper."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Add to bag"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link (Overrides product URL)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#fdf8ee"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading Text Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background Color",
+      "default": "#0b1a30"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_wave_image",
+      "label": "Top Wave Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_wave_image",
+      "label": "Bottom Wave Image"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Product Banner"
+    }
+  ]
+}
+{% endschema %}

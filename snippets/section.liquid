@@ -56,6 +56,8 @@
   "
 >
 
+  {%  if section.settings.background_image %}
+
   <div class="custom-section-background">
     {% render 'background-media',
       background_media: section.settings.background_media,
@@ -65,6 +67,7 @@
       background_image_position: section.settings.background_image_position
     %}
   </div>
+{% endif %}
 
   <div
     class="border-style custom-section-content"

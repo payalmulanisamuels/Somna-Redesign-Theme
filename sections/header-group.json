@@ -14,11 +14,45 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
-        "announcement_BxgCk9": {
+        "announcement_dwf6Jk": {
           "type": "_announcement",
+          "name": "t:names.announcement",
           "settings": {
-            "text": "Free shipping, always.",
+            "text": "33% OFF Subscriptions&nbsp;",
             "link": "",
+            "separator_image": "shopify://shop_images/somna-discount.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_wwtXFc": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Free Gifts with Subscription",
+            "link": "",
+            "separator_image": "shopify://shop_images/somna-gift.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_34JFi9": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Free Shipping",
+            "link": "",
+            "separator_image": "shopify://shop_images/free-shipping.png",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -30,17 +64,27 @@
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_dwf6Jk",
+        "announcement_wwtXFc",
+        "announcement_34JFi9"
+      ],
+      "custom_css": [
+        ".wave-container.bottom {bottom: -10px;}",
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -24px; }}"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/announcement-svg-bottom.svg",
-        "speed": 5,
+        "display_mode": "marquee",
+        "speed": 8,
+        "marquee_speed": 20,
+        "separator_size": 16,
+        "separator_gap": 24,
+        "bottom_wave_image": "shopify://shop_images/annoucement.png",
         "section_width": "page-width",
         "background_color": "#071a4b",
-        "divider_width": 1,
+        "divider_width": 0,
         "divider_color": "#ffffff",
-        "padding-block-start": 15,
+        "padding-block-start": 8,
         "padding-block-end": 0
       }
     },
@@ -68,7 +112,7 @@
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
             "type_case_primary_link": "none",
-            "menu_style": "featured_products",
+            "menu_style": "text",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
@@ -77,15 +121,24 @@
             "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
+            "drawer_dividers": false,
+            "bestseller_heading": "Bestsellers",
+            "bestseller_link": "shopify://collections/all",
+            "show_bundle_section": true,
+            "bundle_title": "Find your bundle.",
+            "account_text": "Create an account",
+            "signin_subtext": "Already a member?"
           },
           "blocks": {}
         }
       },
+      "custom_css": [
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -24px; height: 25px; }}"
+      ],
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/header-wave.svg",
+        "bottom_wave_image": "shopify://shop_images/home-banner.png",
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
         "customer_account_menu": "customer-account-main-menu",
         "show_search": true,

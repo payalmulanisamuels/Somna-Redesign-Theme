@@ -369,7 +369,7 @@
               "settings": {
                 "icon": "eye",
                 "image_upload": "shopify://shop_images/Gift.png",
-                "width": 20,
+                "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
                 "icon_color": ""
@@ -418,7 +418,7 @@
                 "text_8jxQPc": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Free gift with<br/>every bundle</strong></p>",
+                    "text": "<p><strong>Free shipping</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -696,7 +696,7 @@
                 "text_mznam6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Secure<br/>checkout</strong></p>",
+                    "text": "<p><strong>Delivered in&nbsp;<br/>7–9 business days</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -878,10 +878,12 @@
         "divider_CimJ7p",
         "group_iMHtRg"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".custom-section-content {display: flex; align-items: center;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon-bg.svg",
+        "bg_image": "shopify://shop_images/icon_bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -889,7 +891,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 10,
+        "gap": 0,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
@@ -917,9 +919,10 @@
           "type": "bundle",
           "settings": {
             "product": "sleep-bundle",
+            "tag": "Most Popular",
             "is_featured": false,
-            "custom_title": "Breathe (Blue), Bold (Red), or Night (Black)",
-            "custom_image": "shopify://shop_images/breat-bundle.jpg",
+            "custom_title": "Strips + Tape, choose Breathe (Blue),Bold (Red), or Night (Black)",
+            "custom_image": "shopify://shop_images/The_Sleep_Bundle.jpg",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Sleep Bundle"
           }
@@ -928,9 +931,10 @@
           "type": "bundle",
           "settings": {
             "product": "the-colour-set",
+            "tag": "",
             "is_featured": false,
-            "custom_title": "All three colours, Strips only",
-            "custom_image": "shopify://shop_images/night.jpg",
+            "custom_title": "All three Colors, Strips only",
+            "custom_image": "shopify://shop_images/strip-product_d852a58d-5e95-47eb-b44e-f980135cf691.png",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Colour Set"
           }
@@ -939,51 +943,26 @@
           "type": "bundle",
           "settings": {
             "product": "season-bundle",
+            "tag": "",
             "is_featured": true,
             "custom_title": "Three months, Black Strips + Black Tape",
-            "custom_image": "shopify://shop_images/night.jpg",
+            "custom_image": "shopify://shop_images/season-bundle.png",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Season Bundle"
-          }
-        },
-        "bundle_rBjHFi": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "mouth-tape",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/Product_image_4x_f9860620-0334-4fdf-9589-9ce8c25178e4.png",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
-          }
-        },
-        "bundle_CGg3b8": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "nasal-strips",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/season.jpg",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
           }
         }
       },
       "block_order": [
         "bundle_gCFgge",
         "bundle_6MqjwE",
-        "bundle_LHB8m9",
-        "bundle_rBjHFi",
-        "bundle_CGg3b8"
+        "bundle_LHB8m9"
       ],
       "name": "Featured Bundle Grid",
       "settings": {
         "heading": "Featured Bundle Block",
         "bg_color": "#ffffff",
-        "padding_top": 20,
-        "padding_bottom": 10
+        "padding_top": 0,
+        "padding_bottom": 5
       }
     },
     "custom_cards_slider_pyJahK": {
@@ -993,9 +972,9 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#1354c4",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product1.png",
+            "image": "shopify://shop_images/nasal-product.png",
+            "alignment": false,
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -1005,10 +984,10 @@
         "card_f7AQym": {
           "type": "card",
           "settings": {
-            "product_selected": "nasal-strips",
-            "card_bg": "#b298e8",
+            "product_selected": "mouth-tape",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product2.png",
+            "image": "shopify://shop_images/tap-product.png",
+            "alignment": true,
             "title": "Mouth Tape",
             "price": "",
             "button_label": "Subscribe & Save",
@@ -1029,68 +1008,98 @@
     "collection_feature_kyHPTY": {
       "type": "collection-feature",
       "blocks": {
-        "guide_card_f3tzTU": {
-          "type": "guide_card",
+        "sleep_option_cEJEFR": {
+          "type": "sleep_option",
           "settings": {
-            "title": "New to both?",
-            "description": "Start with the Sleep Bundle\nin Blue (Breathe).",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/sleep.jpg"
+            "tab_title": "Blocked nose",
+            "product": "nasal-strips",
+            "variant_id": "",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Nasal Strips — Breathe (Blue)",
+            "card_description": "Nasal Strips, 1 Bag · 30 nights",
+            "price_text_override": "",
+            "button_label": "View Nasal Strips",
+            "button_link": ""
           }
         },
-        "guide_card_jYkhU6": {
-          "type": "guide_card",
+        "sleep_option_eCWVJt": {
+          "type": "sleep_option",
           "settings": {
-            "title": "Already know youneed help breathingeasier at night?",
-            "description": "Nasal Strips.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/strip1.png"
+            "tab_title": "Dry mouth",
+            "product": "mouth-tape",
+            "variant_id": "",
+            "badge_subtitle": "Your best start",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Mouth Tape — Breathe (Blue)",
+            "card_description": "Mouth Tape, 1 Bag · 30 nights",
+            "price_text_override": "",
+            "button_label": "View Mouth Tape",
+            "button_link": ""
           }
         },
-        "guide_card_XfLtwa": {
-          "type": "guide_card",
+        "sleep_option_C9Qb3X": {
+          "type": "sleep_option",
           "settings": {
-            "title": "Mostly wake with adry mouth?",
-            "description": "Mouth Tape.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/tape1_98d47ffe-ff7f-48d9-b93e-1e3f10e9a6f2.png"
+            "tab_title": "Both, I'm new",
+            "product": "sleep-bundle",
+            "variant_id": "",
+            "badge_subtitle": "",
+            "image": "shopify://shop_images/best-image.jpg",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — Breathe",
+            "card_description": "Strips + Tape, 1-month set",
+            "price_text_override": "",
+            "button_label": "View Sleep Bundle",
+            "button_link": "shopify://products/sleep-bundle"
           }
         },
-        "guide_card_8AqeXX": {
-          "type": "guide_card",
+        "sleep_option_BNKpYJ": {
+          "type": "sleep_option",
           "settings": {
-            "title": "Want to try everycolour?",
-            "description": "The Colour Set.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/thecolorset.jpg"
+            "tab_title": "Want variety",
+            "product": "the-colour-set",
+            "variant_id": "",
+            "badge_subtitle": "",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "The Color Set",
+            "card_description": "All three Strips colors · 3 months",
+            "price_text_override": "$0.99/night · <strong>$89</strong> with Subscribe &amp; Save",
+            "button_label": "View The Color Set",
+            "button_link": ""
           }
         },
-        "guide_card_znmh7M": {
-          "type": "guide_card",
+        "sleep_option_66YfmJ": {
+          "type": "sleep_option",
           "settings": {
-            "title": "Ready to commit to afull season?",
-            "description": "Season Bundle.",
-            "target_product": "",
-            "custom_image": "shopify://shop_images/sleep-black.png"
+            "tab_title": "Stocking up",
+            "product": "sleep-bundle",
+            "variant_id": "52629426045159",
+            "badge_subtitle": "",
+            "overlay_badge": "FREE GIFTS with subscription",
+            "card_title": "Sleep Bundle — 3+1 Sets",
+            "card_description": "Strips + Tape, 4 months · 1 set free",
+            "price_text_override": "$1.45/night · <strong>$174.87</strong> with Subscribe &amp; Save",
+            "button_label": "View 3+1 Sets",
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "guide_card_f3tzTU",
-        "guide_card_jYkhU6",
-        "guide_card_XfLtwa",
-        "guide_card_8AqeXX",
-        "guide_card_znmh7M"
+        "sleep_option_cEJEFR",
+        "sleep_option_eCWVJt",
+        "sleep_option_C9Qb3X",
+        "sleep_option_BNKpYJ",
+        "sleep_option_66YfmJ"
+      ],
+      "custom_css": [
+        ".wave-container.bottom {bottom: 5px;}"
       ],
       "name": "Collection Feature",
       "settings": {
-        "bg_color": "#f8f0dd",
-        "text_color": "#0a1a4a",
-        "heading": "Not sure where to start?",
-        "top_wave_image": "shopify://shop_images/col-top.svg",
-        "bottom_wave_image": "shopify://shop_images/col-bottom.svg",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "top_wave_image": "shopify://shop_images/curve-top.png",
+        "bottom_wave_image": "shopify://shop_images/curve-bottom.png",
+        "heading": "What keeps you from sleeping well?"
       }
     },
     "faq_accordion_XL3WiV": {
@@ -1100,7 +1109,7 @@
           "type": "faq_item",
           "settings": {
             "question": "What's the difference between the bundles?",
-            "answer": "<p>Sleep Bundle comes in three colours — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colours of Strips only,<br/><br/>no Tape. Season Bundle is a three-month supply in Black.</p>",
+            "answer": "<p>Sleep Bundle comes in three colors — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colors of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
             "default_open": false
           }
         },
@@ -1146,10 +1155,10 @@
       ],
       "name": "FAQ Accordion - PDP",
       "settings": {
-        "bg_color": "#fdf8ee",
+        "bg_color": "{{ settings.color_palette.background }}",
         "divider_color": "#cbd3d8",
         "heading": "FAQ",
-        "padding_top": 20,
+        "padding_top": 56,
         "padding_bottom": 64
       }
     }

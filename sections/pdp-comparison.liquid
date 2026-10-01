@@ -18,6 +18,7 @@
 
 
     <div class="section section--page-width">
+    <div class="comp-container">
       {% if section.settings.heading != blank %}
         <h2 class="hz-simple-comp-heading">{{ section.settings.heading }}</h2>
       {% endif %}
@@ -32,10 +33,14 @@
         </div>
       {% endif %}
     </div>
+    </div>
   </div>
 {%- endif -%}
 
 <style>
+  .comp-container{
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
   .hz-simple-comp-section {
     position: relative;
     padding: 20px 0px;
@@ -109,6 +114,31 @@
       "type": "image_picker",
       "id": "bottom_image",
       "label": "Bottom Image"
+    },
+    
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
     }
   ],
   "presets": [

@@ -8,7 +8,7 @@
   @param {object} [section] - The section that can be used to provide settings
 
   @example
-  {% render 'header-drawer', linklist: section.settings.menu, class: 'header-drawer--mobile' %}
+  {% render 'header-drawer', linklist: settings.link_mobile, class: 'header-drawer--mobile' %}
 {%- enddoc -%}
 
 {% render 'summary-icon-styles' %}
@@ -91,6 +91,173 @@
           {{- 'icon-close-menu.svg' | inline_asset_content -}}
         </span>
       </button>
+
+        <div class="somna-drawer-section">
+          <!-- Bestsellers Header -->
+          {%- if block.settings.bestseller_heading != blank -%}
+            <div class="somna-section-header">
+              <h2 class="somna-section-title">{{ settings.bestseller_heading }}</h2>
+              {%- if block.settings.bestseller_link != blank -%}
+                <a href="{{ settings.bestseller_link }}" class="somna-view-all">View all
+
+                 <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.3536 4.03544C10.5488 3.84018 10.5488 3.52359 10.3536 3.32833L7.17157 0.146351C6.97631 -0.0489113 6.65973 -0.0489113 6.46447 0.146351C6.2692 0.341613 6.2692 0.658195 6.46447 0.853458L9.29289 3.68188L6.46447 6.51031C6.2692 6.70557 6.2692 7.02216 6.46447 7.21742C6.65973 7.41268 6.97631 7.41268 7.17157 7.21742L10.3536 4.03544ZM0 3.68188V4.18188H10V3.68188V3.18188H0V3.68188Z" fill="black"/>
+</svg>
+
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          <!-- Bestsellers 2-Column Grid -->
+          <div class="somna-products-grid">
+            {%- for i in (1..2) -%}
+              {%- liquid
+                assign prod_key = 'bestseller_product_' | append: i
+                assign product_item = settings[prod_key]
+              -%}
+              <div class="somna-product-card">
+                <a href="{{ product_item.url | default: '#' }}" class="somna-card-link">
+                  <div class="somna-image-wrapper">
+                    {%- if product_item.featured_image != blank -%}
+                      {{ product_item.featured_image | image_url: width: 400 | image_tag: class: 'somna-card-img' }}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'somna-card-img placeholder-svg' }}
+                    {%- endif -%}
+                  </div>
+                  <div class="somna-product-info">
+                    <h4 class="somna-product-title">{{ product_item.title | default: 'Nasal Strips' }}</h4>
+                    <span class="somna-product-price">
+                      {%- if product_item.price != blank -%}
+                        {{ product_item.price | money }}
+                      {%- else -%}
+                        $45
+                      {%- endif -%}
+                    </span>
+                  </div>
+                </a>
+              </div>
+            {%- endfor -%}
+          </div>
+
+        </div>
+
+
+        <!-- Find Your Bundle Banner Section -->
+  {%- if settings.show_bundle_section -%}
+    <div class="somna-bundle-banner-wrap">
+      <div class="wave-container top" style="background-image: url(https://cdn.shopify.com/s/files/1/0796/2545/3799/files/purple-top-menu.svg?v=1790592477&amp;width=1440)">
+    </div>
+      <div class="wave-container bottom" style="background-image: url(https://cdn.shopify.com/s/files/1/0796/2545/3799/files/purple-bottom-menu.svg?v=1790592474&amp;width=1440)">
+       </div>
+      <div class="somna-bundle-header">
+        <h3 class="somna-bundle-main-title">{{ settings.bundle_title }}</h3>
+      </div>
+
+      <!-- 2x2 Grid for Bundles -->
+      <div class="somna-bundles-grid">
+        {%- for i in (1..4) -%}
+          {%- liquid
+            assign bundle_key = 'bundle_product_' | append: i
+            assign bundle_item = settings[bundle_key]
+
+            # Per-card overrides: variant (name or ID), title and image — so the same
+            # product can be used on several cards, one per variant.
+            assign bundle_variant_key = 'bundle_card_variant_' | append: i
+            assign bundle_title_key = 'bundle_card_title_' | append: i
+            assign bundle_image_key = 'bundle_card_image_' | append: i
+            assign bundle_variant_setting = settings[bundle_variant_key] | strip
+            assign bundle_title_setting = settings[bundle_title_key] | strip
+
+            assign bundle_variant = nil
+            if bundle_item != blank and bundle_variant_setting != blank
+              # Exact variant ID or title first, then the first title containing the text
+              assign bundle_variant_check = bundle_variant_setting | downcase
+              assign bundle_partial_match = nil
+              for variant in bundle_item.variants
+                assign variant_id_string = variant.id | append: ''
+                assign variant_title_check = variant.title | downcase
+                if variant_id_string == bundle_variant_setting or variant_title_check == bundle_variant_check
+                  assign bundle_variant = variant
+                  break
+                elsif bundle_partial_match == nil and variant_title_check contains bundle_variant_check
+                  assign bundle_partial_match = variant
+                endif
+              endfor
+              if bundle_variant == nil
+                assign bundle_variant = bundle_partial_match
+              endif
+            endif
+            if bundle_variant == nil and bundle_item != blank
+              assign bundle_variant = bundle_item.selected_or_first_available_variant
+            endif
+
+            assign bundle_url = bundle_variant.url | default: bundle_item.url
+            assign bundle_name = bundle_title_setting | default: bundle_item.title
+            assign bundle_price = bundle_variant.price | default: bundle_item.price
+            assign bundle_image = settings[bundle_image_key] | default: bundle_variant.featured_image | default: bundle_item.featured_image
+          -%}
+          {% if bundle_item != blank %}
+          <div class="somna-bundle-item">
+            <a href="{{ bundle_url | default: '#' }}" class="somna-bundle-link">
+              <div class="somna-bundle-img-wrap">
+                {%- if bundle_image != blank -%}
+                  {{ bundle_image | image_url: width: 400 | image_tag: class: 'somna-bundle-img', alt: bundle_name }}
+                {%- endif -%}
+              </div>
+              <div class="somna-bundle-details">
+                <span class="somna-bundle-name">{{ bundle_name | escape }}</span>
+                <span class="somna-bundle-price">
+                  {%- if bundle_price != blank -%}
+                    {{ bundle_price | money }}
+                  {%- endif -%}
+                </span>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+        {%- endfor -%}
+      </div>
+
+      <!-- Featured Horizontal Banner Item (The Season Bundle) -->
+      <div class="somna-featured-horizontal-card">
+      {%- assign season_prod = settings.season_bundle_product -%}
+      <a href="{{ season_prod.url | default: '#' }}" class="somna-featured-horizontal-card">
+        <div class="somna-hz-img-side">
+          {%- if season_prod.featured_image != blank -%}
+            {{ season_prod.featured_image | image_url: width: 400 | image_tag: class: 'somna-hz-img' }}
+          {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'somna-hz-img placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="somna-hz-content-side">
+          <h4 class="somna-hz-title">{{ season_prod.title | default: 'The Season Bundle' }}</h4>
+          <div class="somna-hz-price">
+            {%- if season_prod.price != blank -%}
+              {{ season_prod.price | money }}
+            {%- else -%}
+              $149
+            {%- endif -%}
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if settings.btn_text -%}
+    <div class="shop_all">
+      <a href="{{ settings.btn_link }}">
+        {{settings.btn_text }}
+        <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.3536 4.03544C10.5488 3.84018 10.5488 3.52359 10.3536 3.32833L7.17157 0.146351C6.97631 -0.0489113 6.65973 -0.0489113 6.46447 0.146351C6.2692 0.341613 6.2692 0.658195 6.46447 0.853458L9.29289 3.68188L6.46447 6.51031C6.2692 6.70557 6.2692 7.02216 6.46447 7.21742C6.65973 7.41268 6.97631 7.41268 7.17157 7.21742L10.3536 4.03544ZM0 3.68188V4.18188H10V3.68188V3.18188H0V3.68188Z" fill="#fff"/>
+</svg>
+
+      </a>
+    </div>
+  {% endif %}
+
+      
       <nav
         class="menu-drawer__navigation"
         style="
@@ -135,6 +302,7 @@
                         class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element"
                       >
                         <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                   
                         <span class="svg-wrapper icon-plus">
                           {{- 'icon-plus.svg' | inline_asset_content -}}
                         </span>
@@ -176,6 +344,10 @@
                                 %}
                               {% endif %}
                               <span class="menu-drawer__menu-item-text wrap-text">{{ childlink.title | escape }}</span>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+
                             </a>
                           </li>
                         {%- endfor -%}
@@ -199,6 +371,10 @@
                     {% endif %}
                   >
                     <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+
                   </a>
                   {% liquid
                     assign render_link_image = false
@@ -236,6 +412,10 @@
                             %}
                           {% endif %}
                           <span class="menu-drawer__menu-item-text wrap-text">{{ childlink.title | escape }}</span>
+                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                              </svg>
+
                         </a>
                       </li>
                     {%- endfor -%}
@@ -253,6 +433,10 @@
                     {% endif %}
                   >
                     <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                          </svg>
+
                   </a>
                 {% endif %}
               </li>
@@ -311,6 +495,10 @@
                             {% endif %}
                           >
                             <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                                  </svg>
+
                           </a>
                           <button
                             class="button button-unstyled close-button menu-drawer__close-button focus-inset"
@@ -373,6 +561,10 @@
                                   <span class="menu-drawer__menu-item-text wrap-text">
                                     {{- childlink.title | escape -}}
                                   </span>
+                                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+
                                 </a>
                               {%- else -%}
                                 {% liquid
@@ -440,6 +632,10 @@
                                               <span class="menu-drawer__menu-item-text wrap-text">
                                                 {{- grandchildlink.title | escape -}}
                                               </span>
+                                                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                  <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                                                  </svg>
+
                                             </a>
                                           </li>
                                         {%- endfor -%}
@@ -465,6 +661,10 @@
                                     <span class="menu-drawer__menu-item-text wrap-text">
                                       {{- childlink.title | escape -}}
                                     </span>
+                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+
                                   </a>
                                   {% liquid
                                     assign render_link_image = false
@@ -505,6 +705,10 @@
                                           <span class="menu-drawer__menu-item-text wrap-text">
                                             {{- grandchildlink.title | escape -}}
                                           </span>
+                                               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
                                         </a>
                                       </li>
                                     {%- endfor -%}
@@ -582,6 +786,10 @@
                     {% endif %}
                   >
                     <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.91602 6.99982H11.0836M6.99982 11.0836L11.0836 6.99982L6.99982 2.91602" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
                   </a>
                 {%- endif -%}
               </li>
@@ -589,6 +797,27 @@
           {% endif %}
         </ul>
       </nav>
+      <div class="somna-footer-wrapper">
+  <!-- Decorative Top Curved Wave -->
+<div class="wave-container top" style="background-image: url(https://cdn.shopify.com/s/files/1/0796/2545/3799/files/menu-top.svg?v=1790592299&width=1440)">
+    </div>
+
+  <div class="somna-footer-content">
+    <a href="{{ routes.account_register_url | default: '#' }}" class="somna-account-btn">
+      <span class="svg-wrapper somna-account-icon">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.2507 15.75V14.25C14.2507 13.4544 13.9346 12.6913 13.3719 12.1287C12.8093 11.5661 12.0461 11.25 11.2504 11.25H6.74985C5.95411 11.25 5.19097 11.5661 4.62829 12.1287C4.06562 12.6913 3.74951 13.4544 3.74951 14.25V15.75M12.0005 5.25C12.0005 6.90685 10.6572 8.25 9.00011 8.25C7.34307 8.25 5.99977 6.90685 5.99977 5.25C5.99977 3.59315 7.34307 2.25 9.00011 2.25C10.6572 2.25 12.0005 3.59315 12.0005 5.25Z" stroke="#0A1A4A" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="somna-account-text">{{ settings.account_text }} &rarr;</span>
+    </a>
+    
+    <div class="somna-signin-row">
+      <span>{{ settings.signin_subtext }}</span>
+      <a href="{{ routes.account_login_url | default: '#' }}" class="somna-signin-link">Sign in</a>
+    </div>
+  </div>
+</div>
       <div
         class="menu-drawer__utility-links menu-drawer__animated-element"
         style="--menu-drawer-animation-index: {{ linklist.links.size }};"

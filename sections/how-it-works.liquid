@@ -21,10 +21,7 @@
         {% comment %} ========================================================
           LAYOUT A: 2+ Items (Side-by-side Cards)
         ======================================================== {% endcomment %}
-        {% if section.settings.heading != blank %}
-          <h2 class="custom-header">{{ section.settings.heading }}</h2>
-        {% endif %}
-
+      
         <div class="hz-hiw-grid">
           {% for item in how_it_works_items %}
             <div class="hz-hiw-card">
@@ -100,115 +97,7 @@
   </div>
 {%- endif -%}
 
-<style>
-  .hz-hiw-section {
-    position: relative;
-    padding: 70px 0 35px 0px;
-  }
-  .hz-hiw-wave-img {
-    display: block;
-    width: 100%;
-    height: 60px;
-    object-fit: fill;
-  }
-  .hz-hiw-main-title {
-    text-align: center;
-    font-size: 38px;
-    font-family: serif;
-    font-weight: 500;
-    color: #0b1a30;
-    margin: 0 0 40px 0;
-  }
-
-  /* ------------------- Double Card Layout ------------------- */
-  .hz-hiw-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-  }
-
-  .hz-hiw-card {
-    background-color: #dceaf7;
-    border-radius: 24px;
-    padding: 12px 10px;
-  }
-  .hz-hiw-card-inner{
-    display: flex;
-    justify-content: space-between;
-  }
-  .hz-hiw-card:nth-child(2) {
-    background-color: #eee9e0;
-  }
-
-  .hz-hiw-card-header {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 5px;
-  }
-
-  .hz-hiw-card-info {
-    flex: 1;
-  }
-
-  .hz-hiw-card-title {
-    font-size: 24px;
-    font-family: serif;
-    font-weight: 600;
-    color: #0b1a30;
-    margin: 0 0 12px 0;
-    line-height: 1.15;
-  }
-
-  .hz-hiw-card-desc {
-    font-size: 8px;
-    line-height: 1.55;
-    color: #1a2a3e;
-  }
-  .hz-hiw-card-bottom-image {
-    max-width: 167px;
-  }
-  /* ------------------- Single Item Layout ------------------- */
-  .hz-hiw-single-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .hz-hiw-single-content {
-    flex: 1;
-  }
-
-  .hz-hiw-single-title {
-    font-size: 18px;
-    font-weight: 500;
-    color: #0A1A4A;
-    margin: 0 0 5px 0;
-    font-family: var(--headfont);
-  }
-  .hz-hiw-single-desc {
-    font-size: 10px;
-    line-height: 1.5;
-    color: #0A1A4A;
-  }
-  .hz-hiw-single-desc p {
-    margin: 0;
-  }
-
-  .hz-hiw-single-media {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .hz-hiw-single-media img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-  }
-
-</style>
+ 
 
 {% schema %}
 {

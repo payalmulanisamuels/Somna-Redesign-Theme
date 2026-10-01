@@ -131,7 +131,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "",
+                "text_color": "#0a1a4a",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -146,7 +146,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>Calm nights.<br/>Clearer</strong> <em>mornings</em>.</h2>",
+                "text": "<h2><strong>Calm nights.</strong><br/><strong>Clearer </strong><em>mornings</em>.</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -188,76 +188,20 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 9,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_VDbt3L",
-            "text_eT6TMz",
-            "text_Lqf6bA"
-          ]
-        },
-        "group_iMPm3G": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "custom_liquid_iRWbVt": {
-              "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
-              "disabled": true,
-              "settings": {
-                "custom_liquid": "<span class=\"bundle\">Bundles from $59 · Subscribe & Save</span>"
-              },
-              "blocks": {}
             },
-            "button_x76i7w": {
+            "button_6EgajN": {
               "type": "button",
               "name": "t:names.button",
               "settings": {
                 "label": "Shop the Breathe Bundle",
-                "link": "shopify://products/sleep-bundle",
+                "link": "/products/sleep-bundle?variant=52629425979623",
                 "open_in_new_tab": false,
-                "style_class": "button-custom",
+                "style_class": "button",
                 "custom_button_background": "#071a4b",
                 "custom_button_text": "{{ settings.color_palette.background }}",
                 "custom_button_border": "{{ settings.color_palette.background }}",
@@ -271,24 +215,28 @@
             }
           },
           "block_order": [
-            "custom_liquid_iRWbVt",
-            "button_x76i7w"
+            "text_VDbt3L",
+            "text_eT6TMz",
+            "text_Lqf6bA",
+            "button_6EgajN"
           ]
         }
       },
       "block_order": [
-        "group_47iMdX",
-        "group_iMPm3G"
+        "group_47iMdX"
+      ],
+      "custom_css": [
+        ".size-style.button {padding: 5px 8px; font-size: 9px; border: 1px solid #fff;}"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_09_55_59_PM.png",
+        "image_1": "shopify://shop_images/Subtract-banner.png",
         "media_type_2": "image",
         "stack_media_on_mobile": true,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/banner_image.jpg",
+        "image_1_mobile": "shopify://shop_images/mobile-banner.jpg",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -310,7 +258,7 @@
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 50,
+        "padding-block-start": 45,
         "padding-block-end": 35
       }
     },
@@ -361,7 +309,7 @@
               "settings": {
                 "icon": "eye",
                 "image_upload": "shopify://shop_images/Gift.png",
-                "width": 20,
+                "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
                 "icon_color": ""
@@ -410,7 +358,7 @@
                 "text_8jxQPc": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Free gift with<br/>every bundle</strong></p>",
+                    "text": "<p><strong>Free shipping</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -688,7 +636,7 @@
                 "text_mznam6": {
                   "type": "text",
                   "settings": {
-                    "text": "<p><strong>Secure<br/>checkout</strong></p>",
+                    "text": "<p><strong>Delivered in&nbsp;<br/>7–9 business days</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -870,10 +818,12 @@
         "divider_CimJ7p",
         "group_iMHtRg"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".custom-section-content {display: flex; align-items: center;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon-bg.svg",
+        "bg_image": "shopify://shop_images/icon_bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -881,7 +831,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 10,
+        "gap": 0,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
@@ -909,9 +859,10 @@
           "type": "bundle",
           "settings": {
             "product": "sleep-bundle",
+            "tag": "Most Popular",
             "is_featured": false,
-            "custom_title": "Breathe (Blue), Bold (Red), or Night (Black)",
-            "custom_image": "shopify://shop_images/breat-bundle.jpg",
+            "custom_title": "Strips + Tape, choose Breathe (Blue),Bold (Red), or Night (Black)",
+            "custom_image": "shopify://shop_images/The_Sleep_Bundle.jpg",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Sleep Bundle"
           }
@@ -920,9 +871,10 @@
           "type": "bundle",
           "settings": {
             "product": "the-colour-set",
+            "tag": "",
             "is_featured": false,
-            "custom_title": "All three colours, Strips only",
-            "custom_image": "shopify://shop_images/night.jpg",
+            "custom_title": "All three colors, Strips only",
+            "custom_image": "shopify://shop_images/strip-product_d852a58d-5e95-47eb-b44e-f980135cf691.png",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Colour Set"
           }
@@ -931,51 +883,26 @@
           "type": "bundle",
           "settings": {
             "product": "season-bundle",
+            "tag": "",
             "is_featured": true,
             "custom_title": "Three months, Black Strips + Black Tape",
-            "custom_image": "shopify://shop_images/night.jpg",
+            "custom_image": "shopify://shop_images/season-bundle.png",
             "subtext": "Subscribe & Save",
             "button_label": "Shop the Season Bundle"
-          }
-        },
-        "bundle_rBjHFi": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "mouth-tape",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/Product_image_4x_f9860620-0334-4fdf-9589-9ce8c25178e4.png",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
-          }
-        },
-        "bundle_CGg3b8": {
-          "type": "bundle",
-          "disabled": true,
-          "settings": {
-            "product": "nasal-strips",
-            "is_featured": false,
-            "custom_title": "",
-            "custom_image": "shopify://shop_images/season.jpg",
-            "subtext": "Subscribe & Save",
-            "button_label": "Shop the Breathe Bundle"
           }
         }
       },
       "block_order": [
         "bundle_gCFgge",
         "bundle_6MqjwE",
-        "bundle_LHB8m9",
-        "bundle_rBjHFi",
-        "bundle_CGg3b8"
+        "bundle_LHB8m9"
       ],
       "name": "Featured Bundle Grid",
       "settings": {
         "heading": "Featured Bundle Block",
         "bg_color": "#ffffff",
-        "padding_top": 20,
-        "padding_bottom": 10
+        "padding_top": 0,
+        "padding_bottom": 5
       }
     },
     "custom_cards_slider_pyJahK": {
@@ -985,58 +912,32 @@
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#1354c4",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product1.png",
+            "image": "shopify://shop_images/nasal-product.png",
+            "alignment": false,
             "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
-            "button_link": ""
+            "button_link": "shopify://products/nasal-strips"
           }
         },
         "card_f7AQym": {
           "type": "card",
           "settings": {
             "product_selected": "nasal-strips",
-            "card_bg": "#b298e8",
             "text_color": "#ffffff",
-            "image": "shopify://shop_images/product2.png",
+            "image": "shopify://shop_images/tap-product.png",
+            "alignment": true,
             "title": "Mouth Tape",
-            "price": "$35",
-            "button_label": "Subscribe & Save",
-            "button_link": ""
-          }
-        },
-        "card_dCixMV": {
-          "type": "card",
-          "settings": {
-            "product_selected": "",
-            "card_bg": "#1354c4",
-            "text_color": "#ffffff",
-            "title": "Night Bundle",
-            "price": "$70",
-            "button_label": "Subscribe & Save",
-            "button_link": ""
-          }
-        },
-        "card_eMfLa8": {
-          "type": "card",
-          "settings": {
-            "product_selected": "",
-            "card_bg": "#1858c2",
-            "text_color": "#ffffff",
-            "title": "Nasal Strips",
             "price": "",
             "button_label": "Subscribe & Save",
-            "button_link": ""
+            "button_link": "shopify://products/mouth-tape"
           }
         }
       },
       "block_order": [
         "card_XExw3D",
-        "card_f7AQym",
-        "card_dCixMV",
-        "card_eMfLa8"
+        "card_f7AQym"
       ],
       "name": "Custom Cards Slider",
       "settings": {
@@ -1051,7 +952,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Why This Brand</p>",
+            "text": "<p>Small essentials. Thoughtfully made.</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -1172,7 +1073,7 @@
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
-                    "font": "var(--font-body--family)",
+                    "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1294,7 +1195,7 @@
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
-                    "font": "var(--font-body--family)",
+                    "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1416,7 +1317,7 @@
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
-                    "font": "var(--font-body--family)",
+                    "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1538,7 +1439,7 @@
                     "max_width": "normal",
                     "alignment": "center",
                     "type_preset": "custom",
-                    "font": "var(--font-body--family)",
+                    "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1671,7 +1572,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/simple-banner.jpg",
+            "image_1": "shopify://shop_images/breath-banner.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -1687,21 +1588,21 @@
             "gradient_direction": "to top",
             "padding-block-start": 40,
             "padding-block-end": 40,
-            "padding-inline-start": 32,
-            "padding-inline-end": 32
+            "padding-inline-start": 15,
+            "padding-inline-end": 25
           },
           "blocks": {
             "text_QmeLq9": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>It's simple.<br/>Breathe through your nose.</p>",
+                "text": "<p>It's simple.&nbsp;<br/>Breathe through&nbsp;<br/>your nose.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.125rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1721,7 +1622,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Strips open your nasal passages so you<br/>breathe easier through the night. Tape<br/>encourages nasal breathing instead <br/>of mouth breathing while you sleep. <br/>Used together, they support one simple<br/>habit breathingthe way your body<br/> actually rests best.</p>",
+                "text": "<p>SOMNA Strips gently open nasal<br/>passages, while Tape encourages&nbsp;<br/>nasal breathing as you sleep.&nbsp;<br/>Together, they support one&nbsp;<br/>simple nightly habit.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -1754,7 +1655,7 @@
         "layered_slide_jqmf8i"
       ],
       "custom_css": [
-        ".wave-container img {height: 50px; object-position: top;}"
+        ".wave-container.bottom {background-position: top; bottom: 0;}"
       ],
       "name": "Layered Image with Text",
       "settings": {
@@ -1769,230 +1670,32 @@
         "padding-block-end": 0
       }
     },
-    "bundle_feature_banner_Qrgcy3": {
-      "type": "bundle-feature-banner",
-      "name": "Bundle Feature Banner",
+    "sleep_bundle_zRUkmH": {
+      "type": "sleep-bundle",
+      "name": "The Sleep Bundle",
       "settings": {
-        "product": "season-bundle",
-        "bg_color": "{{ settings.color_palette.background }}",
-        "image": "shopify://shop_images/image.png",
-        "title": "The Breathe Bundle",
-        "subtitle": "Blue Strips + Blue Tape, one month supply",
-        "sub_price_override": "",
-        "sub_label": "Subscribe & Save",
-        "onetime_price_override": "",
-        "onetime_label": "One-time",
-        "button_label": "Shop the Breathe Bundle",
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
-    "steps_guide_GFjEFb": {
-      "type": "steps-guide",
-      "blocks": {
-        "step_a9NE7E": {
-          "type": "step",
-          "settings": {
-            "step_number": "01",
-            "image": "shopify://shop_images/step1.png",
-            "title": "<p>Clean & dry</p>"
-          }
-        },
-        "step_Xi3rtx": {
-          "type": "step",
-          "settings": {
-            "step_number": "02",
-            "image": "shopify://shop_images/step2.png",
-            "title": "<p>Peel & place</p>"
-          }
-        },
-        "step_dwFEQe": {
-          "type": "step",
-          "settings": {
-            "step_number": "03",
-            "image": "shopify://shop_images/step3.png",
-            "title": "<p>Press gently</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_a9NE7E",
-        "step_Xi3rtx",
-        "step_dwFEQe"
-      ],
-      "disabled": true,
-      "name": "Steps Guide",
-      "settings": {
-        "bg_color": "#e0e8d7",
-        "show_waves": true,
-        "title": "<strong>Peel. Place.</strong> <em>Unwind.</em>",
-        "subheading_bottom": "Follow the directions on your pack."
-      }
-    },
-    "section_BbCdDx": {
-      "type": "section",
-      "blocks": {
-        "group_QgaMyg": {
-          "type": "group",
-          "name": "t:names.group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 5,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_9nwNVx": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>Real people. Rested Morning</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_YaB99C": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>20+ genuine settled reviews. Never a placeholder testimonial, star rating, or review count in the meantime.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_9nwNVx",
-            "text_YaB99C"
-          ]
-        },
-        "image_wdnJNN": {
-          "type": "image",
-          "name": "t:names.image",
-          "settings": {
-            "image": "shopify://shop_images/message.png",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "custom",
-            "custom_width": 26,
-            "width_mobile": "custom",
-            "custom_width_mobile": 20,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "group_QgaMyg",
-        "image_wdnJNN"
-      ],
-      "custom_css": [
-        ".image-block {position: absolute; max-width: 36px; right: 0; top: 40%; transform: translateY(-50%);}",
-        ".group-block.group-block--height-fit {max-width: 295px;}"
-      ],
-      "name": "t:names.rich_text_section",
-      "settings": {
-        "top_wave_image": "shopify://shop_images/review-svg-top.svg",
-        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 5,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "#e0e8d7",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 26,
-        "padding-block-end": 26
+        "product": "sleep-bundle",
+        "badge_text": "3 Colors",
+        "show_badge_icon": true,
+        "show_rating": true,
+        "title": "The Sleep Bundle",
+        "subtitle": "Strips + Tape in all three colors",
+        "price_prefix": "From",
+        "price_override": "",
+        "price_label": "Subscribe & Save",
+        "per_night_text": "3+1 sets. $1.46/night",
+        "button_label": "See the Breathe Bundle",
+        "button_variant": "Breathe",
+        "section_bg": "#ffffff",
+        "card_bg": "#ffffff",
+        "border_color": "#0a1a4a",
+        "accent_color": "#0b57e3",
+        "text_color": "#0a1a4a",
+        "muted_color": "#5b6b94",
+        "button_bg": "#0a1a4a",
+        "button_text_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "section_HiaPwG": {
@@ -2048,7 +1751,7 @@
             "accordion_row_Ebj6H3": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?",
+                "heading": "What's the difference between the bundles?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -2057,18 +1760,18 @@
                 "text_4zJNzt": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>Sleep Bundle comes in three colors — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colors of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -2087,7 +1790,7 @@
             "accordion_row_n8z9tW": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are any purchases final sale?",
+                "heading": "Can I buy Strips or Tape separately?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -2096,18 +1799,18 @@
                 "text_bYqVfB": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "text": "<p>Yes — both are available as singles if you'd rather start with one.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.625rem",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -2127,7 +1830,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "When will I get my order?",
+                "heading": "How does Subscribe & Save work?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -2137,18 +1840,18 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                    "text": "<p>It delivers automatically on your chosen schedule at 10% off, and you can skip, pause, or cancel anytime.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -2168,7 +1871,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "Where are your products manufactured?",
+                "heading": "Do you ship outside the United States?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -2178,18 +1881,18 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
+                    "text": "<p>We currently ship within the United States only.</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -2209,7 +1912,7 @@
               "type": "_accordion-row",
               "name": "t:names.accordion_row",
               "settings": {
-                "heading": "How much does shipping cost?",
+                "heading": "What's your return policy?",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -2219,18 +1922,18 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>",
+                    "text": "<p>Every product is covered by our 30-Night Money-Back Guarantee, counted from delivery</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "rte",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "",
+                    "font_size": "0.75rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "#0a1a4a",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -2335,18 +2038,18 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
+                "text": "<p>Get 10% off your<br/>first order.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
-                "font": "var(--font-body--family)",
+                "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "{{ settings.color_palette.background }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -2360,7 +2063,7 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
+                "text": "<p>A welcome code for your first&nbsp;<br/>night with Somna.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2371,7 +2074,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "{{ settings.color_palette.background }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -2435,7 +2138,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/footer-bg.jpg",
+        "background_image": "shopify://shop_images/footer-image.jpg",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
@@ -2452,9 +2155,7 @@
     "custom_cards_slider_pyJahK",
     "section_ibM3ft",
     "layered_image_with_text_LEPfjJ",
-    "bundle_feature_banner_Qrgcy3",
-    "steps_guide_GFjEFb",
-    "section_BbCdDx",
+    "sleep_bundle_zRUkmH",
     "section_HiaPwG",
     "footer_m9NzUG"
   ]
