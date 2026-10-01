@@ -1153,6 +1153,9 @@ h2.upsell_heading {
     transform: translate(-50%, -50%);
     position: absolute; top: 50%;
 }
+.progress-icon-cart img{
+    max-width: 24px;
+}
 .progress-icon{
     transform: translate(-50%, -50%);
     width: 24px; 
