@@ -9,7 +9,6 @@
   {% render 'search', style: 'default', class: 'custom-class', display_style: 'icon' %}
 {%- enddoc -%}
 
-==={{ display_style }}
 {% unless style == 'none' %}
   <search-button
     class="search-action{% if display_style == 'text' %} search-action--text{% endif %}{% if class != blank %} {{ class | strip }}{% endif %}"
