@@ -98,6 +98,8 @@
         </p>
       {% endif %}
 
+
+      <div class="sticky_bar_main">
       {% liquid
         assign image_to_show = current_variant.featured_image | default: product.featured_image
       %}
@@ -222,6 +224,8 @@
           </span>
         </span>
       </button>
+    </div>
+
     </div>
   </sticky-add-to-cart>
 
