@@ -663,19 +663,22 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   --somna-onetime: #d2461e;
   flex-wrap: wrap;
   gap: 10px;
-  width: min(420px, calc(100% - 32px));
-  padding:0 10px 10px 10px;
-  border-radius: 22px;
+  width: 100%;
+  padding:0 0 10px 0;
+  border-radius: 0;
   background: var(--somna-navy);
   color: var(--somna-navy-dark);
   box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
+  max-width: 800px;
+  z-index: 11111 !important;
 }
 
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
   display: none;
 }
 .sticky-add-to-cart__bar{
-  z-index: 1111;
+  z-index: 1111 !important;
+  bottom: 0 !important;
 }
 .somna-sticky__banner {
   flex: 1 0 100%;
@@ -683,9 +686,9 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin: -10px -10px 0;
+  margin: 0;
   padding: 4.5px 12px;
-  border-radius: 22px 22px 0 0;
+  border-radius:0;
   background: var(--somna-sky);
   color: var(--somna-navy-dark);
   font-size: 11px;
@@ -693,7 +696,12 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   font-weight: 600;
   line-height: normal;
 }
-
+.sticky_bar_main {
+    width: 100%;
+    display: flex;
+    padding:10px 15px 0;
+    gap: 10px;
+}
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
   height: 48px;
   border-radius: 4px;
@@ -881,11 +889,8 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 
 @media screen and (max-width: 749px) {
   .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
-    bottom: max(12px, var(--safe-area-inset-bottom));
-    width: calc(100% - 24px);
-    border-radius: 22px;
-    padding-block-end: 10px;
-    z-index: 11111;
+    width: 100%;
+    max-width: 800px;
   }
 
   /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
@@ -1280,12 +1285,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   .product-information__grid {
     margin-bottom: 90px;
   }
-  .footer-content .shopify-block.shopify-app-block {
-    max-width: 300px;
-    margin-bottom: 45px;
-  }
+ 
 
-  .klaviyo-form input[name="email"] {
-    font-size: 40px !important;
-  }
+
 }

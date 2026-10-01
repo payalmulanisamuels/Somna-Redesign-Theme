@@ -62,6 +62,26 @@ html[scroll-lock ] .announcement-bar {
 }
 
 /* Ensure left column aligns start and right column groups to the end */
+.logo_mobile {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 17px;
+}
+.logo_mobile .header-logo img {
+    width: 130px;
+    height: auto !important;
+}
+.menu-drawer__close-button.menu-drawer__close-button {
+    padding: 0;
+}
+.logo_mobile svg {
+    width: 28px !important;
+    height: 28px !important;
+}
+.logo_mobile .svg-wrapper {
+    width: 28px;
+    height: 28px;
+}
 .header__column--left {
   display: flex !important;
   align-items: center !important;
@@ -537,7 +557,7 @@ max-width: 190px;
 .email-signup__form {
 height: 100%;
 }
-.email-signup__input-group {
+.email-signup__input-group{
 height: 100%;
 }
 
@@ -1153,6 +1173,9 @@ h2.upsell_heading {
     transform: translate(-50%, -50%);
     position: absolute; top: 50%;
 }
+.progress-icon-cart img{
+    max-width: 24px;
+}
 .progress-icon{
     transform: translate(-50%, -50%);
     width: 24px; 
@@ -1208,19 +1231,14 @@ h2.upsell_heading {
    Width uses vw, not %: .header has `contain: layout` until the menu opens, which makes it the
    containing block of this fixed drawer — a % width would jump from header width to viewport width. */
 header-drawer .menu-drawer {
-    /* Must be vw, not %: a fixed element's % width comes from its containing block, and .header
-       has `contain: layout`, so 100% resolved to a narrower box on iPhone (~370px of 390px),
-       leaving a strip on the right. vw is always the full screen width. */
+ 
     width: 100%;
     max-width: 100%;
     border-right: 0;
     transform: translateY(-100%);
     left: 0;
     right: 0;
-    /* Full-screen drop needs more time than Horizon's 0.2s side drawer, or it reads as a jump.
-       Closing: slightly quicker, ease-in. will-change keeps the layer ready so Safari
-       doesn't paint a blank first frame. */
-    transition: transform 0.3s cubic-bezier(0.55, 0, 0.75, 0.5), visibility 0.3s, opacity 0.3s;
+    transition: transform .4s linear,visibility .4s,opacity .4s;
     will-change: transform;
     backface-visibility: hidden;
 }
@@ -1228,6 +1246,10 @@ header-drawer .menu-open > .menu-drawer {
     transform: translateY(0);
     /* Opening: ease-out, so it drops in fast and settles smoothly */
     transition: transform .4s linear, visibility .4s, opacity .4s;
+    overflow: hidden;
+}
+.somna-drawer_main {
+    overflow: auto;
 }
 @media (prefers-reduced-motion: reduce) {
     header-drawer .menu-drawer,
@@ -1702,7 +1724,12 @@ a.somna-view-all {
     to { opacity: 1; transform: translateY(0); }
   }
 /* Collection Feature*/
-
+.klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+    font-family: var(--font-paragraph--family) !important;
+}
+.klaviyo-form-richtext, .klaviyo-form-richtext strong, .klaviyo-form-richtext p,.klaviyo-form-richtext p span {
+    color: #fff !important;
+}
 @media(min-width:768px){
     .header-logo span[data-testid=header-logo] {
         max-width: 173px;
@@ -1778,4 +1805,18 @@ a.somna-view-all {
     height: 18px;
     width: 85px;
     }
+    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+        font-size: 18px !important;
+        height: 40px !important;
+    }
+    .klaviyo-form .klaviyo-form-button {
+        height: 23px !important;
+        font-size: 18px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    .footer-content .shopify-block.shopify-app-block {
+        max-width: 400px;
+        margin-bottom: 45px;
+     }
 }
