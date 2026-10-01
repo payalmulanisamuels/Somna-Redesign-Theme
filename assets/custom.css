@@ -1765,4 +1765,11 @@ a.somna-view-all {
     .header__columns:has(.header__column--center header-menu) .header__column--left{
         flex: none;
     }
+    .review_content {
+    font-size: 16px;
+    }
+    .review_content svg {
+    height: 18px;
+    width: 85px;
+    }
 }
