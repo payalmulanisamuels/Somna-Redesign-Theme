@@ -35,7 +35,7 @@ html {
 
 html[scroll-lock],
 html[scroll-lock] .page-wrapper {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .page-wrapper {
