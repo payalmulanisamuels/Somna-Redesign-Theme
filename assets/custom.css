@@ -1783,6 +1783,5 @@ a.somna-view-all {
     .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
         font-size: 18px !important;
         height: 40px !important;
-        font-family: var(--font-paragraph--family) !important;
     }
 }
