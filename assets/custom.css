@@ -62,6 +62,20 @@ html[scroll-lock ] .announcement-bar {
 }
 
 /* Ensure left column aligns start and right column groups to the end */
+.logo_mobile {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 17px;
+}
+
+.logo_mobile .header-logo img {
+    width: 130px;
+    height: auto !important;
+}
+
+.menu-drawer__close-button.menu-drawer__close-button {
+    padding: 0;
+}
 .header__column--left {
   display: flex !important;
   align-items: center !important;
