@@ -254,6 +254,8 @@ class StickyAddToCartComponent extends Component {
     const { optionValueId } = event.detail ?? {};
     if (optionValueId) {
       this.dataset.currentVariantId = optionValueId;
+      // Somna: update the size dropdown right away instead of waiting for the section re-render.
+      this.#selectRowNow(optionValueId);
     }
 
     // Wait for the promise to resolve with variant update data
@@ -306,6 +308,26 @@ class StickyAddToCartComponent extends Component {
         if (error?.name !== 'AbortError') console.warn('[sticky-add-to-cart] Event promise rejected:', error);
       });
   };
+
+  /**
+   * Somna: marks the size row for the picked option value as selected and refreshes the
+   * dropdown trigger (size, price, per night) from data already in the markup. The morph
+   * that follows the section fetch brings the same values, so nothing flickers.
+   * @param {string} optionValueId
+   */
+  #selectRowNow(optionValueId) {
+    const rows = this.querySelectorAll('[data-somna-sticky-row]');
+    const picked = Array.from(rows).find(
+      (row) => row instanceof HTMLElement && row.dataset.optionValueId === optionValueId
+    );
+    // Another option (e.g. color) changed — the sizes come with the re-render.
+    if (!picked) return;
+
+    for (const row of rows) row.setAttribute('aria-selected', String(row === picked));
+    const title = picked.querySelector('.somna-sticky__row-title')?.textContent?.trim();
+    if (title) this.#setField(this.querySelector('[data-somna-sticky-toggle]'), 'size', title);
+    this.#syncPurchaseState();
+  }
 
   /**
    * Updates the variant title based on selected options when the variant is unavailable
