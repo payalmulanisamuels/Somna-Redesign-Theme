@@ -1277,4 +1277,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     width: 200px;
     height: 10px;
   }
+  .product-information__grid {
+    margin-bottom: 90px;
+  }
 }
