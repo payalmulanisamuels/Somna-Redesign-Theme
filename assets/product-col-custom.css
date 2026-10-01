@@ -669,6 +669,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
   background: var(--somna-navy);
   color: var(--somna-navy-dark);
   box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
+  max-width: 800px;
 }
 
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
@@ -887,8 +888,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 @media screen and (max-width: 749px) {
   .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
     width: 100%;
-    border-radius: 0;
-    z-index: 11111;
+    max-width: 800px;
   }
 
   /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
