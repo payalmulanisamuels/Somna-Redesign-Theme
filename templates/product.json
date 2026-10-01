@@ -46,7 +46,7 @@
           "static": true,
           "settings": {
             "width": "fill",
-            "custom_width": 55,
+            "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -65,7 +65,7 @@
             "padding-block-start": 0,
             "padding-block-end": 24,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 40
           },
           "blocks": {
             "group_icgrde": {
@@ -562,7 +562,7 @@
         "desktop_media_position": "left",
         "equal_columns": false,
         "limit_details_width": false,
-        "gap": 48,
+        "gap": 20,
         "enable_sticky_add_to_cart": true,
         "background_color": "#fff9ed",
         "padding-block-start": 0,
