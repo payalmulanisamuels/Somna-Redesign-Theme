@@ -63,6 +63,7 @@ html[scroll-lock ] .announcement-bar {
 
 /* Ensure left column aligns start and right column groups to the end */
 .logo_mobile {
+    flex: none;
     display: flex;
     justify-content: space-between;
     padding: 20px 17px;
@@ -1253,11 +1254,12 @@ header-drawer .menu-drawer {
     clip-path: inset(var(--somna-reveal-top, 0px) 0 var(--somna-reveal-bottom, calc(100% - 64px)) 0 round 12px);
     opacity: 0;
     pointer-events: none;
+    /* Closing is kept short (.3s): the card has faded out by .26s, and header-drawer.js keeps the
+       menu [open] — scroll lock on — until this finishes. */
     transition:
-        clip-path .76s var(--somna-ease-out),
+        clip-path .3s cubic-bezier(.4, 0, .2, 1),
         opacity .26s cubic-bezier(.22, 1, .36, 1),
-        visibility 0s linear .76s;
-    will-change: clip-path, opacity;
+        visibility 0s linear .3s;
 }
 header-drawer .menu-open > .menu-drawer {
     transform: none;
@@ -1271,7 +1273,12 @@ header-drawer .menu-open > .menu-drawer {
         visibility 0s;
 }
 .somna-drawer_main {
+    /* Fill the card below the logo row and scroll inside it. Without flex + min-height: 0 this
+       grows to its full content height, the card clips it, and the lower links can't be reached. */
+    flex: 1 1 auto;
+    min-height: 0;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
     /* Scrolling past the end of the menu must not scroll the page behind it */
     overscroll-behavior: contain;
 }
@@ -1282,11 +1289,20 @@ header-drawer .menu-drawer__backdrop {
     backdrop-filter: none;
     transition: opacity .36s cubic-bezier(.22, 1, .36, 1);
 }
+/* While closing, the fading backdrop must not catch taps: let them through to the hamburger */
+header-drawer .menu-drawer-container:not(.menu-open) .menu-drawer__backdrop {
+    pointer-events: none;
+}
 
-/* Lock page scroll while the menu is open. base.css has the global scroll-lock overflow commented
-   out, so lock only for this drawer. (scrollbar-gutter below stops any sideways shift.) */
-html:has(#Details-menu-drawer-container[open]) {
-    overflow: hidden;
+/* Keep the page behind the menu from scrolling without `overflow: hidden` on <html>: on iPhone
+   Safari that re-lays out the sticky header (and this drawer inside it) while the menu animates,
+   which glitches the animation and puts tap targets out of line with what's drawn (taps miss).
+   (base.css has the global scroll-lock overflow commented out, likely for the same reason.)
+   Instead: gestures that start on the backdrop or the logo row don't scroll anything, and the menu's
+   own scroll area doesn't hand its scroll on to the page (overscroll-behavior on .somna-drawer_main). */
+header-drawer .menu-drawer__backdrop,
+header-drawer .logo_mobile {
+    touch-action: none;
 }
 
 /* Links: drop 10px and fade in once the card is mostly open (~355ms), 55ms apart */

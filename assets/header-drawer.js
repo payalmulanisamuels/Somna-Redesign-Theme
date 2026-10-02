@@ -57,7 +57,15 @@ class HeaderDrawer extends Component {
   /**
    * Toggle the main menu drawer
    */
-  toggle() {
+  toggle(event) {
+    // Somna: while the closing animation runs the menu is still [open] but no longer .menu-open.
+    // Treat that as closed so a tap on the hamburger re-opens it straight away, and stop the
+    // <summary>'s own toggle from closing the <details> under us.
+    if (this.isOpen && !this.refs.details.classList.contains('menu-open')) {
+      event?.preventDefault?.();
+      return this.open();
+    }
+
     return this.isOpen ? this.close() : this.open();
   }
 
@@ -152,6 +160,9 @@ class HeaderDrawer extends Component {
     onAnimationEnd(
       drawer || details,
       () => {
+        // Re-opened before the closing animation finished (see toggle): leave it open
+        if (details.classList.contains('menu-open')) return;
+
         reset(details);
         if (details === this.refs.details) {
           removeTrapFocus();
