@@ -34,7 +34,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Free Gifts with Subscription",
+            "text": "3 Free Gifts",
             "link": "",
             "separator_image": "shopify://shop_images/somna-gift.png",
             "font": "var(--font-subheading--family)",
