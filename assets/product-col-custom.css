@@ -759,6 +759,7 @@ sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onet
     display: flex;
     padding:10px 15px 0;
     gap: 10px;
+    align-items: center;
 }
 .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
   height: 48px;
