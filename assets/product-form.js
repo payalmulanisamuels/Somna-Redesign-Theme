@@ -923,6 +923,10 @@ class ProductFormComponent extends Component {
 
       // Fetch and update cart quantity for the new variant
       this.#refreshCart().then((cart) => this.#updateCartQuantity(cart));
+    } catch (error) {
+      // A newer variant selection cancelled this one's section fetch — expected, nothing to do.
+      // (Without this catch the AbortError surfaces as "Uncaught (in promise)" in the console.)
+      if (error?.name !== 'AbortError') throw error;
     } finally {
       // Only clear the flag if no newer variant selection has started
       if (generation === this.#variantChangeGeneration) {

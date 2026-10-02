@@ -125,6 +125,62 @@ margin-top: 7px;
     background-color: #C9E5FE !important;
   }
 
+  /* Selected card: 2px border traced in from two opposite corners (like histrips.com).
+     A new ::after is created each time a card becomes :checked, so the animation replays on every pick.
+     Without @property support the angle falls back to 180deg and the full border just shows. */
+  @property --somna-border-reveal {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes somna-border-trace {
+    0%,
+    10% { --somna-border-reveal: 0deg; }
+    100% { --somna-border-reveal: 180deg; }
+  }
+  .variant-option__button-label--card:has(:checked):not(:has([data-option-available='false']))::after {
+    --reveal: var(--somna-border-reveal, 180deg);
+    content: '';
+    position: absolute;
+    inset: calc(var(--options-border-width, 1px) * -1);
+    padding: 2px;
+    border: 0;
+    border-radius: inherit;
+    background: #1354c4;
+    pointer-events: none;
+    z-index: 3;
+    clip-path: none;
+    -webkit-mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    -webkit-mask-composite: source-in, xor;
+    mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    mask-composite: intersect, exclude;
+    animation: somna-border-trace 680ms cubic-bezier(.45, 0, .2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .variant-option__button-label--card:has(:checked)::after {
+      animation: none;
+      --somna-border-reveal: 180deg;
+    }
+  }
+
   .variant-card__badge.popular { background: #1354c4; }
   .variant-card__badge.free-bag { background: #0a1a4a; }
   .variant-card__sub-title {
@@ -432,7 +488,9 @@ margin-top: 7px;
     background: #0A4FD6 !important;
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
- 
+ .slideshow-controls__thumbnails{
+  margin: 0 !important;
+ }
 .slideshow-controls__thumbnails .slideshow-control {
     width: 74px !important;
     height: 71px !important;
@@ -1158,6 +1216,8 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   object-fit: contain;
 }
 /* How it works*/
+
+
 @media(min-width:768px){
   .hz-ps-text{
     font-size: 20px;
@@ -1288,4 +1348,10 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
  
 
 
+}
+
+@media(max-width:1000px){
+  .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+    font-size: 14px !important;
+  }
 }

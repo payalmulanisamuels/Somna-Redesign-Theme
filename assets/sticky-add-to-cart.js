@@ -66,12 +66,6 @@ const PURCHASE_OPTION_EVENT = 'somna:purchase-option-change';
 class StickyAddToCartComponent extends Component {
   requiredRefs = ['stickyBar', 'addToCartButton', 'quantityDisplay', 'quantityNumber'];
 
-  /** @type {IntersectionObserver | null} */
-  #buyButtonsIntersectionObserver = null;
-
-  /** @type {IntersectionObserver | null} */
-  #mainBottomObserver = null;
-
   /** @type {number | undefined} */
   #resetTimeout;
 
@@ -89,9 +83,6 @@ class StickyAddToCartComponent extends Component {
 
   /** @type {number} */
   #currentQuantity = 1;
-
-  /** @type {boolean} */
-  #hiddenByBottom = false;
 
   /** @type {PurchaseState} */
   #purchaseState = { mode: 'onetime', sellingPlanId: '' };
@@ -136,8 +127,6 @@ class StickyAddToCartComponent extends Component {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.#buyButtonsIntersectionObserver?.disconnect();
-    this.#mainBottomObserver?.disconnect();
     this.#abortController.abort();
     if (this.#animationTimeout) {
       clearTimeout(this.#animationTimeout);
@@ -145,7 +134,7 @@ class StickyAddToCartComponent extends Component {
   }
 
   /**
-   * Sets up the IntersectionObserver to watch the buy buttons visibility
+   * Shows / hides the sticky bar on scroll (Somna: once the section after the product is behind the header)
    */
   #setupIntersectionObserver() {
     const productForm = this.#getProductForm();
@@ -154,58 +143,44 @@ class StickyAddToCartComponent extends Component {
     const buyButtonsBlock = productForm.closest('.buy-buttons-block');
     if (!buyButtonsBlock) return;
 
-    // In themes migrated from 2.0, the footer element doesn't exist
-    const footer = document.querySelector('footer') ?? document.querySelector('[class*="footer-group"]');
-    if (!footer) return;
+    // Somna: the bar stays visible through the footer to the bottom of the page. Horizon's second
+    // observer, which hid it once the footer came within 200px of the viewport, was removed.
 
-    // Observer for buy buttons visibility
-    this.#buyButtonsIntersectionObserver = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (!entry) return;
+    // Somna: show the bar as soon as the top of the section right after the product (the yellow
+    // trust bar) reaches the sticky header, and hide it again when it moves back down below it.
+    // Falls back to the buy buttons if the product section is the last one.
+    // A scroll check instead of an IntersectionObserver: the observer counts the part of the page
+    // under the sticky header as visible, so the bar only appeared once the section left the screen.
+    const trigger = productForm.closest('.shopify-section')?.nextElementSibling ?? buyButtonsBlock;
+    const header = document.querySelector('header-component');
+    // How far before the yellow bar reaches the header the sticky bar appears (px). Raise to show earlier.
+    const SHOW_OFFSET = 0;
+    let frame = 0;
 
-      // Only show sticky bar if buy buttons have been scrolled past (above viewport)
-      if (!entry.isIntersecting && !this.#isStuck) {
-        // Check if the element is above the viewport (scrolled past) or below (not yet reached)
-        const rect = entry.target.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top < 0) {
-          if (this.#isChatActive()) return;
-          this.#showStickyBar();
-        }
-        // If rect.top >= 0, element is below viewport - don't show sticky bar yet
-      } else if (entry.isIntersecting && this.#isStuck) {
-        this.#hiddenByBottom = false;
+    const update = () => {
+      frame = 0;
+      // Bottom of the header as it is on screen right now: 0 once it has scrolled or slid away
+      const headerBottom = Math.max(0, header?.getBoundingClientRect().bottom ?? 0);
+      const scrolledPast = trigger.getBoundingClientRect().top <= headerBottom + SHOW_OFFSET;
+
+      if (scrolledPast && !this.#isStuck) {
+        if (this.#isChatActive()) return;
+        this.#showStickyBar();
+      } else if (!scrolledPast && this.#isStuck) {
         this.#hideStickyBar();
       }
-    });
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
 
-    // Observer for footer visibility - hides sticky bar at page bottom
-    this.#mainBottomObserver = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (!entry) return;
+    // Capture catches scrolling on any container (on desktop the theme scrolls .page-wrapper, not the window)
+    const { signal } = this.#abortController;
+    document.addEventListener('scroll', scheduleUpdate, { capture: true, passive: true, signal });
+    window.addEventListener('resize', scheduleUpdate, { passive: true, signal });
+    signal.addEventListener('abort', () => cancelAnimationFrame(frame));
+    scheduleUpdate();
 
-        if (entry.isIntersecting && this.#isStuck) {
-          this.#hiddenByBottom = true;
-          this.#hideStickyBar();
-        } else if (!entry.isIntersecting && this.#hiddenByBottom) {
-          // Footer out of view - check if we should show sticky bar again
-          const rect = buyButtonsBlock.getBoundingClientRect();
-          // Only show if buy buttons are above the viewport (scrolled past)
-          if (rect.bottom < 0 || rect.top < 0) {
-            this.#hiddenByBottom = false;
-            if (!this.#isChatActive()) {
-              this.#showStickyBar();
-            }
-          }
-        }
-      },
-      {
-        rootMargin: '200px 0px 0px 0px',
-      }
-    );
-
-    this.#buyButtonsIntersectionObserver.observe(buyButtonsBlock);
-    this.#mainBottomObserver.observe(footer);
     this.#targetAddToCartButton = productForm.querySelector('[ref="addToCartButton"]');
   }
 

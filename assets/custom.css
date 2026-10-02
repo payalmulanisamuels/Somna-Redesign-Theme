@@ -1226,51 +1226,106 @@ h2.upsell_heading {
     background: #fff9ed !important;
 }
 
-/* Menu drawer opens from the top like a dropdown (Horizon default slides in from the left).
-   "header-drawer" prefix outranks the drawer's own .menu-drawer rules in header-drawer.liquid.
-   Width uses vw, not %: .header has `contain: layout` until the menu opens, which makes it the
-   containing block of this fixed drawer — a % width would jump from header width to viewport width. */
+/* Mobile menu, modelled on histrips.com: a floating rounded card (8px off every edge) that grows
+   out of the header bar — up and down at once — over a dark backdrop, then the links drop in.
+   Closing reverses it: links fade first, then the card shrinks back into the header bar.
+   - clip-path does the growing, so the card never moves and its contents never shift.
+   - --somna-reveal-top / --somna-reveal-bottom are set by header-drawer.js on open: how far the header
+     bar sits from the card's top and bottom edges, so the closed clip is exactly the header bar.
+   - Each state sets its own transition: .menu-open times the opening, the base rule the closing
+     (header-drawer.js waits for these transitions before removing [open]).
+   "header-drawer" prefix outranks the drawer's own .menu-drawer rules in header-drawer.liquid. */
 header-drawer .menu-drawer {
- 
-    width: 100%;
-    max-width: 100%;
+    --somna-ease-out: cubic-bezier(.16, 1, .3, 1);
+    /* .header has `contain: layout`, so it (not the viewport) is this fixed drawer's containing block.
+       --somna-cb-top / --somna-cb-left (set by header-drawer.js) are the header's offset from the
+       viewport, so the card still sits 8px off every edge of the screen. */
+    top: calc(8px - var(--somna-cb-top, 0px));
+    left: calc(8px - var(--somna-cb-left, 0px));
+    right: auto;
+    bottom: auto;
+    width: calc(100vw - 16px);
+    height: calc(100dvh - 16px);
+    max-width: none;
     border-right: 0;
-    transform: translateY(-100%);
-    left: 0;
-    right: 0;
-    transition: transform .4s linear,visibility .4s,opacity .4s;
-    will-change: transform;
-    backface-visibility: hidden;
+    border-radius: 12px;
+    transform: none;
+    clip-path: inset(var(--somna-reveal-top, 0px) 0 var(--somna-reveal-bottom, calc(100% - 64px)) 0 round 12px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        clip-path .76s var(--somna-ease-out),
+        opacity .26s cubic-bezier(.22, 1, .36, 1),
+        visibility 0s linear .76s;
+    will-change: clip-path, opacity;
 }
 header-drawer .menu-open > .menu-drawer {
-    transform: translateY(0);
-    /* Opening: ease-out, so it drops in fast and settles smoothly */
-    transition: transform .4s linear, visibility .4s, opacity .4s;
+    transform: none;
+    clip-path: inset(0 0 0 0 round 12px);
+    opacity: 1;
+    pointer-events: auto;
     overflow: hidden;
+    transition:
+        clip-path .76s var(--somna-ease-out),
+        opacity .26s cubic-bezier(.22, 1, .36, 1),
+        visibility 0s;
 }
 .somna-drawer_main {
     overflow: auto;
-}
-@media (prefers-reduced-motion: reduce) {
-    header-drawer .menu-drawer,
-    header-drawer .menu-open > .menu-drawer {
-        transition: none;
-    }
+    /* Scrolling past the end of the menu must not scroll the page behind it */
+    overscroll-behavior: contain;
 }
 
-/* Menu links: fade in instead of Horizon's translateX(-0.5rem) slide-in — on a top dropdown
-   that slide reads as content jumping left to right. Keeps Horizon's timing and stagger. */
-header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
-    animation-name: somna-menu-item-fade-in;
+/* Dark backdrop fades in under the card */
+header-drawer .menu-drawer__backdrop {
+    background: rgb(6 28 66 / .6);
+    backdrop-filter: none;
+    transition: opacity .36s cubic-bezier(.22, 1, .36, 1);
 }
-@keyframes somna-menu-item-fade-in {
+
+/* Lock page scroll while the menu is open. base.css has the global scroll-lock overflow commented
+   out, so lock only for this drawer. (scrollbar-gutter below stops any sideways shift.) */
+html:has(#Details-menu-drawer-container[open]) {
+    overflow: hidden;
+}
+
+/* Links: drop 10px and fade in once the card is mostly open (~355ms), 55ms apart */
+header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
+    animation-name: somna-menu-item-reveal;
+    animation-duration: .52s;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+    animation-delay: calc(.355s + (var(--menu-drawer-animation-index, 1) - 1) * .055s);
+}
+@keyframes somna-menu-item-reveal {
     0% {
         visibility: hidden;
         opacity: 0;
+        transform: translateY(-10px);
+    }
+    40% {
+        opacity: 1;
     }
     100% {
         visibility: visible;
         opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Closing: links fade out right away, before the card shrinks over them */
+header-drawer .menu-drawer-container:not(.menu-open) .menu-drawer__animated-element {
+    opacity: 0;
+    transition: opacity .18s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    header-drawer .menu-drawer,
+    header-drawer .menu-open > .menu-drawer,
+    header-drawer .menu-drawer__backdrop,
+    header-drawer .menu-drawer-container:not(.menu-open) .menu-drawer__animated-element {
+        transition: none;
+    }
+    header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
+        animation: none;
     }
 }
 
