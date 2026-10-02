@@ -110,7 +110,7 @@
                   # Per night across the nights this variant supplies (e.g. 4 bags = 120 nights).
                   assign per_night = ''
                   if v_nights > 0
-                    assign per_night = alloc.price | divided_by: v_nights | money
+                    assign per_night = alloc.price | times: 1.0 | divided_by: v_nights | round | money
                   endif
 
                   if is_current

@@ -94,7 +94,7 @@
             {%- capture plan_label -%}{%- render 'somna-plan-label', selling_plan: alloc.selling_plan -%}{%- endcapture -%}
             "{{ alloc.selling_plan.id }}": {
               "price": {{ alloc.price | money_without_trailing_zeros | json }},
-              "perNight": {{ alloc.price | divided_by: row_nights | money | json }},
+              "perNight": {{ alloc.price | times: 1.0 | divided_by: row_nights | round | money | json }},
               "label": {{ plan_label | strip | json }}
             }{% unless forloop.last %},{% endunless %}
           {%- endfor -%} }
@@ -108,7 +108,7 @@
             data-somna-sticky-row
             data-option-value-id="{{ option_value.id }}"
             data-onetime-price="{{ row_variant.price | money_without_trailing_zeros | escape }}"
-            data-onetime-per-night="{{ row_variant.price | divided_by: row_nights | money | escape }}"
+            data-onetime-per-night="{{ row_variant.price | times: 1.0 | divided_by: row_nights | round | money | escape }}"
             data-plans="{{ row_plans | strip_newlines | escape }}"
             aria-selected="{{ option_value.selected }}"
             {% unless row_variant.available %}
@@ -125,9 +125,9 @@
               {{ row_nights }} nights ·
               <span class="somna-sticky__row-per-night" data-somna-sticky-field="per-night">
                 {%- if initial_mode == 'subscribe' and row_variant.selling_plan_allocations.size > 0 -%}
-                  {{- row_variant.selling_plan_allocations.first.price | divided_by: row_nights | money -}}
+                  {{- row_variant.selling_plan_allocations.first.price | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- else -%}
-                  {{- row_variant.price | divided_by: row_nights | money -}}
+                  {{- row_variant.price | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- endif -%}
               </span>/night
               {%- unless row_variant.available %} · {{ 'products.product.sold_out' | t }}{% endunless -%}

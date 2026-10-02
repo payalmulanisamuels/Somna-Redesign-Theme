@@ -76,6 +76,13 @@ class HeaderDrawer extends Component {
 
     this.preventInitialAccordionAnimations(details);
     requestAnimationFrame(() => {
+      const drawer = details.querySelector('.menu-drawer, .menu-drawer__submenu');
+
+      if (details === this.refs.details && drawer instanceof HTMLElement) this.#setRevealOrigin(drawer);
+
+      // The drawer was display: none until [open]. Force a style flush so its closed state is
+      // computed first; otherwise the browser can skip the opening transition and show it instantly.
+      drawer?.getBoundingClientRect();
       details.classList.add('menu-open');
 
       if (target) {
@@ -83,9 +90,30 @@ class HeaderDrawer extends Component {
       }
 
       // Wait for the drawer animation to complete before trapping focus
-      const drawer = details.querySelector('.menu-drawer, .menu-drawer__submenu');
       onAnimationEnd(drawer || details, () => trapFocus(details), { subtree: false });
     });
+  }
+
+  /**
+   * Somna: the main drawer is a card that grows out of the header bar (see "Mobile menu" in custom.css).
+   * 1. The header's `contain: layout` makes it the fixed drawer's containing block, so store the
+   *    header's offset from the viewport for the CSS to cancel out.
+   * 2. Store how far the header bar is from the card's top and bottom edges; the closed clip-path
+   *    uses these so the card starts (and ends) as exactly the header bar.
+   * @param {HTMLElement} drawer
+   */
+  #setRevealOrigin(drawer) {
+    const style = getComputedStyle(drawer);
+    const placed = drawer.getBoundingClientRect();
+    // Viewport position minus the resolved `top`/`left` = where the containing block starts
+    drawer.style.setProperty('--somna-cb-top', `${placed.top - parseFloat(style.top)}px`);
+    drawer.style.setProperty('--somna-cb-left', `${placed.left - parseFloat(style.left)}px`);
+
+    const bar = (this.closest('.header__row') ?? this).getBoundingClientRect();
+    const panel = drawer.getBoundingClientRect();
+
+    drawer.style.setProperty('--somna-reveal-top', `${Math.max(0, bar.top - panel.top)}px`);
+    drawer.style.setProperty('--somna-reveal-bottom', `${Math.max(0, panel.bottom - bar.bottom)}px`);
   }
 
   /**
