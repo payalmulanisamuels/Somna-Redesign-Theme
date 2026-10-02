@@ -7,8 +7,8 @@
   Checkout still shows the plan's own name from the Subscriptions app.
 
   Variant "nights" (used to preselect the matching plan) come from the
-  `custom.nights` variant metafield, falling back to variant position
-  (1st = 30, 2nd = 60, 3rd+ = 120).
+  `custom.nights` variant metafield, then the `custom.nights` product metafield,
+  falling back to variant position (1st = 30, 2nd = 60, 3rd+ = 120).
 
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
@@ -65,8 +65,11 @@
             elsif supply_index >= 3
               assign v_nights = 120
             endif
+            # Nights override: variant metafield, else product metafield (e.g. single-variant 3-pack sets = 90)
             if v.metafields.custom.nights != blank
               assign v_nights = v.metafields.custom.nights.value | plus: 0
+            elsif product_resource.metafields.custom.nights != blank
+              assign v_nights = product_resource.metafields.custom.nights.value | plus: 0
             endif
             assign is_current = false
             if v.id == current_var.id
