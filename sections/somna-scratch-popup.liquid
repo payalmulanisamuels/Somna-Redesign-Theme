@@ -35,13 +35,25 @@
 >
   <div class="somna-popup-container" tabindex="-1">
     <div class="somna-popup-content">
-      <button type="button" class="somna-close-btn" aria-label="Close popup">&times;</button>
+      <button type="button" class="somna-close-btn" aria-label="Close popup">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" focusable="false">
+          <path d="M2 2l18 18M20 2L2 20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="somna-logo">
+        {%- if settings.logo != blank -%}
+          {{ settings.logo | image_url: width: 400 | image_tag: alt: shop.name, loading: 'lazy' }}
+        {%- else -%}
+          somna.
+        {%- endif -%}
+      </div>
 
       <!-- SCREEN 1: Scratch -->
       <div id="somna-screen-1" class="somna-screen">
-        
-        <h2 class="somna-headline" id="somna-screen-1-title">Scratch to reveal your welcome gift</h2>
-        <p class="somna-subhead">Everyone gets one. Scratch the card to see yours.</p>
+        <h2 class="somna-headline somna-headline--serif" id="somna-screen-1-title">
+        try your luck  <span class="somna-wink" aria-hidden="true">😉</span></h2>
+        <p class="somna-subhead--serif">scratch below to see what you win!</p>
 
         <div class="somna-scratch-box-wrap">
           <div class="somna-scratch-revealed" aria-hidden="true">
@@ -55,33 +67,56 @@
             aria-label="Scratch card. Press Enter to reveal your welcome gift."
           ></canvas>
         </div>
-        <p class="somna-helper-text">Tap or drag to scratch.</p>
-        <button type="button" class="somna-decline-link somna-close-trigger">No thanks</button>
       </div>
 
       <!-- SCREEN 2: Claim -->
       <div id="somna-screen-2" class="somna-screen somna-hidden">
         <div class="somna-revealed-card">
+          <svg class="somna-burst somna-burst--right" width="50" height="50" viewBox="0 0 50 50" fill="none" aria-hidden="true" focusable="false">
+            <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+              <path d="M6 30L10 5" pathLength="1"/>
+              <path d="M16 37L37 16" pathLength="1"/>
+              <path d="M22 46L47 40" pathLength="1"/>
+            </g>
+          </svg>
+          <svg class="somna-burst somna-burst--left" width="50" height="60" viewBox="0 0 50 60" fill="none" aria-hidden="true" focusable="false">
+            <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+              <path d="M44 16L10 5" pathLength="1"/>
+              <path d="M44 28L6 36" pathLength="1"/>
+              <path d="M46 38L26 57" pathLength="1"/>
+            </g>
+          </svg>
           <span class="somna-reveal-title">10% off</span>
           <span class="somna-reveal-sub">your first order</span>
         </div>
         <h2 class="somna-headline" id="somna-screen-2-title">You've unlocked 10% off</h2>
-        <p class="somna-subhead">Enter your email to claim it. We'll send your code straight to your inbox.</p>
+        <p class="somna-subhead">Enter your email to claim it.<br>We'll send your code straight to your inbox.</p>
 
         <p id="somna-already-subscribed" class="somna-already-subscribed somna-hidden" role="status">User already subscribed</p>
 
         <form id="somna-signup-form" novalidate>
           <label for="somna-email-input" class="visually-hidden">Email address</label>
-          <input
-            type="email"
-            id="somna-email-input"
-            name="email"
-            placeholder="Email address"
-            required
-            autocomplete="email"
-            aria-describedby="somna-error-container"
-          >
-          <button type="submit" class="somna-primary-btn" id="somna-submit-btn">Unlock my 10% off</button>
+          <div class="somna-input-wrap">
+            <input
+              type="email"
+              id="somna-email-input"
+              name="email"
+              placeholder="Email address"
+              required
+              autocomplete="email"
+              aria-describedby="somna-error-container"
+            >
+            <svg class="somna-input-icon" width="24" height="18" viewBox="0 0 24 18" fill="none" aria-hidden="true" focusable="false">
+              <rect x="1.25" y="1.25" width="21.5" height="15.5" rx="1.5" stroke="currentColor" stroke-width="2"/>
+              <path d="M2 2.5l10 7.5 10-7.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <button type="submit" class="somna-primary-btn" id="somna-submit-btn">
+            Unlock my 10% off
+            <svg class="somna-btn-arrow" width="26" height="18" viewBox="0 0 26 18" fill="none" aria-hidden="true" focusable="false">
+              <path d="M1 9h23M16 1l8 8-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
           <div class="somna-error-msg" id="somna-error-container" role="alert" aria-live="assertive"></div>
         </form>
 
@@ -94,15 +129,26 @@
 
       <!-- SCREEN 3: Code -->
       <div id="somna-screen-3" class="somna-screen somna-hidden">
-        <h2 class="somna-headline" id="somna-screen-3-title">Your code is ready</h2>
+        <h2 class="somna-headline somna-headline--lg" id="somna-screen-3-title">Your code is ready</h2>
 
         <div class="somna-code-box">
           <span id="somna-discount-code-text">{{ popup_code | escape }}</span>
         </div>
-        <button type="button" id="somna-copy-btn" class="somna-copy-link">Copy code</button>
+        <button type="button" id="somna-copy-btn" class="somna-copy-link">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" focusable="false">
+            <rect x="1" y="1" width="14" height="14" rx="1.5" stroke="currentColor" stroke-width="2"/>
+            <rect x="7" y="7" width="14" height="14" rx="1.5" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span class="somna-copy-label">Copy code</span>
+        </button>
 
-        <a href="{{ popup_shop_url }}" class="somna-primary-btn somna-shop-link" id="somna-shop-btn">Shop now, 10% applied</a>
-        <p class="somna-small-print">We've also sent it to your inbox. Valid on your first order for 7 days.</p>
+        <a href="{{ popup_shop_url }}" class="somna-primary-btn somna-shop-link" id="somna-shop-btn">
+          Shop now, 10% applied
+          <svg class="somna-btn-arrow" width="26" height="18" viewBox="0 0 26 18" fill="none" aria-hidden="true" focusable="false">
+            <path d="M1 9h23M16 1l8 8-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="somna-small-print">We've also sent it to your inbox.<br>Valid on your first order for 7 days.</p>
       </div>
     </div>
 
@@ -121,77 +167,218 @@
 <!-- Minimised teaser tab -->
 <button type="button" id="somna-teaser-tab" class="somna-teaser-tab somna-hidden">Scratch for 10% off</button>
 
+{%- liquid
+  assign somna_serif = settings.type_heading_font
+  assign somna_serif_italic = somna_serif | font_modify: 'style', 'italic'
+-%}
 <style>
+  {%- if somna_serif_italic -%}
+    {{ somna_serif_italic | font_face: font_display: 'swap' }}
+  {%- endif %}
+
+  .somna-popup-wrapper {
+    --somna-navy: #14235C;
+    --somna-blue: #0B3FC2;
+    --somna-link: #1F55D6;
+    --somna-cream: #FDF7EC;
+    --somna-tile: #F6EEDF;
+    --somna-grey: #65718A;
+    --somna-serif: {{ somna_serif.family | default: 'Lora' }}, {{ somna_serif.fallback_families | default: 'Georgia, serif' }};
+    --somna-sans: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  /* Wrapper is the click target; the dimmed backdrop lives on ::before so it
+     can fade independently of the card's scale/slide. */
   .somna-popup-wrapper {
     position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh;
-    background: rgba(20, 35, 92, 0.4); z-index: 99999;
+    z-index: 99999; padding: 16px; box-sizing: border-box;
     display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.3s ease;
+    overscroll-behavior: contain;
   }
-  .somna-popup-wrapper.somna-visible { opacity: 1; }
+  .somna-popup-wrapper::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    opacity: 0; transition: opacity 0.22s ease-in;
+  }
+  .somna-popup-wrapper.somna-visible::before { opacity: 1; transition: opacity 0.3s ease-out; }
   .somna-hidden { display: none !important; }
-  html.somna-popup-open { overflow: hidden; }
+  html.somna-popup-open,
+  html.somna-popup-open body { overflow: hidden; }
+  html.somna-popup-open body { padding-right: var(--somna-scrollbar-width, 0px); }
 
+  /* Cream card with staggered rounded-square pattern and navy outline */
   .somna-popup-container {
-    background: #F7F1E5;
-    background-image: radial-gradient(#F1EADB 15%, transparent 16%);
-    background-size: 20px 20px;
-    width: 100%; max-width: 100vh; min-height: 100vh;
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    background-color: var(--somna-cream);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='136' height='144'%3E%3Cg fill='%23F6EEDF'%3E%3Crect x='6' y='6' width='62' height='64' rx='12'/%3E%3Crect x='74' y='78' width='62' height='64' rx='12'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 136px 144px;
+    background-position: 8px 6px;
+    width: 100%; max-width: 440px;
+    min-height: min(680px, calc(100dvh - 32px)); max-height: calc(100dvh - 32px);
+    overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+    border: 1.7px solid var(--somna-navy); border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(20, 35, 92, 0.28), 0 4px 12px rgba(20, 35, 92, 0.12);
     position: relative; display: flex; box-sizing: border-box;
+    font-family: var(--somna-sans); color: var(--somna-navy);
+    /* Closing state (also the pre-open state) */
+    opacity: 0; transform: translateY(16px) scale(0.97);
+    transition: opacity 0.18s ease-in, transform 0.22s cubic-bezier(0.4, 0, 1, 1);
+    will-change: transform, opacity;
+  }
+  .somna-visible .somna-popup-container {
+    opacity: 1; transform: none;
+    transition: opacity 0.25s ease-out 0.05s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s;
   }
   .somna-popup-container:focus { outline: none; }
   .somna-popup-content {
     flex: 1; min-width: 0;
-    padding: 32px 24px;
-    display: flex; flex-direction: column; justify-content: center;
+    padding: 64px 20px 40px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
     box-sizing: border-box;
   }
-  .somna-screen { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .somna-screen { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
   .somna-close-btn {
-    position: absolute; top: 12px; right: 12px; z-index: 2; background: none; border: none;
-    font-size: 30px; line-height: 1; color: #14235C; cursor: pointer; width: 44px; height: 44px;
+    position: absolute; top: 16px; right: 16px; z-index: 2; background: none; border: none; padding: 0;
+    color: var(--somna-navy); cursor: pointer; width: 44px; height: 44px;
     display: flex; align-items: center; justify-content: center;
   }
-  .somna-logo { font-size: 24px; font-weight: 800; color: #14235C; margin-bottom: 12px; letter-spacing: -0.5px; }
-  .somna-headline { font-size: 22px; font-weight: 700; color: #14235C; margin: 0 0 8px 0; }
-  .somna-subhead { font-size: 16px; color: #4a5568; margin: 0 0 24px 0; line-height: 1.4; }
+  .somna-logo {
+    margin: 0 0 60px; line-height: 0;
+    font: 800 40px/1 var(--somna-sans); color: #9BA3DD; letter-spacing: -1px;
+  }
+  .somna-logo img { width: 140px; height: auto; display: block; }
+
+  .somna-headline {
+    font: 800 24px/1.2 var(--somna-sans); color: var(--somna-navy);
+    margin: 0 0 10px; letter-spacing: -0.3px;
+  }
+  .somna-headline--lg { font-size: 28px; margin-bottom: 28px; }
+  .somna-headline--serif {
+    font-family: var(--somna-serif); 
+    font-weight: 500; 
+    font-size: 29px; 
+    line-height: 1.15; 
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .somna-subhead { font-size: 15px; color: var(--somna-grey); margin: 0 0 22px; line-height: 1.45; text-wrap: balance; }
+  .somna-subhead--serif { font-family: var(--somna-serif); font-size: 15px; color: var(--somna-navy); margin: 0; }
+
+  /* Emoji blink: squashes vertically for a split second, every few seconds */
+  .somna-wink {
+    display: inline-block;
+    transform-origin: 50% 55%;
+    animation: somna-blink 3.4s ease-in-out 1.2s infinite;
+  }
+  @keyframes somna-blink {
+    0%, 88%, 100% { transform: scaleY(1) rotate(0); }
+    91%           { transform: scaleY(0.08) rotate(-6deg); }
+    94%           { transform: scaleY(1) rotate(0); }
+    96%           { transform: scaleY(0.08) rotate(-6deg); }
+    99%           { transform: scaleY(1) rotate(0); }
+  }
+
+  /* Card background pattern: drifts diagonally while hovering.
+     Shift = exactly one tile (136x144), so the loop is seamless.
+     Paused by default, so on mouse-leave it freezes in place (no jump). */
+  @media (hover: hover) and (pointer: fine) {
+    .somna-popup-container {
+      animation: somna-pattern-drift 6s linear infinite;
+      animation-play-state: paused;
+    }
+    .somna-popup-container:hover {
+      animation-play-state: running;
+    }
+  }
+  @keyframes somna-pattern-drift {
+    from { background-position: 8px 6px; }
+    to   { background-position: 144px 150px; } /* 8+136, 6+144 */
+  }
 
   /* Scratch card: revealed layer underneath, canvas cover on top */
   .somna-scratch-box-wrap {
-    position: relative; width: 300px; max-width: 100%; aspect-ratio: 300 / 190;
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 10px 24px rgba(20,35,92,0.22), 0 2px 0 rgba(20,35,92,0.35);
-    margin-bottom: 12px;
+    position: relative;
+    width: min(240px, 68%);
+    aspect-ratio: 410 / 232;
+    margin: 56px 0 40px;
+    border-radius: 18px;
+    border: 0px solid #2D6DE0;
+    background: linear-gradient(95deg, #1D64E4 7.41%, #0954D2 60.22%, #0044BA 92.59%);
+    box-shadow: 0 3px 10px 2px #000;
   }
   .somna-scratch-revealed,
   .somna-revealed-card {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: #FFFFFF;
+    background: #FFFFFF; border: 3px solid var(--somna-blue); box-sizing: border-box;
   }
-  .somna-scratch-revealed { position: absolute; inset: 0; border: 2px solid #1F3FAF; border-radius: 16px; box-sizing: border-box; }
+  .somna-scratch-revealed { position: absolute; inset: 0; border-radius: 22px; }
+  .somna-scratch-revealed .somna-reveal-title { font-size: 34px; }
+  .somna-scratch-revealed .somna-reveal-sub { font-size: 14px; }
   #somna-scratch-canvas {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    cursor: pointer; touch-action: none; border-radius: 16px;
+    cursor: pointer; touch-action: none; border-radius: 22px;
     transition: opacity 0.45s ease;
   }
-  #somna-scratch-canvas:focus-visible { outline: 3px solid #14235C; outline-offset: 3px; }
+  #somna-scratch-canvas:focus-visible { outline: 3px solid var(--somna-navy); outline-offset: 3px; }
   #somna-scratch-canvas.somna-scratch-done { opacity: 0; pointer-events: none; }
-  .somna-reveal-title { font-size: 36px; font-weight: 800; color: #1F3FAF; line-height: 1.1; }
-  .somna-reveal-sub { font-size: 16px; color: #14235C; font-weight: 500; }
+  .somna-reveal-title { font: 900 48px/1.05 var(--somna-sans); color: var(--somna-blue); letter-spacing: -1.5px; }
+  .somna-reveal-sub { font-size: 19px; color: var(--somna-navy); font-weight: 400; margin-top: 6px; }
 
   /* Screen 2: revealed card "flips" in */
   .somna-revealed-card {
-    width: 100%; max-width: 280px; padding: 24px 16px; margin-bottom: 20px;
-    border: 2px solid #1F3FAF; border-radius: 16px; box-sizing: border-box;
+    position: relative; width: 100%; max-width: 300px; padding: 26px 16px 22px;
+     margin-bottom: 26px;
+    border-radius: 22.933px;
+    border: 2.219px solid #073DC1;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6.658px 13.316px 0 rgba(5, 27, 74, 0.19);
+  }
+  .somna-burst { position: absolute; color: var(--somna-blue); overflow: visible; }
+  .somna-burst--right { top: 0; right: 10px; transform-origin: 0% 100%; }
+  .somna-burst--left { left: 6px; top: 44%; width: 36px; height: auto; transform-origin: 100% 50%; }
+
+  /* Scratch card: periodic attention shake until the visitor starts scratching */
+  .somna-scratch-box-wrap:not(.somna-scratch-started) { animation: somna-wiggle 3.2s ease-in-out 1s infinite; }
+  .somna-scratch-box-wrap:hover { animation-play-state: paused; }
+  @keyframes somna-wiggle {
+    0%, 22%, 100% { transform: none; }
+    4% { transform: rotate(-4deg) scale(1.04); }
+    8% { transform: rotate(4deg) scale(1.04); }
+    12% { transform: rotate(-3deg) scale(1.03); }
+    16% { transform: rotate(2deg) scale(1.02); }
+    19% { transform: rotate(-1deg) scale(1.01); }
+  }
+
+  /* Screen 2: "10% off" pops, burst lines splash outward, then sparkle on a loop */
+  .somna-screen-enter .somna-revealed-card .somna-reveal-title {
+    animation: somna-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  }
+  .somna-screen-enter .somna-burst path {
+    stroke-dasharray: 1; stroke-dashoffset: 1;
+    animation: somna-burst-draw 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .somna-screen-enter .somna-burst path:nth-child(1) { animation-delay: 0.4s; }
+  .somna-screen-enter .somna-burst path:nth-child(2) { animation-delay: 0.47s; }
+  .somna-screen-enter .somna-burst path:nth-child(3) { animation-delay: 0.54s; }
+  .somna-screen-enter .somna-burst { animation: somna-burst-sparkle 2.8s ease-in-out 1.3s infinite; }
+  @keyframes somna-pop {
+    from { opacity: 0; transform: scale(0.6); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes somna-burst-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes somna-burst-sparkle {
+    0%, 30%, 100% { transform: scale(1); opacity: 1; }
+    10% { transform: scale(1.18); opacity: 0.85; }
+    20% { transform: scale(0.96); opacity: 1; }
   }
   .somna-screen-enter { animation: somna-flip-in 0.45s ease both; }
   .somna-screen-leave { opacity: 0; transition: opacity 0.3s ease; }
   .somna-already-subscribed {
     width: 100%; margin: 0 0 12px; padding: 14px 16px; box-sizing: border-box;
-    background: #DCE4FB; color: #14235C; border-radius: 8px;
+    background: #DCE4FB; color: var(--somna-navy); border-radius: 12px;
     font-size: 16px; font-weight: 600;
   }
   @keyframes somna-flip-in {
@@ -199,40 +386,56 @@
     to { opacity: 1; transform: perspective(800px) rotateY(0); }
   }
 
-  .somna-helper-text { font-size: 14px; color: #718096; margin: 0 0 16px; }
-
-  #somna-signup-form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+  #somna-signup-form { width: 100%; display: flex; flex-direction: column; gap: 14px; }
+  .somna-input-wrap { position: relative; }
   #somna-email-input {
-    width: 100%; height: 48px; padding: 0 16px; font-size: 16px;
-    border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; box-sizing: border-box; color: #14235C;
+    width: 100%; height: 54px; padding: 0 56px 0 18px; font: 400 17px var(--somna-sans);
+    border: 2px solid #C8D2E2; border-radius: 14px; background: #fff; box-sizing: border-box; color: var(--somna-navy);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
+  #somna-email-input::placeholder { color: #6B7385; }
+  #somna-email-input:focus { outline: none; border-color: var(--somna-link); box-shadow: 0 0 0 3px rgba(31, 85, 214, 0.15); }
   #somna-email-input[aria-invalid="true"] { border-color: #e53e3e; }
+  .somna-input-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: #5E6779; pointer-events: none; }
 
   .somna-primary-btn {
-    width: 100%; height: 48px; background: #14235C; color: #fff;
-    font-size: 16px; font-weight: 600; border: none; border-radius: 8px;
+    width: 100%; height: 58px; padding: 0 20px; gap: 14px;
+    background: linear-gradient(90deg, #0B2463, #1A3470); color: #fff;
+    font: 700 18px var(--somna-sans); border: none; border-radius: 16px;
     cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none;
-    box-sizing: border-box; transition: background 0.2s;
+    box-sizing: border-box; box-shadow: 0 10px 20px rgba(11, 36, 99, 0.22);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
   }
-  .somna-primary-btn:hover { background: #1F3FAF; color: #fff; }
+  .somna-primary-btn:hover { color: #fff; filter: brightness(1.15); box-shadow: 0 12px 24px rgba(11, 36, 99, 0.28); }
+  .somna-primary-btn:active { transform: translateY(1px); }
   .somna-primary-btn[disabled] { opacity: 0.7; cursor: progress; }
+  .somna-btn-arrow { flex: 0 0 auto; transition: transform 0.2s ease; }
+  .somna-primary-btn:hover .somna-btn-arrow { transform: translateX(3px); }
 
   .somna-code-box {
-    width: 100%; max-width: 260px; background: #fff; border: 2px dashed #1F3FAF; border-radius: 8px;
-    padding: 12px 16px; margin: 8px 0 4px; box-sizing: border-box; text-align: center;
+    width: 100%; max-width: 300px; padding: 18px 16px; margin: 0 0 12px; box-sizing: border-box; text-align: center;
+    background: linear-gradient(180deg, #FFFFFF, #F1F5FB);
+    border: 2px dashed var(--somna-navy); border-radius: 18px;
+    box-shadow: 0 8px 18px rgba(20, 35, 92, 0.1);
   }
-  #somna-discount-code-text { font-size: 20px; font-weight: 700; color: #14235C; letter-spacing: 1px; }
+  #somna-discount-code-text { font: 800 26px var(--somna-sans); color: var(--somna-navy); letter-spacing: -0.3px; word-break: break-all; }
   .somna-copy-link {
-    background: none; border: none; color: #1F3FAF; font-size: 14px; font-weight: 600;
-    text-decoration: underline; cursor: pointer; padding: 8px; margin-bottom: 16px;
+    background: none; border: none; color: var(--somna-link); font: 500 17px var(--somna-sans);
+    cursor: pointer; padding: 8px; margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
   }
+  .somna-copy-link:hover .somna-copy-label { text-decoration: underline; }
 
-  .somna-consent-text { font-size: 12px; color: #718096; line-height: 1.4; margin-top: 12px; }
-  .somna-consent-text a { color: #14235C; text-decoration: underline; }
-  .somna-small-print { font-size: 13px; color: #718096; margin-top: 16px; line-height: 1.4; }
-  .somna-error-msg { font-size: 14px; color: #c53030; text-align: left; min-height: 18px; }
+  .somna-consent-text { font-size: 13px; color: var(--somna-grey); line-height: 1.5; margin: 18px 0 0; }
+  .somna-consent-text a { color: var(--somna-grey); text-decoration: underline; display: inline-block; }
+  .somna-small-print { font-size: 15px; color: var(--somna-grey); margin: 24px 0 0; line-height: 1.5; }
+  .somna-error-msg { font-size: 14px; color: #c53030; text-align: left; min-height: 18px; margin-top: -6px; }
+  .somna-error-msg:empty { display: none; }
 
-  .somna-decline-link { background: none; border: none; color: #718096; font-size: 14px; text-decoration: underline; cursor: pointer; margin-top: 12px; padding: 8px; }
+  .somna-decline-link {
+    background: none; border: none; color: var(--somna-grey); font: 400 15px var(--somna-sans);
+    text-decoration: underline; cursor: pointer; margin-top: 14px; padding: 8px;
+  }
 
   .somna-popup-image { display: none; }
 
@@ -244,15 +447,31 @@
   }
   html:has(.sticky-add-to-cart__bar[data-stuck='true']) .somna-teaser-tab { bottom: 110px; }
 
+  @media (max-width: 380px) {
+    .somna-popup-content { padding: 60px 18px 32px; }
+    .somna-headline--serif { font-size: 30px; }
+    .somna-reveal-title { font-size: 42px; }
+    .somna-primary-btn { font-size: 17px; }
+  }
 
   @media (min-width: 750px) {
+    .somna-popup--has-image .somna-popup-container { max-width: 880px; }
     .somna-popup--has-image .somna-popup-image { display: block; flex: 0 0 48%; position: relative; }
     .somna-popup--has-image .somna-popup-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .somna-popup-wrapper, #somna-scratch-canvas { transition: none; }
-    .somna-screen-enter { animation: none; }
+    .somna-popup-wrapper::before, .somna-popup-wrapper.somna-visible::before,
+    .somna-popup-container, .somna-visible .somna-popup-container,
+    #somna-scratch-canvas { transition: none; }
+    .somna-popup-container { transform: none; }
+    .somna-wink,
+    .somna-popup-container { animation: none; }
+    .somna-screen-enter,
+    .somna-scratch-box-wrap:not(.somna-scratch-started),
+    .somna-screen-enter .somna-revealed-card .somna-reveal-title,
+    .somna-screen-enter .somna-burst,
+    .somna-screen-enter .somna-burst path { animation: none; stroke-dashoffset: 0; }
   }
 </style>
 
@@ -264,6 +483,8 @@
       code: {{ popup_code | json }},
       klaviyoCompanyId: {{ section.settings.klaviyo_company_id | strip | json }},
       klaviyoListId: {{ section.settings.klaviyo_list_id | strip | json }},
+      serifFamily: {{ settings.type_heading_font.family | default: 'Lora' | json }},
+      serifFont: {{ settings.type_heading_font.family | default: 'Lora' | prepend: '"' | append: '", Georgia, serif' | json }},
       excludedPaths: {{ section.settings.excluded_paths | newline_to_br | split: '<br />' | json }},
     };
 
@@ -327,6 +548,21 @@
       let lastFocus = null;
       let openTimer = null;
       let reopenTimer = null;
+      let closeTimer = null;
+      const CLOSE_MS = 240; // matches the closing CSS transition
+
+      function lockScroll() {
+        const root = document.documentElement;
+        const scrollbar = window.innerWidth - root.clientWidth;
+        root.style.setProperty('--somna-scrollbar-width', scrollbar > 0 ? scrollbar + 'px' : '0px');
+        root.classList.add('somna-popup-open');
+      }
+
+      function unlockScroll() {
+        const root = document.documentElement;
+        root.classList.remove('somna-popup-open');
+        root.style.removeProperty('--somna-scrollbar-width');
+      }
 
       if (isSuppressed()) return;
 
@@ -369,13 +605,17 @@
         isOpen = true;
         clearTimeout(openTimer);
         clearTimeout(reopenTimer);
+        clearTimeout(closeTimer);
         lastFocus = document.activeElement;
         teaserTab?.classList.add('somna-hidden');
         overlay.classList.remove('somna-hidden');
         overlay.setAttribute('aria-hidden', 'false');
-        document.documentElement.classList.add('somna-popup-open');
-        requestAnimationFrame(() => overlay.classList.add('somna-visible'));
+        lockScroll();
         scratch.setup();
+        // Commit the hidden starting styles before adding the visible class so the
+        // overlay fade and card entrance actually transition instead of snapping in.
+        void overlay.offsetWidth;
+        overlay.classList.add('somna-visible');
         document.addEventListener('keydown', onKeydown);
         const canvas = document.getElementById('somna-scratch-canvas');
         setTimeout(() => {
@@ -390,13 +630,13 @@
         isOpen = false;
         overlay.classList.remove('somna-visible');
         overlay.setAttribute('aria-hidden', 'true');
-        document.documentElement.classList.remove('somna-popup-open');
         document.removeEventListener('keydown', onKeydown);
         const signedUp = storage.get('localStorage', KEYS.signedUp);
         const hasScratched = storage.get('localStorage', KEYS.scratched);
-        
-        setTimeout(() => {
+
+        closeTimer = setTimeout(() => {
           overlay.classList.add('somna-hidden');
+          unlockScroll();
           if (!signedUp && !hasScratched) {
             // User closed via icon or "No thanks" without scratching -> show again after 10 seconds
             reopenTimer = setTimeout(() => {
@@ -407,8 +647,8 @@
             storage.set('sessionStorage', KEYS.teaser, '1');
             teaserTab?.classList.remove('somna-hidden');
           }
-          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-        }, 300);
+          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus({ preventScroll: true });
+        }, CLOSE_MS);
         track('close');
       }
 
@@ -428,6 +668,7 @@
         let checkQueued = false;
         let cssW = 0;
         let cssH = 0;
+        let touched = false;
 
         function roundRect(x, y, w, h, r) {
           ctx.beginPath();
@@ -439,58 +680,31 @@
           ctx.closePath();
         }
 
-        function star(x, y, r) {
-          ctx.beginPath();
-          for (let i = 0; i < 8; i++) {
-            const radius = i % 2 === 0 ? r : r * 0.35;
-            const angle = (Math.PI / 4) * i - Math.PI / 2;
-            ctx.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
-          }
-          ctx.closePath();
-          ctx.fill();
-        }
-
-        function moon(x, y, r) {
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.save();
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.beginPath();
-          ctx.arc(x + r * 0.45, y - r * 0.3, r * 0.85, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        }
-
         function drawCover() {
           const dpr = Math.min(window.devicePixelRatio || 1, 3);
-          const rect = canvas.getBoundingClientRect();
-          cssW = rect.width || 300;
-          cssH = rect.height || 190;
+          // Layout size, unaffected by the popup's entrance scale transform
+          cssW = canvas.offsetWidth || 300;
+          cssH = canvas.offsetHeight || 190;
           canvas.width = Math.round(cssW * dpr);
           canvas.height = Math.round(cssH * dpr);
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
           ctx.globalCompositeOperation = 'source-over';
 
-          ctx.fillStyle = '#1F3FAF';
-          roundRect(0, 0, cssW, cssH, 16);
+          const s = cssW / 300;
+          const gradient = ctx.createLinearGradient(0, 0, cssW, cssH);
+          gradient.addColorStop(0, '#2B6CE8');
+          gradient.addColorStop(1, '#0340BD');
+          ctx.fillStyle = gradient;
+          roundRect(0, 0, cssW, cssH, 22);
           ctx.fill();
 
-          ctx.fillStyle = '#DCE4FB';
-          const s = cssW / 300;
-          moon(34 * s, 34 * s, 10 * s);
-          moon(262 * s, 150 * s, 8 * s);
-          star(250 * s, 30 * s, 6 * s);
-          star(48 * s, 150 * s, 5 * s);
-          star(150 * s, 26 * s, 3.5 * s);
-          star(205 * s, 165 * s, 3.5 * s);
-          star(95 * s, 55 * s, 3 * s);
-
+          const size = Math.round(54 * s);
           ctx.fillStyle = '#FFFFFF';
-          ctx.font = `700 ${Math.round(30 * s)}px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif`;
+          ctx.font = `italic 400 ${size}px ${config.serifFont}`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('scratch here', cssW / 2, cssH / 2);
+          ctx.fillText('scratch', cssW / 2, cssH / 2 - size * 0.45);
+          ctx.fillText('here', cssW / 2, cssH / 2 + size * 0.55);
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.lineCap = 'round';
@@ -548,6 +762,7 @@
           storage.set('localStorage', KEYS.scratched, '1');
           
           canvas.classList.add('somna-scratch-done');
+          canvas.parentElement.classList.add('somna-scratch-started');
           canvas.setAttribute('aria-hidden', 'true');
           canvas.tabIndex = -1;
           track('scratch_complete');
@@ -568,6 +783,8 @@
           event.preventDefault();
           canvas.setPointerCapture?.(event.pointerId);
           drawing = true;
+          touched = true;
+          canvas.parentElement.classList.add('somna-scratch-started');
           last = null;
           travelled = 0;
           scratchTo(point(event));
@@ -590,6 +807,10 @@
             if (!canvas || !ctx || ready) return;
             ready = true;
             drawCover();
+            // Canvas text can't use a web font until it's loaded; redraw once it is.
+            document.fonts?.load(`italic 400 40px "${config.serifFamily}"`).then(() => {
+              if (!touched && !revealed) drawCover();
+            }).catch(() => {});
             canvas.addEventListener('pointerdown', onDown);
             canvas.addEventListener('pointermove', onMove);
             canvas.addEventListener('pointerup', onUp);
@@ -718,9 +939,10 @@
           try { document.execCommand('copy'); } catch (err) {}
           selection.removeAllRanges();
         }
-        copyBtn.textContent = 'Copied';
+        const copyLabel = copyBtn.querySelector('.somna-copy-label') || copyBtn;
+        copyLabel.textContent = 'Copied';
         track('code_copied');
-        setTimeout(() => { copyBtn.textContent = 'Copy code'; }, 2000);
+        setTimeout(() => { copyLabel.textContent = 'Copy code'; }, 2000);
       });
 
       document.getElementById('somna-shop-btn')?.addEventListener('click', () => {

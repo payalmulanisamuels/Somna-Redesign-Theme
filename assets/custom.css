@@ -6,11 +6,6 @@
 *:focus-visible {
     outline: none;
 }
-html[scroll-lock] .shopify-section-group-header-group > .wave-container {
-    opacity: 0;
-    transition: ease-out;
-    display: none;
-}
 .bg_image {
     background-size: cover !important;
     background-position: center !important;
@@ -24,8 +19,11 @@ html[scroll-lock] .shopify-section-group-header-group > .wave-container {
 .theme-drawer__close-button:focus-visible {
     outline: none;
 }
-html[scroll-lock ] .announcement-bar {
-    z-index: 1;
+/* Mobile menu open: lift the header section (which contains the drawer) above the
+   announcement bar (z-index: 1111) and the wave dividers (z-index: 111).
+   Must beat the sticky-header rule below (z-index: 11111 !important). */
+.header-section:has(.menu-drawer-container[open]) {
+    z-index: 11112 !important;
 }
 .review_content {
     display: flex;
@@ -40,6 +38,9 @@ html[scroll-lock ] .announcement-bar {
     gap: 2px;
 }
 /* Header */
+.announcement-bar {
+    display: block;
+}
  .announcement-bar__slide[aria-hidden=true] {
     opacity: 1 !important;
     visibility: visible !important;
@@ -308,10 +309,10 @@ li.menu__item.paragraph a {
 .bundle-card--featured .bundle-card__content {
     flex-wrap: wrap;
 }
-.bundle-card--featured .brand-card-wrap {
+.brand-card-wrap {
     width: 100%;
 }
-.bundle-card--featured .bundle-subtext {
+.bundle-subtext {
     max-width: 100%;
 }
 .bundle-card__title {
@@ -383,10 +384,6 @@ li.menu__item.paragraph a {
   background-color: #ffffff;
   display: grid;
   align-items: center;
-}
-
-.bundle-card--featured .bundle-card__title {
-  font-size: 14px;
 }
 .bundle-card--featured .bundle-card__content-wrapper {
     flex-wrap: wrap;
@@ -1802,6 +1799,24 @@ a.somna-view-all {
     color: #fff !important;
 }
 @media(min-width:768px){
+
+    .bundle-card__title {
+        font-size: 22px;
+    }
+    .bundle-subtext {
+        font-size: 16px;
+        max-width: calc(100% - 90px);
+        margin-top: 11px;
+        line-height: 1.2;
+    }
+
+    .bundle-card__price {
+        font-size: 22px;
+    }
+
+    .bundle-card__subtext {
+        font-size: 16px;
+    }
     .header-logo span[data-testid=header-logo] {
         max-width: 173px;
     }
