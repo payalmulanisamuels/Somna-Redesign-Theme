@@ -1,0 +1,474 @@
+/* =====================================================================
+   SOMNA — HOMEPAGE DESKTOP & TABLET (added 2026-10-07)
+   ---------------------------------------------------------------------
+   Loaded only on the homepage, after custom.css (snippets/stylesheets).
+   Source of truth: Figma "Home" frame (node 796-327), with sizes
+   re-proportioned for real desktop screens.
+
+   Mobile (<750px) is locked: every rule in this file sits inside a
+   min-width media query (750px / 990px / 1200px), so nothing here
+   applies to phones. Rules are scoped through
+   #MainContent[data-template="index"] and, where a single section is
+   targeted, its section-ID suffix.
+
+   Breakpoints follow the theme: 750px (tablet) and 990px (desktop),
+   plus 1200px for wide-screen refinements. Fluid sizes use clamp().
+
+   The few !important flags only override existing !important rules or
+   inline widths written by theme blocks.
+   ===================================================================== */
+
+@media screen and (min-width: 750px) {
+
+  /* ---------- Hero ---------- */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+    /* Desktop hero image is 2.5:1 — size the hero to the image, not the viewport */
+    min-height: clamp(440px, 42vw, 720px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero__container {
+    /* Figma places the copy in the upper-left of the hero, about 1/6 down the image */
+    padding-block: clamp(40px, 6vw, 96px) 96px; /* bottom space clears the trust-bar wave */
+  }
+  #MainContent[data-template="index"] .text-block--text_VDbt3L,
+  #MainContent[data-template="index"] .text-block--text_VDbt3L > * {
+    font-size: clamp(13px, 1.05vw, 15px);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz {
+    margin-block: 12px 28px;
+    padding-block-end: 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz,
+  #MainContent[data-template="index"] .text-block--text_eT6TMz > * {
+    font-size: clamp(36px, 4.2vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 999px;
+  }
+
+  /* ---------- Trust bar ---------- */
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block,
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block > * {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .icon-block__media {
+    width: 26px !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+    gap: 10px;
+  }
+
+  /* ---------- Section headings (Lora) ---------- */
+  #MainContent[data-template="index"] .custom-header,
+  #MainContent[data-template="index"] .custom-header > * {
+    font-size: clamp(30px, 3vw, 42px) !important; /* overrides existing !important heading sizes */
+    line-height: 1.1;
+  }
+
+  /* ---------- Bundle grid: two cards + full-width Season card ---------- */
+  #MainContent[data-template="index"] [id$="__featured_bundle_grid_6jFGFr"] > section {
+    padding-block: 32px 40px;
+  }
+  #MainContent[data-template="index"] h2.custom-header {
+    margin: 0 0 clamp(24px, 2.6vw, 40px);
+  }
+  #MainContent[data-template="index"] .bundle-section__grid {
+    gap: clamp(16px, 1.8vw, 24px);
+  }
+  #MainContent[data-template="index"] .bundle-card {
+    padding: 10px 10px 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 14px rgb(10 26 74 / 0.12);
+  }
+  #MainContent[data-template="index"] .bundle-card__image-wrapper {
+    border-radius: 12px;
+  }
+  #MainContent[data-template="index"] .bundle-card__content {
+    flex: 1;
+    align-content: space-between;
+    row-gap: 16px;
+    margin-top: 16px;
+    padding-inline: 8px;
+  }
+  #MainContent[data-template="index"] .bundle-card .review_content {
+    font-size: 13px;
+    gap: 6px;
+  }
+  #MainContent[data-template="index"] .bundle-card .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+  #MainContent[data-template="index"] .bundle-card__title {
+    font-size: clamp(18px, 1.7vw, 24px);
+    line-height: 1.25;
+    margin-top: 6px;
+  }
+  #MainContent[data-template="index"] .bundle-subtext {
+    max-width: none;
+    min-height: 0;
+    margin-top: 8px;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.5;
+  }
+  #MainContent[data-template="index"] .bundle-card__content-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+  }
+  #MainContent[data-template="index"] .bundle-card__price {
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1.2;
+    margin: 0 0 4px;
+  }
+  #MainContent[data-template="index"] .bundle-card__subtext {
+    font-size: clamp(13px, 1.05vw, 15px);
+    line-height: 1.4;
+  }
+  #MainContent[data-template="index"] .bundle-card__button {
+    min-height: 44px;
+    padding: 0 24px;
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 500;
+  }
+  #MainContent[data-template="index"] .tag_text {
+    top: -14px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  #MainContent[data-template="index"] .bundle-card--featured .bundle-card__image {
+    height: clamp(240px, 34vw, 480px);
+    object-fit: cover;
+  }
+
+  /* ---------- Nasal Strips / Mouth Tape cards (tablet: wider slider cards) ---------- */
+  #MainContent[data-template="index"] .hz-slider-section {
+    padding-bottom: 104px; /* clears the next section's top wave (70px overlap on desktop) */
+  }
+  #MainContent[data-template="index"] .hz-slider-viewport {
+    padding: 10px calc(50vw - 230px);
+  }
+  #MainContent[data-template="index"] .hz-slider-track {
+    gap: 16px;
+  }
+  #MainContent[data-template="index"] .hz-card {
+    flex: 0 0 460px;
+    max-width: 460px;
+    border-radius: 16px;
+  }
+  #MainContent[data-template="index"] .hz-card-content {
+    padding: 28px 24px;
+  }
+  #MainContent[data-template="index"] .hz-card-title {
+    font-size: clamp(17px, 1.6vw, 24px);
+    margin-bottom: 8px;
+  }
+  #MainContent[data-template="index"] .hz-card-price {
+    font-size: clamp(26px, 2.6vw, 40px);
+    margin-bottom: 18px;
+  }
+  #MainContent[data-template="index"] .hz-card-btn {
+    min-height: 40px;
+    padding: 0 22px;
+    font-size: clamp(13px, 1.05vw, 15px);
+  }
+
+  /* ---------- Four-column features ("Small essentials") ---------- */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
+    gap: clamp(28px, 3vw, 44px);
+    padding-block: 56px 64px;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--row {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    align-items: flex-start;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--row > .group-block {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--column {
+    gap: 14px;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .icon-block__media {
+    width: clamp(48px, 4.6vw, 64px) !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+  #MainContent[data-template="index"] :is(.text-block--text_jdiCtc, .text-block--text_k8RLU6, .text-block--text_6dYGUM, .text-block--text_gUzH3C),
+  #MainContent[data-template="index"] :is(.text-block--text_jdiCtc, .text-block--text_k8RLU6, .text-block--text_6dYGUM, .text-block--text_gUzH3C) > * {
+    font-size: clamp(15px, 1.5vw, 21px);
+    line-height: 1.3;
+  }
+  #MainContent[data-template="index"] :is(.text-block--text_XpGJhd, .text-block--text_Czr7MH, .text-block--text_9rK86g, .text-block--text_T6N9EM),
+  #MainContent[data-template="index"] :is(.text-block--text_XpGJhd, .text-block--text_Czr7MH, .text-block--text_9rK86g, .text-block--text_T6N9EM) > * {
+    font-size: clamp(12px, 1.05vw, 15px);
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  /* ---------- "Breathe through your nose" banner ---------- */
+  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
+    padding-block: 48px 96px; /* bottom space clears the wave inside this banner */
+    padding-inline: max(40px, calc((100vw - 1280px) / 2)) 40px;
+  }
+  /* The banner's script sizes it from this inner group plus the padding above, so the
+     min-height lives here. Banner image is ~2.1:1: total height tracks the image. */
+  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content > .group-block-content {
+    min-height: calc(clamp(380px, 47vw, 760px) - 144px);
+    justify-content: center;
+    margin: 0;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+  #MainContent[data-template="index"] .text-block--text_QmeLq9,
+  #MainContent[data-template="index"] .text-block--text_QmeLq9 > * {
+    font-size: clamp(30px, 3.3vw, 48px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="index"] .text-block--text_jdwziN,
+  #MainContent[data-template="index"] .text-block--text_jdwziN > * {
+    font-size: clamp(14px, 1.25vw, 18px);
+    line-height: 1.55;
+    max-inline-size: 30em;
+  }
+
+  /* ---------- The Sleep Bundle card ---------- */
+  #MainContent[data-template="index"] .somna-sleep-bundle {
+    padding: 56px 40px 72px;
+  }
+
+  /* ---------- FAQ ---------- */
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+    gap: 20px;
+    padding-block: 56px 72px;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header {
+    font-size: clamp(16px, 1.4vw, 19px) !important; /* overrides existing !important size */
+    line-height: 1.4;
+    padding-block: 22px;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block,
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block > * {
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.6;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details-content {
+    padding-block-end: 20px;
+  }
+
+  /* ---------- Newsletter ("Get 10% off your first order") ---------- */
+  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .section {
+    min-height: clamp(340px, 34vw, 540px);
+    align-content: center;
+  }
+  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .footer-content {
+    padding-block: 48px 72px;
+  }
+  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .group-block-content {
+    gap: 14px;
+  }
+  #MainContent[data-template="index"] .text-block--text_LWt8Pz,
+  #MainContent[data-template="index"] .text-block--text_LWt8Pz > * {
+    font-size: clamp(28px, 2.9vw, 44px);
+    line-height: 1.1;
+  }
+  #MainContent[data-template="index"] .text-block--text_f9CFLH,
+  #MainContent[data-template="index"] .text-block--text_f9CFLH > * {
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 990px) {
+
+  /* Homepage content width: 1280px max (theme default for other pages stays 1040px) */
+  #MainContent[data-template="index"],
+  body:has(#MainContent[data-template="index"]) .shopify-section-group-footer-group {
+    --page-content-width: 80rem;
+    --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+  }
+
+  /* ---------- Hero ---------- */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+    min-height: clamp(480px, 42vw, 720px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    min-height: 54px;
+    padding: 0 34px;
+    font-size: 16px;
+  }
+
+  /* ---------- Trust bar ---------- */
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
+    font-size: clamp(14px, 1.15vw, 16px);
+  }
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .icon-block__media {
+    width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
+  }
+  #MainContent[data-template="index"] [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+    gap: 14px;
+  }
+
+  /* ---------- Bundle grid ---------- */
+  #MainContent[data-template="index"] [id$="__featured_bundle_grid_6jFGFr"] > section {
+    padding-block: 48px 56px;
+  }
+  #MainContent[data-template="index"] .bundle-card {
+    padding: 14px 14px 26px;
+    border-radius: 20px;
+  }
+  #MainContent[data-template="index"] .bundle-card__image-wrapper {
+    border-radius: 14px;
+  }
+  #MainContent[data-template="index"] .bundle-card__content {
+    margin-top: 20px;
+    padding-inline: 12px;
+  }
+  #MainContent[data-template="index"] .bundle-card .review_content {
+    font-size: 14px;
+  }
+  #MainContent[data-template="index"] .bundle-card__button {
+    min-height: 48px;
+    padding: 0 30px;
+  }
+  #MainContent[data-template="index"] .tag_text {
+    top: -15px;
+    font-size: 13px;
+  }
+
+  /* ---------- Nasal Strips / Mouth Tape: both cards visible side by side ---------- */
+  #MainContent[data-template="index"] .hz-slider-viewport {
+    overflow: visible;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+  #MainContent[data-template="index"] .hz-slider-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 1.8vw, 24px);
+  }
+  #MainContent[data-template="index"] .hz-card {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    border-radius: 20px;
+  }
+  #MainContent[data-template="index"] .hz-card-content {
+    padding: clamp(28px, 3vw, 44px);
+  }
+  #MainContent[data-template="index"] .hz-card-btn {
+    min-height: 46px;
+    padding: 0 28px;
+  }
+
+  /* ---------- Features ---------- */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
+    padding-block: 64px 72px;
+  }
+
+  /* ---------- The Sleep Bundle card ---------- */
+  #MainContent[data-template="index"] .somna-sleep-bundle {
+    padding: 64px 40px 80px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__card {
+    max-width: 960px;
+    padding: 52px clamp(40px, 4vw, 64px) 48px;
+    border-radius: 28px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__badge {
+    top: -19px;
+    left: clamp(32px, 3.2vw, 48px);
+    gap: 8px;
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__top {
+    grid-template-columns: clamp(220px, 20vw, 260px) 1fr;
+    gap: clamp(32px, 3.4vw, 48px);
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__media {
+    border-radius: 20px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .review_content {
+    font-size: 14px;
+    gap: 6px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__title {
+    margin-top: 6px !important; /* section sets margin-top with !important */
+    font-size: clamp(30px, 2.7vw, 38px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__subtitle {
+    margin-top: 10px !important; /* section sets margin-top with !important */
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__price {
+    margin-top: 16px !important; /* section sets margin-top with !important */
+    margin-bottom: 6px;
+    font-size: clamp(22px, 2vw, 26px);
+    line-height: 1.25;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__per-night {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__colors {
+    gap: 12px;
+    margin-top: 32px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__color {
+    min-width: 120px;
+    min-height: 44px;
+    padding: 0 22px;
+    gap: 10px;
+    font-size: 15px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__dot {
+    width: 14px;
+    height: 14px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__button {
+    max-width: 440px;
+    min-height: 56px;
+    margin: 24px auto 0;
+    padding: 0 32px;
+    font-size: 17px;
+  }
+
+  /* ---------- FAQ ---------- */
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+    gap: 24px;
+    padding-block: 64px 80px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
+    padding-block: 72px 80px;
+  }
+}
+/* ======================= END HOMEPAGE DESKTOP ======================= */

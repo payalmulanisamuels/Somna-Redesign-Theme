@@ -4,3 +4,7 @@
 {% if template contains 'product' or template contains 'collection' %}
     {{ 'product-col-custom.css' | asset_url | stylesheet_tag: preload: true }}
 {% endif %}
+{%- comment -%} Homepage desktop/tablet styles; media attribute keeps phones from waiting on it {%- endcomment -%}
+{% if template.name == 'index' %}
+    <link rel="stylesheet" href="{{ 'somna-home-desktop.css' | asset_url }}" media="screen and (min-width: 750px)">
+{% endif %}
