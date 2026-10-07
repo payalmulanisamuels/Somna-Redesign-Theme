@@ -319,7 +319,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/Gift.png",
+                "image_upload": "shopify://shop_images/Gift_9b893c20-4b7e-45bb-b826-ccd957775598.png",
                 "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
@@ -460,7 +460,7 @@
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/guarantee.png",
+                "image_upload": "shopify://shop_images/gurantee.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -601,7 +601,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/ship.png",
+                "image_upload": "shopify://shop_images/Truck.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -742,7 +742,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/secure.png",
+                "image_upload": "shopify://shop_images/payment.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -1079,7 +1079,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon1-ritual.png",
+                    "image_upload": "shopify://shop_images/icon1.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1205,7 +1205,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon2-drug.png",
+                    "image_upload": "shopify://shop_images/icon2.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1331,7 +1331,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon3-subscription.png",
+                    "image_upload": "shopify://shop_images/icon3.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1457,7 +1457,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon4-guarantee.png",
+                    "image_upload": "shopify://shop_images/icon4.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
