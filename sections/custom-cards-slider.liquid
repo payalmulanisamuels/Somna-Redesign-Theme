@@ -60,7 +60,8 @@
             endif
           -%}
 
-          <div class="hz-card" style="color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+          <div class="hz-card-outer">
+          <a href="{{ card_link }}" class="hz-card" style="color: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
             <div class="hz-card-media">
               {% if card_image != blank %}
                 <img 
@@ -89,6 +90,7 @@
                 </a>
               {% endif %}
             </div>
+          </a>
           </div>
         {% endfor %}
       </div>
