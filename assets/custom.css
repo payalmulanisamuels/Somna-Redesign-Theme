@@ -434,7 +434,7 @@ li.menu__item.paragraph a {
   display: flex;
   gap: 5px;
 }
-.hz-card {
+.hz-card ,.hz-card-outer{
   flex: 0 0 300px;
   max-width: 300px;
   aspect-ratio: 2 / 1;  
