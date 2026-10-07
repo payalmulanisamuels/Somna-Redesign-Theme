@@ -192,7 +192,6 @@
   #MainContent[data-template="index"] .hz-card-content:not(.alignment-right) {
     width: auto;
     max-width: 62%;
-    padding-inline-start: 0;
     align-items: flex-start;
   }
   #MainContent[data-template="index"] .hz-card-price {
