@@ -161,7 +161,7 @@
     padding-bottom: 104px; /* clears the next section's top wave (70px overlap on desktop) */
   }
   #MainContent[data-template="index"] .hz-slider-viewport {
-    padding: 10px calc(50vw - 230px);
+    padding: 10px calc(50vw - 2000px);
   }
   #MainContent[data-template="index"] .hz-slider-track {
     gap: 16px;
