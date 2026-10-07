@@ -31,7 +31,10 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "image_ratio_desktop": "2 / 1",
+            "border_radius_desktop": 29,
+            "border_corners_desktop": "bottom"
           },
           "blocks": {}
         },
@@ -71,7 +74,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 15,
-            "padding-inline-end": 15
+            "padding-inline-end": 15,
+            "align_page_width_desktop": true,
+            "gap_desktop": 0,
+            "padding-inline-start-desktop": 0,
+            "padding-inline-end-desktop": 0
           },
           "blocks": {
             "text_LhHWcH": {
@@ -126,7 +133,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "var(--font-heading--family)",
+                "font_weight_desktop": "400",
+                "line_height_desktop": "1.4",
+                "max_width_desktop": 430
               },
               "blocks": {}
             },
@@ -153,7 +164,10 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "line_height_desktop": "1.5",
+                "max_width_desktop": 590,
+                "padding-block-start-desktop": 6
               },
               "blocks": {}
             }
@@ -197,7 +211,10 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 0,
-        "padding-block-end": 40
+        "padding-block-end": 40,
+        "stack_desktop": true,
+        "gap_desktop": 19,
+        "content_width_desktop": "80rem"
       }
     },
     "layered_image_with_text_LEPfjJ": {
@@ -224,7 +241,11 @@
             "padding-block-start": 40,
             "padding-block-end": 40,
             "padding-inline-start": 15,
-            "padding-inline-end": 25
+            "padding-inline-end": 25,
+            "padding-block-start-desktop": 40,
+            "padding-block-end-desktop": 96,
+            "gap_desktop": 10,
+            "padding-inline-start-desktop": 58
           },
           "blocks": {
             "text_QmeLq9": {
@@ -251,7 +272,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "var(--font-heading--family)",
+                "font_weight_desktop": "500",
+                "line_height_desktop": "1.2",
+                "letter_spacing_desktop": "-0.03em"
               },
               "blocks": {}
             },
@@ -279,7 +304,9 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "line_height_desktop": "1.5",
+                "max_width_desktop": 324
               },
               "blocks": {}
             }
@@ -305,7 +332,8 @@
         "drop_shadow": false,
         "background_color": "",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "content_min_height_desktop": 47
       }
     },
     "steps_guide_GFjEFb": {
@@ -348,7 +376,16 @@
         "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "",
-        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one."
+        "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one.",
+        "content_width_desktop": "80rem",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 30,
+        "image_size_desktop": 100,
+        "image_gap_desktop": 8,
+        "title_size_desktop": 15,
+        "note_size_desktop": 15,
+        "arrow_size_desktop": 14,
+        "note_width_desktop": 470
       }
     },
     "layered_image_with_text_BndA69": {
@@ -375,7 +412,11 @@
             "padding-block-start": 40,
             "padding-block-end": 40,
             "padding-inline-start": 15,
-            "padding-inline-end": 5
+            "padding-inline-end": 5,
+            "padding-block-start-desktop": 40,
+            "padding-block-end-desktop": 96,
+            "gap_desktop": 10,
+            "padding-inline-end-desktop": 58
           },
           "blocks": {
             "text_QLq86c": {
@@ -402,7 +443,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "var(--font-heading--family)",
+                "font_weight_desktop": "500",
+                "line_height_desktop": "1.2",
+                "letter_spacing_desktop": "-0.03em"
               },
               "blocks": {}
             },
@@ -430,7 +475,9 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "line_height_desktop": "1.5",
+                "max_width_desktop": 324
               },
               "blocks": {}
             }
@@ -457,7 +504,8 @@
         "drop_shadow": false,
         "background_color": "",
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "content_min_height_desktop": 47
       }
     },
     "steps_guide_ed4FP7": {
@@ -500,7 +548,16 @@
         "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "",
-        "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use."
+        "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use.",
+        "content_width_desktop": "80rem",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 30,
+        "image_size_desktop": 100,
+        "image_gap_desktop": 8,
+        "title_size_desktop": 15,
+        "note_size_desktop": 15,
+        "arrow_size_desktop": 14,
+        "note_width_desktop": 640
       }
     },
     "bundle_feature_banner_Qrgcy3": {
@@ -521,7 +578,15 @@
         "onetime_label": "",
         "button_label": "",
         "padding_top": 28,
-        "padding_bottom": 28
+        "padding_bottom": 28,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 30,
+        "content_width_desktop": 1280,
+        "image_width_desktop": 50,
+        "title_size_desktop": 32,
+        "subtitle_size_desktop": 16,
+        "price_size_desktop": 26,
+        "button_height_desktop": 46
       }
     },
     "pdp_comparison_JDftN9": {
@@ -535,7 +600,14 @@
         "heading": "Settling In",
         "subheading": "<p>Most people notice it feels routine within the first week. If anything feels wrong too tight, too irritating, not holding reposition or size down before deciding it's not for you. You have 30 nights to find out either way.</p>",
         "padding_top": 20,
-        "padding_bottom": 20
+        "padding_bottom": 20,
+        "content_width_desktop": "80rem",
+        "min_height_desktop": 34,
+        "padding_top_desktop": 24,
+        "padding_bottom_desktop": 24,
+        "heading_size_desktop": 40,
+        "subheading_size_desktop": 18,
+        "subheading_width_desktop": 580
       }
     },
     "section_q3qVem": {
@@ -553,7 +625,7 @@
             "font": "var(--font-body--family)",
             "font_size": "",
             "font_size_tablet": "",
-            "font_size_desktop": "",
+            "font_size_desktop": "2.5rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -565,7 +637,10 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "var(--font-heading--family)",
+            "font_weight_desktop": "500",
+            "line_height_desktop": "1.1"
           },
           "blocks": {}
         },
@@ -587,7 +662,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "heading_size_desktop": 18,
+            "row_spacing_top_desktop": 28,
+            "row_spacing_bottom_desktop": 11,
+            "divider_last_desktop": true
           },
           "blocks": {
             "accordion_row_KNXU4r": {
@@ -610,7 +689,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -622,7 +701,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "line_height_desktop": "1.5"
                   },
                   "blocks": {}
                 }
@@ -651,7 +731,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -663,7 +743,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "line_height_desktop": "1.5"
                   },
                   "blocks": {}
                 }
@@ -694,7 +775,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -706,7 +787,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "line_height_desktop": "1.5"
                   },
                   "blocks": {}
                 }
@@ -737,7 +819,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -749,7 +831,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "line_height_desktop": "1.5"
                   },
                   "blocks": {}
                 }
@@ -780,7 +863,7 @@
                     "font": "var(--font-body--family)",
                     "font_size": "",
                     "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -792,7 +875,8 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "line_height_desktop": "1.5"
                   },
                   "blocks": {}
                 }
@@ -845,7 +929,11 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 50,
-        "padding-block-end": 50
+        "padding-block-end": 50,
+        "padding-block-start-desktop": 30,
+        "padding-block-end-desktop": 34,
+        "gap_desktop": 18,
+        "content_width_desktop": "80rem"
       }
     }
   },
