@@ -43,7 +43,7 @@
   style="{% render 'spacing-padding', settings: section.settings %}"
 >
   <h2 class="visually-hidden">{{ 'accessibility.slideshow' | t }}</h2>
-  <layered-slideshow-component style="--layered-panel-height-mobile: {{ layered_panel_height_mobile }}; --layered-min-height-desktop: {{ layered_min_height_desktop }}">
+  <layered-slideshow-component style="--layered-panel-height-mobile: {{ layered_panel_height_mobile }}; --layered-min-height-desktop: {{ layered_min_height_desktop }}{% if section.settings.content_min_height_desktop != blank %}; --layered-content-min-height-desktop: {{ section.settings.content_min_height_desktop }}vw{% endif %}">
     <div
       class="layered-slideshow__container"
       ref="container"
@@ -483,6 +483,17 @@
       "step": 1,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "content_min_height_desktop",
+      "label": "Banner height (desktop, % of screen width)",
+      "info": "e.g. 47 keeps the banner at the image's proportions"
     }
   ],
   "presets": [
