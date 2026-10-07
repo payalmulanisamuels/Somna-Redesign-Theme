@@ -3,8 +3,10 @@
 
   - Shows on homepage, collections and product pages only; never for logged-in customers.
   - Opens after N seconds (default 10); on desktop also on exit intent before that.
-  - Once per visitor: after closing, a teaser tab shows for the rest of the session and the
-    full popup does not reopen for N days (default 14). Never shows again after signing up.
+  - Closing hides it for the rest of the browser session: a session cookie keeps it hidden on
+    every page and tab until the browser is closed, and it shows again on the next visit.
+    If the card was already scratched, a teaser tab lets the visitor reopen it that session.
+  - Never shows again after a successful sign-up (localStorage).
   - Suppressed for visitors arriving from a Klaviyo email link or already known to Klaviyo.
   - Scratch works by drag, single tap/click, or keyboard Enter/Space.
   - Fixed discount code (default WELCOME10), auto-applied via /discount/CODE.
@@ -479,7 +481,6 @@
   (() => {
     const config = {
       delayMs: {{ section.settings.delay_seconds | times: 1000 | json }},
-      dismissDays: {{ section.settings.dismiss_days | json }},
       code: {{ popup_code | json }},
       klaviyoCompanyId: {{ section.settings.klaviyo_company_id | strip | json }},
       klaviyoListId: {{ section.settings.klaviyo_list_id | strip | json }},
@@ -489,16 +490,24 @@
     };
 
     const KEYS = {
-      dismissedAt: 'somna_popup_dismissed_at', 
-      signedUp: 'somna_popup_signed_up',      
-      suppressed: 'somna_popup_suppressed',    
-      teaser: 'somna_popup_teaser',            
-      scratched: 'somna_popup_scratched',      
+      dismissedAt: 'somna_popup_dismissed_at', // legacy 14-day cooldown key, cleared on load
+      signedUp: 'somna_popup_signed_up',       // localStorage: signed up, never show again
+      suppressed: 'somna_popup_suppressed',    // localStorage: arrived from Klaviyo / known profile
+      teaser: 'somna_popup_teaser',            // sessionStorage: show the teaser tab
+      scratched: 'somna_popup_scratched',      // sessionStorage: card scratched this session
+      closed: 'somna_popup_closed',            // session cookie: closed this browser session
     };
     const storage = {
       get(store, key) { try { return window[store].getItem(key); } catch (e) { return null; } },
       set(store, key, value) { try { window[store].setItem(key, value); } catch (e) {} },
       remove(store, key) { try { window[store].removeItem(key); } catch (e) {} }
+    };
+
+    // "Closed" lives in a session cookie (no expiry): every page and tab shares it, and the
+    // browser clears it when it is closed, so the popup comes back on the next visit.
+    const closedForSession = {
+      get() { try { return document.cookie.split('; ').includes(KEYS.closed + '=1'); } catch (e) { return false; } },
+      set() { try { document.cookie = KEYS.closed + '=1; path=/; SameSite=Lax'; } catch (e) {} },
     };
 
     function track(name, data = {}) {
@@ -514,7 +523,7 @@
       const excluded = config.excludedPaths.map((p) => p.trim()).filter(Boolean);
       if (excluded.some((p) => path.includes(p))) return true;
 
-      if (storage.get('localStorage', KEYS.signedUp) || storage.get('localStorage', KEYS.suppressed) || storage.get('localStorage', KEYS.scratched)) return true;
+      if (storage.get('localStorage', KEYS.signedUp) || storage.get('localStorage', KEYS.suppressed)) return true;
 
       const params = new URLSearchParams(window.location.search);
       const fromKlaviyo =
@@ -547,7 +556,6 @@
       let isOpen = false;
       let lastFocus = null;
       let openTimer = null;
-      let reopenTimer = null;
       let closeTimer = null;
       const CLOSE_MS = 240; // matches the closing CSS transition
 
@@ -564,11 +572,15 @@
         root.style.removeProperty('--somna-scrollbar-width');
       }
 
+      // Earlier versions stored these in localStorage, which hid the popup for weeks
+      // (or for good) after a close; a close now only lasts for the browser session.
+      storage.remove('localStorage', KEYS.scratched);
+      storage.remove('localStorage', KEYS.dismissedAt);
+
       if (isSuppressed()) return;
 
-      const dismissedAt = Number(storage.get('localStorage', KEYS.dismissedAt) || 0);
-      const withinCooldown = Boolean(dismissedAt) && Date.now() - dismissedAt < config.dismissDays * 86400000;
-      if (withinCooldown && storage.get('sessionStorage', KEYS.teaser)) teaserTab?.classList.remove('somna-hidden');
+      const closedThisSession = closedForSession.get();
+      if (closedThisSession && storage.get('sessionStorage', KEYS.teaser)) teaserTab?.classList.remove('somna-hidden');
 
       function showScreen(index) {
         screens.forEach((screen, i) => screen?.classList.toggle('somna-hidden', i !== index));
@@ -602,9 +614,11 @@
 
       function openPopup(trigger) {
         if (isOpen) return;
+        // Automatic triggers (timer, exit intent) never reopen it after a close or a sign-up;
+        // only the visitor's own click on the teaser tab can.
+        if (trigger !== 'teaser' && (closedForSession.get() || storage.get('localStorage', KEYS.signedUp))) return;
         isOpen = true;
         clearTimeout(openTimer);
-        clearTimeout(reopenTimer);
         clearTimeout(closeTimer);
         lastFocus = document.activeElement;
         teaserTab?.classList.add('somna-hidden');
@@ -632,18 +646,16 @@
         overlay.setAttribute('aria-hidden', 'true');
         document.removeEventListener('keydown', onKeydown);
         const signedUp = storage.get('localStorage', KEYS.signedUp);
-        const hasScratched = storage.get('localStorage', KEYS.scratched);
+        const hasScratched = storage.get('sessionStorage', KEYS.scratched);
+        // Closed (icon, "No thanks", Esc or backdrop): hide for the rest of this browser session
+        if (!signedUp) closedForSession.set();
+        clearTimeout(openTimer);
 
         closeTimer = setTimeout(() => {
           overlay.classList.add('somna-hidden');
           unlockScroll();
-          if (!signedUp && !hasScratched) {
-            // User closed via icon or "No thanks" without scratching -> show again after 10 seconds
-            reopenTimer = setTimeout(() => {
-              openWhenClear('reopen_10s');
-            }, 10000);
-          } else if (!signedUp) {
-            storage.set('localStorage', KEYS.dismissedAt, String(Date.now()));
+          if (!signedUp && hasScratched) {
+            // Scratched but not signed up: a teaser tab lets them come back to it this session
             storage.set('sessionStorage', KEYS.teaser, '1');
             teaserTab?.classList.remove('somna-hidden');
           }
@@ -758,8 +770,8 @@
         function reveal() {
           if (revealed) return;
           revealed = true;
-          // Mark that the user has scratched so it doesn't show popup anymore
-          storage.set('localStorage', KEYS.scratched, '1');
+          // Scratched this session (decides whether the teaser tab shows after closing)
+          storage.set('sessionStorage', KEYS.scratched, '1');
           
           canvas.classList.add('somna-scratch-done');
           canvas.parentElement.classList.add('somna-scratch-started');
@@ -972,7 +984,7 @@
         document.addEventListener('visitorConsentCollected', check);
       }
 
-      if (withinCooldown) return;
+      if (closedThisSession) return;
       openTimer = setTimeout(() => openWhenClear('timer'), config.delayMs);
 
       if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
