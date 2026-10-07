@@ -31,3 +31,8 @@
 
 --horizontal-alignment: {{ horizontal_alignment }}; --vertical-alignment: {{ vertical_alignment }};
 --vertical-alignment-mobile: {{ vertical_alignment_mobile }};
+{%- comment -%} Desktop overrides (990px and up); empty = same as mobile {%- endcomment -%}
+{%- if settings.gap_desktop != blank %} --gap-desktop: {{ settings.gap_desktop }}px;{% endif -%}
+{%- if settings.stack_desktop %} --stack-desktop: 1;{% endif -%}
+{%- if settings.align_items_desktop != blank %} --align-items-desktop: {{ settings.align_items_desktop }};{% endif -%}
+{%- if settings.align_page_width_desktop %} --align-page-width-desktop: 1;{% endif -%}

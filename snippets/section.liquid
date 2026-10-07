@@ -13,6 +13,17 @@
     assign skip_contrast = true
   endif
 %}
+{%- comment -%} Desktop content width (990px and up) {%- endcomment -%}
+{%- if section.settings.content_width_desktop != blank -%}
+  {% style %}
+    @media screen and (min-width: 990px) {
+      #shopify-section-{{ section.id }} {
+        --page-content-width: {{ section.settings.content_width_desktop }};
+        --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+      }
+    }
+  {% endstyle %}
+{%- endif -%}
 {% render 'contrast-override',
   background_color: background_color,
   section_id: section_id,
@@ -55,8 +66,7 @@
      {% endif %}
   "
 >
-
-  {%  if section.settings.background_image %}
+{% if section.settings.background_image %}
 
   <div class="custom-section-background">
     {% render 'background-media',

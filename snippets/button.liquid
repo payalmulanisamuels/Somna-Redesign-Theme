@@ -26,12 +26,18 @@
     {% if block_settings.font_size != blank %}button-font-size{% endif %}
     {% if block_settings.font_size_tablet != blank %}button-font-size-tablet{% endif %}
     {% if block_settings.font_size_desktop != blank %}button-font-size-desktop{% endif %}
+    {% if block_settings.height_desktop != blank %}button-height-desktop{% endif %}
+    {% if block_settings.padding_inline_desktop != blank %}button-padding-desktop{% endif %}
+    {% if block_settings.button_radius_desktop != blank %}button-radius-desktop{% endif %}
   "
   style="
     {% render 'size-style', settings: block_settings %}
     {% if block_settings.font_size != blank %}--button-font-size: {{ block_settings.font_size }};{% endif %}
     {% if block_settings.font_size_tablet != blank %}--button-font-size-tablet: {{ block_settings.font_size_tablet }};{% endif %}
     {% if block_settings.font_size_desktop != blank %}--button-font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
+    {% if block_settings.height_desktop != blank %}--button-height-desktop: {{ block_settings.height_desktop }}px;{% endif %}
+    {% if block_settings.padding_inline_desktop != blank %}--button-padding-desktop: {{ block_settings.padding_inline_desktop }}px;{% endif %}
+    {% if block_settings.button_radius_desktop != blank %}--button-radius-desktop: {{ block_settings.button_radius_desktop }}px;{% endif %}
   "
   {%- if block_settings.open_in_new_tab -%}
     target="_blank"

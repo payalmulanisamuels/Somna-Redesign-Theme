@@ -33,4 +33,20 @@
       echo ';'
     endif
   endfor
+
+  comment
+    Desktop overrides (990px and up) from the optional "<key>-desktop" settings.
+    Empty = same as mobile. Applied by the desktop-settings rules in somna-home-desktop.css.
+  endcomment
+  for key in keys
+    assign desktop_key = key | append: '-desktop'
+    assign desktop_value = settings[desktop_key]
+    if desktop_value != blank
+      echo '--'
+      echo desktop_key
+      echo ': '
+      echo desktop_value
+      echo 'px;'
+    endif
+  endfor
 -%}
