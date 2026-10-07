@@ -2,7 +2,9 @@
    SOMNA — DESKTOP & TABLET (homepage 2026-10-07, collection added same day)
    ---------------------------------------------------------------------
    Loaded on the homepage, collection, product and page templates, after
-   custom.css (snippets/stylesheets). Shared components (container width,
+   custom.css (snippets/stylesheets). Also holds the desktop layer for the
+   Support, Contact and How to use pages (page.support / page.contact /
+   page.how-to-use), scoped the same way. Shared components (container width,
    section headings, trust bar, bundle grid, product cards, FAQ, newsletter)
    use one rule; page-only sections are scoped to their template.
    Source of truth: Figma "Home" frame (node 796-327), with sizes
@@ -60,22 +62,22 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block,
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block,
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block > * {
     font-size: 13px;
     line-height: 1.25;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .icon-block__media {
     width: 26px !important; /* overrides the icon block's inline width */
     height: auto;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 10px;
   }
 
   /* ---------- Section headings (Lora) ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header,
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) .custom-header,
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) .custom-header > * {
     font-size: clamp(30px, 3vw, 42px) !important; /* overrides existing !important heading sizes */
     line-height: 1.1;
   }
@@ -244,26 +246,28 @@
     mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
   }
 
-  /* ---------- "Breathe through your nose" banner ---------- */
-  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
+  /* ---------- "Breathe through your nose" banner ----------
+     SHARED with How to use: its Nasal Strips / Mouth Tape banners are the same
+     section type, and the Nasal Strips one has the same section + block ids. */
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
     padding-block: 40px 96px; /* bottom space clears the wave inside this banner */
     padding-inline: max(40px, calc((100vw - 1280px) / 2)) 40px;
   }
   /* The banner's script sizes it from this inner group plus the padding above, so the
      min-height lives here. Banner image is ~2.1:1: total height tracks the image. */
-  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content > .group-block-content {
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is([id$="__layered_image_with_text_LEPfjJ"], [id$="__layered_image_with_text_BndA69"]) .layered-slideshow__content > .group-block-content {
     min-height: calc(clamp(380px, 47vw, 760px) - 144px);
     justify-content: center;
     margin: 0;
     gap: clamp(14px, 1.6vw, 22px);
   }
-  #MainContent[data-template="index"] .text-block--text_QmeLq9,
-  #MainContent[data-template="index"] .text-block--text_QmeLq9 > * {
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is(.text-block--text_QmeLq9, .text-block--text_QLq86c),
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is(.text-block--text_QmeLq9, .text-block--text_QLq86c) > * {
     font-size: clamp(30px, 3.3vw, 48px);
     line-height: 1.15;
   }
-  #MainContent[data-template="index"] .text-block--text_jdwziN,
-  #MainContent[data-template="index"] .text-block--text_jdwziN > * {
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is(.text-block--text_jdwziN, .text-block--text_yUXBwV),
+  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is(.text-block--text_jdwziN, .text-block--text_yUXBwV) > * {
     font-size: clamp(14px, 1.25vw, 18px);
     line-height: 1.55;
     max-inline-size: 30em;
@@ -275,7 +279,8 @@
   }
 
   /* ---------- FAQ ---------- */
-  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper,
+  #MainContent[data-template="page.how-to-use"] [id$="__section_q3qVem"] .section-content-wrapper {
     width: 100%;
     max-width: 800px;
     margin-inline: auto;
@@ -283,19 +288,22 @@
     padding-block: 56px 72px;
   }
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header,
-  #MainContent[data-template^="collection"] .hz-faq-wrapper .details__header {
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details__header,
+  #MainContent:is([data-template="page.support"], [data-template="page.how-to-use"]) .accordion .details__header {
     font-size: clamp(16px, 1.4vw, 19px) !important; /* overrides existing !important size */
     line-height: 1.4;
     padding-block: 22px;
   }
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block,
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block > *,
-  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content :is(.text-block, p) {
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content :is(.text-block, p),
+  #MainContent:is([data-template="page.support"], [data-template="page.how-to-use"]) .accordion .details-content :is(.text-block, .text-block > *) {
     font-size: clamp(14px, 1.15vw, 16px);
     line-height: 1.6;
   }
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details-content,
-  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content {
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content,
+  #MainContent:is([data-template="page.support"], [data-template="page.how-to-use"]) .accordion .details-content {
     padding-block-end: 20px;
   }
 
@@ -419,6 +427,342 @@
     max-width: 800px;
     justify-self: center;
   }
+
+  /* ================= Contact + How to use: shared page hero =================
+     Both pages open with the same section (section_mXKVY7: photo + eyebrow,
+     headline, intro). On phones it wraps to photo-then-copy; from 750px the
+     theme would put them side by side, so keep the stacked order with a
+     wide photo and the copy aligned to the page container. */
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .section-content-wrapper {
+    flex-flow: column nowrap;
+    align-items: stretch;
+    gap: clamp(28px, 3vw, 44px);
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .image-block__image {
+    width: 100%;
+    height: clamp(340px, 46vw, 760px);
+    aspect-ratio: auto;
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .section-content-wrapper > .group-block {
+    padding-inline: max(40px, calc((100% - 1280px) / 2));
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_LhHWcH,
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_LhHWcH > * {
+    font-size: clamp(13px, 1.05vw, 15px);
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_9AMpwg,
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_9AMpwg > * {
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz,
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz > * {
+    font-size: clamp(15px, 1.3vw, 19px);
+    line-height: 1.55;
+    max-inline-size: 38em;
+  }
+  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz {
+    margin-block-start: 8px;
+  }
+
+  /* ================= Support page ================= */
+
+  /* Every Support section: room for the waves that overlap section edges */
+  #MainContent[data-template="page.support"] .section-content-wrapper {
+    padding-block: clamp(88px, 8vw, 120px);
+  }
+  #MainContent[data-template="page.support"] [id$="__section_DxebWP"] .section-content-wrapper {
+    padding-block: clamp(56px, 6vw, 96px) clamp(104px, 9vw, 136px); /* bottom clears the next section's wave */
+  }
+
+  /* Hero: "SUPPORT HUB / How can we help?" */
+  #MainContent[data-template="page.support"] :is(.text-block--text_DTBxH9, .text-block--text_d8k9wW),
+  #MainContent[data-template="page.support"] :is(.text-block--text_DTBxH9, .text-block--text_d8k9wW) > * {
+    font-size: clamp(13px, 1.05vw, 15px);
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+  #MainContent[data-template="page.support"] .text-block--text_pJVpJ6,
+  #MainContent[data-template="page.support"] .text-block--text_pJVpJ6 > * {
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  #MainContent[data-template="page.support"] .text-block--text_MJFMYC,
+  #MainContent[data-template="page.support"] .text-block--text_MJFMYC > * {
+    font-size: clamp(30px, 3.2vw, 46px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="page.support"] :is(.text-block--text_hCgw3j, .text-block--text_TkkWd4),
+  #MainContent[data-template="page.support"] :is(.text-block--text_hCgw3j, .text-block--text_TkkWd4) > * {
+    font-size: clamp(15px, 1.3vw, 19px);
+    line-height: 1.55;
+    max-inline-size: 34em;
+  }
+  #MainContent[data-template="page.support"] :is(.text-block--text_pJVpJ6, .text-block--text_MJFMYC) {
+    margin-block: 6px 10px;
+  }
+  /* Hero chat icon and track-order box: illustration size */
+  #MainContent[data-template="page.support"] :is([id$="__section_DxebWP"], [id$="__section_TJBP7d"]) .layout-panel-flex--column > .image-block:only-child .image-block__image {
+    width: clamp(88px, 8vw, 124px);
+    max-width: none;
+    height: auto;
+  }
+  #MainContent[data-template="page.support"] [id$="__section_DxebWP"] .image-block {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  /* Track order: illustration + button stay a compact block */
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper {
+    gap: 24px;
+  }
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper > .group-block:last-child {
+    width: 100%;
+    max-width: 440px;
+  }
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .size-style.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* FAQ categories (Products, Ordering, Shipping, Returns) */
+  #MainContent[data-template="page.support"] :is(.text-block--text_FgL4Hh, .text-block--text_dVk3ic, .text-block--text_LVjeWN, .text-block--text_4BjDty),
+  #MainContent[data-template="page.support"] :is(.text-block--text_FgL4Hh, .text-block--text_dVk3ic, .text-block--text_LVjeWN, .text-block--text_4BjDty) > * {
+    font-size: clamp(28px, 2.8vw, 40px);
+    line-height: 1.15;
+  }
+  /* Category icon (section custom CSS caps it at 52px for phones) */
+  #MainContent[data-template="page.support"] .group-block-content.layout-panel-flex--row > .image-block {
+    flex: none;
+    width: auto;
+  }
+  #MainContent[data-template="page.support"] .group-block-content.layout-panel-flex--row > .image-block img {
+    width: clamp(56px, 5vw, 72px);
+    max-width: none;
+    height: auto;
+  }
+  #MainContent[data-template="page.support"] .accordion .details-content :is(.text-block, .text-block > *) {
+    max-inline-size: 46em;
+  }
+
+  /* ================= Contact page ================= */
+
+  /* "Quick answers" heading */
+  #MainContent[data-template="page.contact"] [id$="__section_fEMxag"] .section-content-wrapper {
+    gap: 10px;
+    padding-block-start: clamp(48px, 5vw, 80px);
+  }
+  #MainContent[data-template="page.contact"] .text-block--text_LCFF4w,
+  #MainContent[data-template="page.contact"] .text-block--text_LCFF4w > * {
+    font-size: clamp(26px, 2.6vw, 36px);
+    line-height: 1.2;
+  }
+  #MainContent[data-template="page.contact"] :is(.text-block--text_ytF98R, .text-block--text_AVzR3C),
+  #MainContent[data-template="page.contact"] :is(.text-block--text_ytF98R, .text-block--text_AVzR3C) > * {
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.6;
+  }
+
+  /* Quick-answer cards: icon on top, title + arrow along the bottom */
+  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper {
+    align-items: stretch;
+    gap: clamp(16px, 1.8vw, 24px);
+    padding-block: clamp(24px, 2.6vw, 36px) clamp(48px, 5vw, 72px);
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper > .group-block {
+    min-height: clamp(168px, 17vw, 245px);
+    padding: clamp(20px, 2.2vw, 32px);
+    border-radius: 20px;
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper > .group-block > .group-block-content {
+    justify-content: space-between;
+    gap: 24px;
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .icon-block__media {
+    width: clamp(32px, 3vw, 44px) !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+  #MainContent[data-template="page.contact"] :is(.text-block--text_3D6VtV, .text-block--text_h8PY37, .text-block--text_nVigzz),
+  #MainContent[data-template="page.contact"] :is(.text-block--text_3D6VtV, .text-block--text_h8PY37, .text-block--text_nVigzz) > * {
+    font-size: clamp(16px, 1.5vw, 22px);
+    line-height: 1.3;
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] svg {
+    width: clamp(16px, 1.4vw, 20px);
+    height: auto;
+  }
+
+  /* Message form card */
+  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper {
+    padding-block: 0 clamp(24px, 2.4vw, 32px);
+  }
+  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper > .group-block {
+    padding: clamp(24px, 3vw, 48px);
+    border-radius: 20px;
+  }
+  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper > .group-block > .group-block-content {
+    gap: clamp(16px, 1.8vw, 24px);
+  }
+  #MainContent[data-template="page.contact"] .contact-form__form {
+    gap: 16px;
+  }
+  #MainContent[data-template="page.contact"] .contact-form__input {
+    padding: 14px 18px;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  #MainContent[data-template="page.contact"] .contact-form__input--textarea {
+    min-height: clamp(160px, 14vw, 200px);
+  }
+  #MainContent[data-template="page.contact"] .contact-form .submit-button {
+    height: auto;
+    min-height: 54px;
+    padding: 0 32px;
+    font-size: 16px;
+  }
+
+  /* Direct email card */
+  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .section-content-wrapper {
+    padding-block: 0 clamp(64px, 6vw, 96px);
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .section-content-wrapper > .group-block {
+    padding: clamp(20px, 2.4vw, 32px) clamp(24px, 3vw, 40px);
+    border-radius: 20px;
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .group-block-content.layout-panel-flex--row {
+    gap: clamp(16px, 2vw, 28px);
+  }
+  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .icon-block__media {
+    width: clamp(44px, 4.4vw, 64px) !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+
+  /* ================= How to use page ================= */
+
+  /* Mouth Tape banner: copy sits on the right, so mirror the Nasal Strips padding */
+  #MainContent[data-template="page.how-to-use"] [id$="__layered_image_with_text_BndA69"] .layered-slideshow__content {
+    padding-block: 40px 96px;
+    padding-inline: 40px max(40px, calc((100vw - 1280px) / 2));
+  }
+
+  /* Steps (steps-guide): bigger illustrations and readable labels */
+  #MainContent[data-template="page.how-to-use"] .steps-section {
+    padding-block: clamp(96px, 9vw, 136px);
+  }
+  #MainContent[data-template="page.how-to-use"] .steps-grid {
+    max-width: 1040px;
+    margin: 0 auto clamp(28px, 3vw, 44px);
+    gap: clamp(24px, 3vw, 48px);
+    flex-wrap: nowrap;
+  }
+  #MainContent[data-template="page.how-to-use"] .step-card {
+    flex: 1 1 0;
+    max-width: none;
+  }
+  #MainContent[data-template="page.how-to-use"] .step-image-wrapper {
+    margin-bottom: clamp(14px, 1.6vw, 22px);
+  }
+  #MainContent[data-template="page.how-to-use"] .step-image-wrapper img {
+    width: clamp(104px, 10vw, 150px);
+    height: auto;
+    max-width: none;
+    max-height: none;
+  }
+  #MainContent[data-template="page.how-to-use"] .step-card:is(:nth-child(2), :nth-child(5)) .step-image-wrapper::before,
+  #MainContent[data-template="page.how-to-use"] .step-card:is(:nth-child(2), :nth-child(5)) .step-image-wrapper::after {
+    width: clamp(18px, 1.6vw, 24px);
+    height: clamp(18px, 1.6vw, 24px);
+  }
+  #MainContent[data-template="page.how-to-use"] :is(.step-title, .step-title > *) {
+    font-size: clamp(15px, 1.35vw, 19px);
+    line-height: 1.45;
+  }
+  #MainContent[data-template="page.how-to-use"] .step-title {
+    max-inline-size: 15em;
+  }
+  #MainContent[data-template="page.how-to-use"] .steps-subheading-bottom {
+    max-width: 44em;
+    margin-inline: auto;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.55;
+  }
+
+  /* "Using Them Together" (bundle-feature-banner) */
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-section {
+    padding-block: clamp(48px, 5vw, 80px);
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-container-main {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 40px;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-container {
+    gap: clamp(32px, 4vw, 72px);
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-media {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-image-wrap {
+    max-width: 520px;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-content {
+    flex: 1 1 auto;
+    max-width: 30rem;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-title {
+    margin-bottom: 12px;
+    font-size: clamp(30px, 3vw, 42px);
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-subtitle {
+    margin-bottom: 18px;
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.55;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-pricing-row {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-sub-price {
+    gap: 8px;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-price-large {
+    font-size: clamp(28px, 2.6vw, 36px);
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-price-sub-label {
+    font-size: 15px;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-btn {
+    min-height: 52px;
+    padding: 0 30px;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /* "Settling In" (pdp-comparison) */
+  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .comp-container {
+    padding-block: clamp(48px, 5vw, 88px);
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-heading {
+    margin-bottom: 16px;
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-subheading {
+    max-width: 40em;
+    font-size: clamp(15px, 1.3vw, 18px);
+    line-height: 1.6;
+  }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
@@ -436,9 +780,10 @@
 
 @media screen and (min-width: 990px) {
 
-  /* Homepage + collection content width: 1280px max (other pages keep the theme's 1040px) */
-  #MainContent:is([data-template="index"], [data-template^="collection"]),
-  body:has(#MainContent:is([data-template="index"], [data-template^="collection"])) .shopify-section-group-footer-group {
+  /* Homepage, collection, Support, Contact and How to use content width: 1280px max
+     (other pages keep the theme's 1040px) */
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.support"], [data-template="page.contact"], [data-template="page.how-to-use"]),
+  body:has(#MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.support"], [data-template="page.contact"], [data-template="page.how-to-use"])) .shopify-section-group-footer-group {
     --page-content-width: 80rem;
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
   }
@@ -454,14 +799,14 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
     font-size: clamp(14px, 1.15vw, 16px);
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .icon-block__media {
     width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 14px;
   }
 
@@ -597,7 +942,8 @@
   }
 
   /* ---------- FAQ ---------- */
-  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper,
+  #MainContent[data-template="page.how-to-use"] [id$="__section_q3qVem"] .section-content-wrapper {
     gap: 24px;
     padding-block: 64px 80px;
   }
@@ -641,6 +987,40 @@
     grid-column: 2;
     grid-row: 1 / span 2;
   }
+
+  /* ================= Support page ================= */
+
+  /* Track order: copy on the left, illustration + button on the right */
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper {
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(40px, 5vw, 96px);
+  }
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper > .group-block:first-child {
+    flex: 1 1 auto;
+  }
+  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper > .group-block:last-child {
+    flex: 0 0 clamp(320px, 32vw, 440px);
+  }
+
+  /* FAQ categories: category title on the left, questions on the right */
+  #MainContent[data-template="page.support"] :is([id$="__section_mW8NGX"], [id$="__section_FrTCYP"], [id$="__section_Jdh3Be"], [id$="__section_W6ecwU"]) .section-content-wrapper {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 2.2fr);
+    align-items: start;
+    column-gap: clamp(48px, 6vw, 112px);
+  }
+  #MainContent[data-template="page.support"] :is([id$="__section_mW8NGX"], [id$="__section_FrTCYP"], [id$="__section_Jdh3Be"], [id$="__section_W6ecwU"]) .section-content-wrapper > .group-block > .group-block-content {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+  /* First question lines up with the category title */
+  #MainContent[data-template="page.support"] .accordion--dividers accordion-custom:first-child .details__header {
+    padding-block-start: 0;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -648,4 +1028,4 @@
     padding-block: 72px 80px;
   }
 }
-/* ======================= END HOMEPAGE DESKTOP ======================= */
+/* ======================= END SOMNA DESKTOP ======================= */
