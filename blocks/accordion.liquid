@@ -9,7 +9,7 @@
 %}
 
 <div
-  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.background_color != blank or block_settings.text_color != blank %} color-custom-{{ block.id }}{% endif %}{% if block_settings.background_color != blank %} accordion--custom-background{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}"
+  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.background_color != blank or block_settings.text_color != blank %} color-custom-{{ block.id }}{% endif %}{% if block_settings.background_color != blank %} accordion--custom-background{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}{% if block_settings.divider_last_desktop %} accordion--last-divider-desktop{% endif %}"
   style="
     --summary-font-family: var(--font-{{ block_settings.type_preset }}--family);
      --summary-font-style: var(--font-{{ block_settings.type_preset }}--style);
@@ -20,6 +20,9 @@
     {% render 'spacing-style', settings: block_settings %}
     {% render 'border-override', settings: block_settings %}
     {% if block_settings.divider_color != blank %} --color-border: {{ block_settings.divider_color }};{% endif %}
+    {% if block_settings.heading_size_desktop != blank %} --accordion-heading-size-desktop: {{ block_settings.heading_size_desktop }}px;{% endif %}
+    {% if block_settings.row_spacing_top_desktop != blank %} --accordion-row-top-desktop: {{ block_settings.row_spacing_top_desktop }}px;{% endif %}
+    {% if block_settings.row_spacing_bottom_desktop != blank %} --accordion-row-bottom-desktop: {{ block_settings.row_spacing_bottom_desktop }}px;{% endif %}
   "
   {{ block.shopify_attributes }}
 >
@@ -227,6 +230,33 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "heading_size_desktop",
+      "label": "Question font size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "row_spacing_top_desktop",
+      "label": "Space above each question (desktop, px)",
+      "info": "Not applied to the first question."
+    },
+    {
+      "type": "number",
+      "id": "row_spacing_bottom_desktop",
+      "label": "Space below each question (desktop, px)"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider_last_desktop",
+      "label": "Line under the last question (desktop)",
+      "default": false
     }
   ],
   "presets": [
@@ -244,7 +274,7 @@
             "text-1": {
               "type": "text",
               "settings": {
-                "text": "t:html_defaults.goal_for_every_customer",
+                "text": "t:html_defaults.work_quickly_to_ship",
                 "width": "100%"
               }
             }

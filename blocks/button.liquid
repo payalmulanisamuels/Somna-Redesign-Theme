@@ -384,6 +384,27 @@
       "unit": "%",
       "default": 100,
       "visible_if": "{{ block.settings.width_mobile == \"custom\" }}"
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "height_desktop",
+      "label": "Height (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_inline_desktop",
+      "label": "Side padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "button_radius_desktop",
+      "label": "Corner radius (desktop, px)",
+      "info": "Use 999 for a pill shape."
     }
   ],
   "presets": [
