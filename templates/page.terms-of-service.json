@@ -788,7 +788,7 @@
         "padding-block-end": 0
       }
     },
-    "footer_m9NzUG": {
+"footer_m9NzUG": {
       "type": "footer",
       "blocks": {
         "group_H6VpwJ": {
@@ -833,18 +833,20 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Get 10% off your</strong><br/><em>first order.</em></p>",
+                "text": "<p>Get 10% off your<br/>first order.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
-                "font": "var(--font-body--family)",
+                "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
+                "font_size_tablet": "1.5rem",
+                "font_size_desktop": "2rem",
+                "line_height": "tight",
+                "letter_spacing": "tight",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "{{ settings.color_palette.background }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -858,30 +860,39 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>A welcome code for your first night with Somna.</p>",
+                "text": "<p>A welcome code for your first&nbsp;<br/>night with Somna.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "0.625rem",
-                "line_height": "normal",
+                "font_size_tablet": "1.5rem",
+                "font_size_desktop": "1.25rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "{{ settings.color_palette.background }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 7,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
             },
+            "klaviyo_email_marketing_sms_form_embed_block_9bccLn": {
+              "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+              "settings": {
+                "formId": "S7fEZF"
+              }
+            },
             "email_signup_TkptFH": {
               "type": "email-signup",
+              "disabled": true,
               "settings": {
                 "width": "fill",
                 "custom_width": 100,
@@ -916,6 +927,7 @@
           "block_order": [
             "text_LWt8Pz",
             "text_f9CFLH",
+            "klaviyo_email_marketing_sms_form_embed_block_9bccLn",
             "email_signup_TkptFH"
           ]
         }
@@ -925,11 +937,11 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "background_image": "shopify://shop_images/footer-bg.jpg",
+        "background_image": "shopify://shop_images/footer-image.jpg",
         "section_width": "page-width",
         "gap": 7,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 50,
+        "padding-block-start": 30,
         "padding-block-end": 50
       }
     }
