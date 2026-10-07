@@ -1,15 +1,17 @@
 /* =====================================================================
-   SOMNA — HOMEPAGE DESKTOP & TABLET (added 2026-10-07)
+   SOMNA — DESKTOP & TABLET (homepage 2026-10-07, collection added same day)
    ---------------------------------------------------------------------
-   Loaded only on the homepage, after custom.css (snippets/stylesheets).
+   Loaded on the homepage and collection pages, after custom.css
+   (snippets/stylesheets). Shared components (container width, section
+   headings, trust bar, bundle grid, product cards, FAQ) use one rule for
+   both pages; page-only sections are scoped to their template.
    Source of truth: Figma "Home" frame (node 796-327), with sizes
    re-proportioned for real desktop screens.
 
    Mobile (<750px) is locked: every rule in this file sits inside a
    min-width media query (750px / 990px / 1200px), so nothing here
-   applies to phones. Rules are scoped through
-   #MainContent[data-template="index"] and, where a single section is
-   targeted, its section-ID suffix.
+   applies to phones. Rules are scoped through #MainContent[data-template]
+   and, where a single section is targeted, its section-ID suffix.
 
    Breakpoints follow the theme: 750px (tablet) and 990px (desktop),
    plus 1200px for wide-screen refinements. Fluid sizes use clamp().
@@ -58,143 +60,143 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block,
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block > * {
     font-size: 13px;
     line-height: 1.25;
   }
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
     width: 26px !important; /* overrides the icon block's inline width */
     height: auto;
   }
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 10px;
   }
 
   /* ---------- Section headings (Lora) ---------- */
-  #MainContent[data-template="index"] .custom-header,
-  #MainContent[data-template="index"] .custom-header > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header > * {
     font-size: clamp(30px, 3vw, 42px) !important; /* overrides existing !important heading sizes */
     line-height: 1.1;
   }
 
   /* ---------- Bundle grid: two cards + full-width Season card ---------- */
-  #MainContent[data-template="index"] [id$="__featured_bundle_grid_6jFGFr"] > section {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__featured_bundle_grid_6jFGFr"] > section {
     padding-block: 32px 40px;
   }
-  #MainContent[data-template="index"] h2.custom-header {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) h2.custom-header {
     margin: 0 0 clamp(24px, 2.6vw, 40px);
   }
-  #MainContent[data-template="index"] .bundle-section__grid {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-section__grid {
     gap: clamp(16px, 1.8vw, 24px);
   }
-  #MainContent[data-template="index"] .bundle-card {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card {
     padding: 10px 10px 20px;
     border-radius: 16px;
     box-shadow: 0 2px 14px rgb(10 26 74 / 0.12);
   }
-  #MainContent[data-template="index"] .bundle-card__image-wrapper {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__image-wrapper {
     border-radius: 12px;
   }
-  #MainContent[data-template="index"] .bundle-card__content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content {
     flex: 1;
     align-content: space-between;
     row-gap: 16px;
     margin-top: 16px;
     padding-inline: 8px;
   }
-  #MainContent[data-template="index"] .bundle-card .review_content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content {
     font-size: 13px;
     gap: 6px;
   }
-  #MainContent[data-template="index"] .bundle-card .review_content svg {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content svg {
     width: 76px;
     height: 16px;
   }
-  #MainContent[data-template="index"] .bundle-card__title {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__title {
     font-size: clamp(18px, 1.7vw, 24px);
     line-height: 1.25;
     margin-top: 6px;
   }
-  #MainContent[data-template="index"] .bundle-subtext {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-subtext {
     max-width: none;
     min-height: 0;
     margin-top: 8px;
     font-size: clamp(14px, 1.15vw, 16px);
     line-height: 1.5;
   }
-  #MainContent[data-template="index"] .bundle-card__content-wrapper {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content-wrapper {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
     width: 100%;
   }
-  #MainContent[data-template="index"] .bundle-card__price {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__price {
     font-size: clamp(20px, 1.9vw, 26px);
     line-height: 1.2;
     margin: 0 0 4px;
   }
-  #MainContent[data-template="index"] .bundle-card__subtext {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__subtext {
     font-size: clamp(13px, 1.05vw, 15px);
     line-height: 1.4;
   }
-  #MainContent[data-template="index"] .bundle-card__button {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__button {
     min-height: 44px;
     padding: 0 24px;
     font-size: clamp(13px, 1.1vw, 15px);
     font-weight: 500;
   }
-  #MainContent[data-template="index"] .tag_text {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .tag_text {
     top: -14px;
     padding: 6px 16px;
     border-radius: 6px;
     font-size: 12px;
     letter-spacing: 0.04em;
   }
-  #MainContent[data-template="index"] .bundle-card--featured .bundle-card__image {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card--featured .bundle-card__image {
     height: clamp(240px, 34vw, 480px);
     object-fit: cover;
   }
 
   /* ---------- Nasal Strips / Mouth Tape cards (tablet: wider slider cards) ---------- */
-  #MainContent[data-template="index"] .hz-slider-section {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-section {
     padding-bottom: 104px; /* clears the next section's top wave (70px overlap on desktop) */
   }
-  #MainContent[data-template="index"] .hz-slider-viewport {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
     padding: 10px calc(50vw - 2000px);
   }
-  #MainContent[data-template="index"] .hz-slider-track {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-track {
     gap: 16px;
   }
-  #MainContent[data-template="index"] .hz-card {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card {
     flex: 0 0 460px;
     max-width: 460px;
     border-radius: 16px;
   }
-  #MainContent[data-template="index"] .hz-card-content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content {
     padding: 28px 24px;
   }
-  #MainContent[data-template="index"] .hz-card-title {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-title {
     font-size: clamp(17px, 1.6vw, 24px);
     margin-bottom: 8px;
   }
-  #MainContent[data-template="index"] .hz-card-price {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-price {
     font-size: clamp(26px, 2.6vw, 40px);
     margin-bottom: 18px;
   }
-  #MainContent[data-template="index"] .hz-card-btn {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-btn {
     min-height: 40px;
     padding: 0 22px;
     font-size: clamp(13px, 1.05vw, 15px);
   }
   /* Right-aligned card (Mouth Tape): content hugs its text so the price stays on one
      line, stacked and left-aligned like the Nasal Strips card */
-  #MainContent[data-template="index"] .hz-card-content:not(.alignment-right) {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content:not(.alignment-right) {
     width: auto;
     max-width: 62%;
     align-items: flex-start;
   }
-  #MainContent[data-template="index"] .hz-card-price {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-price {
     white-space: nowrap;
   }
 
@@ -280,17 +282,20 @@
     gap: 20px;
     padding-block: 56px 72px;
   }
-  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header {
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details__header {
     font-size: clamp(16px, 1.4vw, 19px) !important; /* overrides existing !important size */
     line-height: 1.4;
     padding-block: 22px;
   }
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block,
-  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block > * {
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block > *,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content :is(.text-block, p) {
     font-size: clamp(14px, 1.15vw, 16px);
     line-height: 1.6;
   }
-  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details-content {
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details-content,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content {
     padding-block-end: 20px;
   }
 
@@ -315,13 +320,112 @@
     font-size: clamp(14px, 1.2vw, 17px);
     line-height: 1.5;
   }
+
+  /* ================= Collection page only ================= */
+
+  /* Title: "Two Essentials. Every Way to Get Them." */
+  #MainContent[data-template^="collection"] [id$="__section_qEUCdJ"] .section-content-wrapper {
+    gap: 12px;
+    padding-block: clamp(40px, 5vw, 72px) 96px; /* bottom space clears the trust-bar wave */
+  }
+  #MainContent[data-template^="collection"] .text-block--text_LxVzjr,
+  #MainContent[data-template^="collection"] .text-block--text_LxVzjr > * {
+    font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  #MainContent[data-template^="collection"] .text-block--text_g7Qiix,
+  #MainContent[data-template^="collection"] .text-block--text_g7Qiix > * {
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  /* "What keeps you from sleeping well?" picker (collection-feature) */
+  #MainContent[data-template^="collection"] .sleep-tabs-section {
+    max-width: 720px;
+    margin: 64px auto 72px;
+    padding: 40px;
+    border-radius: 36px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header {
+    margin-bottom: 24px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header h2 {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.2;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-list {
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tab-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container {
+    padding: 24px;
+    border-radius: 24px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-subtitle {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-image-wrapper {
+    margin-bottom: 16px;
+    border-radius: 18px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-badge {
+    top: 16px;
+    right: 16px;
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container .review_content {
+    font-size: 14px;
+    gap: 6px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-title {
+    margin-bottom: 4px;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.25;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-description {
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-price {
+    margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+
+  /* FAQ (faq-accordion): same reading width as the homepage FAQ */
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .accordion {
+    width: 100%;
+    max-width: 800px;
+    justify-self: center;
+  }
 }
 
 @media screen and (min-width: 990px) {
 
-  /* Homepage content width: 1280px max (theme default for other pages stays 1040px) */
-  #MainContent[data-template="index"],
-  body:has(#MainContent[data-template="index"]) .shopify-section-group-footer-group {
+  /* Homepage + collection content width: 1280px max (other pages keep the theme's 1040px) */
+  #MainContent:is([data-template="index"], [data-template^="collection"]),
+  body:has(#MainContent:is([data-template="index"], [data-template^="collection"])) .shopify-section-group-footer-group {
     --page-content-width: 80rem;
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
   }
@@ -337,65 +441,65 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
     font-size: clamp(14px, 1.15vw, 16px);
   }
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
     width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
   }
-  #MainContent[data-template="index"] [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 14px;
   }
 
   /* ---------- Bundle grid ---------- */
-  #MainContent[data-template="index"] [id$="__featured_bundle_grid_6jFGFr"] > section {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__featured_bundle_grid_6jFGFr"] > section {
     padding-block: 48px 56px;
   }
-  #MainContent[data-template="index"] .bundle-card {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card {
     padding: 14px 14px 26px;
     border-radius: 20px;
   }
-  #MainContent[data-template="index"] .bundle-card__image-wrapper {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__image-wrapper {
     border-radius: 14px;
   }
-  #MainContent[data-template="index"] .bundle-card__content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content {
     margin-top: 20px;
     padding-inline: 12px;
   }
-  #MainContent[data-template="index"] .bundle-card .review_content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content {
     font-size: 14px;
   }
-  #MainContent[data-template="index"] .bundle-card__button {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__button {
     min-height: 48px;
     padding: 0 30px;
   }
-  #MainContent[data-template="index"] .tag_text {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .tag_text {
     top: -15px;
     font-size: 13px;
   }
 
   /* ---------- Nasal Strips / Mouth Tape: both cards visible side by side ---------- */
-  #MainContent[data-template="index"] .hz-slider-viewport {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
     overflow: visible;
     padding: 0;
     scroll-snap-type: none;
   }
-  #MainContent[data-template="index"] .hz-slider-track {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-track {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(20px, 1.8vw, 24px);
   }
-  #MainContent[data-template="index"] .hz-card {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card {
     flex: none;
     max-width: none;
     width: 100%;
     border-radius: 20px;
   }
-  #MainContent[data-template="index"] .hz-card-content {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content {
     padding: clamp(28px, 3vw, 44px);
   }
-  #MainContent[data-template="index"] .hz-card-btn {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-btn {
     min-height: 46px;
     padding: 0 28px;
   }
@@ -483,6 +587,33 @@
   #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
     gap: 24px;
     padding-block: 64px 80px;
+  }
+
+  /* ================= Collection page only ================= */
+
+  /* Picker: question + options on the left, recommendation on the right */
+  #MainContent[data-template^="collection"] .sleep-tabs-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    column-gap: clamp(40px, 5vw, 80px);
+    align-items: center;
+    max-width: 1120px;
+    margin: 72px auto 88px;
+    padding: clamp(40px, 4vw, 64px);
+    border-radius: 40px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header {
+    grid-column: 1;
+    align-self: end;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-list {
+    grid-column: 1;
+    align-self: start;
+    margin-bottom: 0;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 }
 
