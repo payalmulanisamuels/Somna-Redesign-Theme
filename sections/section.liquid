@@ -456,6 +456,85 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "padding-block-start-desktop",
+      "label": "Top padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding-block-end-desktop",
+      "label": "Bottom padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "gap_desktop",
+      "label": "Gap (desktop, px)"
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_desktop",
+      "label": "Stack content vertically (desktop)",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "align_items_desktop",
+      "label": "Align items (desktop)",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as mobile"
+        },
+        {
+          "value": "flex-start",
+          "label": "Start"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "End"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch (equal height)"
+        }
+      ],
+      "default": "",
+      "info": "Row layout: vertical alignment. Column layout: horizontal alignment."
+    },
+    {
+      "type": "select",
+      "id": "content_width_desktop",
+      "label": "Content width (desktop)",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as mobile"
+        },
+        {
+          "value": "65rem",
+          "label": "Narrow (1040px)"
+        },
+        {
+          "value": "80rem",
+          "label": "Wide (1280px)"
+        },
+        {
+          "value": "90rem",
+          "label": "Extra wide (1440px)"
+        }
+      ],
+      "default": ""
     }
   ],
   "presets": [
@@ -1750,7 +1829,7 @@
           "type": "text",
           "settings": {
             "text": "t:html_defaults.made_with_care_extended",
-            "max_width": "narrow"
+            "max_width": "normal"
           }
         },
         "logo": {
