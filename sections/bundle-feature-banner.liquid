@@ -284,6 +284,38 @@
   }
 </style>
 
+{%- comment -%} Desktop settings (990px and up); empty = same as mobile {%- endcomment -%}
+<style>
+  @media screen and (min-width: 990px) {
+    {% if section.settings.padding_top_desktop != blank %}#hz-bundle-{{ section.id }} { padding-top: {{ section.settings.padding_top_desktop }}px; }{% endif %}
+    {% if section.settings.padding_bottom_desktop != blank %}#hz-bundle-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }{% endif %}
+    {% if section.settings.content_width_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-container-main { max-width: {{ section.settings.content_width_desktop }}px; margin-inline: auto; padding-inline: 40px; }
+      #hz-bundle-{{ section.id }} .hz-bundle-container { justify-content: space-between; gap: 4.8vw; }
+      #hz-bundle-{{ section.id }} .hz-bundle-content { flex: 1 1 auto; max-width: none; }
+    {% endif %}
+    {% if section.settings.image_width_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-media { flex: 0 0 {{ section.settings.image_width_desktop }}%; max-width: {{ section.settings.image_width_desktop }}%; }
+      #hz-bundle-{{ section.id }} .hz-bundle-image-wrap { max-width: none; }
+    {% endif %}
+    {% if section.settings.title_size_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-title { margin-bottom: 0.3em; font-size: {{ section.settings.title_size_desktop }}px; line-height: 1.2; letter-spacing: -0.015em; }
+    {% endif %}
+    {% if section.settings.subtitle_size_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-subtitle { max-width: 19em; margin-bottom: 1em; font-size: {{ section.settings.subtitle_size_desktop }}px; line-height: 1.5; }
+    {% endif %}
+    {% if section.settings.price_size_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-pricing-row { gap: 12px; margin-bottom: 12px; }
+      #hz-bundle-{{ section.id }} .hz-bundle-sub-price { gap: 8px; }
+      #hz-bundle-{{ section.id }} .hz-price-large { font-size: {{ section.settings.price_size_desktop }}px; }
+      #hz-bundle-{{ section.id }} .hz-price-sub-label { font-size: 14px; }
+    {% endif %}
+    {% if section.settings.button_height_desktop != blank %}
+      #hz-bundle-{{ section.id }} .hz-bundle-btn { min-height: {{ section.settings.button_height_desktop }}px; padding: 0 28px; gap: 10px; font-size: 15px; font-weight: 600; }
+    {% endif %}
+  }
+</style>
+
 {%  endif %}
 {% schema %}
 {
@@ -399,6 +431,52 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Top padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "content_width_desktop",
+      "label": "Content width (desktop, px)",
+      "info": "e.g. 1280"
+    },
+    {
+      "type": "number",
+      "id": "image_width_desktop",
+      "label": "Image width (desktop, % of the row)"
+    },
+    {
+      "type": "number",
+      "id": "title_size_desktop",
+      "label": "Heading size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "subtitle_size_desktop",
+      "label": "Subheading size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "price_size_desktop",
+      "label": "Price size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "button_height_desktop",
+      "label": "Button height (desktop, px)"
     }
   ],
   "presets": [

@@ -74,6 +74,28 @@
   }
 </style>
 
+{%- comment -%} Desktop settings (990px and up); empty = same as mobile {%- endcomment -%}
+<style>
+  @media screen and (min-width: 990px) {
+    {% if section.settings.content_width_desktop != blank %}#shopify-section-{{ section.id }} { --page-content-width: {{ section.settings.content_width_desktop }}; --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2)); }{% endif %}
+    {% if section.settings.min_height_desktop != blank %}
+      #hz-comp-{{ section.id }} { display: flex; align-items: center; min-height: {{ section.settings.min_height_desktop }}vw; }
+      #hz-comp-{{ section.id }} > .section { width: 100%; }
+    {% endif %}
+    {% if section.settings.padding_top_desktop != blank %}#hz-comp-{{ section.id }} .comp-container { padding-top: {{ section.settings.padding_top_desktop }}px; }{% endif %}
+    {% if section.settings.padding_bottom_desktop != blank %}#hz-comp-{{ section.id }} .comp-container { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }{% endif %}
+    {% if section.settings.heading_size_desktop != blank %}
+      #hz-comp-{{ section.id }} .hz-simple-comp-heading { margin-bottom: 0.6em; font-size: {{ section.settings.heading_size_desktop }}px; line-height: 1.05; letter-spacing: -0.015em; }
+    {% endif %}
+    {% if section.settings.subheading_size_desktop != blank %}
+      #hz-comp-{{ section.id }} .hz-simple-comp-subheading { font-size: {{ section.settings.subheading_size_desktop }}px; line-height: 1.5; }
+    {% endif %}
+    {% if section.settings.subheading_width_desktop != blank %}
+      #hz-comp-{{ section.id }} .hz-simple-comp-subheading { max-width: {{ section.settings.subheading_width_desktop }}px; }
+    {% endif %}
+  }
+</style>
+
 {% schema %}
 {
   "name": "Comparison Simple",
@@ -139,6 +161,65 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "select",
+      "id": "content_width_desktop",
+      "label": "Content width (desktop)",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as mobile"
+        },
+        {
+          "value": "65rem",
+          "label": "Narrow (1040px)"
+        },
+        {
+          "value": "80rem",
+          "label": "Wide (1280px)"
+        },
+        {
+          "value": "90rem",
+          "label": "Extra wide (1440px)"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "number",
+      "id": "min_height_desktop",
+      "label": "Band height (desktop, % of screen width)"
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Top padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "subheading_size_desktop",
+      "label": "Subheading size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "subheading_width_desktop",
+      "label": "Subheading max width (desktop, px)"
     }
   ],
   "presets": [
