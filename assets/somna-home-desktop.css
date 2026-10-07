@@ -1,10 +1,10 @@
 /* =====================================================================
    SOMNA — DESKTOP & TABLET (homepage 2026-10-07, collection added same day)
    ---------------------------------------------------------------------
-   Loaded on the homepage and collection pages, after custom.css
-   (snippets/stylesheets). Shared components (container width, section
-   headings, trust bar, bundle grid, product cards, FAQ) use one rule for
-   both pages; page-only sections are scoped to their template.
+   Loaded on the homepage, collection, product and page templates, after
+   custom.css (snippets/stylesheets). Shared components (container width,
+   section headings, trust bar, bundle grid, product cards, FAQ, newsletter)
+   use one rule; page-only sections are scoped to their template.
    Source of truth: Figma "Home" frame (node 796-327), with sizes
    re-proportioned for real desktop screens.
 
@@ -299,25 +299,25 @@
     padding-block-end: 20px;
   }
 
-  /* ---------- Newsletter ("Get 10% off your first order") ---------- */
-  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .section {
-    min-height: clamp(340px, 34vw, 540px);
+  /* ---------- Newsletter ("Get 10% off your first order") ----------
+     SHARED: the same section (footer_m9NzUG) sits on the homepage, product page,
+     page template and the policy pages, so these rules apply on every template.
+     The section above it and the footer below both overlap it with waves, so the
+     padding keeps the copy clear of both and centred in the visible photo. */
+  #MainContent [id$="__footer_m9NzUG"] .section {
+    min-height: clamp(400px, 36vw, 600px);
     align-content: center;
   }
-  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .footer-content {
-    padding-block: 48px 72px;
+  #MainContent [id$="__footer_m9NzUG"] .footer-content {
+    padding-block: 88px 104px;
   }
-  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .group-block-content {
+  #MainContent [id$="__footer_m9NzUG"] .group-block-content {
     gap: 14px;
   }
-  #MainContent[data-template="index"] .text-block--text_LWt8Pz,
-  #MainContent[data-template="index"] .text-block--text_LWt8Pz > * {
-    font-size: clamp(28px, 2.9vw, 44px);
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz > * {
     line-height: 1.1;
   }
-  #MainContent[data-template="index"] .text-block--text_f9CFLH,
-  #MainContent[data-template="index"] .text-block--text_f9CFLH > * {
-    font-size: clamp(14px, 1.2vw, 17px);
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH > * {
     line-height: 1.5;
   }
 
@@ -418,6 +418,19 @@
     width: 100%;
     max-width: 800px;
     justify-self: center;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  /* Newsletter text on tablets (shared). From 990px the blocks' own desktop
+     font-size setting applies, so it isn't overridden here. */
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz,
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz > * {
+    font-size: 28px;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH,
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH > * {
+    font-size: 15px;
   }
 }
 
@@ -587,6 +600,19 @@
   #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
     gap: 24px;
     padding-block: 64px 80px;
+  }
+
+  /* ---------- Newsletter (shared) ----------
+     Desktop sizes follow the blocks' "desktop font size" setting (2rem / 1.25rem).
+     Where a template's copy of the section has no desktop size set (e.g. the order
+     cancellation page), use the same values so every page matches. */
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz:not(.custom-font-size-desktop),
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz:not(.custom-font-size-desktop) > * {
+    font-size: 2rem;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH:not(.custom-font-size-desktop),
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH:not(.custom-font-size-desktop) > * {
+    font-size: 1.25rem;
   }
 
   /* ================= Collection page only ================= */
