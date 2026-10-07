@@ -244,7 +244,7 @@
 
   /* ---------- "Breathe through your nose" banner ---------- */
   #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
-    padding-block: 0px 96px; /* bottom space clears the wave inside this banner */
+    padding-block: 40px 96px; /* bottom space clears the wave inside this banner */
     padding-inline: max(40px, calc((100vw - 1280px) / 2)) 40px;
   }
   /* The banner's script sizes it from this inner group plus the padding above, so the
