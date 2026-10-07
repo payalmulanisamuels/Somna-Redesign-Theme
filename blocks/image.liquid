@@ -20,16 +20,23 @@
 
 {% capture class %}
   image-block image-block--{{ block.id }} image-block--height-{{ block_settings.height }} spacing-style size-style
+  {%- if block_settings.visibility == 'mobile' %} image-block--hide-desktop{% elsif block_settings.visibility == 'desktop' %} image-block--hide-mobile{% endif %}
 {% endcapture %}
 
 {% capture style %}
   --ratio: {{ ratio }};
   {% render 'size-style', settings: block_settings %}
   {% render 'spacing-style', settings: block_settings %}
+  {% if block_settings.width_desktop != blank %}--image-width-desktop: {{ block_settings.width_desktop }}px;{% endif %}
 {% endcapture %}
 
 {% capture image_border_style %}
   --ratio: {{ ratio }};
+  {% if block_settings.image_ratio_desktop == 'adapt' %}
+    --ratio-desktop: {{ block_settings.image_desktop.aspect_ratio | default: block_settings.image.aspect_ratio | default: 1 }};
+  {% elsif block_settings.image_ratio_desktop != blank %}
+    --ratio-desktop: {{ block_settings.image_ratio_desktop }};
+  {% endif %}
   {% render 'border-override', settings: block_settings %}
 {% endcapture %}
 
@@ -41,6 +48,12 @@
 %}
 
 {% capture image %}
+  {%- liquid
+    assign image_class = 'image-block__image border-style'
+    if block_settings.image_desktop != blank
+      assign image_class = 'image-block__image image-block__image--mobile border-style'
+    endif
+  -%}
   {%- if block_settings.image -%}
     {{
       block_settings.image
@@ -49,11 +62,27 @@
         width: block_settings.image.width,
         widths: widths,
         height: block_settings.image.height,
-        class: 'image-block__image border-style',
+        class: image_class,
         style: image_border_style,
         sizes: sizes
     }}
-  {%- else -%}
+  {%- endif -%}
+  {%- comment -%} Optional desktop image (990px and up) {%- endcomment -%}
+  {%- if block_settings.image_desktop -%}
+    {{
+      block_settings.image_desktop
+      | image_url: width: 3840
+      | image_tag:
+        width: block_settings.image_desktop.width,
+        widths: widths,
+        height: block_settings.image_desktop.height,
+        class: 'image-block__image image-block__image--desktop border-style',
+        style: image_border_style,
+        sizes: sizes,
+        loading: 'lazy'
+    }}
+  {%- endif -%}
+  {%- if block_settings.image == blank and block_settings.image_desktop == blank -%}
     {% comment %} <div class="placeholder-image border-style size-style" style="{{ image_border_style }}">
       {{ 'detailed-apparel-1' | placeholder_svg_tag: 'image-block__placeholder' }}
     </div> {% endcomment %}
@@ -109,6 +138,29 @@
   .image-block__image {
     object-fit: cover;
     aspect-ratio: var(--ratio);
+  }
+
+  /* Desktop image + "Show on" setting (990px breakpoint); other desktop
+     image settings are applied in somna-home-desktop.css */
+  .image-block__image--desktop {
+    display: none;
+  }
+
+  @media screen and (max-width: 989px) {
+    .image-block--hide-mobile {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .image-block__image--desktop {
+      display: block;
+    }
+
+    .image-block__image--mobile,
+    .image-block--hide-desktop {
+      display: none;
+    }
   }
 {% endstylesheet %}
 
@@ -336,6 +388,99 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image",
+      "info": "Optional. Shown from 990px instead of the image above."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_desktop",
+      "label": "Aspect ratio (desktop)",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as mobile"
+        },
+        {
+          "value": "adapt",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "4 / 5",
+          "label": "t:options.portrait"
+        },
+        {
+          "value": "1",
+          "label": "t:options.square"
+        },
+        {
+          "value": "16 / 9",
+          "label": "t:options.landscape"
+        },
+        {
+          "value": "2 / 1",
+          "label": "Wide (2:1)"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "number",
+      "id": "width_desktop",
+      "label": "Width (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "border_radius_desktop",
+      "label": "Corner radius (desktop, px)"
+    },
+    {
+      "type": "select",
+      "id": "border_corners_desktop",
+      "label": "Rounded corners (desktop)",
+      "options": [
+        {
+          "value": "all",
+          "label": "All"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom only"
+        },
+        {
+          "value": "top",
+          "label": "Top only"
+        }
+      ],
+      "default": "all"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Show on",
+      "options": [
+        {
+          "value": "all",
+          "label": "All screens"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile and tablet only (hide from 990px)"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop only (from 990px)"
+        }
+      ],
+      "default": "all"
     }
   ],
   "presets": [
