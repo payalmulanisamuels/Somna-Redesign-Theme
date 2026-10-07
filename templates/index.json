@@ -236,7 +236,8 @@
         "group_47iMdX"
       ],
       "custom_css": [
-        ".size-style.button {padding: 8px 12px; font-size: 14px; border: 1px solid #fff;}"
+        ".size-style.button {padding: 8px 12px; font-size: 14px; border: 1px solid #fff;}",
+        "@media (min-width: 768px) {.size-style.button {padding: 10px 22px; font-size: 18px; border: 3px solid #fff; }}"
       ],
       "name": "t:names.hero",
       "settings": {
