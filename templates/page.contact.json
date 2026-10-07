@@ -1625,7 +1625,8 @@
       ],
       "custom_css": [
         ".custom-section-content {display: flex; align-items: center;}",
-        ".section-content-wrapper.section-content-wrapper {height: auto;}"
+        ".section-content-wrapper.section-content-wrapper {height: auto;}",
+        "@media(min-width:768px){.bg_image {height: 212px;} }"
       ],
       "name": "t:names.icons_with_text",
       "settings": {
