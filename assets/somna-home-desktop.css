@@ -192,6 +192,7 @@
   #MainContent[data-template="index"] .hz-card-content:not(.alignment-right) {
     width: auto;
     max-width: 62%;
+    padding-inline-start: 0;
     align-items: flex-start;
   }
   #MainContent[data-template="index"] .hz-card-price {
@@ -230,6 +231,16 @@
     font-size: clamp(12px, 1.05vw, 15px);
     line-height: 1.55;
     text-align: center;
+  }
+
+  /* Bottom wave of this section sits over the banner photo. The wave graphic carries a
+     white under-layer, which showed as a white band on the photo. Draw the wave in the
+     section's cream instead, using the same graphic as the shape (white areas turn cream). */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+    background-image: none !important; /* replaces the inline wave image */
+    background-color: #faf2df;
+    -webkit-mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+    mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
   }
 
   /* ---------- "Breathe through your nose" banner ---------- */
@@ -292,7 +303,9 @@
   #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .footer-content {
     padding-block: 48px 72px;
   }
-  
+  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .group-block-content {
+    gap: 14px;
+  }
   #MainContent[data-template="index"] .text-block--text_LWt8Pz,
   #MainContent[data-template="index"] .text-block--text_LWt8Pz > * {
     font-size: clamp(28px, 2.9vw, 44px);
