@@ -2,9 +2,7 @@
    SOMNA — DESKTOP & TABLET (homepage 2026-10-07, collection added same day)
    ---------------------------------------------------------------------
    Loaded on the homepage, collection, product and page templates, after
-   custom.css (snippets/stylesheets). Also holds the desktop layer for the
-   Support, Contact and How to use pages (page.support / page.contact /
-   page.how-to-use), scoped the same way. Shared components (container width,
+   custom.css (snippets/stylesheets). Shared components (container width,
    section headings, trust bar, bundle grid, product cards, FAQ, newsletter)
    use one rule; page-only sections are scoped to their template.
    Source of truth: Figma "Home" frame (node 796-327), with sizes
@@ -62,16 +60,16 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block,
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block > * {
     font-size: 13px;
     line-height: 1.25;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
     width: 26px !important; /* overrides the icon block's inline width */
     height: auto;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 10px;
   }
 
@@ -246,16 +244,14 @@
     mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
   }
 
-  /* ---------- "Breathe through your nose" banner ----------
-     The min-height rule is SHARED with How to use: its Nasal Strips / Mouth Tape
-     banners are the same section type (Nasal Strips has the same ids). */
+  /* ---------- "Breathe through your nose" banner ---------- */
   #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
     padding-block: 40px 96px; /* bottom space clears the wave inside this banner */
     padding-inline: max(40px, calc((100vw - 1280px) / 2)) 40px;
   }
   /* The banner's script sizes it from this inner group plus the padding above, so the
      min-height lives here. Banner image is ~2.1:1: total height tracks the image. */
-  #MainContent:is([data-template="index"], [data-template="page.how-to-use"]) :is([id$="__layered_image_with_text_LEPfjJ"], [id$="__layered_image_with_text_BndA69"]) .layered-slideshow__content > .group-block-content {
+  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content > .group-block-content {
     min-height: calc(clamp(380px, 47vw, 760px) - 144px);
     justify-content: center;
     margin: 0;
@@ -424,520 +420,6 @@
     justify-self: center;
   }
 
-
-  /* ================= Support, Contact, How to use (Figma desktop frames) =================
-     Figma: Support 2280-5665, Contact 2289-6499, How to use 2289-6972 (1440px frames).
-     Layout, order, colours, alignment and image proportions follow the frames as drawn.
-     Type and spacing use one unit, --somna-fig = 1 Figma px, so every measurement keeps
-     Figma's proportions: 0.5px per Figma px from 1440px, easing to 0.36px on tablets
-     (the frames are the phone layout drawn at 3.7x, so 1:1 would be ~2x the homepage). */
-  #MainContent:is([data-template="page.support"], [data-template="page.contact"], [data-template="page.how-to-use"]) {
-    --somna-fig: clamp(0.36px, 0.03472vw, 0.5px);
-  }
-
-  /* ---------- Contact + How to use: page hero (same section on both) ---------- */
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .section-content-wrapper {
-    flex-flow: column nowrap;
-    align-items: stretch;
-    gap: calc(48 * var(--somna-fig));
-  }
-  /* Full-width photo, 1440 x 725 in Figma, rounded bottom corners only */
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .image-block__image {
-    width: 100%;
-    height: auto;
-    max-height: 760px;
-    aspect-ratio: 1440 / 725;
-    border-radius: 0 0 min(5.14vw, 80px) min(5.14vw, 80px);
-  }
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .section-content-wrapper > .group-block {
-    padding-inline: max(40px, calc((100% - 1280px) / 2));
-  }
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) [id$="__section_mXKVY7"] .section-content-wrapper > .group-block > .group-block-content {
-    gap: 0;
-  }
-  /* "CONTACT US" / "HOW TO USE" */
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_LhHWcH,
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_LhHWcH > * {
-    font-size: calc(44.3 * var(--somna-fig));
-    font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: 0;
-  }
-  /* "We're here to help." / "Getting the most from your first night." */
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_9AMpwg,
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_9AMpwg :is(p, strong) {
-    font-family: var(--headfont);
-    font-size: calc(81.2 * var(--somna-fig));
-    font-weight: 400;
-    line-height: 1.45;
-    color: #0a1a4a;
-  }
-  #MainContent[data-template="page.how-to-use"] .text-block--text_9AMpwg > * {
-    max-inline-size: 13.3em;
-  }
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz {
-    margin-block-start: calc(16 * var(--somna-fig));
-  }
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz,
-  #MainContent:is([data-template="page.contact"], [data-template="page.how-to-use"]) .text-block--text_BBghpz > * {
-    font-size: max(14px, calc(36.9 * var(--somna-fig)));
-    line-height: 1.5;
-    color: #0a1a4a;
-    max-inline-size: 32.6em;
-  }
-
-  /* ================= Support page ================= */
-
-  /* Lora headings: "How can we help?", "On its way?", category titles */
-  #MainContent[data-template="page.support"] :is(.text-block--text_pJVpJ6, .text-block--text_MJFMYC, .text-block--text_FgL4Hh, .text-block--text_dVk3ic, .text-block--text_LVjeWN, .text-block--text_4BjDty),
-  #MainContent[data-template="page.support"] :is(.text-block--text_pJVpJ6, .text-block--text_MJFMYC, .text-block--text_FgL4Hh, .text-block--text_dVk3ic, .text-block--text_LVjeWN, .text-block--text_4BjDty) :is(p, strong) {
-    font-family: var(--headfont);
-    font-size: calc(110.1 * var(--somna-fig));
-    font-weight: 500;
-    line-height: 1.37;
-    letter-spacing: calc(-3.5 * var(--somna-fig));
-    color: #0f1f3d;
-  }
-  /* Eyebrows: "SUPPORT HUB", "TRACK YOUR ORDER" */
-  #MainContent[data-template="page.support"] :is(.text-block--text_DTBxH9, .text-block--text_d8k9wW),
-  #MainContent[data-template="page.support"] :is(.text-block--text_DTBxH9, .text-block--text_d8k9wW) > * {
-    font-size: max(13px, calc(36.7 * var(--somna-fig)));
-    font-weight: 700;
-    line-height: 1.6;
-    letter-spacing: calc(6.5 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.support"] .text-block--text_DTBxH9 {
-    color: #476395;
-  }
-  /* Intro copy */
-  #MainContent[data-template="page.support"] :is(.text-block--text_hCgw3j, .text-block--text_TkkWd4) {
-    margin-block-start: calc(25 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.support"] :is(.text-block--text_hCgw3j, .text-block--text_TkkWd4),
-  #MainContent[data-template="page.support"] :is(.text-block--text_hCgw3j, .text-block--text_TkkWd4) > * {
-    font-size: max(14px, calc(44.1 * var(--somna-fig)));
-    line-height: 1.41;
-  }
-  #MainContent[data-template="page.support"] .text-block--text_hCgw3j {
-    color: #3e5272;
-  }
-  #MainContent[data-template="page.support"] .text-block--text_hCgw3j > * {
-    max-inline-size: 22em;
-  }
-  #MainContent[data-template="page.support"] :is([id$="__section_DxebWP"], [id$="__section_TJBP7d"]) .group-block-content.layout-panel-flex--column {
-    gap: 0;
-  }
-
-  /* Hero: blue band, chat icon top-right (223 x 183 in Figma) */
-  #MainContent[data-template="page.support"] [id$="__section_DxebWP"] .section-content-wrapper {
-    padding-block: calc(107 * var(--somna-fig)) max(88px, calc(190 * var(--somna-fig))); /* bottom clears the yellow wave */
-  }
-  #MainContent[data-template="page.support"] [id$="__section_DxebWP"] .image-block {
-    justify-content: flex-end;
-    width: 100%;
-  }
-  #MainContent[data-template="page.support"] [id$="__section_DxebWP"] .image-block__image {
-    width: calc(223 * var(--somna-fig));
-    max-width: none;
-    height: auto;
-  }
-
-  /* Track order: copy (no illustrations in Figma), then a full-width pill button */
-  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper {
-    gap: calc(40 * var(--somna-fig));
-    padding-block: calc(100 * var(--somna-fig)) max(96px, calc(200 * var(--somna-fig))); /* bottom clears the next wave */
-  }
-  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .layout-panel-flex--row > .group-block:first-child .image-block {
-    visibility: hidden; /* keeps the copy's indent, as in Figma */
-  }
-  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .section-content-wrapper > .group-block:last-child .image-block {
-    display: none;
-  }
-  #MainContent[data-template="page.support"] [id$="__section_TJBP7d"] .size-style.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: calc(36.7 * var(--somna-fig));
-    min-height: calc(117 * var(--somna-fig));
-    padding: 0 calc(146.9 * var(--somna-fig));
-    border-radius: 999px;
-    background-color: #0a1a4a;
-    color: #fff;
-    font-size: max(14px, calc(36.7 * var(--somna-fig)));
-    font-weight: 600;
-  }
-
-  /* FAQ categories: title, then the questions full width */
-  #MainContent[data-template="page.support"] :is([id$="__section_mW8NGX"], [id$="__section_FrTCYP"], [id$="__section_Jdh3Be"], [id$="__section_W6ecwU"]) .section-content-wrapper {
-    gap: calc(91 * var(--somna-fig));
-    padding-block: max(80px, calc(170 * var(--somna-fig))) max(88px, calc(170 * var(--somna-fig)));
-  }
-  #MainContent[data-template="page.support"] :is([id$="__section_mW8NGX"], [id$="__section_FrTCYP"], [id$="__section_Jdh3Be"], [id$="__section_W6ecwU"]) .group-block-content.layout-panel-flex--row > .image-block {
-    display: none; /* category icons aren't in the Figma desktop frame */
-  }
-  #MainContent[data-template="page.support"] .accordion .details__header {
-    font-size: calc(51.4 * var(--somna-fig)) !important; /* overrides existing !important size */
-    font-weight: 400;
-    line-height: 1.21;
-    padding-block: calc(102 * var(--somna-fig)) calc(41 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.support"] .accordion .details__header .svg-wrapper {
-    width: calc(37 * var(--somna-fig));
-    height: calc(37 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.support"] .accordion .details-content :is(.text-block, .text-block > *) {
-    font-size: max(14px, calc(40 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-  #MainContent[data-template="page.support"] .accordion .details-content {
-    padding-block-end: calc(41 * var(--somna-fig));
-  }
-
-  /* ================= Contact page ================= */
-
-  #MainContent[data-template="page.contact"] [id$="__section_mXKVY7"] .section-content-wrapper {
-    padding-block-end: 0;
-  }
-  /* "Quick answers" */
-  #MainContent[data-template="page.contact"] [id$="__section_fEMxag"] .section-content-wrapper {
-    gap: calc(10.5 * var(--somna-fig));
-    padding-block: calc(56 * var(--somna-fig)) 0;
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_LCFF4w,
-  #MainContent[data-template="page.contact"] .text-block--text_LCFF4w > * {
-    font-size: calc(49.1 * var(--somna-fig));
-    font-weight: 700;
-    line-height: 1.2;
-    color: #071b3b;
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_ytF98R,
-  #MainContent[data-template="page.contact"] .text-block--text_ytF98R > * {
-    font-size: max(13px, calc(31.6 * var(--somna-fig)));
-    line-height: 1.25;
-    color: #071b3b;
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_ytF98R > * {
-    max-inline-size: none;
-  }
-  /* Three link cards: icon, then title + arrow */
-  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper {
-    align-items: stretch;
-    gap: calc(31.6 * var(--somna-fig));
-    padding-block: calc(25 * var(--somna-fig)) calc(57 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper > .group-block {
-    padding: calc(35.1 * var(--somna-fig));
-    border-radius: calc(42.1 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .section-content-wrapper > .group-block > .group-block-content {
-    justify-content: flex-start;
-    gap: calc(17 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] .icon-block__media {
-    width: calc(84 * var(--somna-fig)) !important; /* overrides the icon block's inline width */
-    height: auto;
-  }
-  #MainContent[data-template="page.contact"] :is(.text-block--text_3D6VtV, .text-block--text_h8PY37, .text-block--text_nVigzz),
-  #MainContent[data-template="page.contact"] :is(.text-block--text_3D6VtV, .text-block--text_h8PY37, .text-block--text_nVigzz) > * {
-    font-size: max(13px, calc(35.1 * var(--somna-fig)));
-    font-weight: 700;
-    line-height: 1.05;
-    color: #071b3b;
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_UCqXDf"] svg {
-    width: calc(39 * var(--somna-fig));
-    height: auto;
-  }
-
-  /* "Send us a message" card: stacked fields with visible labels, full-width button */
-  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper {
-    padding-block: 0 calc(37 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper > .group-block {
-    width: calc(100% + 2 * 37 * var(--somna-fig));
-    margin-inline: calc(-37 * var(--somna-fig));
-    padding: calc(36.9 * var(--somna-fig));
-    border-radius: calc(44.3 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__form"] .section-content-wrapper > .group-block > .group-block-content {
-    gap: calc(22.1 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_jNyf6p,
-  #MainContent[data-template="page.contact"] .text-block--text_jNyf6p > * {
-    font-family: var(--font-body--family);
-    font-size: calc(48 * var(--somna-fig)) !important; /* overrides the .custom-header !important size */
-    font-weight: 700;
-    line-height: 1.2;
-    color: #071b3b !important; /* overrides the .custom-header !important colour */
-  }
-  #MainContent[data-template="page.contact"] .contact-form__form,
-  #MainContent[data-template="page.contact"] .contact-form__form-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-  #MainContent[data-template="page.contact"] .contact-form__form label.visually-hidden {
-    position: static !important; /* shows the form's own labels, as in Figma */
-    width: auto;
-    height: auto;
-    margin: 0 0 calc(11.1 * var(--somna-fig));
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    font-family: var(--font-body--family);
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-    font-weight: 500;
-    line-height: 1.2;
-    color: #071b3b;
-  }
-  #MainContent[data-template="page.contact"] .contact-form__input {
-    min-height: calc(92 * var(--somna-fig));
-    margin-block-end: calc(22.6 * var(--somna-fig));
-    padding: calc(22.1 * var(--somna-fig)) calc(33.2 * var(--somna-fig));
-    border: max(1px, calc(3.7 * var(--somna-fig))) solid #d8dee7;
-    border-radius: calc(22.1 * var(--somna-fig));
-    background-color: #fff;
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-    line-height: 1.2;
-  }
-  #MainContent[data-template="page.contact"] .contact-form__input--textarea {
-    height: calc(159 * var(--somna-fig));
-    min-height: calc(159 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] .contact-form .submit-button {
-    width: 100%;
-    height: auto;
-    min-height: calc(107 * var(--somna-fig));
-    margin-block-start: calc(22 * var(--somna-fig));
-    padding: 0 calc(33.2 * var(--somna-fig));
-    border-radius: 999px;
-    background-color: #0a1a4a;
-    color: #fff;
-    font-size: max(14px, calc(36.9 * var(--somna-fig)));
-    font-weight: 700;
-  }
-
-  /* Direct email card: white round icon badge + copy */
-  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .section-content-wrapper {
-    padding-block: 0 calc(76 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .section-content-wrapper > .group-block {
-    min-height: calc(174 * var(--somna-fig));
-    padding: calc(21 * var(--somna-fig)) calc(41.9 * var(--somna-fig));
-    border-radius: calc(41.9 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .group-block-content.layout-panel-flex--row {
-    gap: calc(41.9 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.contact"] [id$="__section_JJDLqa"] .icon-block__media {
-    width: calc(133 * var(--somna-fig)) !important; /* overrides the icon block's inline width */
-    height: auto;
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_AVzR3C,
-  #MainContent[data-template="page.contact"] .text-block--text_AVzR3C > * {
-    font-size: max(13px, calc(29.6 * var(--somna-fig)));
-    line-height: 1.25;
-    letter-spacing: 0;
-  }
-  #MainContent[data-template="page.contact"] .text-block--text_AVzR3C a {
-    color: #0b57e3;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  /* ================= How to use page ================= */
-
-  /* Nasal Strips / Mouth Tape banners: Lora title + "How it works" copy */
-  #MainContent[data-template="page.how-to-use"] :is([id$="__layered_image_with_text_LEPfjJ"], [id$="__layered_image_with_text_BndA69"]) .layered-slideshow__content {
-    padding-block: 40px 96px; /* bottom space clears the wave inside the banner */
-    padding-inline: 4.03vw;
-  }
-  #MainContent[data-template="page.how-to-use"] :is([id$="__layered_image_with_text_LEPfjJ"], [id$="__layered_image_with_text_BndA69"]) .layered-slideshow__content > .group-block-content {
-    gap: calc(25 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] :is(.text-block--text_QmeLq9, .text-block--text_QLq86c),
-  #MainContent[data-template="page.how-to-use"] :is(.text-block--text_QmeLq9, .text-block--text_QLq86c) :is(p, strong) {
-    font-family: var(--headfont);
-    font-size: calc(51.5 * var(--somna-fig));
-    font-weight: 500;
-    line-height: 1.18;
-    letter-spacing: calc(-1.5 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] :is(.text-block--text_jdwziN, .text-block--text_yUXBwV),
-  #MainContent[data-template="page.how-to-use"] :is(.text-block--text_jdwziN, .text-block--text_yUXBwV) > * {
-    font-size: max(14px, calc(36.8 * var(--somna-fig)));
-    line-height: 1.5;
-    max-inline-size: 18em;
-  }
-
-  /* Steps (steps-guide): round photos, labels and arrows in three columns */
-  #MainContent[data-template="page.how-to-use"] .steps-section {
-    padding-block: calc(100 * var(--somna-fig)) calc(56 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] .steps-grid {
-    gap: calc(48 * var(--somna-fig));
-    margin: 0 0 calc(45 * var(--somna-fig));
-    flex-wrap: nowrap;
-  }
-  #MainContent[data-template="page.how-to-use"] .step-card {
-    flex: 1 1 0;
-    max-width: none;
-  }
-  #MainContent[data-template="page.how-to-use"] .step-image-wrapper {
-    margin-bottom: calc(17 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] .step-image-wrapper img {
-    width: calc(214 * var(--somna-fig));
-    height: auto;
-    max-width: none;
-    max-height: none;
-  }
-  #MainContent[data-template="page.how-to-use"] .step-card:is(:nth-child(2), :nth-child(5)) .step-image-wrapper::before,
-  #MainContent[data-template="page.how-to-use"] .step-card:is(:nth-child(2), :nth-child(5)) .step-image-wrapper::after {
-    width: calc(33 * var(--somna-fig));
-    height: calc(33 * var(--somna-fig));
-    top: 55%;
-  }
-  #MainContent[data-template="page.how-to-use"] :is(.step-title, .step-title > *) {
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-  #MainContent[data-template="page.how-to-use"] .step-title {
-    max-inline-size: 13.3em;
-  }
-  #MainContent[data-template="page.how-to-use"] .steps-subheading-bottom {
-    margin-inline: auto;
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__steps_guide_GFjEFb"] .steps-subheading-bottom {
-    max-width: 31.3em;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__steps_guide_ed4FP7"] .steps-subheading-bottom {
-    max-width: 42.5em;
-  }
-
-  /* "Using Them Together" (bundle-feature-banner): photo left, copy right */
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-section {
-    padding-block: calc(94 * var(--somna-fig)) calc(60 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-container-main {
-    max-width: 1280px;
-    margin-inline: auto;
-    padding-inline: 40px;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-container {
-    justify-content: space-between;
-    gap: 4.8vw;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-media {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-image-wrap {
-    max-width: none;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-content {
-    flex: 1 1 auto;
-    max-width: none;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-title {
-    margin-bottom: calc(16 * var(--somna-fig));
-    font-family: var(--headfont);
-    font-size: calc(51.5 * var(--somna-fig));
-    font-weight: 500;
-    line-height: 1.18;
-    letter-spacing: calc(-1.5 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-subtitle {
-    max-width: 19em;
-    margin-bottom: calc(29.5 * var(--somna-fig));
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-pricing-row {
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-sub-price {
-    gap: 8px;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-price-large {
-    font-size: calc(51.5 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-price-sub-label {
-    font-size: max(13px, calc(29.5 * var(--somna-fig)));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__bundle_feature_banner_Qrgcy3"] .hz-bundle-btn {
-    min-height: calc(96 * var(--somna-fig));
-    padding: 0 calc(60 * var(--somna-fig));
-    gap: 10px;
-    font-size: max(14px, calc(32 * var(--somna-fig)));
-    font-weight: 600;
-  }
-
-  /* "Settling In" (pdp-comparison): photo band, centred copy */
-  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-section {
-    display: flex;
-    align-items: center;
-    min-height: 34.4vw;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-section > .section {
-    width: 100%;
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .comp-container {
-    padding-block: calc(60 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-heading {
-    margin-bottom: calc(42 * var(--somna-fig));
-    font-size: calc(66.3 * var(--somna-fig));
-    line-height: 0.98;
-    letter-spacing: calc(-1.5 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] [id$="__pdp_comparison_JDftN9"] .hz-simple-comp-subheading {
-    max-width: 31.4em;
-    font-size: max(14px, calc(36.8 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-
-  /* FAQ: centred Lora title, full-width questions */
-  #MainContent[data-template="page.how-to-use"] [id$="__section_q3qVem"] .section-content-wrapper {
-    gap: calc(46 * var(--somna-fig));
-    padding-block: calc(68 * var(--somna-fig)) calc(78 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] .text-block--text_6VPgQf,
-  #MainContent[data-template="page.how-to-use"] .text-block--text_6VPgQf :is(p, strong) {
-    font-family: var(--headfont);
-    font-size: calc(66 * var(--somna-fig));
-    font-weight: 500;
-    line-height: 1.05;
-    color: #0a1a4a;
-  }
-  #MainContent[data-template="page.how-to-use"] .accordion .details__header {
-    font-size: calc(36.1 * var(--somna-fig)) !important; /* overrides existing !important size */
-    font-weight: 400;
-    line-height: 1.22;
-    padding-block: calc(56.7 * var(--somna-fig)) calc(22 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] .accordion .details__header .svg-wrapper {
-    width: calc(36 * var(--somna-fig));
-    height: calc(36 * var(--somna-fig));
-  }
-  #MainContent[data-template="page.how-to-use"] .accordion .details-content :is(.text-block, .text-block > *) {
-    font-size: max(14px, calc(32 * var(--somna-fig)));
-    line-height: 1.5;
-  }
-  #MainContent[data-template="page.how-to-use"] .accordion .details-content {
-    padding-block-end: calc(22 * var(--somna-fig));
-  }
-
-  /* Support + How to use FAQ: first question sits on the title, line under the last one */
-  #MainContent:is([data-template="page.support"], [data-template="page.how-to-use"]) .accordion--dividers accordion-custom:first-child .details__header {
-    padding-block-start: 0;
-  }
-  #MainContent:is([data-template="page.support"], [data-template="page.how-to-use"]) .accordion--dividers accordion-custom:last-child .details {
-    border-block-end: var(--style-border-width) solid #b9b7ac;
-  }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
@@ -955,10 +437,10 @@
 
 @media screen and (min-width: 990px) {
 
-  /* Homepage, collection, Support, Contact and How to use content width: 1280px max
-     (other pages keep the theme's 1040px) */
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.support"], [data-template="page.contact"], [data-template="page.how-to-use"]),
-  body:has(#MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.support"], [data-template="page.contact"], [data-template="page.how-to-use"])) .shopify-section-group-footer-group {
+  /* Homepage + collection content width: 1280px max (other pages keep the theme's 1040px;
+     sections can widen themselves with their "Content width (desktop)" setting) */
+  #MainContent:is([data-template="index"], [data-template^="collection"]),
+  body:has(#MainContent:is([data-template="index"], [data-template^="collection"])) .shopify-section-group-footer-group {
     --page-content-width: 80rem;
     --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
   }
@@ -974,14 +456,14 @@
   }
 
   /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
     font-size: clamp(14px, 1.15vw, 16px);
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .icon-block__media {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
     width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"], [data-template="page.contact"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 14px;
   }
 
@@ -1160,6 +642,170 @@
   #MainContent[data-template^="collection"] .sleep-card-container {
     grid-column: 2;
     grid-row: 1 / span 2;
+  }
+
+  /* ================= Desktop settings (theme editor) =================
+     Applies the optional "(desktop)" settings on sections and blocks: padding, gap,
+     stacking, corners, typography, images, accordion, contact form and buttons.
+     Each rule only matches when its setting is filled in, so an empty setting changes
+     nothing. No page names or section IDs: any page using these blocks gets them. */
+
+  /* Padding (section, group, text, layered slide, image) */
+  .spacing-style[style*='--padding-block-start-desktop'] {
+    padding-block-start: calc(var(--padding-block-start-desktop) + var(--section-top-offset, 0px));
+  }
+  .spacing-style[style*='--padding-block-end-desktop'] {
+    padding-block-end: var(--padding-block-end-desktop);
+  }
+  .spacing-style[style*='--padding-inline-start-desktop'] {
+    padding-inline-start: var(--padding-inline-start-desktop);
+  }
+  .spacing-style[style*='--padding-inline-end-desktop'] {
+    padding-inline-end: var(--padding-inline-end-desktop);
+  }
+
+  /* Layout: gap, stack vertically, line content up with the page width */
+  .layout-panel-flex[style*='--gap-desktop'] {
+    gap: var(--gap-desktop);
+  }
+  .layout-panel-flex[style*='--stack-desktop'] {
+    flex-flow: column nowrap;
+    align-items: stretch;
+  }
+  .layout-panel-flex[style*='--align-items-desktop'] {
+    align-items: var(--align-items-desktop);
+  }
+  .layout-panel-flex[style*='--align-page-width-desktop'] {
+    padding-inline: max(var(--page-margin, 40px), calc((100% - var(--page-content-width)) / 2));
+  }
+
+  /* Corner radius (group, section, image) */
+  .border-style[style*='--border-radius-desktop'] {
+    border-radius: var(--border-radius-desktop);
+  }
+
+  /* Image: width and aspect ratio */
+  .image-block[style*='--image-width-desktop'] .image-block__image {
+    width: var(--image-width-desktop);
+    max-width: none;
+    height: auto;
+  }
+  .image-block__image[style*='--ratio-desktop'] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ratio-desktop);
+  }
+
+  /* Text: font, weight, line height, letter spacing, max width */
+  .text-block[style*='--font-family-desktop'],
+  .text-block[style*='--font-family-desktop'] * {
+    font-family: var(--font-family-desktop);
+  }
+  .text-block[style*='--font-weight-desktop'],
+  .text-block[style*='--font-weight-desktop'] * {
+    font-weight: var(--font-weight-desktop);
+  }
+  .text-block[style*='--line-height-desktop'],
+  .text-block[style*='--line-height-desktop'] > * {
+    line-height: var(--line-height-desktop);
+  }
+  .text-block[style*='--letter-spacing-desktop'],
+  .text-block[style*='--letter-spacing-desktop'] * {
+    letter-spacing: var(--letter-spacing-desktop);
+  }
+  .text-block[style*='--max-width-desktop'] > * {
+    max-inline-size: var(--max-width-desktop);
+  }
+  /* Desktop font size on non-"custom" presets (heading, paragraph): beats custom.css preset sizes */
+  .text-block.custom-font-size-desktop:not(.custom-typography),
+  .text-block.custom-font-size-desktop:not(.custom-typography) > * {
+    font-size: var(--font-size-desktop);
+  }
+  .text-block.custom-header.custom-font-size-desktop,
+  .text-block.custom-header.custom-font-size-desktop > * {
+    font-size: var(--font-size-desktop) !important; /* .custom-header sets its size with !important */
+  }
+
+  /* Accordion: question size, spacing, line under the last question */
+  .accordion[style*='--accordion-heading-size-desktop'] .details__header {
+    font-size: var(--accordion-heading-size-desktop) !important; /* custom.css sets it with !important */
+  }
+  .accordion[style*='--accordion-row-top-desktop'] accordion-custom:not(:first-child) .details__header {
+    padding-block-start: var(--accordion-row-top-desktop);
+  }
+  .accordion[style*='--accordion-row-top-desktop'] accordion-custom:first-child .details__header {
+    padding-block-start: 0;
+  }
+  .accordion[style*='--accordion-row-bottom-desktop'] .details__header,
+  .accordion[style*='--accordion-row-bottom-desktop'] .details-content {
+    padding-block-end: var(--accordion-row-bottom-desktop);
+  }
+  .accordion--last-divider-desktop accordion-custom:last-child .details {
+    border-block-end: var(--style-border-width) solid var(--color-border);
+  }
+
+  /* Contact form */
+  .contact-form--stack-desktop :is(.contact-form__form, .contact-form__form-row) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .contact-form--labels-desktop label.visually-hidden {
+    position: static !important; /* shows the form's own labels */
+    width: auto;
+    height: auto;
+    margin: 0 0 6px;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    font-size: var(--contact-font-size-desktop, inherit);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .contact-form[style*='--contact-input-height-desktop'] .contact-form__input {
+    min-height: var(--contact-input-height-desktop);
+    padding: 10px 16px;
+  }
+  .contact-form[style*='--contact-font-size-desktop'] .contact-form__input {
+    font-size: var(--contact-font-size-desktop);
+    line-height: 1.2;
+  }
+  .contact-form[style*='--contact-input-radius-desktop'] .contact-form__input {
+    border-radius: var(--contact-input-radius-desktop);
+  }
+  .contact-form[style*='--contact-textarea-height-desktop'] .contact-form__input--textarea {
+    height: var(--contact-textarea-height-desktop);
+    min-height: var(--contact-textarea-height-desktop);
+  }
+  .contact-form[style*='--contact-field-gap-desktop'] .contact-form__input {
+    margin-block-end: var(--contact-field-gap-desktop);
+  }
+  .contact-form[style*='--contact-button-height-desktop'] .submit-button {
+    height: auto;
+    min-height: var(--contact-button-height-desktop);
+    font-size: 16px;
+  }
+  .contact-form[style*='--contact-button-radius-desktop'] .submit-button {
+    border-radius: var(--contact-button-radius-desktop);
+  }
+
+  /* Button: height, side padding, corners */
+  .size-style.button-height-desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--button-height-desktop);
+  }
+  .size-style.button-padding-desktop {
+    padding-inline: var(--button-padding-desktop);
+  }
+  .size-style.button-radius-desktop {
+    border-radius: var(--button-radius-desktop);
+  }
+
+  /* Layered image with text: banner height */
+  layered-slideshow-component[style*='--layered-content-min-height-desktop'] .layered-slideshow__content > .group-block-content {
+    min-height: calc(var(--layered-content-min-height-desktop) - var(--padding-block-start-desktop, var(--padding-block-start, 0px)) - var(--padding-block-end-desktop, var(--padding-block-end, 0px)));
   }
 
 }
