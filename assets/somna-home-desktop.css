@@ -292,9 +292,7 @@
   #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .footer-content {
     padding-block: 48px 72px;
   }
-  #MainContent[data-template="index"] [id$="__footer_m9NzUG"] .group-block-content {
-    gap: 14px;
-  }
+  
   #MainContent[data-template="index"] .text-block--text_LWt8Pz,
   #MainContent[data-template="index"] .text-block--text_LWt8Pz > * {
     font-size: clamp(28px, 2.9vw, 44px);
