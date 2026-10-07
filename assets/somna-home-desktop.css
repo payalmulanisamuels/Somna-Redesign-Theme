@@ -193,7 +193,7 @@
      line, stacked and left-aligned like the Nasal Strips card */
   #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content:not(.alignment-right) {
     width: auto;
-    max-width: 62%;
+    max-width: 50%;
     align-items: flex-start;
   }
   #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-price {
