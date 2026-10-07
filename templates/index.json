@@ -1079,7 +1079,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon1.png",
+                    "image_upload": "shopify://shop_images/IconContainer.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1205,7 +1205,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon2.png",
+                    "image_upload": "shopify://shop_images/IconContainer-1.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1331,7 +1331,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon3.png",
+                    "image_upload": "shopify://shop_images/IconContainer-2.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1457,7 +1457,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon4.png",
+                    "image_upload": "shopify://shop_images/IconContainer-3.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
