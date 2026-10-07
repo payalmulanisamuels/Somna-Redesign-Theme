@@ -23,6 +23,8 @@
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
+            "font_size_tablet": "",
+            "font_size_desktop": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -49,6 +51,8 @@
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
+            "font_size_tablet": "",
+            "font_size_desktop": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -246,6 +250,8 @@
             "type_preset": "custom",
             "font": "var(--font-body--family)",
             "font_size": "0.75rem",
+            "font_size_tablet": "",
+            "font_size_desktop": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "uppercase",
@@ -272,6 +278,8 @@
             "type_preset": "custom",
             "font": "var(--font-body--family)",
             "font_size": "1.25rem",
+            "font_size_tablet": "",
+            "font_size_desktop": "",
             "line_height": "tight",
             "letter_spacing": "normal",
             "case": "none",
@@ -322,7 +330,7 @@
         "padding-block-end": 35
       }
     },
-  "section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -905,7 +913,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf2df",
+        "background_color": "{{ settings.color_palette.background }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
