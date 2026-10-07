@@ -61,12 +61,63 @@
             "text_color": ""
           },
           "blocks": {}
+        },
+        "announcement_mtnfxA": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "33% OFF Subscriptions&nbsp;",
+            "link": "",
+            "separator_image": "shopify://shop_images/somna-discount.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_QyMwbn": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "3 Free Gifts",
+            "link": "",
+            "separator_image": "shopify://shop_images/somna-gift.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
+        },
+        "announcement_Mc8m7Y": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "Free Shipping",
+            "link": "",
+            "separator_image": "shopify://shop_images/free-shipping.png",
+            "font": "var(--font-subheading--family)",
+            "font_size": "0.75rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": ""
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "announcement_dwf6Jk",
         "announcement_wwtXFc",
-        "announcement_34JFi9"
+        "announcement_34JFi9",
+        "announcement_mtnfxA",
+        "announcement_QyMwbn",
+        "announcement_Mc8m7Y"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}",
