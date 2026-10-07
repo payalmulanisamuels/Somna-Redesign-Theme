@@ -187,6 +187,17 @@
     padding: 0 22px;
     font-size: clamp(13px, 1.05vw, 15px);
   }
+  /* Right-aligned card (Mouth Tape): content hugs its text so the price stays on one
+     line, stacked and left-aligned like the Nasal Strips card */
+  #MainContent[data-template="index"] .hz-card-content:not(.alignment-right) {
+    width: auto;
+    max-width: 62%;
+    padding-inline-start: 0;
+    align-items: flex-start;
+  }
+  #MainContent[data-template="index"] .hz-card-price {
+    white-space: nowrap;
+  }
 
   /* ---------- Four-column features ("Small essentials") ---------- */
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
