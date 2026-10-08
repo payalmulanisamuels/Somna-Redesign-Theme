@@ -413,30 +413,91 @@
 
 /* --------------------------------------------------------------------------
    6. "Start with a bundle": floating nasal strip, mouth tape and dots (desktop only)
-   Like the floating fruit on drinkohza.com, with Somna's own strip and tape. Pure CSS decoration: drawn with
-   pseudo-elements behind the content, can't be clicked, takes no space,
-   so the cards, buttons and layout are exactly as before.
-   Images: assets/somna-deco-strip.svg and assets/somna-deco-tape.svg.
-   Tune sizes and positions with the variables below.
+   Like the floating fruit on drinkohza.com, using Somna's own strip (Breathe blue)
+   and tape (Bold red). Images: assets/somna-deco-strip.webp and assets/somna-deco-tape.webp.
+   Pure CSS decoration on pseudo-elements behind the content: can't be clicked and
+   takes no space, so the cards, buttons and layout are exactly as before.
+   Motion: a springy pop-in as the section scrolls into view, then a soft bounce loop.
+   Reduced-motion visitors see them standing still. Tune with the variables below.
    -------------------------------------------------------------------------- */
 :root {
-  --sm-deco-strip-w: 120px;
-  --sm-deco-strip-h: 60px;
-  --sm-deco-tape-w: 112px;
-  --sm-deco-tape-h: 56px;
+  --sm-deco-strip-w: 150px;
+  --sm-deco-strip-h: 51px;
+  --sm-deco-tape-w: 124px;
+  --sm-deco-tape-h: 52px;
   --sm-deco-dot: #efd27a;
+  --sm-deco-bounce: 20px;
 }
 
-@keyframes sm-deco-bob {
+/* Soft bounce: rises, drops, squashes a little on landing, small rebound, rests */
+@keyframes sm-deco-bounce {
   0%,
   100% {
     translate: 0 0;
-    rotate: calc(var(--sm-deco-tilt, 0deg) - 4deg);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
   }
 
-  50% {
-    translate: 0 -10px;
-    rotate: calc(var(--sm-deco-tilt, 0deg) + 4deg);
+  38% {
+    translate: 0 calc(var(--sm-deco-bounce) * -1);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  58% {
+    translate: 0 0;
+    scale: 1.06 0.92;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  68% {
+    translate: 0 calc(var(--sm-deco-bounce) * -0.3);
+    scale: 0.98 1.02;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  78% {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+/* Springy pop-in, driven by scrolling the section into view */
+@keyframes sm-deco-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(0.3);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.12);
+  }
+
+  75% {
+    transform: translateY(5px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Dots just fade up into place (scaling their wide layer would make them fly in from the middle) */
+@keyframes sm-deco-dots-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: none;
   }
 }
 
@@ -444,20 +505,17 @@
   0%,
   100% {
     translate: 0 0;
+    scale: 1;
   }
 
-  50% {
-    translate: 0 -6px;
-  }
-}
-
-@keyframes sm-deco-drift {
-  from {
-    transform: translateY(24px);
+  45% {
+    translate: 0 -10px;
+    scale: 1.08;
   }
 
-  to {
-    transform: translateY(-24px);
+  65% {
+    translate: 0 0;
+    scale: 0.96;
   }
 }
 
@@ -481,18 +539,16 @@
     pointer-events: none;
   }
 
-  /* Nasal strip: left edge, above the heading */
+  /* Nasal strip (blue): left edge, above the heading */
   section[class^='bundle-section-'] .custom-header::before {
-    --sm-deco-tilt: -18deg;
-
     top: calc(50% - 106px - var(--sm-deco-strip-h) / 2);
-    left: calc(50% - 50vw + 70px - var(--sm-deco-strip-w) / 2);
+    left: calc(50% - 50vw + 104px - var(--sm-deco-strip-w) / 2);
     width: var(--sm-deco-strip-w);
     height: var(--sm-deco-strip-h);
-    rotate: var(--sm-deco-tilt);
-    background-image: url('somna-deco-strip.svg');
+    rotate: -18deg;
+    background-image: url('somna-deco-strip.webp');
     background-size: contain;
-    filter: drop-shadow(0 12px 18px rgb(10 26 74 / 0.18));
+    filter: drop-shadow(0 14px 16px rgb(10 26 74 / 0.22));
   }
 
   /* Dots: two beside the heading on the left, two above it on the right */
@@ -507,55 +563,66 @@
       radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%);
     background-size: 16px 16px, 10px 10px, 12px 12px, 18px 18px;
     background-position: left 132px top 84px, left 205px top 123px, right 324px top 24px, right 283px top 53px;
-    opacity: 0.85;
+    opacity: 0.9;
   }
 
-  /* Mouth tape: right edge, beside the second card */
+  /* Mouth tape (red): right edge, beside the second card */
   section[class^='bundle-section-'] .bundle-section__grid::before {
-    --sm-deco-tilt: 14deg;
-
     top: calc(71px - var(--sm-deco-tape-h) / 2);
-    right: calc(50% - 50vw + 65px - var(--sm-deco-tape-w) / 2);
+    right: calc(50% - 50vw + 96px - var(--sm-deco-tape-w) / 2);
     width: var(--sm-deco-tape-w);
     height: var(--sm-deco-tape-h);
-    rotate: var(--sm-deco-tilt);
-    background-image: url('somna-deco-tape.svg');
+    rotate: 14deg;
+    background-image: url('somna-deco-tape.webp');
     background-size: contain;
-    filter: drop-shadow(0 12px 18px rgb(10 26 74 / 0.18));
+    filter: drop-shadow(0 14px 16px rgb(10 26 74 / 0.22));
   }
 }
 
 @media screen and (min-width: 990px) and (prefers-reduced-motion: no-preference) {
   section[class^='bundle-section-'] .custom-header::before {
-    animation: sm-deco-bob 7s ease-in-out infinite;
-  }
-
-  section[class^='bundle-section-'] .custom-header::after {
-    animation: sm-deco-dots 5s ease-in-out -1.5s infinite;
+    animation: sm-deco-bounce 3.2s infinite;
   }
 
   section[class^='bundle-section-'] .bundle-section__grid::before {
-    animation: sm-deco-bob 8s ease-in-out -3s infinite;
+    animation: sm-deco-bounce 3.6s -1.4s infinite;
   }
 
-  /* Gentle drift while scrolling (browsers without support just skip it) */
+  section[class^='bundle-section-'] .custom-header::after {
+    animation: sm-deco-dots 2.8s ease-in-out -0.6s infinite;
+  }
+
+  /* Pop-in while scrolling into view (browsers without support just show the bounce) */
   @supports (animation-timeline: view()) {
     section[class^='bundle-section-'] {
       view-timeline-name: --sm-deco;
     }
 
     section[class^='bundle-section-'] .custom-header::before,
-    section[class^='bundle-section-'] .bundle-section__grid::before {
-      animation:
-        sm-deco-bob 7s ease-in-out infinite,
-        sm-deco-drift linear both;
+    section[class^='bundle-section-'] .bundle-section__grid::before,
+    section[class^='bundle-section-'] .custom-header::after {
+      animation-name: sm-deco-bounce, sm-deco-pop;
+      animation-duration: 3.2s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
       animation-timeline: auto, --sm-deco;
-      animation-range: normal, cover 0% cover 100%;
+      animation-range: normal, entry 5% entry 45%;
     }
 
     section[class^='bundle-section-'] .bundle-section__grid::before {
-      animation-duration: 8s, auto;
-      animation-delay: -3s, 0s;
+      animation-duration: 3.6s, auto;
+      animation-delay: -1.4s, 0s;
+      animation-range: normal, entry 15% entry 55%;
+    }
+
+    section[class^='bundle-section-'] .custom-header::after {
+      animation-name: sm-deco-dots, sm-deco-dots-in;
+      animation-duration: 2.8s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: -0.6s, 0s;
+      animation-range: normal, entry 10% entry 50%;
     }
   }
 }
