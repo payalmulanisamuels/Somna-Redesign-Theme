@@ -198,73 +198,73 @@
   .bundle-card--featured {
     grid-column: auto;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-section__grid {
+   .bundle-section__grid {
     gap: clamp(16px, 1.8vw, 24px);
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card {
+   .bundle-card {
     padding: 10px 10px 20px;
     border-radius: 16px;
     box-shadow: 0 2px 14px rgb(10 26 74 / 0.12);
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__image-wrapper {
+   .bundle-card__image-wrapper {
     border-radius: 12px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content {
+   .bundle-card__content {
     flex: 1;
     align-content: space-between;
     row-gap: 16px;
     margin-top: 16px;
     padding-inline: 8px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content {
+   .bundle-card .review_content {
     font-size: 13px;
     gap: 6px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content svg {
+   .bundle-card .review_content svg {
     width: 76px;
     height: 16px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__title {
+   .bundle-card__title {
     font-size: clamp(18px, 1.7vw, 24px);
     line-height: 1.25;
     margin-top: 6px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-subtext {
+   .bundle-subtext {
     max-width: none;
     min-height: 0;
     margin-top: 8px;
     font-size: clamp(14px, 1.15vw, 16px);
     line-height: 1.5;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content-wrapper {
+   .bundle-card__content-wrapper {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
     width: 100%;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__price {
+   .bundle-card__price {
     font-size: clamp(20px, 1.9vw, 26px);
     line-height: 1.2;
     margin: 0 0 4px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__subtext {
+   .bundle-card__subtext {
     font-size: clamp(13px, 1.05vw, 15px);
     line-height: 1.4;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__button {
+   .bundle-card__button {
     min-height: 44px;
     padding: 0 24px;
     font-size: clamp(13px, 1.1vw, 15px);
     font-weight: 500;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .tag_text {
+   .tag_text {
     top: -14px;
     padding: 6px 16px;
     border-radius: 6px;
     font-size: 12px;
     letter-spacing: 0.04em;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card--featured .bundle-card__image {
+   .bundle-card--featured .bundle-card__image {
     height: clamp(240px, 34vw, 480px);
     object-fit: cover;
   }
