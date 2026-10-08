@@ -607,7 +607,7 @@
     "pdp_comparison_JDftN9": {
       "type": "pdp-comparison",
       "custom_css": [
-        ".hz-simple-comp-section {background: transparent;}"
+        ".hz-simple-comp-section {background: transparent; margin-top: -60px;}"
       ],
       "name": "Comparison Simple",
       "settings": {
