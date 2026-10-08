@@ -212,3 +212,49 @@
     scale: var(--sm-press-scale);
   }
 }
+
+/* --------------------------------------------------------------------------
+   3. Hero text entrance (CSS only, plays once when the page loads)
+   The heading only rises and is fully visible from the first frame, so
+   Largest Contentful Paint is not delayed. The eyebrow, any text below the
+   heading and the button fade in and rise, one after another.
+   "backwards" means nothing stays applied after the animation, so button
+   hover works normally afterwards.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-hero-duration: 900ms;
+  --sm-hero-distance: 12px;
+  --sm-hero-step: 160ms;
+}
+
+@keyframes sm-hero-rise {
+  from {
+    translate: 0 var(--sm-hero-distance);
+  }
+}
+
+@keyframes sm-hero-fade-rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--sm-hero-distance);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__content-wrapper .text-block:not(:has(h1, h2, h3)),
+  .hero__content-wrapper :is(.button, .button-secondary) {
+    animation: sm-hero-fade-rise var(--sm-hero-duration) var(--sm-ease) var(--sm-hero-delay, 0ms) backwards;
+  }
+
+  .hero__content-wrapper .text-block:has(h1, h2, h3) {
+    animation: sm-hero-rise var(--sm-hero-duration) var(--sm-ease) backwards;
+  }
+
+  .hero__content-wrapper .text-block:has(h1, h2, h3) ~ .text-block {
+    --sm-hero-delay: var(--sm-hero-step);
+  }
+
+  .hero__content-wrapper :is(.button, .button-secondary) {
+    --sm-hero-delay: calc(var(--sm-hero-step) * 2);
+  }
+}
