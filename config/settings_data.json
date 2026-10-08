@@ -156,7 +156,7 @@
         "type": "somna-scratch-popup",
         "settings": {
           "enabled": true,
-          "delay_seconds": 10,
+          "delay_seconds": 8,
           "dismiss_days": 14,
           "discount_code": "WELCOME10",
           "shop_redirect": "/collections/all",
