@@ -197,6 +197,7 @@
   }
   .bundle-card--featured {
     grid-column: auto;
+    align-items: flex-start;
   }
    .bundle-section__grid {
     gap: clamp(16px, 1.8vw, 24px);
