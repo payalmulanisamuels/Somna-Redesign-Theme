@@ -346,7 +346,7 @@
         "corner_radius": 0,
         "border_width": 1,
         "drop_shadow": false,
-        "background_color": "",
+        "background_color": "#E0E8D7",
         "padding-block-start": 0,
         "padding-block-end": 0,
         "content_min_height_desktop": 47
