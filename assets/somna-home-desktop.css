@@ -391,7 +391,6 @@
   /* ---------- FAQ ---------- */
   #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
     width: 100%;
-    max-width: 800px;
     margin-inline: auto;
     gap: 20px;
     padding-block: 56px 72px;
