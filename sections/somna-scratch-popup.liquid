@@ -144,7 +144,7 @@
           <span class="somna-copy-label">Copy code</span>
         </button>
 
-        <a href="{{ popup_shop_url }}" class="somna-primary-btn somna-shop-link" id="somna-shop-btn">
+        <a href="#" class="somna-primary-btn somna-shop-link close-popup-page" id="somna-shop-btn">
           Shop now, 10% applied
           <svg class="somna-btn-arrow" width="26" height="18" viewBox="0 0 26 18" fill="none" aria-hidden="true" focusable="false">
             <path d="M1 9h23M16 1l8 8-8 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -449,6 +449,89 @@
   }
   html:has(.sticky-add-to-cart__bar[data-stuck='true']) .somna-teaser-tab { bottom: 110px; }
 
+  /* Teaser tab: "breathing + scratch shimmer" loop (motion only, added 2026-10-08).
+     One 10s cycle: rests ~4.5s, slowly breathes (scale 1 -> 1.03 -> 1), then a quick
+     diagonal light sweep, then rests again. Uses the individual `scale` property and a
+     transparent background-image layer, so position, size, colour and the existing
+     transitions are unchanged, nothing shifts in the layout and clicks work as before. */
+  @media (prefers-reduced-motion: no-preference) {
+    .somna-teaser-tab {
+      background-image: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.26) 50%, transparent 75%);
+      background-repeat: no-repeat;
+      background-size: 60% 100%;
+      background-position: -150% 0;
+      animation:
+        somna-tab-breathe 10s ease-in-out infinite,
+        somna-tab-shimmer 10s linear infinite;
+    }
+  }
+  @keyframes somna-tab-breathe {
+    0%, 45% { scale: 1; }
+    60%     { scale: 1.03; }
+    75%, 100% { scale: 1; }
+  }
+  @keyframes somna-tab-shimmer {
+    0%, 76% { background-position: -150% 0; animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+    80%, 100% { background-position: 250% 0; }
+  }
+
+  /* Teaser tab: "taped-up dreamer" (added 2026-10-08). A sleeping face wearing Somna mouth
+     tape rises from behind the tab's top edge, little "z"s float up, then it sinks back.
+     Runs on the same 10s clock as the breathing + shimmer above. Both drawings are tiny
+     inline SVGs (no extra requests, no JavaScript); the face is a still image that only
+     slides inside a small window above the tab, and the "z"s only fade and move, so the
+     page layout never changes. The pseudo-elements can't be clicked, so clicks still go
+     to the tab. Reduced-motion visitors see the face resting still, without the "z"s. */
+  .somna-teaser-tab::before,
+  .somna-teaser-tab::after {
+    content: ''; position: absolute; pointer-events: none;
+    background-repeat: no-repeat;
+  }
+  .somna-teaser-tab::before {
+    bottom: 100%; left: 50%; width: 54px; height: 46px;
+    translate: -50% 0; rotate: -6deg; transform-origin: 50% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='32%25' r='75%25'%3E%3Cstop offset='0' stop-color='%23FFE27A'/%3E%3Cstop offset='.7' stop-color='%23FFCC3E'/%3E%3Cstop offset='1' stop-color='%23F2A91F'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='35' r='26' fill='url(%23g)'/%3E%3Cellipse cx='16' cy='41' rx='3.6' ry='2.3' fill='%23FF8A65' opacity='.45'/%3E%3Cellipse cx='48' cy='41' rx='3.6' ry='2.3' fill='%23FF8A65' opacity='.45'/%3E%3Cpath d='M18 29q5 4 10 0M36 29q5 4 10 0' fill='none' stroke='%235a3a0c' stroke-width='2.6' stroke-linecap='round'/%3E%3Cg transform='translate(19 41) rotate(-4)'%3E%3Crect width='26' height='10' rx='5' fill='%23d6453a'/%3E%3Crect x='10' y='4' width='6' height='2' rx='1' fill='%23fff' opacity='.9'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 40px auto;
+    background-position: center 4px;
+  }
+  .somna-teaser-tab::after {
+    bottom: calc(100% + 26px); left: calc(50% + 14px); width: 16px; height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext x='1' y='22' font-family='Arial,sans-serif' font-weight='700' font-size='12' fill='%231f45d6'%3Ez%3C/text%3E%3Ctext x='11' y='12' font-family='Arial,sans-serif' font-weight='700' font-size='9' fill='%231f45d6'%3Ez%3C/text%3E%3C/svg%3E");
+    background-size: contain;
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .somna-teaser-tab::before {
+      background-position: center 50px;
+      animation: somna-tab-peek 10s linear infinite;
+    }
+    .somna-teaser-tab::after {
+      animation: somna-tab-zz 10s linear infinite;
+    }
+  }
+  /* Rises with a soft spring (4.5s), bobs while the tab breathes and shines, sinks at ~9s */
+  @keyframes somna-tab-peek {
+    0%, 45%   { background-position: center 50px; animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1); }
+    50.5%     { background-position: center -1px; animation-timing-function: ease-in-out; }
+    53.5%     { background-position: center 7px; animation-timing-function: ease-in-out; }
+    56.5%     { background-position: center 3px; animation-timing-function: ease-in-out; }
+    64%       { background-position: center 6px; animation-timing-function: ease-in-out; }
+    72%       { background-position: center 3px; animation-timing-function: ease-in-out; }
+    80%       { background-position: center 6px; animation-timing-function: ease-in-out; }
+    88%       { background-position: center 4px; animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.3); }
+    93%, 100% { background-position: center 50px; }
+  }
+  /* Two little "z" puffs while the face is up */
+  @keyframes somna-tab-zz {
+    0%, 53%   { opacity: 0; translate: 0 0; }
+    56%       { opacity: 1; translate: 1px -3px; }
+    66%       { opacity: 0; translate: 6px -14px; }
+    66.1%, 69% { opacity: 0; translate: 0 0; }
+    72%       { opacity: 1; translate: 1px -3px; }
+    82%       { opacity: 0; translate: 6px -14px; }
+    82.1%, 100% { opacity: 0; translate: 0 0; }
+  }
+
   @media (max-width: 380px) {
     .somna-popup-content { padding: 60px 18px 32px; }
     .somna-headline--serif { font-size: 30px; }
@@ -660,7 +743,7 @@
         track('close');
       }
 
-      overlay.querySelectorAll('.somna-close-btn, .somna-close-trigger').forEach((el) => el.addEventListener('click', closePopup));
+      overlay.querySelectorAll('.somna-close-btn, .somna-close-trigger,.close-popup-page').forEach((el) => el.addEventListener('click', closePopup));
       overlay.addEventListener('click', (event) => { if (event.target === overlay) closePopup(); });
       teaserTab?.addEventListener('click', () => openPopup('teaser'));
 
