@@ -230,49 +230,9 @@
             "text_Lqf6bA",
             "button_6EgajN"
           ]
-        },
-        "somna_float_hero_1": {
-          "type": "somna-float",
-          "settings": {
-            "image": "shopify://shop_images/Tape.png",
-            "round": true,
-            "x": 90,
-            "y": 16,
-            "width": 132,
-            "show_on_mobile": true,
-            "x_mobile": 86,
-            "y_mobile": 9,
-            "width_mobile": 64,
-            "rotation": -8,
-            "depth": 56,
-            "bob": true,
-            "bob_delay": 0
-          },
-          "blocks": {}
-        },
-        "somna_float_hero_2": {
-          "type": "somna-float",
-          "settings": {
-            "image": "shopify://shop_images/strip.png",
-            "round": true,
-            "x": 62,
-            "y": 88,
-            "width": 96,
-            "show_on_mobile": false,
-            "x_mobile": 14,
-            "y_mobile": 9,
-            "width_mobile": 56,
-            "rotation": 10,
-            "depth": 40,
-            "bob": true,
-            "bob_delay": 3
-          },
-          "blocks": {}
         }
       },
       "block_order": [
-        "somna_float_hero_1",
-        "somna_float_hero_2",
         "group_47iMdX"
       ],
       "custom_css": [
@@ -1727,49 +1687,9 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "somna_float_banner_1": {
-              "type": "somna-float",
-              "settings": {
-                "image": "shopify://shop_images/somna_breathe_blue_final.png",
-                "round": true,
-                "x": 93,
-                "y": 12,
-                "width": 112,
-                "show_on_mobile": true,
-                "x_mobile": 92,
-                "y_mobile": 16,
-                "width_mobile": 44,
-                "rotation": -10,
-                "depth": 64,
-                "bob": true,
-                "bob_delay": 1.5
-              },
-              "blocks": {}
-            },
-            "somna_float_banner_2": {
-              "type": "somna-float",
-              "settings": {
-                "image": "shopify://shop_images/somna_bold_red_final.png",
-                "round": true,
-                "x": 62,
-                "y": 92,
-                "width": 84,
-                "show_on_mobile": false,
-                "x_mobile": 8,
-                "y_mobile": 84,
-                "width_mobile": 40,
-                "rotation": 12,
-                "depth": 40,
-                "bob": true,
-                "bob_delay": 4.5
-              },
-              "blocks": {}
             }
           },
           "block_order": [
-            "somna_float_banner_1",
-            "somna_float_banner_2",
             "text_QmeLq9",
             "text_jdwziN"
           ]
