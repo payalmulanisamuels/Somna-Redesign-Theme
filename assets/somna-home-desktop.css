@@ -584,31 +584,31 @@
   #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__featured_bundle_grid_6jFGFr"] > section {
     padding-block: 48px 56px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card {
+   .bundle-card {
     padding: 14px 14px 26px;
     border-radius: 20px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__image-wrapper {
+   .bundle-card__image-wrapper {
     border-radius: 14px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__content {
+   .bundle-card__content {
     margin-top: 20px;
     padding-inline: 12px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card .review_content {
+   .bundle-card .review_content {
     font-size: 14px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-card__button {
+   .bundle-card__button {
     min-height: 48px;
     padding: 0 30px;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .tag_text {
+   .tag_text {
     top: -15px;
     font-size: 13px;
   }
 
   /* ---------- Nasal Strips / Mouth Tape: both cards visible side by side ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
+   #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
     overflow: visible;
     padding: 0;
     scroll-snap-type: none;
