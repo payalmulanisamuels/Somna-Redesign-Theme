@@ -939,10 +939,10 @@
         "content_width_desktop": ""
       }
     },
-    "featured_bundle_grid_6jFGFr": {
+    "featured_bundle_grid_gb9fCH": {
       "type": "featured-bundle-grid",
       "blocks": {
-        "bundle_gCFgge": {
+        "bundle_BPHXgH": {
           "type": "bundle",
           "settings": {
             "product": "sleep-bundle",
@@ -954,7 +954,7 @@
             "button_label": "Shop the Sleep Bundle"
           }
         },
-        "bundle_6MqjwE": {
+        "bundle_Vge79H": {
           "type": "bundle",
           "settings": {
             "product": "the-colour-set",
@@ -966,7 +966,7 @@
             "button_label": "Shop the Colour Set"
           }
         },
-        "bundle_LHB8m9": {
+        "bundle_L4B3MH": {
           "type": "bundle",
           "settings": {
             "product": "season-bundle",
@@ -980,9 +980,9 @@
         }
       },
       "block_order": [
-        "bundle_gCFgge",
-        "bundle_6MqjwE",
-        "bundle_LHB8m9"
+        "bundle_BPHXgH",
+        "bundle_Vge79H",
+        "bundle_L4B3MH"
       ],
       "name": "Featured Bundle Grid",
       "settings": {
@@ -1026,6 +1026,7 @@
         "card_XExw3D",
         "card_f7AQym"
       ],
+      "disabled": true,
       "name": "Custom Cards Slider",
       "settings": {
         "bg_color": "{{ settings.color_palette.background }}",
@@ -2389,7 +2390,7 @@
     "custom_circle_categories_DqUCEF",
     "hero_jVaWmY",
     "section_zELtyM",
-    "featured_bundle_grid_6jFGFr",
+    "featured_bundle_grid_gb9fCH",
     "custom_cards_slider_pyJahK",
     "section_ibM3ft",
     "layered_image_with_text_LEPfjJ",
