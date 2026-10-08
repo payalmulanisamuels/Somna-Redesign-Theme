@@ -54,9 +54,28 @@
     <div class="somna-ess__grid">
       {%- for block in section.blocks -%}
         {%- liquid
+          # Works with no setup: card 1 falls back to Nasal Strips, card 2 to Mouth Tape,
+          # each with the photo from the Figma design (uploaded to Files).
           assign product = block.settings.product
+          if product == blank
+            if forloop.index == 1
+              assign product = all_products['nasal-strips']
+            elsif forloop.index == 2
+              assign product = all_products['mouth-tape']
+            endif
+          endif
+          assign card_image = block.settings.image
+          if card_image == blank
+            if product.handle == 'nasal-strips'
+              assign card_image = images['somna-essentials-nasal-strips.png']
+            elsif product.handle == 'mouth-tape'
+              assign card_image = images['somna-essentials-mouth-tape.png']
+            endif
+          endif
+          if card_image == blank
+            assign card_image = product.featured_image
+          endif
           assign card_title = block.settings.title | default: product.title
-          assign card_image = block.settings.image | default: product.featured_image
           assign card_link = block.settings.link | default: product.url | default: '#'
 
           assign card_price = ''
