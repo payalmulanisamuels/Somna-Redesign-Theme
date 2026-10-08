@@ -989,7 +989,7 @@
         "heading": "Start with a bundle",
         "bg_color": "#ffffff",
         "padding_top": 0,
-        "padding_bottom": 5
+        "padding_bottom": 100
       }
     },
     "custom_cards_slider_pyJahK": {
@@ -1026,6 +1026,7 @@
         "card_XExw3D",
         "card_f7AQym"
       ],
+      "disabled": true,
       "name": "Custom Cards Slider",
       "settings": {
         "bg_color": "{{ settings.color_palette.background }}",
