@@ -289,11 +289,9 @@
   @media screen and (min-width: 990px) {
     {% if section.settings.padding_top_desktop != blank %}#hz-bundle-{{ section.id }} { padding-top: {{ section.settings.padding_top_desktop }}px; }{% endif %}
     {% if section.settings.padding_bottom_desktop != blank %}#hz-bundle-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }{% endif %}
-    {% if section.settings.content_width_desktop != blank %}
-      #hz-bundle-{{ section.id }} .hz-bundle-container-main { max-width: {{ section.settings.content_width_desktop }}px; margin-inline: auto; padding-inline: 40px; }
+      
       #hz-bundle-{{ section.id }} .hz-bundle-container { justify-content: space-between; gap: 4.8vw; }
       #hz-bundle-{{ section.id }} .hz-bundle-content { flex: 1 1 auto; max-width: none; }
-    {% endif %}
     {% if section.settings.image_width_desktop != blank %}
       #hz-bundle-{{ section.id }} .hz-bundle-media { flex: 0 0 {{ section.settings.image_width_desktop }}%; max-width: {{ section.settings.image_width_desktop }}%; }
       #hz-bundle-{{ section.id }} .hz-bundle-image-wrap { max-width: none; }
@@ -447,12 +445,7 @@
       "id": "padding_bottom_desktop",
       "label": "Bottom padding (desktop, px)"
     },
-    {
-      "type": "number",
-      "id": "content_width_desktop",
-      "label": "Content width (desktop, px)",
-      "info": "e.g. 1280"
-    },
+  
     {
       "type": "number",
       "id": "image_width_desktop",
