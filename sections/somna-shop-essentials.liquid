@@ -41,11 +41,7 @@
 
 <div class="somna-ess">
   {%- comment -%} The tape and strips are cut off on one side, so they sit on the screen edges {%- endcomment -%}
-  <span class="somna-ess__deco somna-ess__deco--tape" aria-hidden="true"></span>
-  <span class="somna-ess__deco somna-ess__deco--strips" aria-hidden="true"></span>
   <div class="somna-ess__inner">
-    <span class="somna-ess__deco somna-ess__deco--dots-left" aria-hidden="true"></span>
-    <span class="somna-ess__deco somna-ess__deco--dots-right" aria-hidden="true"></span>
 
     {%- if section.settings.heading != blank -%}
       <h2 class="somna-ess__title">{{ section.settings.heading }}</h2>
@@ -284,47 +280,7 @@
     }
   }
 
-  /* Decorations from the Figma frame: blue tape (left edge), yellow dots, red/blue strips (right edge).
-     Out of the layout flow and can't be tapped. */
-  .somna-ess__deco {
-    position: absolute;
-    z-index: 2;
-    display: block;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    pointer-events: none;
-  }
-
-  .somna-ess__deco--tape {
-    top: calc(var(--ess-pad-top) - 5px);
-    left: 0;
-    width: 33px;
-    height: 49px;
-  }
-
-  .somna-ess__deco--dots-left,
-  .somna-ess__deco--dots-right {
-    width: 14px;
-    height: 10px;
-  }
-
-  .somna-ess__deco--dots-left {
-    top: -15px;
-    left: 42px;
-  }
-
-  .somna-ess__deco--dots-right {
-    top: 28px;
-    right: 9px;
-  }
-
-  .somna-ess__deco--strips {
-    top: calc(var(--ess-pad-top) + 179px);
-    right: 0;
-    width: 39px;
-    height: 73px;
-  }
-
+ 
   /* ---------- Tablet ---------- */
   @media screen and (min-width: 750px) {
     .somna-ess__inner {
