@@ -824,6 +824,9 @@
 }
 
 @media screen and (min-width: 990px) {
+  .hz-slider-track{
+    position: relative;
+  }
   .hz-slider-section .hz-slider-viewport,
   .hz-slider-section .hz-slider-track > .hz-card-outer {
     position: relative;
