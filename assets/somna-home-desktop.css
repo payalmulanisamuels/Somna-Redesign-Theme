@@ -266,7 +266,7 @@
     letter-spacing: 0.04em;
   }
    .bundle-card--featured .bundle-card__image {
-    height: clamp(210px,34vw,210px);
+    height: 100%;
     object-fit: cover;
   }
 
