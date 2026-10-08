@@ -757,7 +757,7 @@
             "font_size_tablet": "",
             "font_size_desktop": "0.875rem",
             "width": "custom",
-            "custom_width": 100,
+            "custom_width": 45,
             "width_mobile": "custom",
             "custom_width_mobile": 100,
             "height_desktop": 46,
