@@ -828,7 +828,8 @@
   .hz-slider-section .hz-slider-track > .hz-card-outer {
     position: relative;
   }
-.hz-slider-section .hz-slider-track,
+.hz-slider-section .hz-slider-track:before,
+.hz-slider-section .hz-slider-track:after,
   .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::before,
   .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after,
   .hz-slider-section .hz-slider-viewport::after {
