@@ -1138,6 +1138,11 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 
 
 @media(min-width:768px){
+  .hero__container {
+    padding: 100px 0 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
   .hz-hiw-section {
     padding: 150px 0 80px;
   }

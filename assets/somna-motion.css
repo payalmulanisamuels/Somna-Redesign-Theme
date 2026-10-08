@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Somna motion — calm, slow, restful.
+   1. Reveal on scroll (classes added by the small observer at the end of assets/custom.js)
+   2. Button hover / focus / press (sitewide)
+
+   Motion only: these rules change opacity, translate, scale, colour and shadow.
+   They never change size, spacing or position in the layout, so there is no layout shift.
+   Everything is switched off for visitors who ask their device for reduced motion.
+   Tune the whole feel here.
+   ========================================================================== */
+
+:root {
+  --sm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sm-reveal-duration: 700ms;
+  --sm-reveal-distance: 14px;
+  --sm-reveal-image-scale: 1.03;
+  --sm-stagger: 70ms;
+
+  --sm-hover-duration: 280ms;
+  --sm-hover-lift: -2px;
+  --sm-hover-shadow: 0 10px 22px -12px rgb(10 26 74 / 0.45);
+  --sm-press-scale: 0.98;
+  --sm-arrow-shift: 3px;
+  --sm-focus-color: #0a1a4a;
+}
+
+/* --------------------------------------------------------------------------
+   1. Reveal on scroll
+   The script only marks elements that start below the visible screen, so the
+   hero / LCP image and anything visible on load are never hidden.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .sm-reveal {
+    opacity: 0;
+    translate: 0 var(--sm-reveal-distance);
+  }
+
+  .sm-reveal--image {
+    translate: none;
+    scale: var(--sm-reveal-image-scale);
+  }
+
+  .sm-reveal.sm-in {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    transition: opacity var(--sm-reveal-duration) var(--sm-ease),
+      translate var(--sm-reveal-duration) var(--sm-ease),
+      scale var(--sm-reveal-duration) var(--sm-ease);
+    transition-delay: calc(var(--sm-i, 0) * var(--sm-stagger));
+    will-change: opacity, translate, scale;
+  }
+}
+
+@media print {
+  .sm-reveal {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Buttons
+   Disabled, sold-out (disabled), loading (aria-busy) and "added" states are
+   excluded, so their own styling and the theme's add-to-cart animation are untouched.
+   No pseudo-elements are added, so nothing can cover a button or block its clicks.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Smooth hover/press for every button; the add-to-cart button keeps its own transition list,
+     which already includes translate and scale. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.add-to-cart-button, .button-unstyled) {
+    transition-property: color, background-color, box-shadow, opacity, translate, scale, transform;
+    transition-duration: var(--sm-hover-duration);
+    transition-timing-function: var(--sm-ease);
+  }
+
+  :is(
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .hz-card-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-banner-btn
+    )
+    > svg:last-child {
+    transition: translate var(--sm-hover-duration) var(--sm-ease);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  /* Lift + soft shadow. .hz-card-btn and .hz-bundle-btn already lift with transform, so they only get the shadow. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .bundle-card__button,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+    translate: 0 var(--sm-hover-lift);
+  }
+
+  :is(
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(:disabled, [aria-disabled='true'], [aria-busy='true']):hover {
+    box-shadow: var(--sm-hover-shadow);
+  }
+
+  /* Theme buttons draw their border with an inset shadow, so keep it and add the soft shadow after it */
+  :is(.button, .button-secondary, .button-custom):not(
+      .button-unstyled,
+      :disabled,
+      [aria-disabled='true'],
+      [aria-busy='true'],
+      [data-added='true']
+    ):hover {
+    box-shadow: inset 0 0 0 var(--button-border-width, 0px) var(--button-border-color, transparent),
+      var(--sm-hover-shadow);
+  }
+
+  /* About 8% colour shift on theme buttons (only where the browser supports color-mix) */
+  @supports (color: color-mix(in srgb, red 50%, blue)) {
+    .button:not(.button-secondary, .button-unstyled, .button-custom, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+      --button-background-color: color-mix(in srgb, var(--color-primary-button-hover-background) 92%, #fff);
+    }
+
+    .button-secondary:not(:disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+      --button-background-color: color-mix(
+        in srgb,
+        var(--color-secondary-button-hover-background) 92%,
+        var(--color-secondary-button-hover-text)
+      );
+    }
+  }
+
+  /* Arrow nudges right */
+  :is(
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .hz-card-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-banner-btn
+    ):not(:disabled, [aria-busy='true']):hover
+    > svg:last-child,
+  .hz-card:hover .hz-card-btn > svg:last-child {
+    translate: var(--sm-arrow-shift) 0;
+  }
+}
+
+/* Keyboard focus: the same lift and a clear outline */
+:is(
+    .hz-banner-btn,
+    .hz-card-btn,
+    .bundle-card__button,
+    .hz-bundle-btn,
+    .somna-offer__button,
+    .somna-sleep-bundle__button,
+    .hz-upsell-add-btn
+  ):focus-visible {
+  outline: 2px solid var(--sm-focus-color);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .bundle-card__button,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):focus-visible {
+    translate: 0 var(--sm-hover-lift);
+  }
+
+  /* Gentle press. The add-to-cart button keeps the theme's own press. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.add-to-cart-button, .button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true']):active {
+    scale: var(--sm-press-scale);
+  }
+}

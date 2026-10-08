@@ -423,11 +423,7 @@
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
-  .hero__container {
-    padding: 100px 0 80px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  
   /* Newsletter text on tablets (shared). From 990px the blocks' own desktop
      font-size setting applies, so it isn't overridden here. */
   #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz,
