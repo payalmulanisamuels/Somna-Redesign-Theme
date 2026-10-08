@@ -258,3 +258,44 @@
     --sm-hero-delay: calc(var(--sm-hero-step) * 2);
   }
 }
+
+/* --------------------------------------------------------------------------
+   4. Image settle on scroll (like drinkohza.com's category tiles)
+   Images inside cropped frames start very slightly zoomed and ease to normal
+   size as they scroll into view. Scale only, inside frames that already crop
+   (overflow: hidden), so nothing moves in the layout.
+   CSS scroll-driven animation: no JavaScript. Browsers without support
+   (and reduced-motion visitors) simply see the normal, still image.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-settle-scale: 1.08;
+}
+
+@keyframes sm-settle {
+  from {
+    scale: var(--sm-settle-scale);
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The frame is what we track; the image inside it is what settles */
+    .bundle-card__image-wrapper,
+    .somna-sleep-bundle__media,
+    layered-slideshow-component {
+      view-timeline-name: --sm-settle;
+    }
+
+    .bundle-card__image-wrapper img,
+    .somna-sleep-bundle__media img,
+    .layered-slideshow__panel-content > .layered-slideshow__image {
+      animation: sm-settle linear both;
+      animation-timeline: --sm-settle;
+      animation-range: entry 0% cover 50%;
+    }
+  }
+}
