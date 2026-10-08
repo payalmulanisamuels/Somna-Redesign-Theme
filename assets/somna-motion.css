@@ -829,8 +829,8 @@
     position: relative;
   }
 
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::before,
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after,
+  .hz-slider-section .hz-slider-track::before,
+  .hz-slider-section .hz-slider-track::after,
   .hz-slider-section .hz-slider-viewport::after {
     content: '';
     position: absolute;
