@@ -22,6 +22,111 @@
 
 @media screen and (min-width: 750px) {
 
+    .bundle-card__title {
+        font-size: 22px;
+    }
+    .bundle-subtext {
+        font-size: 16px;
+        max-width: calc(100% - 90px);
+        margin-top: 11px;
+        line-height: 1.2;
+    }
+
+    .bundle-card__price {
+        font-size: 22px;
+    }
+
+    .bundle-card__subtext {
+        font-size: 16px;
+    }
+    .header-logo span[data-testid=header-logo] {
+        max-width: 173px;
+    }
+    .header__column--right {
+        gap: 37px !important;
+    }
+    .header-actions__action:not(.account-button) svg {
+        width: 28px;
+        height: 28px;
+    }
+    .menu-list__link {
+    --menu-top-level-font-size-desktop: 16px;
+    }
+    h2.custom-header {
+        font-size: 32px !important;
+    }
+    p.announcement-bar__text{
+        font-size: 14px;
+    }
+    .header__columns {
+        --header-padding: 20px;
+    }
+    .product-details {
+        margin-top: 40px;
+    }
+    .bg_image {
+        height: 265px;
+        top: -50px;
+    }
+    .wave-container {
+        height: 80px;
+    }
+    .wave-container.bottom {
+        bottom: -80px;
+    }
+    .wave-container.top {
+        top: -70px;
+        z-index: 1;
+    }
+    h2.hz-banner-heading {
+        font-size: 50px;
+    }
+    a.hz-banner-btn {
+        font-size: 32px;
+        padding: 20px 40px;
+        margin-top: 20px;
+    }
+    .accordion .details__header {
+        font-size: 22px !important;
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+    li.menu__item.paragraph a {
+        font-size: 18px;
+    }
+    .footer-content summary.menu__heading.h5 {
+        font-size: 20px;
+    }
+    .shopify-section-group-footer-group:last-child .footer-content {
+        display: block;
+    }
+    .header__columns:has(.header__column--center header-menu){
+        justify-content: space-between;
+    }
+    .header__columns:has(.header__column--center header-menu) .header__column--left{
+        flex: none;
+    }
+    .review_content {
+    font-size: 16px;
+    }
+    .review_content svg {
+    height: 18px;
+    width: 85px;
+    }
+    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+        font-size: 18px !important;
+        height: 40px !important;
+    }
+    .klaviyo-form .klaviyo-form-button {
+        height: 23px !important;
+        font-size: 18px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    .footer-content .shopify-block.shopify-app-block {
+        max-width: 400px;
+        margin-bottom: 45px;
+     }
   /* ---------- Hero ---------- */
   #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
     /* Desktop hero image is 2.5:1 — size the hero to the image, not the viewport */
