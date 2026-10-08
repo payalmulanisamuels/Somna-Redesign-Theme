@@ -1146,3 +1146,45 @@
     animation: sm-cd-rock 4.2s ease-in-out infinite;
   }
 }
+
+/* --------------------------------------------------------------------------
+   10. "Breathe through your nose" banner (Layered image with text): text entrance
+   Added as a new block; nothing above is changed. Desktop, tablet and mobile.
+   The heading, then the text (and any button) fade in and rise one after another
+   as the banner scrolls into view, like the other homepage sections.
+   Uses the banner's existing scroll timeline from section 4 (--sm-settle, on
+   layered-slideshow-component), so the photo settle and the text move together.
+   Motion only (opacity + translate): no change to size, spacing or position,
+   and the theme's own tab/slide transition on .layered-slideshow__content is untouched.
+   CSS only, no JavaScript. Browsers without scroll-driven animation support and
+   reduced-motion visitors simply see the text as normal.
+   -------------------------------------------------------------------------- */
+@keyframes sm-lt-rise {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    layered-slideshow-component .layered-slideshow__content .group-block-content > :not(.somna-float) {
+      animation: sm-lt-rise ease-out both;
+      animation-timeline: --sm-settle;
+      animation-range: entry 35% entry 85%;
+    }
+
+    layered-slideshow-component .layered-slideshow__content .group-block-content > :nth-child(2 of :not(.somna-float)) {
+      animation-range: entry 55% entry 100%;
+    }
+
+    layered-slideshow-component .layered-slideshow__content .group-block-content > :nth-child(n + 3 of :not(.somna-float)) {
+      animation-range: entry 65% entry 100%;
+    }
+  }
+}
