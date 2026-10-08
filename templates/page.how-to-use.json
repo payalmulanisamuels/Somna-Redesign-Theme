@@ -246,7 +246,7 @@
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 10,
-            "background_color": "",
+            "background_color": "#E0E8D7",
             "toggle_overlay": false,
             "overlay_color": "#00000026",
             "overlay_style": "solid",
@@ -387,7 +387,6 @@
       ],
       "name": "Steps Guide",
       "settings": {
-        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
         "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
         "bg_color": "#e0e8d7",
         "show_waves": false,
