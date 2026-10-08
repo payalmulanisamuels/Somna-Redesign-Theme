@@ -299,3 +299,114 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   5. Floating images (like drinkohza.com's floating fruit)
+   Added in the theme editor with the "Floating image" block (blocks/somna-float.liquid)
+   in the hero and in the "Breathe through your nose" banner.
+   Taken out of the layout flow (position: absolute) and can't be clicked,
+   so nothing in the section moves and every button still works.
+   Motion: a slow float up and down, plus a gentle drift as the page scrolls.
+   Reduced-motion visitors see the images standing still.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-float-duration: 7s;
+  --sm-float-distance: 10px;
+  --sm-float-tilt: 2deg;
+}
+
+.somna-float {
+  position: absolute;
+  top: var(--sf-y-m, 12%);
+  left: var(--sf-x-m, 85%);
+  z-index: 0;
+  width: var(--sf-w-m, 64px);
+  max-width: none;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  rotate: var(--sf-rotate, 0deg);
+  pointer-events: none;
+}
+
+@media screen and (min-width: 750px) {
+  .somna-float {
+    top: var(--sf-y, 20%);
+    left: var(--sf-x, 85%);
+    width: var(--sf-w, 120px);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .somna-float--desktop-only {
+    display: none;
+  }
+}
+
+/* Reset the image rules some sections apply to every image inside them (e.g. the banner's full-cover image) */
+.somna-float .somna-float__image {
+  position: relative;
+  inset: auto;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+}
+
+.somna-float--round .somna-float__image {
+  aspect-ratio: 1;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 16px 32px -16px rgb(10 26 74 / 0.5);
+}
+
+.somna-float__placeholder {
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 50%;
+  background: rgb(10 26 74 / 0.08);
+  opacity: 0.8;
+}
+
+@keyframes sm-float-bob {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: calc(var(--sm-float-tilt) * -1);
+  }
+
+  50% {
+    translate: 0 calc(var(--sm-float-distance) * -1);
+    rotate: var(--sm-float-tilt);
+  }
+}
+
+@keyframes sm-float-drift {
+  from {
+    translate: 0 calc(var(--sf-depth, 0px) * 0.5);
+  }
+
+  to {
+    translate: 0 calc(var(--sf-depth, 0px) * -0.5);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .somna-float--bob .somna-float__image {
+    animation: sm-float-bob var(--sm-float-duration) ease-in-out var(--sf-bob-delay, 0s) infinite;
+  }
+
+  /* Drift on scroll: CSS scroll-driven animation, no JavaScript. Browsers without support just skip it. */
+  @supports (animation-timeline: view()) {
+    .shopify-section:has(.somna-float) {
+      view-timeline-name: --sm-float;
+    }
+
+    .somna-float {
+      animation: sm-float-drift linear both;
+      animation-timeline: --sm-float;
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
