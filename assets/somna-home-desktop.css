@@ -209,6 +209,7 @@
   }
    .bundle-card__image-wrapper {
     border-radius: 12px;
+    height: clamp(210px,34vw,210px);
   }
    .bundle-card__content {
     flex: 1;
