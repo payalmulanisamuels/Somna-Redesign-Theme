@@ -597,7 +597,6 @@
         "padding_bottom": 28,
         "padding_top_desktop": 100,
         "padding_bottom_desktop": 30,
-        "content_width_desktop": 1280,
         "image_width_desktop": 50,
         "title_size_desktop": 32,
         "subtitle_size_desktop": 16,
@@ -612,7 +611,7 @@
       ],
       "name": "Comparison Simple",
       "settings": {
-        "background_image": "shopify://shop_images/Subtract-howtouse.png",
+        "background_image": "shopify://shop_images/Subtract_9e7cc6d3-e952-45d6-933b-5adfa93be4d9.png",
         "heading": "Settling In",
         "subheading": "<p>Most people notice it feels routine within the first week. If anything feels wrong too tight, too irritating, not holding reposition or size down before deciding it's not for you. You have 30 nights to find out either way.</p>",
         "padding_top": 20,
