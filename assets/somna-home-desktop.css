@@ -192,6 +192,9 @@
   #MainContent:is([data-template="index"], [data-template^="collection"]) h2.custom-header {
     margin: 0 0 clamp(24px, 2.6vw, 40px);
   }
+  .bundle-section__grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   #MainContent:is([data-template="index"], [data-template^="collection"]) .bundle-section__grid {
     gap: clamp(16px, 1.8vw, 24px);
   }

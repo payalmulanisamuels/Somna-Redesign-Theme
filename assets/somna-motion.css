@@ -696,3 +696,286 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   8. Nasal Strips / Mouth Tape cards: bouncing cut-outs and icons (desktop only)
+   Added as a new block; nothing above is changed. Self-contained: own keyframes
+   (sm-cd-*), own colour and its own scroll timeline (--sm-cdeco).
+   - Night (black) strip on the left edge of the first card
+   - Breathe (blue) tape on the right edge of the second card
+   - A twinkling sparkle on the first card and a rocking moon on the second card
+   - A few soft yellow dots in the side margins
+   Images: assets/somna-deco-strip-black.webp, somna-deco-tape-blue.webp,
+   somna-deco-sparkle.svg and somna-deco-moon.svg.
+   Pseudo-elements that can't be clicked (clicks pass straight through to the card)
+   and take no space, so the cards and layout are exactly as before.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-cd-dot: #efd27a;
+  --sm-cd-bounce: 18px;
+}
+
+@keyframes sm-cd-bounce {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  38% {
+    translate: 0 calc(var(--sm-cd-bounce) * -1);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  58% {
+    translate: 0 0;
+    scale: 1.06 0.92;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  68% {
+    translate: 0 calc(var(--sm-cd-bounce) * -0.3);
+    scale: 0.98 1.02;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  78% {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes sm-cd-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.3);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-12px) scale(1.12);
+  }
+
+  75% {
+    transform: translateY(4px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sm-cd-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+    scale: 0.7;
+    rotate: 0deg;
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1.1;
+    rotate: 45deg;
+  }
+}
+
+@keyframes sm-cd-rock {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -10deg;
+  }
+
+  50% {
+    translate: 0 -6px;
+    rotate: 8deg;
+  }
+}
+
+@keyframes sm-cd-dots {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@keyframes sm-cd-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hz-slider-section .hz-slider-viewport,
+  .hz-slider-section .hz-slider-track > .hz-card-outer {
+    position: relative;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::before,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after,
+  .hz-slider-section .hz-slider-viewport::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Black strip: half over the first card's left edge */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+    top: 16%;
+    left: -64px;
+    width: 128px;
+    height: 43px;
+    rotate: -24deg;
+    background-image: url('somna-deco-strip-black.webp');
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.3));
+  }
+
+  /* Sparkle: top-right corner of the first card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    top: 22px;
+    right: 26px;
+    width: 26px;
+    height: 26px;
+    background-image: url('somna-deco-sparkle.svg');
+  }
+
+  /* Blue tape: half over the second card's right edge */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+    right: -52px;
+    bottom: 14%;
+    width: 104px;
+    height: 44px;
+    rotate: 18deg;
+    background-image: url('somna-deco-tape-blue.webp');
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.3));
+  }
+
+  /* Moon: top-right corner of the second card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    top: 20px;
+    right: 26px;
+    width: 34px;
+    height: 34px;
+    background-image: url('somna-deco-moon.svg');
+    filter: drop-shadow(0 4px 8px rgb(239 210 122 / 0.5));
+  }
+
+  /* Soft yellow dots in the side margins */
+  .hz-slider-section .hz-slider-viewport::after {
+    inset: 0 -110px;
+    z-index: 0;
+    background-image: radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%);
+    background-size: 14px 14px, 9px 9px, 12px 12px, 17px 17px;
+    background-position: left 44px top 70%, left 76px top 86%, right 52px top 14%, right 30px top 30%;
+    opacity: 0.9;
+  }
+}
+
+@media screen and (min-width: 990px) and (prefers-reduced-motion: no-preference) {
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+    animation: sm-cd-bounce 3.4s -0.8s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+    animation: sm-cd-bounce 3.8s -2.2s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    animation: sm-cd-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    animation: sm-cd-rock 4.2s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-viewport::after {
+    animation: sm-cd-dots 2.8s ease-in-out -1.2s infinite;
+  }
+
+  /* Pop-in as the cards scroll into view. The timeline sits on the Shopify section
+     wrapper, because the cards section itself crops with overflow: hidden. */
+  @supports (animation-timeline: view()) {
+    .shopify-section:has(> .hz-slider-section) {
+      view-timeline-name: --sm-cdeco;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+      animation-name: sm-cd-bounce, sm-cd-pop;
+      animation-duration: 3.4s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: -0.8s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 10% entry 60%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+      animation-name: sm-cd-bounce, sm-cd-pop;
+      animation-duration: 3.8s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: -2.2s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 30% entry 80%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+      animation-name: sm-cd-twinkle, sm-cd-pop;
+      animation-duration: 2.4s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 20% entry 70%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+      animation-name: sm-cd-rock, sm-cd-pop;
+      animation-duration: 4.2s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 35% entry 85%;
+    }
+
+    .hz-slider-section .hz-slider-viewport::after {
+      animation-name: sm-cd-dots, sm-cd-fade-in;
+      animation-duration: 2.8s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: -1.2s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 15% entry 65%;
+    }
+  }
+}
