@@ -69,10 +69,10 @@
         top: -50px;
     }
     .wave-container {
-        height: 80px;
+        height: 100px;
     }
     .wave-container.bottom {
-        bottom: -80px;
+      bottom: -95px;
     }
     .wave-container.top {
         top: -70px;
