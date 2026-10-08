@@ -1026,7 +1026,6 @@
         "card_XExw3D",
         "card_f7AQym"
       ],
-      "disabled": true,
       "name": "Custom Cards Slider",
       "settings": {
         "bg_color": "{{ settings.color_palette.background }}",
