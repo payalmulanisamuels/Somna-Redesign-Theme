@@ -841,7 +841,7 @@
   }
 
   /* Black strip: half over the first card's left edge */
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+  .hz-slider-section .hz-slider-track::before {
     top: 16%;
     left: -64px;
     width: 128px;
@@ -852,7 +852,7 @@
   }
 
   /* Sparkle: top-right corner of the first card */
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+  .hz-slider-section .hz-slider-track::after {
     top: 22px;
     right: 26px;
     width: 26px;
