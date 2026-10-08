@@ -585,7 +585,7 @@
       "settings": {
         "product": "",
         "bg_color": "{{ settings.color_palette.background }}",
-        "image": "shopify://shop_images/The_breathe_bundle.png",
+        "image": "shopify://shop_images/strip-tape.png",
         "title": "Using Them Together",
         "subtitle": "Clean, dry skin nose and lips. Apply the strip, then the tape, as the last step before lights out. Give it a few nights to feel like routine, not a new habit.",
         "sub_price_override": "",
