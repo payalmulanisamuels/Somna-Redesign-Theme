@@ -842,7 +842,7 @@
   }
 
   /* Black strip: half over the first card's left edge */
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+  .hz-slider-section .hz-slider-track:nth-child(1)::before {
     top: 16%;
     left: -64px;
     width: 128px;
