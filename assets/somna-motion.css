@@ -570,7 +570,7 @@
      100vw includes the scrollbar, so keep about 17px extra clear of the edge. */
   section[class^='bundle-section-'] .bundle-section__grid::before {
     top: calc(71px - var(--sm-deco-tape-h) / 2);
-    right: calc(50% - 50vw + 17px + 84px - var(--sm-deco-tape-w) / 2);
+    right: calc(45% - 50vw + 17px + 84px - var(--sm-deco-tape-w) / 2);
     width: var(--sm-deco-tape-w);
     height: var(--sm-deco-tape-h);
     rotate: 14deg;
