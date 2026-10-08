@@ -980,3 +980,169 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   9. Mobile version of the bouncing cut-outs (sections 6 and 8), phones only (up to 749px)
+   Added as a new block; nothing above is changed. Same images and the same bounce
+   as desktop, made mobile-friendly:
+   - smaller cut-outs and about half the bounce height
+   - fewer, smaller dots
+   - no scroll-linked pop-in on phones: the loops run on the graphics chip only,
+     so scrolling stays smooth and the page script does no extra work
+   - everything stays inside the screen width, so there is no sideways scroll
+   Pseudo-elements that can't be tapped (taps pass straight through) and take no
+   space, so the mobile layout is exactly as before. Reduced-motion visitors see
+   the cut-outs standing still.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  /* ---- "Start with a bundle": blue strip left of the heading, red tape right of it, a few dots ---- */
+  section[class^='bundle-section-'] {
+    isolation: isolate;
+  }
+
+  section[class^='bundle-section-'] .custom-header,
+  section[class^='bundle-section-'] .bundle-section__grid {
+    position: relative;
+  }
+
+  section[class^='bundle-section-'] .custom-header::before,
+  section[class^='bundle-section-'] .custom-header::after,
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Blue nasal strip: left side of the heading */
+  section[class^='bundle-section-'] .custom-header::before {
+    --sm-deco-bounce: 9px;
+    top: calc(50% - 12px);
+    left: calc(50% - 50vw + 12px);
+    width: 66px;
+    height: 23px;
+    rotate: -16deg;
+    background-image: url('somna-deco-strip.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.18));
+  }
+
+  /* Red mouth tape: right side of the heading */
+  section[class^='bundle-section-'] .custom-header::after {
+    --sm-deco-bounce: 8px;
+    top: calc(50% - 12px);
+    right: calc(50% - 50vw + 12px);
+    width: 56px;
+    height: 24px;
+    rotate: 14deg;
+    background-image: url('somna-deco-tape.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.18));
+  }
+
+  /* Three small dots around the strip and tape (kept clear of the heading text) */
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-image: radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%);
+    background-size: 9px 9px, 6px 6px, 8px 8px;
+    background-position: left 58px top 2px, left 30px top 54px, right 40px top 54px;
+    opacity: 0.9;
+  }
+
+  /* ---- Nasal Strips / Mouth Tape cards ----
+     On phones the cards scroll sideways and crop their edges, so:
+     - the black strip and blue tape sit on the section's corners (they stay put while the cards swipe)
+     - the sparkle and moon sit inside the top-right corner of the first two cards */
+  .shopify-section:has(> .hz-slider-section) {
+    position: relative;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::before,
+  .shopify-section:has(> .hz-slider-section)::after,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Black strip: over the top-left corner of the first card */
+  .shopify-section:has(> .hz-slider-section)::before {
+    --sm-cd-bounce: 8px;
+    top: 8px;
+    left: 4px;
+    width: 64px;
+    height: 22px;
+    rotate: -20deg;
+    background-image: url('somna-deco-strip-black.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.25));
+  }
+
+  /* Blue tape: over the bottom-right corner of the slider */
+  .shopify-section:has(> .hz-slider-section)::after {
+    --sm-cd-bounce: 8px;
+    right: 6px;
+    bottom: 10px;
+    width: 54px;
+    height: 23px;
+    rotate: 16deg;
+    background-image: url('somna-deco-tape-blue.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.25));
+  }
+
+  /* Sparkle: top-right corner of the first card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    top: 12px;
+    right: 14px;
+    width: 18px;
+    height: 18px;
+    background-image: url('somna-deco-sparkle.svg');
+  }
+
+  /* Moon: top-right corner of the second card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    top: 12px;
+    right: 14px;
+    width: 22px;
+    height: 22px;
+    background-image: url('somna-deco-moon.svg');
+    filter: drop-shadow(0 3px 6px rgb(239 210 122 / 0.5));
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  section[class^='bundle-section-'] .custom-header::before {
+    animation: sm-deco-bounce 3.2s infinite;
+  }
+
+  section[class^='bundle-section-'] .custom-header::after {
+    animation: sm-deco-bounce 3.6s -1.4s infinite;
+  }
+
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    animation: sm-cd-dots 2.8s ease-in-out -0.6s infinite;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::before {
+    animation: sm-cd-bounce 3.4s -0.8s infinite;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::after {
+    animation: sm-cd-bounce 3.8s -2.2s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    animation: sm-cd-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    animation: sm-cd-rock 4.2s ease-in-out infinite;
+  }
+}
