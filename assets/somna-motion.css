@@ -824,16 +824,13 @@
 }
 
 @media screen and (min-width: 990px) {
-  .hz-slider-track{
-    position: relative;
-  }
   .hz-slider-section .hz-slider-viewport,
   .hz-slider-section .hz-slider-track > .hz-card-outer {
     position: relative;
   }
-
-  .hz-slider-section .hz-slider-track::before,
-  .hz-slider-section .hz-slider-track::after,
+.hz-slider-section .hz-slider-track,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::before,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after,
   .hz-slider-section .hz-slider-viewport::after {
     content: '';
     position: absolute;
@@ -844,7 +841,7 @@
   }
 
   /* Black strip: half over the first card's left edge */
-  .hz-slider-section .hz-slider-track::before {
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
     top: 16%;
     left: -64px;
     width: 128px;
@@ -855,7 +852,7 @@
   }
 
   /* Sparkle: top-right corner of the first card */
-  .hz-slider-section .hz-slider-track::after {
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
     top: 22px;
     right: 26px;
     width: 26px;
@@ -864,7 +861,7 @@
   }
 
   /* Blue tape: half over the second card's right edge */
-  .hz-slider-section .hz-slider-track::before {
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
     right: -52px;
     bottom: 14%;
     width: 104px;
