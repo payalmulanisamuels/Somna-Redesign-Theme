@@ -34,7 +34,8 @@
             "padding-inline-end": 0,
             "image_ratio_desktop": "2 / 1",
             "border_radius_desktop": 29,
-            "border_corners_desktop": "bottom"
+            "border_corners_desktop": "bottom",
+            "visibility": "all"
           },
           "blocks": {}
         },
@@ -75,10 +76,13 @@
             "padding-block-end": 0,
             "padding-inline-start": 15,
             "padding-inline-end": 15,
-            "align_page_width_desktop": true,
-            "gap_desktop": 0,
             "padding-inline-start-desktop": 0,
-            "padding-inline-end-desktop": 0
+            "padding-inline-end-desktop": 0,
+            "gap_desktop": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": true,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "text_LhHWcH": {
@@ -105,7 +109,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -137,6 +145,7 @@
                 "font_desktop": "var(--font-heading--family)",
                 "font_weight_desktop": "400",
                 "line_height_desktop": "1.4",
+                "letter_spacing_desktop": "",
                 "max_width_desktop": 430
               },
               "blocks": {}
@@ -165,7 +174,10 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
                 "line_height_desktop": "1.5",
+                "letter_spacing_desktop": "",
                 "max_width_desktop": 590,
                 "padding-block-start-desktop": 6
               },
@@ -212,8 +224,9 @@
         "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 40,
-        "stack_desktop": true,
         "gap_desktop": 19,
+        "stack_desktop": true,
+        "align_items_desktop": "",
         "content_width_desktop": "80rem"
       }
     },
@@ -224,14 +237,14 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Breathe_Easier.png",
+            "image_1": "shopify://shop_images/strip-new.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-end",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 10,
             "background_color": "",
             "toggle_overlay": false,
@@ -244,8 +257,8 @@
             "padding-inline-end": 25,
             "padding-block-start-desktop": 40,
             "padding-block-end-desktop": 96,
-            "gap_desktop": 10,
-            "padding-inline-start-desktop": 58
+            "padding-inline-start-desktop": 58,
+            "gap_desktop": 10
           },
           "blocks": {
             "text_QmeLq9": {
@@ -305,7 +318,10 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
                 "line_height_desktop": "1.5",
+                "letter_spacing_desktop": "",
                 "max_width_desktop": 324
               },
               "blocks": {}
@@ -384,8 +400,8 @@
         "image_gap_desktop": 8,
         "title_size_desktop": 15,
         "note_size_desktop": 15,
-        "arrow_size_desktop": 14,
-        "note_width_desktop": 470
+        "note_width_desktop": 470,
+        "arrow_size_desktop": 14
       }
     },
     "layered_image_with_text_BndA69": {
@@ -395,14 +411,14 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/Quiet_Nights.png",
+            "image_1": "shopify://shop_images/tap-new.png",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-end",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 10,
             "background_color": "",
             "toggle_overlay": false,
@@ -415,8 +431,8 @@
             "padding-inline-end": 5,
             "padding-block-start-desktop": 40,
             "padding-block-end-desktop": 96,
-            "gap_desktop": 10,
-            "padding-inline-end-desktop": 58
+            "padding-inline-end-desktop": 58,
+            "gap_desktop": 10
           },
           "blocks": {
             "text_QLq86c": {
@@ -476,7 +492,10 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
                 "line_height_desktop": "1.5",
+                "letter_spacing_desktop": "",
                 "max_width_desktop": 324
               },
               "blocks": {}
@@ -556,8 +575,8 @@
         "image_gap_desktop": 8,
         "title_size_desktop": 15,
         "note_size_desktop": 15,
-        "arrow_size_desktop": 14,
-        "note_width_desktop": 640
+        "note_width_desktop": 640,
+        "arrow_size_desktop": 14
       }
     },
     "bundle_feature_banner_Qrgcy3": {
@@ -640,7 +659,8 @@
             "padding-inline-end": 0,
             "font_desktop": "var(--font-heading--family)",
             "font_weight_desktop": "500",
-            "line_height_desktop": "1.1"
+            "line_height_desktop": "1.1",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -702,7 +722,10 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
-                    "line_height_desktop": "1.5"
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "1.5",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -744,7 +767,10 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
-                    "line_height_desktop": "1.5"
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "1.5",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -788,7 +814,10 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
-                    "line_height_desktop": "1.5"
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "1.5",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -832,7 +861,10 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
-                    "line_height_desktop": "1.5"
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "1.5",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -876,7 +908,10 @@
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
-                    "line_height_desktop": "1.5"
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "1.5",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -933,6 +968,8 @@
         "padding-block-start-desktop": 30,
         "padding-block-end-desktop": 34,
         "gap_desktop": 18,
+        "stack_desktop": false,
+        "align_items_desktop": "",
         "content_width_desktop": "80rem"
       }
     }
