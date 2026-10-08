@@ -862,7 +862,7 @@
   }
 
   /* Blue tape: half over the second card's right edge */
-  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+  .hz-slider-section .hz-slider-track::before {
     right: -52px;
     bottom: 14%;
     width: 104px;
