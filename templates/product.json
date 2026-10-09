@@ -603,7 +603,7 @@
         "padding-block-end": 0
       }
     },
-    "section_zELtyM": {
+   "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -1221,7 +1221,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon_bg.svg",
+        "bg_image": "shopify://shop_images/Yellow_BG-new.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -1234,7 +1234,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#FAF2DF",
+        "background_color": "#ffffff",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
