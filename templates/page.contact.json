@@ -1837,7 +1837,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/contact-footer.png",
+        "bg_image": "shopify://shop_images/top-wave.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
