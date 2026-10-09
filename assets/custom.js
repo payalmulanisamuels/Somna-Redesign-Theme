@@ -246,3 +246,149 @@ if(document.querySelector(".hz-banner-btn")){
   document.addEventListener('shopify:section:select', (event) => revealAll(event.target));
   document.addEventListener('shopify:block:select', (event) => revealAll(event.target.closest('.shopify-section')));
 })();
+
+
+/* ==========================================================================
+   Somna motion: extra reveal on scroll (added; nothing above is changed)
+   Same fade-up as the reveal above (styles: .sm-reveal in assets/somna-motion.css),
+   for content the reveal above leaves out, on every page:
+   - the banner text ("It's simple. Breathe through your nose.")
+   - FAQ / accordion rows (the check above skips them because of their +/- icons)
+   - the "Shop the essentials" heading and cards
+   - any heading, text, image, card or column it skipped for the same icon reason
+   Only content that starts below the screen is hidden, so the hero / LCP and
+   anything visible on load are never affected. Each element animates once and
+   its classes are removed again. Off for prefers-reduced-motion.
+   Light on PageSpeed: one IntersectionObserver, set up after the page has loaded
+   (in idle time), no scroll listeners, and only opacity / translate change.
+   ========================================================================== */
+(() => {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ITEMS = [
+    '.layered-slideshow__content .group-block-content > :not(.somna-float)',
+    'accordion-custom',
+    '.somna-ess__title',
+    '.somna-ess__card',
+    '.custom-header',
+    '.text-block',
+    '.image-block',
+    'product-card',
+    '.collection-card',
+    '.bundle-card',
+    '.somna-sleep-bundle__card',
+    '.layout-panel-flex--row > .group-block',
+  ].join(',');
+  const SKIP = [
+    'header',
+    'footer',
+    'dialog',
+    '[role="dialog"]',
+    'theme-drawer',
+    'slideshow-component',
+    'marquee-component',
+    'media-gallery',
+    'product-form-component',
+    'variant-picker',
+    'sticky-add-to-cart',
+    '.hz-slider-track',
+    '.details-content',
+    '.shopify-app-block',
+    '[data-no-motion]',
+  ].join(',');
+
+  const finish = (el) => {
+    el.classList.remove('sm-reveal', 'sm-in');
+    el.style.removeProperty('--sm-i');
+  };
+
+  const show = (el, index) => {
+    if (!el.classList.contains('sm-reveal') || el.classList.contains('sm-in')) return;
+    if (index) el.style.setProperty('--sm-i', String(index));
+    el.classList.add('sm-in');
+    const onEnd = (event) => {
+      if (event.target !== el || event.propertyName !== 'opacity') return;
+      el.removeEventListener('transitionend', onEnd);
+      finish(el);
+    };
+    el.addEventListener('transitionend', onEnd);
+    setTimeout(() => finish(el), 2000 + index * 150);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const perParent = new Map();
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        const parent = entry.target.parentElement;
+        const index = perParent.get(parent) || 0;
+        perParent.set(parent, index + 1);
+        show(entry.target, Math.min(index, 5));
+      }
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0 }
+  );
+
+  // Safe to move: not already moving, not fixed/sticky, and no positioned child that is
+  // placed against something outside it (that child would shift while it moves)
+  const canAnimate = (el) => {
+    const style = getComputedStyle(el);
+    if (
+      style.transform !== 'none' ||
+      style.translate !== 'none' ||
+      style.scale !== 'none' ||
+      style.animationName !== 'none' ||
+      style.position === 'fixed' ||
+      style.position === 'sticky' ||
+      parseFloat(style.opacity) !== 1
+    ) {
+      return false;
+    }
+    if (style.position === 'static') {
+      for (const child of el.querySelectorAll('*')) {
+        const position = getComputedStyle(child).position;
+        if (position === 'fixed') return false;
+        if (position === 'absolute' && !el.contains(child.offsetParent)) return false;
+      }
+    }
+    return true;
+  };
+
+  const init = (scope) => {
+    const main = document.getElementById('MainContent');
+    if (!main || !scope) return;
+    const firstSection = main.querySelector(':scope > .shopify-section');
+    const viewportHeight = window.innerHeight;
+    const root = main.contains(scope) || scope === main ? scope : main;
+
+    for (const el of root.querySelectorAll(ITEMS)) {
+      if (el.classList.contains('sm-reveal') || el.closest('.sm-reveal')) continue; // already handled
+      const section = el.closest('.shopify-section');
+      if (!section || section === firstSection || !main.contains(section)) continue;
+      if (section.querySelector('product-form-component')) continue;
+      if (el.closest(SKIP)) continue;
+      if (el.parentElement?.closest('.sm-reveal')) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.height === 0 || rect.top < viewportHeight) continue; // visible on load or above
+      if (!canAnimate(el)) continue;
+      el.classList.add('sm-reveal');
+      observer.observe(el);
+    }
+  };
+
+  const start = () => init(document.getElementById('MainContent'));
+  const later = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 200));
+  if (document.readyState === 'complete') later(start);
+  else window.addEventListener('load', () => later(start), { once: true });
+
+  // Theme editor: re-rendered sections get set up again; selected ones show straight away
+  document.addEventListener('shopify:section:load', (event) => init(event.target));
+  document.addEventListener('shopify:section:select', (event) =>
+    event.target.querySelectorAll('.sm-reveal:not(.sm-in)').forEach((el) => {
+      observer.unobserve(el);
+      show(el, 0);
+    })
+  );
+})();
