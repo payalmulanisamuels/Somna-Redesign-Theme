@@ -929,6 +929,120 @@
         if (message) emailInput.focus();
       }
 
+      // ---------- Unwanted email filter ----------
+      // Stops typos (gmail.con, gmail.coms, gmial.com), throwaway inboxes and obvious junk
+      // (ddddd@..., test@test.com) before they reach Klaviyo. For a typo it offers the fix.
+      const KNOWN_DOMAINS = [
+        'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.in', 'yahoo.co.uk', 'ymail.com',
+        'hotmail.com', 'hotmail.co.uk', 'outlook.com', 'outlook.in', 'live.com', 'msn.com',
+        'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me',
+        'rediffmail.com', 'zoho.com', 'gmx.com', 'mail.com', 'yandex.com', 'comcast.net',
+        'att.net', 'verizon.net', 'sbcglobal.net', 'bellsouth.net', 'cox.net', 'charter.net',
+        'email.com',
+      ];
+      // Big inbox providers whose misspellings are worth catching (gmial.com, yahooo.com ...)
+      const TYPO_TARGETS = [
+        'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.in', 'yahoo.co.uk', 'hotmail.com',
+        'hotmail.co.uk', 'outlook.com', 'icloud.com', 'rediffmail.com', 'protonmail.com',
+      ];
+      // Endings that are never real (.con, .coms, .cmo ...) and what they were meant to be
+      const BAD_ENDINGS = {
+        con: 'com', coms: 'com', comm: 'com', coom: 'com', cmo: 'com', ocm: 'com', cpm: 'com',
+        cim: 'com', xom: 'com', vom: 'com', clm: 'com', cok: 'com', comn: 'com',
+        nte: 'net', nett: 'net', ner: 'net', ogr: 'org', orgg: 'org', rog: 'org',
+      };
+      const THROWAWAY_DOMAINS = [
+        'mailinator.com', 'yopmail.com', 'guerrillamail.com', 'sharklasers.com', '10minutemail.com',
+        'tempmail.com', 'temp-mail.org', 'trashmail.com', 'getnada.com', 'dispostable.com',
+        'maildrop.cc', 'throwawaymail.com', 'fakeinbox.com', 'mintemail.com', 'mohmal.com',
+        'example.com', 'example.org', 'test.com', 'domain.com', 'email.test',
+      ];
+      const JUNK_NAMES = ['test', 'asdf', 'qwerty', 'abc', 'abcd', 'xyz', 'fake', 'noemail', 'none', 'null', 'sample', 'example'];
+
+      // Typing-mistake distance: one missing, extra, wrong or swapped letter counts as 1
+      function editDistance(a, b) {
+        const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+        for (let j = 1; j <= b.length; j++) d[0][j] = j;
+        for (let i = 1; i <= a.length; i++) {
+          for (let j = 1; j <= b.length; j++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost);
+            if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
+              d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+            }
+          }
+        }
+        return d[a.length][b.length];
+      }
+
+      // Returns null when the email looks fine, otherwise { message, suggestion? }
+      function checkEmailQuality(email) {
+        const at = email.lastIndexOf('@');
+        const name = email.slice(0, at).toLowerCase();
+        const domain = email.slice(at + 1).toLowerCase();
+        const labels = domain.split('.');
+        const ending = labels[labels.length - 1];
+
+        if (/^(.)\1{2,}$/.test(name) || JUNK_NAMES.includes(name)) {
+          return { message: 'Please enter your real email address.' };
+        }
+        if (THROWAWAY_DOMAINS.includes(domain)) {
+          return { message: 'Please use a permanent email address, not a temporary one.' };
+        }
+        // Gmail usernames are 6-30 letters/numbers (dots and +tags don't count)
+        if (domain === 'gmail.com' || domain === 'googlemail.com') {
+          const user = name.split('+')[0].replace(/\./g, '');
+          if (user.length < 6 || user.length > 30 || /[^a-z0-9]/.test(user)) {
+            return { message: 'Please check your email. Gmail addresses have at least 6 characters before the @.' };
+          }
+        }
+        if (KNOWN_DOMAINS.includes(domain)) return null;
+
+        // Close to a well-known provider: gmial.com, gmail.co, yahooo.com, hotmal.com ...
+        let best = null;
+        for (const known of TYPO_TARGETS) {
+          const distance = editDistance(domain, known);
+          const limit = known.length >= 11 ? 2 : 1;
+          if (distance <= limit && (!best || distance < best.distance)) best = { known, distance };
+        }
+        if (best) return { message: 'Please check your email.', suggestion: email.slice(0, at + 1) + best.known };
+
+        // Gmail only uses gmail.com
+        if (labels[0] === 'gmail' && domain !== 'gmail.com') {
+          return { message: 'Please check your email.', suggestion: email.slice(0, at + 1) + 'gmail.com' };
+        }
+        // Ending that doesn't exist: .con, .coms, .cmo ...
+        if (BAD_ENDINGS[ending]) {
+          const fixed = labels.slice(0, -1).concat(BAD_ENDINGS[ending]).join('.');
+          return { message: 'Please check your email.', suggestion: email.slice(0, at + 1) + fixed };
+        }
+        if (!/^[a-z]{2,24}$/.test(ending)) return { message: MESSAGES.invalid };
+        return null;
+      }
+
+      // Only suggest a fix that itself passes every check (e.g. never suggest a too-short Gmail)
+      function emailProblem(email) {
+        const problem = checkEmailQuality(email);
+        if (problem?.suggestion) return checkEmailQuality(problem.suggestion) || problem;
+        return problem;
+      }
+
+      // Shows "Please check your email. Did you mean name@gmail.com?" with the fix as a tap target
+      function showEmailProblem(problem) {
+        showError(problem.message);
+        if (!problem.suggestion) return;
+        const fix = document.createElement('button');
+        fix.type = 'button';
+        fix.textContent = problem.suggestion;
+        fix.style.cssText = 'background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;';
+        fix.addEventListener('click', () => {
+          emailInput.value = problem.suggestion;
+          showError('');
+          emailInput.focus();
+        });
+        errorBox.append(' Did you mean ', fix, '?');
+      }
+
       function showAlreadySubscribed() {
         form?.classList.add('somna-hidden');
         overlay.querySelector('#somna-screen-2 .somna-consent-text')?.classList.add('somna-hidden');
@@ -1086,6 +1200,12 @@
 
         if (!EMAIL_RE.test(email)) {
           showError(MESSAGES.invalid);
+          return;
+        }
+        const problem = emailProblem(email);
+        if (problem) {
+          track('email_rejected');
+          showEmailProblem(problem);
           return;
         }
         if (storage.get('localStorage', KEYS.signedUp)) {
