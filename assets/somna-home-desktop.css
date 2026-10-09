@@ -529,7 +529,6 @@
   /* FAQ (faq-accordion): same reading width as the homepage FAQ */
   #MainContent[data-template^="collection"] .hz-faq-wrapper .accordion {
     width: 100%;
-    max-width: 800px;
     justify-self: center;
   }
  
