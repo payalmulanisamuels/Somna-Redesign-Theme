@@ -1813,3 +1813,36 @@ main[data-template^='index'] {
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   14. One calm fade-up everywhere, like the reference video (all pages)
+   Added as a new block; nothing above is changed.
+   - The video timing from section 13 (40px rise, 1s fade, 0.14s stagger; phones
+     26px / 0.11s) now applies on every page, not only the homepage.
+   - The scroll-linked text entrances from sections 10, 12 and 13 (banner text,
+     "Small essentials" heading + columns, "Shop the essentials" heading + cards)
+     are switched off here, so those elements get the same timed fade-up as the
+     rest of the page instead (from the reveal scripts in assets/custom.js).
+     Their decorations (moon, fireflies, breathing icons, cut-outs, dividers) are untouched.
+   Motion only: sizes, spacing and positions are exactly as before.
+   -------------------------------------------------------------------------- */
+#MainContent {
+  --sm-reveal-duration: 1000ms;
+  --sm-reveal-distance: 40px;
+  --sm-stagger: 140ms;
+}
+
+@media screen and (max-width: 749px) {
+  #MainContent {
+    --sm-reveal-distance: 26px;
+    --sm-stagger: 110ms;
+  }
+}
+
+:root layered-slideshow-component .layered-slideshow__content .group-block-content > :not(.somna-float),
+:root .shopify-section[id$='__section_ibM3ft'] .custom-header > *,
+:root .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block,
+:root main[data-template^='index'] .somna-ess__title,
+:root main[data-template^='index'] .somna-ess__card {
+  animation: none;
+}
