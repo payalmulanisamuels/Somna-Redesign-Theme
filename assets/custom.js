@@ -253,7 +253,8 @@ if(document.querySelector(".hz-banner-btn")){
    Same fade-up as the reveal above (styles: .sm-reveal in assets/somna-motion.css),
    for content the reveal above leaves out, on every page:
    - the banner text ("It's simple. Breathe through your nose.")
-   - FAQ / accordion rows (the check above skips them because of their +/- icons)
+   - FAQ / accordion rows (their wrapper is an inline element that can't move, so
+     each row's details element is animated instead, one row after another)
    - the "Shop the essentials" heading and cards
    - any heading, text, image, card or column it skipped for the same icon reason
    Only content that starts below the screen is hidden, so the hero / LCP and
@@ -268,7 +269,7 @@ if(document.querySelector(".hz-banner-btn")){
 
   const ITEMS = [
     '.layered-slideshow__content .group-block-content > :not(.somna-float)',
-    'accordion-custom',
+    'accordion-custom > details',
     '.somna-ess__title',
     '.somna-ess__card',
     '.custom-header',
@@ -316,15 +317,19 @@ if(document.querySelector(".hz-banner-btn")){
     setTimeout(() => finish(el), 2000 + index * 150);
   };
 
+  // Items of the same group that come into view within 0.4s of each other follow one another
+  // (FAQ rows each sit in their own wrapper, so they are grouped by their accordion)
+  const lastInGroup = new Map();
   const observer = new IntersectionObserver(
     (entries) => {
-      const perParent = new Map();
+      const now = performance.now();
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         observer.unobserve(entry.target);
-        const parent = entry.target.parentElement;
-        const index = perParent.get(parent) || 0;
-        perParent.set(parent, index + 1);
+        const group = entry.target.closest('.accordion') || entry.target.parentElement;
+        const last = lastInGroup.get(group);
+        const index = last && now - last.time < 400 ? last.index + 1 : 0;
+        lastInGroup.set(group, { time: last && index ? last.time : now, index });
         show(entry.target, Math.min(index, 5));
       }
     },
@@ -362,6 +367,10 @@ if(document.querySelector(".hz-banner-btn")){
     const firstSection = main.querySelector(':scope > .shopify-section');
     const viewportHeight = window.innerHeight;
     const root = main.contains(scope) || scope === main ? scope : main;
+
+    // The theme's FAQ row wrapper (accordion-custom) is an inline element, which can't move,
+    // so the row inside it (details) is animated instead
+    root.querySelectorAll('accordion-custom.sm-reveal:not(.sm-in)').forEach((el) => el.classList.remove('sm-reveal'));
 
     for (const el of root.querySelectorAll(ITEMS)) {
       if (el.classList.contains('sm-reveal') || el.closest('.sm-reveal')) continue; // already handled
