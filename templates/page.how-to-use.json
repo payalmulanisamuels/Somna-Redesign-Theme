@@ -510,7 +510,7 @@
       ],
       "custom_css": [
         ".wave-container img {height: 50px; object-position: top;}",
-        ".group-block-content {width: 50%; margin: 0 0 0 auto !important;}"
+        ".group-block-content {width: 25%; margin: 0 0 0 auto !important;}"
       ],
       "name": "Layered Image with Text",
       "settings": {
