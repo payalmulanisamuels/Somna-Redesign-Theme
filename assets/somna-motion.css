@@ -1188,3 +1188,255 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   11. "Shop the essentials" (sections/somna-shop-essentials.liquid): bouncing cut-outs
+   Added as a new block; nothing above is changed. Desktop, tablet and mobile.
+   - Night (black) strip to the left of the heading, Breathe (blue) tape to the right
+   - A twinkling sparkle on the Nasal Strips photo and a rocking moon on the Mouth Tape photo
+   - A few soft yellow dots around the heading
+   Reuses the images and the bounce / twinkle / rock keyframes from section 8.
+   Pseudo-elements only: they can't be clicked or tapped (clicks go straight to the
+   cards), take no space and sit inside the screen width, so the layout and the
+   section's own code are exactly as before. Phones get smaller cut-outs, a smaller
+   bounce and no scroll-linked pop-in, so scrolling stays smooth.
+   Reduced-motion visitors see the cut-outs standing still.
+   -------------------------------------------------------------------------- */
+.somna-ess__title {
+  position: relative;
+}
+
+.somna-ess__title::before,
+.somna-ess__title::after,
+.somna-ess__inner::before,
+.somna-ess__card:nth-child(-n + 2) .somna-ess__media::after {
+  content: '';
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+/* Black strip: left of the heading */
+.somna-ess__title::before {
+  --sm-cd-bounce: 7px;
+  top: calc(50% - 9px);
+  left: calc(50% - 164px);
+  width: 52px;
+  height: 18px;
+  rotate: -18deg;
+  background-image: url('somna-deco-strip-black.webp');
+  filter: drop-shadow(0 6px 6px rgb(10 26 74 / 0.22));
+}
+
+/* Blue tape: right of the heading */
+.somna-ess__title::after {
+  --sm-cd-bounce: 7px;
+  top: calc(50% - 10px);
+  left: calc(50% + 112px);
+  width: 46px;
+  height: 20px;
+  rotate: 16deg;
+  background-image: url('somna-deco-tape-blue.webp');
+  filter: drop-shadow(0 6px 6px rgb(10 26 74 / 0.22));
+}
+
+/* Soft yellow dots around the heading (behind the cards) */
+.somna-ess__inner::before {
+  top: -14px;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 64px;
+  background-image: radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+    radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+    radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%);
+  background-size: 7px 7px, 5px 5px, 6px 6px;
+  background-position: calc(50% - 126px) 0, calc(50% + 150px) 2px, calc(50% + 104px) 42px;
+  opacity: 0.9;
+}
+
+/* Sparkle: top-right corner of the first photo */
+.somna-ess__card:nth-child(1) .somna-ess__media::after {
+  top: 6px;
+  right: 7px;
+  width: 12px;
+  height: 12px;
+  background-image: url('somna-deco-sparkle.svg');
+}
+
+/* Moon: top-right corner of the second photo */
+.somna-ess__card:nth-child(2) .somna-ess__media::after {
+  top: 6px;
+  right: 7px;
+  width: 14px;
+  height: 14px;
+  background-image: url('somna-deco-moon.svg');
+  filter: drop-shadow(0 2px 4px rgb(239 210 122 / 0.5));
+}
+
+@media screen and (min-width: 750px) {
+  .somna-ess__title::before {
+    --sm-cd-bounce: 12px;
+    top: calc(50% - 15px);
+    left: calc(50% - 270px);
+    width: 88px;
+    height: 30px;
+  }
+
+  .somna-ess__title::after {
+    --sm-cd-bounce: 12px;
+    top: calc(50% - 16px);
+    left: calc(50% + 186px);
+    width: 76px;
+    height: 32px;
+  }
+
+  .somna-ess__inner::before {
+    top: -22px;
+    height: 100px;
+    background-size: 11px 11px, 8px 8px, 10px 10px;
+    background-position: calc(50% - 232px) 0, calc(50% + 300px) 6px, calc(50% + 214px) 60px;
+  }
+
+  .somna-ess__card:nth-child(1) .somna-ess__media::after {
+    top: 12px;
+    right: 14px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .somna-ess__card:nth-child(2) .somna-ess__media::after {
+    top: 12px;
+    right: 14px;
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 3px 6px rgb(239 210 122 / 0.5));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .somna-ess__title::before {
+    --sm-cd-bounce: 16px;
+    top: calc(50% - 20px);
+    left: calc(50% - 360px);
+    width: 120px;
+    height: 41px;
+    rotate: -20deg;
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.28));
+  }
+
+  .somna-ess__title::after {
+    --sm-cd-bounce: 16px;
+    top: calc(50% - 21px);
+    left: calc(50% + 248px);
+    width: 100px;
+    height: 42px;
+    rotate: 18deg;
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.28));
+  }
+
+  .somna-ess__inner::before {
+    top: -30px;
+    height: 130px;
+    background-image: radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%);
+    background-size: 14px 14px, 9px 9px, 12px 12px, 16px 16px;
+    background-position: calc(50% - 420px) 4px, calc(50% - 330px) 76px, calc(50% + 404px) 0, calc(50% + 330px) 72px;
+  }
+
+  .somna-ess__card:nth-child(1) .somna-ess__media::after {
+    top: 16px;
+    right: 18px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .somna-ess__card:nth-child(2) .somna-ess__media::after {
+    top: 14px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 4px 8px rgb(239 210 122 / 0.5));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .somna-ess__title::before {
+    animation: sm-cd-bounce 3.4s -0.8s infinite;
+  }
+
+  .somna-ess__title::after {
+    animation: sm-cd-bounce 3.8s -2.2s infinite;
+  }
+
+  .somna-ess__card:nth-child(1) .somna-ess__media::after {
+    animation: sm-cd-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .somna-ess__card:nth-child(2) .somna-ess__media::after {
+    animation: sm-cd-rock 4.2s ease-in-out infinite;
+  }
+
+  .somna-ess__inner::before {
+    animation: sm-cd-dots 2.8s ease-in-out -1.2s infinite;
+  }
+}
+
+/* Desktop and tablet: pop in as the section scrolls into view, then keep bouncing
+   (browsers without scroll-driven animation support just show the bounce) */
+@supports (animation-timeline: view()) {
+  @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
+    .somna-ess {
+      view-timeline-name: --sm-ess;
+    }
+
+    .somna-ess__title::before,
+    .somna-ess__title::after,
+    .somna-ess__card:nth-child(-n + 2) .somna-ess__media::after {
+      animation-name: sm-cd-bounce, sm-cd-pop;
+      animation-duration: 3.4s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: -0.8s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-ess;
+      animation-range: normal, entry 10% entry 55%;
+    }
+
+    .somna-ess__title::after {
+      animation-duration: 3.8s, auto;
+      animation-delay: -2.2s, 0s;
+      animation-range: normal, entry 20% entry 65%;
+    }
+
+    .somna-ess__card:nth-child(1) .somna-ess__media::after {
+      animation-name: sm-cd-twinkle, sm-cd-pop;
+      animation-duration: 2.4s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-range: normal, entry 30% entry 75%;
+    }
+
+    .somna-ess__card:nth-child(2) .somna-ess__media::after {
+      animation-name: sm-cd-rock, sm-cd-pop;
+      animation-duration: 4.2s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-range: normal, entry 40% entry 85%;
+    }
+
+    .somna-ess__inner::before {
+      animation-name: sm-cd-dots, sm-cd-fade-in;
+      animation-duration: 2.8s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: -1.2s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-ess;
+      animation-range: normal, entry 15% entry 60%;
+    }
+  }
+}
