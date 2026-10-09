@@ -907,7 +907,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/Yellow_BG.png",
+        "bg_image": "shopify://shop_images/Yellow_BG-new.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -932,8 +932,8 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0,
+        "padding-block-start": 15,
+        "padding-block-end": 15,
         "stack_desktop": false,
         "align_items_desktop": "",
         "content_width_desktop": ""
