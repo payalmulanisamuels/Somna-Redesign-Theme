@@ -956,6 +956,9 @@
         "bundle_6MqjwE",
         "bundle_LHB8m9"
       ],
+      "custom_css": [
+        "@media (min-width: 768px) {.bundle-section__grid {padding-bottom: 100px;}}"
+      ],
       "name": "Featured Bundle Grid",
       "settings": {
         "heading": "Or save with a bundle",
