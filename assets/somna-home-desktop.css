@@ -549,7 +549,10 @@
 }
 
 @media screen and (min-width: 990px) {
-
+   .bundle-card__image-wrapper {
+    border-radius: 12px;
+    height: clamp(195px,34vw,195px);
+  }
   /* Homepage + collection content width: 1280px max (other pages keep the theme's 1040px;
      sections can widen themselves with their "Content width (desktop)" setting) */
   #MainContent:is([data-template="index"], [data-template^="collection"]),
