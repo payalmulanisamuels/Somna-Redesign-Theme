@@ -123,6 +123,13 @@
             {%- endif -%}
           </div>
           <div class="somna-ess__info">
+          {% if product.metafields.custom.custom_review_rating_review_count.value %}
+            {% assign review_count_rating = product.metafields.custom.custom_review_rating_review_count.value %}
+            <div class="review_content">
+              {{ review_count_rating }} 
+            </div>
+          {% endif %}
+
             {%- if card_title != blank -%}
               <h3 class="somna-ess__name">{{ card_title }}</h3>
             {%- endif -%}
