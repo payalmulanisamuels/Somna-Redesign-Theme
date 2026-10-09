@@ -1092,7 +1092,9 @@
         "heading": "Or save with a bundle",
         "bg_color": "#ffffff",
         "padding_top": 0,
-        "padding_bottom": 45
+        "padding_bottom": 45,
+        "padding_bottom_tablet": 80,
+        "padding_bottom_desktop": 150
       }
     },
     "collection_feature_kyHPTY": {
