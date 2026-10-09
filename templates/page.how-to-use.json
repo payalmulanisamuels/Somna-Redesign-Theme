@@ -258,7 +258,7 @@
             "padding-block-start-desktop": 40,
             "padding-block-end-desktop": 96,
             "padding-inline-start-desktop": 100,
-            "padding-inline-end-desktop": 100,
+            "padding-inline-end-desktop": 25,
             "gap_desktop": 10
           },
           "blocks": {
