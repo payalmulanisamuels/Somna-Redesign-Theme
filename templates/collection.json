@@ -1185,7 +1185,8 @@
         "sleep_option_66YfmJ"
       ],
       "custom_css": [
-        ".wave-container.bottom {bottom: -70px;}"
+        "@media (min-width: 768px) {.wave-container.bottom {bottom: -70px; }}",
+        ".wave-container.bottom {bottom: -5px; height: 40px}"
       ],
       "name": "Collection Feature",
       "settings": {
