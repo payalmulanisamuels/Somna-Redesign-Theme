@@ -77,7 +77,7 @@
       {{ placeholder_name | placeholder_svg_tag: 'layered-slideshow__image' }} {% endcomment %}
     {%- endif -%}
     <div
-      class="layered-slideshow__content spacing-style{% if block.settings.background_color != blank %} color-custom-{{ block.id }}{% endif %} background-transparent"
+      class="section section--page-width layered-slideshow__content spacing-style{% if block.settings.background_color != blank %} color-custom-{{ block.id }}{% endif %} background-transparent"
       style="{% render 'spacing-style', settings: block.settings %}"
     >
       <div
