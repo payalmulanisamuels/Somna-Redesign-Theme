@@ -1440,3 +1440,311 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   12. "Small essentials. Thoughtfully made." (the 4-column section with yellow icons)
+   Added as a new block; nothing above is changed. Desktop, tablet and mobile.
+   Calm "lights down, slow breath" motion, with a moon:
+   - the heading settles in from a soft blur as the section scrolls into view
+   - the four columns rise gently into place, one after another, and the thin
+     dividers draw downward
+   - a slow breath (about 4s in, 4s out) travels across the four yellow icons,
+     left to right, with a soft honey glow behind each one
+   - a honey crescent moon sits in the top-right corner, gently rocking
+     (on desktop and tablet it rises into place as the section scrolls in)
+   - a few honey fireflies drift and fade in the cream background
+   The section is found by the end of its ID (section_ibM3ft), so only this section
+   is affected. Motion only (opacity, translate, scale, blur): sizes, spacing and
+   positions are exactly as before. Decorations can't be clicked and take no space.
+   Browsers without scroll-driven animation support skip the entrance and simply
+   show the section. Reduced-motion visitors see everything standing still.
+   -------------------------------------------------------------------------- */
+@keyframes sm-sm-settle {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+    filter: none;
+  }
+}
+
+@keyframes sm-sm-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@keyframes sm-sm-draw {
+  from {
+    scale: 1 0;
+  }
+
+  to {
+    scale: 1 1;
+  }
+}
+
+/* One slow breath: in for about 4s, out for about 4s */
+@keyframes sm-sm-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  45% {
+    scale: 1.06;
+  }
+}
+
+@keyframes sm-sm-glow {
+  0%,
+  100% {
+    opacity: 0;
+    scale: 0.7;
+  }
+
+  45% {
+    opacity: 1;
+    scale: 1.15;
+  }
+}
+
+@keyframes sm-sm-fireflies {
+  0%,
+  100% {
+    opacity: 0.25;
+    translate: 0 0;
+  }
+
+  30% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 0.45;
+    translate: 8px -10px;
+  }
+
+  75% {
+    opacity: 0.85;
+    translate: -4px -4px;
+  }
+}
+
+@keyframes sm-sm-moon {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -8deg;
+  }
+
+  50% {
+    translate: 0 -5px;
+    rotate: 6deg;
+  }
+}
+
+@keyframes sm-sm-moonrise {
+  from {
+    opacity: 0;
+    transform: translate(-30px, 50px) scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Decorations ---- */
+.shopify-section[id$='__section_ibM3ft'] .section::before,
+.shopify-section[id$='__section_ibM3ft'] .section::after,
+.shopify-section[id$='__section_ibM3ft'] .section-background::before,
+.shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+/* Fireflies: two layers that drift on different beats, kept in the side margins */
+.shopify-section[id$='__section_ibM3ft'] .section::before,
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
+  inset: 0 14px;
+  background-image: radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%),
+    radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%),
+    radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%);
+  background-size: 14px 14px, 10px 10px, 12px 12px;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .section::before {
+  background-position: 6% 34%, 92% 70%, 10% 86%;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
+  background-position: 95% 40%, 4% 62%, 88% 88%;
+}
+
+/* Moon: top-right corner */
+.shopify-section[id$='__section_ibM3ft'] .section::after {
+  top: 10%;
+  right: 7%;
+  width: 46px;
+  height: 46px;
+  background-image: url('somna-deco-moon.svg');
+  background-size: contain;
+  filter: drop-shadow(0 0 12px rgb(240 210 122 / 0.7));
+}
+
+/* Soft honey glow behind each icon (breathes with it) */
+.shopify-section[id$='__section_ibM3ft'] .icon-block {
+  position: relative;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(240 210 122 / 0.75) 0 40%, rgb(240 210 122 / 0) 70%);
+  opacity: 0;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .icon-block__media {
+  position: relative;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section[id$='__section_ibM3ft'] .section::before,
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    background-size: 8px 8px, 6px 6px, 7px 7px;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::before {
+    background-position: 5% 12%, 94% 92%, 30% 96%;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    background-position: 96% 30%, 3% 60%, 72% 6%;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::after {
+    top: 5%;
+    right: 2%;
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(0 0 6px rgb(240 210 122 / 0.7));
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+    inset: -6px;
+  }
+}
+
+/* ---- Loops (all screen sizes) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .shopify-section[id$='__section_ibM3ft'] .icon-block__media,
+  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+    animation: 8s ease-in-out 1.6s infinite;
+    animation-name: sm-sm-breathe;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+    animation-name: sm-sm-glow;
+  }
+
+  /* The breath travels left to right: each column starts 0.9s after the one before */
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block__media,
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block::before {
+    animation-delay: 2.5s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block__media,
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block::before {
+    animation-delay: 3.4s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block__media,
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block::before {
+    animation-delay: 4.3s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::before {
+    animation: sm-sm-fireflies 9s ease-in-out infinite;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    animation: sm-sm-fireflies 12s ease-in-out -5s infinite reverse;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::after {
+    animation: sm-sm-moon 6s ease-in-out infinite;
+  }
+}
+
+/* ---- Entrance as the section scrolls into view (all screen sizes) ---- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .shopify-section[id$='__section_ibM3ft'] {
+      view-timeline-name: --sm-small;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .custom-header > * {
+      animation: sm-sm-rise ease-out both;
+      animation-timeline: --sm-small;
+      animation-range: entry 10% entry 55%;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block {
+      animation: sm-sm-rise ease-out both;
+      animation-timeline: --sm-small;
+      animation-range: entry 30% entry 75%;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) {
+      animation-range: entry 38% entry 83%;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) {
+      animation-range: entry 46% entry 91%;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) {
+      animation-range: entry 54% entry 99%;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .divider__line {
+      transform-origin: top;
+      animation: sm-sm-draw ease-out both;
+      animation-timeline: --sm-small;
+      animation-range: entry 40% cover 45%;
+    }
+  }
+
+  /* Desktop and tablet: the heading also clears from a soft blur, and the moon rises into place */
+  @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
+    .shopify-section[id$='__section_ibM3ft'] .custom-header > * {
+      animation-name: sm-sm-settle;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .section::after {
+      animation-name: sm-sm-moon, sm-sm-moonrise;
+      animation-duration: 6s, auto;
+      animation-timing-function: ease-in-out, ease-out;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-small;
+      animation-range: normal, entry 15% entry 70%;
+    }
+  }
+}
