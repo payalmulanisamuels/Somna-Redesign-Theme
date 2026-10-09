@@ -1029,7 +1029,8 @@
         "heading": "Or save with a bundle",
         "bg_color": "#ffffff",
         "padding_top": 0,
-        "padding_bottom": 100
+        "padding_bottom": 100,
+        "padding_bottom_desktop": 150
       }
     },
     "custom_cards_slider_pyJahK": {
