@@ -1748,3 +1748,68 @@
     }
   }
 }
+
+/* --------------------------------------------------------------------------
+   13. Homepage scroll reveal, like the reference video (fade up, one after another)
+   Added as a new block; nothing above is changed. Homepage only.
+   The theme's own reveal (section 1 + the small observer in assets/custom.js)
+   already fades content up as it scrolls into view, but very subtly (14px, 0.7s).
+   This block only retunes it on the homepage to the reference video: a longer
+   rise, a slower calm fade and a clearer stagger between cards in a row.
+   It also adds the same fade-up to the "Shop the essentials" heading and cards,
+   which the observer doesn't cover (CSS scroll-driven, no extra JavaScript).
+   Motion only (opacity + translate): sizes, spacing and positions are exactly as
+   before on desktop and mobile. Content visible when the page loads (the hero)
+   is never hidden. Reduced-motion visitors see everything as normal.
+   -------------------------------------------------------------------------- */
+main[data-template^='index'] {
+  --sm-reveal-duration: 1000ms;
+  --sm-reveal-distance: 40px;
+  --sm-stagger: 140ms;
+}
+
+@media screen and (max-width: 749px) {
+  main[data-template^='index'] {
+    --sm-reveal-distance: 26px;
+    --sm-stagger: 110ms;
+  }
+}
+
+@keyframes sm-hp-fade-up {
+  from {
+    opacity: 0;
+    translate: 0 var(--sm-reveal-distance, 40px);
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main[data-template^='index'] .shopify-section:has(> .somna-ess) {
+      view-timeline-name: --sm-hp-ess;
+    }
+
+    main[data-template^='index'] .somna-ess__title,
+    main[data-template^='index'] .somna-ess__card {
+      animation: sm-hp-fade-up ease-out both;
+      animation-timeline: --sm-hp-ess;
+      animation-range: entry 0% entry 30%;
+    }
+
+    main[data-template^='index'] .somna-ess__card {
+      animation-range: entry 10% entry 40%;
+    }
+
+    main[data-template^='index'] .somna-ess__card:nth-child(2) {
+      animation-range: entry 16% entry 46%;
+    }
+
+    main[data-template^='index'] .somna-ess__card:nth-child(n + 3) {
+      animation-range: entry 22% entry 52%;
+    }
+  }
+}
