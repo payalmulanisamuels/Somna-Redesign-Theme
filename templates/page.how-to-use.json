@@ -342,7 +342,7 @@
       ],
       "name": "Layered Image with Text",
       "settings": {
-        "section_width": "page-width",
+        "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
         "border_width": 1,
