@@ -908,7 +908,7 @@
       "name": "t:names.icons_with_text",
       "settings": {
         "top_wave_image": "shopify://shop_images/top-wave.png",
-        "bottom_wave_image": "shopify://shop_images/top-wave.png",
+        "bottom_wave_image": "shopify://shop_images/bottom-wave.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
