@@ -36,7 +36,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -64,7 +68,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         }
@@ -101,7 +109,10 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "stack_desktop": false,
+        "align_items_desktop": "",
+        "content_width_desktop": ""
       }
     },
     "main": {
@@ -263,7 +274,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -291,7 +306,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         }
@@ -327,10 +346,13 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 60,
-        "padding-block-end": 35
+        "padding-block-end": 35,
+        "stack_desktop": false,
+        "align_items_desktop": "",
+        "content_width_desktop": ""
       }
     },
-   "section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -980,7 +1002,7 @@
         "content_width_desktop": ""
       }
     },
-  "somna_shop_essentials_AhrNe9": {
+    "somna_shop_essentials_AhrNe9": {
       "type": "somna-shop-essentials",
       "blocks": {
         "product_card_Wtc9my": {
@@ -1070,7 +1092,7 @@
         "heading": "Or save with a bundle",
         "bg_color": "#ffffff",
         "padding_top": 0,
-        "padding_bottom": 100
+        "padding_bottom": 45
       }
     },
     "collection_feature_kyHPTY": {
