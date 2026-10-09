@@ -907,7 +907,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/Yellow_BG-lessheight.png",
+        "bg_image": "shopify://shop_images/Yellow_BG-new.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
