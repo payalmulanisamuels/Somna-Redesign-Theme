@@ -7,6 +7,23 @@
   overflow-x: clip; /* Prevents mobile horizontal scroll */
   width: 100%;
 }
+/* Tablet (750px and up) and desktop (990px and up) padding. Empty = keep the smaller screen's value. */
+@media screen and (min-width: 750px) {
+  {%- if section.settings.padding_top_tablet != blank %}
+  .bundle-section-{{ section.id }} { padding-top: {{ section.settings.padding_top_tablet }}px; }
+  {%- endif %}
+  {%- if section.settings.padding_bottom_tablet != blank %}
+  .bundle-section-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_tablet }}px; }
+  {%- endif %}
+}
+@media screen and (min-width: 990px) {
+  {%- if section.settings.padding_top_desktop != blank %}
+  .bundle-section-{{ section.id }} { padding-top: {{ section.settings.padding_top_desktop }}px; }
+  {%- endif %}
+  {%- if section.settings.padding_bottom_desktop != blank %}
+  .bundle-section-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }
+  {%- endif %}
+}
 {%- endstyle -%}
 
 <section class="bundle-section-{{ section.id }}">
@@ -160,6 +177,36 @@
       "unit": "px",
       "label": "Padding Bottom",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Tablet (750px and up)",
+      "info": "Leave empty to use the padding above."
+    },
+    {
+      "type": "number",
+      "id": "padding_top_tablet",
+      "label": "Padding Top (tablet, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_tablet",
+      "label": "Padding Bottom (tablet, px)"
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the tablet value (or the padding above if tablet is empty)."
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (desktop, px)"
     }
   ],
   "blocks": [
