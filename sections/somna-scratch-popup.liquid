@@ -938,7 +938,28 @@
         message?.focus();
       }
 
+      // Faster submit: open the connection to Klaviyo (DNS + TLS) while the visitor is still
+      // reading and typing, so pressing the button only waits for Klaviyo's answer.
+      // Browsers drop an unused warm connection after ~10s, so it is refreshed while typing.
+      let lastWarm = 0;
+      function warmUpKlaviyo() {
+        const now = Date.now();
+        if (now - lastWarm < 8000) return;
+        lastWarm = now;
+        try {
+          const link = document.createElement('link');
+          link.rel = 'preconnect';
+          link.href = 'https://a.klaviyo.com';
+          link.crossOrigin = 'anonymous';
+          document.head.appendChild(link);
+          setTimeout(() => link.remove(), 9000);
+        } catch (e) {}
+      }
+      emailInput?.addEventListener('focus', warmUpKlaviyo);
+      emailInput?.addEventListener('input', warmUpKlaviyo);
+
       function showClaimScreen() {
+        warmUpKlaviyo();
         showScreen(1);
         if (storage.get('localStorage', KEYS.signedUp)) showAlreadySubscribed();
         else emailInput?.focus();
@@ -995,7 +1016,7 @@
       async function serverSaysSubscribed(email) {
         if (!config.subscriptionCheckUrl) return null;
         const controller = 'AbortController' in window ? new AbortController() : null;
-        const timer = controller ? setTimeout(() => controller.abort(), 4000) : null;
+        const timer = controller ? setTimeout(() => controller.abort(), 2500) : null;
         try {
           const url = new URL(config.subscriptionCheckUrl, window.location.origin);
           url.searchParams.set('email', email);
@@ -1024,7 +1045,7 @@
       // One subscribe call to Klaviyo with a timeout. Returns { ok, status, invalidEmail }.
       async function sendToKlaviyo(payload) {
         const controller = 'AbortController' in window ? new AbortController() : null;
-        const timer = controller ? setTimeout(() => controller.abort(), 12000) : null;
+        const timer = controller ? setTimeout(() => controller.abort(), 8000) : null;
         try {
           const response = await fetch(
             `https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(config.klaviyoCompanyId)}`,
@@ -1048,9 +1069,10 @@
               );
             } catch (e) {}
           }
-          return { ok: response.ok, status: response.status, invalidEmail };
+          return { ok: response.ok, status: response.status, invalidEmail, timedOut: false };
         } catch (error) {
-          return { ok: false, status: 0, invalidEmail: false }; // network error or timeout
+          // network error, or no answer within 8s
+          return { ok: false, status: 0, invalidEmail: false, timedOut: error?.name === 'AbortError' };
         } finally {
           if (timer) clearTimeout(timer);
         }
@@ -1072,6 +1094,10 @@
         }
         if (!config.klaviyoCompanyId || !config.klaviyoListId) {
           showError(MESSAGES.setup);
+          return;
+        }
+        if (navigator.onLine === false) {
+          showError(MESSAGES.offline);
           return;
         }
 
@@ -1109,13 +1135,15 @@
             },
           };
 
-          // Klaviyo de-duplicates by email, so retrying once after a 5xx or network error is safe
+          // Klaviyo de-duplicates by email, so one quick retry after a 5xx or a dropped
+          // connection is safe. No retry after a timeout, so the visitor never waits twice.
           let result = await sendToKlaviyo(payload);
-          if (!result.ok && (result.status === 0 || result.status >= 500)) {
-            await new Promise((resolve) => setTimeout(resolve, 1200));
+          if (!result.ok && !result.timedOut && (result.status === 0 || result.status >= 500)) {
+            await new Promise((resolve) => setTimeout(resolve, 400));
             result = await sendToKlaviyo(payload);
           }
 
+          // The code screen ("Your code is ready") is shown ONLY here, after Klaviyo confirms.
           if (result.ok) {
             rememberSubmitted(key);
             success();
