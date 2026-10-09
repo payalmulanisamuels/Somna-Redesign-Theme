@@ -1075,8 +1075,7 @@
       function showClaimScreen() {
         warmUpKlaviyo();
         showScreen(1);
-        if (storage.get('localStorage', KEYS.signedUp)) showAlreadySubscribed();
-        else emailInput?.focus();
+        emailInput?.focus();
       }
 
       function success() {
@@ -1085,15 +1084,12 @@
         document.getElementById('somna-copy-btn')?.focus();
       }
 
-      // ---------- Duplicate protection ----------
-      // Klaviyo's public (client) API can only write, it cannot look a profile up, and the private
-      // key must never be in the browser. So the popup checks, in order:
-      //   1. this device: emails already submitted here (stored only as SHA-256 hashes);
-      //   2. optional server check (theme setting "Subscription check URL"): a small endpoint on
-      //      your own server that holds the private key and answers {"subscribed": true|false};
-      //   3. Klaviyo itself: it de-duplicates by email, so a repeat subscribe never creates a
-      //      second profile or a second list entry.
-      const SUBMITTED_KEY = 'somna_popup_submitted';   // localStorage: hashes of submitted emails
+      // ---------- Already subscribed? (checked against the real Klaviyo list) ----------
+      // Klaviyo's public key can only add subscribers, it cannot look anyone up, and the private
+      // key must never be in the browser. So before every submit the popup asks the server check
+      // set in "Subscription check URL" (somna-subscription-check-worker.js), which reads the real
+      // Klaviyo Email List with the private key and answers {"subscribed": true|false}.
+      // Nothing about the email is decided from this browser's storage.
       const MESSAGES = {
         invalid: 'Enter a valid email address.',
         server: "Sorry, we couldn't save your email just now. Please try again in a moment.",
@@ -1102,28 +1098,6 @@
         setup: 'Sign-up is unavailable right now. Please try again later.',
       };
       let submitting = false;
-
-      async function emailKey(email) {
-        const value = email.trim().toLowerCase();
-        try {
-          const bytes = new TextEncoder().encode(value);
-          const digest = await crypto.subtle.digest('SHA-256', bytes);
-          return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
-        } catch (e) {
-          return null; // no Web Crypto (very old browser / insecure context): skip the device check
-        }
-      }
-
-      function submittedKeys() {
-        try { return JSON.parse(storage.get('localStorage', SUBMITTED_KEY) || '[]'); } catch (e) { return []; }
-      }
-
-      function rememberSubmitted(key) {
-        if (!key) return;
-        const keys = submittedKeys().filter((k) => k !== key);
-        keys.push(key);
-        storage.set('localStorage', SUBMITTED_KEY, JSON.stringify(keys.slice(-20)));
-      }
 
       // Optional server-side check. Any problem (no URL, timeout, error, odd reply) returns null,
       // meaning "unknown", and the normal sign-up continues.
@@ -1208,10 +1182,6 @@
           showEmailProblem(problem);
           return;
         }
-        if (storage.get('localStorage', KEYS.signedUp)) {
-          showAlreadySubscribed();
-          return;
-        }
         if (!config.klaviyoCompanyId || !config.klaviyoListId) {
           showError(MESSAGES.setup);
           return;
@@ -1225,10 +1195,8 @@
         setBusy(true);
 
         try {
-          // 1 + 2: already submitted on this device, or already subscribed according to the server check
-          const key = await emailKey(email);
-          if ((key && submittedKeys().includes(key)) || (await serverSaysSubscribed(email)) === true) {
-            rememberSubmitted(key);
+          // Already in the Klaviyo Email List? Then no sign-up and no code.
+          if ((await serverSaysSubscribed(email)) === true) {
             track('email_duplicate');
             showAlreadySubscribed();
             return;
@@ -1265,7 +1233,6 @@
 
           // The code screen ("Your code is ready") is shown ONLY here, after Klaviyo confirms.
           if (result.ok) {
-            rememberSubmitted(key);
             success();
             return;
           }
