@@ -389,6 +389,7 @@
       ],
       "name": "Steps Guide",
       "settings": {
+        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
         "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "",
