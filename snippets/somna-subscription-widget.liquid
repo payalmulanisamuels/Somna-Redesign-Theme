@@ -194,38 +194,46 @@
             <span class="somna-active-price" data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
           </div>
           <div class="somna-save-pill" {% if init_save <= 0 %}hidden{% endif %}>
-            SAVE <span data-somna="save">{{ init_save | money_without_trailing_zeros }}</span>
+            YOU SAVE <span data-somna="save">{{ init_save | money_without_trailing_zeros }}</span>
           </div>
         </div>
       </div>
       <div class="somna-box-inner">
+        {%- liquid
+          # "Delivery every 60 days" -> "delivery every 60 days" for the perk line
+          assign init_name_first = init_name | slice: 0 | downcase
+          assign init_name_rest = init_name | slice: 1, 200
+          assign init_name_lc = init_name_first | append: init_name_rest
+        -%}
         <ul class="somna-perks-list">
           <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>
-              <span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo after first order
-              {% comment %} · <span data-somna="interval">{{ init_name }}</span> {% endcomment %}
-              (<span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF ongoing)
-            </b>
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            <b><span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo · <span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every order</b>
           </li>
           <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <strong>FREE</strong> shipping
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            <span><strong>FREE</strong> shipping · <span data-somna="interval-lc">{{ init_name_lc }}</span></span>
           </li>
           <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>FREE 3 Gifts</b> with every subscription
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            <b><span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every delivery, not just the first</b>
           </li>
-          <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>FREE 30-Night Sleep Tracker</b> with every subscription
-          </li>
-             <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-           <b>Skip, pause or cancel anytime</b>
-          </li>
-
         </ul>
+
+        <div class="somna-gifts" aria-label="Free gifts included">
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.3 5 7.6 4.3 3 4.5v14c4.6-.2 7.3.5 9 2 1.7-1.5 4.4-2.2 9-2v-14c-4.6-.2-7.3.5-9 2Z"/><path d="M12 6.5v14"/></g></svg>
+            <span>Sleep Guide 1</span>
+          </div>
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.3 5 7.6 4.3 3 4.5v14c4.6-.2 7.3.5 9 2 1.7-1.5 4.4-2.2 9-2v-14c-4.6-.2-7.3.5-9 2Z"/><path d="M12 6.5v14"/></g></svg>
+            <span>Sleep Guide 2</span>
+          </div>
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m8.5 15 2.5 2.5 4.5-4.5"/></g></svg>
+            <span>30-Night Tracker</span>
+          </div>
+        </div>
 
         <div class="somna-dropdown-wrap">
           <select
@@ -254,12 +262,15 @@
             <label class="somna-radio-label">
               <input type="radio" name="somna_purchase_type_{{ section.id }}" value="onetime" {% if one_time_selected %}checked{% endif %}>
               <span class="somna-radio-bullet"></span>
-              <span class="somna-box-title">One-Time Purchase</span>
+              <span class="somna-box-title">One-time purchase</span>
             </label>
             <div class="somna-price-stack">
               <span class="somna-active-price" data-somna="onetime-price">{{ current_var.price | money_without_trailing_zeros }}</span>
             </div>
           </div>
+          <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
+            You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship
+          </p>
         </div>
       </div>
     {%- endunless -%}
@@ -298,6 +309,7 @@
         const regularEl = container.querySelector('[data-somna="regular"]');
         const savePill = container.querySelector('.somna-save-pill');
         const perNightEl = container.querySelector('.somna-per-night');
+        const oneTimeSaveEl = container.querySelector('[data-somna-onetime-save]');
         let plans = [];
         let currentVariantId = null;
 
@@ -352,7 +364,9 @@
           setText('save', plan.save);
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
+          setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
           regularEl.hidden = plan.saveCents <= 0;
+          if (oneTimeSaveEl) oneTimeSaveEl.hidden = plan.saveCents <= 0;
           savePill.hidden = plan.saveCents <= 0;
           perNightEl.hidden = !plan.perNight;
           syncForm();
@@ -370,6 +384,7 @@
 
           if (!plans.length) {
             subBox.hidden = true;
+            if (oneTimeSaveEl) oneTimeSaveEl.hidden = true;
             activate(oneTimeBox);
             return;
           }
