@@ -170,7 +170,7 @@
     font-size: 13px;
     line-height: 1.25;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
+ .icon-block__media {
     width: 26px !important; /* overrides the icon block's inline width */
     height: auto;
   }
@@ -332,7 +332,7 @@
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--column {
     gap: 14px;
   }
-  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .icon-block__media {
+   .icon-block__media {
     width: clamp(48px, 4.6vw, 64px) !important; /* overrides the icon block's inline width */
     height: auto;
   }
@@ -576,7 +576,7 @@
   #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
     font-size: clamp(14px, 1.15vw, 16px);
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .icon-block__media {
+   .icon-block__media {
     width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
   }
   #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
