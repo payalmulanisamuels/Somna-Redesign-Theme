@@ -352,7 +352,7 @@
         "content_width_desktop": ""
       }
     },
-"section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -1032,6 +1032,7 @@
         "product_card_Wtc9my",
         "product_card_WhXmqi"
       ],
+      "custom_css": [],
       "name": "Shop the essentials",
       "settings": {
         "heading": "Shop the essentials",
@@ -1184,7 +1185,9 @@
         "sleep_option_BNKpYJ",
         "sleep_option_66YfmJ"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.wave-container.bottom {bottom: -68px; }}"
+      ],
       "name": "Collection Feature",
       "settings": {
         "top_wave_image": "shopify://shop_images/curve-top.png",
