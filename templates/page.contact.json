@@ -1213,7 +1213,7 @@
         "padding-block-start": 10,
         "padding-block-end": 50,
         "padding-block-start-desktop": 0,
-        "padding-block-end-desktop": 80,
+        "padding-block-end-desktop": 120,
         "stack_desktop": false,
         "align_items_desktop": "",
         "content_width_desktop": "80rem"
@@ -1850,7 +1850,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#EFD374",
+        "background_color": "#efd374",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
