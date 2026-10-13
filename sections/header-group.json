@@ -127,10 +127,10 @@
       "settings": {
         "display_mode": "marquee",
         "speed": 7,
-        "marquee_speed": 10,
+        "marquee_speed": 13,
         "separator_size": 16,
         "separator_gap": 24,
-        "bottom_wave_image": "shopify://shop_images/annoucement.png",
+        "bottom_wave_image": "shopify://shop_images/annouce-wave.svg",
         "section_width": "page-width",
         "background_color": "#071a4b",
         "divider_width": 0,
