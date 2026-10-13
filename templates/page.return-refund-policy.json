@@ -697,7 +697,7 @@
         "padding-block-end": 0
       }
     },
-"footer_m9NzUG": {
+    "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
         "group_H6VpwJ": {
@@ -736,7 +736,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "text_LWt8Pz": {
@@ -762,7 +766,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -789,7 +797,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 7,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
