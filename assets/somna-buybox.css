@@ -397,8 +397,9 @@
     max-width: 17px;
   }
   .somna-buybox-picker .somna-tier .somna-tier__pill {
-    bottom: -10px;
-    padding: 2px 7px;
+    bottom: -5px;
+    padding: 3px 8px;
+    font-size: 12px;
     border-radius: 4px;
   }
   .somna-bundle-card {
