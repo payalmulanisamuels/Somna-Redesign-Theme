@@ -55,8 +55,8 @@
         "content_direction": "column",
         "gap": 15,
         "background_color": "#cbd6f4",
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "padding-block-start": 50,
+        "padding-block-end": 100
       }
     },
     "section_nCrU7b": {
@@ -147,8 +147,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 20,
+        "padding-block-start-desktop": 0
       }
     },
     "section_iYG7xV": {
@@ -238,8 +239,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "section_63n6Lm": {
@@ -329,8 +331,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "section_xXDyC9": {
@@ -420,8 +423,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "section_B46NBr": {
@@ -511,8 +515,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "section_RixrEc": {
@@ -602,8 +607,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "section_xj6tme": {
@@ -693,8 +699,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 20,
-        "padding-block-end": 0
+        "padding-block-start": 50,
+        "padding-block-end": 0,
+        "padding-block-start-desktop": 100
       }
     },
     "footer_m9NzUG": {
