@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Somna buybox – Figma "Purchase panel" (mobile 2707-3118…, desktop 2707-3220…)
+   Loaded after assets/product-col-custom.css (snippets/stylesheets.liquid); that file is unchanged.
+   Markup: snippets/variant-main-picker.liquid, snippets/somna-subscription-widget.liquid,
+           templates/product.json (footer custom liquid under Add to cart).
+   The blue panel itself is the buybox group's own settings in the theme editor.
+   Font families and the existing font sizes are kept; this block sets the
+   design's layout and colours, and sizes only the new elements.
+   ========================================================================== */
+
+/* Review card */
+.somna-buybox-review {
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 8px 10px 7px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+.somna-buybox-review__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.15;
+}
+.somna-buybox-review__stars {
+  display: inline-flex;
+}
+.somna-star {
+  --fill: 100%;
+  background: linear-gradient(90deg, #eeb229 var(--fill), #c7c7c7 var(--fill));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.somna-buybox-review__rating {
+  margin-left: 3px;
+  color: #292929;
+}
+.somna-buybox-review__quote {
+  margin: 3px 0 0;
+  font-size: 8px;
+  line-height: 1.5;
+  color: #0a1a4a;
+}
+
+/* Colour row: white card, no border */
+.somna-buybox-picker .somna-color-option {
+  background: #fff;
+  border: 0;
+  margin-bottom: 12px;
+}
+
+/* Size cards: three equal columns, room for the badges above */
+.somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding-top: 9px;
+  width: 100%;
+}
+.somna-buybox-picker .variant-option__button-label--card.somna-tier {
+  position: relative;
+  justify-content: flex-start;
+  width: auto;
+  min-width: 0;
+  padding: 4px 3px 16px;
+  border-radius: 10px;
+  background: #fff !important;
+  overflow: visible !important;
+}
+.somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier {
+  border: 1px solid #d7dce7 !important;
+}
+.somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+  background: #f6f8fe !important;
+}
+.somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+  background: #eff2fc !important;
+  border: 1.7px solid #0b57e3 !important;
+}
+.somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+  background: #0b57e3;
+}
+.somna-buybox-picker .somna-tier .somna-tier__badge {
+  top: 0;
+  left: 50%;
+  width: auto;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #152963;
+  line-height: 1;
+  transform: translate(-50%, -55%);
+  z-index: 4;
+}
+.somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+  background: #0b57e3;
+}
+.somna-buybox-picker .somna-tier .variant-card__title {
+  color: #152963;
+  font-weight: 400;
+}
+.somna-buybox-picker .somna-tier .variant-card__sub-title {
+  color: #5366aa;
+}
+.somna-tier__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px 4px;
+  width: 100%;
+  margin: 6px 0 0;
+  line-height: 1.15;
+}
+.somna-tier__night {
+  color: #0b57e3;
+  font-size: 10px;
+  font-weight: 700;
+}
+.somna-tier__was {
+  color: #8c99c0;
+  font-size: 8.8px;
+  text-decoration: line-through;
+}
+.somna-tier__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: #246335;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.somna-buybox-picker .somna-tier .somna-tier__perk {
+  justify-content: center;
+  width: 100%;
+  margin-top: 3px;
+  color: #246335;
+  font-weight: 700;
+}
+.somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+  color: #8c99c0;
+  font-weight: 400;
+}
+.somna-tier__icon,
+.somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  max-width: 12px;
+}
+.somna-buybox-picker .somna-tier .somna-tier__pill {
+  bottom: -7px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: #1b7c46;
+  line-height: 1;
+}
+
+/* Bundle card (single-variant products: The Color Set, Season Bundle) */
+.somna-bundle-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+.somna-bundle-card__media {
+  flex: 0 0 34%;
+  max-width: 140px;
+}
+.somna-bundle-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 96px;
+  object-fit: contain;
+}
+.somna-bundle-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.somna-bundle-card__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.somna-bundle-card__sub {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+.somna-bundle-card .somna-tier__price {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Autoship & Save / One-time purchase */
+.somna-custom-subscription-container .somna-purchase-box {
+  background: #fff;
+  border: 1px solid #d7dce7;
+  border-radius: 10px;
+}
+.somna-custom-subscription-container .somna-purchase-box.active {
+  background: #fff;
+  border: 1.6px solid #0b57e3;
+}
+.somna-custom-subscription-container .somna-box-banner {
+  background: #0b57e3;
+}
+.somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+  padding: 10px 10px 2px;
+  border-bottom: 0;
+}
+.somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+  padding-top: 2px;
+  padding-bottom: 10px;
+}
+.somna-custom-subscription-container .somna-per-night,
+.somna-custom-subscription-container .somna-dropdown-wrap {
+  display: none !important;
+}
+.somna-custom-subscription-container .somna-box-title,
+.somna-custom-subscription-container .somna-active-price {
+  color: #152963;
+}
+.somna-custom-subscription-container .somna-pricing-row {
+  gap: 6px;
+}
+.somna-custom-subscription-container .somna-strike-price {
+  color: #8c99c0;
+}
+.somna-custom-subscription-container .somna-save-pill {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #1b7c46;
+}
+.somna-custom-subscription-container .somna-radio-bullet {
+  flex-shrink: 0;
+  border-color: #152963;
+}
+.somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+  border: 2px solid #0b57e3;
+}
+.somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+  width: 6px;
+  height: 6px;
+}
+.somna-custom-subscription-container .somna-perks-list {
+  color: #152963;
+}
+.somna-custom-subscription-container .somna-perks-list li {
+  align-items: baseline;
+}
+.somna-perk-check {
+  flex-shrink: 0;
+  color: #0b57e3;
+  font-weight: 700;
+}
+.somna-gifts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 2px;
+}
+.somna-gift {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 39px;
+  padding: 4px;
+  border-radius: 7px;
+  background: #e5f4eb;
+  color: #246a3b;
+  font-size: 9.2px;
+  line-height: 1.1;
+  text-align: center;
+}
+.somna-gift__icon {
+  width: 14px;
+  height: 14px;
+}
+.somna-onetime-save {
+  margin: 1px 0 0 22px;
+  color: #ef5400;
+  font-size: 9.8px;
+  line-height: 1.15;
+}
+.somna-onetime-save[hidden] {
+  display: none;
+}
+.somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+  padding: 8px 10px;
+}
+
+/* Add to cart */
+.product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #0b57e3;
+  background-color: #0b57e3;
+}
+
+/* Under the button: flexibility line + delivery promise */
+.somna-buybox-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #5366aa;
+  font-size: 9.7px;
+  line-height: 1.2;
+}
+.somna-buybox-flex__icon {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+.somna-buybox-delivery {
+  width: 100%;
+  margin: 0;
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #fff;
+  color: #152963;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+    height: 41px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .somna-buybox-review {
+    margin-bottom: 20px;
+    padding: 12px 16px 10px;
+    border-radius: 14px;
+  }
+  .somna-buybox-review__top {
+    font-size: 16px;
+  }
+  .somna-buybox-review__quote {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+  .somna-buybox-picker .somna-color-option {
+    margin-bottom: 16px;
+  }
+  .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+    gap: 12px;
+    padding-top: 14px;
+  }
+  .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+    padding: 4px 6px 24px;
+    border-radius: 14px;
+  }
+  .somna-buybox-picker .somna-tier .somna-tier__badge {
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+  .somna-tier__price {
+    margin-top: 10px;
+  }
+  .somna-tier__night {
+    font-size: 16px;
+  }
+  .somna-tier__was {
+    font-size: 13px;
+  }
+  .somna-tier__perk {
+    gap: 6px;
+    font-size: 14px;
+  }
+  .somna-tier__icon,
+  .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+    width: 17px;
+    height: 17px;
+    max-width: 17px;
+  }
+  .somna-buybox-picker .somna-tier .somna-tier__pill {
+    bottom: -10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .somna-bundle-card {
+    gap: 18px;
+    margin-bottom: 16px;
+    padding: 12px 18px;
+    border-radius: 14px;
+  }
+  .somna-bundle-card__img {
+    max-height: 130px;
+  }
+  .somna-bundle-card__title {
+    font-size: 20px;
+  }
+  .somna-bundle-card__sub {
+    font-size: 15px;
+  }
+  .somna-custom-subscription-container .somna-purchase-box {
+    border-radius: 14px;
+  }
+  .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+    padding: 16px 18px 4px;
+  }
+  .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+    padding-bottom: 16px;
+  }
+  .somna-custom-subscription-container .somna-radio-bullet {
+    width: 20px;
+    height: 20px;
+  }
+  .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+    width: 9px;
+    height: 9px;
+  }
+  .somna-custom-subscription-container .somna-save-pill {
+    padding: 1px 8px;
+  }
+  .somna-gifts {
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .somna-gift {
+    gap: 5px;
+    min-height: 64px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .somna-gift__icon {
+    width: 22px;
+    height: 22px;
+  }
+  .somna-onetime-save {
+    margin-left: 28px;
+    font-size: 15px;
+  }
+  .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+    padding: 14px 18px;
+  }
+  .somna-buybox-flex {
+    gap: 5px;
+    margin: 4px 0 10px;
+    font-size: 14px;
+  }
+  .somna-buybox-flex__icon {
+    width: 15px;
+    height: 15px;
+  }
+  .somna-buybox-delivery {
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 15px;
+  }
+}
