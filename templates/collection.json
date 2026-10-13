@@ -1184,10 +1184,7 @@
         "sleep_option_BNKpYJ",
         "sleep_option_66YfmJ"
       ],
-      "custom_css": [
-        "@media (min-width: 768px) {.wave-container.bottom {bottom: -70px; }}",
-        ".wave-container.bottom {bottom: -5px; height: 40px}"
-      ],
+      "custom_css": [],
       "name": "Collection Feature",
       "settings": {
         "top_wave_image": "shopify://shop_images/curve-top.png",
