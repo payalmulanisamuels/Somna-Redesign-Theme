@@ -1219,7 +1219,7 @@
         "content_width_desktop": "80rem"
       }
     },
-"section_zELtyM": {
+    "section_zELtyM": {
       "type": "section",
       "blocks": {
         "group_iHdB3h": {
@@ -1837,7 +1837,7 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/Yellow_BG-new.png",
+        "bg_image": "shopify://shop_images/top-wave.png",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -1850,7 +1850,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_color": "#efd374",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1862,13 +1862,13 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 15,
-        "padding-block-end": 15,
+        "padding-block-start": 0,
+        "padding-block-end": 0,
         "stack_desktop": false,
         "align_items_desktop": "",
         "content_width_desktop": ""
       }
-    },
+    }
   },
   "order": [
     "section_mXKVY7",
