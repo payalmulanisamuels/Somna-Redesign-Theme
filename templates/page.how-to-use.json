@@ -32,7 +32,8 @@
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
-            "image_ratio_desktop": "2 / 1",
+            "image_desktop": "shopify://shop_images/contact-banner.jpg",
+            "image_ratio_desktop": "adapt",
             "border_radius_desktop": 29,
             "border_corners_desktop": "bottom",
             "visibility": "all"
