@@ -43,8 +43,29 @@
   {%- comment -%} The tape and strips are cut off on one side, so they sit on the screen edges {%- endcomment -%}
   {%- if section.settings.halloween_decor -%}
     {%- comment -%} Halloween: spiderwebs in the two top corners (decorative, ignored by screen readers) {%- endcomment -%}
-    <span class="somna-ess__web somna-ess__web--left" aria-hidden="true"></span>
+    {%- comment -%} Left web: the Figma web image; the spider is separate so it can drop on its thread {%- endcomment -%}
+    <span class="somna-ess__web somna-ess__web--left" aria-hidden="true">
+      <img class="somna-ess__web-img" src="{{ 'somna-hw-web.png' | asset_url }}" alt="" width="439" height="268" loading="lazy" decoding="async">
+      <span class="somna-spider">
+        <i class="somna-spider__thread"></i>
+        <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
+      </span>
+    </span>
     <span class="somna-ess__web somna-ess__web--right" aria-hidden="true"></span>
+  {%- endif -%}
+  {%- if section.settings.halloween_decor -%}
+    <script>
+      /* Starts the spider drop + pumpkin hop once the section scrolls into view (runs once). */
+      (function () {
+        var s = document.currentScript && document.currentScript.closest('.somna-ess');
+        if (!s) return;
+        if (!('IntersectionObserver' in window)) { s.classList.add('is-in'); return; }
+        var io = new IntersectionObserver(function (e) {
+          if (e[0].isIntersecting) { s.classList.add('is-in'); io.disconnect(); }
+        }, { threshold: 0.25 });
+        io.observe(s);
+      })();
+    </script>
   {%- endif -%}
   <div class="somna-ess__inner">
 
@@ -55,7 +76,33 @@
     {%- if section.settings.heading != blank -%}
       <h2 class="somna-ess__title">
         <span class="somna-ess__title-text">{{ section.settings.heading }}</span>
-        {%- if section.settings.title_icon != blank -%}
+        {%- if section.settings.halloween_decor -%}
+          {%- comment -%} Animated pumpkin: hops, then smiles (eyes and mouth swap). Decorative. {%- endcomment -%}
+          <span class="somna-ess__title-icon somna-pk" aria-hidden="true">
+            <svg viewBox="0 0 120 118" focusable="false">
+              <defs>
+                <mask id="somna-pk-{{ section.id }}" maskUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="140">
+                  <rect x="-10" y="-10" width="140" height="140" fill="#fff"/>
+                  <g class="somna-pk__eyes" fill="#000"><path d="M27 60 L38 43 L50 59 Z"/><path d="M71 59 L83 44 L94 60 Z"/></g>
+                  <g class="somna-pk__happy" fill="none" stroke="#000" stroke-width="5.5" stroke-linecap="round"><path d="M28 57 Q39 43 50 57"/><path d="M71 57 Q82 43 93 57"/></g>
+                  <path fill="#000" d="M55 72 L60 64 L65 72 Z"/>
+                  <path class="somna-pk__calm" fill="#000" d="M30 80 Q60 90 90 80 L86 86 Q60 96 34 86 Z"/>
+                  <g class="somna-pk__smile">
+                    <path fill="#000" d="M25 75 Q60 87 95 75 Q91 97 60 99 Q29 97 25 75 Z"/>
+                    <rect x="45" y="79" width="10" height="8" rx="1.5" fill="#fff"/>
+                    <rect x="64" y="90" width="10" height="9" rx="1.5" fill="#fff"/>
+                  </g>
+                </mask>
+              </defs>
+              <g fill="#ff9845" mask="url(#somna-pk-{{ section.id }})">
+                <path d="M58 30 Q57 18 62 10 Q66 8 70 11 Q66 19 67 30 Z"/>
+                <ellipse cx="36" cy="68" rx="28" ry="36"/>
+                <ellipse cx="84" cy="68" rx="28" ry="36"/>
+                <ellipse cx="60" cy="66" rx="34" ry="40"/>
+              </g>
+            </svg>
+          </span>
+        {%- elsif section.settings.title_icon != blank -%}
           {{
             section.settings.title_icon
             | image_url: width: 160
@@ -478,7 +525,7 @@
       "type": "checkbox",
       "id": "halloween_decor",
       "label": "Show Halloween decorations",
-      "info": "Spiderwebs in the top corners.",
+      "info": "Spiderwebs in the top corners, the dropping spider and the smiling pumpkin after the heading (used instead of the title icon).",
       "default": false
     },
     {
