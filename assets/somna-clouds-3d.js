@@ -40,7 +40,7 @@
         world.appendChild(p);
       }
       wrap.appendChild(world);
-      section.insert(wrap, first);
+      section.append(wrap, first);
     });
   }
 
