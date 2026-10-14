@@ -993,7 +993,12 @@
 
   /* Shop the essentials */
   .somna-ess__web--left {
-    width: clamp(150px, 19vw, 300px);
+    --web-w: clamp(150px, 19vw, 300px); /* the spider scales from this width */
+    width: var(--web-w);
+  }
+  .somna-spider__thread {
+    width: 1.5px;
+    left: -0.75px;
   }
   .somna-ess__web--right {
     width: clamp(160px, 21vw, 333px);
