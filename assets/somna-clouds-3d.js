@@ -16,7 +16,7 @@
   }
 
   function build(section) {
-    if (section.querySelector(':scope > .sm-cloud3d')) return;
+    if (section.querySelector(':scope > .sm-cloud3d > .somna-ess__grid')) return;
     var first = section.firstChild;
     CLOUDS.forEach(function (c) {
       var rnd = seeded(c.seed);
@@ -40,7 +40,7 @@
         world.appendChild(p);
       }
       wrap.appendChild(world);
-      section.append(wrap, first);
+      section.insertBeforeappend(wrap, first);
     });
   }
 
