@@ -1,81 +1,55 @@
 /* --------------------------------------------------------------------------
-   "Shop the essentials": drifting clouds instead of the strip and tape
-   Loaded right after assets/somna-motion.css (layout/theme.liquid), which is unchanged;
-   this overrides only the heading's two cut-outs from its section 11. The sparkle,
-   moon and dots from section 11 stay as they are. The heading's two cut-outs (strip on the left, tape on
-   the right) now show a soft cloud (assets/somna-deco-cloud.svg) that drifts
-   slowly sideways and floats up and down, a calm "sky" feel like the reference.
-   Still pseudo-elements only: no clicks, no layout change, inside the screen width.
-   Only translate is animated, so it stays light on PageSpeed.
+   "Shop the essentials": drifting clouds in the top-left corner
+   (instead of the strip and tape beside the heading)
+   Loaded right after assets/somna-motion.css (layout/theme.liquid), which is unchanged.
+   - Removes the heading's two cut-outs (strip and tape) from somna-motion.css section 11.
+     The sparkle, moon and yellow dots from section 11 stay as they are.
+   - Adds a big and a small soft cloud (assets/somna-deco-cloud.svg) in the section's
+     top-left corner, drifting slowly sideways and floating up and down.
+   One pseudo-element behind the cards: no clicks, no layout change, inside the
+   screen width. Only translate is animated, so it stays light on PageSpeed.
    Reduced-motion visitors see the clouds standing still.
    -------------------------------------------------------------------------- */
 .somna-ess__title::before,
 .somna-ess__title::after {
-  background-image: url('somna-deco-cloud.svg');
-  background-position: center;
-  rotate: 0deg;
-  filter: none;
+  content: none;
+  animation: none;
+}
+
+.somna-ess::before {
+  --sm-cloud-x: 8px;
+  --sm-cloud-y: 3px;
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  width: 86px;
+  aspect-ratio: 2.6;
+  background-image: url('somna-deco-cloud.svg'), url('somna-deco-cloud.svg');
+  background-repeat: no-repeat;
+  background-size: 60% auto, 34% auto;
+  background-position: 0 0, 100% 40%;
   opacity: 0.95;
-}
-
-/* Left cloud */
-.somna-ess__title::before {
-  --sm-cloud-x: 6px;
-  --sm-cloud-y: 3px;
-  top: calc(50% - 22px);
-  left: calc(50% - 182px);
-  width: 66px;
-  height: 41px;
-}
-
-/* Right cloud (mirrored, a little smaller and lower) */
-.somna-ess__title::after {
-  --sm-cloud-x: -6px;
-  --sm-cloud-y: 3px;
-  top: calc(50% - 16px);
-  left: calc(50% + 120px);
-  width: 58px;
-  height: 36px;
-  scale: -1 1;
+  pointer-events: none;
 }
 
 @media screen and (min-width: 750px) {
-  .somna-ess__title::before {
-    --sm-cloud-x: 12px;
+  .somna-ess::before {
+    --sm-cloud-x: 14px;
     --sm-cloud-y: 5px;
-    top: calc(50% - 40px);
-    left: calc(50% - 300px);
-    width: 124px;
-    height: 78px;
-  }
-
-  .somna-ess__title::after {
-    --sm-cloud-x: -12px;
-    --sm-cloud-y: 5px;
-    top: calc(50% - 30px);
-    left: calc(50% + 192px);
-    width: 108px;
-    height: 68px;
+    top: 10px;
+    left: 16px;
+    width: 170px;
   }
 }
 
 @media screen and (min-width: 990px) {
-  .somna-ess__title::before {
-    --sm-cloud-x: 18px;
+  .somna-ess::before {
+    --sm-cloud-x: 22px;
     --sm-cloud-y: 7px;
-    top: calc(50% - 60px);
-    left: calc(50% - 430px);
-    width: 190px;
-    height: 119px;
-  }
-
-  .somna-ess__title::after {
-    --sm-cloud-x: -18px;
-    --sm-cloud-y: 7px;
-    top: calc(50% - 46px);
-    left: calc(50% + 250px);
-    width: 168px;
-    height: 105px;
+    top: 14px;
+    left: max(16px, 3%);
+    width: clamp(220px, 22vw, 340px);
   }
 }
 
@@ -90,22 +64,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .somna-ess__title::before,
-  .somna-ess__title::after {
-    animation: sm-cloud-drift 9s ease-in-out infinite;
-    animation-timeline: auto;
-    animation-range: normal;
-  }
-
-  .somna-ess__title::after {
-    animation-duration: 11s;
-    animation-delay: -4s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .somna-ess__title::before,
-  .somna-ess__title::after {
-    animation: none;
+  .somna-ess::before {
+    animation: sm-cloud-drift 10s ease-in-out infinite;
   }
 }
