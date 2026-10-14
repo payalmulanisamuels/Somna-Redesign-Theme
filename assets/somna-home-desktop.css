@@ -931,4 +931,118 @@
     padding-block: 72px 80px;
   }
 }
+/* =====================================================================
+   HALLOWEEN 2026 — tablet & desktop (Figma 3297:5520)
+   Figma's desktop type is oversized, so sizes are re-proportioned for real
+   screens with clamp(). Base rules are in custom.css.
+   ===================================================================== */
+@media screen and (min-width: 750px) {
+  /* Announcement bar (sitewide) */
+  .announcement-bar__slide[style*="font-display"] .announcement-bar__text {
+    font-size: 18px;
+  }
+  .announcement-bar .announcement-bar__separator-image {
+    height: 24px;
+  }
+
+  /* Logo (sitewide) */
+  .header-logo span[data-testid="header-logo"] {
+    width: 173px;
+  }
+
+  /* Hero */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero::before {
+    height: clamp(40px, 5vw, 72px);
+    background-image: url("somna-hw-header-wave.svg");
+  }
+  #MainContent[data-template="index"] .text-block--text_VDbt3L,
+  #MainContent[data-template="index"] .text-block--text_VDbt3L > * {
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz {
+    margin-block: 4px 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz,
+  #MainContent[data-template="index"] .text-block--text_eT6TMz > * {
+    font-size: clamp(46px, 5.2vw, 76px);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"],
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] > * {
+    font-size: clamp(60px, 7vw, 104px);
+  }
+  #MainContent[data-template="index"] .text-block--text_Lqf6bA,
+  #MainContent[data-template="index"] .text-block--text_Lqf6bA > *,
+  #MainContent[data-template="index"] .text-block--text_hwperks,
+  #MainContent[data-template="index"] .text-block--text_hwperks > * {
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    min-height: 54px;
+    gap: 12px;
+    padding: 3px 30px 3px 8px !important; /* overrides the hero's own button padding */
+    font-size: clamp(16px, 1.4vw, 20px) !important;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button::before {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* Shop the essentials */
+  .somna-ess__web--left {
+    width: clamp(150px, 19vw, 300px);
+  }
+  .somna-ess__web--right {
+    width: clamp(160px, 21vw, 333px);
+  }
+  .somna-ess__eyebrow {
+    margin-bottom: 10px;
+    font-size: clamp(13px, 1.1vw, 16px);
+    font-weight: 900;
+    letter-spacing: 0.23em;
+  }
+  .somna-ess.somna-ess--halloween .somna-ess__title {
+    gap: 14px;
+    margin-bottom: 34px;
+    font-size: clamp(36px, 4vw, 58px);
+  }
+  .somna-ess__title-icon {
+    width: clamp(40px, 4vw, 60px);
+  }
+  .somna-ess__badge {
+    top: -34px;
+    right: -26px;
+    width: clamp(76px, 7.4vw, 104px);
+  }
+  .somna-ess__badge-text {
+    font-size: clamp(17px, 1.6vw, 24px);
+  }
+
+  /* Small essentials */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+    height: clamp(60px, 9vw, 130px);
+    background-image: url("somna-hw-orange-edge.svg");
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+    background-color: #fff; /* replaces the cream wave colour set above */
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
+    font-size: clamp(30px, 3.3vw, 48px);
+  }
+
+  /* Sleep Bundle webs */
+  #MainContent[data-template="index"] .somna-sleep-bundle::before {
+    top: -60px;
+    width: clamp(150px, 19vw, 300px);
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle::after {
+    top: -30px;
+    width: clamp(160px, 21vw, 354px);
+  }
+}
+/* ======================= END HALLOWEEN 2026 ======================= */
+
 /* ======================= END SOMNA DESKTOP ======================= */
