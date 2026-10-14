@@ -70,7 +70,7 @@
         <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
       </span>
     </span>
-    {%- comment -%} Right web: the Figma right-hand web, drawn in the same way, with a second spider (large screens only) {%- endcomment -%}
+    {%- comment -%} Right web: the Figma right-hand web (no spider), drawn in the same way {%- endcomment -%}
     <span class="somna-ess__web somna-ess__web--right" aria-hidden="true">
       <svg class="somna-ess__web-svg" viewBox="0 0 333 178" width="333" height="178" focusable="false">
         <defs>
@@ -86,10 +86,6 @@
         </defs>
         <image href="{{ 'somna-hw-web-right.png' | asset_url }}" width="333" height="178" mask="url(#somna-web-r-{{ section.id }})"/>
       </svg>
-      <span class="somna-spider">
-        <i class="somna-spider__thread"></i>
-        <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
-      </span>
     </span>
   {%- endif -%}
   {%- if section.settings.halloween_decor -%}
