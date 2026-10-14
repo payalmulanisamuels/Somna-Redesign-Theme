@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-   "Shop the essentials": soft 3D clouds in the top-left corner
+   "Shop the essentials": soft 3D clouds, one top-left and one top-right
    (instead of the strip and tape beside the heading)
    Loaded right after assets/somna-motion.css (layout/theme.liquid), which is unchanged.
    - Removes the heading's two cut-outs (strip and tape) from somna-motion.css section 11.
@@ -19,8 +19,7 @@
 .sm-cloud3d {
   position: absolute;
   top: 4px;
-  left: 6px;
-  width: 15em;
+  width: 9em;
   height: 6em;
   font-size: 7px;           /* 1em: everything inside scales from this */
   perspective: 60em;
@@ -28,19 +27,17 @@
   z-index: 0;
 }
 
+.sm-cloud3d--left { left: 6px; }
+.sm-cloud3d--right { right: 6px; top: 10px; }
+
 .sm-cloud3d__world {
   position: absolute;
   top: 50%;
-  left: 4.5em;
+  left: 50%;
   width: 0;
   height: 0;
   transform-style: preserve-3d;
   transform: rotateX(6deg) rotateY(-14deg);
-}
-
-.sm-cloud3d__base {
-  position: absolute;
-  transform-style: preserve-3d;
 }
 
 .sm-cloud3d__puff {
@@ -55,11 +52,15 @@
 }
 
 @media screen and (min-width: 750px) {
-  .sm-cloud3d { top: 10px; left: 14px; font-size: 11px; }
+  .sm-cloud3d { top: 10px; font-size: 11px; }
+  .sm-cloud3d--left { left: 14px; }
+  .sm-cloud3d--right { right: 14px; top: 16px; }
 }
 
 @media screen and (min-width: 990px) {
-  .sm-cloud3d { top: 12px; left: max(12px, 2.5%); font-size: clamp(14px, 1.25vw, 19px); }
+  .sm-cloud3d { top: 12px; font-size: clamp(14px, 1.25vw, 19px); }
+  .sm-cloud3d--left { left: max(12px, 2.5%); }
+  .sm-cloud3d--right { right: max(12px, 2.5%); top: 22px; }
 }
 
 @keyframes sm-cloud3d-sway {
@@ -76,6 +77,12 @@
 @media (prefers-reduced-motion: no-preference) {
   .sm-cloud3d__world {
     animation: sm-cloud3d-sway 14s ease-in-out infinite;
+  }
+  /* right cloud drifts the other way, out of step with the left one */
+  .sm-cloud3d--right .sm-cloud3d__world {
+    animation-duration: 17s;
+    animation-direction: reverse;
+    animation-delay: -5s;
   }
   .sm-cloud3d__puff {
     animation-name: sm-cloud3d-spread;
