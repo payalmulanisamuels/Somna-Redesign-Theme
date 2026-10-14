@@ -7,7 +7,7 @@
    - The cloud markup is added by assets/somna-clouds-3d.js: soft puffs placed in 3D
      space (CSS 3D transforms), each puff slowly spreading and settling, the whole cloud gently
      swaying, so it looks round and soft like a real cloud.
-   Behind the cards, no clicks, no layout change, inside the screen width.
+   Appended inside .somna-ess__inner, level with the heading (above the cards), no clicks, no layout change, inside the screen width.
    Only transforms are animated. Reduced-motion visitors see the clouds standing still.
    -------------------------------------------------------------------------- */
 .somna-ess__title::before,
@@ -17,8 +17,9 @@
 }
 
 .sm-cloud3d {
+  --sm-cloud-mid: 9px;      /* middle of the heading line */
   position: absolute;
-  top: 4px;
+  top: calc(var(--sm-cloud-mid) - 3em);
   width: 9em;
   height: 6em;
   font-size: 7px;           /* 1em: everything inside scales from this */
@@ -27,8 +28,8 @@
   z-index: 0;
 }
 
-.sm-cloud3d--left { left: 6px; }
-.sm-cloud3d--right { right: 6px; top: 10px; }
+.sm-cloud3d--left { left: 0; }
+.sm-cloud3d--right { right: 0; }
 
 .sm-cloud3d__world {
   position: absolute;
@@ -52,15 +53,13 @@
 }
 
 @media screen and (min-width: 750px) {
-  .sm-cloud3d { top: 10px; font-size: 11px; }
-  .sm-cloud3d--left { left: 14px; }
-  .sm-cloud3d--right { right: 14px; top: 16px; }
+  .sm-cloud3d { --sm-cloud-mid: 15px; font-size: 11px; }
 }
 
 @media screen and (min-width: 990px) {
-  .sm-cloud3d { top: 12px; font-size: clamp(14px, 1.25vw, 19px); }
-  .sm-cloud3d--left { left: max(12px, 2.5%); }
-  .sm-cloud3d--right { right: max(12px, 2.5%); top: 22px; }
+  .sm-cloud3d { --sm-cloud-mid: 20px; font-size: clamp(14px, 1.25vw, 18px); }
+  .sm-cloud3d--left { left: 24px; }
+  .sm-cloud3d--right { right: 24px; }
 }
 
 @keyframes sm-cloud3d-sway {

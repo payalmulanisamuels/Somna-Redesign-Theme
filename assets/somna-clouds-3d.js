@@ -1,5 +1,5 @@
 /* Somna – "Shop the essentials" 3D clouds (one top-left, one top-right)
-   Builds a small layered cloud scene (CSS 3D transforms) inside each .somna-ess section.
+   Builds a small layered cloud scene (CSS 3D transforms) appended inside each .somna-ess__inner (beside the heading).
    Decorative only: aria-hidden, no clicks, no layout change. Styles: assets/somna-motion-clouds.css */
 (function () {
   var CLOUDS = [
@@ -16,8 +16,8 @@
   }
 
   function build(section) {
-    if (section.querySelector(':scope > .sm-cloud3d')) return;
-    var first = section.firstChild;
+    var inner = section.querySelector(':scope > .somna-ess__inner') || section;
+    if (inner.querySelector(':scope > .sm-cloud3d')) return;
     CLOUDS.forEach(function (c) {
       var rnd = seeded(c.seed);
       var wrap = document.createElement('div');
@@ -40,7 +40,7 @@
         world.appendChild(p);
       }
       wrap.appendChild(world);
-      section.insertBefore(wrap, first);
+      inner.appendChild(wrap);
     });
   }
 
