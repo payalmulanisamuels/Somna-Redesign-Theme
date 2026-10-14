@@ -55,15 +55,32 @@
   {%- endif -%}
   {%- if section.settings.halloween_decor -%}
     <script>
-      /* Starts the spider drop + pumpkin hop once the section scrolls into view (runs once). */
+      /* Halloween spider + pumpkin: plays when the web scrolls into view (a little above the
+         bottom of the screen), and again each time the section comes back into view.
+         Without this script the spider simply hangs still. */
       (function () {
-        var s = document.currentScript && document.currentScript.closest('.somna-ess');
-        if (!s) return;
-        if (!('IntersectionObserver' in window)) { s.classList.add('is-in'); return; }
-        var io = new IntersectionObserver(function (e) {
-          if (e[0].isIntersecting) { s.classList.add('is-in'); io.disconnect(); }
-        }, { threshold: 0.25 });
-        io.observe(s);
+        function setup(s) {
+          if (!s || s.getAttribute('data-hw-init')) return;
+          s.setAttribute('data-hw-init', '1');
+          if (!('IntersectionObserver' in window)) return;
+          var target = s.querySelector('.somna-ess__web--left') || s;
+          s.classList.add('hw-ready');
+          new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) s.classList.add('is-in');
+          }, { rootMargin: '0px 0px -15% 0px' }).observe(target);
+          new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) s.classList.remove('is-in');
+          }).observe(s);
+        }
+        function scan() {
+          document.querySelectorAll('.somna-ess--halloween').forEach(setup);
+        }
+        scan();
+        if (!window.somnaHwBound) {
+          window.somnaHwBound = true;
+          document.addEventListener('DOMContentLoaded', scan);
+          document.addEventListener('shopify:section:load', scan);
+        }
       })();
     </script>
   {%- endif -%}
