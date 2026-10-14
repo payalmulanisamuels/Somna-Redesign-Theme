@@ -1952,7 +1952,7 @@ a.somna-view-all {
   width: 18.6%;
   height: 117%;
   background:
-    url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913") center top / 100% auto no-repeat,
+    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png") center top / 100% auto no-repeat,
     linear-gradient(#fff, #fff) 48.6% 100% / 82.3% 85.5% no-repeat;
 }
 /* witch hat on the "a." (the hat file has a white background, multiply drops it) */
@@ -1961,7 +1961,7 @@ a.somna-view-all {
   top: -200.7%;
   width: 50%;
   aspect-ratio: 1;
-  background: url("/cdn/shop/files/somna-halloween-witch-hat.png") center / contain no-repeat;
+  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913") center / contain no-repeat;
   mix-blend-mode: multiply;
 }
 
