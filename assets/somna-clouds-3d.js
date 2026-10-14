@@ -16,7 +16,7 @@
   }
 
   function build(section) {
-    if (section.querySelector(':scope > .sm-cloud3d > .somna-ess__grid')) return;
+    if (section.querySelector(':scope > .sm-cloud3d ')) return;
     var first = section.firstChild;
     CLOUDS.forEach(function (c) {
       var rnd = seeded(c.seed);
