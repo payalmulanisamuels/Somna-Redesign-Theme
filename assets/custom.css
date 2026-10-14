@@ -1885,3 +1885,299 @@ a.somna-view-all {
 /* How to use*/
 
  
+
+/* =====================================================================
+   HALLOWEEN 2026 — homepage redesign (Figma 3297:6613 mobile / 3297:5520 desktop)
+   Base (mobile-first) rules. Tablet/desktop sizes live in somna-home-desktop.css.
+   Decorations are pointer-events: none and aria-hidden. Only the homepage is
+   affected, except the header (announcement bar + logo), which is sitewide
+   by request.
+   ===================================================================== */
+:root {
+  --font-display--family: "Rubik Wet Paint", "Impact", "Arial Black", sans-serif;
+  --font-display--weight: 400;
+  --font-display--style: normal;
+  --font-display-spray--family: "Rubik Spray Paint", "Impact", "Arial Black", sans-serif;
+  --font-display-spray--weight: 400;
+  --font-display-spray--style: normal;
+  --font-badge--family: "Bigshot One", Georgia, serif;
+  --hw-orange: #ff9845;
+  --hw-orange-text: #ef5400;
+  --hw-navy: #0a1a4a;
+  --hw-web-left: url("/cdn/shop/files/somna-halloween-web-spider.png");
+  --hw-web-right: url("/cdn/shop/files/somna-halloween-web-right.png");
+  --hw-web-right-2: url("/cdn/shop/files/somna-halloween-web-right-2.png");
+}
+
+/* ---------- Announcement bar (sitewide): Halloween drip font ---------- */
+.announcement-bar__slide[style*="font-display"] .announcement-bar__text {
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.announcement-bar__slide[style*="font-display"] .annoucement_bar_wrap {
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Logo (sitewide): pumpkin over the "o" + witch hat ----------
+   Positions are measured from the logo file (515 x 82 px of lettering)
+   against the Figma logo, so they scale with the logo. */
+.header-logo span[data-testid="header-logo"] {
+  position: relative;
+  display: block;
+  width: 102px;
+  max-width: none;
+  line-height: 0;
+}
+.header-logo span[data-testid="header-logo"] > .header-logo__image {
+  display: block;
+  width: 100% !important; /* overrides the logo's own size so the overlay lines up */
+  height: auto !important;
+  max-width: none;
+}
+.header-logo span[data-testid="header-logo"]::before,
+.header-logo span[data-testid="header-logo"]::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+/* pumpkin over the "o" (top layer) with a white patch hiding the "o" underneath */
+.header-logo span[data-testid="header-logo"]::before {
+  left: 14.7%;
+  top: -17%;
+  width: 18.6%;
+  height: 117%;
+  background:
+    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png") center top / 100% auto no-repeat,
+    linear-gradient(#fff, #fff) 48.6% 100% / 82.3% 85.5% no-repeat;
+}
+/* witch hat on the "a." (the hat file has a white background, multiply drops it) */
+.header-logo span[data-testid="header-logo"]::after {
+  left: 70.7%;
+  top: -200.7%;
+  width: 50%;
+  aspect-ratio: 1;
+  background: url("/cdn/shop/files/somna-halloween-witch-hat.png") center / contain no-repeat;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Hero ---------- */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+  position: relative;
+  min-height: 141vw; /* Figma mobile hero: 393 x 555 */
+}
+/* the header's white wave running over the top of the photo */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 7.6vw;
+  z-index: 3;
+  pointer-events: none;
+  background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] h1 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #ff9845;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] {
+  rotate: -3deg;
+  transform-origin: left center;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"],
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] > * {
+  line-height: 0.98;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
+  border: 2px solid #fff !important;
+  border-radius: 999px;
+  background: #fff !important;
+  color: #ff7300 !important;
+  font-family: var(--font-body--family);
+  font-size: 15px !important;
+  font-weight: 600;
+  box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button::before {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 34px;
+  background: url("/cdn/shop/files/somna-halloween-button-pumpkin.png") center / contain no-repeat;
+}
+
+/* ---------- Shop the essentials ---------- */
+.somna-ess.somna-ess--halloween .somna-ess__title::before,
+.somna-ess.somna-ess--halloween .somna-ess__title::after,
+.somna-ess.somna-ess--halloween .somna-ess__inner::before,
+.somna-ess.somna-ess--halloween .somna-ess__card .somna-ess__media::after {
+  content: none;
+  animation: none;
+}
+.somna-ess__web {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  mix-blend-mode: multiply; /* web files have a white background */
+}
+.somna-ess__web--left {
+  left: 0;
+  width: 122px;
+  aspect-ratio: 439 / 620;
+  background-image: var(--hw-web-left);
+}
+.somna-ess__web--right {
+  right: 0;
+  width: 90px;
+  aspect-ratio: 333 / 178;
+  background-image: var(--hw-web-right);
+  background-position: right top;
+}
+.somna-ess--halloween .somna-ess__inner {
+  z-index: 1;
+}
+.somna-ess__eyebrow {
+  margin: 0 0 6px;
+  font-family: var(--font-body--family);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--hw-orange-text);
+}
+.somna-ess.somna-ess--halloween .somna-ess__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 22px;
+  font-family: var(--font-display--family);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 0.98;
+  color: var(--hw-navy);
+}
+.somna-ess__title-icon {
+  flex: none;
+  width: 32px;
+  height: auto;
+  rotate: 10deg;
+}
+.somna-ess.somna-ess--halloween .somna-ess__card {
+  position: relative;
+  background: #fff2e3;
+}
+.somna-ess.somna-ess--halloween .somna-ess__price {
+  color: var(--hw-orange-text);
+}
+.somna-ess__badge {
+  position: absolute;
+  top: -20px;
+  right: -12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  aspect-ratio: 164 / 161;
+  padding-top: 14%;
+  background: url("/cdn/shop/files/somna-halloween-badge-pumpkin.png") center / contain no-repeat;
+  pointer-events: none;
+}
+.somna-ess__badge-text {
+  display: block;
+  width: 72%;
+  font-family: var(--font-badge--family);
+  font-size: 11px;
+  line-height: 0.95;
+  text-align: center;
+  color: #000;
+  rotate: 4deg;
+}
+
+/* ---------- Small essentials: orange wavy edge + orange fade ---------- */
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] {
+  position: relative;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-background {
+  background-image: linear-gradient(180deg, var(--hw-orange) 0%, rgb(255 152 69 / 0) 100%);
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 1px);
+  height: 12.2vw;
+  z-index: 2;
+  pointer-events: none;
+  background: url("somna-hw-orange-edge-mobile.svg") center bottom / 100% 100% no-repeat;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+  background-image: none !important; /* draws the existing bottom wave in white instead */
+  background-color: #fff;
+  -webkit-mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+  mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/* ---------- The Sleep Bundle: spiderwebs ---------- */
+#MainContent[data-template="index"] .somna-sleep-bundle {
+  position: relative;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::before,
+#MainContent[data-template="index"] .somna-sleep-bundle::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  mix-blend-mode: multiply;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::before {
+  left: 0;
+  width: 122px;
+  aspect-ratio: 439 / 620;
+  background-image: var(--hw-web-left);
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::after {
+  right: 0;
+  width: 105px;
+  aspect-ratio: 354 / 237;
+  background-image: var(--hw-web-right-2);
+  background-position: right top;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle > * {
+  position: relative;
+  z-index: 1;
+}
+/* ======================= END HALLOWEEN 2026 ======================= */
