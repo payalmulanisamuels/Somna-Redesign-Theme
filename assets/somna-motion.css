@@ -300,7 +300,13 @@
   }
 }
 
-/* --------------------------------------------------------------------------
+/* ==========================================================================
+   5. Floating images: SWITCHED OFF (Halloween clean-up, 2026-10-14).
+   No page uses the "Floating image" block (blocks/somna-float.liquid), so these
+   rules did nothing. Kept here as a comment so they can be restored: remove this
+   comment wrapper and turn every "(*" and "*)" back into normal CSS comment marks.
+   ==========================================================================
+(* --------------------------------------------------------------------------
    5. Floating images (like drinkohza.com's floating fruit)
    Added in the theme editor with the "Floating image" block (blocks/somna-float.liquid)
    in the hero and in the "Breathe through your nose" banner.
@@ -308,7 +314,7 @@
    so nothing in the section moves and every button still works.
    Motion: a slow float up and down, plus a gentle drift as the page scrolls.
    Reduced-motion visitors see the images standing still.
-   -------------------------------------------------------------------------- */
+   -------------------------------------------------------------------------- *)
 :root {
   --sm-float-duration: 7s;
   --sm-float-distance: 10px;
@@ -342,7 +348,7 @@
   }
 }
 
-/* Reset the image rules some sections apply to every image inside them (e.g. the banner's full-cover image) */
+(* Reset the image rules some sections apply to every image inside them (e.g. the banner's full-cover image) *)
 .somna-float .somna-float__image {
   position: relative;
   inset: auto;
@@ -397,7 +403,7 @@
     animation: sm-float-bob var(--sm-float-duration) ease-in-out var(--sf-bob-delay, 0s) infinite;
   }
 
-  /* Drift on scroll: CSS scroll-driven animation, no JavaScript. Browsers without support just skip it. */
+  (* Drift on scroll: CSS scroll-driven animation, no JavaScript. Browsers without support just skip it. *)
   @supports (animation-timeline: view()) {
     .shopify-section:has(.somna-float) {
       view-timeline-name: --sm-float;
@@ -410,6 +416,8 @@
     }
   }
 }
+
+END OF SWITCHED-OFF SECTION 5 */
 
 /* --------------------------------------------------------------------------
    6. "Start with a bundle": floating nasal strip, mouth tape and dots (desktop only)
@@ -1147,49 +1155,17 @@
   }
 }
 
-/* --------------------------------------------------------------------------
-   10. "Breathe through your nose" banner (Layered image with text): text entrance
-   Added as a new block; nothing above is changed. Desktop, tablet and mobile.
-   The heading, then the text (and any button) fade in and rise one after another
-   as the banner scrolls into view, like the other homepage sections.
-   Uses the banner's existing scroll timeline from section 4 (--sm-settle, on
-   layered-slideshow-component), so the photo settle and the text move together.
-   Motion only (opacity + translate): no change to size, spacing or position,
-   and the theme's own tab/slide transition on .layered-slideshow__content is untouched.
-   CSS only, no JavaScript. Browsers without scroll-driven animation support and
-   reduced-motion visitors simply see the text as normal.
-   -------------------------------------------------------------------------- */
-@keyframes sm-lt-rise {
-  from {
-    opacity: 0;
-    translate: 0 28px;
-  }
+/* 10. "Breathe through your nose" banner text entrance: removed (2026-10-14).
+   It was already switched off by section 14; the banner text uses the reveal in custom.js. */
 
-  to {
-    opacity: 1;
-    translate: none;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    layered-slideshow-component .layered-slideshow__content .group-block-content > :not(.somna-float) {
-      animation: sm-lt-rise ease-out both;
-      animation-timeline: --sm-settle;
-      animation-range: entry 35% entry 85%;
-    }
-
-    layered-slideshow-component .layered-slideshow__content .group-block-content > :nth-child(2 of :not(.somna-float)) {
-      animation-range: entry 55% entry 100%;
-    }
-
-    layered-slideshow-component .layered-slideshow__content .group-block-content > :nth-child(n + 3 of :not(.somna-float)) {
-      animation-range: entry 65% entry 100%;
-    }
-  }
-}
-
-/* --------------------------------------------------------------------------
+/* ==========================================================================
+   11. "Shop the essentials" bouncing cut-outs: SWITCHED OFF (Halloween, 2026-10-14).
+   Hidden while the section's "Show Halloween decorations" setting is on (the Halloween
+   spider, web and pumpkin replace them), so they only cost download and animation time.
+   To bring them back after Halloween: remove this comment wrapper and turn every
+   "(*" and "*)" back into normal CSS comment marks.
+   ==========================================================================
+(* --------------------------------------------------------------------------
    11. "Shop the essentials" (sections/somna-shop-essentials.liquid): bouncing cut-outs
    Added as a new block; nothing above is changed. Desktop, tablet and mobile.
    - Night (black) strip to the left of the heading, Breathe (blue) tape to the right
@@ -1201,7 +1177,7 @@
    section's own code are exactly as before. Phones get smaller cut-outs, a smaller
    bounce and no scroll-linked pop-in, so scrolling stays smooth.
    Reduced-motion visitors see the cut-outs standing still.
-   -------------------------------------------------------------------------- */
+   -------------------------------------------------------------------------- *)
 .somna-ess__title {
   position: relative;
 }
@@ -1217,7 +1193,7 @@
   pointer-events: none;
 }
 
-/* Black strip: left of the heading */
+(* Black strip: left of the heading *)
 .somna-ess__title::before {
   --sm-cd-bounce: 7px;
   top: calc(50% - 9px);
@@ -1229,7 +1205,7 @@
   filter: drop-shadow(0 6px 6px rgb(10 26 74 / 0.22));
 }
 
-/* Blue tape: right of the heading */
+(* Blue tape: right of the heading *)
 .somna-ess__title::after {
   --sm-cd-bounce: 7px;
   top: calc(50% - 10px);
@@ -1241,7 +1217,7 @@
   filter: drop-shadow(0 6px 6px rgb(10 26 74 / 0.22));
 }
 
-/* Soft yellow dots around the heading (behind the cards) */
+(* Soft yellow dots around the heading (behind the cards) *)
 .somna-ess__inner::before {
   top: -14px;
   left: 0;
@@ -1256,7 +1232,7 @@
   opacity: 0.9;
 }
 
-/* Sparkle: top-right corner of the first photo */
+(* Sparkle: top-right corner of the first photo *)
 .somna-ess__card:nth-child(1) .somna-ess__media::after {
   top: 6px;
   right: 7px;
@@ -1265,7 +1241,7 @@
   background-image: url('somna-deco-sparkle.svg');
 }
 
-/* Moon: top-right corner of the second photo */
+(* Moon: top-right corner of the second photo *)
 .somna-ess__card:nth-child(2) .somna-ess__media::after {
   top: 6px;
   right: 7px;
@@ -1385,8 +1361,8 @@
   }
 }
 
-/* Desktop and tablet: pop in as the section scrolls into view, then keep bouncing
-   (browsers without scroll-driven animation support just show the bounce) */
+(* Desktop and tablet: pop in as the section scrolls into view, then keep bouncing
+   (browsers without scroll-driven animation support just show the bounce) *)
 @supports (animation-timeline: view()) {
   @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
     .somna-ess {
@@ -1441,6 +1417,8 @@
   }
 }
 
+END OF SWITCHED-OFF SECTION 11 */
+
 /* --------------------------------------------------------------------------
    12. "Small essentials. Thoughtfully made." (the 4-column section with yellow icons)
    Added as a new block; nothing above is changed. Desktop, tablet and mobile.
@@ -1459,32 +1437,6 @@
    Browsers without scroll-driven animation support skip the entrance and simply
    show the section. Reduced-motion visitors see everything standing still.
    -------------------------------------------------------------------------- */
-@keyframes sm-sm-settle {
-  from {
-    opacity: 0;
-    translate: 0 16px;
-    filter: blur(6px);
-  }
-
-  to {
-    opacity: 1;
-    translate: none;
-    filter: none;
-  }
-}
-
-@keyframes sm-sm-rise {
-  from {
-    opacity: 0;
-    translate: 0 18px;
-  }
-
-  to {
-    opacity: 1;
-    translate: none;
-  }
-}
-
 @keyframes sm-sm-draw {
   from {
     scale: 1 0;
@@ -1698,30 +1650,6 @@
       view-timeline-name: --sm-small;
     }
 
-    .shopify-section[id$='__section_ibM3ft'] .custom-header > * {
-      animation: sm-sm-rise ease-out both;
-      animation-timeline: --sm-small;
-      animation-range: entry 10% entry 55%;
-    }
-
-    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block {
-      animation: sm-sm-rise ease-out both;
-      animation-timeline: --sm-small;
-      animation-range: entry 30% entry 75%;
-    }
-
-    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) {
-      animation-range: entry 38% entry 83%;
-    }
-
-    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) {
-      animation-range: entry 46% entry 91%;
-    }
-
-    .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) {
-      animation-range: entry 54% entry 99%;
-    }
-
     .shopify-section[id$='__section_ibM3ft'] .divider__line {
       transform-origin: top;
       animation: sm-sm-draw ease-out both;
@@ -1730,12 +1658,9 @@
     }
   }
 
-  /* Desktop and tablet: the heading also clears from a soft blur, and the moon rises into place */
+  /* Desktop and tablet: the moon rises into place (the heading/column entrances were removed
+     2026-10-14: section 14 had already switched them off) */
   @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
-    .shopify-section[id$='__section_ibM3ft'] .custom-header > * {
-      animation-name: sm-sm-settle;
-    }
-
     .shopify-section[id$='__section_ibM3ft'] .section::after {
       animation-name: sm-sm-moon, sm-sm-moonrise;
       animation-duration: 6s, auto;
@@ -1749,70 +1674,8 @@
   }
 }
 
-/* --------------------------------------------------------------------------
-   13. Homepage scroll reveal, like the reference video (fade up, one after another)
-   Added as a new block; nothing above is changed. Homepage only.
-   The theme's own reveal (section 1 + the small observer in assets/custom.js)
-   already fades content up as it scrolls into view, but very subtly (14px, 0.7s).
-   This block only retunes it on the homepage to the reference video: a longer
-   rise, a slower calm fade and a clearer stagger between cards in a row.
-   It also adds the same fade-up to the "Shop the essentials" heading and cards,
-   which the observer doesn't cover (CSS scroll-driven, no extra JavaScript).
-   Motion only (opacity + translate): sizes, spacing and positions are exactly as
-   before on desktop and mobile. Content visible when the page loads (the hero)
-   is never hidden. Reduced-motion visitors see everything as normal.
-   -------------------------------------------------------------------------- */
-main[data-template^='index'] {
-  --sm-reveal-duration: 1000ms;
-  --sm-reveal-distance: 40px;
-  --sm-stagger: 140ms;
-}
-
-@media screen and (max-width: 749px) {
-  main[data-template^='index'] {
-    --sm-reveal-distance: 26px;
-    --sm-stagger: 110ms;
-  }
-}
-
-@keyframes sm-hp-fade-up {
-  from {
-    opacity: 0;
-    translate: 0 var(--sm-reveal-distance, 40px);
-  }
-
-  to {
-    opacity: 1;
-    translate: none;
-  }
-}
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    main[data-template^='index'] .shopify-section:has(> .somna-ess) {
-      view-timeline-name: --sm-hp-ess;
-    }
-
-    main[data-template^='index'] .somna-ess__title,
-    main[data-template^='index'] .somna-ess__card {
-      animation: sm-hp-fade-up ease-out both;
-      animation-timeline: --sm-hp-ess;
-      animation-range: entry 0% entry 30%;
-    }
-
-    main[data-template^='index'] .somna-ess__card {
-      animation-range: entry 10% entry 40%;
-    }
-
-    main[data-template^='index'] .somna-ess__card:nth-child(2) {
-      animation-range: entry 16% entry 46%;
-    }
-
-    main[data-template^='index'] .somna-ess__card:nth-child(n + 3) {
-      animation-range: entry 22% entry 52%;
-    }
-  }
-}
+/* 13. Homepage scroll-driven fade-up for "Shop the essentials": removed (2026-10-14).
+   It was already switched off by section 14 (the reveal in custom.js is used instead). */
 
 /* --------------------------------------------------------------------------
    14. One calm fade-up everywhere, like the reference video (all pages)
@@ -1839,10 +1702,479 @@ main[data-template^='index'] {
   }
 }
 
-:root layered-slideshow-component .layered-slideshow__content .group-block-content > :not(.somna-float),
-:root .shopify-section[id$='__section_ibM3ft'] .custom-header > *,
-:root .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block,
-:root main[data-template^='index'] .somna-ess__title,
-:root main[data-template^='index'] .somna-ess__card {
+/* (The rule that switched off the entrances of sections 10, 12 and 13 was removed with them.) */
+
+/* --------------------------------------------------------------------------
+   15. HALLOWEEN 2026: "Shop the essentials" (sections/somna-shop-essentials.liquid)
+   Approved demo v3 (2026-10-14). Only active while the section's
+   "Show Halloween decorations" setting is on (.somna-ess--halloween).
+   Sequence, started by the section's small script when the web scrolls into view
+   (.hw-ready = script running, .is-in = in view; replays each time it comes back):
+     0.00s  the Figma web draws itself: top strand from the corner, then the radial
+            strands, then the spiral ring by ring (SVG mask strokes drawn with
+            stroke-dashoffset over the real web image, somna-hw-web.png)
+     2.75s  the spider appears at the top of its thread, on the web
+     2.85s  it lowers itself in two smooth drops, the silk paying out with it
+     5.05s  short pause, then a gentle swing (3 swings, each smaller) and rest
+   Also: the title pumpkin hops and smiles every 7s, and the "70% OFF" pumpkin
+   badges give a short shake every 4.5s.
+   Without the script, or with reduced motion: finished web, spider hanging,
+   pumpkin smiling, nothing moves.
+   Sizes: --web-w is 122px on phones; somna-home-desktop.css sets the desktop width.
+   Motion only (transform / rotate / translate / opacity / stroke-dashoffset):
+   no layout shift and nothing can be clicked.
+   -------------------------------------------------------------------------- */
+
+/* ---- Web and spider: size and placement ---- */
+:where(.somna-ess__web--left) {
+  --web-w: 122px;
+  --hang: 230; /* phones: shorter silk, so the spider stops beside the heading, clear of the first card */
+}
+
+@media screen and (min-width: 750px) {
+  :where(.somna-ess__web--left) {
+    --hang: 341; /* desktop: same resting place as the Figma design */
+  }
+}
+
+.somna-ess--halloween .somna-ess__web--left {
+  width: var(--web-w);
+  aspect-ratio: auto;
+  background-image: none; /* replaces the old web-with-spider background picture */
+}
+
+.somna-ess__web-svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  overflow: visible;
+}
+
+/* Mask strokes that "draw" the web (in the 439 x 268 units of the web image) */
+.somna-ess__web-svg .hw-m {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.somna-ess__web-svg .hw-m--frame {
+  stroke-width: 9;
+}
+
+.somna-ess__web-svg .hw-m--spoke {
+  stroke-width: 10;
+}
+
+.somna-ess__web-svg .hw-m--ring {
+  stroke-width: 30;
+}
+
+.somna-spider {
+  position: absolute;
+  top: calc(var(--web-w) * 145 / 439);
+  left: calc(var(--web-w) * 44 / 439);
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  --len: calc(var(--web-w) * var(--hang, 341) / 439);
+}
+
+.somna-spider__thread {
+  position: absolute;
+  top: 0;
+  left: -0.6px;
+  width: 1.2px;
+  height: var(--len);
+  background: #1a1a1a;
+  transform-origin: 50% 0;
+}
+
+@media screen and (min-width: 750px) {
+  .somna-ess--halloween .somna-spider__thread {
+    left: -0.75px;
+    width: 1.5px;
+  }
+}
+
+.somna-spider__body {
+  position: absolute;
+  top: 0;
+  left: calc(var(--web-w) * -43.5 / 439);
+  display: block;
+  width: calc(var(--web-w) * 90 / 439);
+  max-width: none;
+  height: auto;
+  translate: 0 calc(var(--len) - 1px);
+}
+
+/* ---- Pumpkin after the heading ---- */
+.somna-pk {
+  display: block;
+}
+
+.somna-pk svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 100%;
+}
+
+.somna-pk__smile,
+.somna-pk__happy {
+  opacity: 0;
+}
+
+.somna-pk__smile {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+
+/* ---- Waiting to scroll into view (only when the script runs) ---- */
+.somna-ess--halloween.hw-ready:not(.is-in) .hw-m {
+  stroke-dashoffset: 1;
+}
+
+.somna-ess--halloween.hw-ready:not(.is-in) .hw-m--all,
+.somna-ess--halloween.hw-ready:not(.is-in) .somna-spider {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Step 1: the web draws itself */
+  .somna-ess--halloween.is-in .hw-m {
+    animation: somna-web-draw var(--d, 0.55s) cubic-bezier(0.45, 0.05, 0.35, 1) var(--t, 0s) both;
+  }
+
+  .somna-ess--halloween.is-in .hw-m--frame {
+    --d: 0.6s;
+    --t: 0s;
+  }
+
+  .somna-ess--halloween.is-in .hw-m--ring {
+    animation-timing-function: cubic-bezier(0.3, 0.05, 0.6, 1);
+  }
+
+  .somna-ess--halloween.is-in .hw-m--all {
+    animation: somna-web-fade 0.4s ease 2.55s both;
+  }
+
+  /* Step 2: the spider lowers itself; Step 3: pause, then a gentle swing */
+  .somna-ess--halloween.is-in .somna-spider {
+    animation: somna-spider-appear 0.25s ease 2.75s both, somna-spider-sway 2.6s ease-in-out 5.05s 1 both;
+  }
+
+  .somna-ess--halloween.is-in .somna-spider__thread {
+    animation: somna-spider-thread 2.2s cubic-bezier(0.45, 0, 0.4, 1) 2.85s both;
+  }
+
+  .somna-ess--halloween.is-in .somna-spider__body {
+    animation: somna-spider-drop 2.2s cubic-bezier(0.45, 0, 0.4, 1) 2.85s both;
+  }
+
+  /* Pumpkin: hop, land, smile */
+  .somna-ess--halloween.is-in .somna-pk svg {
+    animation: somna-pk-hop 7s ease-in-out 1.6s infinite;
+  }
+
+  .somna-ess--halloween.is-in .somna-pk__smile {
+    animation: somna-pk-smile 7s ease-out 1.6s infinite;
+  }
+
+  .somna-ess--halloween.is-in .somna-pk__happy {
+    animation: somna-pk-on 7s linear 1.6s infinite;
+  }
+
+  .somna-ess--halloween.is-in .somna-pk__calm,
+  .somna-ess--halloween.is-in .somna-pk__eyes {
+    animation: somna-pk-off 7s linear 1.6s infinite;
+  }
+
+  /* "70% OFF" pumpkin badges: a short shake, repeated every 4.5s (the second card follows a beat later) */
+  .somna-ess--halloween .somna-ess__badge {
+    transform-origin: 50% 12%;
+  }
+
+  .somna-ess--halloween.is-in .somna-ess__badge {
+    animation: somna-badge-shake 4.5s ease-in-out 1s infinite;
+  }
+
+  .somna-ess--halloween.is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
+    animation-delay: 1.35s;
+  }
+}
+
+@keyframes somna-web-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes somna-web-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes somna-spider-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Thread length and spider position share the same stops, so they stay joined */
+@keyframes somna-spider-thread {
+  0% {
+    transform: scaleY(0);
+  }
+
+  38% {
+    transform: scaleY(0.46);
+  }
+
+  50% {
+    transform: scaleY(0.48);
+  }
+
+  86% {
+    transform: scaleY(1.035);
+  }
+
+  94% {
+    transform: scaleY(0.99);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes somna-spider-drop {
+  0% {
+    translate: 0 -1px;
+  }
+
+  38% {
+    translate: 0 calc(var(--len) * 0.46 - 1px);
+  }
+
+  50% {
+    translate: 0 calc(var(--len) * 0.48 - 1px);
+  }
+
+  86% {
+    translate: 0 calc(var(--len) * 1.035 - 1px);
+  }
+
+  94% {
+    translate: 0 calc(var(--len) * 0.99 - 1px);
+  }
+
+  100% {
+    translate: 0 calc(var(--len) - 1px);
+  }
+}
+
+@keyframes somna-spider-sway {
+  0% {
+    rotate: 0deg;
+  }
+
+  18% {
+    rotate: 5deg;
+  }
+
+  40% {
+    rotate: -3.6deg;
+  }
+
+  60% {
+    rotate: 2deg;
+  }
+
+  80% {
+    rotate: -0.8deg;
+  }
+
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@keyframes somna-pk-hop {
+  0% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+
+  3% {
+    transform: translateY(0) scale(1.14, 0.84) rotate(0);
+  }
+
+  7% {
+    transform: translateY(-34%) scale(0.9, 1.12) rotate(0);
+  }
+
+  10% {
+    transform: translateY(-42%) scale(1, 1) rotate(0);
+  }
+
+  14% {
+    transform: translateY(0) scale(1.16, 0.82) rotate(0);
+  }
+
+  17% {
+    transform: translateY(0) scale(0.97, 1.04) rotate(-7deg);
+  }
+
+  20% {
+    transform: translateY(0) scale(1, 1) rotate(5deg);
+  }
+
+  23% {
+    transform: translateY(0) scale(1, 1) rotate(-2.5deg);
+  }
+
+  26%,
+  100% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+}
+
+@keyframes somna-pk-smile {
+  0%,
+  13% {
+    opacity: 0;
+    transform: scaleY(0.35);
+  }
+
+  16% {
+    opacity: 1;
+    transform: scaleY(1.12);
+  }
+
+  19%,
+  44% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  48%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.35);
+  }
+}
+
+@keyframes somna-pk-on {
+  0%,
+  13% {
+    opacity: 0;
+  }
+
+  15%,
+  45% {
+    opacity: 1;
+  }
+
+  48%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes somna-pk-off {
+  0%,
+  13% {
+    opacity: 1;
+  }
+
+  15%,
+  45% {
+    opacity: 0;
+  }
+
+  48%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Shake lasts about 0.9s of each 4.5s cycle, then the badge rests */
+@keyframes somna-badge-shake {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  3% {
+    rotate: -9deg;
+  }
+
+  7% {
+    rotate: 8deg;
+  }
+
+  11% {
+    rotate: -6deg;
+  }
+
+  15% {
+    rotate: 4deg;
+  }
+
+  18% {
+    rotate: -2deg;
+  }
+
+  20% {
+    rotate: 0deg;
+  }
+}
+
+/* Reduced motion: finished web, spider hanging, pumpkin smiling, badges still */
+@media (prefers-reduced-motion: reduce) {
+  .somna-ess--halloween.hw-ready:not(.is-in) .hw-m {
+    stroke-dashoffset: 0;
+  }
+
+  .somna-ess--halloween.hw-ready:not(.is-in) .hw-m--all,
+  .somna-ess--halloween.hw-ready:not(.is-in) .somna-spider {
+    opacity: 1;
+  }
+
+  .somna-pk__calm,
+  .somna-pk__eyes {
+    opacity: 0;
+  }
+
+  .somna-pk__smile,
+  .somna-pk__happy {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- "Or save with a bundle" on the homepage: the old floating strip, tape and dots
+   (sections 6 and 9 above) are hidden here. They still show on the collection page. ---- */
+#MainContent[data-template='index'] section[class^='bundle-section-'] .custom-header::before,
+#MainContent[data-template='index'] section[class^='bundle-section-'] .custom-header::after,
+#MainContent[data-template='index'] section[class^='bundle-section-'] .bundle-section__grid::before {
+  content: none;
   animation: none;
 }
