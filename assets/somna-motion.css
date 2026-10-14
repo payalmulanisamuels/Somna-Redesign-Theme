@@ -1710,15 +1710,14 @@ END OF SWITCHED-OFF SECTION 11 */
    "Show Halloween decorations" setting is on (.somna-ess--halloween).
    Sequence, started by the section's small script when the web is a quarter of the
    way up the screen (.hw-ready = script running, .is-in = in view; replays each time
-   the section comes back into view). Left web / right web (right starts a beat later):
-     0.00s / 0.35s  the Figma web draws itself: top strand, radial strands, then the
-                    spiral ring by ring (SVG mask strokes drawn with stroke-dashoffset
-                    over the real web images somna-hw-web.png / somna-hw-web-right.png)
-     1.50s / 1.85s  the spider appears at the top of its thread, on the web
-     1.60s / 1.95s  it lowers itself in two smooth drops, the silk paying out with it
-     3.75s / 4.10s  short pause, then a gentle swing (3 swings, each smaller) and rest
-   The right-hand spider shows from 1280px wide only: on narrower screens it would sit
-   on the cards and badges, so there the right web just draws itself.
+   the section comes back into view):
+     0.00s  the left Figma web draws itself: top strand, radial strands, then the
+            spiral ring by ring (SVG mask strokes drawn with stroke-dashoffset over
+            the real web image somna-hw-web.png); the right web (somna-hw-web-right.png,
+            no spider, as in Figma) draws itself from its centre, a beat later
+     1.50s  the spider appears at the top of its thread, on the left web
+     1.60s  it lowers itself in two smooth drops, the silk paying out with it
+     3.75s  short pause, then a gentle swing (3 swings, each smaller) and rest
    Also: the title pumpkin hops and smiles every 7s, and the "70% OFF" pumpkin
    badges give a short shake every 4.5s.
    Without the script, or with reduced motion: finished web, spider hanging,
@@ -1746,8 +1745,8 @@ END OF SWITCHED-OFF SECTION 11 */
   background-image: none; /* replaces the old web-with-spider background picture */
 }
 
-/* Right web (Figma right-hand web, 333 x 178): 90px on phones, the desktop width matches
-   somna-home-desktop.css. Its spider hangs from the lower strand at x 233.5 / y 75. */
+/* Right web (Figma right-hand web, 333 x 178, no spider): 90px on phones,
+   the desktop width matches somna-home-desktop.css. */
 :where(.somna-ess__web--right) {
   --rweb-w: 90px;
 }
@@ -1762,24 +1761,6 @@ END OF SWITCHED-OFF SECTION 11 */
   width: var(--rweb-w);
   aspect-ratio: auto;
   background-image: none; /* replaces the old right web background picture */
-}
-
-.somna-ess__web--right .somna-spider {
-  display: none;
-  top: calc(var(--rweb-w) * 75 / 333);
-  left: calc(var(--rweb-w) * 233.5 / 333);
-  --len: calc(var(--rweb-w) * 200 / 333);
-}
-
-.somna-ess__web--right .somna-spider__body {
-  left: calc(var(--rweb-w) * -29.7 / 333);
-  width: calc(var(--rweb-w) * 61.5 / 333);
-}
-
-@media screen and (min-width: 1280px) {
-  .somna-ess__web--right .somna-spider {
-    display: block;
-  }
 }
 
 .somna-ess__web-svg {
@@ -1917,16 +1898,6 @@ END OF SWITCHED-OFF SECTION 11 */
 
   .somna-ess--halloween.is-in .somna-spider__body {
     animation: somna-spider-drop 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
-  }
-
-  /* Right-hand spider: a beat after the left one */
-  .somna-ess--halloween.is-in .somna-ess__web--right .somna-spider {
-    animation-delay: 1.85s, 4.1s;
-  }
-
-  .somna-ess--halloween.is-in .somna-ess__web--right .somna-spider__thread,
-  .somna-ess--halloween.is-in .somna-ess__web--right .somna-spider__body {
-    animation-delay: 1.95s;
   }
 
   /* Pumpkin: hop, land, smile */
