@@ -577,7 +577,7 @@
     font-size: clamp(14px, 1.15vw, 16px);
   }
    .icon-block__media {
-    width: clamp(28px, 2.4vw, 34px) !important; /* overrides the icon block's inline width */
+    width: clamp(50px, 2.4vw, 50px) !important; /* overrides the icon block's inline width */
   }
   #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 14px;
