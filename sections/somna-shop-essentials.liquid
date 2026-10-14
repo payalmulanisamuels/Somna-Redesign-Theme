@@ -45,7 +45,26 @@
     {%- comment -%} Halloween: spiderwebs in the two top corners (decorative, ignored by screen readers) {%- endcomment -%}
     {%- comment -%} Left web: the Figma web image; the spider is separate so it can drop on its thread {%- endcomment -%}
     <span class="somna-ess__web somna-ess__web--left" aria-hidden="true">
-      <img class="somna-ess__web-img" src="{{ 'somna-hw-web.png' | asset_url }}" alt="" width="439" height="268" loading="lazy" decoding="async">
+      {%- comment -%} The Figma web image, drawn in by an SVG mask (animation: assets/somna-motion.css, section 15) {%- endcomment -%}
+      <svg class="somna-ess__web-svg" viewBox="0 0 439 268" width="439" height="268" focusable="false">
+        <defs>
+          <mask id="somna-web-{{ section.id }}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="480" height="310">
+            <path class="hw-m hw-m--frame" pathLength="1" d="M0 2 L300 2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.35s" d="M65 70 L55.9 -4.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.44s" d="M65 70 L-3.0 8.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.53s" d="M65 70 L-4.0 62.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.62s" d="M65 70 L120.2 -3.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.71s" d="M65 70 L189.7 -2.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.80s" d="M65 70 L284.2 -1.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.89s" d="M65 70 L-2.2 173.4"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.98s" d="M65 70 L-0.6 271.8"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:1.1s;--d:0.8s" d="M62.9 81.8 A12 12 0 1 1 76.8 67.9 L102.4 63.4 A38 38 0 1 0 58.4 107.4 L53.9 133.0 A64 64 0 1 1 128.0 58.9 L153.6 54.4 A90 90 0 1 0 49.4 158.6 L44.9 184.2 A116 116 0 1 1 179.2 49.9"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:1.85s;--d:0.75s" d="M204.8 45.3 A142 142 0 1 0 40.3 209.8 L35.8 235.4 A168 168 0 1 1 230.4 40.8 L256.1 36.3 A194 194 0 1 0 31.3 261.1 L26.8 286.7 A220 220 0 1 1 281.7 31.8 L307.3 27.3 A246 246 0 1 0 22.3 312.3"/>
+            <rect class="hw-m--all" x="-20" y="-20" width="480" height="310" fill="#fff"/>
+          </mask>
+        </defs>
+        <image href="{{ 'somna-hw-web.png' | asset_url }}" width="439" height="268" mask="url(#somna-web-{{ section.id }})"/>
+      </svg>
       <span class="somna-spider">
         <i class="somna-spider__thread"></i>
         <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
@@ -55,9 +74,9 @@
   {%- endif -%}
   {%- if section.settings.halloween_decor -%}
     <script>
-      /* Halloween spider + pumpkin: plays when the web scrolls into view (a little above the
-         bottom of the screen), and again each time the section comes back into view.
-         Without this script the spider simply hangs still. */
+      /* Halloween web, spider, pumpkin and badge animation (CSS: assets/somna-motion.css, section 15).
+         Plays when the web scrolls into view (a little above the bottom of the screen), and again
+         each time the section comes back into view. Without this script everything simply shows still. */
       (function () {
         function setup(s) {
           if (!s || s.getAttribute('data-hw-init')) return;
@@ -508,150 +527,6 @@
     }
   }
 
-  /* ==========================================================================
-     HALLOWEEN 2026: dropping spider, smiling pumpkin, and the old "Or save with a
-     bundle" decorations hidden. Kept here (not in custom.css) at the client's request,
-     so edits to custom.css and these rules can't overwrite each other.
-     ========================================================================== */
-  /* Left web: Figma web image in an <img>, the spider separate (replaces the old
-     background image of web + spider). Width comes from --web-w; somna-home-desktop.css
-     sets the desktop size. */
-  :where(.somna-ess__web--left) {
-    --web-w: 122px;
-  }
-  .somna-ess--halloween .somna-ess__web--left {
-    width: var(--web-w);
-    aspect-ratio: auto;
-    background-image: none;
-  }
-  .somna-ess__web-img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-  @media screen and (min-width: 750px) {
-    .somna-ess--halloween .somna-spider__thread {
-      width: 1.5px;
-      left: -0.75px;
-    }
-  }
-
-  /* ---------- Shop the essentials: spider drop + smiling pumpkin (approved demo v2) ----------
-     Spider geometry is measured on the 439px-wide Figma web image: the thread leaves the web
-     at x 44 / y 145 and the spider artwork (90 x 100) starts 341px lower, thread at x 43.5.
-     The section gets .is-in from a small script when it scrolls into view (runs once). */
-  .somna-spider {
-    position: absolute;
-    left: calc(var(--web-w) * 44 / 439);
-    top: calc(var(--web-w) * 145 / 439);
-    width: 0;
-    height: 0;
-    transform-origin: 0 0;
-    --len: calc(var(--web-w) * 341 / 439);
-  }
-  .somna-spider__thread {
-    position: absolute;
-    top: 0;
-    left: -0.6px;
-    width: 1.2px;
-    height: var(--len);
-    background: #1a1a1a;
-    transform-origin: 50% 0;
-  }
-  .somna-spider__body {
-    position: absolute;
-    top: 0;
-    left: calc(var(--web-w) * -43.5 / 439);
-    display: block;
-    width: calc(var(--web-w) * 90 / 439);
-    max-width: none;
-    height: auto;
-    translate: 0 calc(var(--len) - 1px);
-  }
-  .somna-ess--halloween.hw-ready:not(.is-in) .somna-spider { opacity: 0; }
-  .somna-ess--halloween.is-in .somna-spider { animation: somna-spider-sway 2.8s ease-in-out 1.35s 1 both; }
-  .somna-ess--halloween.is-in .somna-spider__thread { animation: somna-spider-thread 1.35s cubic-bezier(.25,.7,.3,1) .2s 1 both; }
-  .somna-ess--halloween.is-in .somna-spider__body { animation: somna-spider-drop 1.35s cubic-bezier(.25,.7,.3,1) .2s 1 both; }
-  @keyframes somna-spider-thread {
-    0% { transform: scaleY(0); }
-    68% { transform: scaleY(1.07); }
-    84% { transform: scaleY(0.97); }
-    100% { transform: scaleY(1); }
-  }
-  @keyframes somna-spider-drop {
-    0% { translate: 0 calc(var(--len) * -0.05); opacity: 0; }
-    10% { opacity: 1; }
-    68% { translate: 0 calc(var(--len) * 1.07 - 1px); }
-    84% { translate: 0 calc(var(--len) * 0.97 - 1px); }
-    100% { translate: 0 calc(var(--len) - 1px); opacity: 1; }
-  }
-  @keyframes somna-spider-sway {
-    0% { rotate: 0deg; }
-    18% { rotate: 6deg; }
-    40% { rotate: -4.2deg; }
-    60% { rotate: 2.4deg; }
-    80% { rotate: -1deg; }
-    100% { rotate: 0deg; }
-  }
-
-  .somna-pk { display: block; }
-  .somna-pk svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    transform-origin: 50% 100%;
-  }
-  .somna-pk__smile,
-  .somna-pk__happy { opacity: 0; }
-  .somna-pk__smile { transform-box: fill-box; transform-origin: 50% 0; }
-  .somna-ess--halloween.is-in .somna-pk svg { animation: somna-pk-hop 7s ease-in-out 1.6s infinite; }
-  .somna-ess--halloween.is-in .somna-pk__smile { animation: somna-pk-smile 7s ease-out 1.6s infinite; }
-  .somna-ess--halloween.is-in .somna-pk__happy { animation: somna-pk-on 7s linear 1.6s infinite; }
-  .somna-ess--halloween.is-in .somna-pk__calm,
-  .somna-ess--halloween.is-in .somna-pk__eyes { animation: somna-pk-off 7s linear 1.6s infinite; }
-  @keyframes somna-pk-hop {
-    0% { transform: translateY(0) scale(1, 1) rotate(0); }
-    3% { transform: translateY(0) scale(1.14, 0.84) rotate(0); }
-    7% { transform: translateY(-34%) scale(0.9, 1.12) rotate(0); }
-    10% { transform: translateY(-42%) scale(1, 1) rotate(0); }
-    14% { transform: translateY(0) scale(1.16, 0.82) rotate(0); }
-    17% { transform: translateY(0) scale(0.97, 1.04) rotate(-7deg); }
-    20% { transform: translateY(0) scale(1, 1) rotate(5deg); }
-    23% { transform: translateY(0) scale(1, 1) rotate(-2.5deg); }
-    26%, 100% { transform: translateY(0) scale(1, 1) rotate(0); }
-  }
-  @keyframes somna-pk-smile {
-    0%, 13% { opacity: 0; transform: scaleY(0.35); }
-    16% { opacity: 1; transform: scaleY(1.12); }
-    19%, 44% { opacity: 1; transform: scaleY(1); }
-    48%, 100% { opacity: 0; transform: scaleY(0.35); }
-  }
-  @keyframes somna-pk-on { 0%, 13% { opacity: 0; } 15%, 45% { opacity: 1; } 48%, 100% { opacity: 0; } }
-  @keyframes somna-pk-off { 0%, 13% { opacity: 1; } 15%, 45% { opacity: 0; } 48%, 100% { opacity: 1; } }
-
-  /* Reduced motion: nothing moves; the spider is shown hanging and the pumpkin smiling */
-  @media (prefers-reduced-motion: reduce) {
-    .somna-ess--halloween .somna-spider,
-    .somna-ess--halloween .somna-spider__thread,
-    .somna-ess--halloween .somna-spider__body,
-    .somna-ess--halloween .somna-pk svg,
-    .somna-ess--halloween .somna-pk svg * { animation: none !important; }
-    .somna-ess--halloween.hw-ready:not(.is-in) .somna-spider { opacity: 1; }
-    .somna-pk__calm,
-    .somna-pk__eyes { opacity: 0; }
-    .somna-pk__smile,
-    .somna-pk__happy { opacity: 1; transform: none; }
-  }
-
-  /* ---------- "Or save with a bundle" (homepage): old floating strip, tape and dots removed ----------
-     Those decorations come from somna-motion.css (sections 6 and 9); hidden here on the homepage only. */
-  #MainContent[data-template="index"] section[class^='bundle-section-'] .custom-header::before,
-  #MainContent[data-template="index"] section[class^='bundle-section-'] .custom-header::after,
-  #MainContent[data-template="index"] section[class^='bundle-section-'] .bundle-section__grid::before {
-    content: none;
-    animation: none;
-  }
 {% endstylesheet %}
 
 {% schema %}
