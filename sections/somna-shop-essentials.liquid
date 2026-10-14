@@ -39,12 +39,30 @@
   }
 {%- endstyle -%}
 
-<div class="somna-ess">
+<div class="somna-ess{% if section.settings.halloween_decor %} somna-ess--halloween{% endif %}">
   {%- comment -%} The tape and strips are cut off on one side, so they sit on the screen edges {%- endcomment -%}
+  {%- if section.settings.halloween_decor -%}
+    {%- comment -%} Halloween: spiderwebs in the two top corners (decorative, ignored by screen readers) {%- endcomment -%}
+    <span class="somna-ess__web somna-ess__web--left" aria-hidden="true"></span>
+    <span class="somna-ess__web somna-ess__web--right" aria-hidden="true"></span>
+  {%- endif -%}
   <div class="somna-ess__inner">
 
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="somna-ess__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
     {%- if section.settings.heading != blank -%}
-      <h2 class="somna-ess__title">{{ section.settings.heading }}</h2>
+      <h2 class="somna-ess__title">
+        <span class="somna-ess__title-text">{{ section.settings.heading }}</span>
+        {%- if section.settings.title_icon != blank -%}
+          {{
+            section.settings.title_icon
+            | image_url: width: 160
+            | image_tag: class: 'somna-ess__title-icon', alt: '', loading: 'lazy'
+          }}
+        {%- endif -%}
+      </h2>
     {%- endif -%}
 
     <div class="somna-ess__grid">
@@ -106,6 +124,9 @@
           endif
         -%}
         <a href="{{ card_link }}" class="somna-ess__card" {{ block.shopify_attributes }}>
+          {%- if section.settings.badge_text != blank -%}
+            <span class="somna-ess__badge"><span class="somna-ess__badge-text">{{ section.settings.badge_text }}</span></span>
+          {%- endif -%}
           <div class="somna-ess__media">
             {%- if card_image != blank -%}
               {{
@@ -434,6 +455,31 @@
       "id": "heading",
       "label": "Heading",
       "default": "Shop the essentials"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "info": "Small line above the heading. Leave empty to hide."
+    },
+    {
+      "type": "image_picker",
+      "id": "title_icon",
+      "label": "Title icon",
+      "info": "Small decorative image after the heading (e.g. a pumpkin)."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "info": "Shown on the corner of each card (e.g. 70% OFF). Leave empty to hide."
+    },
+    {
+      "type": "checkbox",
+      "id": "halloween_decor",
+      "label": "Show Halloween decorations",
+      "info": "Spiderwebs in the top corners.",
+      "default": false
     },
     {
       "type": "color",
