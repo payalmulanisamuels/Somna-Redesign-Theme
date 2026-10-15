@@ -388,9 +388,7 @@ li.menu__item.paragraph a {
 .bundle-card--featured .bundle-card__content-wrapper {
     flex-wrap: wrap;
 }
-.bundle-card--featured .bundle-card__price {
-  font-size: 14px;
-}
+
 
 /* Feature Bundle section*/
 
