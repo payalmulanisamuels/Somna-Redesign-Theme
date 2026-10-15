@@ -2184,6 +2184,9 @@ a.somna-view-all {
    ===================================================================== */
 
 /* ---- from product-col-custom.css ---- */
+:where(.template-product,.template-collection,.template-list-collections,.somna-sp) .somna-custom-subscription-container{
+  margin-top: 10px
+}
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .review_content{
 margin-top: 7px;
 }
