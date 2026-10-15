@@ -2180,3 +2180,1702 @@ a.somna-view-all {
   z-index: 1;
 }
 /* ======================= END HALLOWEEN 2026 ======================= */
+
+/* =====================================================================
+   PRODUCT & COLLECTION PAGES — moved here on 2026-10-15 from
+   assets/product-col-custom.css and assets/somna-buybox.css (no longer loaded).
+   Same rules, same order. Every selector is prefixed with
+   :where(.template-product, .template-collection, .template-list-collections)
+   so they still only apply on those pages (the body class comes from
+   layout/theme.liquid) and keep their original specificity.
+   Their min-width: 768px blocks moved to the top of somna-home-desktop.css.
+   ===================================================================== */
+
+/* ---- from product-col-custom.css ---- */
+:where(.template-product, .template-collection, .template-list-collections) .review_content{
+margin-top: 7px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .product-information__grid {
+    padding: 0 5px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper {
+    margin: -29px 0 0 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .custom-header{
+  margin-bottom: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
+    object-fit: cover !important;
+    border-radius: 0 0 20px 20px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .product-details {
+    padding-bottom: 15px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .product-form-buttons button {
+    border-radius: 12px;
+    font-size: 15px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option--buttons legend {
+    font-size: 15px;
+    color: #0A1A4A;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label {
+    overflow: inherit !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-card__inner {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 0px;
+    justify-content: center;
+    padding-top: 9px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-card__image-wrapper img {
+    max-height: 40px;
+}
+ 
+:where(.template-product, .template-collection, .template-list-collections) .variant-option--equal-width-buttons .variant-option__button-label {
+    border: 1px solid #000 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__title,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__title  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__sub-price,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__sub-price  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__onetime-price,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__onetime-price  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover{
+    background: #C9E5FE !important;
+    color: #0A1A4A !important;
+}
+ 
+:where(.template-product, .template-collection, .template-list-collections) .variant-card__title {
+    color: #061C42;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: var(--headfont);
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-picker__form legend {
+    display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-card__badge {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  font-size: 7.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 14px 14px 0 0;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}
+   
+:where(.template-product, .template-collection, .template-list-collections) .subscription_group:has(input[type="radio"]:checked) {
+  border-color: #0E63E9 !important;
+  background:#F4FAFF;
+}
+/* Subscription box*/
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__gift {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+    color: #061C42;
+    font-family: var(--headfont);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label .variant-card__gift svg {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    text-align: center;
+    stroke-width: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    stroke: #000 !important;
+    max-width: 18px;
+}
+  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card {
+    border-radius: 16px;
+    padding: 12px 9px;
+    background: #fff;
+    flex-direction: column;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card.selected,
+  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(input:checked) {
+    border-color: #1354c4 !important;
+    background-color: #C9E5FE !important;
+  }
+
+  /* Selected card: 2px border traced in from two opposite corners (like histrips.com).
+     A new ::after is created each time a card becomes :checked, so the animation replays on every pick.
+     Without @property support the angle falls back to 180deg and the full border just shows. */
+  @property --somna-border-reveal {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes somna-border-trace {
+    0%,
+    10% { --somna-border-reveal: 0deg; }
+    100% { --somna-border-reveal: 180deg; }
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(:checked):not(:has([data-option-available='false']))::after {
+    --reveal: var(--somna-border-reveal, 180deg);
+    content: '';
+    position: absolute;
+    inset: calc(var(--options-border-width, 1px) * -1);
+    padding: 2px;
+    border: 0;
+    border-radius: inherit;
+    background: #1354c4;
+    pointer-events: none;
+    z-index: 3;
+    clip-path: none;
+    -webkit-mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    -webkit-mask-composite: source-in, xor;
+    mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    mask-composite: intersect, exclude;
+    animation: somna-border-trace 680ms cubic-bezier(.45, 0, .2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(:checked)::after {
+      animation: none;
+      --somna-border-reveal: 180deg;
+    }
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__badge.popular { background: #1354c4; }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__badge.free-bag { background: #0a1a4a; }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__sub-title {
+    margin-bottom: 6px;
+    display: block;
+    color: #061c42;
+    font-family: Inter;
+    font-size: 6.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 2px;
+    width: 100%;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__img {
+    height: 55px;
+    object-fit: contain;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__bottom-save-pill {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1354c4;
+    color: #fff;
+    font-size: 7.5px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 11;
+  }
+:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
+    inset: inherit !important;
+}
+  /* Subscription Box Styles */
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container {
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 0;
+    font-family: var(--font-body--family);
+    color: #0a1a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box {
+    background: #FFF9EE;
+    border: 1px solid #000;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box.active {
+    border-color: #1354c4;
+    background: #F4FAFF;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-banner {
+    background: #1354c4;
+    text-align: center;
+    padding: 3.5px 0;
+    letter-spacing: .05em;
+    color: #FFF;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-inner {
+    padding: 6px 17px;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box[data-purchase-card="subscribe"] .somna-box-top-row{
+    padding: 5px 10px 7px;
+    border-bottom: 1px solid #000;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-label input {
+    position: absolute;
+    opacity: 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-bullet {
+    width: 14px;
+    height: 14px;
+    border: 1.2px solid #061C42;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box.active .somna-radio-bullet::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: #1354c4;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    text-align: center;
+    margin: 0 auto;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-title-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-title {
+    color: #061C42;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: var(--headfont);
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-per-night {
+    color: #061C42;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-price-stack {
+    text-align: right;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-pricing-row {
+    display: flex;
+    gap: 3px;
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-strike-price {
+    text-decoration: line-through;
+    color: #000;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: line-through;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-active-price {
+    color: #061C42;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-save-pill {
+    color: #FFF;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    border-radius: 2px;
+    background: #0B57E3;
+    line-height: normal;
+    padding: 0 2px;
+    text-align: center;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #061C42;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list li{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-dropdown-wrap {
+    margin-top: 6px;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-dropdown-wrap:after {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjYiIHZpZXdCb3g9IjAgMCA5IDYiIGZpbGw9Im5vbmUiPgogIDxwYXRoIGQ9Ik0wLjUgMC41TDQuNzY2NjcgNC41TDguNSAwLjUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=");
+    content: '';
+    position: absolute;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+  :where(.template-product, .template-collection, .template-list-collections) .somna-frequency-dropdown {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 9px;
+    color: #0A1A4A;
+    border-radius: 39px;
+    border: 0.7px solid #505050;
+    background: #FFF;
+    cursor: pointer;
+    font-family: var(--headfont);
+    appearance: none;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-widget-meta-footer {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-policy-link {
+    text-decoration: underline;
+    color: #000;
+    font-size: 7px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration-line: underline;
+  }
+:where(.template-product, .template-collection, .template-list-collections) .somna-delivery-timeline {
+    border: 1px solid #cbd3d8;
+    padding: 8px 12px;
+    text-align: left;
+    border-radius: 10px;
+    background: #fff9ee;
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span {
+    color: #061C42;
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span:last-child {
+    max-width: 61px;
+    text-align: right;
+}
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-line {
+    height: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-box-icon {
+    position: relative;
+    left: -2px;
+  }
+:where(.template-product, .template-collection, .template-list-collections) .button[id^=BuyButtons-ProductSubmitButton-] {
+    --button-border-color: transparent;
+    border-radius: 999px;
+    color: #FFF;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    height: 34px !important;
+    padding: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-guarantee-text {
+    color: #000;
+    font-size: 7.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+/* Subscription box*/
+:where(.template-product, .template-collection, .template-list-collections) .title_and_price_wrapper {
+    color: #0A1A4A;
+    font-size: 13px;
+    font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections) .custom_radio_button:has(input[type='radio']:checked):before{
+    background: #0A4FD6 !important;
+    box-shadow: 0 0 0 2px #0a4fd6!important;
+}
+ :where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails{
+  margin: 0 !important;
+ }
+:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control {
+    width: 74px !important;
+    height: 71px !important;
+    border-radius: 8px !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) slideshow-arrows[position=center].pagination-arrows {
+    mix-blend-mode: normal;
+    margin: 0 10px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) slideshow-arrows .slideshow-control {
+    background: #FFFFFF8C;
+    border: 0.5px solid #FFFFFF;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    display: flex;
+    justify-content: center;
+    padding-inline: 0 !important;
+    border-radius: 100%;
+    opacity: 1 !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .media-gallery--carousel slideshow-arrows .slideshow-control svg path {stroke: #0A1A4A;}
+:where(.template-product, .template-collection, .template-list-collections) .media-gallery--carousel slideshow-arrows .slideshow-control svg {
+    width: 14px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails {
+  gap: 2px !important;
+  padding-inline: 0 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
+    outline: none !important;
+    border: 2px solid #000 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
+:where(.template-product, .template-collection, .template-list-collections) .accordion .details{
+    border-bottom: 1px solid #B9B7AC;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .accordion--dividers .details-content,:where(.template-product, .template-collection, .template-list-collections) .accordion--dividers .details-content p {
+  color: #0a1a4a;
+  line-height: 1.2;
+  font-size: 12px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .accordion .details__header {
+ justify-content: space-between;
+}
+
+/* Collection */
+:where(.template-product, .template-collection, .template-list-collections) .header_main ul li {
+    display: block;
+    margin-bottom: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .header_main ul {
+    padding: 0;
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-grid {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-media img {
+    height: 62px;
+    object-fit: contain;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-title {
+    color: #0A1A4A;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px; /* 160% */
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-text-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-subtitle {
+    color: #0A1A4A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14px;
+}
+
+/* Collection */
+
+/* ==========================================================
+   Somna color swatches – "Color: Blue  ● ● ●"
+   Markup: snippets/variant-main-picker.liquid (is_color_option)
+   ========================================================== */
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 8px 14px;
+  background: #FFF9EE;
+  border: 1px solid #000;
+  border-radius: 10px;
+  min-width: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .variant-picker__form .somna-color-option legend.visually-hidden {
+  display: block;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label {
+  font-size: 15px;
+  line-height: 1.2;
+  color: #0A1A4A;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label strong {
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__swatches {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch {
+  --somna-swatch: #d9d9d9;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--somna-swatch);
+  color: #fff;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch__check {
+  width: 13px;
+  height: 11px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+/* Selected: white gap + ring in the swatch's own colour, white tick */
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:checked) .somna-color-swatch__dot {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--somna-swatch);
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:checked) .somna-color-swatch__check {
+  opacity: 1;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:hover .somna-color-swatch__dot {
+  transform: scale(1.06);
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:focus-visible) .somna-color-swatch__dot {
+  outline: 2px solid #0A1A4A;
+  outline-offset: 5px;
+}
+/* Sold out: faded with a diagonal line */
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch--unavailable .somna-color-swatch__dot {
+  opacity: .4;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch--unavailable::after {
+  content: "";
+  position: absolute;
+  width: 130%;
+  height: 1.5px;
+  background: #0A1A4A;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+@media screen and (max-width: 749px) {
+  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option {
+    padding: 7px 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label {
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option__swatches {
+    gap: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box[hidden],
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container [hidden] {
+    display: none !important;
+  }
+
+/* =========================================================
+   Somna sticky add-to-cart (inspiration/stickybar, stickybar-flow)
+   Markup: snippets/somna-sticky-options.liquid + sections/product-information.liquid
+   Mode is set on <sticky-add-to-cart data-purchase-mode> by assets/sticky-add-to-cart.js
+   ========================================================= */
+:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__mode--subscribe,
+:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onetime {
+  display: none !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+  --somna-navy: #1c2a6b;
+  --somna-navy-dark: #0a1a4a;
+  --somna-blue: #1354c4;
+  --somna-sky: #DEE6FA;
+  --somna-row-active: #eef3ff;
+  --somna-onetime: #d2461e;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding:0 0 10px 0;
+  border-radius: 0;
+  background: var(--somna-navy);
+  color: var(--somna-navy-dark);
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
+  max-width: 800px;
+  z-index: 11111 !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar{
+  z-index: 1111 !important;
+  bottom: 0 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__banner {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  padding: 4.5px 12px;
+  border-radius:0;
+  background: var(--somna-sky);
+  color: var(--somna-navy-dark);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+:where(.template-product, .template-collection, .template-list-collections) .sticky_bar_main {
+    width: 100%;
+    display: flex;
+    padding:10px 15px 0;
+    gap: 10px;
+    align-items: center;
+}
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+  height: 48px;
+  border-radius: 4px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky {
+  flex: 1;
+  min-width: 0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-title {
+  overflow: hidden;
+  color: #0A1A4A;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-meta {
+  overflow: hidden;
+  color: #0a1a4a70;
+  text-overflow: ellipsis;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 2px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__caret {
+  flex-shrink: 0;
+  width: 10px;
+  transition: transform 0.2s ease;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger[aria-expanded='true'] .somna-sticky__caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown opens upward, spanning the bar (the fixed bar is the containing block) */
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel {
+  position: absolute;
+  right: 10px;
+  bottom: calc(100% + 8px);
+  left: 10px;
+  padding: 10px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.2);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel[hidden] {
+  display: none;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel-heading {
+  margin: 0 0 8px;
+  color: rgb(10 26 74 / 0.65);
+  font-size: 12px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-paragraph--family);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row:hover,
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row[aria-selected='true'] {
+  border-left-color: var(--somna-blue);
+  background: var(--somna-row-active);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-meta {
+  color: rgb(10 26 74 / 0.65);
+  font-size: 11px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
+  color: var(--somna-onetime);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge {
+  padding: 2px 7px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge--popular {
+  background: var(--somna-blue);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge--free {
+  background: var(--somna-navy-dark);
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+  width: auto;
+  max-width: 120px;
+  height: 45px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--somna-navy-dark);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+  color: #FFF;
+  text-align: center;
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 9.35px */
+}
+
+@media screen and (max-width: 749px) {
+  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
+  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+    display: initial;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+    width: auto;
+    padding: 6px 12px;
+  }
+}
+
+/* Problem solution section*/
+:where(.template-product, .template-collection, .template-list-collections) .hz-prob-sol-section {
+  padding:0 0px 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .pro_solu_image {
+    margin-bottom: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  position: relative;
+  z-index: 2;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #064BD8;
+  margin-bottom: 5px;
+  font-family: var(--font-accent--family);
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-heading {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: serif;
+  color: #0A1A4A;
+  line-height: 1.2;
+  margin: 0 0 3px 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-text {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #0A1A4A;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-text p {
+  margin: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-arrow-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-ps-arrow-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #0A1A4A;
+  border: 1px solid #0A1A4A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+/* Problem solution section*/
+
+/* How it works*/
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-section {
+  position: relative;
+  padding: 45px 0 30px 0px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-wave-img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: fill;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-main-title {
+  text-align: center;
+  font-size: 38px;
+  font-family: serif;
+  font-weight: 500;
+  color: #0b1a30;
+  margin: 0 0 40px 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card {
+  background-color: #dceaf7;
+  border-radius: 24px;
+  padding: 12px 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-inner{
+  display: flex;
+  justify-content: space-between;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card:nth-child(2) {
+  background-color: #eee9e0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-info {
+  flex: 1;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-title {
+  font-size: 24px;
+  font-family: serif;
+  font-weight: 600;
+  color: #0b1a30;
+  margin: 0 0 12px 0;
+  line-height: 1.15;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-desc {
+  font-size: 8px;
+  line-height: 1.55;
+  color: #1a2a3e;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-bottom-image {
+  max-width: 167px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-content {
+  flex: 1;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0A1A4A;
+  margin: 0 0 5px 0;
+  font-family: var(--headfont);
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-desc {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-desc p {
+  margin: 0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-media img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+/* How it works*/
+@media(max-width:1000px){
+  :where(.template-product, .template-collection, .template-list-collections) .klaviyo-form input[name=email], :where(.template-product, .template-collection, .template-list-collections) .klaviyo-form input[name=email]::placeholder {
+    font-size: 14px !important;
+  }
+}
+
+/* ---- from somna-buybox.css ---- */
+/* ==========================================================================
+   Somna buybox – Figma "Purchase panel" (mobile 2707-3118…, desktop 2707-3220…)
+   Loaded after assets/product-col-custom.css (snippets/stylesheets.liquid); that file is unchanged.
+   Markup: snippets/variant-main-picker.liquid, snippets/somna-subscription-widget.liquid,
+           templates/product.json (footer custom liquid under Add to cart).
+   The blue panel itself is the buybox group's own settings in the theme editor.
+   Font families and the existing font sizes are kept; this block sets the
+   design's layout and colours, and sizes only the new elements.
+   ========================================================================== */
+
+/* Review card */
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review {
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 8px 10px 7px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__stars {
+  display: inline-flex;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-star {
+  --fill: 100%;
+  background: linear-gradient(90deg, #eeb229 var(--fill), #c7c7c7 var(--fill));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__rating {
+  margin-left: 3px;
+  color: #292929;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__quote {
+  margin: 3px 0 0;
+  font-size: 8px;
+  line-height: 1.5;
+  color: #0a1a4a;
+}
+
+/* Colour row: white card, no border */
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-color-option {
+  background: #fff;
+  border: 0;
+  margin-bottom: 12px;
+}
+
+/* Size cards: three equal columns, room for the badges above */
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding-top: 9px;
+  width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+  position: relative;
+  justify-content: flex-start;
+  width: auto;
+  min-width: 0;
+  padding: 4px 3px 16px;
+  border-radius: 10px;
+  background: #fff !important;
+  overflow: visible !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier {
+  border: 1px solid #d7dce7 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+  background: #f6f8fe !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+  background: #eff2fc !important;
+  border: 1.7px solid #0b57e3 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__badge {
+  top: 0;
+  left: 50%;
+  width: auto;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #152963;
+  line-height: 1;
+  transform: translate(-50%, -55%);
+  z-index: 4;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .variant-card__title {
+  color: #152963;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .variant-card__sub-title {
+  color: #5366aa;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-tier__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px 4px;
+  width: 100%;
+  margin: 6px 0 0;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-tier__night {
+  color: #0b57e3;
+  font-size: 10px;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-tier__was {
+  color: #8c99c0;
+  font-size: 8.8px;
+  text-decoration: line-through;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-tier__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: #246335;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__perk {
+  justify-content: center;
+  width: 100%;
+  margin-top: 3px;
+  color: #246335;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+  color: #8c99c0;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-tier__icon,
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  max-width: 12px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__pill {
+  bottom: -7px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: #1b7c46;
+  line-height: 1;
+}
+
+/* Bundle card (single-variant products: The Color Set, Season Bundle) */
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__media {
+  flex: 0 0 34%;
+  max-width: 140px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 96px;
+  object-fit: contain;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__sub {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card .somna-tier__price {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Autoship & Save / One-time purchase */
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box {
+  background: #fff;
+  border: 1px solid #d7dce7;
+  border-radius: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active {
+  background: #fff;
+  border: 1.6px solid #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-box-banner {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+  padding: 10px 10px 2px;
+  border-bottom: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+  padding-top: 2px;
+  padding-bottom: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-per-night,
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-dropdown-wrap {
+  display: none !important;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-active-price {
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-pricing-row {
+  gap: 6px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-strike-price {
+  color: #8c99c0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-save-pill {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #1b7c46;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-radio-bullet {
+  flex-shrink: 0;
+  border-color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+  border: 2px solid #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+  width: 6px;
+  height: 6px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-perks-list {
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-perks-list li {
+  align-items: baseline;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-perk-check {
+  flex-shrink: 0;
+  color: #0b57e3;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-gifts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 2px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-gift {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 39px;
+  padding: 4px;
+  border-radius: 7px;
+  background: #e5f4eb;
+  color: #246a3b;
+  font-size: 9.2px;
+  line-height: 1.1;
+  text-align: center;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-gift__icon {
+  width: 14px;
+  height: 14px;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-onetime-save {
+  margin: 1px 0 0 22px;
+  color: #ef5400;
+  font-size: 9.8px;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-onetime-save[hidden] {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+  padding: 8px 10px;
+}
+
+/* Add to cart */
+:where(.template-product, .template-collection, .template-list-collections) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #0b57e3;
+  background-color: #0b57e3;
+}
+
+/* Under the button: flexibility line + delivery promise */
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #5366aa;
+  font-size: 9.7px;
+  line-height: 1.2;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex__icon {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-delivery {
+  width: 100%;
+  margin: 0;
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #fff;
+  color: #152963;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  :where(.template-product, .template-collection, .template-list-collections) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+    height: 41px !important;
+  }
+}
+/* ==================== END PRODUCT & COLLECTION PAGES ==================== */
+
+/* =====================================================================
+   HALLOWEEN 2026 — PRODUCT PAGE BUY BOX (Figma 3297-4934 desktop / 3297-5224 mobile)
+   All five products get the Halloween look (peach panel, orange border, orange
+   button). The Halloween words (sale pill above the images, "HALLOWEEN: …" banner,
+   "Lock in your Halloween price") only show when the product's "Halloween sale text"
+   metafield (custom.halloween_sale_text) has a value — Nasal Strips and Mouth Tape.
+   Every price, saving and "% OFF" pill is calculated from the real subscription plans.
+   Panel background / border colours are the buy-box group's own settings
+   (templates/product.json, group_6Ynwc9). Tablet/desktop sizes: somna-home-desktop.css.
+   After Halloween: delete this block and set the group colours back to restore the blue design.
+   ===================================================================== */
+
+/* Sale pill above the product images (only rendered when the metafield is filled) */
+:where(.template-product) .somna-pdp-sale-pill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 0.3em;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 8px 14px;
+  border: 2px solid #ef5400;
+  border-radius: 999px;
+  background: #000;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
+  color: #faf2df;
+  font-family: var(--font-body--family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+:where(.template-product) .somna-pdp-sale-pill__offer {
+  color: #ff7a12;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  :where(.template-product) .somna-pdp-sale-pill__offer {
+    background: linear-gradient(90deg, #ef5400 0%, #ff9860 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Sub-headline + short description under the images: desktop only (phones keep them above the buy box) */
+:where(.template-product) .somna-pdp-intro {
+  display: none;
+}
+
+/* Review card */
+:where(.template-product) .somna-buybox-review {
+  color: #0a1a4a;
+}
+:where(.template-product) .somna-buybox-review__count {
+  color: #000;
+}
+
+/* Size cards */
+:where(.template-product) .somna-buybox-picker .somna-tier .variant-card__title {
+  color: #000;
+}
+:where(.template-product) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+  background: #fff7ef !important;
+}
+:where(.template-product) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+  background: #eff2fc !important;
+  border: 2px solid #000 !important;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+  background: #000;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__badge {
+  background: #000;
+  color: #fff;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+  background: #ff9845;
+  color: #000;
+}
+:where(.template-product) .somna-tier__night {
+  color: #cd4a04;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier:has(input:checked) .somna-tier__night {
+  color: #000;
+}
+:where(.template-product) .somna-tier__was {
+  display: none;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__perk,
+:where(.template-product) .somna-bundle-card .somna-tier__perk {
+  color: #fe8b4c;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+  color: #8c99c0;
+}
+:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__pill {
+  background: #000;
+  color: #efa47b;
+  font-weight: 700;
+}
+
+/* Bundle card (The Color Set, Season Bundle) */
+:where(.template-product) .somna-bundle-card {
+  color: #000;
+}
+
+/* Autoship & Save / One-time purchase */
+:where(.template-product) .somna-custom-subscription-container .somna-purchase-box {
+  border: 1px solid #d7dce7;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active {
+  border: 2px solid #cd4a04;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-box-banner {
+  background: #000;
+  color: #fff;
+}
+:where(.template-product) .somna-box-banner__offer {
+  color: #ef5400;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product) .somna-custom-subscription-container .somna-active-price {
+  color: #000;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-strike-price {
+  display: none;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-save-pill {
+  background: #000;
+  color: #efa47b;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-radio-bullet {
+  border-color: #000;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+  border-color: #ef5400;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+  background: #ef5400;
+}
+:where(.template-product) .somna-custom-subscription-container .somna-perks-list {
+  color: #000;
+}
+:where(.template-product) .somna-perk-check {
+  color: #cd4a04;
+}
+:where(.template-product) .somna-gift {
+  color: #933400;
+}
+:where(.template-product) .somna-onetime-save {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 8px;
+  color: #933400;
+}
+:where(.template-product) .somna-onetime-save[hidden] {
+  display: none;
+}
+:where(.template-product) .somna-onetime-pill {
+  margin-left: auto;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #000;
+  color: #efa47b;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Add to cart: orange pill with a darker orange base, like the design */
+:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #ff7a12;
+  --button-color: #faf2df;
+  background-color: #ff7a12;
+  color: #faf2df;
+  box-shadow: 0 4px 0 #b8430b;
+}
+:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-']:hover {
+  --button-background-color: #f06d08;
+  background-color: #f06d08;
+}
+
+/* Under the button */
+:where(.template-product) .somna-buybox-delivery {
+  color: #000;
+}
+/* ===================== END HALLOWEEN 2026 — PRODUCT PAGE ===================== */
