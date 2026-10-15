@@ -1397,7 +1397,6 @@ h4.somna-product-title {
     font-family: var(--headfont);
     margin-bottom: 0;
 }
-
 span.somna-product-price {
     color: rgba(10, 26, 74, 0.60);
     font-size: 13px;
@@ -2185,47 +2184,48 @@ a.somna-view-all {
    PRODUCT & COLLECTION PAGES — moved here on 2026-10-15 from
    assets/product-col-custom.css and assets/somna-buybox.css (no longer loaded).
    Same rules, same order. Every selector is prefixed with
-   :where(.template-product, .template-collection, .template-list-collections)
+   :where(.template-product, .template-collection, .template-list-collections, .somna-sp)
    so they still only apply on those pages (the body class comes from
    layout/theme.liquid) and keep their original specificity.
+   .somna-sp (2026-10-15) = the buy boxes on the Halloween Sale page (sections/somna-sale-product.liquid).
    Their min-width: 768px blocks moved to the top of somna-home-desktop.css.
    ===================================================================== */
 
 /* ---- from product-col-custom.css ---- */
-:where(.template-product, .template-collection, .template-list-collections) .review_content{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .review_content{
 margin-top: 7px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .product-information__grid {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid {
     padding: 0 5px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper {
     margin: -29px 0 0 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .custom-header{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .custom-header{
   margin-bottom: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
     object-fit: cover !important;
     border-radius: 0 0 20px 20px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .product-details {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details {
     padding-bottom: 15px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .product-form-buttons button {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-form-buttons button {
     border-radius: 12px;
     font-size: 15px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option--buttons legend {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option--buttons legend {
     font-size: 15px;
     color: #0A1A4A;
     font-weight: 500;
     letter-spacing: -1px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label {
     overflow: inherit !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-card__inner {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__inner {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -2233,28 +2233,28 @@ margin-top: 7px;
     justify-content: center;
     padding-top: 9px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-card__image-wrapper img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__image-wrapper img {
     max-height: 40px;
 }
  
-:where(.template-product, .template-collection, .template-list-collections) .variant-option--equal-width-buttons .variant-option__button-label {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option--equal-width-buttons .variant-option__button-label {
     border: 1px solid #000 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__title,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__title  {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__title,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__title  {
     color: #0A1A4A;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__sub-price,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__sub-price  {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__sub-price,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__sub-price  {
     color: #0A1A4A;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:has(:checked) .variant-card__onetime-price,:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover .variant-card__onetime-price  {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__onetime-price,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__onetime-price  {
     color: #0A1A4A;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:hover{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover{
     background: #C9E5FE !important;
     color: #0A1A4A !important;
 }
  
-:where(.template-product, .template-collection, .template-list-collections) .variant-card__title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__title {
     color: #061C42;
     font-size: 15px;
     font-style: normal;
@@ -2263,10 +2263,10 @@ margin-top: 7px;
     font-family: var(--headfont);
     width: 100%;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-picker__form legend {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-picker__form legend {
     display: none;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-card__badge {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge {
   position: absolute;
   top: 0;
   color: #fff;
@@ -2279,12 +2279,12 @@ margin-top: 7px;
   text-align: center;
 }
    
-:where(.template-product, .template-collection, .template-list-collections) .subscription_group:has(input[type="radio"]:checked) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .subscription_group:has(input[type="radio"]:checked) {
   border-color: #0E63E9 !important;
   background:#F4FAFF;
 }
 /* Subscription box*/
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__gift {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__gift {
     display: flex;
     gap: 5px;
     align-items: center;
@@ -2295,7 +2295,7 @@ margin-top: 7px;
     font-weight: 400;
     line-height: normal;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label .variant-card__gift svg {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label .variant-card__gift svg {
     width: 18px;
     height: 18px;
     position: relative;
@@ -2307,14 +2307,14 @@ margin-top: 7px;
     stroke: #000 !important;
     max-width: 18px;
 }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card {
     border-radius: 16px;
     padding: 12px 9px;
     background: #fff;
     flex-direction: column;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card.selected,
-  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(input:checked) {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card.selected,
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(input:checked) {
     border-color: #1354c4 !important;
     background-color: #C9E5FE !important;
   }
@@ -2332,7 +2332,7 @@ margin-top: 7px;
     10% { --somna-border-reveal: 0deg; }
     100% { --somna-border-reveal: 180deg; }
   }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(:checked):not(:has([data-option-available='false']))::after {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(:checked):not(:has([data-option-available='false']))::after {
     --reveal: var(--somna-border-reveal, 180deg);
     content: '';
     position: absolute;
@@ -2369,15 +2369,15 @@ margin-top: 7px;
     animation: somna-border-trace 680ms cubic-bezier(.45, 0, .2, 1) both;
   }
   @media (prefers-reduced-motion: reduce) {
-    :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label--card:has(:checked)::after {
+    :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(:checked)::after {
       animation: none;
       --somna-border-reveal: 180deg;
     }
   }
 
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__badge.popular { background: #1354c4; }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__badge.free-bag { background: #0a1a4a; }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__sub-title {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge.popular { background: #1354c4; }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge.free-bag { background: #0a1a4a; }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__sub-title {
     margin-bottom: 6px;
     display: block;
     color: #061c42;
@@ -2389,18 +2389,18 @@ margin-top: 7px;
     margin-top: 2px;
     width: 100%;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__img-wrap {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__img {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img {
     height: 55px;
     object-fit: contain;
   }
 
-  :where(.template-product, .template-collection, .template-list-collections) .variant-card__bottom-save-pill {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__bottom-save-pill {
     position: absolute;
     bottom: -8px;
     left: 50%;
@@ -2414,11 +2414,11 @@ margin-top: 7px;
     white-space: nowrap;
     z-index: 11;
   }
-:where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
     inset: inherit !important;
 }
   /* Subscription Box Styles */
-  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container {
     background-color: transparent;
     border-radius: 16px;
     padding: 0;
@@ -2430,7 +2430,7 @@ margin-top: 7px;
     width: 100%;
     margin-top: 0;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box {
     background: #FFF9EE;
     border: 1px solid #000;
     border-radius: 12px;
@@ -2438,11 +2438,11 @@ margin-top: 7px;
     cursor: pointer;
     transition: all .2s ease;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box.active {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box.active {
     border-color: #1354c4;
     background: #F4FAFF;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-box-banner {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-banner {
     background: #1354c4;
     text-align: center;
     padding: 3.5px 0;
@@ -2453,30 +2453,30 @@ margin-top: 7px;
     font-weight: 700;
     line-height: normal;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-box-inner {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-inner {
     padding: 6px 17px;
     position: relative;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-box-top-row {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-top-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box[data-purchase-card="subscribe"] .somna-box-top-row{
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box[data-purchase-card="subscribe"] .somna-box-top-row{
     padding: 5px 10px 7px;
     border-bottom: 1px solid #000;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-label {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-label {
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-label input {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-label input {
     position: absolute;
     opacity: 0;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-radio-bullet {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-bullet {
     width: 14px;
     height: 14px;
     border: 1.2px solid #061C42;
@@ -2484,7 +2484,7 @@ margin-top: 7px;
     display: inline-block;
     position: relative;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box.active .somna-radio-bullet::after {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box.active .somna-radio-bullet::after {
     content: "";
     position: absolute;
     left: 0;
@@ -2498,11 +2498,11 @@ margin-top: 7px;
     text-align: center;
     margin: 0 auto;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-title-stack {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-title-stack {
     display: flex;
     flex-direction: column;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-box-title {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-title {
     color: #061C42;
     font-size: 10px;
     font-style: normal;
@@ -2510,23 +2510,23 @@ margin-top: 7px;
     line-height: normal;
     font-family: var(--headfont);
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-per-night {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-per-night {
     color: #061C42;
     font-size: 9px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-price-stack {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-price-stack {
     text-align: right;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-pricing-row {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-pricing-row {
     display: flex;
     gap: 3px;
     align-items: baseline;
     justify-content: flex-end;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-strike-price {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-strike-price {
     text-decoration: line-through;
     color: #000;
     font-size: 10px;
@@ -2535,14 +2535,14 @@ margin-top: 7px;
     line-height: normal;
     text-decoration-line: line-through;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-active-price {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-active-price {
     color: #061C42;
     font-size: 11px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-save-pill {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-save-pill {
     color: #FFF;
     font-size: 10px;
     font-style: normal;
@@ -2553,7 +2553,7 @@ margin-top: 7px;
     padding: 0 2px;
     text-align: center;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list {
     list-style: none;
     padding: 0;
     margin: 6px 0;
@@ -2566,16 +2566,16 @@ margin-top: 7px;
     font-weight: 400;
     line-height: normal;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list li{
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list li{
     display: flex;
     align-items: center;
     gap: 5px;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-dropdown-wrap {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-dropdown-wrap {
     margin-top: 6px;
     position: relative;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-dropdown-wrap:after {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-dropdown-wrap:after {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjYiIHZpZXdCb3g9IjAgMCA5IDYiIGZpbGw9Im5vbmUiPgogIDxwYXRoIGQ9Ik0wLjUgMC41TDQuNzY2NjcgNC41TDguNSAwLjUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=");
     content: '';
     position: absolute;
@@ -2588,7 +2588,7 @@ margin-top: 7px;
     top: 50%;
     transform: translateY(-50%);
 }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-frequency-dropdown {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-frequency-dropdown {
     width: 100%;
     padding: 8px 10px;
     font-size: 9px;
@@ -2600,7 +2600,7 @@ margin-top: 7px;
     font-family: var(--headfont);
     appearance: none;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-widget-meta-footer {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-widget-meta-footer {
     display: flex;
     gap: 8px;
     margin-top: 4px;
@@ -2608,7 +2608,7 @@ margin-top: 7px;
     flex-wrap: wrap;
     justify-content: center;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-policy-link {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-policy-link {
     text-decoration: underline;
     color: #000;
     font-size: 7px;
@@ -2617,7 +2617,7 @@ margin-top: 7px;
     line-height: normal;
     text-decoration-line: underline;
   }
-:where(.template-product, .template-collection, .template-list-collections) .somna-delivery-timeline {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-delivery-timeline {
     border: 1px solid #cbd3d8;
     padding: 8px 12px;
     text-align: left;
@@ -2625,7 +2625,7 @@ margin-top: 7px;
     background: #fff9ee;
     width: 100%;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span {
     color: #061C42;
     font-size: 8px;
     font-style: normal;
@@ -2633,26 +2633,26 @@ margin-top: 7px;
     line-height: normal;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span:last-child {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span:last-child {
     max-width: 61px;
     text-align: right;
 }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-line {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-line {
     height: 4px;
     position: relative;
     display: flex;
     align-items: center;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-box-icon {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-box-icon {
     position: relative;
     left: -2px;
   }
-:where(.template-product, .template-collection, .template-list-collections) .button[id^=BuyButtons-ProductSubmitButton-] {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .button[id^=BuyButtons-ProductSubmitButton-] {
     --button-border-color: transparent;
     border-radius: 999px;
     color: #FFF;
@@ -2663,7 +2663,7 @@ margin-top: 7px;
     height: 34px !important;
     padding: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-guarantee-text {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-guarantee-text {
     color: #000;
     font-size: 7.5px;
     font-style: normal;
@@ -2674,30 +2674,30 @@ margin-top: 7px;
     align-items: center;
 }
 /* Subscription box*/
-:where(.template-product, .template-collection, .template-list-collections) .title_and_price_wrapper {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .title_and_price_wrapper {
     color: #0A1A4A;
     font-size: 13px;
     font-weight: 700;
 }
-:where(.template-product, .template-collection, .template-list-collections) .custom_radio_button:has(input[type='radio']:checked):before{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .custom_radio_button:has(input[type='radio']:checked):before{
     background: #0A4FD6 !important;
     box-shadow: 0 0 0 2px #0a4fd6!important;
 }
- :where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails{
+ :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails{
   margin: 0 !important;
  }
-:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control {
     width: 74px !important;
     height: 71px !important;
     border-radius: 8px !important;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) slideshow-arrows[position=center].pagination-arrows {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) slideshow-arrows[position=center].pagination-arrows {
     mix-blend-mode: normal;
     margin: 0 10px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) slideshow-arrows .slideshow-control {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) slideshow-arrows .slideshow-control {
     background: #FFFFFF8C;
     border: 0.5px solid #FFFFFF;
     min-width: 16px !important;
@@ -2709,51 +2709,51 @@ margin-top: 7px;
     opacity: 1 !important;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .media-gallery--carousel slideshow-arrows .slideshow-control svg path {stroke: #0A1A4A;}
-:where(.template-product, .template-collection, .template-list-collections) .media-gallery--carousel slideshow-arrows .slideshow-control svg {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .media-gallery--carousel slideshow-arrows .slideshow-control svg path {stroke: #0A1A4A;}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .media-gallery--carousel slideshow-arrows .slideshow-control svg {
     width: 14px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails {
   gap: 2px !important;
   padding-inline: 0 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
     outline: none !important;
     border: 2px solid #000 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
-:where(.template-product, .template-collection, .template-list-collections) .accordion .details{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .accordion .details{
     border-bottom: 1px solid #B9B7AC;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .accordion--dividers .details-content,:where(.template-product, .template-collection, .template-list-collections) .accordion--dividers .details-content p {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .accordion--dividers .details-content,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .accordion--dividers .details-content p {
   color: #0a1a4a;
   line-height: 1.2;
   font-size: 12px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-faq-wrapper .accordion .details__header {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .accordion .details__header {
  justify-content: space-between;
 }
 
 /* Collection */
-:where(.template-product, .template-collection, .template-list-collections) .header_main ul li {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .header_main ul li {
     display: block;
     margin-bottom: 5px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .header_main ul {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .header_main ul {
     padding: 0;
     width: 100%;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-grid {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-grid {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-media img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-media img {
     height: 62px;
     object-fit: contain;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-title {
     color: #0A1A4A;
     text-align: center;
     font-size: 10px;
@@ -2762,13 +2762,13 @@ margin-top: 7px;
     line-height: 16px; /* 160% */
     width: 100%;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-text-wrap {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-text-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 5px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-metaobject-subtitle {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-subtitle {
     color: #0A1A4A;
     font-family: Inter;
     font-size: 12px;
@@ -2783,7 +2783,7 @@ margin-top: 7px;
    Somna color swatches – "Color: Blue  ● ● ●"
    Markup: snippets/variant-main-picker.liquid (is_color_option)
    ========================================================== */
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-option {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2796,24 +2796,24 @@ margin-top: 7px;
   border-radius: 10px;
   min-width: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .variant-picker__form .somna-color-option legend.visually-hidden {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-picker__form .somna-color-option legend.visually-hidden {
   display: block;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label {
   font-size: 15px;
   line-height: 1.2;
   color: #0A1A4A;
   font-weight: 400;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label strong {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label strong {
   font-weight: 700;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-option__swatches {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__swatches {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch {
   --somna-swatch: #d9d9d9;
   position: relative;
   display: inline-flex;
@@ -2824,7 +2824,7 @@ margin-top: 7px;
   border-radius: 50%;
   cursor: pointer;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch input {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch input {
   position: absolute;
   inset: 0;
   margin: 0;
@@ -2832,7 +2832,7 @@ margin-top: 7px;
   cursor: pointer;
   z-index: 1;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch__dot {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch__dot {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2843,31 +2843,31 @@ margin-top: 7px;
   color: #fff;
   transition: box-shadow .2s ease, transform .2s ease;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch__check {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch__check {
   width: 13px;
   height: 11px;
   opacity: 0;
   transition: opacity .2s ease;
 }
 /* Selected: white gap + ring in the swatch's own colour, white tick */
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:checked) .somna-color-swatch__dot {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:checked) .somna-color-swatch__dot {
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--somna-swatch);
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:checked) .somna-color-swatch__check {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:checked) .somna-color-swatch__check {
   opacity: 1;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:hover .somna-color-swatch__dot {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:hover .somna-color-swatch__dot {
   transform: scale(1.06);
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch:has(input:focus-visible) .somna-color-swatch__dot {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:focus-visible) .somna-color-swatch__dot {
   outline: 2px solid #0A1A4A;
   outline-offset: 5px;
 }
 /* Sold out: faded with a diagonal line */
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch--unavailable .somna-color-swatch__dot {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch--unavailable .somna-color-swatch__dot {
   opacity: .4;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch--unavailable::after {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch--unavailable::after {
   content: "";
   position: absolute;
   width: 130%;
@@ -2877,23 +2877,23 @@ margin-top: 7px;
   pointer-events: none;
 }
 @media screen and (max-width: 749px) {
-  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option {
     padding: 7px 12px;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option__label {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label {
     font-size: 14px;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-color-option__swatches {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__swatches {
     gap: 16px;
   }
-  :where(.template-product, .template-collection, .template-list-collections) .somna-color-swatch {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch {
     width: 18px;
     height: 18px;
   }
 }
 
-  :where(.template-product, .template-collection, .template-list-collections) .somna-purchase-box[hidden],
-  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container [hidden] {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box[hidden],
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container [hidden] {
     display: none !important;
   }
 
@@ -2902,12 +2902,12 @@ margin-top: 7px;
    Markup: snippets/somna-sticky-options.liquid + sections/product-information.liquid
    Mode is set on <sticky-add-to-cart data-purchase-mode> by assets/sticky-add-to-cart.js
    ========================================================= */
-:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__mode--subscribe,
-:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onetime {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__mode--subscribe,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onetime {
   display: none !important;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
   --somna-navy: #1c2a6b;
   --somna-navy-dark: #0a1a4a;
   --somna-blue: #1354c4;
@@ -2926,14 +2926,14 @@ margin-top: 7px;
   z-index: 11111 !important;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
   display: none;
 }
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar{
   z-index: 1111 !important;
   bottom: 0 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__banner {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__banner {
   flex: 1 0 100%;
   display: flex;
   align-items: center;
@@ -2949,24 +2949,24 @@ margin-top: 7px;
   font-weight: 600;
   line-height: normal;
 }
-:where(.template-product, .template-collection, .template-list-collections) .sticky_bar_main {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky_bar_main {
     width: 100%;
     display: flex;
     padding:10px 15px 0;
     gap: 10px;
     align-items: center;
 }
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
   height: 48px;
   border-radius: 4px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky {
   flex: 1;
   min-width: 0;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2981,14 +2981,14 @@ margin-top: 7px;
   cursor: pointer;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-text {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-text {
   display: flex;
   flex: 1;
   flex-direction: column;
   min-width: 0;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-title {
   overflow: hidden;
   color: #0A1A4A;
   text-overflow: ellipsis;
@@ -2998,7 +2998,7 @@ margin-top: 7px;
   line-height: normal;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger-meta {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-meta {
   overflow: hidden;
   color: #0a1a4a70;
   text-overflow: ellipsis;
@@ -3009,18 +3009,18 @@ margin-top: 7px;
   margin-top: 2px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__caret {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__caret {
   flex-shrink: 0;
   width: 10px;
   transition: transform 0.2s ease;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__trigger[aria-expanded='true'] .somna-sticky__caret {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger[aria-expanded='true'] .somna-sticky__caret {
   transform: rotate(180deg);
 }
 
 /* Dropdown opens upward, spanning the bar (the fixed bar is the containing block) */
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel {
   position: absolute;
   right: 10px;
   bottom: calc(100% + 8px);
@@ -3032,17 +3032,17 @@ margin-top: 7px;
   box-shadow: 0 12px 30px rgb(10 26 74 / 0.2);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel[hidden] {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel[hidden] {
   display: none;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__panel-heading {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel-heading {
   margin: 0 0 8px;
   color: rgb(10 26 74 / 0.65);
   font-size: 12px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__list {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__list {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -3051,7 +3051,7 @@ margin-top: 7px;
   list-style: none;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -3067,39 +3067,39 @@ margin-top: 7px;
   font-family: var(--font-paragraph--family);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row:hover,
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row[aria-selected='true'] {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row:hover,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row[aria-selected='true'] {
   border-left-color: var(--somna-blue);
   background: var(--somna-row-active);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row:disabled {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-top {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-title {
   font-size: 14px;
   font-weight: 700;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__row-meta {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-meta {
   color: rgb(10 26 74 / 0.65);
   font-size: 11px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
   color: var(--somna-onetime);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge {
   padding: 2px 7px;
   border-radius: 20px;
   color: #fff;
@@ -3108,15 +3108,15 @@ margin-top: 7px;
   white-space: nowrap;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge--popular {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge--popular {
   background: var(--somna-blue);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .somna-sticky__badge--free {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge--free {
   background: var(--somna-navy-dark);
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
   width: auto;
   max-width: 120px;
   height: 45px;
@@ -3129,10 +3129,10 @@ margin-top: 7px;
   white-space: normal;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
   display: none;
 }
-:where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
   color: #FFF;
   text-align: center;
   font-size: 8.5px;
@@ -3142,30 +3142,30 @@ margin-top: 7px;
 }
 
 @media screen and (max-width: 749px) {
-  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
     width: 100%;
     max-width: 800px;
   }
 
   /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
-  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
     display: initial;
   }
 
-  :where(.template-product, .template-collection, .template-list-collections) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
     width: auto;
     padding: 6px 12px;
   }
 }
 
 /* Problem solution section*/
-:where(.template-product, .template-collection, .template-list-collections) .hz-prob-sol-section {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-prob-sol-section {
   padding:0 0px 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .pro_solu_image {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .pro_solu_image {
     margin-bottom: 5px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-container {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3173,13 +3173,13 @@ margin-top: 7px;
   position: relative;
   z-index: 2;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-col {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-col {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-tag {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-tag {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -3188,7 +3188,7 @@ margin-top: 7px;
   margin-bottom: 5px;
   font-family: var(--font-accent--family);
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-heading {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-heading {
   font-size: 16px;
   font-weight: 400;
   font-family: serif;
@@ -3196,22 +3196,22 @@ margin-top: 7px;
   line-height: 1.2;
   margin: 0 0 3px 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-text {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text {
   font-size: 10px;
   line-height: 1.6;
   color: #0A1A4A;
   font-weight: 400;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-text p {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text p {
   margin: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-arrow-wrapper {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-arrow-wrapper {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-ps-arrow-circle {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-arrow-circle {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -3225,17 +3225,17 @@ margin-top: 7px;
 /* Problem solution section*/
 
 /* How it works*/
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-section {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-section {
   position: relative;
   padding: 45px 0 30px 0px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-wave-img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-wave-img {
   display: block;
   width: 100%;
   height: 60px;
   object-fit: fill;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-main-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-main-title {
   text-align: center;
   font-size: 38px;
   font-family: serif;
@@ -3243,36 +3243,36 @@ margin-top: 7px;
   color: #0b1a30;
   margin: 0 0 40px 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-grid {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 28px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card {
   background-color: #dceaf7;
   border-radius: 24px;
   padding: 12px 10px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-inner{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-inner{
   display: flex;
   justify-content: space-between;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card:nth-child(2) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card:nth-child(2) {
   background-color: #eee9e0;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-header {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-header {
   display: flex;
   align-items: flex-start;
   margin-bottom: 5px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-info {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-info {
   flex: 1;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-title {
   font-size: 24px;
   font-family: serif;
   font-weight: 600;
@@ -3281,48 +3281,48 @@ margin-top: 7px;
   line-height: 1.15;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-desc {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-desc {
   font-size: 8px;
   line-height: 1.55;
   color: #1a2a3e;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-bottom-image {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-bottom-image {
   max-width: 167px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-row {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-content {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-content {
   flex: 1;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-title {
   font-size: 18px;
   font-weight: 500;
   color: #0A1A4A;
   margin: 0 0 5px 0;
   font-family: var(--headfont);
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-desc {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-desc {
   font-size: 10px;
   line-height: 1.5;
   color: #0A1A4A;
 }
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-desc p {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-desc p {
   margin: 0;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-media {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-media {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-:where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-media img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-media img {
   max-width: 100%;
   height: auto;
   display: block;
@@ -3330,7 +3330,7 @@ margin-top: 7px;
 }
 /* How it works*/
 @media(max-width:1000px){
-  :where(.template-product, .template-collection, .template-list-collections) .klaviyo-form input[name=email], :where(.template-product, .template-collection, .template-list-collections) .klaviyo-form input[name=email]::placeholder {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .klaviyo-form input[name=email], :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .klaviyo-form input[name=email]::placeholder {
     font-size: 14px !important;
   }
 }
@@ -3347,7 +3347,7 @@ margin-top: 7px;
    ========================================================================== */
 
 /* Review card */
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review {
   width: 100%;
   margin: 0 0 14px;
   padding: 8px 10px 7px;
@@ -3355,7 +3355,7 @@ margin-top: 7px;
   border-radius: 10px;
   color: #152963;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__top {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__top {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -3363,21 +3363,21 @@ margin-top: 7px;
   font-size: 10.5px;
   line-height: 1.15;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__stars {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__stars {
   display: inline-flex;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-star {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-star {
   --fill: 100%;
   background: linear-gradient(90deg, #eeb229 var(--fill), #c7c7c7 var(--fill));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__rating {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__rating {
   margin-left: 3px;
   color: #292929;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__quote {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__quote {
   margin: 3px 0 0;
   font-size: 8px;
   line-height: 1.5;
@@ -3385,21 +3385,21 @@ margin-top: 7px;
 }
 
 /* Colour row: white card, no border */
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-color-option {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-color-option {
   background: #fff;
   border: 0;
   margin-bottom: 12px;
 }
 
 /* Size cards: three equal columns, room for the badges above */
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 7px;
   padding-top: 9px;
   width: 100%;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
   position: relative;
   justify-content: flex-start;
   width: auto;
@@ -3409,20 +3409,20 @@ margin-top: 7px;
   background: #fff !important;
   overflow: visible !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier {
   border: 1px solid #d7dce7 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
   background: #f6f8fe !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
   background: #eff2fc !important;
   border: 1.7px solid #0b57e3 !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
   background: #0b57e3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__badge {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
   top: 0;
   left: 50%;
   width: auto;
@@ -3433,17 +3433,17 @@ margin-top: 7px;
   transform: translate(-50%, -55%);
   z-index: 4;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
   background: #0b57e3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .variant-card__title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__title {
   color: #152963;
   font-weight: 400;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .variant-card__sub-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__sub-title {
   color: #5366aa;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-tier__price {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__price {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -3453,17 +3453,17 @@ margin-top: 7px;
   margin: 6px 0 0;
   line-height: 1.15;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-tier__night {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__night {
   color: #0b57e3;
   font-size: 10px;
   font-weight: 700;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-tier__was {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__was {
   color: #8c99c0;
   font-size: 8.8px;
   text-decoration: line-through;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-tier__perk {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__perk {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -3473,25 +3473,25 @@ margin-top: 7px;
   font-weight: 700;
   line-height: 1.15;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__perk {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk {
   justify-content: center;
   width: 100%;
   margin-top: 3px;
   color: #246335;
   font-weight: 700;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
   color: #8c99c0;
   font-weight: 400;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-tier__icon,
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__icon,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
   flex-shrink: 0;
   width: 12px;
   height: 12px;
   max-width: 12px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__pill {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
   bottom: -7px;
   padding: 1px 4px;
   border-radius: 3px;
@@ -3500,7 +3500,7 @@ margin-top: 7px;
 }
 
 /* Bundle card (single-variant products: The Color Set, Season Bundle) */
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -3511,110 +3511,110 @@ margin-top: 7px;
   border-radius: 10px;
   color: #152963;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__media {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__media {
   flex: 0 0 34%;
   max-width: 140px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__img {
   display: block;
   width: 100%;
   height: auto;
   max-height: 96px;
   object-fit: contain;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__body {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__body {
   display: flex;
   flex-direction: column;
   gap: 3px;
   min-width: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__title {
   margin: 0;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__sub {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__sub {
   margin: 0;
   font-size: 10px;
   line-height: 1.3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card .somna-tier__price {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card .somna-tier__price {
   justify-content: flex-start;
   margin: 0;
 }
 
 /* Autoship & Save / One-time purchase */
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
   background: #fff;
   border: 1px solid #d7dce7;
   border-radius: 10px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active {
   background: #fff;
   border: 1.6px solid #0b57e3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-box-banner {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-box-banner {
   background: #0b57e3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
   padding: 10px 10px 2px;
   border-bottom: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
   padding-top: 2px;
   padding-bottom: 10px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-per-night,
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-dropdown-wrap {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-per-night,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-dropdown-wrap {
   display: none !important;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-box-title,
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-active-price {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-active-price {
   color: #152963;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-pricing-row {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-pricing-row {
   gap: 6px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-strike-price {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-strike-price {
   color: #8c99c0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-save-pill {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
   display: inline-block;
   margin-top: 2px;
   padding: 1px 6px;
   border-radius: 3px;
   background: #1b7c46;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-radio-bullet {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
   flex-shrink: 0;
   border-color: #152963;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
   border: 2px solid #0b57e3;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
   width: 6px;
   height: 6px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-perks-list {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-perks-list {
   color: #152963;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-perks-list li {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-perks-list li {
   align-items: baseline;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-perk-check {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perk-check {
   flex-shrink: 0;
   color: #0b57e3;
   font-weight: 700;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-gifts {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gifts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 5px;
   margin: 8px 0 2px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-gift {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3629,31 +3629,31 @@ margin-top: 7px;
   line-height: 1.1;
   text-align: center;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-gift__icon {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift__icon {
   width: 14px;
   height: 14px;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-onetime-save {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-onetime-save {
   margin: 1px 0 0 22px;
   color: #ef5400;
   font-size: 9.8px;
   line-height: 1.15;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-onetime-save[hidden] {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-onetime-save[hidden] {
   display: none;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
   padding: 8px 10px;
 }
 
 /* Add to cart */
-:where(.template-product, .template-collection, .template-list-collections) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
   --button-background-color: #0b57e3;
   background-color: #0b57e3;
 }
 
 /* Under the button: flexibility line + delivery promise */
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3664,12 +3664,12 @@ margin-top: 7px;
   font-size: 9.7px;
   line-height: 1.2;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex__icon {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex__icon {
   width: 11px;
   height: 11px;
   flex-shrink: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections) .somna-buybox-delivery {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-delivery {
   width: 100%;
   margin: 0;
   padding: 7px 8px;
@@ -3682,7 +3682,7 @@ margin-top: 7px;
 }
 
 @media screen and (max-width: 767px) {
-  :where(.template-product, .template-collection, .template-list-collections) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
     height: 41px !important;
   }
 }
@@ -3740,106 +3740,106 @@ margin-top: 7px;
 }
 
 /* Review card */
-:where(.template-product) .somna-buybox-review {
+:where(.template-product, .somna-sp) .somna-buybox-review {
   color: #0a1a4a;
 }
-:where(.template-product) .somna-buybox-review__count {
+:where(.template-product, .somna-sp) .somna-buybox-review__count {
   color: #000;
 }
 
 /* Size cards */
-:where(.template-product) .somna-buybox-picker .somna-tier .variant-card__title {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__title {
   color: #000;
 }
-:where(.template-product) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
   background: #fff7ef !important;
 }
-:where(.template-product) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
   background: #eff2fc !important;
   border: 2px solid #000 !important;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
   background: #000;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__badge {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
   background: #000;
   color: #fff;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
   background: #ff9845;
   color: #000;
 }
-:where(.template-product) .somna-tier__night {
+:where(.template-product, .somna-sp) .somna-tier__night {
   color: #cd4a04;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier:has(input:checked) .somna-tier__night {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(input:checked) .somna-tier__night {
   color: #000;
 }
-:where(.template-product) .somna-tier__was {
+:where(.template-product, .somna-sp) .somna-tier__was {
   display: none;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__perk,
-:where(.template-product) .somna-bundle-card .somna-tier__perk {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk,
+:where(.template-product, .somna-sp) .somna-bundle-card .somna-tier__perk {
   color: #fe8b4c;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
   color: #8c99c0;
 }
-:where(.template-product) .somna-buybox-picker .somna-tier .somna-tier__pill {
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
   background: #000;
   color: #efa47b;
   font-weight: 700;
 }
 
 /* Bundle card (The Color Set, Season Bundle) */
-:where(.template-product) .somna-bundle-card {
+:where(.template-product, .somna-sp) .somna-bundle-card {
   color: #000;
 }
 
 /* Autoship & Save / One-time purchase */
-:where(.template-product) .somna-custom-subscription-container .somna-purchase-box {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
   border: 1px solid #d7dce7;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active {
   border: 2px solid #cd4a04;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-box-banner {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-banner {
   background: #000;
   color: #fff;
 }
-:where(.template-product) .somna-box-banner__offer {
+:where(.template-product, .somna-sp) .somna-box-banner__offer {
   color: #ef5400;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-box-title,
-:where(.template-product) .somna-custom-subscription-container .somna-active-price {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-active-price {
   color: #000;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-strike-price {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-strike-price {
   display: none;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-save-pill {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
   background: #000;
   color: #efa47b;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-radio-bullet {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
   border-color: #000;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
   border-color: #ef5400;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
   background: #ef5400;
 }
-:where(.template-product) .somna-custom-subscription-container .somna-perks-list {
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-perks-list {
   color: #000;
 }
-:where(.template-product) .somna-perk-check {
+:where(.template-product, .somna-sp) .somna-perk-check {
   color: #cd4a04;
 }
-:where(.template-product) .somna-gift {
+:where(.template-product, .somna-sp) .somna-gift {
   color: #933400;
 }
-:where(.template-product) .somna-onetime-save {
+:where(.template-product, .somna-sp) .somna-onetime-save {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -3847,10 +3847,10 @@ margin-top: 7px;
   gap: 2px 8px;
   color: #933400;
 }
-:where(.template-product) .somna-onetime-save[hidden] {
+:where(.template-product, .somna-sp) .somna-onetime-save[hidden] {
   display: none;
 }
-:where(.template-product) .somna-onetime-pill {
+:where(.template-product, .somna-sp) .somna-onetime-pill {
   margin-left: auto;
   padding: 1px 6px;
   border-radius: 3px;
@@ -3875,7 +3875,7 @@ margin-top: 7px;
 }
 
 /* Under the button */
-:where(.template-product) .somna-buybox-delivery {
+:where(.template-product, .somna-sp) .somna-buybox-delivery {
   color: #000;
 }
 /* ===================== END HALLOWEEN 2026 — PRODUCT PAGE ===================== */
@@ -3957,3 +3957,222 @@ margin-top: 7px;
   background-position: center !important;
 }
 /* ==================== END PRODUCT PAGE — Figma fixes ==================== */
+
+/* =====================================================================
+   HALLOWEEN SALE PAGE (pages/halloween-sale, templates/page.halloween-sale.json)
+   Figma 3316:8669 desktop / 3316:11976 mobile. Phones + all sizes here;
+   tablet/desktop sizes in somna-home-desktop.css ("HALLOWEEN SALE PAGE").
+   Everything is scoped to this page's own sections:
+   - [id$='__hero_hwsale'] = the shared hero (homepage banner) section placed on this page;
+   - .somna-sp = sections/somna-sale-product.liquid (only used on this page).
+   The trust bar and "Get 10% off" use their universal rules above.
+   ===================================================================== */
+
+/* ---------- Hero (same look as the homepage hero) ---------- */
+[id$='__hero_hwsale'] .hero {
+  position: relative;
+  min-height: 120vw;
+}
+/* the header's white wave running over the top of the photo */
+[id$='__hero_hwsale'] .hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 7.6vw;
+  z-index: 3;
+  pointer-events: none;
+  background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
+}
+[id$='__hero_hwsale'] h1 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #ff9845;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] {
+  rotate: -3deg;
+  transform-origin: left center;
+}
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"],
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] > * {
+  line-height: 0.98;
+}
+/* Pill buttons; the pumpkin comes from the hero's "Button icon" setting */
+[id$='__hero_hwsale'] .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
+  border: 2px solid #fff !important;
+  border-radius: 999px;
+  background: #fff !important;
+  color: #ff7300 !important;
+  font-family: var(--font-body--family);
+  font-weight: 600;
+  box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
+}
+[id$='__hero_hwsale'] .button::before {
+  width: 34px;
+  height: 34px;
+}
+/* "Shop Mouth Tape" (desktop): orange pill, white pumpkin with the face cut out (Figma Frame 55) */
+[id$='__hero_hwsale'] .button--button_hwtape {
+  border-color: #ef5400 !important;
+  background: #ef5400 !important;
+  color: #fff !important;
+}
+[id$='__hero_hwsale'] .button--button_hwtape::before {
+  background-image: url("/cdn/shop/files/somna-halloween-pumpkin-navy.png");
+  filter: brightness(0) invert(1);
+}
+/* Phones: one "Shop the sale" button (Figma mobile); the two product buttons are desktop only */
+[id$='__hero_hwsale'] :is(.button--button_hwnasal, .button--button_hwtape) {
+  display: none;
+}
+
+/* ---------- Sale products (sections/somna-sale-product.liquid) ---------- */
+.somna-sp {
+  position: relative;
+  display: block;
+  overflow-x: clip;
+  padding: 32px 16px 40px;
+  background: var(--sp-bg, #fff);
+  color: #0a1a4a;
+}
+.somna-sp--web-left {
+  padding-top: 88px; /* room for the web + spider above the image */
+}
+.somna-sp--web-right {
+  padding-top: 56px;
+}
+.somna-sp-section + .somna-sp-section .somna-sp {
+  padding-top: 8px;
+}
+.somna-sp-section + .somna-sp-section .somna-sp--web-right {
+  padding-top: 56px;
+}
+.somna-sp__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 592px;
+  margin-inline: auto;
+  scroll-margin-top: 110px; /* clears the sticky header when a hero button jumps here */
+}
+.somna-sp__image-link {
+  display: block;
+}
+.somna-sp__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgb(10 26 74 / 0.12);
+}
+.somna-sp__intro {
+  padding: 14px 4px 0;
+}
+.somna-sp__rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #0a1a4a;
+}
+.somna-sp__stars {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #f5b400;
+  background: linear-gradient(90deg, #f5b400 var(--sp-rating, 100%), #d6dbe8 var(--sp-rating, 100%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.somna-sp__eyebrow {
+  margin: 0 0 4px;
+  font-family: var(--font-body--family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+.somna-sp__heading {
+  margin: 0 0 8px;
+  font-family: var(--headfont, var(--font-heading--family));
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: #0a1a4a;
+}
+.somna-sp__text,
+.somna-sp__text p {
+  margin: 0;
+  max-width: 34em;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #0a1a4a;
+}
+/* Buy box panel: same peach panel + orange border as the product page */
+.somna-sp__panel {
+  margin-top: 20px;
+  padding: 16px;
+  border: 2px solid #ef5400;
+  border-radius: 24px;
+  background: #fff2e3;
+}
+.somna-sp .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #ff7a12;
+  --button-color: #faf2df;
+  width: 100%;
+  height: 41px !important; /* beats the shared buy-box height */
+  border-radius: 999px;
+  background-color: #ff7a12;
+  color: #faf2df;
+  font-weight: 700;
+  box-shadow: 0 4px 0 #b8430b;
+}
+.somna-sp .button[id^='BuyButtons-ProductSubmitButton-']:hover {
+  --button-background-color: #f06d08;
+  background-color: #f06d08;
+}
+.somna-sp__details {
+  display: block;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  color: #0a1a4a;
+}
+.somna-sp__details:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Halloween web + spider (homepage animation, somna-motion.css section 15): placement only.
+   Phones: small web in the top corner, the spider stops above the image. */
+.somna-sp > .somna-ess__web--left {
+  --web-w: 96px;
+  --hang: 120;
+}
+.somna-sp > .somna-ess__web--right {
+  --rweb-w: 90px;
+}
+/* ==================== END HALLOWEEN SALE PAGE ==================== */
