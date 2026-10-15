@@ -142,13 +142,14 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 6,
-                "padding-block-end": 4,
+                "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
                 "font_desktop": "",
                 "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": ""
+                "line_height_desktop": "1",
+                "letter_spacing_desktop": "",
+                "padding-block-start-desktop": 30
               },
               "blocks": {}
             },
