@@ -254,7 +254,12 @@
         <ul class="somna-perks-list">
           <li>
             <span class="somna-perk-check" aria-hidden="true">✓</span>
-            <b><span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo · <span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every order</b>
+            <b><span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo · 
+            
+            {%  if product.handle contains 'nasal-strips' and product.handle contains 'mouth-tape' %}
+            <span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every order</b>
+            {% endif %}
+
           </li>
           <li>
             <span class="somna-perk-check" aria-hidden="true">✓</span>
