@@ -216,6 +216,23 @@
 </script>
 {%- endif -%}
 
+{% stylesheet %}
+  /* Halloween Sale page, desktop (2026-10-15): the same 1280px content width as the homepage
+     (hero, trust bar, products and footer), and the two products line up with that width.
+     Only on the Halloween Sale page template; tablets and phones are unchanged. */
+  @media screen and (min-width: 990px) {
+    #MainContent[data-template='page.halloween-sale'],
+    body:has(#MainContent[data-template='page.halloween-sale']) .shopify-section-group-footer-group {
+      --page-content-width: 80rem;
+      --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__inner {
+      max-width: calc(var(--page-content-width) / 2 - clamp(12px, 1.8vw, 26px));
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Somna sale product",
