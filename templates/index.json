@@ -1962,7 +1962,7 @@
       ],
       "custom_css": [
         ".wave-container.bottom {background-position: top; bottom: 0;}",
-        "@media screen and (max-width: 749px) {.layered-slideshow__container[size=auto] {height: auto; position: relative; z-index: 111; }}"
+        "@media screen and (max-width: 749px) {.layered-slideshow__container[size=\"auto\"] {position: relative; z-index: 111; }}"
       ],
       "name": "Layered Image with Text",
       "settings": {
