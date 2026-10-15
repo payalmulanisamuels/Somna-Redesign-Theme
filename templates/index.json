@@ -287,7 +287,7 @@
                 "font": "var(--font-body--family)",
                 "font_size": "0.75rem",
                 "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_desktop": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
