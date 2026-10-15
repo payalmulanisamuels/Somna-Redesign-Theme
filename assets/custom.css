@@ -2417,7 +2417,7 @@ margin-top: 7px;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box {
     background: #FFF9EE;
