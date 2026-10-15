@@ -99,6 +99,120 @@
 
  
 
+{% stylesheet %}
+/* Somna PDP, desktop only (990px and up), 2026-10-15: the Problem / Solution, How It Works,
+     How To Use, Somna vs Others and "Breathe Easier. Sleep Deeper." sections were sized by fixed
+     desktop rules (150px / 90px paddings, full-width graphics that keep growing with the screen,
+     50px banner heading). Here each one gets a content width that scales with the viewport and
+     stops growing on big screens, so text and graphics stay in proportion at 1280-1920px.
+     Paddings keep room for the 95px wave edges that overlap from the neighbouring sections.
+     Phones and tablets (under 990px) are untouched. */
+  @media screen and (min-width: 990px) {
+    /* 1. Problem / Solution: two columns in a centred block, pictures fill their column */
+    .template-product .hz-prob-sol-section {
+      padding-bottom: clamp(36px, 3.4vw, 56px);
+    }
+
+    .template-product .hz-prob-sol-section .hz-ps-container {
+      gap: clamp(24px, 3vw, 48px);
+      align-items: flex-start;
+      max-width: min(100%, clamp(760px, 62vw, 980px));
+      margin-inline: auto;
+    }
+
+    .template-product .hz-prob-sol-section .hz-ps-arrow-wrapper {
+      align-self: center;
+      margin-top: -3.5em;
+    }
+
+    .template-product .hz-prob-sol-section .pro_solu_image {
+      width: 100%;
+      margin-bottom: 14px;
+    }
+
+    .template-product .hz-prob-sol-section .pro_solu_image img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .template-product .hz-prob-sol-section h3.hz-ps-tag {
+      margin-bottom: 8px;
+      font-size: clamp(20px, 1.6vw, 24px);
+    }
+
+    .template-product .hz-prob-sol-section .hz-ps-text {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.35;
+    }
+
+    /* 2. How It Works: text + picture in a centred block, picture capped */
+    .template-product .hz-hiw-section {
+      padding: clamp(110px, 8.3vw, 130px) 0 clamp(36px, 3.4vw, 56px);
+    }
+
+    .template-product .hz-hiw-section .hz-hiw-single-row {
+      gap: clamp(32px, 4vw, 64px);
+      max-width: min(100%, clamp(760px, 62vw, 980px));
+      margin-inline: auto;
+    }
+
+    .template-product .hz-hiw-section .hz-hiw-single-media img {
+      width: 100%;
+      max-width: clamp(280px, 24vw, 380px);
+      height: auto;
+    }
+
+    .template-product .hz-hiw-section .hz-hiw-single-desc {
+      font-size: clamp(16px, 1.25vw, 19px);
+      line-height: 1.4;
+    }
+
+    /* 3. How To Use: less empty space above and below, slightly smaller step and note text */
+    .template-product .steps-section {
+      padding: clamp(48px, 4.4vw, 72px) 0;
+    }
+
+    .template-product .steps-section h3.step-title {
+      font-size: clamp(16px, 1.25vw, 19px);
+    }
+
+    .template-product .steps-section p.steps-subheading-bottom {
+      margin-top: clamp(20px, 2vw, 32px);
+      font-size: clamp(17px, 1.4vw, 21px);
+    }
+
+    /* 4. Somna vs Others (hero with the comparison picture): picture in a centred block that
+       stops growing, less padding (the top keeps room for How To Use's bottom wave) */
+    .template-product [id$='__hero_Djj4xR'] .hero__container {
+      padding: clamp(104px, 8vw, 120px) 0 clamp(28px, 3vw, 48px);
+    }
+
+    .template-product [id$='__hero_Djj4xR'] .hero__media-grid {
+      width: 100%;
+      max-width: clamp(720px, 62vw, 980px);
+      margin-inline: auto;
+    }
+
+    /* 5. "Breathe Easier. Sleep Deeper." banner: picture capped at 1200px wide and centred,
+       heading and button scaled to it */
+    .template-product .hz-banner-section .banner-container {
+      max-width: min(100%, clamp(900px, 76vw, 1200px));
+      margin-inline: auto;
+    }
+
+    .template-product .hz-banner-section h2.hz-banner-heading {
+      font-size: clamp(30px, 2.9vw, 44px);
+    }
+
+    .template-product .hz-banner-section a.hz-banner-btn {
+      margin-top: clamp(8px, 1vw, 16px);
+      padding: clamp(10px, 1vw, 16px) clamp(24px, 2.2vw, 36px);
+      font-size: clamp(16px, 1.4vw, 22px);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "How It Works (Dynamic)",
