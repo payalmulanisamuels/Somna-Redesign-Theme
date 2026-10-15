@@ -25,7 +25,8 @@
   - Review card: rating + count come from the custom.custom_review_rating_review_count
     product metafield (e.g. "4.6 <svg…> (248)"); the quote is set per product below.
   - Bundle card: shown for single-variant products (The Color Set, Season Bundle).
-  Styles: assets/somna-buybox.css.
+  Styles: custom.css (phones + shared) and somna-home-desktop.css (tablet/desktop),
+  moved there from assets/somna-buybox.css on 2026-10-15.
 {%- endcomment -%}
 {%- liquid
   assign somna_review_raw = product_resource.metafields.custom.custom_review_rating_review_count.value | default: '' | strip
@@ -42,8 +43,10 @@
   assign somna_bundle_title = ''
   assign somna_bundle_sub = ''
   case product_resource.handle
-    when 'nasal-strips', 'mouth-tape'
+    when 'nasal-strips'
       assign somna_quote = 'Comfortable all night and they actually stay put. — Jessica M.'
+    when 'mouth-tape'
+      assign somna_quote = 'Felt strange the first night, now I can’t sleep without it. — Ryan T.'
     when 'sleep-bundle'
       assign somna_quote = 'Love having both in one order — the blue looks so clean. — Ashley K.'
     when 'the-colour-set'
@@ -395,9 +398,9 @@
       {% endif %}
     </div>
 
-    {% comment %} Bottom pills (Figma: SAVE 33% / 4th bag free) {% endcomment %}
+    {% comment %} Bottom pills (Figma: "XX% OFF" / 4th bag free). XX = real Autoship saving vs one-time price. {% endcomment %}
     {% if forloop.index == 2 and somna_save_pct > 0 %}
-      <span class="variant-card__bottom-save-pill somna-tier__pill">SAVE {{ somna_save_pct }}%</span>
+      <span class="variant-card__bottom-save-pill somna-tier__pill">{{ somna_save_pct }}% OFF</span>
     {% elsif forloop.index >= 3 %}
       <span class="variant-card__bottom-save-pill somna-tier__pill">4th {{ somna_unit }} free</span>
     {% endif %}
