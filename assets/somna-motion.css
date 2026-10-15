@@ -1427,7 +1427,7 @@ END OF SWITCHED-OFF SECTION 11 */
    - the four columns rise gently into place, one after another, and the thin
      dividers draw downward
    - a slow breath (about 4s in, 4s out) travels across the four yellow icons,
-     left to right, with a soft honey glow behind each one
+     left to right (the honey glow behind each icon was removed 2026-10-15)
    - a honey crescent moon sits in the top-right corner, gently rocking
      (on desktop and tablet it rises into place as the section scrolls in)
    - a few honey fireflies drift and fade in the cream background
@@ -1456,19 +1456,6 @@ END OF SWITCHED-OFF SECTION 11 */
 
   45% {
     scale: 1.06;
-  }
-}
-
-@keyframes sm-sm-glow {
-  0%,
-  100% {
-    opacity: 0;
-    scale: 0.7;
-  }
-
-  45% {
-    opacity: 1;
-    scale: 1.15;
   }
 }
 
@@ -1522,8 +1509,7 @@ END OF SWITCHED-OFF SECTION 11 */
 /* ---- Decorations ---- */
 .shopify-section[id$='__section_ibM3ft'] .section::before,
 .shopify-section[id$='__section_ibM3ft'] .section::after,
-.shopify-section[id$='__section_ibM3ft'] .section-background::before,
-.shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
   content: '';
   position: absolute;
   pointer-events: none;
@@ -1559,18 +1545,6 @@ END OF SWITCHED-OFF SECTION 11 */
   filter: drop-shadow(0 0 12px rgb(240 210 122 / 0.7));
 }
 
-/* Soft honey glow behind each icon (breathes with it) */
-.shopify-section[id$='__section_ibM3ft'] .icon-block {
-  position: relative;
-}
-
-.shopify-section[id$='__section_ibM3ft'] .icon-block::before {
-  inset: -10px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(240 210 122 / 0.75) 0 40%, rgb(240 210 122 / 0) 70%);
-  opacity: 0;
-}
-
 .shopify-section[id$='__section_ibM3ft'] .icon-block__media {
   position: relative;
 }
@@ -1596,37 +1570,24 @@ END OF SWITCHED-OFF SECTION 11 */
     height: 20px;
     filter: drop-shadow(0 0 6px rgb(240 210 122 / 0.7));
   }
-
-  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
-    inset: -6px;
-  }
 }
 
 /* ---- Loops (all screen sizes) ---- */
 @media (prefers-reduced-motion: no-preference) {
-  .shopify-section[id$='__section_ibM3ft'] .icon-block__media,
-  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
-    animation: 8s ease-in-out 1.6s infinite;
-    animation-name: sm-sm-breathe;
-  }
-
-  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
-    animation-name: sm-sm-glow;
+  .shopify-section[id$='__section_ibM3ft'] .icon-block__media {
+    animation: sm-sm-breathe 8s ease-in-out 1.6s infinite;
   }
 
   /* The breath travels left to right: each column starts 0.9s after the one before */
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block__media,
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block::before {
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block__media {
     animation-delay: 2.5s;
   }
 
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block__media,
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block::before {
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block__media {
     animation-delay: 3.4s;
   }
 
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block__media,
-  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block::before {
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block__media {
     animation-delay: 4.3s;
   }
 
