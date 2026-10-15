@@ -40,9 +40,16 @@
     </div>
   {% endcapture %}
 
+  {%- comment -%}
+    Somna: `modal` = the cart always opens as a right-side slide-in overlay with a backdrop
+    (assets/theme-drawer.js), on desktop too, instead of squeezing the page under the header.
+    `no-persist` = it doesn't reopen by itself on the next page.
+  {%- endcomment -%}
   <theme-drawer
     id="cart-drawer"
     data-skip-node-update
+    modal
+    no-persist
   >
     <dialog
       ref="panel"
@@ -137,6 +144,24 @@
 {%- endif -%}
 
 {% stylesheet %}
+  /* Somna: no page scrolling behind the open cart drawer (only while the cart is open). On desktop
+     the page scrolls inside .page-wrapper; its scrollbar space is kept so nothing shifts sideways. */
+  html:has(#cart-drawer[open]),
+  html:has(#cart-drawer[open]) body {
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 990px) {
+    html:has(#cart-drawer[open]) .page-wrapper {
+      overflow: hidden;
+      scrollbar-gutter: stable;
+    }
+  }
+
+  #cart-drawer .theme-drawer__dialog {
+    overscroll-behavior: contain;
+  }
+
   cart-drawer-component {
     --cart-drawer-padding: var(--theme-drawer-padding);
     --font-paragraph--line-height: 1;
