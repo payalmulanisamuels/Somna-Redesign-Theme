@@ -354,15 +354,6 @@
   :where(.template-product) .product-details :is([class*='text_Da8zQC'], [class*='text_VDdr8z']) {
     display: none !important;
   }
-  /* Trust bar text size (Figma 29px at 1440px) */
-  :where(.template-product) [id$='__section_zELtyM'] .text-block,
-  :where(.template-product) [id$='__section_zELtyM'] .text-block > * {
-    font-size: clamp(14px, 2vw, 29px);
-  }
-  :where(.template-product) [id$='__section_zELtyM'] .divider__line {
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-  }
   /* "Get 10% off your first order." — Figma desktop image */
   [id$='__footer_m9NzUG'] .section {
     background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter.png?v=1792041427&width=2000") !important;
@@ -516,17 +507,12 @@
     border-radius: 999px;
   }
 
-  /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block,
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block > * {
-    font-size: 13px;
-    line-height: 1.25;
-  }
+  /* ---------- Trust bar (all pages that have it; colours, font and text size: custom.css) ---------- */
  .icon-block__media {
     width: 26px !important; /* overrides the icon block's inline width */
     height: auto;
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  .shopify-section[id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 10px;
   }
 
@@ -923,15 +909,11 @@
     font-size: 16px;
   }
 
-  /* ---------- Trust bar ---------- */
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop,
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .text-block.custom-font-size-desktop > * {
-    font-size: clamp(14px, 1.15vw, 16px);
-  }
+  /* ---------- Trust bar (all pages that have it) ---------- */
    .icon-block__media {
     width: clamp(50px, 2.4vw, 50px) !important; /* overrides the icon block's inline width */
   }
-  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+  .shopify-section[id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
     gap: 14px;
   }
 
