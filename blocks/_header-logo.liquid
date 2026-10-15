@@ -246,6 +246,92 @@
     scale: none !important;
     transition: none !important;
   }
+  /* Somna (2026-10-15): Halloween "Sale" link in the header menu (the link set as "Highlighted link"
+     in the menu block). The theme's jack-o'-lantern (the one on the logo's "o") sits before the word
+     and gives a little wobble every few seconds, the word glows softly like a lantern, and on hover
+     the pumpkin hops. Visitors who prefer reduced motion see a still pumpkin. */
+  .menu-list__link--highlight .menu-list__link-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+  }
+
+  .menu-list__link--highlight .menu-list__link-title::before {
+    content: '';
+    flex: none;
+    width: 1.3em;
+    height: 1.3em;
+    background: url('/cdn/shop/files/somna-halloween-pumpkin-lantern.png?width=80') center / contain no-repeat;
+    transform-origin: 50% 90%;
+  }
+
+  @keyframes somna-sale-wobble {
+    0%, 60%, 100% {
+      rotate: 0deg;
+      translate: 0 0;
+    }
+
+    66% {
+      rotate: -14deg;
+      translate: 0 -2px;
+    }
+
+    74% {
+      rotate: 12deg;
+      translate: 0 -3px;
+    }
+
+    82% {
+      rotate: -7deg;
+      translate: 0 -1px;
+    }
+
+    90% {
+      rotate: 3deg;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes somna-sale-glow {
+    0%, 100% {
+      text-shadow: 0 0 0 rgb(255 152 69 / 0);
+    }
+
+    50% {
+      text-shadow: 0 0 10px rgb(255 152 69 / 0.8);
+    }
+  }
+
+  @keyframes somna-sale-hop {
+    0%, 100% {
+      rotate: 0deg;
+      translate: 0 0;
+    }
+
+    40% {
+      rotate: -10deg;
+      translate: 0 -5px;
+    }
+
+    70% {
+      rotate: 6deg;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-list__link--highlight .menu-list__link-title {
+      animation: somna-sale-glow 3.2s ease-in-out infinite;
+    }
+
+    .menu-list__link--highlight .menu-list__link-title::before {
+      animation: somna-sale-wobble 3.2s ease-in-out infinite;
+    }
+
+    .menu-list__link--highlight:hover .menu-list__link-title::before {
+      animation: somna-sale-hop 0.6s ease-in-out infinite;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
