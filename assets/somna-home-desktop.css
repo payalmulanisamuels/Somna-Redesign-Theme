@@ -719,7 +719,7 @@
 
   /* ---------- The Sleep Bundle card ---------- */
   #MainContent[data-template="index"] .somna-sleep-bundle {
-    padding: 56px 40px 72px;
+    padding: 56px 40px 0px;
   }
 
   /* ---------- FAQ ---------- */
