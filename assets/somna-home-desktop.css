@@ -20,6 +20,333 @@
    inline widths written by theme blocks.
    ===================================================================== */
 
+/* =====================================================================
+   PRODUCT & COLLECTION PAGES — tablet/desktop blocks moved here on 2026-10-15
+   from assets/product-col-custom.css and assets/somna-buybox.css (no longer loaded).
+   Kept at the top of this file so the rules below still win, exactly as before.
+   Scoped to the product / collection pages with :where(...) (no extra specificity).
+   ===================================================================== */
+/* ---- from product-col-custom.css ---- */
+@media(min-width:768px){
+  :where(.template-product, .template-collection, .template-list-collections) .hero__container {
+    padding: 150px 0 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-hiw-section {
+    padding: 150px 0 80px;
+  }
+   :where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-desc {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card-title {
+    font-size: 40px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-hiw-card {
+    padding: 25px 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-ps-text{
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) h3.hz-ps-tag {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-prob-sol-section {
+    padding: 0 0 70px 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .hz-hiw-single-desc {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) h2.hz-hiw-single-title {
+    font-size: 32px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .steps-section{
+    padding: 90px 0;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections) h2.hz-hiw-single-title {
+    font-size: 32px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) h3.step-title {
+    font-size: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) p.steps-subheading-bottom {
+    font-size: 24px;
+    margin-top: 40px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__title {
+    font-size: 22px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__sub-title {
+    font-size: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__badge {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__inner {
+    padding-top: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__gift {
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-option__button-label .variant-card__gift svg {
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .variant-card__img {
+    height: 65px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-banner {
+    font-size: 13px;
+    padding: 5px 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-title {
+    font-size: 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-per-night {
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-guarantee-text {
+    font-size: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-policy-link {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-strike-price {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-active-price {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-save-pill {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list li svg {
+    width: 12px;
+    height: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-perks-list {
+    font-size: 15px;
+    gap: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-frequency-dropdown {
+    font-size: 15px;
+    padding: 10px 23px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-dropdown-wrap:after {
+    width: 13px;
+    right: 23px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-box-inner {
+    padding: 10px 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .button[id^=BuyButtons-ProductSubmitButton-] {
+    height: 57px !important;
+    font-size: 25px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .svg-wrapper.add-to-cart-icon svg,:where(.template-product, .template-collection, .template-list-collections) .svg-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-guarantee-text {
+    font-size: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-policy-link {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span {
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-header span:last-child {
+    max-width: 115px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-timeline-line svg {
+    width: 200px;
+    height: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .product-information__grid {
+    margin-bottom: 90px;
+  }
+ 
+
+
+}
+
+/* ---- from somna-buybox.css ---- */
+@media (min-width: 768px) {
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review {
+    margin-bottom: 20px;
+    padding: 12px 16px 10px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__top {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-review__quote {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-color-option {
+    margin-bottom: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+    gap: 12px;
+    padding-top: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+    padding: 4px 6px 24px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__badge {
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-tier__price {
+    margin-top: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-tier__night {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-tier__was {
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-tier__perk {
+    gap: 6px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-tier__icon,
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+    width: 17px;
+    height: 17px;
+    max-width: 17px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-picker .somna-tier .somna-tier__pill {
+    bottom: -5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card {
+    gap: 18px;
+    margin-bottom: 16px;
+    padding: 12px 18px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__img {
+    max-height: 130px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__title {
+    font-size: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-bundle-card__sub {
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box {
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+    padding: 16px 18px 4px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+    padding-bottom: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-radio-bullet {
+    width: 20px;
+    height: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+    width: 9px;
+    height: 9px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-save-pill {
+    padding: 1px 8px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-gifts {
+    gap: 8px;
+    margin-top: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-gift {
+    gap: 5px;
+    min-height: 64px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-gift__icon {
+    width: 22px;
+    height: 22px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-onetime-save {
+    margin-left: 28px;
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+    padding: 14px 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex {
+    gap: 5px;
+    margin: 4px 0 10px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-flex__icon {
+    width: 15px;
+    height: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections) .somna-buybox-delivery {
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 15px;
+  }
+}
+
+/* ---------- HALLOWEEN 2026 — product page buy box, tablet/desktop (mobile + colours: custom.css) ---------- */
+@media screen and (min-width: 750px) {
+  :where(.template-product) .somna-pdp-sale-pill {
+    margin-bottom: 16px;
+    padding: 12px 24px;
+    font-size: clamp(15px, 1.4vw, 20px);
+  }
+  /* Figma desktop: sub-headline + description under the images; the copies in the details column are hidden */
+  :where(.template-product) .somna-pdp-intro {
+    display: block;
+    margin-top: 20px;
+    color: #0a1a4a;
+  }
+  :where(.template-product) .somna-pdp-intro__headline {
+    margin: 0 0 6px;
+    font-family: var(--headfont, var(--font-heading--family));
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.15;
+  }
+  :where(.template-product) .somna-pdp-intro__text {
+    margin: 0;
+    max-width: 620px;
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.45;
+  }
+  :where(.template-product) .product-information:has(.somna-pdp-intro) :is(.text-block--text_Da8zQC, .text-block--text_VDdr8z) {
+    display: none;
+  }
+  /* Product name above the buy box (blue eyebrow) */
+  :where(.template-product) .text-block.text-block--text_xrnftG,
+  :where(.template-product) .text-block.text-block--text_xrnftG > * {
+    font-size: clamp(22px, 2vw, 30px);
+  }
+  :where(.template-product) .somna-onetime-pill {
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  :where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+    box-shadow: 0 6px 0 #b8430b;
+  }
+}
+/* ---------- END HALLOWEEN 2026 — product page ---------- */
+/* ==================== END PRODUCT & COLLECTION PAGES ==================== */
+
+
 @media screen and (min-width: 750px) {
 
     .bundle-card__title {
