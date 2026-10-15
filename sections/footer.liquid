@@ -122,6 +122,14 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
     #MainContent .footer-photo.footer-photo > .footer-content {
       padding-block: 22px 40px;
     }
+
+    /* Phones: Figma mobile photo (3316:11976 "image 38", the Tape pack by the pumpkins) on every
+       page that has this banner; the pack stays in view on the right, the copy sits on the dark left */
+    #MainContent [id$='__footer_m9NzUG'] .section.footer-photo {
+      background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter-mobile-tape.png?v=1792060111&width=1200") !important;
+      background-size: cover !important;
+      background-position: 72% center !important;
+    }
   }
 
   @media screen and (min-width: 750px) {
