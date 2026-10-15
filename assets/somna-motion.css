@@ -1692,8 +1692,9 @@ END OF SWITCHED-OFF SECTION 11 */
    Without the script, or with reduced motion: finished web, spider hanging,
    pumpkin smiling, nothing moves.
    The same webs and spider are used above "The Sleep Bundle" card on the homepage
-   (sections/sleep-bundle.liquid adds .somna-sb--halloween); the rules below are shared,
-   and the Sleep Bundle placement is at the end of this section.
+   (sections/sleep-bundle.liquid adds .somna-sb--halloween) and, on the product page, in the
+   Problem / Solution section (sections/problem-solution.liquid adds .somna-ps--halloween);
+   the rules below are shared, and each placement is at the end of this section.
    Sizes: --web-w is 122px on phones; somna-home-desktop.css sets the desktop width.
    Motion only (transform / rotate / translate / opacity / stroke-dashoffset):
    no layout shift and nothing can be clicked.
@@ -1711,7 +1712,7 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
-:is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__web--left {
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--left {
   width: var(--web-w);
   aspect-ratio: auto;
   background-image: none; /* replaces the old web-with-spider background picture */
@@ -1729,7 +1730,7 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
-:is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__web--right {
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--right {
   width: var(--rweb-w);
   aspect-ratio: auto;
   background-image: none; /* replaces the old right web background picture */
@@ -1786,7 +1787,7 @@ END OF SWITCHED-OFF SECTION 11 */
 }
 
 @media screen and (min-width: 750px) {
-  :is(.somna-ess--halloween, .somna-sb--halloween) .somna-spider__thread {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-spider__thread {
     left: -0.75px;
     width: 1.5px;
   }
@@ -1827,79 +1828,79 @@ END OF SWITCHED-OFF SECTION 11 */
 }
 
 /* ---- Waiting to scroll into view (only when the script runs) ---- */
-:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m {
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
   stroke-dashoffset: 1;
 }
 
-:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m--all,
-:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .somna-spider {
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
   opacity: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   /* Step 1: the web draws itself */
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m {
     animation: somna-web-draw var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.35, 1) var(--t, 0s) both;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--frame {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--frame {
     --d: 0.4s;
     --t: 0s;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--ring {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--ring {
     animation-timing-function: cubic-bezier(0.3, 0.05, 0.6, 1);
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--all {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--all {
     animation: somna-web-fade 0.3s ease 1.4s both;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__web--right .hw-m--all {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__web--right .hw-m--all {
     animation-delay: 1.6s;
   }
 
   /* Step 2: the spider lowers itself; Step 3: pause, then a gentle swing */
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider {
     animation: somna-spider-appear 0.25s ease 1.5s both, somna-spider-sway 2.6s ease-in-out 3.75s 1 both;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider__thread {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__thread {
     animation: somna-spider-thread 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider__body {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__body {
     animation: somna-spider-drop 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
   }
 
   /* Pumpkin: hop, land, smile */
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk svg {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk svg {
     animation: somna-pk-hop 7s ease-in-out 1.6s infinite;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__smile {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__smile {
     animation: somna-pk-smile 7s ease-out 1.6s infinite;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__happy {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__happy {
     animation: somna-pk-on 7s linear 1.6s infinite;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__calm,
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__eyes {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__calm,
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__eyes {
     animation: somna-pk-off 7s linear 1.6s infinite;
   }
 
   /* "70% OFF" pumpkin badges: a short shake, repeated every 4.5s (the second card follows a beat later) */
-  :is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__badge {
     transform-origin: 50% 12%;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__badge {
     animation: somna-badge-shake 4.5s ease-in-out 1s infinite;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
     animation-delay: 1.35s;
   }
 }
@@ -2145,12 +2146,12 @@ END OF SWITCHED-OFF SECTION 11 */
 
 /* Reduced motion: finished web, spider hanging, pumpkin smiling, badges still */
 @media (prefers-reduced-motion: reduce) {
-  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
     stroke-dashoffset: 0;
   }
 
-  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m--all,
-  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .somna-spider {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
     opacity: 1;
   }
 
@@ -2211,33 +2212,29 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
-/* ---- Trust bar under the hero (Free shipping / 30-Night guarantee / ...), homepage, desktop and tablet ----
-   Halloween look from the design: a peach-to-orange gradient across the bar, the drippy display font
-   (Rubik Wet Paint) in black, and navy dividers. Phones keep the finished mobile bar as it is.
-   Sizes and spacing still come from somna-home-desktop.css; only colour and font change here. */
-@media screen and (min-width: 750px) {
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .section-background {
-    background: linear-gradient(90deg, #f8ae86 0%, #f09a6b 35%, #eb7c40 68%, #e5621c 100%);
-  }
+/* ---- Problem / Solution (sections/problem-solution.liquid, product page): the left web + spider ----
+   Figma Nasal Strips ("image 194"): the web hangs from the section's top-left corner, 31.3% of the
+   screen wide (451px at 1440px, 123px at 393px), with the spider resting beside the Problem card.
+   Same drawing / dropping animation as the homepage. The cards sit above the web. */
+.hz-prob-sol-section.somna-ps--halloween {
+  position: relative;
+  overflow-x: clip;
+}
 
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .section {
-    background: transparent;
-  }
+.somna-ps--halloween > .somna-ess__web--left {
+  --web-w: clamp(110px, 31.3vw, 451px);
+  --hang: 341;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
 
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block,
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block > *,
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block strong {
-    font-family: var(--font-display--family);
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    color: #000;
-  }
-
-  #MainContent[data-template='index'] [id$='__section_zELtyM'] .divider__line {
-    border-color: #0a1a4a;
-    border-right-width: 2px;
-    border-bottom-width: 2px;
-  }
+.somna-ps--halloween > .section {
+  position: relative;
+  z-index: 2;
 }
 
 /* ---- "Or save with a bundle" on the homepage: the old floating strip, tape and dots
