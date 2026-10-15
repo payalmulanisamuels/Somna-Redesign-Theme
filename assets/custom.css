@@ -3920,7 +3920,6 @@ margin-top: 7px;
   font-family: var(--font-display--family);
 }
 .shopify-section[id$='__section_zELtyM'] .icon-block__media {
-  width: clamp(18px, 4.9vw, 71px) !important; /* Figma icon size (71px at 1440px); beats the shared icon widths */
   height: auto;
 }
 
