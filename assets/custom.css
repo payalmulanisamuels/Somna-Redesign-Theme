@@ -2035,6 +2035,7 @@ a.somna-view-all {
   width: 122px;
   aspect-ratio: 439 / 620;
   background-image: var(--hw-web-left);
+  z-index: 1;
 }
 .somna-ess__web--right {
   right: 0;
