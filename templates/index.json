@@ -1991,7 +1991,7 @@
         "per_night_text": "3+1 sets. $1.46/night",
         "button_label": "See the Breathe Bundle",
         "button_variant": "Breathe",
-        "section_bg": "#ffffff",
+        "section_bg": "rgba(0,0,0,0)",
         "card_bg": "#ffffff",
         "border_color": "#0a1a4a",
         "accent_color": "#0b57e3",
