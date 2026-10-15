@@ -343,6 +343,31 @@
     box-shadow: 0 6px 0 #b8430b;
   }
 }
+/* ---------- Figma fixes 2026-10-15 — product page, tablet/desktop ---------- */
+@media screen and (min-width: 750px) {
+  /* The gallery no longer sticks while scrolling, so the text under the images can't slide over the thumbnails */
+  :where(.template-product) .product-information__media media-gallery.sticky-content {
+    position: relative;
+    top: auto;
+  }
+  /* Headline + description show once, under the images (Figma); hide the copies in the details column */
+  :where(.template-product) .product-details :is([class*='text_Da8zQC'], [class*='text_VDdr8z']) {
+    display: none !important;
+  }
+  /* Trust bar text size (Figma 29px at 1440px) */
+  :where(.template-product) [id$='__section_zELtyM'] .text-block,
+  :where(.template-product) [id$='__section_zELtyM'] .text-block > * {
+    font-size: clamp(14px, 2vw, 29px);
+  }
+  :where(.template-product) [id$='__section_zELtyM'] .divider__line {
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+  /* "Get 10% off your first order." — Figma desktop image */
+  [id$='__footer_m9NzUG'] .section {
+    background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter.png?v=1792041427&width=2000") !important;
+  }
+}
 /* ---------- END HALLOWEEN 2026 — product page ---------- */
 /* ==================== END PRODUCT & COLLECTION PAGES ==================== */
 
