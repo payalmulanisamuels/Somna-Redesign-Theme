@@ -10,12 +10,19 @@
   `custom.nights` variant metafield, then the `custom.nights` product metafield,
   falling back to variant position (1st = 30, 2nd = 60, 3rd+ = 120).
 
+  Halloween 2026: when the product's `custom.halloween_sale_text` metafield has a value
+  (e.g. "70% OFF"), the banner reads "HALLOWEEN: <value> + 3 FREE GIFTS ON YOUR FIRST ORDER"
+  and the third perk reads "Lock in your Halloween price on every delivery." The metafield is
+  display text only; every price, saving and % here comes from the real selling plans.
+  Products without the metafield keep the normal wording.
+
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
 {%- enddoc -%}
 
 {%- liquid
   assign current_var = product_resource.selected_or_first_available_variant
+  assign somna_hw_text = product_resource.metafields.custom.halloween_sale_text.value | strip
 
   assign has_selling_plans = false
   for v in product_resource.variants
@@ -173,7 +180,11 @@
       {% if one_time_selected %}hidden{% endif %}
     >
       <div class="somna-box-banner">
-        <span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- if somna_hw_text != blank -%}
+          HALLOWEEN: <span class="somna-box-banner__offer">{{ somna_hw_text | escape }}</span> + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- else -%}
+          <span class="somna-box-banner__offer"><span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF</span> + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- endif -%}
       </div>
       <div class="somna-box-top-row">
         <label class="somna-radio-label">
@@ -216,7 +227,11 @@
           </li>
           <li>
             <span class="somna-perk-check" aria-hidden="true">✓</span>
-            <b><span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every delivery, not just the first</b>
+            {%- if somna_hw_text != blank -%}
+              <span><b>Lock in your Halloween price</b> on every delivery.</span>
+            {%- else -%}
+              <b><span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every delivery, not just the first</b>
+            {%- endif -%}
           </li>
         </ul>
 
@@ -269,7 +284,8 @@
             </div>
           </div>
           <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
-            You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship
+            <span>You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship</span>
+            <span class="somna-onetime-pill"><span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF</span>
           </p>
         </div>
       </div>
