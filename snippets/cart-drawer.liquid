@@ -162,6 +162,36 @@
     overscroll-behavior: contain;
   }
 
+  /* Somna: dark overlay over the whole page behind the open cart (the theme's default backdrop is
+     only 15%). It is the dialog's own ::backdrop, so it sits directly under the drawer, covers the
+     full viewport, closes the cart when clicked, and is removed when the cart closes. It fades in
+     and out with the drawer's slide. */
+  #cart-drawer .theme-drawer__dialog::backdrop {
+    background: rgb(0 0 0 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    #cart-drawer .theme-drawer__dialog--opening::backdrop {
+      animation: somna-cart-backdrop-in var(--animation-speed) var(--animation-timing-fade-in);
+    }
+
+    #cart-drawer .theme-drawer__dialog--closing::backdrop {
+      animation: somna-cart-backdrop-out var(--animation-speed) var(--animation-timing-fade-out) forwards;
+    }
+  }
+
+  @keyframes somna-cart-backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes somna-cart-backdrop-out {
+    to {
+      opacity: 0;
+    }
+  }
+
   cart-drawer-component {
     --cart-drawer-padding: var(--theme-drawer-padding);
     --font-paragraph--line-height: 1;
