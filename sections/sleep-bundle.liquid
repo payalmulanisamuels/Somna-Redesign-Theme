@@ -275,7 +275,7 @@
     position: relative;
     display: block;
     max-width: 640px;
-    margin: 28px auto 0;
+    margin: 18px auto 0;
     padding: 28px 15px 20px;
     background: var(--ssb-card-bg);
     border: 2px solid var(--ssb-border);
@@ -491,6 +491,16 @@
       padding: 18px 24px;
       font-size: 20px;
     }
+  }
+
+  /* Halloween (homepage): the spider hangs in front of the card on phones and desktop, so the card
+     no longer hides its legs; the web itself stays behind the card as before. */
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+    z-index: auto !important;
+  }
+
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left .somna-spider {
+    z-index: 2;
   }
 {% endstylesheet %}
 
