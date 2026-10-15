@@ -2211,6 +2211,35 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
+/* ---- Trust bar under the hero (Free shipping / 30-Night guarantee / ...), homepage, desktop and tablet ----
+   Halloween look from the design: a peach-to-orange gradient across the bar, the drippy display font
+   (Rubik Wet Paint) in black, and navy dividers. Phones keep the finished mobile bar as it is.
+   Sizes and spacing still come from somna-home-desktop.css; only colour and font change here. */
+@media screen and (min-width: 750px) {
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .section-background {
+    background: linear-gradient(90deg, #f8ae86 0%, #f09a6b 35%, #eb7c40 68%, #e5621c 100%);
+  }
+
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .section {
+    background: transparent;
+  }
+
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block,
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block > *,
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .text-block strong {
+    font-family: var(--font-display--family);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #000;
+  }
+
+  #MainContent[data-template='index'] [id$='__section_zELtyM'] .divider__line {
+    border-color: #0a1a4a;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+}
+
 /* ---- "Or save with a bundle" on the homepage: the old floating strip, tape and dots
    (sections 6 and 9 above) are hidden here. They still show on the collection page. ---- */
 #MainContent[data-template='index'] section[class^='bundle-section-'] .custom-header::before,
