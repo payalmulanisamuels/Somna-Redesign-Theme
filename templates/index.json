@@ -2387,7 +2387,7 @@
                 "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
                 "font_size_tablet": "1.5rem",
-                "font_size_desktop": "2rem",
+                "font_size_desktop": "3rem",
                 "line_height": "tight",
                 "letter_spacing": "tight",
                 "case": "none",
