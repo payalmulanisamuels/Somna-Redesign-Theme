@@ -1819,6 +1819,9 @@
         "group_VC3f3X",
         "text_LNDHbX"
       ],
+      "custom_css": [
+        ".wave-container.bottom {bottom: -25px;}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
         "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
