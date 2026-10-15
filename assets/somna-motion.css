@@ -2208,7 +2208,7 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 
   #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
-    top: calc(-60px - 2.6vw);
+    top: calc(12px - 2.6vw);
   }
 }
 
