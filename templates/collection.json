@@ -1009,6 +1009,7 @@
           "type": "product_card",
           "settings": {
             "product": "nasal-strips",
+            "image": "shopify://shop_images/somna-halloween-card-strips.png",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -1020,6 +1021,7 @@
           "type": "product_card",
           "settings": {
             "product": "mouth-tape",
+            "image": "shopify://shop_images/somna-halloween-card-tape.png",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -1032,15 +1034,18 @@
         "product_card_Wtc9my",
         "product_card_WhXmqi"
       ],
-      "custom_css": [],
       "name": "Shop the essentials",
       "settings": {
         "heading": "Shop the essentials",
+        "eyebrow": "NO TRICK . ONLY TREATS",
+        "title_icon": "shopify://shop_images/somna-halloween-title-pumpkin.png",
+        "badge_text": "70% OFF",
+        "halloween_decor": true,
         "bg_color": "#ffffff",
-        "padding_top_mobile": 0,
+        "padding_top_mobile": 18,
         "padding_bottom_mobile": 30,
-        "padding_top": 0,
-        "padding_bottom": 40
+        "padding_top": 40,
+        "padding_bottom": 50
       }
     },
     "featured_bundle_grid_gb9fCH": {
