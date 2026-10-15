@@ -3879,3 +3879,47 @@ margin-top: 7px;
   color: #000;
 }
 /* ===================== END HALLOWEEN 2026 — PRODUCT PAGE ===================== */
+
+/* =====================================================================
+   PRODUCT PAGE — Figma fixes 2026-10-15 (Nasal Strips 3297:4934 desktop / 3297:5224 mobile)
+   Phones + all sizes here; tablet/desktop sizes in somna-home-desktop.css.
+   ===================================================================== */
+/* Trust bar under the buy box: flat orange gradient band, black Rubik Spray Paint, navy dividers */
+:where(.template-product) [id$='__section_zELtyM'] .section.bg_image {
+  top: 0;
+  height: auto;
+  min-height: clamp(35px, 9.5vw, 137px);
+  align-content: center;
+  background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important;
+}
+:where(.template-product) [id$='__section_zELtyM'] .text-block,
+:where(.template-product) [id$='__section_zELtyM'] .text-block > *,
+:where(.template-product) [id$='__section_zELtyM'] .text-block strong {
+  font-family: var(--font-display-spray--family);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+}
+:where(.template-product) [id$='__section_zELtyM'] .divider__line {
+  border-color: #0a1a4a;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+}
+
+/* How To Use: peach background and peach top/bottom waves (Figma #fff2e3) */
+:where(.template-product) .steps-section {
+  background-color: #fff2e3 !important; /* replaces the section's inline green */
+}
+:where(.template-product) .steps-section > .wave-container.top {
+  background-image: url("somna-hw-howto-top.svg") !important;
+}
+:where(.template-product) .steps-section > .wave-container.bottom {
+  background-image: url("somna-hw-howto-bottom.svg") !important;
+}
+
+/* "Get 10% off your first order." — Figma images, on every page that has this section */
+[id$='__footer_m9NzUG'] .section {
+  background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter-mobile.png?v=1792041619&width=1200") !important;
+  background-position: center !important;
+}
+/* ==================== END PRODUCT PAGE — Figma fixes ==================== */
