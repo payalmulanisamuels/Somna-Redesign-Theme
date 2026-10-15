@@ -375,6 +375,7 @@
         max-width: calc(100% - 90px);
         margin-top: 11px;
         line-height: 1.2;
+    min-height: 42px;
     }
 
     .bundle-card__price {
