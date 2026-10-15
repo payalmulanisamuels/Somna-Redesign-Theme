@@ -2194,7 +2194,7 @@ margin-top: 7px;
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .custom-header{
   margin-bottom: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
+:where(.template-collection, .template-list-collections, .somna-sp) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
     object-fit: cover !important;
     border-radius: 0 0 20px 20px;
 }
