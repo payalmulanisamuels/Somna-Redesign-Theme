@@ -35,7 +35,7 @@
     margin: 0 auto;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-section {
-    padding: 150px 0 80px;
+    padding: 150px 0 100px;
   }
    :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-desc {
     font-size: 16px;
