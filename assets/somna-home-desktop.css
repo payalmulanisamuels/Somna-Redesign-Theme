@@ -1521,14 +1521,21 @@
   .somna-sp-section + .somna-sp-section .somna-sp__inner {
     margin-inline: 0 auto;
   }
-  /* Webs: left web (with spider) in the first column's corner, right web in the second's;
+  /* Webs: same size as the homepage webs (left 150-300px with spider, right 160-333px);
      the spider hangs in the outer margin, beside the image, never over text or buttons */
   .somna-sp > .somna-ess__web--left {
-    --web-w: clamp(110px, 31.3vw, 451px);
+    --web-w: clamp(150px, 19vw, 300px);
     --hang: 341;
   }
   .somna-sp > .somna-ess__web--right {
-    --rweb-w: clamp(90px, 23.1vw, 333px);
+    --rweb-w: clamp(160px, 21vw, 333px);
+  }
+}
+/* Product page Problem / Solution web: same size as the homepage web from 750px
+   (overrides the larger placement in somna-motion.css; phones keep ~122px, like the homepage) */
+@media screen and (min-width: 750px) {
+  .hz-prob-sol-section.somna-ps--halloween > .somna-ess__web--left {
+    --web-w: clamp(150px, 19vw, 300px);
   }
 }
 /* ==================== END HALLOWEEN SALE PAGE ==================== */

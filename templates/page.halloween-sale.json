@@ -206,6 +206,20 @@
               },
               "blocks": {}
             },
+            "spacer_bMin6n": {
+              "type": "spacer",
+              "name": "t:names.spacer",
+              "settings": {
+                "size": "pixel",
+                "percent_size": 100,
+                "pixel_size": 20,
+                "custom_mobile_size": false,
+                "size_mobile": "percent",
+                "percent_size_mobile": 100,
+                "pixel_size_mobile": 120
+              },
+              "blocks": {}
+            },
             "button_hwtape": {
               "type": "button",
               "name": "t:names.button",
@@ -217,28 +231,6 @@
                 "custom_button_background": "#ef5400",
                 "custom_button_text": "#ffffff",
                 "custom_button_border": "#ef5400",
-                "link_text_color": "",
-                "font_size": "",
-                "font_size_tablet": "",
-                "font_size_desktop": "1.25rem",
-                "width": "fit-content",
-                "custom_width": 52,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            },
-            "button_hwshop": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Shop the sale →",
-                "link": "#hw-nasal-strips",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "custom_button_background": "#ffffff",
-                "custom_button_text": "#ff7300",
-                "custom_button_border": "#ffffff",
                 "link_text_color": "",
                 "font_size": "",
                 "font_size_tablet": "",
@@ -289,8 +281,8 @@
             "text_hwoff",
             "text_hwon",
             "button_hwnasal",
+            "spacer_bMin6n",
             "button_hwtape",
-            "button_hwshop",
             "text_hwperks"
           ]
         }
@@ -1217,6 +1209,8 @@
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
+            "font_size_tablet": "",
+            "font_size_desktop": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -1228,7 +1222,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -1248,7 +1246,7 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
-        "background_color": "#FFF9ED",
+        "background_color": "#fff9ed",
         "padding-block-start": 40,
         "padding-block-end": 80
       }
