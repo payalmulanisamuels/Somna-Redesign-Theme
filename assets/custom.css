@@ -2092,7 +2092,7 @@ a.somna-view-all {
   place-items: center;
   width: 46px;
   aspect-ratio: 164 / 161;
-  padding-top: 15px;
+  padding-top: 10px;
   background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/badge.png?v=1791982298") center / contain no-repeat;
   pointer-events: none;
 }
