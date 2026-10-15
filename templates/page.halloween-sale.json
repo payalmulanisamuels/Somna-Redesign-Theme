@@ -191,7 +191,7 @@
                 "label": "Shop Nasal Strips ↓",
                 "link": "#hw-nasal-strips",
                 "open_in_new_tab": false,
-                "style_class": "button",
+                "style_class": "button-custom",
                 "custom_button_background": "#ffffff",
                 "custom_button_text": "#ff7300",
                 "custom_button_border": "#ffffff",
@@ -202,7 +202,9 @@
                 "width": "fit-content",
                 "custom_width": 52,
                 "width_mobile": "fit-content",
-                "custom_width_mobile": 100
+                "custom_width_mobile": 100,
+                "icon": "shopify://shop_images/pumpkin-icon.png",
+                "icon_color": "original"
               },
               "blocks": {}
             },
@@ -227,7 +229,7 @@
                 "label": "Shop Mouth Tape ↓",
                 "link": "#hw-mouth-tape",
                 "open_in_new_tab": false,
-                "style_class": "button",
+                "style_class": "button-custom",
                 "custom_button_background": "#ef5400",
                 "custom_button_text": "#ffffff",
                 "custom_button_border": "#ef5400",
@@ -238,7 +240,9 @@
                 "width": "fit-content",
                 "custom_width": 52,
                 "width_mobile": "fit-content",
-                "custom_width_mobile": 100
+                "custom_width_mobile": 100,
+                "icon": "shopify://shop_images/white-pumpkin.png",
+                "icon_color": "original"
               },
               "blocks": {}
             },
