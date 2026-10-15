@@ -1271,7 +1271,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/IconContainer.png",
+                    "image_upload": "shopify://shop_images/leaf.svg",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
