@@ -256,7 +256,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop the sale →",
-                "link": "/collections/all",
+                "link": "shopify://pages/halloween-sale",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "custom_button_background": "#ffffff",
