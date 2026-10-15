@@ -1262,7 +1262,7 @@
 
 @media screen and (min-width: 1200px) {
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
-    padding-block: 72px 80px;
+    padding-block: 0px 80px;
   }
 }
 /* =====================================================================
