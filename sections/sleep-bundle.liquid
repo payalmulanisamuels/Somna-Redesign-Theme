@@ -502,6 +502,26 @@
   #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left .somna-spider {
     z-index: 2;
   }
+
+  /* Halloween (homepage), phones: webs and spider placed as in the Figma mobile design (3297:6613).
+     The section sits above the banner photo before it, so the webs show in full instead of being
+     covered by the photo. Left web right under the photo's curve, its spider hanging on the card's
+     left border beside the product picture; right web in the top-right corner. Tablet and desktop
+     are unchanged. */
+  @media screen and (max-width: 749px) {
+    #MainContent .somna-sleep-bundle.somna-sb--halloween {
+      z-index: 1;
+    }
+
+    #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+      top: -12px !important;
+      --hang: 341;
+    }
+
+    #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
+      top: -14px !important;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
