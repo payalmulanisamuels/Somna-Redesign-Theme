@@ -308,6 +308,7 @@
     margin-bottom: 16px;
     padding: 12px 24px;
     font-size: clamp(15px, 1.4vw, 20px);
+    margin-top: 40px;
   }
   /* Figma desktop: sub-headline + description under the images; the copies in the details column are hidden */
   :where(.template-product) .somna-pdp-intro {
