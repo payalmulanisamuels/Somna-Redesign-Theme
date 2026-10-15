@@ -432,6 +432,13 @@
     }
   }
 
+  /* Phones: no web above the Mouth Tape product (desktop keeps it) */
+  @media screen and (max-width: 749px) {
+    #MainContent[data-template='page.halloween-sale'] .somna-sp--web-right > .somna-ess__web--right {
+      display: none;
+    }
+  }
+
   /* The extra right-hand web on the Nasal Strips product (top-right corner, under the trust bar,
      like the Figma mobile design) is for phones only. */
   @media screen and (min-width: 750px) {
