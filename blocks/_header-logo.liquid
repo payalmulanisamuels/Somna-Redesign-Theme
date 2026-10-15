@@ -223,6 +223,29 @@
       height: clamp(36px, 5.6svh, 46px) !important;
     }
   }
+  /* Somna (2026-10-15): "Small essentials. Thoughtfully made." (homepage, section_ibM3ft) shows
+     completely still, by request: no moon, no floating dots, no glow or breathing on the icons,
+     no scroll-in entrance and no fade-up. Overrides section 12 of somna-motion.css (that file is
+     unchanged; delete this block to bring the motion back). Layout and colours are unchanged. */
+  .shopify-section[id$='__section_ibM3ft'] .section::before,
+  .shopify-section[id$='__section_ibM3ft'] .section::after,
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before,
+  .shopify-section[id$='__section_ibM3ft'] .icon-block::before {
+    content: none !important;
+    animation: none !important;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] :is(.icon-block__media, .custom-header > *, .group-block, .divider__line) {
+    animation: none !important;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .sm-reveal,
+  .shopify-section[id$='__section_ibM3ft'] .sm-reveal.sm-in {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+    transition: none !important;
+  }
 {% endstylesheet %}
 
 {% schema %}
