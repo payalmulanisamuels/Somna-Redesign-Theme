@@ -269,7 +269,9 @@
                 "width": "fit-content",
                 "custom_width": 52,
                 "width_mobile": "fit-content",
-                "custom_width_mobile": 100
+                "custom_width_mobile": 100,
+                "icon": "shopify://shop_images/pumpkin-icon.png",
+                "icon_color": "original"
               },
               "blocks": {}
             },
