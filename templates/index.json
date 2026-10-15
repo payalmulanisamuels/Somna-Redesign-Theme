@@ -1846,8 +1846,10 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 48,
+        "padding-block-start": 0,
         "padding-block-end": 48,
+        "padding-block-start-desktop": 48,
+        "padding-block-end-desktop": 48,
         "stack_desktop": false,
         "align_items_desktop": "",
         "content_width_desktop": ""
