@@ -89,6 +89,29 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
 </div>
 
 {% stylesheet %}
+  /* Somna footer, desktop and tablet (2026-10-15), matching the Figma desktop homepage
+     "Curved edge" (3316:8680) above the footer.
+     - Top wave: drawn with the exact Figma curve and scaled to the screen width (62px tall at
+       1440px), in the footer's navy (#071A4B, the section's background colour setting).
+     - Less navy above the logo: the footer content moves up so the "somna." logo sits just
+       under the curve, as in Figma. This cancels the section's top padding and rises 17px at 1440px.
+     Only the footer section that has a top wave is affected; phones (under 750px) are unchanged.
+     The section's settings are unchanged. Kept in this file, not somna-home-desktop.css, because
+     the footer shows on every page and that file only loads on some templates. */
+  @media screen and (min-width: 750px) {
+    .shopify-section-group-footer-group > .wave-container.top {
+      top: calc(1px - 62 / 1440 * 100vw);
+      height: calc(62 / 1440 * 100vw);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 0 1441.69 62' preserveAspectRatio='none'%3E%3Cpath d='M-2 45.3253C-2 45.3253 320.822 -44.5513 482.233 28.8174C695.002 129.699 841.74 -44.5513 1047.17 37.9884C1208.58 102.186 1340.65 -26.2091 1439.69 28.8174V62H-2Z' fill='%23071A4B'/%3E%3C/svg%3E") center top / 100% 100% no-repeat !important;
+    }
+
+    .shopify-section-group-footer-group:has(> .wave-container.top) .footer-content {
+      position: relative;
+      z-index: 2;
+      margin-block-start: calc(-1 * var(--padding-block-start, 0px) - 17 / 1440 * 100vw);
+    }
+  }
+
   .footer-content {
     contain: content;
     content-visibility: auto;
@@ -297,7 +320,7 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
                 "text": "t:html_defaults.get_exclusive_deals_and_early_access_to_new_products",
                 "width": "100%",
                 "alignment": "left",
-                "type_preset": "rte"
+                "type_preset": "h3"
               }
             }
           },
