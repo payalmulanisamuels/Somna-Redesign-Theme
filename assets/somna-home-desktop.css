@@ -1045,7 +1045,7 @@
   /* ---------- FAQ ---------- */
   #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
     gap: 24px;
-    padding-block: 64px 80px;
+    padding-block: 0px 80px;
   }
 
   /* ---------- Newsletter (shared) ----------
