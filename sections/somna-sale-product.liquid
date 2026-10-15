@@ -350,6 +350,70 @@
       font-weight: 800;
     }
   }
+  /* Halloween Sale page, phones (2026-10-15, Figma 3316:11976 updated single-column frame):
+     products in one centred column with Figma's insets and type sizes (at 393px: panel 28px from
+     the screen edge, image 7px inside that, text 16px inside; rating 9px, eyebrow 11px, headline
+     19.6px, text 13px, details link 14px), Figma's gaps (21px above the buy box, 18px below it,
+     about 60px between the two products), and the banner buttons 8px apart. Sizes follow the
+     screen width with small floors so 320px phones stay readable. Desktop/tablet unchanged. */
+  @media screen and (max-width: 749px) {
+    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .spacer-block {
+      height: 8px !important;
+      flex: none !important;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .text-block--text_hwon {
+      padding-block-end: 22px !important;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp {
+      padding-inline: 7.1vw;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp-section:has(+ .somna-sp-section) .somna-sp {
+      padding-bottom: 4px;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__media {
+      padding-inline: 1.8vw;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__intro {
+      padding: 12px 4.1vw 0;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__rating {
+      margin: 0 0 4px;
+      font-size: max(9px, 2.32vw);
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__eyebrow {
+      margin: 0 0 2px;
+      font-size: max(10px, 2.78vw);
+      font-weight: 600;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__heading {
+      margin: 0 0 6px;
+      font-size: max(18px, 5vw);
+      line-height: 1.3;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__text,
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__text p {
+      font-size: max(12.5px, 3.33vw);
+      line-height: 1.5;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__panel {
+      margin-top: 21px;
+    }
+
+    #MainContent[data-template='page.halloween-sale'] .somna-sp .somna-sp__details {
+      margin-top: 18px;
+      font-size: max(13px, 3.58vw);
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
