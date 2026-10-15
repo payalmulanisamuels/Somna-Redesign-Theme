@@ -169,7 +169,7 @@ search-button.search-action.search-action--hidden-on-menu {
     max-height: 20px;
 } */
 .wave-container.bottom {
-    bottom: -24px;
+    bottom: -18px;
     background-position: bottom;
 }
 .wave-container.top {
@@ -2421,7 +2421,7 @@ margin-top: 7px;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 15px;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box {
     background: #FFF9EE;
