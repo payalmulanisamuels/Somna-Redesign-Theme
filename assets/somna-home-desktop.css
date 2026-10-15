@@ -652,7 +652,6 @@
   /* ---------- Four-column features ("Small essentials") ---------- */
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
     gap: clamp(28px, 3vw, 44px);
-    padding-block: 56px 64px;
   }
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--row {
     width: 100%;
@@ -967,9 +966,7 @@
   }
 
   /* ---------- Features ---------- */
-  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
-    padding-block: 64px 72px;
-  }
+ 
 
   /* ---------- The Sleep Bundle card ---------- */
   #MainContent[data-template="index"] .somna-sleep-bundle {
