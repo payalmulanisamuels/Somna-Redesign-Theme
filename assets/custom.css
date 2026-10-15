@@ -3338,7 +3338,7 @@ margin-top: 7px;
 /* Review card */
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review {
   width: 100%;
-  margin: 0 0 10px;
+  margin: 0 0 5px;
   padding: 8px 10px 7px;
   background: #fff;
   border-radius: 10px;
