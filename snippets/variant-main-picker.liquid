@@ -321,6 +321,14 @@
     if one_time_price > sub_price
       assign somna_save_pct = one_time_price | minus: sub_price | times: 100.0 | divided_by: one_time_price | round
     endif
+    # Sale "was" price (variant metafield custom.autoship_compare_at, Nasal Strips + Mouth Tape):
+    # the pill shows the Autoship price against it (264 -> 79.06 = 70% OFF). Others unchanged.
+    if current_variant.metafields.custom.autoship_compare_at != blank
+      assign somna_auto_cmp = current_variant.metafields.custom.autoship_compare_at.value | times: 100 | round
+      if somna_auto_cmp > sub_price
+        assign somna_save_pct = somna_auto_cmp | minus: sub_price | times: 100.0 | divided_by: somna_auto_cmp | round
+      endif
+    endif
     assign somna_unit = 'bag'
     assign somna_value_lc = product_option_value.name | downcase
     if somna_value_lc contains 'set'
