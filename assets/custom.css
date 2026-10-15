@@ -3884,26 +3884,63 @@ margin-top: 7px;
    PRODUCT PAGE — Figma fixes 2026-10-15 (Nasal Strips 3297:4934 desktop / 3297:5224 mobile)
    Phones + all sizes here; tablet/desktop sizes in somna-home-desktop.css.
    ===================================================================== */
-/* Trust bar under the buy box: flat orange gradient band, black Rubik Spray Paint, navy dividers */
-:where(.template-product) [id$='__section_zELtyM'] .section.bg_image {
+/* Trust bar (Free shipping / 30-night guarantee / Delivered in / Secure payment) — ONE style for every
+   page that has this bar (homepage, collection, product, contact): it is matched by its section id, never
+   by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
+   Rubik Spray Paint, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
+   It replaces the yellow wave picture (bg_image) and the per-page colour. */
+.shopify-section[id$='__section_zELtyM'] .section-background,
+.shopify-section[id$='__section_zELtyM'] .section {
+  background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important; /* beats the inline wave picture */
+}
+.shopify-section[id$='__section_zELtyM'] .section {
   top: 0;
   height: auto;
   min-height: clamp(35px, 9.5vw, 137px);
   align-content: center;
-  background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important;
 }
-:where(.template-product) [id$='__section_zELtyM'] .text-block,
-:where(.template-product) [id$='__section_zELtyM'] .text-block > *,
-:where(.template-product) [id$='__section_zELtyM'] .text-block strong {
+.shopify-section[id$='__section_zELtyM'] .text-block,
+.shopify-section[id$='__section_zELtyM'] .text-block > *,
+.shopify-section[id$='__section_zELtyM'] .text-block strong {
   font-family: var(--font-display-spray--family);
+  font-size: clamp(8px, 2.05vw, 29px);
   font-weight: 400;
   line-height: 1.2;
+  letter-spacing: 0.01em;
   color: #000;
 }
-:where(.template-product) [id$='__section_zELtyM'] .divider__line {
+.shopify-section[id$='__section_zELtyM'] .divider__line {
   border-color: #0a1a4a;
-  border-right-width: 1.5px;
-  border-bottom-width: 1.5px;
+  border-right-width: clamp(1px, 0.14vw, 2px);
+  border-bottom-width: clamp(1px, 0.14vw, 2px);
+}
+/* Figma: "Delivered in" and "Secure payment" are set in Rubik Wet Paint (the first two in Spray Paint) */
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block,
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block > *,
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block strong {
+  font-family: var(--font-display--family);
+}
+.shopify-section[id$='__section_zELtyM'] .icon-block__media {
+  width: clamp(18px, 4.9vw, 71px) !important; /* Figma icon size (71px at 1440px); beats the shared icon widths */
+  height: auto;
+}
+
+/* Sale pill: clear of the header's wavy bottom edge (it was cutting into the pill's top) */
+:where(.template-product) .somna-pdp-sale-pill {
+  margin-top: clamp(14px, 2.4vw, 36px);
+}
+
+/* Problem / Solution (sections/problem-solution.liquid): Figma background #fff2e3, a matching
+   peach bottom wave, and top spacing from Figma (93px at 1440px, 25px at 393px).
+   The Halloween spiderweb + spider and their animation live in somna-motion.css (section 15). */
+.hz-prob-sol-section {
+  background-color: #fff2e3 !important; /* replaces the section's inline cream */
+}
+.hz-prob-sol-section > .wave-container.bottom {
+  background-image: url("somna-hw-howto-bottom.svg") !important;
+}
+.hz-prob-sol-section.somna-ps--halloween {
+  padding-top: clamp(24px, 6.4vw, 93px);
 }
 
 /* How To Use: peach background and peach top/bottom waves (Figma #fff2e3) */
