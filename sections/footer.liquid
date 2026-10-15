@@ -35,7 +35,7 @@
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 <div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.settings.background_image != blank %} footer-photo{% endif %}"
 {% if section.settings.background_image != blank %}
 style="background-image:url({{ section.settings.background_image |  image_url }});background-size: cover;background-position: center;"
 {% endif %}
@@ -109,6 +109,71 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
       position: relative;
       z-index: 2;
       margin-block-start: calc(-1 * var(--padding-block-start, 0px) - 17 / 1440 * 100vw);
+    }
+  }
+
+  /* Somna photo banner (2026-10-15): this section with a "Section background image" is the
+     "Get 10% off your first order." newsletter (Figma desktop 3316:8670, mobile 3394:963).
+     Less empty photo above and below the copy on every screen size, and on tablet/desktop
+     the headline, text and form scale with the screen, closer to the Figma proportions.
+     The bottom padding includes the footer wave that overlaps the photo (18px on phones,
+     62px at 1440px on desktop). Spacing and sizes only; the section settings are unchanged. */
+  @media screen and (max-width: 749px) {
+    #MainContent .footer-photo.footer-photo > .footer-content {
+      padding-block: 22px 40px;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #MainContent .section.footer-photo.footer-photo {
+      min-height: 0;
+    }
+
+    #MainContent .footer-photo.footer-photo > .footer-content {
+      padding-block: clamp(36px, 4.6vw, 80px) calc(62 / 1440 * 100vw + clamp(28px, 3.4vw, 60px));
+    }
+
+    #MainContent .footer-photo .group-block-content {
+      gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    #MainContent .footer-photo .text-block--text_LWt8Pz,
+    #MainContent .footer-photo .text-block--text_LWt8Pz > * {
+      font-size: clamp(34px, 4vw, 64px);
+      line-height: 0.98;
+    }
+
+    #MainContent .footer-photo .text-block--text_f9CFLH,
+    #MainContent .footer-photo .text-block--text_f9CFLH > * {
+      font-size: clamp(16px, 1.75vw, 28px);
+      line-height: 1.15;
+    }
+
+    #MainContent .footer-photo .text-block--text_f9CFLH {
+      padding-block-end: clamp(10px, 1.4vw, 22px);
+    }
+
+    /* Klaviyo sign-up form: no extra space under it, and scaled up on larger screens */
+    #MainContent .footer-photo .shopify-app-block {
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.12;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.25;
+    }
+  }
+
+  @media screen and (min-width: 1800px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.35;
     }
   }
 
