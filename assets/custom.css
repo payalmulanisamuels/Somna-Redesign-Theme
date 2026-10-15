@@ -3896,7 +3896,6 @@ margin-top: 7px;
 .shopify-section[id$='__section_zELtyM'] .section {
   top: 0;
   height: auto;
-  min-height: clamp(35px, 9.5vw, 137px);
   align-content: center;
 }
 .shopify-section[id$='__section_zELtyM'] .text-block,
