@@ -573,13 +573,7 @@
     line-height: 1.25;
     margin-top: 6px;
   }
-   .bundle-subtext {
-    max-width: none;
-    min-height: 0;
-    margin-top: 8px;
-    font-size: clamp(14px, 1.15vw, 16px);
-    line-height: 1.5;
-  }
+
    .bundle-card__content-wrapper {
     flex-direction: column;
     align-items: flex-start;
