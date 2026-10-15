@@ -461,8 +461,11 @@
 
 <div
   id="Hero-{{ section.id }}"
-  class="hero{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}"
+  class="hero{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}{% if section.settings.button_icon_enable and section.settings.button_icon != blank %} hero--button-icon{% endif %}"
   style="
+    {% if section.settings.button_icon_enable and section.settings.button_icon != blank %}
+      --hero-button-icon: url('{{ section.settings.button_icon | image_url: width: 160 }}');
+    {% endif %}
     --hero-border-style: {{ section.settings.border }};
     --hero-border-width: {{ section.settings.border_width }}px;
     --hero-border-opacity: {{ section.settings.border_opacity }}%;
@@ -560,6 +563,21 @@
 </div>
 
 {% stylesheet %}
+  /* Optional icon before each button label ("Button icon" settings; off by default) */
+  .hero--button-icon .hero__content-wrapper .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+
+  .hero--button-icon .hero__content-wrapper .button::before {
+    content: '';
+    flex: none;
+    width: var(--hero-button-icon-size, 1.9em);
+    aspect-ratio: 1;
+    background: var(--hero-button-icon) center / contain no-repeat;
+  }
+
   .hero-wrapper {
     --hero-height-offset: 0px;
   }
@@ -1259,6 +1277,23 @@
       "unit": "%",
       "default": 75,
       "visible_if": "{{ section.settings.blurred_reflection and section.settings.media_type_1 != 'video' or section.settings.media_type_2 != 'video' }}"
+    },
+    {
+      "type": "header",
+      "content": "Button icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon_enable",
+      "label": "Show icon in buttons",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "button_icon",
+      "label": "Icon",
+      "info": "Shown before each button label, e.g. a pumpkin",
+      "visible_if": "{{ section.settings.button_icon_enable }}"
     },
     {
       "type": "header",
