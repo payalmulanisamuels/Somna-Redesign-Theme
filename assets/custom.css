@@ -2184,9 +2184,7 @@ a.somna-view-all {
    ===================================================================== */
 
 /* ---- from product-col-custom.css ---- */
-:where(.template-product,.template-collection,.template-list-collections,.somna-sp) .somna-custom-subscription-container{
-  margin-top: 10px
-}
+ 
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .review_content{
 margin-top: 7px;
 }
@@ -2423,7 +2421,7 @@ margin-top: 7px;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin-top: 0;
+    margin-top: 50px;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box {
     background: #FFF9EE;
