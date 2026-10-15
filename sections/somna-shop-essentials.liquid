@@ -223,8 +223,10 @@
           endif
         -%}
         <a href="{{ card_link }}" class="somna-ess__card" {{ block.shopify_attributes }}>
-          {%- if section.settings.badge_text != blank -%}
-            <span class="somna-ess__badge"><span class="somna-ess__badge-text">{{ section.settings.badge_text }}</span></span>
+          {%- comment -%} Halloween badge: the product's own "Halloween sale text" metafield (custom.halloween_sale_text). Empty = no badge. {%- endcomment -%}
+          {%- assign card_badge = product.metafields.custom.halloween_sale_text.value | strip -%}
+          {%- if card_badge != blank -%}
+            <span class="somna-ess__badge"><span class="somna-ess__badge-text">{{ card_badge | escape }}</span></span>
           {%- endif -%}
           <div class="somna-ess__media">
             {%- if card_image != blank -%}
@@ -571,8 +573,8 @@
     {
       "type": "text",
       "id": "badge_text",
-      "label": "Badge text",
-      "info": "Shown on the corner of each card (e.g. 70% OFF). Leave empty to hide."
+      "label": "Badge text (no longer used)",
+      "info": "Not used any more: each card's badge now comes from its product's \"Halloween sale text\" metafield (Products > metafields). Empty metafield = no badge."
     },
     {
       "type": "checkbox",
