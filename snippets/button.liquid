@@ -29,7 +29,7 @@
     {% if block_settings.height_desktop != blank %}button-height-desktop{% endif %}
     {% if block_settings.padding_inline_desktop != blank %}button-padding-desktop{% endif %}
     {% if block_settings.button_radius_desktop != blank %}button-radius-desktop{% endif %}
-    {% if block_settings.icon != blank %}button--has-icon{% if block_settings.icon_size != blank %} button--icon-size{% endif %}{% endif %}
+    {% if block_settings.icon != blank %}button--has-icon{% if block_settings.icon_size != blank %} button--icon-size{% endif %}{% if block_settings.icon_color == 'white' or block_settings.icon_color == 'black' %} button--icon-{{ block_settings.icon_color }}{% endif %}{% endif %}
   "
   style="
     {% render 'size-style', settings: block_settings %}
@@ -71,6 +71,15 @@
     height: var(--button-icon-size, 1.6em);
     background: var(--button-icon) center / contain no-repeat !important;
     filter: none !important;
+  }
+
+  /* "Icon colour": White / Black turns the whole icon one colour */
+  .size-style.button--has-icon.button--icon-white::before {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .size-style.button--has-icon.button--icon-black::before {
+    filter: brightness(0) !important;
   }
 
   .size-style.button--icon-size::before {
