@@ -1428,6 +1428,7 @@ END OF SWITCHED-OFF SECTION 11 */
      dividers draw downward
    - a slow breath (about 4s in, 4s out) travels across the four yellow icons,
      left to right (the honey glow behind each icon was removed 2026-10-15)
+   - the thin column dividers are navy, like the design (2026-10-15)
    - a honey crescent moon sits in the top-right corner, gently rocking
      (on desktop and tablet it rises into place as the section scrolls in)
    - a few honey fireflies drift and fade in the cream background
@@ -1547,6 +1548,13 @@ END OF SWITCHED-OFF SECTION 11 */
 
 .shopify-section[id$='__section_ibM3ft'] .icon-block__media {
   position: relative;
+}
+
+/* Column dividers: solid navy lines like the design (the block setting is a light grey) */
+.shopify-section[id$='__section_ibM3ft'] .divider__line {
+  border-color: #0a1a4a;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
 }
 
 @media screen and (max-width: 749px) {
@@ -1683,6 +1691,9 @@ END OF SWITCHED-OFF SECTION 11 */
    badges give a short shake every 4.5s.
    Without the script, or with reduced motion: finished web, spider hanging,
    pumpkin smiling, nothing moves.
+   The same webs and spider are used above "The Sleep Bundle" card on the homepage
+   (sections/sleep-bundle.liquid adds .somna-sb--halloween); the rules below are shared,
+   and the Sleep Bundle placement is at the end of this section.
    Sizes: --web-w is 122px on phones; somna-home-desktop.css sets the desktop width.
    Motion only (transform / rotate / translate / opacity / stroke-dashoffset):
    no layout shift and nothing can be clicked.
@@ -1700,7 +1711,7 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
-.somna-ess--halloween .somna-ess__web--left {
+:is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__web--left {
   width: var(--web-w);
   aspect-ratio: auto;
   background-image: none; /* replaces the old web-with-spider background picture */
@@ -1718,7 +1729,7 @@ END OF SWITCHED-OFF SECTION 11 */
   }
 }
 
-.somna-ess--halloween .somna-ess__web--right {
+:is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__web--right {
   width: var(--rweb-w);
   aspect-ratio: auto;
   background-image: none; /* replaces the old right web background picture */
@@ -1775,7 +1786,7 @@ END OF SWITCHED-OFF SECTION 11 */
 }
 
 @media screen and (min-width: 750px) {
-  .somna-ess--halloween .somna-spider__thread {
+  :is(.somna-ess--halloween, .somna-sb--halloween) .somna-spider__thread {
     left: -0.75px;
     width: 1.5px;
   }
@@ -1816,79 +1827,79 @@ END OF SWITCHED-OFF SECTION 11 */
 }
 
 /* ---- Waiting to scroll into view (only when the script runs) ---- */
-.somna-ess--halloween.hw-ready:not(.is-in) .hw-m {
+:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m {
   stroke-dashoffset: 1;
 }
 
-.somna-ess--halloween.hw-ready:not(.is-in) .hw-m--all,
-.somna-ess--halloween.hw-ready:not(.is-in) .somna-spider {
+:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m--all,
+:is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .somna-spider {
   opacity: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   /* Step 1: the web draws itself */
-  .somna-ess--halloween.is-in .hw-m {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m {
     animation: somna-web-draw var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.35, 1) var(--t, 0s) both;
   }
 
-  .somna-ess--halloween.is-in .hw-m--frame {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--frame {
     --d: 0.4s;
     --t: 0s;
   }
 
-  .somna-ess--halloween.is-in .hw-m--ring {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--ring {
     animation-timing-function: cubic-bezier(0.3, 0.05, 0.6, 1);
   }
 
-  .somna-ess--halloween.is-in .hw-m--all {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .hw-m--all {
     animation: somna-web-fade 0.3s ease 1.4s both;
   }
 
-  .somna-ess--halloween.is-in .somna-ess__web--right .hw-m--all {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__web--right .hw-m--all {
     animation-delay: 1.6s;
   }
 
   /* Step 2: the spider lowers itself; Step 3: pause, then a gentle swing */
-  .somna-ess--halloween.is-in .somna-spider {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider {
     animation: somna-spider-appear 0.25s ease 1.5s both, somna-spider-sway 2.6s ease-in-out 3.75s 1 both;
   }
 
-  .somna-ess--halloween.is-in .somna-spider__thread {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider__thread {
     animation: somna-spider-thread 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
   }
 
-  .somna-ess--halloween.is-in .somna-spider__body {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-spider__body {
     animation: somna-spider-drop 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
   }
 
   /* Pumpkin: hop, land, smile */
-  .somna-ess--halloween.is-in .somna-pk svg {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk svg {
     animation: somna-pk-hop 7s ease-in-out 1.6s infinite;
   }
 
-  .somna-ess--halloween.is-in .somna-pk__smile {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__smile {
     animation: somna-pk-smile 7s ease-out 1.6s infinite;
   }
 
-  .somna-ess--halloween.is-in .somna-pk__happy {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__happy {
     animation: somna-pk-on 7s linear 1.6s infinite;
   }
 
-  .somna-ess--halloween.is-in .somna-pk__calm,
-  .somna-ess--halloween.is-in .somna-pk__eyes {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__calm,
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-pk__eyes {
     animation: somna-pk-off 7s linear 1.6s infinite;
   }
 
   /* "70% OFF" pumpkin badges: a short shake, repeated every 4.5s (the second card follows a beat later) */
-  .somna-ess--halloween .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween) .somna-ess__badge {
     transform-origin: 50% 12%;
   }
 
-  .somna-ess--halloween.is-in .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__badge {
     animation: somna-badge-shake 4.5s ease-in-out 1s infinite;
   }
 
-  .somna-ess--halloween.is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
+  :is(.somna-ess--halloween, .somna-sb--halloween).is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
     animation-delay: 1.35s;
   }
 }
@@ -2134,12 +2145,12 @@ END OF SWITCHED-OFF SECTION 11 */
 
 /* Reduced motion: finished web, spider hanging, pumpkin smiling, badges still */
 @media (prefers-reduced-motion: reduce) {
-  .somna-ess--halloween.hw-ready:not(.is-in) .hw-m {
+  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m {
     stroke-dashoffset: 0;
   }
 
-  .somna-ess--halloween.hw-ready:not(.is-in) .hw-m--all,
-  .somna-ess--halloween.hw-ready:not(.is-in) .somna-spider {
+  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .hw-m--all,
+  :is(.somna-ess--halloween, .somna-sb--halloween).hw-ready:not(.is-in) .somna-spider {
     opacity: 1;
   }
 
@@ -2152,6 +2163,51 @@ END OF SWITCHED-OFF SECTION 11 */
   .somna-pk__happy {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---- "The Sleep Bundle" (sections/sleep-bundle.liquid, homepage): placement of the two webs ----
+   Same webs as "Shop the essentials": the left web with the spider dropping on its thread, and the
+   Figma right-hand web (no spider), tilted about 6deg and hung from the picture's wavy edge, as in Figma.
+   These replace the still web pictures custom.css draws with ::before / ::after. */
+#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::before,
+#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::after {
+  content: none;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween {
+  position: relative;
+  overflow-x: clip; /* the tilted right web never makes the page scroll sideways */
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+  top: -40px;
+  left: 0;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
+  top: -50px;
+  right: calc(var(--rweb-w) * -0.06);
+  left: auto;
+  width: calc(var(--rweb-w) * 1.1);
+  rotate: 6deg;
+  transform-origin: 100% 0;
+}
+
+@media screen and (min-width: 750px) {
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+    top: -60px;
+  }
+
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
+    top: calc(-60px - 2.6vw);
   }
 }
 
