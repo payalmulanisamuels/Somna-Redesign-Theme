@@ -4164,6 +4164,7 @@ margin-top: 7px;
 .somna-sp > .somna-ess__web--left {
   --web-w: 96px;
   --hang: 120;
+  z-index: 11;
 }
 .somna-sp > .somna-ess__web--right {
   --rweb-w: 90px;
