@@ -1306,10 +1306,7 @@
     line-height: 0.98;
     letter-spacing: 0;
   }
-  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"],
-  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] > * {
-    font-size: clamp(60px, 7vw, 104px);
-  }
+
   #MainContent[data-template="index"] .text-block--text_Lqf6bA,
   #MainContent[data-template="index"] .text-block--text_Lqf6bA > *,
   #MainContent[data-template="index"] .text-block--text_hwperks,
