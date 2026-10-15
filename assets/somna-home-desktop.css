@@ -970,7 +970,7 @@
 
   /* ---------- The Sleep Bundle card ---------- */
   #MainContent[data-template="index"] .somna-sleep-bundle {
-    padding: 64px 40px 80px;
+    padding: 64px 40px 40px;
   }
   #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__card {
     max-width: 960px;
