@@ -1820,7 +1820,8 @@
         "text_LNDHbX"
       ],
       "custom_css": [
-        ".wave-container.bottom {bottom: -25px;}"
+        ".wave-container.bottom {bottom: -25px;}",
+        " @media screen and (min-width: 750px) {.wave-container.bottom {bottom: -95px; } }"
       ],
       "name": "t:names.icons_with_text",
       "settings": {
