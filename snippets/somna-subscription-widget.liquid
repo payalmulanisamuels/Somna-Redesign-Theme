@@ -381,6 +381,33 @@
 
         const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
 
+        // Nasal Strips + Mouth Tape: the size cards' "$x/night" (snippets/variant-main-picker.liquid)
+        // follows the selected option: Autoship price per night, or the one-time price per night when
+        // One-time purchase is picked. Uses the cards' own data-sub-numeric / data-onetime-numeric /
+        // data-nights, rounded to the cent like the Liquid. Re-applied if the cards are re-rendered.
+        const nightCardsOn = ['nasal-strips', 'mouth-tape'].includes({{ product_resource.handle | json }});
+        const nightScope = container.closest('.shopify-section') || document;
+        const updateNightPrices = () => {
+          if (!nightCardsOn) return;
+          const key = isSubscribe() ? 'subNumeric' : 'onetimeNumeric';
+          nightScope.querySelectorAll('.somna-tier[data-nights]').forEach((card) => {
+            const nightEl = card.querySelector('.somna-tier__night');
+            const total = parseFloat(card.dataset[key]);
+            const nights = parseFloat(card.dataset.nights);
+            if (!nightEl || !(total > 0) || !(nights > 0)) return;
+            const perNight = (Math.round((total * 100) / nights) / 100).toFixed(2);
+            const text = nightEl.textContent.replace(/\d[\d,]*(\.\d+)?/, perNight);
+            if (nightEl.textContent !== text) nightEl.textContent = text;
+          });
+        };
+        if (nightCardsOn) {
+          let nightFrame = 0;
+          new MutationObserver(() => {
+            cancelAnimationFrame(nightFrame);
+            nightFrame = requestAnimationFrame(updateNightPrices);
+          }).observe(nightScope, { childList: true, subtree: true });
+        }
+
         const syncForm = () => {
           if (isSubscribe() && select.value) {
             planInput.value = select.value;
@@ -389,6 +416,7 @@
             planInput.value = '';
             planInput.disabled = true;
           }
+          updateNightPrices();
 
           // Programmatic changes fire no `change` event, so announce the new purchase option
           // (the sticky add-to-cart bar mirrors it — see assets/sticky-add-to-cart.js).
