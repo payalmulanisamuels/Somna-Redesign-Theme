@@ -115,7 +115,7 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
   /* Somna photo banner (2026-10-15): this section with a "Section background image" is the
      "Get 10% off your first order." newsletter (Figma desktop 3316:8670, mobile 3394:963).
      Less empty photo above and below the copy on every screen size, and on tablet/desktop
-     the headline, text and form scale with the screen, closer to the Figma proportions.
+     the form scales with the screen, closer to the Figma proportions.
      The bottom padding includes the footer wave that overlaps the photo (18px on phones,
      62px at 1440px on desktop). Spacing and sizes only; the section settings are unchanged. */
   @media screen and (max-width: 749px) {
@@ -140,18 +140,6 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
       gap: clamp(6px, 0.6vw, 10px);
     }
 
-    #MainContent .footer-photo .text-block--text_LWt8Pz,
-    #MainContent .footer-photo .text-block--text_LWt8Pz > * {
-      font-size: clamp(34px, 4vw, 64px);
-      line-height: 0.98;
-    }
-
-    #MainContent .footer-photo .text-block--text_f9CFLH,
-    #MainContent .footer-photo .text-block--text_f9CFLH > * {
-      font-size: clamp(16px, 1.75vw, 28px);
-      line-height: 1.15;
-    }
-
     #MainContent .footer-photo .text-block--text_f9CFLH {
       padding-block-end: clamp(10px, 1.4vw, 22px);
     }
@@ -159,6 +147,26 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
     /* Klaviyo sign-up form: no extra space under it, and scaled up on larger screens */
     #MainContent .footer-photo .shopify-app-block {
       margin-bottom: 0;
+    }
+  }
+
+  /* Every page that has this banner looks like the homepage one: same 1280px content width
+     (other pages use the theme's narrower width) and the homepage's text sizes, 48px headline
+     and 20px text (the other templates' copies of this section have a 32px headline) */
+  @media screen and (min-width: 990px) {
+    #MainContent .section.footer-photo.footer-photo {
+      --page-content-width: 80rem;
+      --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+    }
+
+    #MainContent .footer-photo .text-block--text_LWt8Pz,
+    #MainContent .footer-photo .text-block--text_LWt8Pz > * {
+      font-size: 3rem !important;
+    }
+
+    #MainContent .footer-photo .text-block--text_f9CFLH,
+    #MainContent .footer-photo .text-block--text_f9CFLH > * {
+      font-size: 1.25rem !important;
     }
   }
 
