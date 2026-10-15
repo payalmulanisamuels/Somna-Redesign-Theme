@@ -17,6 +17,14 @@
      small and even (8px between parts, 6-14px inside the boxes), text 1-2px smaller, bag pictures
      smaller, Add to cart 48px tall (was 57px). Phones and the Halloween Sale page are unchanged. */
   @media screen and (min-width: 750px) {
+    /* Product details column scrolls with the page, like the images. The images stopped sticking
+       (somna-home-desktop.css), so a sticky details column slid down beside them and left a big
+       empty gap above "NASAL STRIPS". Both columns now start together at the top. */
+    .template-product .product-information .product-details.sticky-content--desktop {
+      position: relative !important;
+      top: auto !important;
+    }
+
     .template-product .product-details .group-block:has(> .group-block-content > .somna-buybox-review),
     .template-product .product-details .group-block.color-custom-group_6Ynwc9 {
       padding-block: 14px 12px !important;
