@@ -1,14 +1,10 @@
 {%- comment -%}
-  Somna sale product (Halloween Sale page, Figma 3316:8669 desktop / 3316:11976 mobile).
-  One product per section: image, rating, eyebrow, headline, description, the same buy box as the
-  product page (variant-picker + buy-buttons theme blocks, i.e. snippets/variant-main-picker and
-  snippets/somna-subscription-widget) and a "See full details" link.
-  All product data (prices, plans, variants, rating) comes from the chosen product; nothing is hardcoded.
-  It works like Horizon's "Featured product information" section: the <featured-product-information>
-  wrapper makes variant changes re-render this section from the product's URL.
-  Two of these placed one after the other sit side by side from 750px (custom.css / somna-home-desktop.css,
-  "SOMNA SALE PRODUCT"). Optional Halloween spiderweb (+ spider on the left web) reuses the homepage
-  animation in assets/somna-motion.css, section 15.
+  Somna sale product (Halloween Sale page, Figma 3316:8669 / 3316:11976): image, rating, eyebrow,
+  headline, description, the product page buy box (variant-picker + buy-buttons blocks) and a details
+  link. All product data comes from the chosen product. <featured-product-information> makes variant
+  changes re-render this section from the product URL (Horizon pattern). Styles: custom.css /
+  somna-home-desktop.css "HALLOWEEN SALE PAGE". The web + spider reuse the homepage animation
+  (somna-motion.css section 15, via the somna-ess--halloween class).
 {%- endcomment -%}
 {%- liquid
   assign sp_product = section.settings.product
@@ -45,7 +41,7 @@
 {%- if sp_product != blank -%}
 <featured-product-information
   id="{{ section.id }}"
-  class="somna-sp somna-sp--web-{{ sp_web }}{% if sp_web != 'none' %} somna-sp--halloween{% endif %}"
+  class="somna-sp somna-sp--web-{{ sp_web }}{% if sp_web != 'none' %} somna-sp--halloween somna-ess--halloween{% endif %}"
   style="--sp-bg: {{ section.settings.background_color }};"
 >
   {%- if sp_web == 'left' -%}
