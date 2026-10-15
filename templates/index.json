@@ -1956,7 +1956,7 @@
         "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
-        "border_width": 1,
+        "border_width": 0,
         "drop_shadow": false,
         "background_color": "",
         "padding-block-start": 0,
