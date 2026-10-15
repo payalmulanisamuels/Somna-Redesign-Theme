@@ -16,6 +16,13 @@
   display text only; every price, saving and % here comes from the real selling plans.
   Products without the metafield keep the normal wording.
 
+  Sale "was" prices (2026-10-15, Nasal Strips + Mouth Tape): optional variant metafields
+  `custom.autoship_compare_at` and `custom.onetime_compare_at` (decimal, e.g. 264 / 393).
+  - Autoship "YOU SAVE" (and its hidden crossed-out price) = autoship_compare_at - Autoship price.
+  - One-time "% OFF" pill = onetime_compare_at vs the one-time price.
+  The "x% off every order" perk and "You'd save $x with Autoship" keep the real plan saving.
+  Variants without these metafields work exactly as before.
+
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
 {%- enddoc -%}
@@ -88,10 +95,28 @@
             if v_bags < 1
               assign v_bags = 1
             endif
+
+            # Sale "was" prices from variant metafields, in cents (0 = not set)
+            assign v_auto_cmp = 0
+            if v.metafields.custom.autoship_compare_at != blank
+              assign v_auto_cmp = v.metafields.custom.autoship_compare_at.value | times: 100 | round
+            endif
+            assign v_once_cmp = 0
+            if v.metafields.custom.onetime_compare_at != blank
+              assign v_once_cmp = v.metafields.custom.onetime_compare_at.value | times: 100 | round
+            endif
+            assign v_once_pct = 0
+            if v_once_cmp > v.price
+              assign v_once_pct = v_once_cmp | minus: v.price | times: 100.0 | divided_by: v_once_cmp | round
+            endif
+            if is_current
+              assign init_once_pct = v_once_pct
+            endif
           -%}
           "{{ v.id }}": {
             "nights": {{ v_nights }},
             "price": {{ v.price | money_without_trailing_zeros | json }},
+            "onetimePct": {{ v_once_pct }},
             "plans": [
               {%- for alloc in v.selling_plan_allocations -%}
                 {%- liquid
@@ -114,6 +139,13 @@
                     assign discount = save_cents | times: 100.0 | divided_by: regular | round
                   endif
 
+                  # Autoship "was" price + saving: the metafield price when set, else the one-time price
+                  assign auto_regular = regular
+                  if v_auto_cmp > alloc.price
+                    assign auto_regular = v_auto_cmp
+                  endif
+                  assign auto_save = auto_regular | minus: alloc.price
+
                   # Subscription price per bag (1 / 2 / 4), kept in cents so it shows with decimals.
                   assign per_bag = alloc.price | times: 1.0 | divided_by: v_bags | round
 
@@ -132,8 +164,9 @@
                       assign init_plan_id = plan.id
                       assign init_name = plan_label
                       assign init_price = alloc.price
-                      assign init_regular = regular
+                      assign init_regular = auto_regular
                       assign init_save = save_cents
+                      assign init_auto_save = auto_save
                       assign init_per_bag = per_bag
                       assign init_discount = discount
                       assign init_per_night = per_night
@@ -146,9 +179,11 @@
                   "interval": {{ plan_label | json }},
                   "days": {{ plan_days }},
                   "price": {{ alloc.price | money_without_trailing_zeros | json }},
-                  "regular": {{ regular | money_without_trailing_zeros | json }},
+                  "regular": {{ auto_regular | money_without_trailing_zeros | json }},
                   "save": {{ save_cents | money_without_trailing_zeros | json }},
                   "saveCents": {{ save_cents }},
+                  "autoSave": {{ auto_save | money_without_trailing_zeros | json }},
+                  "autoSaveCents": {{ auto_save }},
                   "perBag": {{ per_bag | money_without_trailing_zeros | json }},
                   "discount": {{ discount }},
                   "perNight": {{ per_night | json }}
@@ -199,13 +234,13 @@
         </label>
         <div class="somna-price-stack">
           <div class="somna-pricing-row">
-            <span class="somna-strike-price" data-somna="regular" {% if init_save <= 0 %}hidden{% endif %}>
+            <span class="somna-strike-price" data-somna="regular" {% if init_auto_save <= 0 %}hidden{% endif %}>
               {{- init_regular | money_without_trailing_zeros -}}
             </span>
             <span class="somna-active-price" data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
           </div>
-          <div class="somna-save-pill" {% if init_save <= 0 %}hidden{% endif %}>
-            YOU SAVE <span data-somna="save">{{ init_save | money_without_trailing_zeros }}</span>
+          <div class="somna-save-pill" {% if init_auto_save <= 0 %}hidden{% endif %}>
+            YOU SAVE <span data-somna="auto-save">{{ init_auto_save | money_without_trailing_zeros }}</span>
           </div>
         </div>
       </div>
@@ -285,7 +320,7 @@
           </div>
           <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
             <span>You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship</span>
-            <span class="somna-onetime-pill"><span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF</span>
+            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_once_pct > 0 %}{{ init_once_pct }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
           </p>
         </div>
       </div>
@@ -327,6 +362,7 @@
         const perNightEl = container.querySelector('.somna-per-night');
         const oneTimeSaveEl = container.querySelector('[data-somna-onetime-save]');
         let plans = [];
+        let currentVariant = null;
         let currentVariantId = null;
 
         // The widget isn't re-rendered on variant change, so look each field's nodes up once.
@@ -378,12 +414,14 @@
           setText('per-bag', plan.perBag);
           setText('regular', plan.regular);
           setText('save', plan.save);
+          setText('auto-save', plan.autoSave);
+          setText('onetime-pct', String(currentVariant?.onetimePct > 0 ? currentVariant.onetimePct : plan.discount));
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
           setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
-          regularEl.hidden = plan.saveCents <= 0;
+          regularEl.hidden = plan.autoSaveCents <= 0;
           if (oneTimeSaveEl) oneTimeSaveEl.hidden = plan.saveCents <= 0;
-          savePill.hidden = plan.saveCents <= 0;
+          savePill.hidden = plan.autoSaveCents <= 0;
           perNightEl.hidden = !plan.perNight;
           syncForm();
         };
@@ -394,6 +432,7 @@
           const variant = data.variants[String(variantId)];
           if (!variant) return;
           currentVariantId = String(variantId);
+          currentVariant = variant;
 
           setText('onetime-price', variant.price);
           plans = variant.plans;
