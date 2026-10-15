@@ -11,6 +11,108 @@
   {% render 'variant-main-picker', product_resource: product_resource, section: section, product: product %}
 {% endunless %}
 
+{% stylesheet %}
+  /* Somna (2026-10-15): product page buy box on tablet and desktop (750px and up), compact so the
+     sizes, Autoship box and Add to cart fit in about one screen. Same layout, fonts and colours;
+     only the gaps are smaller and even (about 10px between parts, 8-16px inside the boxes), the bag
+     pictures in the size cards are a little smaller, and Add to cart is 50px tall (was 57px).
+     Phones and the Halloween Sale page buy boxes are unchanged. */
+  @media screen and (min-width: 750px) {
+    .template-product .product-details .group-block.color-custom-group_6Ynwc9 {
+      padding-block: 20px 14px !important;
+    }
+
+    .template-product .product-details .somna-buybox-review {
+      margin-bottom: 10px;
+      padding: 8px 14px;
+    }
+
+    .template-product .product-details .somna-buybox-review__quote {
+      margin-top: 2px;
+    }
+
+    .template-product .product-details .somna-buybox-picker {
+      padding-block-end: 10px !important;
+    }
+
+    .template-product .product-details .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+      gap: 10px;
+      padding-top: 12px;
+    }
+
+    .template-product .product-details .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+      padding: 2px 6px 16px;
+    }
+
+    .template-product .product-details .somna-tier .variant-card__inner {
+      padding-top: 12px;
+    }
+
+    .template-product .product-details .somna-tier .variant-card__img {
+      height: 44px;
+    }
+
+    .template-product .product-details .somna-tier__price {
+      margin-top: 4px;
+    }
+
+    .template-product .product-details .somna-custom-subscription-container {
+      gap: 10px;
+    }
+
+    .template-product .product-details .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+      padding: 10px 16px 6px;
+    }
+
+    .template-product .product-details .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+      padding: 8px 16px 10px;
+    }
+
+    .template-product .product-details .somna-perks-list {
+      gap: 4px;
+      margin-block: 2px 0;
+    }
+
+    .template-product .product-details .somna-gifts {
+      margin-top: 8px;
+    }
+
+    .template-product .product-details .somna-gift {
+      gap: 3px;
+      min-height: 46px;
+    }
+
+    .template-product .product-details .somna-gift__icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .template-product .product-details .somna-frequency-dropdown {
+      padding: 7px 18px;
+    }
+
+    .template-product .product-details .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+      padding: 10px 16px;
+    }
+
+    .template-product .product-details .product-form-buttons {
+      padding-block: 10px 0 !important;
+    }
+
+    .template-product .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+      height: 50px !important;
+    }
+
+    .template-product .product-details .somna-buybox-flex {
+      margin: 8px 0;
+    }
+
+    .template-product .product-details .somna-buybox-delivery {
+      padding: 8px 12px;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.product_variant_picker",
