@@ -125,12 +125,15 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
   }
 
   @media screen and (min-width: 750px) {
+    /* Height follows the Figma banner (1440 x 491), so the photo is never cropped at the top;
+       the copy is centred in the part above the footer wave */
     #MainContent .section.footer-photo.footer-photo {
-      min-height: 0;
+      min-height: calc(100vw * 491 / 1440);
+      align-content: center;
     }
 
     #MainContent .footer-photo.footer-photo > .footer-content {
-      padding-block: clamp(36px, 4.6vw, 80px) calc(62 / 1440 * 100vw + clamp(28px, 3.4vw, 60px));
+      padding-block: clamp(24px, 2.6vw, 48px) calc(62 / 1440 * 100vw + clamp(20px, 2.2vw, 40px));
     }
 
     #MainContent .footer-photo .group-block-content {
