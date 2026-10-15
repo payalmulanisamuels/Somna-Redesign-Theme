@@ -92,8 +92,20 @@
       endif
     %}
 
+    {%- liquid
+      # Highlighted link (e.g. "Sale" in orange): matched by link title, colour from the block settings
+      assign highlight_title = block_settings.highlight_link_title | strip | downcase
+      assign highlight_color = block_settings.highlight_link_color
+    -%}
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {%- liquid
+          assign link_highlight = false
+          assign link_title_key = link.title | strip | downcase
+          if highlight_title != blank and highlight_color != blank and link_title_key == highlight_title
+            assign link_highlight = true
+          endif
+        -%}
         <li
           class="menu-list__list-item"
           on:blur="/deactivate"
@@ -106,7 +118,10 @@
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link_highlight %} menu-list__link--highlight{% endif %}"
+            {% if link_highlight %}
+              style="--menu-top-level-font-color: {{ highlight_color }}; --menu-top-level-font-color-rgb: {{ highlight_color.red }} {{ highlight_color.green }} {{ highlight_color.blue }};"
+            {% endif %}
             {% if link.current %}
               aria-current="page"
             {% endif %}
@@ -846,6 +861,19 @@
       "id": "text_color",
       "label": "t:settings.text_color",
       "placeholder": "t:settings.default"
+    },
+    {
+      "type": "text",
+      "id": "highlight_link_title",
+      "label": "Highlighted link",
+      "default": "Sale",
+      "info": "Title of a menu link to show in its own colour, e.g. Sale. Leave empty for none."
+    },
+    {
+      "type": "color",
+      "id": "highlight_link_color",
+      "label": "Highlighted link colour",
+      "default": "#EF5400"
     },
     {
       "type": "header",
