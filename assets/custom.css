@@ -2385,7 +2385,7 @@ margin-top: 7px;
     width: 100%;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img {
-    height: 55px;
+    height: 40px;
     object-fit: contain;
   }
 
