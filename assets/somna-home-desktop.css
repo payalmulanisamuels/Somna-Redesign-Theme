@@ -29,6 +29,9 @@
    ===================================================================== */
 /* ---- from product-col-custom.css ---- */
 @media(min-width:768px){
+  :where(.template-product,.template-collection,.template-list-collections,.somna-sp) .hz-hiw-grid{
+    padding: 50px 0 0;
+  }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hero__container {
     padding: 150px 0 80px;
     max-width: 1200px;
