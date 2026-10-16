@@ -1779,7 +1779,7 @@ END OF SWITCHED-OFF SECTION 11 */
 .somna-spider__thread {
   position: absolute;
   top: 0;
-  left: -0.6px;
+  left: -2.4px;
   width: 1.2px;
   height: var(--len);
   background: #1a1a1a;
