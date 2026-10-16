@@ -23,6 +23,13 @@
   The "x% off every order" perk and "You'd save $x with Autoship" keep the real plan saving.
   Variants without these metafields work exactly as before.
 
+  Halloween Sale one-time price (2026-10-16): products with `custom.halloween_sale_text` get 55% off
+  one-time purchases at checkout from the automatic discount "Halloween Sale" (Shopify doesn't give
+  themes automatic discounts, so the 55 is set here as `somna_once_off`). For those products the
+  one-time price, its "% OFF" pill and "You'd save $x with Autoship" use price x 0.45, replacing the
+  `custom.onetime_compare_at` pill. Autoship prices are unchanged. Set somna_once_off to 0 when the
+  sale ends.
+
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
 {%- enddoc -%}
@@ -30,6 +37,12 @@
 {%- liquid
   assign current_var = product_resource.selected_or_first_available_variant
   assign somna_hw_text = product_resource.metafields.custom.halloween_sale_text.value | strip
+
+  # Halloween Sale: one-time purchases are 55% off at checkout (automatic discount) on these products
+  assign somna_once_off = 0
+  if somna_hw_text != blank
+    assign somna_once_off = 55
+  endif
 
   assign has_selling_plans = false
   for v in product_resource.variants
@@ -109,13 +122,21 @@
             if v_once_cmp > v.price
               assign v_once_pct = v_once_cmp | minus: v.price | times: 100.0 | divided_by: v_once_cmp | round
             endif
+            # One-time price the customer pays (Halloween Sale: price x 0.45, e.g. 264 -> 118.80)
+            assign v_once_price = v.price
+            if somna_once_off > 0
+              assign v_once_keep = 100 | minus: somna_once_off
+              assign v_once_price = v.price | times: v_once_keep | divided_by: 100.0 | round
+              assign v_once_pct = somna_once_off
+            endif
             if is_current
               assign init_once_pct = v_once_pct
+              assign init_once_price = v_once_price
             endif
           -%}
           "{{ v.id }}": {
             "nights": {{ v_nights }},
-            "price": {{ v.price | money_without_trailing_zeros | json }},
+            "price": {{ v_once_price | money_without_trailing_zeros | json }},
             "onetimePct": {{ v_once_pct }},
             "plans": [
               {%- for alloc in v.selling_plan_allocations -%}
@@ -146,6 +167,12 @@
                   endif
                   assign auto_save = auto_regular | minus: alloc.price
 
+                  # "You'd save $x with Autoship" (one-time box): against the one-time price actually paid
+                  assign once_save = save_cents
+                  if somna_once_off > 0
+                    assign once_save = v_once_price | minus: alloc.price
+                  endif
+
                   # Subscription price per bag (1 / 2 / 4), kept in cents so it shows with decimals.
                   assign per_bag = alloc.price | times: 1.0 | divided_by: v_bags | round
 
@@ -165,7 +192,7 @@
                       assign init_name = plan_label
                       assign init_price = alloc.price
                       assign init_regular = auto_regular
-                      assign init_save = save_cents
+                      assign init_save = once_save
                       assign init_auto_save = auto_save
                       assign init_per_bag = per_bag
                       assign init_discount = discount
@@ -180,8 +207,8 @@
                   "days": {{ plan_days }},
                   "price": {{ alloc.price | money_without_trailing_zeros | json }},
                   "regular": {{ auto_regular | money_without_trailing_zeros | json }},
-                  "save": {{ save_cents | money_without_trailing_zeros | json }},
-                  "saveCents": {{ save_cents }},
+                  "save": {{ once_save | money_without_trailing_zeros | json }},
+                  "saveCents": {{ once_save }},
                   "autoSave": {{ auto_save | money_without_trailing_zeros | json }},
                   "autoSaveCents": {{ auto_save }},
                   "perBag": {{ per_bag | money_without_trailing_zeros | json }},
@@ -320,7 +347,7 @@
               <span class="somna-box-title">One-time purchase</span>
             </label>
             <div class="somna-price-stack">
-              <span class="somna-active-price" data-somna="onetime-price">{{ current_var.price | money_without_trailing_zeros }}</span>
+              <span class="somna-active-price" data-somna="onetime-price">{{ init_once_price | default: current_var.price | money_without_trailing_zeros }}</span>
             </div>
           </div>
           <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
