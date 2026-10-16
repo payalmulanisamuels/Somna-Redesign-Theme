@@ -600,7 +600,7 @@
         "onetime_label": "",
         "button_label": "",
         "padding_top": 28,
-        "padding_bottom": 28,
+        "padding_bottom": 104,
         "padding_top_desktop": 100,
         "padding_bottom_desktop": 30,
         "image_width_desktop": 50,
