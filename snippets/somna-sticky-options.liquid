@@ -141,3 +141,85 @@
     </ul>
   </div>
 </div>
+
+{% stylesheet %}
+  /* Somna sticky bar, desktop only (990px and up). Phones and tablets keep the approved layout.
+     The desktop bar reused the phone sizes (8.5px button text, 9px price line) inside an
+     800px square box; here it becomes a centred floating card with desktop-sized text. */
+  @media screen and (min-width: 990px) {
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+      bottom: 16px !important;
+      gap: 0;
+      width: min(720px, calc(100% - 48px));
+      max-width: 720px;
+      padding: 0 0 12px;
+      border-radius: 14px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__banner {
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 14px 14px 0 0;
+      font-size: 13px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__banner svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .sticky_bar_main {
+      gap: 12px;
+      padding: 12px 16px 0;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger {
+      gap: 12px;
+      height: 48px;
+      padding: 6px 16px;
+      border-radius: 10px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger-title {
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger-meta {
+      margin-top: 3px;
+      color: rgb(10 26 74 / 0.65);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__caret {
+      width: 12px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__panel {
+      right: 16px;
+      left: 16px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+      flex-shrink: 0;
+      min-width: 168px;
+      max-width: none;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 10px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+  }
+{% endstylesheet %}
