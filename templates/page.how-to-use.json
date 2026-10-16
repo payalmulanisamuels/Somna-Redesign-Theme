@@ -344,7 +344,7 @@
       "name": "Layered Image with Text",
       "settings": {
         "section_width": "full-width",
-        "height": "auto",
+        "height": "medium",
         "corner_radius": 0,
         "border_width": 1,
         "drop_shadow": false,
@@ -394,7 +394,7 @@
         "title": "",
         "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one.",
         "content_width_desktop": "80rem",
-        "padding_top_desktop": 0,
+        "padding_top_desktop": 50,
         "padding_bottom_desktop": 50,
         "image_size_desktop": 100,
         "image_gap_desktop": 8,
@@ -518,7 +518,7 @@
       "name": "Layered Image with Text",
       "settings": {
         "section_width": "full-width",
-        "height": "auto",
+        "height": "medium",
         "corner_radius": 0,
         "border_width": 1,
         "drop_shadow": false,
