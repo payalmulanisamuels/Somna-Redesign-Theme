@@ -170,7 +170,7 @@
     height: 10px;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
  
 
