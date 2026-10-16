@@ -487,7 +487,7 @@
           setText('regular', plan.regular);
           setText('save', plan.save);
           setText('auto-save', plan.autoSave);
-          setText('onetime-pct', String(currentVariant?.onetimePct > 0 ? currentVariant.onetimePct : plan.discount));
+          setText('onetime-pct', String(currentVariant?.autoSave > 0 ? currentVariant.autoSave : plan.discount));
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
           setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
