@@ -1385,9 +1385,9 @@
         "button_label": "Add to Cart",
         "button_link": "",
         "bg_color": "rgba(0,0,0,0)",
-        "text_color": "#0b1a30",
-        "button_bg_color": "#0b1a30",
-        "button_text_color": "#ffffff",
+        "text_color": "{{ settings.color_palette.background }}",
+        "button_bg_color": "{{ settings.color_palette.background }}",
+        "button_text_color": "#0A1A4A",
         "padding_top": 0,
         "padding_bottom": 0
       }
