@@ -37,12 +37,23 @@
 </div>
 
 {% stylesheet %}
-  /* Shipping Policy page only (2026-10-16): sections alternate peach #fff2e3 and coral #f9b38d. Every
-     section after the title rises into the one above with the footer's own wave (Footer_Curved_edge.svg,
-     the file the footer uses), drawn in that section's colour at the footer's sizes: 25px on phones,
-     79px from 750px, scaled to the page width and anchored to the top like the footer's. The last
-     section hangs the same wave, flipped, over the newsletter image. Text and blocks are unchanged. */
-  #MainContent[data-template='page.shipping-policy'] {
+  /* Policy and Support pages (2026-10-16; first approved on Shipping Policy): the content sections
+     alternate peach #fff2e3 and coral #f9b38d, counted on each page in order (title first; on Support,
+     where the title is off, the hero). Every section after the first rises into the one above with the
+     footer's own wave (Footer_Curved_edge.svg, the file the footer uses) in that section's colour, at
+     the footer's sizes: 25px on phones, 79px from 750px, scaled to the page width and anchored to the top
+     like the footer's. A last section with the newsletter image below it hangs the same wave, flipped,
+     over that image. The old image waves are hidden here. Text, blocks and settings are unchanged. */
+  #MainContent:is(
+    [data-template='page.shipping-policy'],
+    [data-template='page.support'],
+    [data-template='page.return-refund-policy'],
+    [data-template='page.terms-of-service'],
+    [data-template='page.policy'],
+    [data-template='page.order-cancellation-policy'],
+    [data-template='page.subscription-policy'],
+    [data-template='page.sale-policy']
+  ) {
     --sp-wave-h: 25px;
     --sp-wave: url('/cdn/shop/files/Footer_Curved_edge.svg');
     --sp-gap-top: 32px;
@@ -50,50 +61,48 @@
   }
 
   @media screen and (min-width: 750px) {
-    #MainContent[data-template='page.shipping-policy'] {
+    #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) {
       --sp-wave-h: 79px;
       --sp-gap-top: 44px;
       --sp-gap-bottom: 56px;
     }
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
-      [id$='__main'], [id$='__section_iYG7xV'], [id$='__section_xXDyC9']) {
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):nth-child(odd of .shopify-section:is([id$='__main'], [id*='__section_'])) {
     --sp-bg: #fff2e3;
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
-      [id$='__section_nCrU7b'], [id$='__section_63n6Lm'], [id$='__section_B46NBr']) {
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):nth-child(even of .shopify-section:is([id$='__main'], [id*='__section_'])) {
     --sp-bg: #f9b38d;
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is([id$='__main'], [id*='__section_']) > .section-background {
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']) > .section-background {
     background-color: var(--sp-bg);
   }
 
-  /* The old image waves were drawn in the old section colours, so they are hidden on this page */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is([id$='__main'], [id*='__section_']) > .wave-container {
+  /* The old image waves were drawn in the old section colours */
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']) > .wave-container {
     display: none;
   }
 
   /* Even spacing. Each wave sits in the bottom padding of the section above it, so that padding is the
-     wave height plus a gap, and no text is ever under a wave. */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id*='__section_'] .section > .custom-section-content > .section-content-wrapper.spacing-style {
+     wave height plus a gap, and no text, accordion or button is ever under a wave. The first section
+     keeps its own top padding and a last section above the site footer keeps its own bottom padding. */
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):not(:nth-child(1 of .shopify-section:is([id$='__main'], [id*='__section_']))) :is(.section > .section-content-wrapper, .section > .custom-section-content > .section-content-wrapper).spacing-style {
     padding-block-start: var(--sp-gap-top);
+  }
+
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):not(:nth-last-child(1 of .shopify-section:is([id$='__main'], [id*='__section_']))) :is(.section > .section-content-wrapper, .section > .custom-section-content > .section-content-wrapper).spacing-style {
     padding-block-end: calc(var(--sp-wave-h) + var(--sp-gap-bottom));
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__main'] .section > .section-content-wrapper.spacing-style {
-    padding-block-end: calc(var(--sp-wave-h) + var(--sp-gap-bottom));
-  }
-
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__section_B46NBr'] .section > .custom-section-content > .section-content-wrapper.spacing-style {
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):has(+ [id$='__footer_m9NzUG']) :is(.section > .section-content-wrapper, .section > .custom-section-content > .section-content-wrapper).spacing-style {
     padding-block-end: var(--sp-gap-bottom);
   }
 
-  /* The wave, exactly as the footer draws its own: this section's colour, shaped by the footer's SVG,
-     full width, rising from 1px inside this section over the bottom of the section above */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id*='__section_']::before {
+  /* The wave, as the footer draws its own: this section's colour, shaped by the footer's SVG, full
+     width, rising from 1px inside this section over the bottom of the section above */
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):not(:nth-child(1 of .shopify-section:is([id$='__main'], [id*='__section_'])))::before {
     content: '';
     position: absolute;
     top: calc(1px - var(--sp-wave-h));
@@ -107,8 +116,8 @@
     pointer-events: none;
   }
 
-  /* Last section: the same wave turned upside down, in coral, over the top of the newsletter image */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__section_B46NBr']::after {
+  /* Last section above the newsletter image: the same wave upside down, over the top of the image */
+  #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):has(+ [id$='__footer_m9NzUG'])::after {
     content: '';
     position: absolute;
     top: calc(100% - 1px);
@@ -123,10 +132,10 @@
     pointer-events: none;
   }
 
-  /* Phones: move the newsletter text down by the wave height so the wave never covers it
+  /* Phones: the newsletter text moves down by the wave height so the wave never covers it
      (from 750px the footer already has more room than that) */
   @media screen and (max-width: 749px) {
-    #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__footer_m9NzUG'] > .section {
+    #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > [id$='__footer_m9NzUG'] > .section {
       padding-top: var(--sp-wave-h);
     }
   }
