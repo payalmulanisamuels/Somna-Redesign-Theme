@@ -38,10 +38,20 @@
 
 {% stylesheet %}
   /* Shipping Policy page only (2026-10-16): sections alternate peach #fff2e3 and coral #f9b38d, and each
-     one ends in a soft wave of its own colour that runs over the top of the next section (the last one
-     over the footer). Replaces this page's old image waves; text, blocks and settings are unchanged. */
+     one ends in a deep S-shaped wave of its own colour that flows down into the next section (the last
+     one over the footer image). Replaces this page's old image waves; text and blocks are unchanged.
+     The wave height follows the screen width, so the curve keeps the same shape at every size. */
   #MainContent[data-template='page.shipping-policy'] {
-    --sp-wave-h: clamp(28px, 4.2vw, 60px);
+    --sp-wave-h: clamp(44px, 6.6vw, 96px);
+    --sp-gap-top: 28px;
+    --sp-gap-bottom: 36px;
+  }
+
+  @media screen and (min-width: 990px) {
+    #MainContent[data-template='page.shipping-policy'] {
+      --sp-gap-top: 44px;
+      --sp-gap-bottom: 56px;
+    }
   }
 
   #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
@@ -54,24 +64,29 @@
     --sp-bg: #f9b38d;
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
-      [id$='__main'], [id^='shopify-section-'][id*='__section_']) .section-background {
+  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is([id$='__main'], [id*='__section_']) > .section-background {
     background-color: var(--sp-bg);
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
-      [id$='__main'], [id*='__section_']) > .wave-container {
+  /* The old image waves were drawn in the old section colours, so they are hidden on this page */
+  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is([id$='__main'], [id*='__section_']) > .wave-container {
     display: none;
   }
 
-  /* Room for the wave that comes down from the section above, so no text sits under it */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id*='__section_'] {
-    padding-top: var(--sp-wave-h);
-    padding-bottom: 12px;
+  /* Even spacing: the wave from the section above sits in the top padding, then a comfortable gap
+     before the heading; the same gap below the text before this section's own wave */
+  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id*='__section_'] .section > .custom-section-content > .section-content-wrapper.spacing-style {
+    padding-block-start: calc(var(--sp-wave-h) + var(--sp-gap-top));
+    padding-block-end: var(--sp-gap-bottom);
   }
 
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
-      [id$='__main'], [id*='__section_'])::after {
+  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__main'] .section > .section-content-wrapper.spacing-style {
+    padding-block-end: var(--sp-gap-bottom);
+  }
+
+  /* The wave: this section's colour, hanging from its bottom edge over the top of the next section.
+     It starts 1px inside this section so no seam shows between the two. */
+  #MainContent[data-template='page.shipping-policy'] > .shopify-section:is([id$='__main'], [id*='__section_'])::after {
     content: '';
     position: absolute;
     top: calc(100% - 1px);
@@ -80,20 +95,23 @@
     z-index: 3;
     height: calc(var(--sp-wave-h) + 1px);
     background-color: var(--sp-bg);
-    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V26C1330 48 1190 60 1030 52C870 44 770 20 610 17C450 14 310 42 170 48C100 51 45 45 0 36Z'/%3E%3C/svg%3E") top / 100% 100% no-repeat;
-    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V26C1330 48 1190 60 1030 52C870 44 770 20 610 17C450 14 310 42 170 48C100 51 45 45 0 36Z'/%3E%3C/svg%3E") top / 100% 100% no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1340 60 1260 96 1150 96C1010 96 780 10 600 10C420 10 270 78 150 78C70 78 25 62 0 50Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1440V30C1340 60 1260 96 1150 96C1010 96 780 10 600 10C420 10 270 78 150 78C70 78 25 62 0 50Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
     pointer-events: none;
   }
 
-  /* Every other wave is mirrored so the dividers don't all look the same */
+  /* Every other wave is mirrored, so the dips and peaks alternate down the page */
   #MainContent[data-template='page.shipping-policy'] > .shopify-section:is(
       [id$='__section_nCrU7b'], [id$='__section_63n6Lm'], [id$='__section_B46NBr'])::after {
     transform: scaleX(-1);
   }
 
-  /* The last wave runs over the top of the footer image; push the footer text down by the same amount */
-  #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__footer_m9NzUG'] > .section {
-    padding-top: var(--sp-wave-h);
+  /* Phones and tablets: the last wave covers the top of the footer image, so its text moves down by the
+     wave height (desktop already has room for it in somna-home-desktop.css) */
+  @media screen and (max-width: 989px) {
+    #MainContent[data-template='page.shipping-policy'] > .shopify-section[id$='__footer_m9NzUG'] > .section {
+      padding-top: var(--sp-wave-h);
+    }
   }
 {% endstylesheet %}
 
