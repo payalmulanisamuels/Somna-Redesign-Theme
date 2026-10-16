@@ -429,6 +429,16 @@
         z-index: 1;
     }
   
+    .template-page .wave-container {
+        height: 79px;
+    }
+    .template-page  .wave-container.bottom {
+      bottom: -79px;
+    }
+    .template-page  .wave-container.top {
+        top: -79px;
+        z-index: 1;
+    }
     .accordion .details__header {
         font-size: 22px !important;
         padding-top: 30px;
