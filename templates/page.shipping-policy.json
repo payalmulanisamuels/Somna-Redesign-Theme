@@ -168,6 +168,7 @@
         "padding-block-start": 50,
         "padding-block-end": 20,
         "padding-block-start-desktop": 0,
+        "padding-block-end-desktop": 0,
         "stack_desktop": false,
         "align_items_desktop": "",
         "content_width_desktop": ""
@@ -725,9 +726,9 @@
                 "heading_text_color": "",
                 "heading_preset": "h3",
                 "border_style": "all",
+                "input_style": "custom",
                 "border_width": 1,
                 "border_radius": 100,
-                "input_style": "custom",
                 "input_background_color": "{{ settings.color_palette.background }}",
                 "input_text_color": "{{ settings.color_palette.color1 }}",
                 "input_border_color": "#0a1a4a",
