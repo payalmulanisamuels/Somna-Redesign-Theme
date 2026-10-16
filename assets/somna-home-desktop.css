@@ -1421,6 +1421,7 @@
     min-height: 54px;
     gap: 12px;
     padding: 3px 30px 3px 8px !important; /* overrides the hero's own button padding */
+    font-size: clamp(16px, 1.4vw, 20px) !important;
   }
   [id$='__hero_hwsale'] .button::before {
     width: 46px;
@@ -1460,7 +1461,7 @@
     box-shadow: 0 6px 0 #b8430b;
   }
   .somna-sp__details {
-    margin-top: clamp(24px, 3.3vw, 48px);
+    margin-top: clamp(15px, 3.3vw, 15px);
     font-size: clamp(15px, 1.25vw, 18px);
   }
 }
