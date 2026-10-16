@@ -415,13 +415,13 @@
         top: -65px;
     }
     .wave-container {
-        height: 100px;
+        height: 45px;
     }
     .wave-container.bottom {
-      bottom: -95px;
+      bottom: -45px;
     }
     .wave-container.top {
-        top: -95px;
+        top: -45px;
         z-index: 1;
     }
     h2.hz-banner-heading {
