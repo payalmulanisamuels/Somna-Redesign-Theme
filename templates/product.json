@@ -1297,7 +1297,7 @@
         "button_bg": "#0a1a4a",
         "button_text_color": "#ffffff",
         "padding_top": 8,
-        "padding_bottom": 8
+        "padding_bottom": 0
       }
     },
     "steps_guide_GFjEFb": {
