@@ -293,7 +293,7 @@
                 "padding-block-end": 10,
                 "padding-inline-start": 10,
                 "padding-inline-end": 10,
-                "padding-block-start-desktop": 30,
+                "padding-block-start-desktop": 10,
                 "padding-block-end-desktop": 16,
                 "padding-inline-start-desktop": 18,
                 "padding-inline-end-desktop": 16,
@@ -1387,7 +1387,7 @@
         "bg_color": "rgba(0,0,0,0)",
         "text_color": "{{ settings.color_palette.background }}",
         "button_bg_color": "{{ settings.color_palette.background }}",
-        "button_text_color": "#0A1A4A",
+        "button_text_color": "#0a1a4a",
         "padding_top": 0,
         "padding_bottom": 0
       }
