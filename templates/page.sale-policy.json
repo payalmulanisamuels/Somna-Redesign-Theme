@@ -61,7 +61,7 @@
         "content_direction": "column",
         "gap": 15,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 10,
+        "padding-block-start": 100,
         "padding-block-end": 0
       }
     },
