@@ -142,6 +142,23 @@
  
     {% endif %}
 
+{% stylesheet %}
+  /* Halloween spider, phones only (2026-10-16, Figma Mouth Tape mobile): shorter silk and a smaller
+     spider, so it rests in the gap left of the Problem card, about two-thirds of the way down it,
+     instead of dropping onto the "Problem" heading and text. Tablet and desktop are unchanged. */
+  @media screen and (max-width: 749px) {
+    .somna-ps--halloween > .somna-ess__web--left .somna-spider {
+      left: calc(var(--web-w) * 30 / 439);
+      --len: calc(var(--web-w) * 168 / 439);
+    }
+
+    .somna-ps--halloween > .somna-ess__web--left .somna-spider__body {
+      left: calc(var(--web-w) * -26 / 439);
+      width: calc(var(--web-w) * 52 / 439);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Problem Solution",
