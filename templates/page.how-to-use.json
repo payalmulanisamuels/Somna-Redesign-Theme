@@ -77,6 +77,7 @@
             "padding-block-end": 0,
             "padding-inline-start": 15,
             "padding-inline-end": 15,
+            "padding-block-start-desktop": 20,
             "padding-inline-start-desktop": 0,
             "padding-inline-end-desktop": 0,
             "gap_desktop": 0,
