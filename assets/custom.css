@@ -1700,6 +1700,9 @@ a.somna-view-all {
   }
   .sleep-warap{
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
   }
   .sleep-card-badge {
     background: #ffffff;
