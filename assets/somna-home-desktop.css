@@ -29,6 +29,9 @@
    ===================================================================== */
 /* ---- from product-col-custom.css ---- */
 @media(min-width:768px){
+  .hz-banner-content{
+    padding: 20px 20px 20px 140px;
+  }
   :where(.template-product,.template-collection,.template-list-collections,.somna-sp) .hz-hiw-grid{
     padding: 50px 0 0;
   }
