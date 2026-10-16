@@ -3930,7 +3930,7 @@ margin-top: 7px;
   background-image: url("somna-hw-howto-bottom.svg") !important;
 }
 .hz-prob-sol-section.somna-ps--halloween {
-  padding-top: clamp(24px, 6.4vw, 93px);
+  padding-top: clamp(17px,6.4vw,35px);
 }
 
 /* How To Use: peach background and peach top/bottom waves (Figma #fff2e3) */
