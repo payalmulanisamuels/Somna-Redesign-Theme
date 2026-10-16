@@ -142,6 +142,18 @@
   </div>
 </section>
 
+{% stylesheet %}
+  /* "Or save with a bundle" on collection pages (2026-10-16): the floating strip, tape and dots
+     from assets/somna-motion.css are hidden here, same as on the homepage. The cards, heading
+     and layout are unchanged. */
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .custom-header::before,
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .custom-header::after,
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .bundle-section__grid::before {
+    content: none;
+    animation: none;
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Featured Bundle Grid",
