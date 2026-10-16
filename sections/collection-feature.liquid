@@ -204,6 +204,101 @@
   });
 </script>
 
+{% stylesheet %}
+  /* "What keeps you from sleeping well?" on collection pages (2026-10-16): a shorter section, the whole
+     product photo shown (not cropped) with an even 12px frame on all four sides, and a soft shadow
+     around the white container. Same content, type, colours and layout. */
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+    margin: 24px auto 32px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgb(10 26 74 / 0.08), 0 2px 6px rgb(10 26 74 / 0.05);
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-header {
+    margin-bottom: 14px;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+    margin-bottom: 16px;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-container {
+    padding: 14px;
+  }
+
+  /* Photo: fixed height, frame hugs it, image contained (no crop, no stretch) */
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    height: 170px;
+    margin: 10px auto 12px;
+    padding: 12px;
+    aspect-ratio: auto;
+    box-sizing: border-box;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+      margin: 40px auto 48px;
+      padding: 32px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-header {
+      margin-bottom: 18px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+      margin-bottom: 20px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-container {
+      padding: 20px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
+      height: clamp(200px, 22vw, 240px);
+      margin-bottom: 14px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-description {
+      margin-bottom: 8px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-price {
+      margin-bottom: 14px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-button {
+      min-height: 46px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+      margin: 40px auto 48px;
+      padding: clamp(28px, 2.8vw, 40px);
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+      margin-bottom: 0;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
+      height: clamp(180px, 15vw, 220px);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Interactive Sleep Tabs",
