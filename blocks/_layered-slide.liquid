@@ -90,6 +90,19 @@
   </div>
 </div>
 
+{% stylesheet %}
+  /* Homepage "It's simple. Breathe through your nose." banner (2026-10-16): the white wave over
+     the top of the photo is the bottom wave of the "Small essentials" section above it. From 750px
+     the shared wave strip is now 65px tall, but that section's own CSS still moved it down 95px,
+     so the wave started 30px below the photo's top edge and a strip of the photo showed above it.
+     Same placement as before the height change: the wave overlaps the section above by 5px. */
+  @media screen and (min-width: 750px) {
+    #MainContent[data-template='index'] .shopify-section[id$='__section_ibM3ft'] .wave-container.bottom {
+      bottom: -60px;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:names.slide",
