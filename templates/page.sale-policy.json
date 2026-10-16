@@ -60,9 +60,9 @@
       "settings": {
         "content_direction": "column",
         "gap": 15,
-        "background_color": "#cbd6f4",
-        "padding-block-start": 50,
-        "padding-block-end": 100
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 10,
+        "padding-block-end": 0
       }
     },
     "section_nCrU7b": {
