@@ -124,10 +124,10 @@
           {%- comment -%}
             Handle menus with fewer than 3 levels of links
           {%- endcomment -%}
-          {% if linklist.levels < 3 %}
+          {% if linklisttop.levels < 3 %}
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
-            {%- for link in linklist.links -%}
+            {%- for link in linklisttop.links -%}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 style="--menu-drawer-animation-index: {{ animation_index }};"
