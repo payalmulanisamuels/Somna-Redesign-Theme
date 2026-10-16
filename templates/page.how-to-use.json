@@ -389,8 +389,8 @@
       ],
       "name": "Steps Guide",
       "settings": {
-        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
-        "bottom_wave_image": "shopify://shop_images/review-svg-bottom.svg",
+        "top_wave_image": "shopify://shop_images/somna-hw-howto-top.svg",
+        "bottom_wave_image": "shopify://shop_images/somna-hw-howto-bottom.svg",
         "bg_color": "#FFF2E3",
         "show_waves": false,
         "title": "",
@@ -565,9 +565,9 @@
       ],
       "name": "Steps Guide",
       "settings": {
-        "top_wave_image": "shopify://shop_images/howtouse-top.svg",
-        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
-        "bg_color": "#e0e8d7",
+        "top_wave_image": "shopify://shop_images/somna-hw-howto-top.svg",
+        "bottom_wave_image": "shopify://shop_images/somna-hw-howto-bottom.svg",
+        "bg_color": "#FFF2E3",
         "show_waves": false,
         "title": "",
         "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use.",
