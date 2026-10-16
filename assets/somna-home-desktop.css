@@ -826,7 +826,7 @@
     border-radius: 24px;
   }
   #MainContent[data-template^="collection"] .sleep-card-subtitle {
-    margin-bottom: 16px;
+    margin-bottom: 0px;
     font-size: 16px;
   }
   #MainContent[data-template^="collection"] .sleep-card-image-wrapper {
