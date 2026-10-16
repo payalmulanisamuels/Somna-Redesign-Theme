@@ -1421,7 +1421,6 @@
     min-height: 54px;
     gap: 12px;
     padding: 3px 30px 3px 8px !important; /* overrides the hero's own button padding */
-    font-size: clamp(16px, 1.4vw, 20px) !important;
   }
   [id$='__hero_hwsale'] .button::before {
     width: 46px;
