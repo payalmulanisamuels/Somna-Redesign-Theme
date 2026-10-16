@@ -2222,7 +2222,7 @@ END OF SWITCHED-OFF SECTION 11 */
 }
 
 .somna-ps--halloween > .somna-ess__web--left {
-  --web-w: clamp(110px, 31.3vw, 451px);
+  --web-w: clamp(110px, 28.3vw, 451px);
   --hang: 341;
   position: absolute;
   top: 0;
