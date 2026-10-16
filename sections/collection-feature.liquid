@@ -133,12 +133,13 @@
         -%}
 
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
-          <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
 
+          <div class="sleep-warap">
+          <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
              {%- if block.settings.overlay_badge != blank -%}
               <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
             {%- endif -%}
-          
+          </div>
           <div class="sleep-card-image-wrapper">
             {%- if card_image != blank -%}
               {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'sleep-card-main-image' }}
