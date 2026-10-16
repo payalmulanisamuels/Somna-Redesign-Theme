@@ -357,13 +357,14 @@
   }
 
   /* Homepage "It's simple. Breathe through your nose." banner, phones only (2026-10-16): the white
-     wave of the "Small essentials" section above overlaps the top of this banner's photo, but the
-     banner's own mobile Custom CSS gives its container z-index 111, the same as the wave, so the
-     photo (later on the page) painted over the wave and hid it. The wave goes one step above.
-     Tablet and desktop are unchanged. */
+     wave is part of the banner photo (simple-banner.png, 2880 x 1360). On phones the banner was
+     only as tall as its text, so the photo (object-fit: cover) was cut at the top and bottom on
+     wider phones and the wave disappeared. The text group gets the photo's height at this width
+     as a minimum (the banner's script sizes the banner from it, as on desktop), so the whole photo
+     shows. Small phones whose text is already taller are unchanged. Desktop is unchanged. */
   @media screen and (max-width: 749px) {
-    #MainContent[data-template='index'] .shopify-section[id$='__section_ibM3ft'] .wave-container.bottom {
-      z-index: 112;
+    #MainContent[data-template='index'] [id$='__layered_image_with_text_LEPfjJ'] .layered-slideshow__content > .group-block-content {
+      min-height: calc(100cqi * 1360 / 2880 - var(--padding-block-start, 0px) - var(--padding-block-end, 0px));
     }
   }
 {% endstylesheet %}
