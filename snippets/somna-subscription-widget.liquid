@@ -353,13 +353,21 @@
         if (!productForm) return;
 
         // The real selling plan id submitted to /cart/add. Disabled = one-time purchase.
-        let planInput = productForm.querySelector('input[name="selling_plan"]');
-        if (!planInput) {
-          planInput = document.createElement('input');
-          planInput.type = 'hidden';
-          planInput.name = 'selling_plan';
-          productForm.appendChild(planInput);
-        }
+        // Halloween Sale page: a size change re-renders (morphs) the whole sale section from the server,
+        // which drops this script-made input, so Autoship was added as one-time. The input is looked up
+        // (and re-made if missing) every time it is used, and synced again just before every submit.
+        const getPlanInput = () => {
+          const form = document.getElementById(`BuyButtons-ProductForm-${sectionId}`) || productForm;
+          let input = form.querySelector('input[name="selling_plan"]');
+          if (!input) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'selling_plan';
+            form.appendChild(input);
+          }
+          return input;
+        };
+        let planInput = getPlanInput();
 
         const variantIdInput = productForm.querySelector('input[name="id"]');
         const regularEl = container.querySelector('[data-somna="regular"]');
@@ -379,6 +387,9 @@
           });
         };
 
+        // The customer's choice (Autoship or one-time). Kept here as well as in the boxes' "active" class,
+        // because the sale page's section re-render resets that class to the server's default.
+        let mode = subBox && subBox.classList.contains('active') ? 'subscribe' : 'onetime';
         const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
 
         // Nasal Strips + Mouth Tape: the size cards' "$x/night" (snippets/variant-main-picker.liquid)
@@ -409,6 +420,7 @@
         }
 
         const syncForm = () => {
+          planInput = getPlanInput();
           if (isSubscribe() && select.value) {
             planInput.value = select.value;
             planInput.disabled = false;
@@ -493,8 +505,34 @@
         };
 
         boxes.forEach((box) => {
-          box.addEventListener('click', () => activate(box));
+          box.addEventListener('click', () => {
+            mode = box === subBox ? 'subscribe' : 'onetime';
+            activate(box);
+          });
         });
+
+        // After the sale page's section re-render: show this variant's plans again, restore the
+        // customer's Autoship / one-time choice and put the selling plan input back.
+        const restoreAfterRender = (variantId) => {
+          if (container.dataset.somnaReady) return; // nothing was re-rendered (product page)
+          container.dataset.somnaReady = 'true';
+          currentVariantId = null;
+          renderVariant(variantId);
+          const box = mode === 'subscribe' && subBox && !subBox.hidden ? subBox : oneTimeBox || subBox;
+          if (box) activate(box);
+        };
+
+        // Last check before /cart/add reads the form: the input matches what is selected on screen.
+        // Capture phase, so it runs before the product form's own submit handler.
+        window.addEventListener(
+          'submit',
+          (event) => {
+            if (event.target instanceof HTMLFormElement && event.target.id === `BuyButtons-ProductForm-${sectionId}`) {
+              syncForm();
+            }
+          },
+          true
+        );
 
         select.addEventListener('change', renderPlan);
 
@@ -506,14 +544,13 @@
         scope.addEventListener('shopify:product:select', (event) => {
           if (event.target instanceof Element && event.target.closest('product-card')) return;
           const variantId = event.detail?.variantId;
-          if (variantId) {
-            renderVariant(variantId);
-            return;
-          }
+          if (variantId) renderVariant(variantId);
           event.promise
             .then((result) => {
-              const id = result?.detail?.resource?.id ?? variantIdInput?.value;
-              if (id) renderVariant(id);
+              const id = result?.detail?.resource?.id ?? variantId ?? getPlanInput().form?.querySelector('input[name="id"]')?.value;
+              if (!id) return;
+              if (!variantId) renderVariant(id);
+              restoreAfterRender(id);
             })
             .catch(() => {
               /* aborted fetch — a newer selection will follow */
