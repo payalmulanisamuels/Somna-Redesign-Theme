@@ -1191,6 +1191,7 @@
         "sleep_option_66YfmJ"
       ],
       "custom_css": [
+        ".wave-container.bottom {bottom: 5px; }",
         "@media screen and (min-width: 750px) {.wave-container.bottom {bottom: -35px; }}"
       ],
       "name": "Collection Feature",
