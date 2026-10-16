@@ -2194,9 +2194,6 @@ margin-top: 7px;
     padding: 0 5px;
 }
 
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper {
-    margin: -29px 0 0 0;
-}
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .custom-header{
   margin-bottom: 0;
 }
