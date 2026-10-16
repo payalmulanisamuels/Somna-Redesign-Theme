@@ -132,7 +132,7 @@
                 "font": "var(--font-display-spray--family)",
                 "font_size": "1.5rem",
                 "font_size_tablet": "",
-                "font_size_desktop": "7.5rem",
+                "font_size_desktop": "4.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
