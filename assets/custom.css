@@ -1711,9 +1711,9 @@ a.somna-view-all {
   .sleep-card-badge {
     background: #ffffff;
     color: #111827;
-    font-size: 11px;
+    font-size: 7px;
     font-weight: 700;
-    padding: 6px 10px;
+    padding: 6px 6px;
     border-radius: 50px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-transform: uppercase;
