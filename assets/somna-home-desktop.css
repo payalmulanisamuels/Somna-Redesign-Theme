@@ -69,7 +69,7 @@
     font-size: 32px;
   }
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .steps-section{
-    padding: 90px 0;
+    padding: 0px 0;
   }
 
   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) h2.hz-hiw-single-title {
