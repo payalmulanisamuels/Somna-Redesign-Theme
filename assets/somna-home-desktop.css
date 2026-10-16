@@ -736,6 +736,10 @@
     gap: 20px;
     padding-block: 30px 72px;
   }
+  
+  .hz-faq-wrapper {
+    padding: 40px 0 50px 0 !important;
+  }
   #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header,
   #MainContent[data-template^="collection"] .hz-faq-wrapper .details__header {
     font-size: clamp(16px, 1.4vw, 19px) !important; /* overrides existing !important size */
