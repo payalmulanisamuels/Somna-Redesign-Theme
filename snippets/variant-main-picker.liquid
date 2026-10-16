@@ -158,6 +158,8 @@
         -%}
 
         {%- if is_color_option -%}
+              {%- assign fieldset_index = fieldset_index | plus: 1 -%}
+          {%- if somna_review_after_color and forloop.first -%}{{ somna_review_card }}{%- endif -%}
           {% comment %} =========================================================
             SOMNA COLOR SWATCHES  ("Color: Blue"  ● ● ●)
           ========================================================= {% endcomment %}
@@ -227,8 +229,7 @@
               {%- endfor -%}
             </div>
           </fieldset>
-          {%- assign fieldset_index = fieldset_index | plus: 1 -%}
-          {%- if somna_review_after_color and forloop.first -%}{{ somna_review_card }}{%- endif -%}
+      
         {%- elsif product_option.values.size == 1 and variant_style != 'swatch' -%}
           <div
             class="variant-option"

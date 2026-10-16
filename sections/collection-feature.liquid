@@ -205,9 +205,9 @@
 </script>
 
 {% stylesheet %}
-  /* "What keeps you from sleeping well?" on collection pages (2026-10-16): a shorter section, the whole
-     product photo shown (not cropped) with an even 12px frame on all four sides, and a soft shadow
-     around the white container. Same content, type, colours and layout. */
+  /* "What keeps you from sleeping well?" on collection pages (2026-10-16): a shorter section, a
+     full-width but shorter product photo, and a soft shadow around the white container.
+     Same content, type, colours and layout. */
   #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
     margin: 24px auto 32px;
     padding: 20px;
@@ -226,25 +226,21 @@
     padding: 14px;
   }
 
-  /* Photo: fixed height, frame hugs it, image contained (no crop, no stretch) */
+  /* Photo: full width of the card, shorter fixed height; the photo fills it without stretching
+     (object-fit: cover), centred so the product stays in view */
   #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
-    display: flex;
-    width: fit-content;
-    max-width: 100%;
-    height: 170px;
-    margin: 10px auto 12px;
-    padding: 12px;
+    width: 100%;
+    height: 160px;
+    margin: 10px 0 12px;
     aspect-ratio: auto;
-    box-sizing: border-box;
   }
 
   #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper img {
     display: block;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
   }
 
   @media screen and (min-width: 750px) {
@@ -266,7 +262,7 @@
     }
 
     #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
-      height: clamp(200px, 22vw, 240px);
+      height: 200px;
       margin-bottom: 14px;
     }
 
@@ -294,7 +290,7 @@
     }
 
     #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
-      height: clamp(180px, 15vw, 220px);
+      height: clamp(170px, 14vw, 210px);
     }
   }
 {% endstylesheet %}
