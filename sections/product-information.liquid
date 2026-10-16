@@ -80,6 +80,11 @@
     if somna_supply_option and product.selling_plan_groups.size > 0
       assign somna_sticky = true
     endif
+    # Single-variant bundles with a selling plan (e.g. The Colour Set, Season Bundle) use the same bar,
+    # with a fixed summary (title, price, per night) instead of the size dropdown.
+    if product.has_only_default_variant and product.selling_plan_groups.size > 0
+      assign somna_sticky = true
+    endif
 
     # Initial mode matches the Buy Box default; the JS keeps it in sync afterwards.
     assign somna_purchase_mode = 'onetime'
