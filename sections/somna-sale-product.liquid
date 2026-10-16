@@ -125,15 +125,7 @@
     </div>
 
     <div class="somna-sp__intro">
-      {%- if section.settings.show_rating and sp_rating != blank -%}
-        <p class="somna-sp__rating">
-          <span class="somna-sp__rating-value">{{ sp_rating }}</span>
-          <span class="somna-sp__stars" style="--sp-rating: {{ sp_rating_pct }}%;" role="img" aria-label="{{ sp_rating }} out of 5 stars">★★★★★</span>
-          {%- if sp_count != blank -%}
-            <span class="somna-sp__rating-count">({{ sp_count }})</span>
-          {%- endif -%}
-        </p>
-      {%- endif -%}
+    
       {%- if sp_eyebrow != blank -%}
         <p class="somna-sp__eyebrow">{{ sp_eyebrow | escape }}</p>
       {%- endif -%}
