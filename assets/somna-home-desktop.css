@@ -169,7 +169,9 @@
     width: 200px;
     height: 10px;
   }
-
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid {
+    margin-bottom: 20px;
+  }
  
 
 
