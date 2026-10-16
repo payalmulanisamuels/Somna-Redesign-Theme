@@ -330,6 +330,17 @@
         assign somna_save_pct = somna_auto_cmp | minus: sub_price | times: 100.0 | divided_by: somna_auto_cmp | round
       endif
     endif
+    # Halloween Sale (products with custom.halloween_sale_text): one-time purchases are 55% off at
+    # checkout (automatic discount "Halloween Sale"), so the one-time $/night uses price x 0.45.
+    # The card's "% OFF" pill keeps showing the Autoship saving (70%). Autoship values are unchanged.
+    # Same 55 as somna_once_off in snippets/somna-subscription-widget.liquid.
+    assign somna_once_price = one_time_price
+    assign somna_once_pct = 0
+    if product_resource.metafields.custom.halloween_sale_text.value != blank
+      assign somna_once_pct = 55
+      assign somna_once_keep = 100 | minus: somna_once_pct
+      assign somna_once_price = current_variant.price | times: somna_once_keep | divided_by: 100.0 | round
+    endif
     assign somna_unit = 'bag'
     assign somna_value_lc = product_option_value.name | downcase
     if somna_value_lc contains 'set'
@@ -339,9 +350,9 @@
   <label
     class="variant-option__button-label variant-option__button-label--card somna-tier {% if forloop.index == 2 %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
     data-sub-formatted="{{ sub_price | money_without_trailing_zeros }}"
-    data-onetime-formatted="{{ one_time_price | money_without_trailing_zeros }}"
+    data-onetime-formatted="{{ somna_once_price | money_without_trailing_zeros }}"
     data-sub-numeric="{{ sub_price | divided_by: 100.0 }}"
-    data-onetime-numeric="{{ one_time_price | divided_by: 100.0 }}"
+    data-onetime-numeric="{{ somna_once_price | divided_by: 100.0 }}"
     data-nights="{{ nights_count }}"
   >
     {% comment %} Top badges (Figma: Try it / Most popular / Best value) {% endcomment %}
