@@ -50,11 +50,7 @@
 </div>
 
 <style>
-  @media(min-width:768px){
-     .hz-banner-content{
-    padding: 20px 20px 20px 140px;
-  }
-  }
+
   .hz-banner-section {
     position: relative;
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
@@ -117,7 +113,11 @@
   .hz-banner-btn:hover {
     opacity: 0.9;
   }
-
+  @media(min-width:768px){
+     .hz-banner-content{
+    padding: 20px 20px 20px 140px;
+  }
+  }
 </style>
 
 {%  endif %}
