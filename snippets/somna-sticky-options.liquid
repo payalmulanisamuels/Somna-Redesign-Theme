@@ -9,8 +9,12 @@
   the top Buy Box by assets/sticky-add-to-cart.js — this markup only holds the data.
   Rendered inside the sticky bar, so it is re-rendered (morphed) on every variant change.
 
+  Single-variant bundles (no Size option, e.g. The Colour Set / Season Bundle): the same trigger look
+  shows a fixed summary (product title · purchase option, price · per night) with no dropdown; one
+  hidden row holds that variant's prices so the script mirrors subscribe / one-time the same way.
+
   @param {object} product - The product object.
-  @param {object} supply_option - The Size / Quantity / Set option (from product.options_with_values).
+  @param {object} [supply_option] - The Size / Quantity / Set option (from product.options_with_values).
 {%- enddoc -%}
 
 {%- liquid
@@ -20,6 +24,7 @@
   endif
 -%}
 
+{%- if supply_option -%}
 <div class="somna-sticky" data-somna-sticky>
   <button
     type="button"
@@ -141,11 +146,70 @@
     </ul>
   </div>
 </div>
+{%- else -%}
+  {%- liquid
+    assign single_variant = product.selected_or_first_available_variant
+    assign single_nights = 30
+    if single_variant.metafields.custom.nights != blank
+      assign single_nights = single_variant.metafields.custom.nights.value | plus: 0
+    elsif product.metafields.custom.nights != blank
+      assign single_nights = product.metafields.custom.nights.value | plus: 0
+    endif
+
+    assign single_price = single_variant.price | money_without_trailing_zeros
+    assign single_per_night = single_variant.price | times: 1.0 | divided_by: single_nights | round | money
+    if initial_mode == 'subscribe'
+      assign single_alloc = single_variant.selling_plan_allocations.first
+      assign single_price = single_alloc.price | money_without_trailing_zeros
+      assign single_per_night = single_alloc.price | times: 1.0 | divided_by: single_nights | round | money
+    endif
+  -%}
+
+  {%- capture single_plans -%}
+    { {%- for alloc in single_variant.selling_plan_allocations -%}
+      {%- capture plan_label -%}{%- render 'somna-plan-label', selling_plan: alloc.selling_plan -%}{%- endcapture -%}
+      "{{ alloc.selling_plan.id }}": {
+        "price": {{ alloc.price | money_without_trailing_zeros | json }},
+        "perNight": {{ alloc.price | times: 1.0 | divided_by: single_nights | round | money | json }},
+        "label": {{ plan_label | strip | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%} }
+  {%- endcapture -%}
+
+  <div class="somna-sticky somna-sticky--single" data-somna-sticky>
+    <div class="somna-sticky__trigger somna-sticky__trigger--static" data-somna-sticky-toggle>
+      <span class="somna-sticky__trigger-text">
+        <span class="somna-sticky__trigger-title">
+          {{- product.title | escape }} ·
+          <span class="somna-sticky__mode--subscribe">Subscribe</span>
+          <span class="somna-sticky__mode--onetime">One-time</span>
+        </span>
+        <span class="somna-sticky__trigger-meta">
+          <span data-somna-sticky-field="price">{{ single_price }}</span> ·
+          <span data-somna-sticky-field="per-night">{{ single_per_night }}</span>/night
+        </span>
+      </span>
+    </div>
+    <span
+      hidden
+      data-somna-sticky-row
+      aria-selected="true"
+      data-onetime-price="{{ single_variant.price | money_without_trailing_zeros | escape }}"
+      data-onetime-per-night="{{ single_variant.price | times: 1.0 | divided_by: single_nights | round | money | escape }}"
+      data-plans="{{ single_plans | strip_newlines | escape }}"
+    ></span>
+  </div>
+{%- endif -%}
 
 {% stylesheet %}
   /* Somna sticky bar, desktop only (990px and up). Phones and tablets keep the approved layout.
      The desktop bar reused the phone sizes (8.5px button text, 9px price line) inside an
      800px square box; here it becomes a centred floating card with desktop-sized text. */
+  /* Single-variant bundles: the summary looks like the dropdown trigger but has nothing to open */
+  .somna-sticky__trigger.somna-sticky__trigger--static {
+    cursor: default;
+  }
+
   @media screen and (min-width: 990px) {
     sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
       bottom: 16px !important;
