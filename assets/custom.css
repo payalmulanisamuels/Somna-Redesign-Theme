@@ -1368,6 +1368,11 @@ html,
     padding: 16px 16px 40px 16px;
     width: 100%;
 }
+a#HeaderDrawer-sale {
+    color: #EF5400;
+}
+
+a#HeaderDrawer-sale svg path {stroke: #EF5400 !important;}
 .somna-products-grid {
     display: grid;
     grid-template-columns: calc(50% - 8px) calc(50% - 8px);
