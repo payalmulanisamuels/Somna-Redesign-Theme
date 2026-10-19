@@ -84,18 +84,8 @@
               {%endif %}
               <div class="bundle-card__image-wrapper">
                 {%- if image != blank -%}
-                  {%- capture bundle_img_srcset -%}
-                    {%- assign bundle_img_widths = '300,450,600,800' | split: ',' -%}
-                    {%- for bw_str in bundle_img_widths -%}
-                      {%- assign bw = bw_str | plus: 0 -%}
-                      {%- if bw < image.width -%}{{ image | image_url: width: bw }} {{ bw }}w, {% endif -%}
-                    {%- endfor -%}
-                    {{ image | image_url: width: 1000 }} {{ image.width | at_most: 1000 }}w
-                  {%- endcapture -%}
                   <img
                     src="{{ image | image_url: width: 1000 }}"
-                    srcset="{{ bundle_img_srcset | strip }}"
-                    sizes="(min-width: 750px) 34vw, 92vw"
                     alt="{{ title | escape }}"
                     loading="lazy"
                     class="bundle-card__image"
