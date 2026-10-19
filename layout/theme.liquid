@@ -19,7 +19,10 @@
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'card-hover-effect-styles' -%}
-    {{ 'somna-motion.css' | asset_url | stylesheet_tag }}
+    {%- comment -%} Speed (2026-10-19): somna-motion.css only holds hover/focus effects and decorations further down the page,
+      so it loads without blocking the first paint. Its first-paint rules are at the end of custom.css. {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'somna-motion.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'somna-motion.css' | asset_url | stylesheet_tag }}</noscript>
     {%- comment -%} Halloween display fonts (Rubik Wet Paint, Rubik Spray Paint, Bigshot One): Latin-only subsets, loaded without blocking the page {%- endcomment -%}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
