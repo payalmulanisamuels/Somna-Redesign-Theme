@@ -1,12 +1,13 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
 {{ 'custom.css' | asset_url | stylesheet_tag: preload: true }}
-{% if template contains 'product' or template contains 'collection' %}
-    {{ 'product-col-custom.css' | asset_url | stylesheet_tag: preload: true }}
-    {%- comment -%} Somna buybox (Figma purchase panel) – after product-col-custom.css so it can restyle it {%- endcomment -%}
-    {{ 'somna-buybox.css' | asset_url | stylesheet_tag }}
-{% endif %}
+{%- comment -%}
+  2026-10-15: product-col-custom.css and somna-buybox.css are no longer loaded. Their rules were
+  moved (unchanged, in the same order) to the end of custom.css (phones + all sizes) and the top of
+  somna-home-desktop.css (min-width 768px blocks), scoped to the product / collection pages via the
+  body class template-{{ template.name }} (layout/theme.liquid). The two old files are kept as backups.
+{%- endcomment -%}
 {%- comment -%} Shared desktop/tablet styles (homepage, collection, product, pages); media attribute keeps phones from waiting on it {%- endcomment -%}
-{% if template.name == 'index' or template.name == 'collection' or template.name == 'product' or template.name == 'page' %}
+{% if template.name == 'index' or template.name == 'collection' or template.name == 'product' or template.name == 'page' or template.name == 'list-collections' %}
     <link rel="stylesheet" href="{{ 'somna-home-desktop.css' | asset_url }}" media="screen and (min-width: 750px)">
 {% endif %}
