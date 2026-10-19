@@ -100,6 +100,15 @@ if(document.querySelector(".hz-banner-btn")){
   });
 }
 
+/** True when an ancestor of el (below stop) is in the set of elements about to animate. */
+const hasMarkedAncestor = (el, marked, stop) => {
+  if (!marked.size) return false;
+  for (let node = el.parentElement; node && node !== stop; node = node.parentElement) {
+    if (marked.has(node)) return true;
+  }
+  return false;
+};
+
 /* ==========================================================================
    Somna motion: calm reveal on scroll (styles in assets/somna-motion.css)
    - Marks only content that starts BELOW the screen, so the hero / LCP and
@@ -217,15 +226,21 @@ if(document.querySelector(".hz-banner-btn")){
     const viewportHeight = window.innerHeight;
     const root = main.contains(scope) || scope === main ? scope : main;
 
+    // Speed: measure everything first, then add the classes in one go. Adding a class between
+    // measurements made the browser recalculate the layout for every element (forced reflow).
+    const marked = new Set();
     for (const el of root.querySelectorAll(SELECTOR)) {
       const section = el.closest('.shopify-section');
       if (!section || section === firstSection || !main.contains(section)) continue;
       if (section.querySelector('product-form-component')) continue; // main product / featured product
       if (el.closest(SKIP)) continue;
-      if (el.parentElement?.closest('.sm-reveal')) continue; // parent already animates
+      if (el.parentElement?.closest('.sm-reveal') || hasMarkedAncestor(el, marked, main)) continue; // parent already animates
       const rect = el.getBoundingClientRect();
       if (rect.height === 0 || rect.top < viewportHeight) continue; // visible on load or above: leave as is
       if (!canAnimate(el)) continue;
+      marked.add(el);
+    }
+    for (const el of marked) {
       el.classList.add('sm-reveal');
       if (el.matches('.image-block')) el.classList.add('sm-reveal--image');
       observer.observe(el);
@@ -239,7 +254,12 @@ if(document.querySelector(".hz-banner-btn")){
     });
   };
 
-  init(document.getElementById('MainContent'));
+  // Speed: set up after the page has loaded (in idle time) instead of while it is still loading.
+  // Only content below the screen is ever hidden, so nothing visible changes.
+  const start = () => init(document.getElementById('MainContent'));
+  const later = (fn) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 200));
+  if (document.readyState === 'complete') later(start);
+  else window.addEventListener('load', () => later(start), { once: true });
 
   // Theme editor: set up re-rendered sections, show selected ones straight away
   document.addEventListener('shopify:section:load', (event) => init(event.target));
@@ -372,16 +392,21 @@ if(document.querySelector(".hz-banner-btn")){
     // so the row inside it (details) is animated instead
     root.querySelectorAll('accordion-custom.sm-reveal:not(.sm-in)').forEach((el) => el.classList.remove('sm-reveal'));
 
+    // Speed: measure everything first, then add the classes in one go (no forced reflow per element)
+    const marked = new Set();
     for (const el of root.querySelectorAll(ITEMS)) {
       if (el.classList.contains('sm-reveal') || el.closest('.sm-reveal')) continue; // already handled
       const section = el.closest('.shopify-section');
       if (!section || section === firstSection || !main.contains(section)) continue;
       if (section.querySelector('product-form-component')) continue;
       if (el.closest(SKIP)) continue;
-      if (el.parentElement?.closest('.sm-reveal')) continue;
+      if (el.parentElement?.closest('.sm-reveal') || hasMarkedAncestor(el, marked, main)) continue;
       const rect = el.getBoundingClientRect();
       if (rect.height === 0 || rect.top < viewportHeight) continue; // visible on load or above
       if (!canAnimate(el)) continue;
+      marked.add(el);
+    }
+    for (const el of marked) {
       el.classList.add('sm-reveal');
       observer.observe(el);
     }
