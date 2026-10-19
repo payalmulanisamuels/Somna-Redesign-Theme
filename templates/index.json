@@ -1963,6 +1963,7 @@
         ".wave-container.bottom {background-position: top; bottom: 0;}",
         ".layered-slideshow-section {overflow: hidden;}",
         ".layered-slideshow__container,.layered-slideshow__panels,.layered-slideshow__panel-content {overflow: visible;}",
+        ".layered-slideshow-section {overflow: hidden;}",
         "@media screen and (max-width: 749px) {.layered-slideshow__container[size=\"auto\"] {position: relative; z-index: 111; }}"
       ],
       "name": "Layered Image with Text",
