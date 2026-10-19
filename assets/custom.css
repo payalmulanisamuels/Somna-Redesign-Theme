@@ -1944,7 +1944,7 @@ a.somna-view-all {
   width: 18.6%;
   height: 117%;
   background:
-    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png") center top / 100% auto no-repeat,
+    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png?width=200") center top / 100% auto no-repeat,
     linear-gradient(#fff, #fff) 48.6% 100% / 82.3% 85.5% no-repeat;
 }
 /* witch hat on the "a." (the hat file has a white background, multiply drops it) */
@@ -1953,7 +1953,7 @@ a.somna-view-all {
   top: -200.7%;
   width: 50%;
   aspect-ratio: 1;
-  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913") center / contain no-repeat;
+  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913&width=300") center / contain no-repeat;
   mix-blend-mode: multiply;
 }
 
@@ -2011,7 +2011,7 @@ a.somna-view-all {
   flex: none;
   width: 34px;
   height: 34px;
-  background: url("/cdn/shop/files/pumpkin-icon.png") center / contain no-repeat;
+  background: url("/cdn/shop/files/pumpkin-icon.png?width=128") center / contain no-repeat;
 }
 
 /* ---------- Shop the essentials ---------- */
@@ -2094,7 +2094,7 @@ a.somna-view-all {
   width: 46px;
   aspect-ratio: 164 / 161;
   padding-top: 10px;
-  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/badge.png?v=1791982298") center / contain no-repeat;
+  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/badge.png?v=1791982298&width=160") center / contain no-repeat;
   pointer-events: none;
 }
 .somna-ess__badge-text {
@@ -4026,7 +4026,7 @@ margin-top: 7px;
   color: #fff !important;
 }
 [id$='__hero_hwsale'] .button--button_hwtape::before {
-  background-image: url("/cdn/shop/files/somna-halloween-pumpkin-navy.png");
+  background-image: url("/cdn/shop/files/somna-halloween-pumpkin-navy.png?width=128");
   filter: brightness(0) invert(1);
 }
 /* Phones: one "Shop the sale" button (Figma mobile); the two product buttons are desktop only */
