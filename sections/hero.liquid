@@ -112,7 +112,42 @@
   if section.index == 1
     assign fetch_priority = 'high'
   endif
+
+  # Speed (2026-10-21): the slot 1 mobile picture lists only real file sizes (widths smaller than the
+  # image, plus the image's own width). Shopify never enlarges an image, so the 1200/1600 entries were
+  # the same pixels under another URL; dropping them keeps the resolution identical and lets the
+  # Early Hints preload below ask for exactly the same file as the <source>.
+  assign hero_m1_widths = mobile_widths
+  if section.settings.image_1_mobile != blank
+    assign hero_m1_px = section.settings.image_1_mobile.width
+    if hero_m1_px <= 1600
+      assign hero_m1_widths = ''
+      for mw in mobile_widths_array
+        assign mw_num = mw | plus: 0
+        if mw_num < hero_m1_px
+          assign hero_m1_widths = hero_m1_widths | append: mw | append: ', '
+        endif
+      endfor
+      assign hero_m1_widths = hero_m1_widths | append: hero_m1_px
+    endif
+  endif
+  assign hero_m1_widths_array = hero_m1_widths | split: ', '
 %}
+
+{%- comment -%}
+  Speed (2026-10-21): first hero on the page with a separate phone image -> send that image as an
+  Early Hints preload (Link header) so phones start downloading it before the page HTML arrives.
+  The image_tag output is discarded; only its Link header is used. Same file, same sizes as below.
+{%- endcomment -%}
+{%- if section.index == 1 and media_1 == 'image' and media_1_mobile == 'image' and section.settings.image_1_mobile != blank -%}
+  {%- capture hero_mobile_preload -%}
+    {{
+      section.settings.image_1_mobile
+      | image_url: width: 1600
+      | image_tag: widths: hero_m1_widths, sizes: sizes_mobile, preload: true
+    }}
+  {%- endcapture -%}
+{%- endif -%}
 
 {% capture media_slot_1 %}
   {%- if media_1 == 'image' and media_1_mobile == 'image' -%}
@@ -124,7 +159,7 @@
       <source
         media="(max-width: 749px)"
         srcset="
-          {%-  for mobile_width in mobile_widths_array -%}
+          {%-  for mobile_width in hero_m1_widths_array -%}
             {{ section.settings.image_1_mobile | image_url: width: mobile_width }} {{ mobile_width }}w{% unless forloop.last %},{% endunless %}
           {%- endfor -%}
         "
