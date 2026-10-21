@@ -584,6 +584,88 @@
     .somna-popup--has-image .somna-popup-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   }
 
+  /* Desktop only (990px and up, single-column popup): a wide two-panel modal instead of the
+     phone card. Left panel = the visual of each screen (pumpkin stage / "10% off" card / carved
+     pumpkin) on a warm glow; right panel = logo, headline, copy and buttons, left-aligned.
+     Same markup, script, content and animations; phones and tablets keep the card above. */
+  @media (min-width: 990px) {
+    .somna-popup-wrapper:not(.somna-popup--has-image) {
+      --somna-pk-w: clamp(190px, 30dvh, 236px);
+      padding: 24px;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-popup-container {
+      max-width: 880px; min-height: min(560px, calc(100dvh - 48px)); max-height: calc(100dvh - 48px);
+      border-radius: 28px;
+      background:
+        radial-gradient(60% 75% at 72% 50%, rgba(0, 0, 0, 0) 0%, #000 100%),
+        linear-gradient(rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.74)),
+        url("{{ popup_web }}&width=1200") center / cover no-repeat,
+        #000;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-popup-content { padding: 0; position: relative; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-close-btn { top: 18px; right: 18px; }
+
+    /* logo sits at the top of the right panel */
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-logo {
+      position: absolute; z-index: 2; top: 38px; left: calc(44% + 60px); font-size: 32px; padding: 0;
+    }
+
+    /* each screen: 44% visual panel | text panel, text block centred vertically */
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-screen {
+      flex: 1; margin: 0; padding: 0;
+      display: grid; grid-template-columns: 44% minmax(0, 1fr);
+      grid-template-rows: minmax(112px, 1fr) repeat(7, auto) minmax(40px, 1fr);
+      align-items: start; justify-items: start; text-align: left;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-screen::before {
+      content: ''; grid-column: 2; grid-row: 1;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-screen::after {
+      content: ''; grid-column: 1; grid-row: 1 / -1; align-self: stretch; justify-self: stretch;
+      border-right: 1px solid rgba(205, 74, 4, 0.45);
+      background: radial-gradient(70% 55% at 50% 58%, rgba(241, 198, 68, 0.16), rgba(205, 74, 4, 0.05) 55%, transparent 80%);
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-screen > * {
+      grid-column: 2; margin-inline: 60px 56px; max-width: calc(100% - 116px);
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-screen > :is(.somna-carve-stage, .somna-revealed-card, .somna-pumpkin) {
+      grid-column: 1; grid-row: 1 / -1; align-self: center; justify-self: center;
+      margin: 0; max-width: none; position: relative; z-index: 1;
+    }
+
+    /* Screen 1 */
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-carve-stage { width: 84%; margin: 0; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-title { font-size: 64px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-subhead { font-size: 16px; margin-top: 14px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-primary-btn--sm {
+      min-width: 250px; height: 52px; margin-block-start: 28px; font-size: 23px;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-claim-btn { font-size: 21px; }
+
+    /* Screen 2 */
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-screen-2 > .somna-revealed-card {
+      width: 240px; padding: 22px 16px 18px; rotate: -5.8deg;
+    }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-screen-2 .somna-reveal-title { font-size: 44px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-screen-2 .somna-reveal-sub { font-size: 15px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-title--md { font-size: 52px; margin-top: 0; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-screen-2 .somna-subhead { margin: 10px 56px 24px 60px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-signup-form { max-width: 380px; width: 100%; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-email-input { height: 52px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-submit-btn { height: 52px; font-size: 19px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-consent-text { max-width: 380px; margin-top: 16px; text-wrap: pretty; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-decline-link { padding-inline: 0; margin-top: 4px; }
+
+    /* Screen 3 */
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-screen-3 > .somna-pumpkin { --somna-pk-w: 210px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-title--sm { font-size: 40px; margin-top: 0; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-code-box { max-width: 380px; margin-block: 22px 4px; padding: 18px 12px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) #somna-discount-code-text { font-size: 34px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-copy-link { padding-inline: 0; margin-bottom: 16px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-primary-btn--lg { max-width: 380px; height: 56px; font-size: 20px; }
+    .somna-popup-wrapper:not(.somna-popup--has-image) .somna-small-print { margin-top: 14px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .somna-popup-wrapper::before, .somna-popup-wrapper.somna-visible::before,
     .somna-popup-container, .somna-visible .somna-popup-container,
