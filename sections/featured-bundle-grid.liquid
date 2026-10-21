@@ -95,7 +95,7 @@
                   <img
                     src="{{ image | image_url: width: 1000 }}"
                     srcset="{{ bundle_img_srcset | strip }}"
-                    sizes="(min-width: 750px) 34vw, 92vw"
+                    sizes="(min-width: 750px) 34vw, {% if block.settings.is_featured %}92vw{% else %}46vw{% endif %}"
                     alt="{{ title | escape }}"
                     loading="lazy"
                     class="bundle-card__image"

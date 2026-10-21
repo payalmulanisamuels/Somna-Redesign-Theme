@@ -1016,7 +1016,7 @@
           "type": "product_card",
           "settings": {
             "product": "nasal-strips",
-            "image": "shopify://shop_images/somna-halloween-card-strips.png",
+            "image": "shopify://shop_images/somna-halloween-card-strips-optimized.webp",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -1028,7 +1028,7 @@
           "type": "product_card",
           "settings": {
             "product": "mouth-tape",
-            "image": "shopify://shop_images/somna-halloween-card-tape.png",
+            "image": "shopify://shop_images/somna-halloween-card-tape-optimized.webp",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -1089,7 +1089,7 @@
             "tag": "",
             "is_featured": true,
             "custom_title": "Three months, Black Strips + Black Tape",
-            "custom_image": "shopify://shop_images/season-bundle.png",
+            "custom_image": "shopify://shop_images/season-bundle-optimized.webp",
             "subtext": "Subscribe & Save",
             "button_label": "Shop now"
           }
@@ -1865,7 +1865,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/simple-banner.png",
+            "image_1": "shopify://shop_images/simple-banner-optimized.webp",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -1985,6 +1985,7 @@
         "product": "sleep-bundle",
         "badge_text": "3 Colors",
         "show_badge_icon": true,
+        "image": "shopify://shop_images/somna_breathe_blue_final-optimized.webp",
         "show_rating": true,
         "title": "The Sleep Bundle",
         "subtitle": "Strips + Tape in Blue, Red or Black.",
