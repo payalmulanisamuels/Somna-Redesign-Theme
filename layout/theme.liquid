@@ -42,6 +42,52 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    {%- unless request.design_mode -%}
+    {%- comment -%}
+      Speed TEST (2026-10-22, Pagespeed theme only, not approved for live yet):
+      hold Klaviyo's onsite script (static.klaviyo.com/onsite/js/...) until the visitor first scrolls, taps,
+      clicks or presses a key. Klaviyo's own queue (window.klaviyo / _learnq) keeps every tracking call
+      made before that and sends it once the script runs. Remove this block to undo.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        var KL = 'static.klaviyo.com/onsite/js/';
+        var held = [];
+        var started = false;
+        function isKlaviyo(n) {
+          return n && n.tagName === 'SCRIPT' && n.src && n.src.indexOf(KL) > -1 && !n.hasAttribute('data-somna-late');
+        }
+        function addLate(src) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = src;
+          s.setAttribute('data-somna-late', '');
+          document.head.appendChild(s);
+        }
+        var obs = new MutationObserver(function (list) {
+          list.forEach(function (m) {
+            m.addedNodes.forEach(function (n) {
+              if (!isKlaviyo(n)) return;
+              if (started) return;
+              n.type = 'javascript/blocked';
+              if (n.parentNode) n.parentNode.removeChild(n);
+              held.push(n.src);
+            });
+          });
+        });
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+        var events = ['scroll', 'wheel', 'pointerdown', 'touchstart', 'keydown'];
+        function start() {
+          if (started) return;
+          started = true;
+          events.forEach(function (e) { removeEventListener(e, start, true); });
+          held.splice(0).forEach(addLate);
+          obs.disconnect();
+        }
+        events.forEach(function (e) { addEventListener(e, start, { capture: true, passive: true }); });
+      })();
+    </script>
+    {%- endunless -%}
     {{ content_for_header }}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMTP7PT99F"></script>
