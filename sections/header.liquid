@@ -393,7 +393,8 @@
     class="header__underlay header__underlay-open"
   ></div>
   {%- if request.page_type == 'index' -%}
-    <h1 class="visually-hidden">{{ shop.name }}</h1>
+    {%- comment -%} SEO (2026-10-22): a paragraph, not an H1, so the hero headline is the only H1 on the homepage. Still read by screen readers. {%- endcomment -%}
+    <p class="visually-hidden">{{ shop.name }}</p>
   {%- endif -%}
   {% for row in rows %}
     {% liquid
