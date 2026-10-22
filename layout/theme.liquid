@@ -71,11 +71,32 @@
               if (started) return;
               n.type = 'javascript/blocked';
               if (n.parentNode) n.parentNode.removeChild(n);
-              held.push(n.src);
+              if (held.indexOf(n.src) < 0) held.push(n.src);
             });
           });
         });
         obs.observe(document.documentElement, { childList: true, subtree: true });
+        // Scripts added later by other code (e.g. Klaviyo's Shopify app file) are held too:
+        // a script with an unknown type is never downloaded or run.
+        var srcProp = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
+        var create = document.createElement;
+        document.createElement = function (tag) {
+          var el = create.apply(document, arguments);
+          if (!started && srcProp && String(tag).toLowerCase() === 'script') {
+            Object.defineProperty(el, 'src', {
+              configurable: true,
+              get: function () { return srcProp.get.call(el); },
+              set: function (v) {
+                if (!started && String(v).indexOf(KL) > -1) {
+                  el.type = 'javascript/blocked';
+                  if (held.indexOf(String(v)) < 0) held.push(String(v));
+                }
+                srcProp.set.call(el, v);
+              }
+            });
+          }
+          return el;
+        };
         var events = ['scroll', 'wheel', 'pointerdown', 'touchstart', 'keydown'];
         function start() {
           if (started) return;
