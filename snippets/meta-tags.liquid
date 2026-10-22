@@ -18,11 +18,27 @@
   content=""
 >
 
+{%- comment -%} SEO (2026-10-22): custom meta descriptions for policy pages, which have no description field in Shopify admin. All other pages are unchanged. {%- endcomment -%}
 {%- liquid
+  assign seo_description = page_description
+  if request.page_type == 'policy'
+    case request.path
+      when '/policies/refund-policy'
+        assign seo_description = 'Not sleeping better? Return Somna within 30 days for a refund. See how returns work for nasal strips, mouth tape and the alarm band.'
+      when '/policies/privacy-policy'
+        assign seo_description = 'How Somna collects, uses and protects your personal information when you shop with us, and the privacy choices you have.'
+      when '/policies/terms-of-service'
+        assign seo_description = 'The terms for using usesomna.com and buying Somna sleep products, including product use, liability and how disputes are handled.'
+      when '/policies/subscription-policy'
+        assign seo_description = 'How to change, skip or cancel a Somna subscription, pre-order or try-before-you-buy order at any time.'
+      when '/policies/contact-information'
+        assign seo_description = 'Contact Somna Sleep Co. for help with orders, returns and subscriptions: hello@somnasleep.com.'
+    endcase
+  endif
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  assign og_description = seo_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
     assign og_type = 'product'
@@ -115,9 +131,9 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
+{% if seo_description %}
   <meta
     name="description"
-    content="{{ page_description | escape }}"
+    content="{{ seo_description | escape }}"
   >
 {% endif %}
