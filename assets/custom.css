@@ -507,27 +507,6 @@ li.menu__item.paragraph a {
 }
 
 /* Dot navigation */
-.hz-slider-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 30px;
-}
-.hz-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid #4a5c68;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
-}
-.hz-dot.is-active {
-  background-color: #4a5c68;
-  transform: scale(1.1);
-}
 /* Small Product */
 /* Signup Form*/
 
@@ -1042,22 +1021,6 @@ h2.upsell_heading {
     flex-direction: column;
     gap: 2px;
     min-width: 0;
-}
-.hz-minicart-upsell__stars {
-    position: relative;
-    align-self: flex-start;
-    color: #E0E0E0;
-    font-size: 13px;
-    letter-spacing: 2px;
-    line-height: 1;
-}
-.hz-minicart-upsell__stars::before {
-    content: "★★★★★";
-    position: absolute;
-    inset: 0;
-    width: var(--hz-rating, 100%);
-    overflow: hidden;
-    color: #F1C644;
 }
 .hz-minicart-upsell__title {
     margin: 0;
@@ -1798,12 +1761,6 @@ a.somna-view-all {
   color: #0A1A4A;
   padding: 20px 0;
 }
-.steps-subheading-top {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  letter-spacing: 0.02em;
-}
 .steps-grid {
   display: flex;
   justify-content: space-between;
@@ -2225,9 +2182,6 @@ margin-top: 7px;
     justify-content: center;
     padding-top: 9px;
 }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__image-wrapper img {
-    max-height: 40px;
-}
  
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option--equal-width-buttons .variant-option__button-label {
     border: 1px solid #000 !important;
@@ -2596,59 +2550,8 @@ margin-top: 7px;
     font-family: var(--headfont);
     appearance: none;
   }
-  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-widget-meta-footer {
-    display: flex;
-    gap: 8px;
-    margin-top: 4px;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-policy-link {
-    text-decoration: underline;
-    color: #000;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    text-decoration-line: underline;
-  }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-delivery-timeline {
-    border: 1px solid #cbd3d8;
-    padding: 8px 12px;
-    text-align: left;
-    border-radius: 10px;
-    background: #fff9ee;
-    width: 100%;
-}
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span {
-    color: #061C42;
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span:last-child {
-    max-width: 61px;
-    text-align: right;
-}
-  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-line {
-    height: 4px;
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-box-icon {
-    position: relative;
-    left: -2px;
-  }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .button[id^=BuyButtons-ProductSubmitButton-] {
+    
+      :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .button[id^=BuyButtons-ProductSubmitButton-] {
     --button-border-color: transparent;
     border-radius: 999px;
     color: #FFF;
@@ -2659,26 +2562,7 @@ margin-top: 7px;
     height: 34px !important;
     padding: 0;
 }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-guarantee-text {
-    color: #000;
-    font-size: 7.5px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
 /* Subscription box*/
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .title_and_price_wrapper {
-    color: #0A1A4A;
-    font-size: 13px;
-    font-weight: 700;
-}
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .custom_radio_button:has(input[type='radio']:checked):before{
-    background: #0A4FD6 !important;
-    box-shadow: 0 0 0 2px #0a4fd6!important;
-}
  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails{
   margin: 0 !important;
  }
@@ -3184,14 +3068,6 @@ margin-top: 7px;
   margin-bottom: 5px;
   font-family: var(--font-accent--family);
 }
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-heading {
-  font-size: 16px;
-  font-weight: 400;
-  font-family: serif;
-  color: #0A1A4A;
-  line-height: 1.2;
-  margin: 0 0 3px 0;
-}
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text {
   font-size: 10px;
   line-height: 1.6;
@@ -3230,14 +3106,6 @@ margin-top: 7px;
   width: 100%;
   height: 60px;
   object-fit: fill;
-}
-:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-main-title {
-  text-align: center;
-  font-size: 38px;
-  font-family: serif;
-  font-weight: 500;
-  color: #0b1a30;
-  margin: 0 0 40px 0;
 }
 :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-grid {
   display: grid;
