@@ -90,7 +90,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><strong>Contact Us</strong></p>",
+                "text": "<h1><strong>Contact Us</strong></h1>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -228,7 +228,10 @@
         "stack_desktop": true,
         "align_items_desktop": "",
         "content_width_desktop": "80rem"
-      }
+      },
+      "custom_css": [
+        ".text-block > h1 {font-weight: 400; line-height: 1.2;}"
+      ]
     },
     "section_fEMxag": {
       "type": "section",

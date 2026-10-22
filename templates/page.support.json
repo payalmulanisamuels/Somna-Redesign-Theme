@@ -160,7 +160,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>SUPPORT HUB</p>",
+                    "text": "<h1>SUPPORT HUB</h1>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -350,7 +350,8 @@
       ],
       "custom_css": [
         ".layout-panel-flex--row:not(.mobile-column) > .image-block img {max-width: 52px;}",
-        ".layout-panel-flex--row:not(.mobile-column) > .image-block {justify-content: flex-end;}"
+        ".layout-panel-flex--row:not(.mobile-column) > .image-block {justify-content: flex-end;}",
+        ".text-block > h1 {font-weight: 400; line-height: 1.2;}"
       ],
       "name": "t:names.faq_section",
       "settings": {
