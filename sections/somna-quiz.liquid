@@ -1,0 +1,209 @@
+{%- comment -%}
+  Somna "What's your sleep type?" quiz — Pagespeed theme version (2026-10-23).
+  Content, scoring, results and product URLs are carried over unchanged from
+  sections/somna-quiz.liquid in theme 159031787751. Restyled to this theme's design.
+  Additions: Back / Next / Retake controls, answers kept when going back,
+  results recalculated from the stored answers (same rules), double-tap guard.
+  CSS and JS live in snippets rendered only by this section, so they load only on the quiz page.
+{%- endcomment -%}
+{%- assign band = all_products['silent-alarm-band'] -%}
+{%- assign nasal = all_products['anti-snore-nasal-strips'] -%}
+{%- assign tape = all_products['sleep-mouth-tape'] -%}
+{%- assign allimgs = band.images | concat: nasal.images | concat: tape.images -%}
+{%- assign sid = section.id -%}
+{%- capture img_b -%}{% if band.featured_image != blank %}{{ band.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+{%- capture img_t -%}{% if tape.featured_image != blank %}{{ tape.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+{%- capture img_s -%}{% if nasal.featured_image != blank %}{{ nasal.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+
+<section class="sq" id="sq-{{ sid }}" data-sq aria-label="Sleep type quiz">
+  <div class="sq-wrap">
+    <div class="sq-logo">som<span>na.</span></div>
+    <div class="sq-card">
+
+      <div class="sq-top" data-sq-top>
+        <button type="button" class="sq-back" data-sq-back hidden>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ section.settings.back_label | default: 'Back' }}</span>
+        </button>
+        <div class="sq-prog" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8" data-sq-prog>
+          <div class="sq-prog-f" data-sq-progf></div>
+        </div>
+      </div>
+      <p class="sq-sr" aria-live="polite" data-sq-live></p>
+
+      <div class="sq-body">
+
+        <div class="sq-s is-on" data-type="q" data-q="1">
+          <h1 class="sq-intro-h" tabindex="-1">Find out what's <span>really</span> wrecking your sleep</h1>
+          <p class="sq-assess"><span class="sq-check" aria-hidden="true">✓</span> This 60-second assessment reads your symptoms and routine to find the fix built for you.</p>
+          <figure class="sq-testi">
+            {%- if section.settings.testi_img -%}
+              {{ section.settings.testi_img | image_url: width: 112 | image_tag: class: 'sq-testi-av', width: 48, height: 48, alt: '', loading: 'eager' }}
+            {%- else -%}
+              <div class="sq-testi-av sq-testi-ph" aria-hidden="true">MD</div>
+            {%- endif -%}
+            <div>
+              <blockquote class="sq-testi-q">“{{ section.settings.testi_quote }}”</blockquote>
+              <figcaption class="sq-testi-n">{{ section.settings.testi_name }} <span>✓ Verified buyer</span></figcaption>
+            </div>
+          </figure>
+          <h2 class="sq-q" id="sq-{{ sid }}-q1">First — how do your mornings usually feel?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q1">
+            <button type="button" class="sq-opt" data-b="2">I hit snooze a bunch and still struggle to get up</button>
+            <button type="button" class="sq-opt" data-t="2">Groggy and foggy even after a full night</button>
+            <button type="button" class="sq-opt" data-t="2">Tired with a dry mouth or sore throat</button>
+            <button type="button" class="sq-opt" data-s="1">Mornings are fine — it's my nights</button>
+          </div>
+        </div>
+
+        <div class="sq-s" data-type="q" data-q="2">
+          <h2 class="sq-q" id="sq-{{ sid }}-q2" tabindex="-1">Be honest — how many alarms does it take to get you up?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q2">
+            <button type="button" class="sq-opt" data-b="0">One. I'm up.</button>
+            <button type="button" class="sq-opt" data-b="2">Two or three, with snoozing</button>
+            <button type="button" class="sq-opt" data-b="3">Four+ — someone has to wake me</button>
+            <button type="button" class="sq-opt" data-b="3">I've slept straight through them</button>
+          </div>
+        </div>
+
+        <div class="sq-s" data-type="q" data-q="3">
+          <h2 class="sq-q" id="sq-{{ sid }}-q3" tabindex="-1">Does your sleep affect anyone else?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q3">
+            <button type="button" class="sq-opt" data-b="2">My alarm blasts my partner awake too</button>
+            <button type="button" class="sq-opt" data-s="3">My snoring drives them off (or to another room)</button>
+            <button type="button" class="sq-opt" data-b="2" data-s="2">Both 😬</button>
+            <button type="button" class="sq-opt" data-tag="solo">I sleep solo</button>
+          </div>
+        </div>
+
+        <div class="sq-s" data-type="q" data-q="4">
+          <h2 class="sq-q" id="sq-{{ sid }}-q4" tabindex="-1">When you wake up, what's the inside of your mouth like?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q4">
+            <button type="button" class="sq-opt" data-t="3">Bone dry — reaching for water in the night</button>
+            <button type="button" class="sq-opt" data-t="2">Drooled on the pillow / rough morning breath</button>
+            <button type="button" class="sq-opt" data-s="2" data-t="1">Nose so blocked I have to mouth-breathe</button>
+            <button type="button" class="sq-opt">Totally fine</button>
+          </div>
+          <div class="sq-why"><span>Why we ask</span>Mouth-breathing dries you out and breaks deep sleep — one of the most missed causes of waking up unrested.</div>
+        </div>
+
+        <div class="sq-s" data-type="q" data-q="5">
+          <h2 class="sq-q" id="sq-{{ sid }}-q5" tabindex="-1">How's your nose at night?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q5">
+            <button type="button" class="sq-opt" data-s="3">Always congested — worse when I lie down</button>
+            <button type="button" class="sq-opt" data-s="3">I snore, or I've been told I do</button>
+            <button type="button" class="sq-opt" data-s="1">Stuffy only with allergies or a cold</button>
+            <button type="button" class="sq-opt">Clear, no problems</button>
+          </div>
+          <div class="sq-why"><span>Why we ask</span>A blocked airway lying down is what turns into snoring — and the lighter, broken sleep that follows.</div>
+        </div>
+
+        <div class="sq-s" data-type="q" data-q="6">
+          <h2 class="sq-q" id="sq-{{ sid }}-q6" tabindex="-1">Once you're in bed, how long does it take to fall asleep?</h2>
+          <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q6">
+            <button type="button" class="sq-opt" data-tag="fast">Out cold in minutes</button>
+            <button type="button" class="sq-opt" data-tag="normal">15–30 minutes</button>
+            <button type="button" class="sq-opt" data-tag="racing">30–60 min — mind won't shut off</button>
+            <button type="button" class="sq-opt" data-tag="severe">Over an hour, most nights</button>
+          </div>
+        </div>
+
+        <div class="sq-s" data-type="baswap" data-prog="55">
+          <p class="sq-tag">✓ You're in the right place</p>
+          <h2 class="sq-q" tabindex="-1">{{ section.settings.proof_count | default: '12,000+' }} sleepers have found their fix.</h2>
+          <p class="sq-sub">Real people, real mornings.</p>
+          <div class="sq-cw" data-sq-cw>
+            {%- assign cwi = 0 -%}
+            {%- for block in section.blocks -%}{%- if block.type == 'cust' -%}
+              {%- assign cimg = block.settings.img | default: allimgs[cwi] -%}{%- assign cwi = cwi | plus: 1 -%}
+              <div class="sq-cwcard" {{ block.shopify_attributes }}>
+                <div class="sq-cwhead"><p class="sq-cwcap">{{ block.settings.caption }}</p><span class="sq-cwage">{{ block.settings.age }}</span></div>
+                <div class="sq-cwimg">
+                  {%- if cimg -%}
+                    {{ cimg | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '(min-width: 750px) 330px, 45vw', loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <div class="sq-cwph">Upload customer photo</div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}{%- endfor -%}
+          </div>
+          <button type="button" class="sq-cta" data-next>Continue →</button>
+        </div>
+
+        {% render 'somna-quiz-screens', qs: section.settings, sid: sid %}
+
+      </div>
+
+      <div class="sq-foot" data-sq-foot hidden>
+        <button type="button" class="sq-next" data-sq-nextbtn>{{ section.settings.next_label | default: 'Next' }} →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% render 'somna-quiz-styles' %}
+{% render 'somna-quiz-script', qs: section.settings, sid: sid, img_b: img_b, img_t: img_t, img_s: img_s %}
+
+{% schema %}
+{
+  "name": "Somna quiz",
+  "class": "somna-quiz-section",
+  "settings": [
+    { "type": "header", "content": "Intro testimonial" },
+    { "type": "text", "id": "testi_quote", "label": "Testimonial quote", "default": "Took maybe a minute. First thing in years that actually gets me up — and my wife sleeps right through it." },
+    { "type": "text", "id": "testi_name", "label": "Testimonial name", "default": "Marcus D." },
+    { "type": "image_picker", "id": "testi_img", "label": "Testimonial avatar" },
+    { "type": "text", "id": "proof_count", "label": "Social proof count", "default": "12,000+" },
+    { "type": "header", "content": "Navigation labels" },
+    { "type": "text", "id": "back_label", "label": "Back button", "default": "Back" },
+    { "type": "text", "id": "next_label", "label": "Next button (shown after going back)", "default": "Next" },
+    { "type": "text", "id": "retake_label", "label": "Retake link", "default": "Retake quiz" },
+    { "type": "header", "content": "Loader & button text" },
+    { "type": "text", "id": "analyze_title", "label": "Analyzing screen title", "default": "Analyzing your sleep profile…" },
+    { "type": "text", "id": "build_title", "label": "Building screen title", "default": "Building your profile…" },
+    { "type": "text", "id": "assess_cta", "label": "Assessment button", "default": "Show me what's possible →" },
+    { "type": "text", "id": "project_title", "label": "Projection title", "default": "The fix built for your Sleep Type." },
+    { "type": "text", "id": "project_cta", "label": "Projection button", "default": "Get my protocol →" },
+    { "type": "text", "id": "offer_title", "label": "Offer title", "default": "Sleep deep and wake rested — with your 90-night SOMNA plan." },
+    { "type": "text", "id": "offer_guar_pre", "label": "Guarantee — start", "default": "Because you qualify, " },
+    { "type": "text", "id": "offer_guar_emph", "label": "Guarantee — underlined phrase", "default": "we guarantee you'll wake up more rested" },
+    { "type": "text", "id": "offer_guar_post", "label": "Guarantee — end", "default": " with your 90-night SOMNA plan." },
+    { "type": "text", "id": "offer_refund", "label": "Offer refund line", "default": "If your mornings don't change, you don't pay — full refund, no questions asked." },
+    { "type": "text", "id": "offer_cta", "label": "Offer button", "default": "Claim my discount →" },
+    { "type": "text", "id": "applying_title", "label": "Applying screen title", "default": "Applying your discount…" },
+    { "type": "header", "content": "Result screen labels" },
+    { "type": "text", "id": "assess_heading", "label": "Result eyebrow", "default": "Your Sleep Assessment" },
+    { "type": "text", "id": "assess_levellbl", "label": "Disruption meter label", "default": "Sleep disruption level" },
+    { "type": "text", "id": "stat_pattern", "label": "Stat 1 label", "default": "Pattern" },
+    { "type": "text", "id": "stat_primary", "label": "Stat 2 label", "default": "Primary driver" },
+    { "type": "text", "id": "stat_secondary", "label": "Stat 3 label", "default": "Secondary driver" },
+    { "type": "text", "id": "stat_impact", "label": "Stat 4 label", "default": "Daytime impact" },
+    { "type": "header", "content": "Result: Heavy Sleeper" },
+    { "type": "text", "id": "type_b_name", "label": "Name", "default": "The Heavy Sleeper" },
+    { "type": "textarea", "id": "type_b_desc", "label": "Description", "default": "Sound alarms barely register for you — so you snooze and oversleep. You're not lazy; you're built like a deep sleeper, and that's exactly what Somna is designed for." },
+    { "type": "text", "id": "type_b_note", "label": "Guarantee note", "default": "30-day money-back guarantee." },
+    { "type": "header", "content": "Result: Mouth Breather" },
+    { "type": "text", "id": "type_t_name", "label": "Name", "default": "The Mouth Breather" },
+    { "type": "textarea", "id": "type_t_desc", "label": "Description", "default": "You sleep through the night but breathe wrong the whole time — which is why you wake dry, foggy and unrested. Tape. is designed to fix that." },
+    { "type": "text", "id": "type_t_note", "label": "Guarantee note", "default": "30-day money-back guarantee." },
+    { "type": "header", "content": "Result: Night Rumbler" },
+    { "type": "text", "id": "type_s_name", "label": "Name", "default": "The Night Rumbler" },
+    { "type": "textarea", "id": "type_s_desc", "label": "Description", "default": "When your nose can't move enough air lying down, you snore — and your partner pays for it. Strips. are designed to open the airway." },
+    { "type": "text", "id": "type_s_note", "label": "Guarantee note", "default": "30-day money-back guarantee." },
+    { "type": "header", "content": "Result: Full Reset" },
+    { "type": "text", "id": "type_full_name", "label": "Name", "default": "The Full Reset" },
+    { "type": "textarea", "id": "type_full_desc", "label": "Description", "default": "Your sleep is breaking down in more than one place — waking, breathing and snoring. Fixing one won't cut it. The full system targets all three." },
+    { "type": "text", "id": "type_full_note", "label": "Guarantee note", "default": "30-day money-back guarantee." }
+  ],
+  "blocks": [
+    { "type": "cust", "name": "Customer card", "settings": [
+      { "type": "image_picker", "id": "img", "label": "Customer photo" },
+      { "type": "text", "id": "caption", "label": "Top caption (what they said)", "default": "Best sleep in years." },
+      { "type": "text", "id": "age", "label": "Age line", "default": "Age: 34" }
+    ] }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "Somna quiz", "blocks": [ {"type":"cust"},{"type":"cust"},{"type":"cust"},{"type":"cust"} ] }]
+}
+{% endschema %}

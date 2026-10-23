@@ -1,0 +1,171 @@
+{%- comment -%} Somna quiz logic — only rendered by sections/somna-quiz.liquid {%- endcomment -%}
+<script>
+(function () {
+  var root = document.getElementById('sq-{{ sid }}');
+  if (!root || root.dataset.sqReady) return;   // never initialise twice
+  root.dataset.sqReady = '1';
+
+  var $ = function (s) { return root.querySelector(s); };
+  var screens = [].slice.call(root.querySelectorAll('.sq-s'));
+  var qCards = screens.filter(function (s) { return s.getAttribute('data-type') === 'q'; });
+  var progf = $('[data-sq-progf]'), prog = $('[data-sq-prog]'), top = $('[data-sq-top]');
+  var backBtn = $('[data-sq-back]'), foot = $('[data-sq-foot]'), nextBtn = $('[data-sq-nextbtn]'), live = $('[data-sq-live]');
+
+  // ---- carried over unchanged from the source section ----
+  var PROD = {
+    b: { name: 'Somna Silent Alarm Band', url: '/products/silent-alarm-band', img: '{{ img_b }}' },
+    t: { name: 'Somna Cotton Mouth Tape', url: '/products/sleep-mouth-tape', img: '{{ img_t }}' },
+    s: { name: 'Somna Anti-Snore Nasal Strips', url: '/products/anti-snore-nasal-strips', img: '{{ img_s }}' },
+    full: { name: 'The SOMNA Sleep System', url: '/products/silent-alarm-band', img: '{{ img_b }}' }
+  };
+  var TYPES = {
+    b: { name: {{ qs.type_b_name | default: "The Heavy Sleeper" | json }}, desc: {{ qs.type_b_desc | default: "Sound alarms barely register for you — so you snooze and oversleep. You're not lazy; you're built like a deep sleeper, and that's exactly what Somna is designed for." | json }}, note: {{ qs.type_b_note | default: "30-Night money-back guarantee." | json }} },
+    t: { name: {{ qs.type_t_name | default: "The Mouth Breather" | json }}, desc: {{ qs.type_t_desc | default: "You sleep through the night but breathe wrong the whole time — which is why you wake dry, foggy and unrested. Tape. is designed to fix that." | json }}, note: {{ qs.type_t_note | default: "30-Night money-back guarantee." | json }} },
+    s: { name: {{ qs.type_s_name | default: "The Night Rumbler" | json }}, desc: {{ qs.type_s_desc | default: "When your nose can't move enough air lying down, you snore — and your partner pays for it. Strips. are designed to open the airway." | json }}, note: {{ qs.type_s_note | default: "30-Night money-back guarantee." | json }} },
+    full: { name: {{ qs.type_full_name | default: "The Full Reset" | json }}, desc: {{ qs.type_full_desc | default: "Your sleep is breaking down in more than one place — waking, breathing and snoring. Fixing one won't cut it. The full system targets all three." | json }}, note: {{ qs.type_full_note | default: "30-Night money-back guarantee." | json }} }
+  };
+  var BL = { b: 'Deep-sleep wake difficulty', t: 'Mouth-breathing / dry mouth', s: 'Nasal congestion / snoring' };
+
+  // ---- state ----
+  var i = 0, answers = [], score, meta, leadFired = false, lastLevel = 'MODERATE';
+  var busy = false, run = 0, timers = [];
+  function later(fn, ms) { var r = run; var t = setTimeout(function () { if (r === run) fn(); }, ms); timers.push(t); return t; }
+  function every(fn, ms) { var r = run; var t = setInterval(function () { if (r !== run) { clearInterval(t); return; } fn(t); }, ms); timers.push(t); return t; }
+  function clearTimers() { run++; timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; }
+
+  // Rebuild points and stored data from the saved answers, in quiz order.
+  // Gives the same result as the source, which added points as each answer was tapped.
+  function lead() { var k = 'b', m = -1; ['b', 't', 's'].forEach(function (x) { if (score[x] > m) { m = score[x]; k = x; } }); return k; }
+  function recompute() {
+    score = { b: 0, t: 0, s: 0 };
+    meta = { pattern: 'Progressive', impact: 'High', cost: '', tried: '', onset: '' };
+    qCards.forEach(function (card, qi) {
+      var a = answers[qi]; if (a == null) return;
+      var opt = card.querySelectorAll('.sq-opt')[a];
+      if (opt.hasAttribute('data-impact')) meta.impact = opt.getAttribute('data-impact');
+      if (opt.hasAttribute('data-pattern')) meta.pattern = opt.getAttribute('data-pattern');
+      if (opt.hasAttribute('data-cost')) meta.cost = opt.getAttribute('data-cost');
+      if (opt.hasAttribute('data-tried')) meta.tried = opt.getAttribute('data-tried');
+      var tg = opt.getAttribute('data-tag'); if (tg && ['fast', 'normal', 'racing', 'severe'].indexOf(tg) > -1) meta.onset = tg;
+      if (opt.hasAttribute('data-impact')) { score[lead()] += 1; }
+      ['b', 't', 's'].forEach(function (x) { var v = parseInt(opt.getAttribute('data-' + x) || '0', 10); if (v) score[x] += v; });
+    });
+  }
+  function decide() { var a = [['b', score.b], ['t', score.t], ['s', score.s]]; a.sort(function (x, y) { return y[1] - x[1]; }); if (a[0][1] <= 0) return 'full'; if (a[1][1] > 0 && (a[0][1] - a[1][1]) <= 1) return 'full'; return a[0][0]; }
+
+  function isStep(sc) { var t = sc.getAttribute('data-type'); return t === 'q' || t === 'baswap'; }
+  function prevStep(n) { for (var k = n - 1; k >= 0; k--) { if (isStep(screens[k])) return k; } return -1; }
+
+  function show(n, opts) {
+    clearTimers(); busy = false;
+    screens.forEach(function (s, k) { s.classList.toggle('is-on', k === n); });
+    i = n;
+    var sc = screens[n], ty = sc.getAttribute('data-type'), q = sc.getAttribute('data-q'), dp = sc.getAttribute('data-prog');
+    var pct = q ? (q / 12 * 100) : (dp ? +dp : null);           // same progress values as the source
+    if (pct != null) { progf.style.width = pct + '%'; prog.setAttribute('aria-valuenow', Math.round(pct)); }
+    var resultish = ['assess', 'project', 'offer', 'applying'].indexOf(ty) > -1;
+    top.hidden = resultish;
+    var pb = prevStep(n);
+    backBtn.hidden = !(isStep(sc) && pb > -1);
+    if (q) {
+      var a = answers[q - 1];
+      sc.querySelectorAll('.sq-opt').forEach(function (o, k) { o.setAttribute('aria-pressed', a === k ? 'true' : 'false'); });
+      foot.hidden = (a == null);                                  // answer required before moving on
+      live.textContent = 'Question ' + q + ' of 10';
+    } else { foot.hidden = true; live.textContent = ''; }
+    var h = sc.querySelector('[tabindex="-1"]');
+    if (opts && opts.focus && h) { try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } }
+    var r = root.getBoundingClientRect();
+    if (r.top < 0 || r.top > window.innerHeight * 0.4) { try { root.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { root.scrollIntoView(); } }
+    var fn = HOOK[ty]; if (fn) fn(sc);
+  }
+  function go(n) { show(n, { focus: true }); }
+
+  qCards.forEach(function (card, qi) {
+    card.querySelectorAll('.sq-opt').forEach(function (opt, k) {
+      opt.addEventListener('click', function () {
+        if (busy || screens[i] !== card) return;                // ignore double taps
+        busy = true;
+        answers[qi] = k;
+        card.querySelectorAll('.sq-opt').forEach(function (o) { o.setAttribute('aria-pressed', o === opt ? 'true' : 'false'); });
+        recompute();
+        later(function () { go(i + 1); }, 220);
+      });
+    });
+  });
+  root.querySelectorAll('[data-next]').forEach(function (b) { b.addEventListener('click', function () { if (busy) return; busy = true; go(i + 1); }); });
+  nextBtn.addEventListener('click', function () { var q = screens[i].getAttribute('data-q'); if (busy || !q || answers[q - 1] == null) return; busy = true; go(i + 1); });
+  backBtn.addEventListener('click', function () { var p = prevStep(i); if (p > -1) go(p); });
+  root.querySelectorAll('[data-sq-retake]').forEach(function (b) { b.addEventListener('click', function () { answers = []; recompute(); go(0); }); });
+  $('[data-sq-claim]').addEventListener('click', function () { if (busy) return; busy = true; go(i + 1); });
+
+  function seqChecks(nodes, done) {
+    var arr = [].slice.call(nodes), k = 0;
+    arr.forEach(function (n) { n.classList.remove('is-doing', 'is-done'); });
+    function step() { if (k > 0) { arr[k - 1].classList.remove('is-doing'); arr[k - 1].classList.add('is-done'); } if (k >= arr.length) { done && done(); return; } arr[k].classList.add('is-doing'); k++; later(step, 720); }
+    step();
+  }
+
+  var HOOK = {
+    baswap: function (sc) {
+      var cards = [].slice.call(sc.querySelectorAll('.sq-cwcard')); if (!cards.length) return;
+      var per = 2, groups = Math.ceil(cards.length / per), g = 0;
+      function showg() { cards.forEach(function (c) { c.classList.remove('is-on', 'sq-cw-r'); }); for (var k = 0; k < per; k++) { var c = cards[(g * per + k) % cards.length]; if (!c) continue; c.classList.add('is-on'); if (k % 2) c.classList.add('sq-cw-r'); } g = (g + 1) % groups; }
+      showg(); every(showg, 1000);
+    },
+    analyze: function () {
+      var n = 0, el = $('[data-sq-ringn]'), rf = $('[data-sq-ringf]'), bar = $('[data-sq-loadf]'), lbl = $('[data-sq-analbl]');
+      var msgs = ['Reading your answers', 'Checking your airway profile', 'Scoring your wake difficulty', 'Cross-referencing your routine'];
+      el.textContent = '0%'; rf.style.strokeDashoffset = 327; bar.style.width = '0%';
+      every(function (t) {
+        n += Math.max(1, Math.round((100 - n) / 9));
+        if (n >= 100) { n = 100; clearInterval(t); later(function () { go(i + 1); }, 450); }
+        el.textContent = n + '%'; rf.style.strokeDashoffset = (327 - 327 * n / 100); bar.style.width = n + '%'; lbl.textContent = msgs[Math.min(3, Math.floor(n / 26))];
+      }, 85);
+    },
+    build: function (sc) { seqChecks(sc.querySelectorAll('.sq-chk'), function () { later(function () { go(i + 1); }, 350); }); },
+    assess: function () {
+      recompute();
+      if (!leadFired) { try { if (window.fbq) fbq('track', 'Lead', { content_name: 'Sleep Type Quiz' }); } catch (e) {} leadFired = true; }
+      var key = decide(), ty = TYPES[key];
+      $('[data-sq-atype]').textContent = ty.name; $('[data-sq-adesc]').textContent = ty.desc;
+      var tot = score.b + score.t + score.s, lvl = tot >= 11 ? 'HIGH' : (tot >= 6 ? 'MODERATE' : 'MILD'); lastLevel = lvl;
+      $('[data-sq-alevel]').textContent = lvl;
+      $('[data-sq-adot]').style.left = (lvl === 'HIGH' ? 86 : (lvl === 'MODERATE' ? 58 : 26)) + '%';
+      $('[data-sq-spat]').textContent = meta.pattern;
+      var a = [['b', score.b], ['t', score.t], ['s', score.s]]; a.sort(function (x, y) { return y[1] - x[1]; });
+      $('[data-sq-spri]').textContent = a[0][1] > 0 ? BL[a[0][0]] : '—';
+      $('[data-sq-ssec]').textContent = a[1][1] > 0 ? BL[a[1][0]] : '—';
+      $('[data-sq-simp]').textContent = meta.impact;
+    },
+    project: function () {
+      var f = function (dd) { return dd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+      var aM = function (nn) { var d = new Date(); d.setMonth(d.getMonth() + nn); return d; };
+      var t1 = aM(1), t2 = aM(2);
+      $('[data-sq-date]').textContent = t2.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+      $('[data-sq-eta]').textContent = f(t2);
+      $('[data-sq-cstatus]').textContent = lastLevel.charAt(0) + lastLevel.slice(1).toLowerCase() + ' disruption';
+      $('[data-sq-x2]').textContent = f(t1); $('[data-sq-x3]').textContent = f(t2);
+      try { if (window.fbq) fbq('track', 'ViewContent', { content_name: 'Quiz Result' }); } catch (e) {}
+    },
+    offer: function () {
+      var key = decide(), p = PROD[key], ty = TYPES[key], img = $('[data-sq-oimg]');
+      if (p.img) { img.innerHTML = '<img src="' + p.img + '" alt="" width="700" height="700" loading="lazy">'; img.hidden = false; }
+      else { img.innerHTML = ''; img.hidden = true; }          // product not available: no empty or broken image
+      $('[data-sq-onote]').textContent = ty.note;
+    },
+    applying: function (sc) {
+      var bar = $('[data-sq-applybar]'), n = 0; bar.style.width = '0%';
+      every(function (t) { n += 4; if (n >= 100) { n = 100; clearInterval(t); } bar.style.width = n + '%'; }, 95);
+      seqChecks(sc.querySelectorAll('.sq-chk'), function () {
+        var key = decide();
+        var url = PROD[key].url + '?st=' + key + (meta.cost ? '&c=' + meta.cost : '') + (meta.tried ? '&tr=' + meta.tried : '');
+        later(function () { window.location.href = url; }, 500);
+      });
+    }
+  };
+
+  recompute();
+  show(0);
+})();
+</script>
