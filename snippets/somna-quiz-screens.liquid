@@ -1,0 +1,132 @@
+{%- comment -%} Somna quiz screens Q7 → redirect. Rendered by sections/somna-quiz.liquid with qs (section settings) + sid. {%- endcomment -%}
+<div class="sq-s" data-type="q" data-q="7">
+  <h2 class="sq-q" id="sq-{{ sid }}-q7" tabindex="-1">Even after 7–8 hours, how do you feel during the day?</h2>
+  <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q7">
+    <button type="button" class="sq-opt" data-impact="High">Foggy and low — caffeine is life support</button>
+    <button type="button" class="sq-opt" data-impact="High">I crash hard around 3pm</button>
+    <button type="button" class="sq-opt" data-impact="High">Honestly? Exhausted most days</button>
+    <button type="button" class="sq-opt" data-impact="Moderate">Pretty good — I just want to optimize</button>
+  </div>
+</div>
+
+<div class="sq-s" data-type="q" data-q="8">
+  <h2 class="sq-q" id="sq-{{ sid }}-q8" tabindex="-1">What is bad sleep costing you most right now?</h2>
+  <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q8">
+    <button type="button" class="sq-opt" data-cost="energy">My energy — I'm dragging all day</button>
+    <button type="button" class="sq-opt" data-cost="focus">My focus &amp; work — brain fog</button>
+    <button type="button" class="sq-opt" data-cost="mood">My mood &amp; relationships</button>
+    <button type="button" class="sq-opt" data-cost="health">My health — long-term worry</button>
+  </div>
+</div>
+
+<div class="sq-s sq-center" data-type="analyze" data-prog="78">
+  <h2 class="sq-q" tabindex="-1">{{ qs.analyze_title | default: 'Analyzing your sleep profile…' }}</h2>
+  <p class="sq-sub">Reading what's breaking your sleep and the factors behind your tired mornings.</p>
+  <div class="sq-ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="sq-ring-bg" cx="60" cy="60" r="52"/><circle class="sq-ring-f" data-sq-ringf cx="60" cy="60" r="52"/></svg><div class="sq-ring-n" data-sq-ringn>0%</div></div>
+  <div class="sq-loadbar" aria-hidden="true"><div class="sq-loadbar-f" data-sq-loadf></div></div>
+  <p class="sq-ring-lbl" data-sq-analbl>Reading your answers</p>
+</div>
+
+<div class="sq-s" data-type="q" data-q="9">
+  <h2 class="sq-q" id="sq-{{ sid }}-q9" tabindex="-1">What have you already tried to fix your sleep?</h2>
+  <div class="sq-opts sq-opts--5" role="group" aria-labelledby="sq-{{ sid }}-q9">
+    <button type="button" class="sq-opt" data-tried="melatonin">Melatonin / sleep supplements</button>
+    <button type="button" class="sq-opt" data-tried="more">Just sleeping more or earlier</button>
+    <button type="button" class="sq-opt" data-tried="alarms">Louder or multiple alarms</button>
+    <button type="button" class="sq-opt" data-tried="stripstape">Nose strips or mouth tape before</button>
+    <button type="button" class="sq-opt" data-tried="nothing">Honestly — nothing yet</button>
+  </div>
+</div>
+
+<div class="sq-s" data-type="q" data-q="10">
+  <h2 class="sq-q" id="sq-{{ sid }}-q10" tabindex="-1">Has your sleep gotten worse over the last few years?</h2>
+  <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q10">
+    <button type="button" class="sq-opt" data-pattern="Progressive">Yeah — it used to be easy</button>
+    <button type="button" class="sq-opt" data-pattern="Long-standing">It's always been a struggle</button>
+    <button type="button" class="sq-opt" data-pattern="Intermittent">Comes and goes</button>
+    <button type="button" class="sq-opt" data-pattern="Recent onset">It's a recent thing</button>
+  </div>
+  <p class="sq-reframe">It's not you. Your sleep mechanics changed — and that's fixable.</p>
+</div>
+
+<div class="sq-s" data-type="build" data-prog="100">
+  <h2 class="sq-q" tabindex="-1">{{ qs.build_title | default: 'Building your profile…' }}</h2>
+  <p class="sq-sub">Mapping your answers against the SOMNA sleep framework.</p>
+  <ul class="sq-checks">
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Analyzing your symptoms</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Cross-referencing your routine</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Calibrating your protocol</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Personalizing your result</li>
+  </ul>
+  <p class="sq-fine">Your sleep profile is almost ready…</p>
+</div>
+
+<div class="sq-s" data-type="assess" data-prog="100">
+  <div class="sq-acard">
+    <div class="sq-acard-top"><span class="sq-acard-ic" aria-hidden="true">!</span><div><p class="sq-acard-lbl">{{ qs.assess_heading | default: 'Your Sleep Assessment' }}</p><h2 class="sq-acard-type" data-sq-atype tabindex="-1">—</h2></div></div>
+    <p class="sq-acard-desc" data-sq-adesc></p>
+    <p class="sq-acard-meterlbl">{{ qs.assess_levellbl | default: 'Sleep disruption level' }}</p>
+    <p class="sq-acard-pill" data-sq-alevel>MODERATE</p>
+    <div class="sq-meter" aria-hidden="true"><div class="sq-meter-dot" data-sq-adot></div></div>
+    <div class="sq-meter-ends" aria-hidden="true"><span>Low</span><span>High</span></div>
+  </div>
+  <dl class="sq-stats">
+    <div class="sq-stat"><dt>{{ qs.stat_pattern | default: 'Pattern' }}</dt><dd data-sq-spat>—</dd></div>
+    <div class="sq-stat"><dt>{{ qs.stat_primary | default: 'Primary driver' }}</dt><dd data-sq-spri>—</dd></div>
+    <div class="sq-stat"><dt>{{ qs.stat_secondary | default: 'Secondary driver' }}</dt><dd data-sq-ssec>—</dd></div>
+    <div class="sq-stat"><dt>{{ qs.stat_impact | default: 'Daytime impact' }}</dt><dd data-sq-simp>—</dd></div>
+  </dl>
+  <button type="button" class="sq-cta" data-next>{{ qs.assess_cta | default: "Show me what's possible →" }}</button>
+  <button type="button" class="sq-retake" data-sq-retake>{{ qs.retake_label | default: 'Retake quiz' }}</button>
+</div>
+
+<div class="sq-s" data-type="project" data-prog="100">
+  <h2 class="sq-q" tabindex="-1">{{ qs.project_title | default: 'The fix built for your Sleep Type.' }}</h2>
+  <p class="sq-sub">Based on your answers, most people in your profile feel noticeably more rested by <strong data-sq-date></strong>.</p>
+  <div class="sq-chart" aria-hidden="true">
+    <div class="sq-chart-top">
+      <div><p class="sq-chart-k">Status</p><p class="sq-chart-v" data-sq-cstatus>Moderate disruption</p></div>
+      <div><p class="sq-chart-k">Projected</p><p class="sq-chart-v sq-accent">Rested sleep</p></div>
+      <div><p class="sq-chart-k">ETA</p><p class="sq-chart-v" data-sq-eta>—</p></div>
+    </div>
+    <div class="sq-chart-mid">
+      <div class="sq-chart-y"><span>Rested</span><span>OK</span><span>Poor</span></div>
+      <div class="sq-chart-plot">
+        <div class="sq-chart-grid"><i></i><i></i><i></i></div>
+        <span class="sq-chart-goal">Goal · rested</span>
+        <svg viewBox="0 0 300 160" preserveAspectRatio="none"><defs><linearGradient id="sq-g-{{ sid }}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1354C4" stop-opacity=".28"/><stop offset="1" stop-color="#1354C4" stop-opacity="0"/></linearGradient></defs><path d="M0,138 C90,132 175,92 300,16 L300,160 L0,160 Z" fill="url(#sq-g-{{ sid }})"/><path d="M0,138 C90,132 175,92 300,16" fill="none" stroke="#1354C4" stroke-width="3" vector-effect="non-scaling-stroke"/></svg>
+        <span class="sq-chart-here">You are here</span>
+        <span class="sq-chart-pt sq-chart-pt-a"></span><span class="sq-chart-pt sq-chart-pt-b"></span>
+      </div>
+    </div>
+    <div class="sq-chart-x"><span>Today</span><span data-sq-x2>—</span><span data-sq-x3>—</span></div>
+  </div>
+  <button type="button" class="sq-cta" data-next>{{ qs.project_cta | default: 'Get my protocol →' }}</button>
+  <button type="button" class="sq-retake" data-sq-retake>{{ qs.retake_label | default: 'Retake quiz' }}</button>
+</div>
+
+<div class="sq-s sq-center" data-type="offer" data-prog="100">
+  <h2 class="sq-q sq-offer-h" tabindex="-1">{{ qs.offer_title | default: 'Sleep deep and wake rested — with your 90-night SOMNA plan.' }}</h2>
+  <p class="sq-oguar">{{ qs.offer_guar_pre | default: 'Because you qualify, ' }}<strong>{{ qs.offer_guar_emph | default: "we guarantee you'll wake up more rested" }}</strong>{{ qs.offer_guar_post | default: ' with your 90-night SOMNA plan.' }}</p>
+  <p class="sq-orefund">{{ qs.offer_refund | default: "If your mornings don't change, you don't pay — full refund, no questions asked." }}</p>
+  <div class="sq-ohero">
+    <p class="sq-ohero-badge">{{ qs.proof_count | default: '12,000+' }} rested</p>
+    <div class="sq-ohero-img" data-sq-oimg hidden></div>
+  </div>
+  <button type="button" class="sq-cta" data-sq-claim>{{ qs.offer_cta | default: 'Claim my discount →' }}</button>
+  <p class="sq-fine" data-sq-onote></p>
+  <button type="button" class="sq-retake" data-sq-retake>{{ qs.retake_label | default: 'Retake quiz' }}</button>
+</div>
+
+<div class="sq-s" data-type="applying" data-prog="100">
+  <h2 class="sq-q" tabindex="-1">{{ qs.applying_title | default: 'Applying your discount…' }}</h2>
+  <p class="sq-sub">Securing your plan and loading your personalized offer.</p>
+  <ul class="sq-checks">
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Verifying your eligibility</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Locking in your plan</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Activating your guarantee</li>
+    <li class="sq-chk"><span class="sq-chk-i" aria-hidden="true"></span>Loading your offer</li>
+  </ul>
+  <div class="sq-loadbar" aria-hidden="true"><div class="sq-loadbar-f" data-sq-applybar></div></div>
+  <p class="sq-fine">Please don't refresh — taking you to your plan…</p>
+</div>
