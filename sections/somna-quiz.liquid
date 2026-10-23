@@ -11,9 +11,9 @@
 {%- assign tape = all_products['sleep-mouth-tape'] -%}
 {%- assign allimgs = band.images | concat: nasal.images | concat: tape.images -%}
 {%- assign sid = section.id -%}
-{%- capture img_b -%}{% if band.featured_image %}{{ band.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
-{%- capture img_t -%}{% if tape.featured_image %}{{ tape.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
-{%- capture img_s -%}{% if nasal.featured_image %}{{ nasal.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+{%- capture img_b -%}{% if band.featured_image != blank %}{{ band.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+{%- capture img_t -%}{% if tape.featured_image != blank %}{{ tape.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
+{%- capture img_s -%}{% if nasal.featured_image != blank %}{{ nasal.featured_image | image_url: width: 700 }}{% endif %}{%- endcapture -%}
 
 <section class="sq" id="sq-{{ sid }}" data-sq aria-label="Sleep type quiz">
   <div class="sq-wrap">
