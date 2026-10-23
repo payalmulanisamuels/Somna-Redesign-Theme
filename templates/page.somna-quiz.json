@@ -10,226 +10,140 @@
 {
   "sections": {
     "main": {
-      "type": "main-page",
+      "type": "somna-quiz",
       "blocks": {
-        "heading": {
-          "type": "text",
-          "name": "t:names.title",
+        "c1": {
+          "type": "cust",
           "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
-            "width": "100%",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "img": "shopify://shop_images/c3493e90b1c247164bde27a4e07309bc.jpg",
+            "caption": "\"The vibration alarm is a game changer. I wake up without disturbing my wife anymore. She actually thanked me for buying it.\"",
+            "age": "Age: 41"
+          }
         },
-        "page-content": {
-          "type": "page-content",
+        "c2": {
+          "type": "cust",
           "settings": {
-            "text_color": ""
-          },
-          "blocks": {}
+            "img": "shopify://shop_images/d969e0e2922434cc91fcb0ed4afaf2ea.jpg",
+            "caption": "\"Somna feels like one of those brands you wish you had found sooner. Premium quality, thoughtful design, and products that actually do what they promise.\"",
+            "age": "Age: 52"
+          }
+        },
+        "c3": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/f4617f035a31d2716664c9ef01e6664a.jpg",
+            "caption": "\"I've tried a few mouth tapes before and these are by far the most comfortable. They stay on all night and peel off easily in the morning.\"",
+            "age": "Age: 66"
+          }
+        },
+        "c4": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/1a7b041f48c0df27fc1493299121da86.jpg",
+            "caption": "\"The nasal strips are now part of my nightly routine. I breathe easier, sleep deeper, and wake up feeling more refreshed.\"",
+            "age": "Age: 58"
+          }
+        },
+        "c5": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/c709f1d4c8ea8c49862674e181c8ab1a.jpg",
+            "caption": "\"I bought the Complete Sleep System and didn't realize how much better my sleep could be. Everything just works together.\"",
+            "age": "Age: 28"
+          }
+        },
+        "c6": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/e361567ca9cb958a1c3da44b9385281a.jpg",
+            "caption": "\"I stopped hitting snooze because the wristband wakes me up quietly every morning. No more loud alarms.\"",
+            "age": "Age: 39"
+          }
+        },
+        "c7": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/7923a277d6b6dfa254d5ff2253ba245d.jpg",
+            "caption": "\"I honestly didn't expect much, but these nasal strips made a huge difference. I woke up breathing through my nose for the first time in years.\"",
+            "age": "Age: 33"
+          }
+        },
+        "c8": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/4fe384187b90fc4b3e6dff892e399274.jpg",
+            "caption": "\"I was skeptical about mouth tape, but after one week I noticed less dry mouth and better sleep quality.\"",
+            "age": "Age: 49"
+          }
+        },
+        "c9": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/fabd5be78af6da3e86012f849a659474.jpg",
+            "caption": "\"I travel a lot for work and the Sleep System comes with me everywhere. Small products, big difference.\"",
+            "age": "Age: 61"
+          }
+        },
+        "c10": {
+          "type": "cust",
+          "settings": {
+            "img": "shopify://shop_images/85d07fd268887d1839131b55af2b4ac6.jpg",
+            "caption": "\"The battery life on the alarm band is incredible. I've been using it for over two weeks and still haven't needed to recharge.\"",
+            "age": "Age: 46"
+          }
         }
       },
       "block_order": [
-        "heading",
-        "page-content"
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10"
       ],
       "settings": {
-        "content_direction": "column",
-        "gap": 32,
-        "background_color": "#FFF9ED",
-        "padding-block-start": 40,
-        "padding-block-end": 80
-      }
-    },
-    "footer_m9NzUG": {
-      "type": "footer",
-      "blocks": {
-        "group_H6VpwJ": {
-          "type": "group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 7,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "background_color": "",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "stack_desktop": false,
-            "align_items_desktop": "",
-            "align_page_width_desktop": false,
-            "border_corners_desktop": "all"
-          },
-          "blocks": {
-            "text_LWt8Pz": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Get 10% off your<br/>first order.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.125rem",
-                "font_size_tablet": "1.5rem",
-                "font_size_desktop": "2rem",
-                "line_height": "tight",
-                "letter_spacing": "tight",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "font_desktop": "",
-                "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": ""
-              },
-              "blocks": {}
-            },
-            "text_f9CFLH": {
-              "type": "text",
-              "settings": {
-                "text": "<p>A welcome code for your first&nbsp;<br/>night with Somna.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.625rem",
-                "font_size_tablet": "1.5rem",
-                "font_size_desktop": "1.25rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "{{ settings.color_palette.background }}",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 7,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "font_desktop": "",
-                "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": ""
-              },
-              "blocks": {}
-            },
-            "klaviyo_email_marketing_sms_form_embed_block_9bccLn": {
-              "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-              "settings": {
-                "formId": "S7fEZF"
-              }
-            },
-            "email_signup_TkptFH": {
-              "type": "email-signup",
-              "disabled": true,
-              "settings": {
-                "width": "fill",
-                "custom_width": 100,
-                "heading": "",
-                "heading_text_color": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "input_style": "custom",
-                "border_width": 1,
-                "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.background }}",
-                "input_text_color": "{{ settings.color_palette.color1 }}",
-                "input_border_color": "#0a1a4a",
-                "input_type_preset": "paragraph",
-                "style_class": "button-unstyled",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "{{ settings.color_palette.background }}",
-                "display_type": "text",
-                "label": "Unlock 10% off →",
-                "integrated_button": true,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_LWt8Pz",
-            "text_f9CFLH",
-            "klaviyo_email_marketing_sms_form_embed_block_9bccLn",
-            "email_signup_TkptFH"
-          ]
-        }
-      },
-      "block_order": [
-        "group_H6VpwJ"
-      ],
-      "name": "t:names.footer",
-      "settings": {
-        "background_image": "shopify://shop_images/footer-image.jpg",
-        "section_width": "page-width",
-        "gap": 7,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 50
+        "testi_quote": "Took maybe a minute. First thing in years that actually gets me up — and my wife sleeps right through it.",
+        "testi_name": "Marcus D.",
+        "testi_img": "shopify://shop_images/05c3eadfdb9d9914f574d952d5617620.jpg",
+        "proof_count": "100,000+",
+        "analyze_title": "Analyzing your sleep profile…",
+        "build_title": "Building your profile…",
+        "assess_cta": "Show me what's possible →",
+        "project_title": "The fix built for your Sleep Type.",
+        "project_cta": "Get my protocol →",
+        "offer_title": "Sleep deep and wake rested — with your 90-night SOMNA plan.",
+        "offer_refund": "If your mornings don't change, you don't pay — full refund, no questions asked.",
+        "offer_cta": "Claim my discount →",
+        "applying_title": "Applying your discount…",
+        "assess_heading": "Your Sleep Assessment:",
+        "assess_levellbl": "Sleep Disruption Level",
+        "stat_pattern": "Pattern",
+        "stat_primary": "Primary driver",
+        "stat_secondary": "Secondary driver",
+        "stat_impact": "Daytime impact",
+        "type_b_name": "The Heavy Sleeper",
+        "type_b_desc": "Sound alarms barely register for you — so you snooze and oversleep. You're not lazy; you're built like a deep sleeper, and that's exactly what DreamX is designed for.",
+        "type_b_note": "90-night money-back guarantee on DreamX.",
+        "type_t_name": "The Mouth Breather",
+        "type_t_desc": "You sleep through the night but breathe wrong the whole time — which is why you wake dry, foggy and unrested. Tape. is designed to fix that.",
+        "type_t_note": "30-Night money-back guarantee.",
+        "type_s_name": "The Night Rumbler",
+        "type_s_desc": "When your nose can't move enough air lying down, you snore — and your partner pays for it. Strips. are designed to open the airway.",
+        "type_s_note": "30-Night money-back guarantee.",
+        "type_full_name": "The Full Reset",
+        "type_full_desc": "Your sleep is breaking down in more than one place — waking, breathing and snoring. Fixing one won't cut it. The full system targets all three.",
+        "type_full_note": "Backed by our money-back guarantee.",
+        "back_label": "Back",
+        "next_label": "Next",
+        "retake_label": "Retake quiz"
       }
     }
   },
   "order": [
-    "main",
-    "footer_m9NzUG"
+    "main"
   ]
 }
