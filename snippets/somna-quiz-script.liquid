@@ -124,10 +124,12 @@
     triedEl.textContent = line || ''; triedEl.hidden = !line;
     var el = $('.sq-res[data-res="' + s.result + '"]'), base = el ? el.getAttribute('data-url') : '';
     var tried = s.tried.map(function (t) { return t.replace('tried_', ''); }).join(',');
-    var url = base ? base + '&quiz=' + s.result + '&for=' + s.who + (tried ? '&tried=' + encodeURIComponent(tried) : '') : '#';
-    // Email sign-ups: Shopify discount link applies the code, then opens the same product page
+    var path = base.split('?')[0], qs = (base.split('?')[1] ? base.split('?')[1] + '&' : '') + 'quiz=' + s.result + '&for=' + s.who + (tried ? '&tried=' + encodeURIComponent(tried) : '');
+    var url = base ? path + '?' + qs : '#';
+    // Email sign-ups: Shopify discount link applies the code, then opens the same product page.
+    // Shopify drops a query string inside "redirect" but passes the link's other parameters on, so they go alongside it.
     var withCode = signedUp && cfg.code && base;
-    if (withCode) url = '/discount/' + encodeURIComponent(cfg.code) + '?redirect=' + encodeURIComponent(url);
+    if (withCode) url = '/discount/' + encodeURIComponent(cfg.code) + '?redirect=' + encodeURIComponent(path) + '&' + qs;
     if (codeEl) codeEl.hidden = !withCode;
     goBtn.setAttribute('href', url);
   }
