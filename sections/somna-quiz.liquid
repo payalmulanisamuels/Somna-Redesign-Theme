@@ -35,11 +35,14 @@
       {%- comment -%} Screen 6: optional email {%- endcomment -%}
       <div class="sq-s sq-center" data-type="email">
         <h2 class="sq-q" tabindex="-1">{{ section.settings.email_heading }}</h2>
-        {%- comment -%} Klaviyo embed form (default "Footer Signup - 10% Off"): Klaviyo's onsite script draws the form here and adds the email to its list, which starts the Welcome Series with the 10% code. The script moves on to the result after a successful sign-up. {%- endcomment -%}
-        <div class="sq-kl" data-sq-kl>
-          {%- if section.settings.klaviyo_form_id != blank -%}<div class="klaviyo-form-{{ section.settings.klaviyo_form_id }}"></div>{%- endif -%}
-        </div>
-        <p class="sq-err" role="alert" data-sq-err hidden></p>
+        {%- if section.settings.email_sub != blank -%}<p class="sq-email-sub">{{ section.settings.email_sub }}</p>{%- endif -%}
+        {%- comment -%} Subscribes the email to the Klaviyo list (same list as the footer 10% sign-up) with source "quiz" and the quiz result, then shows the result with the discount code. {%- endcomment -%}
+        <form class="sq-form" data-sq-form novalidate>
+          <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
+          <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Email address" required data-sq-email>
+          <p class="sq-err" role="alert" data-sq-err hidden></p>
+          <button type="submit" class="sq-cta" data-sq-send>{{ section.settings.email_button }}</button>
+        </form>
         {%- if section.settings.email_consent != blank -%}<p class="sq-fine">{{ section.settings.email_consent }}</p>{%- endif -%}
         <button type="button" class="sq-skip" data-sq-skip>{{ section.settings.email_skip }}</button>
       </div>
@@ -99,6 +102,11 @@
         <p class="sq-tried" data-sq-tried hidden></p>
         {%- if section.settings.guarantee != blank -%}<p class="sq-guar">✓ {{ section.settings.guarantee }}</p>{%- endif -%}
         {%- if section.settings.social_proof != blank -%}<p class="sq-proof sq-proof--c">{{ section.settings.social_proof }}</p>{%- endif -%}
+        {%- comment -%} Only shown to shoppers who entered their email {%- endcomment -%}
+        {%- if section.settings.discount_code != blank -%}
+          {%- assign code_html = section.settings.discount_code | strip | escape | prepend: '<strong>' | append: '</strong>' -%}
+          <p class="sq-code" data-sq-code hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>
+        {%- endif -%}
         <a class="sq-cta sq-cta--link" href="#" data-sq-go>{{ section.settings.result_button }}</a>
         <button type="button" class="sq-retake" data-sq-retake>Retake quiz</button>
       </div>
@@ -114,7 +122,10 @@
   {
     "triedStrips": {{ section.settings.tried_strips_line | json }},
     "triedPills": {{ section.settings.tried_pills_line | json }},
-    "klaviyoForm": {{ section.settings.klaviyo_form_id | json }}
+    "code": {{ section.settings.discount_code | strip | json }},
+    "klaviyoCompany": {{ section.settings.klaviyo_company_id | strip | json }},
+    "klaviyoList": {{ section.settings.klaviyo_list_id | strip | json }},
+    "source": {{ section.settings.klaviyo_source | strip | json }}
   }
 </script>
 {% render 'somna-quiz-styles' %}
@@ -128,15 +139,24 @@
     { "type": "header", "content": "Intro" },
     { "type": "text", "id": "intro_heading", "label": "Heading", "default": "Snoring, stuffy nose or dry mouth? Find out what's ruining your sleep in 60 seconds." },
     { "type": "text", "id": "intro_sub", "label": "Subheading", "default": "Answer 5 quick questions and we'll match you to the right SOMNA fix." },
-    { "type": "text", "id": "social_proof", "label": "Social proof line (intro + result)", "info": "Must be a provable customer count.", "default": "Join 1,000+ SOMNA sleepers." },
+    { "type": "text", "id": "social_proof", "label": "Social proof line (intro + result)", "info": "Must be a provable customer count.", "default": "Join 1,000+ SOMNA sleepers" },
     { "type": "header", "content": "Email step (optional for shopper)" },
-    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo embed form ID", "info": "Default S7fEZF = Footer Signup - 10% Off. Its list starts the Welcome Series with the 10% code.", "default": "S7fEZF" },
-    { "type": "text", "id": "email_heading", "label": "Heading", "default": "Where should we send your result + 10% off?" },
-    { "type": "text", "id": "email_skip", "label": "Skip link", "default": "Skip" },
+    { "type": "text", "id": "email_heading", "label": "Heading", "default": "Unlock 10% off your SOMNA plan" },
+    { "type": "text", "id": "email_sub", "label": "Subheading", "default": "Enter your email and we'll show your code with your result." },
+    { "type": "text", "id": "email_button", "label": "Button", "default": "Show my result + 10% off" },
+    { "type": "text", "id": "email_skip", "label": "Skip link", "default": "Skip, just show my result" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
+    { "type": "header", "content": "Klaviyo sign-up" },
+    { "type": "paragraph", "content": "The email is added to this list (default: Email List, the same list as the footer 10% sign-up, which starts the Welcome Series). The quiz result is saved on the profile." },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public API key (company ID)", "default": "Tr7JSM" },
+    { "type": "text", "id": "klaviyo_list_id", "label": "Klaviyo list ID", "default": "XyWydk" },
+    { "type": "text", "id": "klaviyo_source", "label": "Sign-up source", "default": "quiz" },
+    { "type": "header", "content": "Discount (email sign-ups only)" },
+    { "type": "text", "id": "discount_code", "label": "Discount code", "info": "Shown on the result and applied automatically through the See my plan link. Leave empty to turn off.", "default": "WELCOME10" },
+    { "type": "text", "id": "code_text", "label": "Code box text", "info": "[code] is replaced by the discount code.", "default": "Your 10% code: [code] – applied automatically when you tap See my plan." },
     { "type": "header", "content": "Result screen" },
     { "type": "text", "id": "preselect_size", "label": "Size to pre-select on the product page", "default": "2 Bags" },
-    { "type": "text", "id": "guarantee", "label": "Guarantee line", "default": "30-night money-back guarantee" },
+    { "type": "text", "id": "guarantee", "label": "Guarantee line", "default": "30-Night Money-Back Guarantee" },
     { "type": "text", "id": "result_button", "label": "Button", "default": "See my plan →" },
     { "type": "text", "id": "tried_strips_line", "label": "Q5 line: tried cheap strips", "default": "Cheap strips peel off by 2am. SOMNA Strips are structural, with an all-night adhesive." },
     { "type": "text", "id": "tried_pills_line", "label": "Q5 line: tried melatonin or pills", "default": "Drug-free – nothing to swallow." },
