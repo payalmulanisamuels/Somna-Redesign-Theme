@@ -7,9 +7,10 @@
 {%- liquid
   assign sid = section.id
   assign size_label = section.settings.preselect_size | default: '2 Bags'
-  assign p_strips = section.settings.product_strips
-  assign p_tape = section.settings.product_tape
-  assign p_bundle = section.settings.product_bundle
+  # Fall back to the live product handles if a product setting is empty (e.g. template out of sync)
+  assign p_strips = section.settings.product_strips | default: all_products['nasal-strips']
+  assign p_tape = section.settings.product_tape | default: all_products['mouth-tape']
+  assign p_bundle = section.settings.product_bundle | default: all_products['sleep-bundle']
 -%}
 
 <section class="sq" id="sq-{{ sid }}" data-sq aria-label="Sleep quiz">
