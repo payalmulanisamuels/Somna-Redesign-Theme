@@ -14,12 +14,13 @@
   var qScreens = screens.filter(function (s) { return s.hasAttribute('data-q'); });
   var top = $('[data-sq-top]'), back = $('[data-sq-back]'), progf = $('[data-sq-progf]'), prog = $('[data-sq-prog]');
   var step = $('[data-sq-step]'), live = $('[data-sq-live]'), foot = $('[data-sq-foot]'), nextBtn = $('[data-sq-next]');
-  var cont = $('[data-sq-continue]'), err = $('[data-sq-err]'), kl = $('[data-sq-kl]');
+  var cont = $('[data-sq-continue]'), err = $('[data-sq-err]'), form = $('[data-sq-form]'), emailIn = $('[data-sq-email]');
+  var sendBtn = $('[data-sq-send]'), codeEl = $('[data-sq-code]');
   var triedEl = $('[data-sq-tried]'), goBtn = $('[data-sq-go]');
   var TOTAL = 5;
 
   // ---- state: answers by question number (1-4 = option index, 5 = list of option indexes) ----
-  var i = 0, answers = {}, busy = false, timer = null, signedUp = false;
+  var i = 0, answers = {}, busy = false, timer = null, signedUp = false, sending = false;
 
   // ---- scoring (SOMNA_Quiz_v2: S = snoring/nose, T = mouth breathing) ----
   function score() {
@@ -66,7 +67,7 @@
       $$('.sq-opt', sc).forEach(function (o, k) { o.setAttribute('aria-pressed', picked.indexOf(k) > -1 ? 'true' : 'false'); });
       cont.disabled = picked.length === 0;
     }
-    if (ty === 'email') { err.hidden = true; checkForm(); }
+    if (ty === 'email') { err.hidden = true; }
     if (ty === 'result') renderResult();
     var h = sc.querySelector('[tabindex="-1"]');
     if (ty === 'result') h = sc.querySelector('.sq-res:not([hidden]) [tabindex="-1"]') || h;
@@ -124,37 +125,46 @@
     var el = $('.sq-res[data-res="' + s.result + '"]'), base = el ? el.getAttribute('data-url') : '';
     var tried = s.tried.map(function (t) { return t.replace('tried_', ''); }).join(',');
     var url = base ? base + '&quiz=' + s.result + '&for=' + s.who + (tried ? '&tried=' + encodeURIComponent(tried) : '') : '#';
+    // Email sign-ups: Shopify discount link applies the code, then opens the same product page
+    var withCode = signedUp && cfg.code && base;
+    if (withCode) url = '/discount/' + encodeURIComponent(cfg.code) + '?redirect=' + encodeURIComponent(url);
+    if (codeEl) codeEl.hidden = !withCode;
     goBtn.setAttribute('href', url);
   }
 
-  // ---- optional email step → Klaviyo embed form (default "Footer Signup - 10% Off") ----
-  // Klaviyo's onsite script draws the form and adds the email to the form's list, which starts the
-  // Welcome Series with the 10% code. After a successful sign-up: Meta Lead event, the quiz answers
-  // are saved on the Klaviyo profile, then the result opens (after the form's thank-you message).
-  var formTimer = null;
+  // ---- optional email step → Klaviyo list (same list as the footer 10% sign-up) ----
+  // Client-side subscribe with the store's public Klaviyo key: source "quiz" + the quiz answers on the profile.
+  // On success: Meta Lead event, then the result with the discount code. Skip shows the result without the code.
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   function showErr(m) { err.textContent = m; err.hidden = !m; }
   function lead(result) { try { if (window.fbq) fbq('track', 'Lead', { content_name: 'SOMNA Quiz', content_category: result }); } catch (e) {} }
-  function checkForm() {                                  // e.g. blocked by an ad blocker: point to Skip
-    clearTimeout(formTimer);
-    if (!kl || signedUp) return;
-    formTimer = setTimeout(function () {
-      if (screens[i].getAttribute('data-type') === 'email' && !kl.querySelector('form, input')) showErr("The sign-up form didn't load. Tap Skip to see your result.");
-    }, 6000);
-  }
-  window.addEventListener('klaviyoForms', function (e) {
-    var d = e.detail || {};
-    if (d.type !== 'submit' || !cfg.klaviyoForm || d.formId !== cfg.klaviyoForm || signedUp) return;
-    if (screens[i].getAttribute('data-type') !== 'email') return;
-    signedUp = true;
+  function subscribe(email) {
     var s = score(), type = ($('.sq-res[data-res="' + s.result + '"] .sq-res-name') || {}).textContent || '';
-    lead(s.result);
-    var props = { 'SOMNA quiz result': s.result, 'SOMNA quiz sleep type': type, 'SOMNA quiz for': s.who,
-      'SOMNA quiz tried': s.tried.map(function (t) { return t.replace('tried_', ''); }) };
-    if (d.metaData && d.metaData.$email) props.email = d.metaData.$email;
-    try { if (window.klaviyo && klaviyo.identify) klaviyo.identify(props); } catch (e2) {}
-    setTimeout(function () { if (screens[i].getAttribute('data-type') === 'email') go(idx('result')); }, 1800);
+    var props = { 'Signup source': cfg.source || 'quiz', 'Quiz result': s.result, 'Quiz sleep type': type, 'Quiz for': s.who,
+      'Quiz tried': s.tried.map(function (t) { return t.replace('tried_', ''); }) };
+    var body = { data: { type: 'subscription', attributes: {
+      custom_source: cfg.source || 'quiz',
+      profile: { data: { type: 'profile', attributes: { email: email, properties: props } } }
+    }, relationships: { list: { data: { type: 'list', id: cfg.klaviyoList } } } } };
+    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(cfg.klaviyoCompany), {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' }, body: JSON.stringify(body)
+    }).then(function (r) { if (!r.ok) throw new Error('Klaviyo ' + r.status); return s.result; });
+  }
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (sending) return;                                   // ignore repeat taps / Enter
+    var email = emailIn.value.trim();
+    if (!EMAIL_RE.test(email)) { showErr('Enter a valid email address.'); emailIn.focus(); return; }
+    if (!cfg.klaviyoCompany || !cfg.klaviyoList) { showErr("Sign-up isn't available right now. Tap the link below to see your result."); return; }
+    sending = true; showErr(''); sendBtn.disabled = true; sendBtn.setAttribute('aria-busy', 'true');
+    subscribe(email).then(function (result) {
+      signedUp = true; lead(result); go(idx('result'));
+    }).catch(function () {
+      showErr("We couldn't save your email. Please try again, or tap the link below to see your result.");
+    }).then(function () { sending = false; sendBtn.disabled = false; sendBtn.removeAttribute('aria-busy'); });
   });
-  $('[data-sq-skip]').addEventListener('click', function () { go(idx('result')); });
+  emailIn.addEventListener('input', function () { if (!err.hidden) showErr(''); });
+  $('[data-sq-skip]').addEventListener('click', function () { if (!sending) go(idx('result')); });
 
   show(0, false);
 })();
