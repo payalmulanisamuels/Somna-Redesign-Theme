@@ -12,7 +12,31 @@
     "main": {
       "type": "somna-quiz",
       "settings": {
-        "intro_heading": "Not sure which SOMNA is right for you? Find out in 60 seconds."
+        "intro_heading": "Not sure which SOMNA is right for you? Find out in 60 seconds.",
+        "social_proof": "Join 1,000+ SOMNA sleepers.",
+        "email_heading": "Where should we send your result + 10% off?",
+        "email_button": "Send my result",
+        "email_skip": "Skip",
+        "email_consent": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime.",
+        "klaviyo_company_id": "Tr7JSM",
+        "klaviyo_list_id": "XyWydk",
+        "preselect_size": "2 Bags",
+        "guarantee": "30-night money-back guarantee",
+        "result_button": "See my plan →",
+        "tried_strips_line": "Cheap strips peel off by 2am. SOMNA Strips are structural, with an all-night adhesive.",
+        "tried_pills_line": "Drug-free – nothing to swallow.",
+        "product_strips": "nasal-strips",
+        "strips_name": "The Nose Breather",
+        "strips_self": "Your nose is the bottleneck. When airflow is restricted lying down, snoring and groggy mornings follow. SOMNA Strips are designed to hold your nose open all night.",
+        "strips_partner": "Their nose is the bottleneck. When airflow is restricted lying down, they snore – and you're the one losing sleep. SOMNA Strips are designed to hold their nose open all night.",
+        "product_tape": "mouth-tape",
+        "tape_name": "The Mouth Breather",
+        "tape_self": "You're breathing through your mouth at night, which is why you wake up dry and groggy. SOMNA Tape is designed to keep your lips gently closed so you breathe through your nose.",
+        "tape_partner": "They're breathing through their mouth at night. SOMNA Tape is designed to keep their lips gently closed so they breathe through their nose.",
+        "product_bundle": "sleep-bundle",
+        "bundle_name": "The Double Trouble",
+        "bundle_self": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together.",
+        "bundle_partner": "It's their nose and their mouth. Strips open the airway; Tape keeps them breathing through it. Built to work together."
       }
     }
   },
