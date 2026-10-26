@@ -14,7 +14,7 @@
   var qScreens = screens.filter(function (s) { return s.hasAttribute('data-q'); });
   var top = $('[data-sq-top]'), back = $('[data-sq-back]'), progf = $('[data-sq-progf]'), prog = $('[data-sq-prog]');
   var step = $('[data-sq-step]'), live = $('[data-sq-live]'), foot = $('[data-sq-foot]'), nextBtn = $('[data-sq-next]');
-  var cont = $('[data-sq-continue]'), form = $('[data-sq-form]'), emailIn = $('[data-sq-email]'), err = $('[data-sq-err]');
+  var cont = $('[data-sq-continue]'), emailIn = $('[data-sq-email]'), form = emailIn.form, err = $('[data-sq-err]');
   var sendBtn = $('[data-sq-send]'), triedEl = $('[data-sq-tried]'), goBtn = $('[data-sq-go]');
   var TOTAL = 5;
 
@@ -123,49 +123,39 @@
     goBtn.setAttribute('href', url);
   }
 
-  // ---- optional email step → Klaviyo (subscribe to list + quiz properties on the profile) ----
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  // ---- optional email step → Shopify contact form (emailed to the store with the quiz answers) ----
+  // Submitted as a normal Shopify form so Shopify's own captcha keeps working. The answers are saved
+  // in sessionStorage first; when the page returns (?contact_posted=true) the quiz reopens on the result.
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, KEY = 'somna-quiz-state';
   function showErr(m) { err.textContent = m; err.hidden = !m; }
-  function post(path, body) {
-    var ctrl = 'AbortController' in window ? new AbortController() : null;
-    var t = ctrl ? setTimeout(function () { ctrl.abort(); }, 8000) : null;
-    return fetch('https://a.klaviyo.com/client/' + path + '/?company_id=' + encodeURIComponent(cfg.klaviyoCompanyId), {
-      method: 'POST',
-      headers: { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json', Revision: '2026-01-15' },
-      body: JSON.stringify(body), signal: ctrl ? ctrl.signal : undefined
-    }).then(function (r) { if (t) clearTimeout(t); return r; }, function (e) { if (t) clearTimeout(t); throw e; });
+  function lead(result) { try { if (window.fbq) fbq('track', 'Lead', { content_name: 'SOMNA Quiz', content_category: result }); } catch (e) {} }
+  function fill() {
+    var s = score(), type = ($('.sq-res[data-res="' + s.result + '"] .sq-res-name') || {}).textContent || '';
+    var tried = s.tried.map(function (t) { return t.replace('tried_', ''); }).join(', ') || 'not answered';
+    var v = { result: s.result, type: type, for: s.who, tried: tried,
+      body: 'SOMNA quiz result: ' + type + ' (' + s.result + '). For: ' + s.who + '. Tried before: ' + tried + '.' };
+    $$('[data-sq-field]', form).forEach(function (f) { f.value = v[f.getAttribute('data-sq-field')] || ''; });
   }
   form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    if (sending) return;                                  // ignore repeat clicks / Enter
     var email = emailIn.value.trim();
-    if (!EMAIL_RE.test(email)) { showErr('Enter a valid email address.'); emailIn.focus(); return; }
-    if (!cfg.klaviyoCompanyId || !cfg.klaviyoListId) { showErr('Sign-up is unavailable right now. You can skip to your result.'); return; }
-    var s = score(), props = {
-      quiz_result: s.result,
-      quiz_sleep_type: ($('.sq-res[data-res="' + s.result + '"] .sq-res-name') || {}).textContent || '',
-      quiz_for: s.who,
-      quiz_tried: s.tried,
-      quiz_completed_at: new Date().toISOString()
-    };
-    sending = true; sendBtn.disabled = true; sendBtn.setAttribute('aria-busy', 'true'); showErr('');
-    var sub = { data: { type: 'subscription', attributes: { custom_source: 'SOMNA Quiz', profile: { data: { type: 'profile', attributes: {
-      email: email, subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } } } } },
-      relationships: { list: { data: { type: 'list', id: cfg.klaviyoListId } } } } };
-    var prof = { data: { type: 'profile', attributes: { email: email, properties: props } } };
-    post('subscriptions', sub).then(function (r) {
-      if (!r.ok) throw r;
-      return post('profiles', prof).catch(function () {});  // properties are a bonus; never block the result
-    }).then(function () {
-      try { if (window.fbq) fbq('track', 'Lead', { content_name: 'SOMNA Quiz', content_category: s.result }); } catch (e) {}
-      go(idx('result'));
-    }).catch(function (r) {
-      var m = (r && r.status === 400) ? 'Please check your email address and try again.' : "We couldn't save your email just now. Try again, or skip to see your result.";
-      showErr(m);
-    }).then(function () { sending = false; sendBtn.disabled = false; sendBtn.removeAttribute('aria-busy'); });
+    if (sending) { ev.preventDefault(); return; }         // ignore repeat clicks / Enter
+    if (!EMAIL_RE.test(email)) { ev.preventDefault(); showErr('Enter a valid email address.'); emailIn.focus(); return; }
+    fill();
+    try { sessionStorage.setItem(KEY, JSON.stringify({ answers: answers, at: Date.now() })); } catch (e) {}
+    sending = true; sendBtn.setAttribute('aria-busy', 'true'); showErr('');
+    setTimeout(function () { sending = false; sendBtn.removeAttribute('aria-busy'); }, 8000); // e.g. captcha closed
+    // no preventDefault: Shopify posts the form (and shows its captcha if needed)
   });
   $('[data-sq-skip]').addEventListener('click', function () { if (!sending) go(idx('result')); });
 
-  show(0, false);
+  // Returning from the contact form: reopen on the result (sent) or on the email step (Shopify reported an error).
+  var saved = null;
+  try { saved = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
+  if (saved && saved.answers && Date.now() - (saved.at || 0) < 30 * 60 * 1000) {
+    answers = saved.answers;
+    if (/[?&]contact_posted=true/.test(location.search)) { lead(score().result); show(idx('result'), true); }
+    else if ($('[data-sq-server-err]')) { show(idx('email'), true); showErr("We couldn't send that. Check your email address and try again, or skip to see your result."); }
+    else { answers = {}; show(0, false); }
+  } else show(0, false);
 })();
 </script>
