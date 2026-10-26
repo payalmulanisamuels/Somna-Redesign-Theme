@@ -114,6 +114,10 @@
   function renderResult() {
     var s = score();
     $$('.sq-res').forEach(function (el) { el.hidden = el.getAttribute('data-res') !== s.result; });
+    // Problem line: repeats the Q2 answer back (their wording for the partner path)
+    var pEl = $('[data-sq-problem]'), q2 = answers[2] != null ? qScreens[1].querySelectorAll('.sq-opt')[answers[2]] : null;
+    var pTxt = q2 ? q2.getAttribute(s.who === 'partner' ? 'data-problem-partner' : 'data-problem-self') : '';
+    pEl.textContent = pTxt || ''; pEl.hidden = !pTxt;
     // Q5 line: strips line wins when both strips and pills are picked
     var line = s.tried.indexOf('tried_strips') > -1 ? cfg.triedStrips : (s.tried.indexOf('tried_pills') > -1 ? cfg.triedPills : '');
     triedEl.textContent = line || ''; triedEl.hidden = !line;
