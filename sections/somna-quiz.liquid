@@ -85,7 +85,7 @@
       {%- comment -%} Screen 6: optional email {%- endcomment -%}
       <div class="sq-s sq-center" data-type="email">
         <h2 class="sq-q" tabindex="-1">{{ section.settings.email_heading }}</h2>
-        {%- comment -%} Shopify contact form: emails the store inbox. Submitted in the background so the shopper stays in the quiz. {%- endcomment -%}
+        {%- comment -%} Shopify contact form: emails the store inbox. Submitted normally (works with Shopify's captcha); the quiz reopens on the result afterwards. {%- endcomment -%}
         {%- form 'contact', id: 'sq-contact', class: 'sq-form', novalidate: 'novalidate' -%}
           <input type="hidden" name="contact[Source]" value="SOMNA quiz">
           <input type="hidden" name="contact[Quiz result]" data-sq-field="result">
@@ -96,6 +96,7 @@
           <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
           <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="contact[email]" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
           <p class="sq-err" role="alert" data-sq-err hidden></p>
+          {%- if form.errors -%}<span hidden data-sq-server-err></span>{%- endif -%}
           <button type="submit" class="sq-cta" data-sq-send>{{ section.settings.email_button }}</button>
         {%- endform -%}
         {%- if section.settings.email_consent != blank -%}<p class="sq-fine">{{ section.settings.email_consent }}</p>{%- endif -%}
