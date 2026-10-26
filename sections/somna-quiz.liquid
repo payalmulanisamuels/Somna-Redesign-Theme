@@ -30,81 +30,23 @@
       </div>
       <p class="sq-sr" aria-live="polite" data-sq-live></p>
 
-      {%- comment -%} Screen 1: intro + Q1 {%- endcomment -%}
-      <div class="sq-s is-on" data-type="q" data-q="1">
-        <h1 class="sq-intro-h" tabindex="-1">{{ section.settings.intro_heading }}</h1>
-        {%- if section.settings.social_proof != blank -%}<p class="sq-proof">{{ section.settings.social_proof }}</p>{%- endif -%}
-        <h2 class="sq-q" id="sq-{{ sid }}-q1">Who's this for?</h2>
-        <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q1">
-          <button type="button" class="sq-opt" data-tag="self">Me</button>
-          <button type="button" class="sq-opt" data-s="2" data-tag="partner">My partner – their snoring keeps me up</button>
-          <button type="button" class="sq-opt" data-tag="both">Both of us</button>
-        </div>
-      </div>
-
-      <div class="sq-s" data-type="q" data-q="2">
-        <h2 class="sq-q" id="sq-{{ sid }}-q2" tabindex="-1">What's the biggest problem at night?</h2>
-        <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q2">
-          <button type="button" class="sq-opt" data-s="3">Snoring</button>
-          <button type="button" class="sq-opt" data-s="3">Blocked or stuffy nose</button>
-          <button type="button" class="sq-opt" data-t="3">Waking with a dry mouth or sore throat</button>
-          <button type="button" class="sq-opt" data-s="1" data-t="1">Waking up tired, even after 7–8 hours</button>
-        </div>
-      </div>
-
-      <div class="sq-s" data-type="q" data-q="3">
-        <h2 class="sq-q" id="sq-{{ sid }}-q3" tabindex="-1" data-self="How's your nose when you lie down?" data-partner="How's their nose when they lie down?">How's your nose when you lie down?</h2>
-        <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q3">
-          <button type="button" class="sq-opt" data-s="2">Blocked most nights</button>
-          <button type="button" class="sq-opt" data-s="1">Stuffy only with a cold or allergies</button>
-          <button type="button" class="sq-opt">Clear</button>
-        </div>
-      </div>
-
-      <div class="sq-s" data-type="q" data-q="4">
-        <h2 class="sq-q" id="sq-{{ sid }}-q4" tabindex="-1" data-self="When you wake up, your mouth is..." data-partner="When they wake up, their mouth is...">When you wake up, your mouth is...</h2>
-        <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q4">
-          <button type="button" class="sq-opt" data-t="2" data-self="Bone dry, or I reach for water at night" data-partner="Bone dry, or they reach for water at night">Bone dry, or I reach for water at night</button>
-          <button type="button" class="sq-opt" data-t="2">Drooling or bad morning breath</button>
-          <button type="button" class="sq-opt">Fine</button>
-        </div>
-      </div>
-
-      <div class="sq-s" data-type="multi" data-q="5">
-        <h2 class="sq-q" id="sq-{{ sid }}-q5" tabindex="-1" data-self="What have you tried before?" data-partner="What have they tried before?">What have you tried before?</h2>
-        <p class="sq-hint">Pick any that apply.</p>
-        <div class="sq-opts sq-opts--multi" role="group" aria-labelledby="sq-{{ sid }}-q5">
-          <button type="button" class="sq-opt sq-opt--check" data-tried="tried_strips">Cheap nasal strips</button>
-          <button type="button" class="sq-opt sq-opt--check" data-tried="tried_tape">Mouth tape</button>
-          <button type="button" class="sq-opt sq-opt--check" data-tried="tried_pills">Melatonin or sleep pills</button>
-          <button type="button" class="sq-opt sq-opt--check" data-tried="tried_nothing">Nothing yet</button>
-        </div>
-        <button type="button" class="sq-cta" data-sq-continue disabled>Continue →</button>
-      </div>
+      {% render 'somna-quiz-screens', qs: section.settings, sid: sid %}
 
       {%- comment -%} Screen 6: optional email {%- endcomment -%}
       <div class="sq-s sq-center" data-type="email">
         <h2 class="sq-q" tabindex="-1">{{ section.settings.email_heading }}</h2>
-        {%- comment -%} Shopify contact form: emails the store inbox. Submitted normally (works with Shopify's captcha); the quiz reopens on the result afterwards. {%- endcomment -%}
-        {%- form 'contact', id: 'sq-contact', class: 'sq-form', novalidate: 'novalidate' -%}
-          <input type="hidden" name="contact[Source]" value="SOMNA quiz">
-          <input type="hidden" name="contact[Quiz result]" data-sq-field="result">
-          <input type="hidden" name="contact[Sleep type]" data-sq-field="type">
-          <input type="hidden" name="contact[Who it's for]" data-sq-field="for">
-          <input type="hidden" name="contact[Tried before]" data-sq-field="tried">
-          <input type="hidden" name="contact[body]" data-sq-field="body">
-          <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
-          <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="contact[email]" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
-          <p class="sq-err" role="alert" data-sq-err hidden></p>
-          {%- if form.errors -%}<span hidden data-sq-server-err></span>{%- endif -%}
-          <button type="submit" class="sq-cta" data-sq-send>{{ section.settings.email_button }}</button>
-        {%- endform -%}
+        {%- comment -%} Klaviyo embed form (default "Footer Signup - 10% Off"): Klaviyo's onsite script draws the form here and adds the email to its list, which starts the Welcome Series with the 10% code. The script moves on to the result after a successful sign-up. {%- endcomment -%}
+        <div class="sq-kl" data-sq-kl>
+          {%- if section.settings.klaviyo_form_id != blank -%}<div class="klaviyo-form-{{ section.settings.klaviyo_form_id }}"></div>{%- endif -%}
+        </div>
+        <p class="sq-err" role="alert" data-sq-err hidden></p>
         {%- if section.settings.email_consent != blank -%}<p class="sq-fine">{{ section.settings.email_consent }}</p>{%- endif -%}
         <button type="button" class="sq-skip" data-sq-skip>{{ section.settings.email_skip }}</button>
       </div>
 
       {%- comment -%} Screen 7: one result panel per product; the script shows the matching one {%- endcomment -%}
       <div class="sq-s" data-type="result">
+        <p class="sq-problem" data-sq-problem hidden></p>
         {%- for r in (1..3) -%}
           {%- liquid
             case r
@@ -171,7 +113,8 @@
 <script type="application/json" data-sq-config>
   {
     "triedStrips": {{ section.settings.tried_strips_line | json }},
-    "triedPills": {{ section.settings.tried_pills_line | json }}
+    "triedPills": {{ section.settings.tried_pills_line | json }},
+    "klaviyoForm": {{ section.settings.klaviyo_form_id | json }}
   }
 </script>
 {% render 'somna-quiz-styles' %}
@@ -183,12 +126,12 @@
   "class": "somna-quiz-section",
   "settings": [
     { "type": "header", "content": "Intro" },
-    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "Not sure which SOMNA is right for you? Find out in 60 seconds." },
+    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "Snoring, stuffy nose or dry mouth? Find out what's ruining your sleep in 60 seconds." },
+    { "type": "text", "id": "intro_sub", "label": "Subheading", "default": "Answer 5 quick questions and we'll match you to the right SOMNA fix." },
     { "type": "text", "id": "social_proof", "label": "Social proof line (intro + result)", "info": "Must be a provable customer count.", "default": "Join 1,000+ SOMNA sleepers." },
     { "type": "header", "content": "Email step (optional for shopper)" },
-    { "type": "paragraph", "content": "Submissions go to Shopify's contact form and are emailed to the store's sender/contact email with the quiz answers." },
+    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo embed form ID", "info": "Default S7fEZF = Footer Signup - 10% Off. Its list starts the Welcome Series with the 10% code.", "default": "S7fEZF" },
     { "type": "text", "id": "email_heading", "label": "Heading", "default": "Where should we send your result + 10% off?" },
-    { "type": "text", "id": "email_button", "label": "Button", "default": "Send my result" },
     { "type": "text", "id": "email_skip", "label": "Skip link", "default": "Skip" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
     { "type": "header", "content": "Result screen" },
@@ -197,6 +140,15 @@
     { "type": "text", "id": "result_button", "label": "Button", "default": "See my plan →" },
     { "type": "text", "id": "tried_strips_line", "label": "Q5 line: tried cheap strips", "default": "Cheap strips peel off by 2am. SOMNA Strips are structural, with an all-night adhesive." },
     { "type": "text", "id": "tried_pills_line", "label": "Q5 line: tried melatonin or pills", "default": "Drug-free – nothing to swallow." },
+    { "type": "header", "content": "Result: problem line (from the Q2 answer)" },
+    { "type": "text", "id": "problem_a_self", "label": "Q2 A – Snoring (me / both)", "default": "You told us snoring is the biggest problem at night." },
+    { "type": "text", "id": "problem_a_partner", "label": "Q2 A – partner", "default": "You told us their snoring is the biggest problem at night." },
+    { "type": "text", "id": "problem_b_self", "label": "Q2 B – Blocked or stuffy nose (me / both)", "default": "You told us a blocked or stuffy nose is keeping you up." },
+    { "type": "text", "id": "problem_b_partner", "label": "Q2 B – partner", "default": "You told us their blocked or stuffy nose is the problem." },
+    { "type": "text", "id": "problem_c_self", "label": "Q2 C – Dry mouth or sore throat (me / both)", "default": "You told us you wake up with a dry mouth or sore throat." },
+    { "type": "text", "id": "problem_c_partner", "label": "Q2 C – partner", "default": "You told us they wake up with a dry mouth or sore throat." },
+    { "type": "text", "id": "problem_d_self", "label": "Q2 D – Tired after 7–8 hours (me / both)", "default": "You told us you wake up tired, even after a full night." },
+    { "type": "text", "id": "problem_d_partner", "label": "Q2 D – partner", "default": "You told us they wake up tired, even after a full night." },
     { "type": "header", "content": "Result: Nasal Strips" },
     { "type": "product", "id": "product_strips", "label": "Product" },
     { "type": "text", "id": "strips_name", "label": "Sleep type name", "default": "The Nose Breather" },

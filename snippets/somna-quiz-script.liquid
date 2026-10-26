@@ -1,4 +1,4 @@
-{%- comment -%} SOMNA quiz v2 logic — only rendered by sections/somna-quiz.liquid {%- endcomment -%}
+{%- comment -%} SOMNA quiz v3 logic — only rendered by sections/somna-quiz.liquid {%- endcomment -%}
 <script>
 (function () {
   var root = document.getElementById('sq-{{ sid }}');
@@ -14,12 +14,12 @@
   var qScreens = screens.filter(function (s) { return s.hasAttribute('data-q'); });
   var top = $('[data-sq-top]'), back = $('[data-sq-back]'), progf = $('[data-sq-progf]'), prog = $('[data-sq-prog]');
   var step = $('[data-sq-step]'), live = $('[data-sq-live]'), foot = $('[data-sq-foot]'), nextBtn = $('[data-sq-next]');
-  var cont = $('[data-sq-continue]'), emailIn = $('[data-sq-email]'), form = emailIn.form, err = $('[data-sq-err]');
-  var sendBtn = $('[data-sq-send]'), triedEl = $('[data-sq-tried]'), goBtn = $('[data-sq-go]');
+  var cont = $('[data-sq-continue]'), err = $('[data-sq-err]'), kl = $('[data-sq-kl]');
+  var triedEl = $('[data-sq-tried]'), goBtn = $('[data-sq-go]');
   var TOTAL = 5;
 
   // ---- state: answers by question number (1-4 = option index, 5 = list of option indexes) ----
-  var i = 0, answers = {}, busy = false, timer = null, sending = false;
+  var i = 0, answers = {}, busy = false, timer = null, signedUp = false;
 
   // ---- scoring (SOMNA_Quiz_v2: S = snoring/nose, T = mouth breathing) ----
   function score() {
@@ -66,7 +66,7 @@
       $$('.sq-opt', sc).forEach(function (o, k) { o.setAttribute('aria-pressed', picked.indexOf(k) > -1 ? 'true' : 'false'); });
       cont.disabled = picked.length === 0;
     }
-    if (ty === 'email') { err.hidden = true; }
+    if (ty === 'email') { err.hidden = true; checkForm(); }
     if (ty === 'result') renderResult();
     var h = sc.querySelector('[tabindex="-1"]');
     if (ty === 'result') h = sc.querySelector('.sq-res:not([hidden]) [tabindex="-1"]') || h;
@@ -108,12 +108,16 @@
   cont.addEventListener('click', function () { if (!busy && (answers[5] || []).length) { busy = true; go(i + 1); } });
 
   back.addEventListener('click', function () { if (i > 0) go(i - 1); });
-  $$('[data-sq-retake]').forEach(function (b) { b.addEventListener('click', function () { answers = {}; emailIn.value = ''; go(0); }); });
+  $$('[data-sq-retake]').forEach(function (b) { b.addEventListener('click', function () { answers = {}; go(0); }); });
 
   // ---- result ----
   function renderResult() {
     var s = score();
     $$('.sq-res').forEach(function (el) { el.hidden = el.getAttribute('data-res') !== s.result; });
+    // Problem line: repeats the Q2 answer back (their wording for the partner path)
+    var pEl = $('[data-sq-problem]'), q2 = answers[2] != null ? qScreens[1].querySelectorAll('.sq-opt')[answers[2]] : null;
+    var pTxt = q2 ? q2.getAttribute(s.who === 'partner' ? 'data-problem-partner' : 'data-problem-self') : '';
+    pEl.textContent = pTxt || ''; pEl.hidden = !pTxt;
     // Q5 line: strips line wins when both strips and pills are picked
     var line = s.tried.indexOf('tried_strips') > -1 ? cfg.triedStrips : (s.tried.indexOf('tried_pills') > -1 ? cfg.triedPills : '');
     triedEl.textContent = line || ''; triedEl.hidden = !line;
@@ -123,39 +127,35 @@
     goBtn.setAttribute('href', url);
   }
 
-  // ---- optional email step → Shopify contact form (emailed to the store with the quiz answers) ----
-  // Submitted as a normal Shopify form so Shopify's own captcha keeps working. The answers are saved
-  // in sessionStorage first; when the page returns (?contact_posted=true) the quiz reopens on the result.
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, KEY = 'somna-quiz-state';
+  // ---- optional email step → Klaviyo embed form (default "Footer Signup - 10% Off") ----
+  // Klaviyo's onsite script draws the form and adds the email to the form's list, which starts the
+  // Welcome Series with the 10% code. After a successful sign-up: Meta Lead event, the quiz answers
+  // are saved on the Klaviyo profile, then the result opens (after the form's thank-you message).
+  var formTimer = null;
   function showErr(m) { err.textContent = m; err.hidden = !m; }
   function lead(result) { try { if (window.fbq) fbq('track', 'Lead', { content_name: 'SOMNA Quiz', content_category: result }); } catch (e) {} }
-  function fill() {
-    var s = score(), type = ($('.sq-res[data-res="' + s.result + '"] .sq-res-name') || {}).textContent || '';
-    var tried = s.tried.map(function (t) { return t.replace('tried_', ''); }).join(', ') || 'not answered';
-    var v = { result: s.result, type: type, for: s.who, tried: tried,
-      body: 'SOMNA quiz result: ' + type + ' (' + s.result + '). For: ' + s.who + '. Tried before: ' + tried + '.' };
-    $$('[data-sq-field]', form).forEach(function (f) { f.value = v[f.getAttribute('data-sq-field')] || ''; });
+  function checkForm() {                                  // e.g. blocked by an ad blocker: point to Skip
+    clearTimeout(formTimer);
+    if (!kl || signedUp) return;
+    formTimer = setTimeout(function () {
+      if (screens[i].getAttribute('data-type') === 'email' && !kl.querySelector('form, input')) showErr("The sign-up form didn't load. Tap Skip to see your result.");
+    }, 6000);
   }
-  form.addEventListener('submit', function (ev) {
-    var email = emailIn.value.trim();
-    if (sending) { ev.preventDefault(); return; }         // ignore repeat clicks / Enter
-    if (!EMAIL_RE.test(email)) { ev.preventDefault(); showErr('Enter a valid email address.'); emailIn.focus(); return; }
-    fill();
-    try { sessionStorage.setItem(KEY, JSON.stringify({ answers: answers, at: Date.now() })); } catch (e) {}
-    sending = true; sendBtn.setAttribute('aria-busy', 'true'); showErr('');
-    setTimeout(function () { sending = false; sendBtn.removeAttribute('aria-busy'); }, 8000); // e.g. captcha closed
-    // no preventDefault: Shopify posts the form (and shows its captcha if needed)
+  window.addEventListener('klaviyoForms', function (e) {
+    var d = e.detail || {};
+    if (d.type !== 'submit' || !cfg.klaviyoForm || d.formId !== cfg.klaviyoForm || signedUp) return;
+    if (screens[i].getAttribute('data-type') !== 'email') return;
+    signedUp = true;
+    var s = score(), type = ($('.sq-res[data-res="' + s.result + '"] .sq-res-name') || {}).textContent || '';
+    lead(s.result);
+    var props = { 'SOMNA quiz result': s.result, 'SOMNA quiz sleep type': type, 'SOMNA quiz for': s.who,
+      'SOMNA quiz tried': s.tried.map(function (t) { return t.replace('tried_', ''); }) };
+    if (d.metaData && d.metaData.$email) props.email = d.metaData.$email;
+    try { if (window.klaviyo && klaviyo.identify) klaviyo.identify(props); } catch (e2) {}
+    setTimeout(function () { if (screens[i].getAttribute('data-type') === 'email') go(idx('result')); }, 1800);
   });
-  $('[data-sq-skip]').addEventListener('click', function () { if (!sending) go(idx('result')); });
+  $('[data-sq-skip]').addEventListener('click', function () { go(idx('result')); });
 
-  // Returning from the contact form: reopen on the result (sent) or on the email step (Shopify reported an error).
-  var saved = null;
-  try { saved = JSON.parse(sessionStorage.getItem(KEY) || 'null'); sessionStorage.removeItem(KEY); } catch (e) {}
-  if (saved && saved.answers && Date.now() - (saved.at || 0) < 30 * 60 * 1000) {
-    answers = saved.answers;
-    if (/[?&]contact_posted=true/.test(location.search)) { lead(score().result); show(idx('result'), true); }
-    else if ($('[data-sq-server-err]')) { show(idx('email'), true); showErr("We couldn't send that. Check your email address and try again, or skip to see your result."); }
-    else { answers = {}; show(0, false); }
-  } else show(0, false);
+  show(0, false);
 })();
 </script>
