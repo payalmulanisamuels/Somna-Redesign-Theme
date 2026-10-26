@@ -35,20 +35,11 @@
       {%- comment -%} Screen 6: optional email {%- endcomment -%}
       <div class="sq-s sq-center" data-type="email">
         <h2 class="sq-q" tabindex="-1">{{ section.settings.email_heading }}</h2>
-        {%- comment -%} Shopify contact form: emails the store inbox. Submitted normally (works with Shopify's captcha); the quiz reopens on the result afterwards. {%- endcomment -%}
-        {%- form 'contact', id: 'sq-contact', class: 'sq-form', novalidate: 'novalidate' -%}
-          <input type="hidden" name="contact[Source]" value="SOMNA quiz">
-          <input type="hidden" name="contact[Quiz result]" data-sq-field="result">
-          <input type="hidden" name="contact[Sleep type]" data-sq-field="type">
-          <input type="hidden" name="contact[Who it's for]" data-sq-field="for">
-          <input type="hidden" name="contact[Tried before]" data-sq-field="tried">
-          <input type="hidden" name="contact[body]" data-sq-field="body">
-          <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
-          <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="contact[email]" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
-          <p class="sq-err" role="alert" data-sq-err hidden></p>
-          {%- if form.errors -%}<span hidden data-sq-server-err></span>{%- endif -%}
-          <button type="submit" class="sq-cta" data-sq-send>{{ section.settings.email_button }}</button>
-        {%- endform -%}
+        {%- comment -%} Klaviyo embed form (default "Footer Signup - 10% Off"): Klaviyo's onsite script draws the form here and adds the email to its list, which starts the Welcome Series with the 10% code. The script moves on to the result after a successful sign-up. {%- endcomment -%}
+        <div class="sq-kl" data-sq-kl>
+          {%- if section.settings.klaviyo_form_id != blank -%}<div class="klaviyo-form-{{ section.settings.klaviyo_form_id }}"></div>{%- endif -%}
+        </div>
+        <p class="sq-err" role="alert" data-sq-err hidden></p>
         {%- if section.settings.email_consent != blank -%}<p class="sq-fine">{{ section.settings.email_consent }}</p>{%- endif -%}
         <button type="button" class="sq-skip" data-sq-skip>{{ section.settings.email_skip }}</button>
       </div>
@@ -122,7 +113,8 @@
 <script type="application/json" data-sq-config>
   {
     "triedStrips": {{ section.settings.tried_strips_line | json }},
-    "triedPills": {{ section.settings.tried_pills_line | json }}
+    "triedPills": {{ section.settings.tried_pills_line | json }},
+    "klaviyoForm": {{ section.settings.klaviyo_form_id | json }}
   }
 </script>
 {% render 'somna-quiz-styles' %}
@@ -138,9 +130,8 @@
     { "type": "text", "id": "intro_sub", "label": "Subheading", "default": "Answer 5 quick questions and we'll match you to the right SOMNA fix." },
     { "type": "text", "id": "social_proof", "label": "Social proof line (intro + result)", "info": "Must be a provable customer count.", "default": "Join 1,000+ SOMNA sleepers." },
     { "type": "header", "content": "Email step (optional for shopper)" },
-    { "type": "paragraph", "content": "Submissions go to Shopify's contact form and are emailed to the store's sender/contact email with the quiz answers." },
+    { "type": "text", "id": "klaviyo_form_id", "label": "Klaviyo embed form ID", "info": "Default S7fEZF = Footer Signup - 10% Off. Its list starts the Welcome Series with the 10% code.", "default": "S7fEZF" },
     { "type": "text", "id": "email_heading", "label": "Heading", "default": "Where should we send your result + 10% off?" },
-    { "type": "text", "id": "email_button", "label": "Button", "default": "Send my result" },
     { "type": "text", "id": "email_skip", "label": "Skip link", "default": "Skip" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
     { "type": "header", "content": "Result screen" },
