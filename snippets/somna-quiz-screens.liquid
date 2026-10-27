@@ -1,7 +1,7 @@
 {%- comment -%}
-  SOMNA quiz v5.1: screens 01–07 (intro + Q1, Q2, Q3, Q4, story break, Q5, Q6).
+  SOMNA quiz v5.2: screens 01–07 (intro + Q1, Q2, Q3, Q4, story break, Q5, Q6).
   Rendered only by sections/somna-quiz.liquid with qs (section settings) + sid.
-  Scoring (data-s / data-t) and copy follow SOMNA_Quiz_v5.1_Engaging_Flow.pdf.
+  Scoring (data-s / data-t) and copy follow SOMNA_Quiz_v5.2_Engaging_Flow.pdf.
   data-self / data-partner hold the "you" and "they" wording; Q1 "My partner" switches to the partner version.
 {%- endcomment -%}
 
@@ -45,7 +45,7 @@
 <div class="sq-s" data-type="q" data-q="3" data-step="3">
   <h2 class="sq-q" id="sq-{{ sid }}-q3" tabindex="-1" data-self="How's your nose when you &lt;em&gt;lie down&lt;/em&gt;?" data-partner="How's their nose when they &lt;em&gt;lie down&lt;/em&gt;?" data-html>How's your nose when you <em>lie down</em>?</h2>
   <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q3">
-    <button type="button" class="sq-opt" data-s="2" data-key="blocked"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'wind' %}</span><span>Blocked most nights</span></button>
+    <button type="button" class="sq-opt" data-s="3" data-key="blocked"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'wind' %}</span><span>Blocked most nights</span></button>
     <button type="button" class="sq-opt" data-s="1" data-key="stuffy"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'wind' %}</span><span>Stuffy only with a cold or allergies</span></button>
     <button type="button" class="sq-opt" data-key="clear"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'wind' %}</span><span>Clear, no problems</span></button>
   </div>
@@ -56,8 +56,8 @@
 <div class="sq-s" data-type="q" data-q="4" data-step="4">
   <h2 class="sq-q" id="sq-{{ sid }}-q4" tabindex="-1" data-self="When you wake up, your mouth is…" data-partner="When they wake up, their mouth is…">When you wake up, your mouth is…</h2>
   <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q4">
-    <button type="button" class="sq-opt" data-t="2" data-key="dry"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span data-self="Bone dry — I reach for water at night" data-partner="Bone dry — they reach for water at night">Bone dry — I reach for water at night</span></button>
-    <button type="button" class="sq-opt" data-t="2" data-key="drool"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Drooling or bad morning breath</span></button>
+    <button type="button" class="sq-opt" data-t="3" data-key="dry"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span data-self="Bone dry — I reach for water at night" data-partner="Bone dry — they reach for water at night">Bone dry — I reach for water at night</span></button>
+    <button type="button" class="sq-opt" data-t="3" data-key="drool"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Drooling or bad morning breath</span></button>
     <button type="button" class="sq-opt" data-key="fine"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Fine</span></button>
   </div>
   {%- if qs.q4_note != blank -%}<div class="sq-note"><p class="sq-note-h">Why we ask</p><p data-self="{{ qs.q4_note | escape }}" data-partner="{{ qs.q4_note_partner | default: qs.q4_note | escape }}">{{ qs.q4_note }}</p></div>{%- endif -%}

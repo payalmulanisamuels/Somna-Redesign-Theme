@@ -1,5 +1,5 @@
 {%- comment -%}
-  SOMNA quiz v5.1 "engaging flow" (SOMNA_Quiz_v5.1_Engaging_Flow.pdf, 27 Oct 2026).
+  SOMNA quiz v5.2 "engaging flow" (SOMNA_Quiz_v5.2_Engaging_Flow.pdf, 27 Oct 2026).
   13 screens: intro + Q1, Q2, Q3, Q4, story break, Q5, Q6, analyzing ring, unlock 10% (optional email),
   sleep report, your fix, getting your plan ready → product page (screen 13 banner: snippets/somna-quiz-match.liquid).
   Q1–Q4 decide the product; Q5–Q6 build the report. Logic: snippets/somna-quiz-script.liquid.
@@ -12,6 +12,10 @@
   assign p_strips = section.settings.product_strips | default: all_products['nasal-strips']
   assign p_tape = section.settings.product_tape | default: all_products['mouth-tape']
   assign p_bundle = section.settings.product_bundle | default: all_products['sleep-bundle']
+  assign fallback_url = routes.all_products_collection_url
+  if p_strips != blank
+    assign fallback_url = p_strips.url
+  endif
   assign code = section.settings.discount_code | strip
 -%}
 
@@ -142,7 +146,7 @@
         {%- assign code_html = code | escape | prepend: '<strong>' | append: '</strong>' -%}
         <p class="sq-code" data-sq-code hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>
       {%- endif -%}
-      <button type="button" class="sq-cta" data-sq-plan>{{ section.settings.result_button }}</button>
+      <a class="sq-cta" data-sq-plan href="{{ fallback_url }}">{{ section.settings.result_button }}</a>
       <button type="button" class="sq-retake" data-sq-retake>Retake quiz</button>
     </div>
 
@@ -153,7 +157,7 @@
       <ul class="sq-loader-list" data-sq-loader-list></ul>
       <div class="sq-loader-bar"><div data-sq-loader-bar></div></div>
       <p class="sq-fine sq-center">{{ section.settings.loader_note }}</p>
-      <a class="sq-skip" href="#" data-sq-go>Continue to your product →</a>
+      <a class="sq-skip" href="{{ fallback_url }}" data-sq-go>Continue to your product →</a>
     </div>
   </div>
 </section>
@@ -161,6 +165,7 @@
 <script type="application/json" data-sq-config>
   {
     "code": {{ code | json }},
+    "fallbackUrl": {{ fallback_url | json }},
     "klaviyoCompany": {{ section.settings.klaviyo_company_id | strip | json }},
     "klaviyoList": {{ section.settings.klaviyo_list_id | strip | json }},
     "source": {{ section.settings.klaviyo_source | strip | json }},
@@ -186,7 +191,7 @@
 
 {% schema %}
 {
-  "name": "SOMNA quiz v5.1",
+  "name": "SOMNA quiz v5.2",
   "class": "somna-quiz-section",
   "settings": [
     { "type": "header", "content": "01 · Intro + Q1" },
@@ -256,8 +261,8 @@
     { "type": "text", "id": "tried_pills_line", "label": "Tick if they tried melatonin or pills", "default": "Drug-free — nothing to swallow" },
     { "type": "text", "id": "tried_tape_line", "label": "Tick if they tried mouth tape", "info": "Wording to confirm.", "default": "Designed to be gentle on skin and peel off easily in the morning" },
     { "type": "text", "id": "timeline_heading", "label": "Timeline heading", "default": "Your first 30 nights" },
-    { "type": "inline_richtext", "id": "timeline_1", "label": "Timeline 1", "default": "<b>Tonight</b> — apply before bed" },
-    { "type": "inline_richtext", "id": "timeline_2", "label": "Timeline 2", "default": "<b>Night 1–30</b> — log your mornings in your free Sleep Tracker" },
+    { "type": "inline_richtext", "id": "timeline_1", "label": "Timeline 1", "default": "<b>Night 1</b> — apply before bed" },
+    { "type": "inline_richtext", "id": "timeline_2", "label": "Timeline 2", "default": "<b>Nights 1–30</b> — log your mornings in your free Sleep Tracker" },
     { "type": "text", "id": "timeline_2_note", "label": "Timeline 2 small print", "default": "(with subscription)" },
     { "type": "inline_richtext", "id": "timeline_3", "label": "Timeline 3", "default": "<b>Night 30</b> — not for you? Full refund (30-Night Money-Back Guarantee)" },
     { "type": "text", "id": "result_button", "label": "Button", "default": "Get my plan →" },
@@ -285,6 +290,6 @@
     { "type": "textarea", "id": "bundle_self", "label": "Copy (me / both)", "default": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together." },
     { "type": "textarea", "id": "bundle_partner", "label": "Copy (partner)", "default": "It's their nose and their mouth. Strips open the airway; Tape keeps them breathing through it. Built to work together." }
   ],
-  "presets": [{ "name": "SOMNA quiz v5.1" }]
+  "presets": [{ "name": "SOMNA quiz v5.2" }]
 }
 {% endschema %}
