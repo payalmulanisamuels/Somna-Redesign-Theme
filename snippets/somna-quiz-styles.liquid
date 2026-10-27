@@ -97,7 +97,9 @@ padding: 18px 16px 56px; min-height: 100vh;
 
 /* 05 story break */
 .sq .sq-story { margin-top: 4px; }
-.sq .sq-video { border-radius: 18px; overflow: hidden; background: #E9E0CE; }
+.sq .sq-video { position: relative; border-radius: 18px; overflow: hidden; background: #E9E0CE; }
+.sq .sq-video-tag { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(18,32,91,.82); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .02em; line-height: 1; }
+.sq .sq-video-tag svg { width: 12px; height: 12px; fill: currentColor; stroke: none; }
 .sq .sq-video video { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; }
 .sq .sq-story-revs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 .sq .sq-story-revs .sq-review { flex-direction: column; align-items: flex-start; gap: 6px; }

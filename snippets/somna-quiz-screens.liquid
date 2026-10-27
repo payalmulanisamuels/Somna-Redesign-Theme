@@ -74,6 +74,7 @@
       if k == 1
         assign sk = 'strips'
         assign svid = qs.video_strips
+        assign svl = qs.video_strips_label
         assign sq1 = qs.strips_review_1_quote
         assign sn1 = qs.strips_review_1_name
         assign sq2 = qs.strips_review_2_quote
@@ -81,6 +82,7 @@
       else
         assign sk = 'tape'
         assign svid = qs.video_tape
+        assign svl = qs.video_tape_label
         assign sq1 = qs.tape_review_1_quote
         assign sn1 = qs.tape_review_1_name
         assign sq2 = qs.tape_review_2_quote
@@ -90,7 +92,8 @@
     <div class="sq-story" data-story="{{ sk }}" hidden>
       {%- if svid != blank -%}
         <div class="sq-video">
-          {{ svid | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: true, preload: 'none', image_size: '640x' }}
+          {{ svid | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '720x' }}
+          {%- if svl != blank -%}<span class="sq-video-tag">{% render 'somna-quiz-icon', name: 'play' %}{{ svl }}</span>{%- endif -%}
         </div>
       {%- endif -%}
       {%- if sq1 != blank or sq2 != blank -%}
