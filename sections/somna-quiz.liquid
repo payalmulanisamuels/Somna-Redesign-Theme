@@ -17,7 +17,11 @@
 
 <section class="sq" id="sq-{{ sid }}" data-sq aria-label="Sleep quiz">
   <div class="sq-wrap">
-    <a class="sq-logo" href="{{ routes.root_url }}" aria-label="SOMNA home">som<span>na.</span></a>
+    <a class="sq-logo" href="{{ routes.root_url }}" aria-label="SOMNA home">
+      {%- if settings.logo != blank -%}
+        {{ settings.logo | image_url: width: 400 | image_tag: widths: '200, 300, 400', sizes: '160px', alt: '', class: 'sq-logo-img', loading: 'eager' }}
+      {%- else -%}som<span>na.</span>{%- endif -%}
+    </a>
 
     <div class="sq-top" data-sq-top>
       <div class="sq-prog" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="12" data-sq-prog>
