@@ -96,7 +96,7 @@
   function resEl(s) { return $('.sq-res[data-res="' + s.result + '"]'); }
   function productUrl(s) {
     var r = resEl(s), base = r ? r.getAttribute('data-url') : '';
-    if (!base) return '#';
+    if (!base) return cfg.fallbackUrl || '/collections/all';
     var tried = s.tried.join(',');
     var path = base.split('?')[0], qs = (base.split('?')[1] ? base.split('?')[1] + '&' : '') + 'quiz=' + s.result + '&for=' + s.who + (tried ? '&tried=' + encodeURIComponent(tried) : '');
     // Email sign-ups: Shopify discount link applies the code, then opens the same product page.
@@ -241,7 +241,7 @@
     var s = score(), box = $('[data-sq-peek]'); box.innerHTML = '';
     var c = el('div', 'sq-card sq-profile', null);
     c.appendChild(el('p', 'sq-lbl', 'Your breathing profile'));
-    var m1 = el('div', 'sq-dots', null), m2 = el('div', 'sq-dots', null); dots(m1, Math.min(7, s.S), 7); dots(m2, Math.min(5, s.T), 5);
+    var m1 = el('div', 'sq-dots', null), m2 = el('div', 'sq-dots', null); dots(m1, Math.min(8, s.S), 8); dots(m2, Math.min(6, s.T), 6);
     c.appendChild(m1); c.appendChild(m2); box.appendChild(c);
     var g = el('div', 'sq-tilegrid', null); tiles(g, s); box.appendChild(g);
   }
@@ -254,7 +254,7 @@
     var pr = $('[data-sq-problem]'), lines = (cfg.problems || {})[s.problem];
     pr.textContent = lines ? lines[p ? 1 : 0] : ''; pr.hidden = !pr.textContent;
     $('[data-sq-nose-lbl]').textContent = level(s.S); $('[data-sq-mouth-lbl]').textContent = level(s.T);
-    dots($('[data-sq-nose]'), Math.min(7, s.S), 7, true); dots($('[data-sq-mouth]'), Math.min(5, s.T), 5, true);
+    dots($('[data-sq-nose]'), Math.min(8, s.S), 8, true); dots($('[data-sq-mouth]'), Math.min(6, s.T), 6, true);
     tiles($('[data-sq-tilegrid]'), s);
     $('[data-sq-desc]').textContent = r ? r.getAttribute(p ? 'data-copy-partner' : 'data-copy-self') : '';
     var share = $('[data-sq-share]'); share.hidden = !(p && (navigator.share || (navigator.clipboard && window.isSecureContext)));
@@ -273,11 +273,13 @@
   function renderFix() {
     var s = score();
     $$('.sq-res').forEach(function (e) { e.hidden = e.getAttribute('data-res') !== s.result; });
+    $('[data-sq-plan]').setAttribute('href', productUrl(s));
     var ul = $('[data-sq-ticks]'); ul.innerHTML = '';
     ticks(s).forEach(function (t) { var li = el('li', '', null); li.appendChild(el('span', 'sq-tick', null)); li.appendChild(el('span', '', t)); ul.appendChild(li); });
     var code = $('[data-sq-code]'); if (code) code.hidden = !(signedUp && cfg.code);
   }
-  $('[data-sq-plan]').addEventListener('click', function () { if (!busy) { busy = true; go(idx('loader')); } });
+  // "Get my plan" is a real link to the product page; with JS it shows the 1.5s loader first, then goes to the same URL.
+  $('[data-sq-plan]').addEventListener('click', function (e) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; e.preventDefault(); if (!busy) { busy = true; go(idx('loader')); } });
 
   // ---- 12 getting your plan ready (1.5s) → product page; the result is saved for the "Matched for you" banner ----
   function runLoader() {
