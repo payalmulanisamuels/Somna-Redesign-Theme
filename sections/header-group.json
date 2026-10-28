@@ -34,7 +34,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "70% OFF",
+            "text": "UP TO 50% OFF",
             "link": "",
             "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
             "font": "var(--font-display--family)",
@@ -82,7 +82,7 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "70% OFF",
+            "text": "UP TO 50% OFF",
             "link": "",
             "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
             "font": "var(--font-display--family)",
