@@ -189,7 +189,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>70% OFF</p>",
+                "text": "<p>UP TO<br/>50% OFF</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -222,7 +222,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>On Nasal Strips & Mouth Tape. Ends Oct 31</p>",
+                "text": "<p>On all products. Ends Oct 31</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1046,7 +1046,7 @@
         "heading": "Shop the essentials",
         "eyebrow": "NO TRICK . ONLY TREATS",
         "title_icon": "shopify://shop_images/somna-halloween-title-pumpkin.png",
-        "badge_text": "70% OFF",
+        "badge_text": "UP TO 50% OFF",
         "halloween_decor": true,
         "bg_color": "#ffffff",
         "padding_top_mobile": 18,
