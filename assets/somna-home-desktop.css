@@ -516,6 +516,17 @@
     font-weight: 600;
     border-radius: 999px;
   }
+  /* Tablet + smaller desktops: "50% OFF" is fluid (theme scales it with the viewport), so the
+     headline and the "UP TO" line scale with it and keep the desktop proportions. The sizes set in
+     the editor stay the maximum, reached at 1280px, so 1280px and wider look exactly as before. */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(> h1),
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(> h1) > h1 {
+    font-size: min(var(--font-size-desktop, 4.5rem), 5.625vw);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(+ .text-block[style*="font-display-spray"]),
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(+ .text-block[style*="font-display-spray"]) > * {
+    font-size: min(var(--font-size-desktop, 2rem), 2.5vw);
+  }
 
   /* ---------- Trust bar (all pages that have it; colours, font and text size: custom.css) ---------- */
  .icon-block__media {
