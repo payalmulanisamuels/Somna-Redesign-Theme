@@ -417,7 +417,7 @@
 
     {% comment %} Bottom pills (Figma: "XX% OFF" / 4th bag free). XX = real Autoship saving vs one-time price. {% endcomment %}
     {% if forloop.index == 2 and somna_save_pct > 0 %}
-      <span class="variant-card__bottom-save-pill somna-tier__pill">{{ somna_save_pct }}% OFF</span>
+      {% comment %} <span class="variant-card__bottom-save-pill somna-tier__pill">{{ somna_save_pct }}% OFF</span> {% endcomment %}
     {% elsif forloop.index >= 3 %}
       <span class="variant-card__bottom-save-pill somna-tier__pill">4th {{ somna_unit }} free</span>
     {% endif %}
