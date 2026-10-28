@@ -193,6 +193,7 @@ if (!customElements.get('add-to-cart-component')) {
  * @property {string | null} intendedVariantId - The selected option's data-variant-id, when present.
  * @property {Promise<unknown> | null} pendingVariantChange - The server-side section fetch for the clicked selection.
  * @property {string | null} variantResolutionUrl - A section-rendering URL that resolves the clicked selection.
+ * @property {string} sellingPlanId - The form's `selling_plan` when Add was clicked ('' = one-time purchase).
  *
  * @typedef {object} QuantityConstraints
  * @property {string} min
@@ -349,7 +350,20 @@ class ProductFormComponent extends Component {
       intendedVariantId: selectedOption?.dataset.variantId ?? null,
       pendingVariantChange: this.#pendingVariantChange,
       variantResolutionUrl: picker && selectedOption ? picker.buildRequestUrl(selectedOption) : null,
+      sellingPlanId: this.#getSellingPlanId(),
     };
+  }
+
+  /**
+   * Somna (2026-10-28): the subscription selling plan the form would submit right now.
+   * A disabled or missing `selling_plan` field means a one-time purchase ('').
+   * @returns {string}
+   */
+  #getSellingPlanId() {
+    const form = this.querySelector('form');
+    if (!form) return '';
+    const value = new FormData(form).get('selling_plan');
+    return typeof value === 'string' ? value : '';
   }
 
   /**
@@ -583,7 +597,7 @@ class ProductFormComponent extends Component {
       });
   }
 
-  /** @param {Array<{variantId: string, quantity: number}>} items */
+  /** @param {Array<{variantId: string, quantity: number, sellingPlanId?: string}>} items */
   #processBatchAddToCart(items) {
     if (items.length === 0) return;
 
@@ -615,9 +629,12 @@ class ProductFormComponent extends Component {
     );
 
     const payload = {
+      // Somna: keep the Autoship selling plan on adds queued during a variant change. Without it
+      // these adds went to the cart as one-time purchases. One-time adds send no selling_plan.
       items: items.map((item) => ({
         id: Number(item.variantId),
         quantity: item.quantity,
+        ...(item.sellingPlanId ? { selling_plan: Number(item.sellingPlanId) } : {}),
       })),
       sections: cartItemComponentsSectionIds.join(','),
     };
@@ -952,7 +969,7 @@ class ProductFormComponent extends Component {
     const queuedItems = [...this.#addToCartQueue];
     this.#addToCartQueue = [];
 
-    /** @type {Array<{variantId: string, quantity: number}>} */
+    /** @type {Array<{variantId: string, quantity: number, sellingPlanId: string}>} */
     const resolvedItems = [];
     for (const item of queuedItems) {
       const resolvedItem = await this.#resolveQueuedAddToCartItem(item);
@@ -966,7 +983,7 @@ class ProductFormComponent extends Component {
 
   /**
    * @param {QueuedAddToCartItem} item
-   * @returns {Promise<{variantId: string, quantity: number} | null>}
+   * @returns {Promise<{variantId: string, quantity: number, sellingPlanId: string} | null>}
    */
   async #resolveQueuedAddToCartItem(item) {
     const { variantId, quantityConstraints } = await this.#resolveQueuedVariant(item);
@@ -975,6 +992,7 @@ class ProductFormComponent extends Component {
     return {
       variantId,
       quantity: this.#normalizeQueuedQuantity(item.quantity, quantityConstraints),
+      sellingPlanId: item.sellingPlanId,
     };
   }
 
