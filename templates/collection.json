@@ -1039,7 +1039,7 @@
         "heading": "Shop the essentials",
         "eyebrow": "NO TRICK . ONLY TREATS",
         "title_icon": "shopify://shop_images/somna-halloween-title-pumpkin.png",
-        "badge_text": "70% OFF",
+        "badge_text": "UP TO 50% OFF",
         "halloween_decor": true,
         "bg_color": "#ffffff",
         "padding_top_mobile": 18,
@@ -1162,7 +1162,7 @@
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "The Color Set",
             "card_description": "All three Strips colors · 3 months",
-            "price_text_override": "$0.99/night · <strong>$89</strong> with Subscribe &amp; Save",
+            "price_text_override": "$0.56/night · <strong>$49.95</strong> with Subscribe &amp; Save",
             "button_label": "View The Color Set",
             "button_link": ""
           }
@@ -1177,7 +1177,7 @@
             "overlay_badge": "FREE GIFTS with subscription",
             "card_title": "Sleep Bundle — 3+1 Sets",
             "card_description": "Strips + Tape, 4 months · 1 set free",
-            "price_text_override": "$1.45/night · <strong>$174.87</strong> with Subscribe &amp; Save",
+            "price_text_override": "$0.82/night · <strong>$98.85</strong> with Subscribe &amp; Save",
             "button_label": "View 3+1 Sets",
             "button_link": ""
           }
@@ -1224,7 +1224,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How does Subscribe & Save work?",
-            "answer": "<p>10% off, delivered automatically on your schedule, skip or cancel anytime.</p>",
+            "answer": "<p>Up to 50% off, delivered automatically on your schedule, skip or cancel anytime.</p>",
             "default_open": false
           }
         },
