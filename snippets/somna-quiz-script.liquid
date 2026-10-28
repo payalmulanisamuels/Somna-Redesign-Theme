@@ -73,12 +73,12 @@
   function ticks(s) {
     var p = s.partner, out = [];
     if (s.result === 'strips') {
-      var n = { blocked: p ? ' — you said theirs is blocked most nights' : " — you said it's blocked most nights", stuffy: ' — even when a cold or allergies hit' }[s.nose]
-        || ((s.problem === 'snoring') ? ' — where snoring usually starts' : '');
+      var n = { blocked: p ? '. You said theirs is blocked most nights.' : ". You said it's blocked most nights.", stuffy: ', even when a cold or allergies hit.' }[s.nose]
+        || ((s.problem === 'snoring') ? ', right where snoring usually starts.' : '.');
       out.push('Designed to hold ' + (p ? 'their' : 'your') + ' nose open all night' + n);
     } else if (s.result === 'tape') {
-      var m = { dry: p ? ' — you said they wake up bone dry' : ' — you said you wake up bone dry', drool: ' — you mentioned drooling or morning breath' }[s.mouth]
-        || ((s.problem === 'mouth') ? (p ? ' — you said they wake with a dry mouth' : ' — you said you wake with a dry mouth') : '');
+      var m = { dry: p ? '. You said they wake up bone dry.' : '. You said you wake up bone dry.', drool: '. You mentioned drooling or morning breath.' }[s.mouth]
+        || ((s.problem === 'mouth') ? (p ? '. You said they wake with a dry mouth.' : '. You said you wake with a dry mouth.') : '.');
       out.push('Designed to keep ' + (p ? 'their lips gently closed so they breathe' : 'your lips gently closed so you breathe') + ' through the nose' + m);
     } else {
       out.push((p ? (cfg.bundleTickPartner || cfg.bundleTick) : cfg.bundleTick) || '');
