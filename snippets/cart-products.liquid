@@ -422,23 +422,8 @@
     endif
   endif
 
-  # Somna Halloween sale (Nasal Strips + Mouth Tape only): cross out the offer's "was" price, the same
-  # one the product page uses - variant metafield custom.autoship_compare_at for Autoship lines,
-  # custom.onetime_compare_at for one-time lines ($150/$264/$449 and $223/$393/$670).
-  # Other products keep the logic above.
-  if item.product.handle == 'nasal-strips' or item.product.handle == 'mouth-tape'
-    assign somna_was_unit = 0
-    if item.selling_plan_allocation != blank
-      if item.variant.metafields.custom.autoship_compare_at != blank
-        assign somna_was_unit = item.variant.metafields.custom.autoship_compare_at.value | times: 100 | round
-      endif
-    elsif item.variant.metafields.custom.onetime_compare_at != blank
-      assign somna_was_unit = item.variant.metafields.custom.onetime_compare_at.value | times: 100 | round
-    endif
-    if somna_was_unit > active_unit_price
-      assign compare_unit_price = somna_was_unit
-    endif
-  endif
+  # Somna Halloween sale (2026-10-28): every line crosses out the variant price. One-time lines show
+  # item.final_price (after the 40% automatic discount), Autoship lines the plan price (above).
 
   # Multiply per-unit price by quantity for total line display
   # Alternatively, item.final_line_price handles total active discounted line price natively

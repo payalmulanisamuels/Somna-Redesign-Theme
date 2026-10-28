@@ -10,25 +10,13 @@
   `custom.nights` variant metafield, then the `custom.nights` product metafield,
   falling back to variant position (1st = 30, 2nd = 60, 3rd+ = 120).
 
-  Halloween 2026: when the product's `custom.halloween_sale_text` metafield has a value
-  (e.g. "70% OFF"), the banner reads "HALLOWEEN: <value> + 3 FREE GIFTS ON YOUR FIRST ORDER"
-  and the third perk reads "Lock in your Halloween price on every delivery." The metafield is
-  display text only; every price, saving and % here comes from the real selling plans.
-  Products without the metafield keep the normal wording.
-
-  Sale "was" prices (2026-10-15, Nasal Strips + Mouth Tape): optional variant metafields
-  `custom.autoship_compare_at` and `custom.onetime_compare_at` (decimal, e.g. 264 / 393).
-  - Autoship "YOU SAVE" (and its hidden crossed-out price) = autoship_compare_at - Autoship price.
-  - One-time "% OFF" pill = onetime_compare_at vs the one-time price.
-  The "x% off every order" perk and "You'd save $x with Autoship" keep the real plan saving.
-  Variants without these metafields work exactly as before.
-
-  Halloween Sale one-time price (2026-10-16): products with `custom.halloween_sale_text` get 55% off
-  one-time purchases at checkout from the automatic discount "Halloween Sale" (Shopify doesn't give
-  themes automatic discounts, so the 55 is set here as `somna_once_off`). For those products the
-  one-time price, its "% OFF" pill and "You'd save $x with Autoship" use price x 0.45, replacing the
-  `custom.onetime_compare_at` pill. Autoship prices are unchanged. Set somna_once_off to 0 when the
-  sale ends.
+  Halloween Sale relaunch (2026-10-28): every product gets the one-time % off from
+  snippets/somna-sale.liquid (40%, the automatic discount "Halloween Sale"). One-time price =
+  variant price x 0.60, with the variant price crossed out before it. Autoship shows the plan
+  price with the variant price crossed out and "YOU SAVE" = variant price - plan price.
+  The `custom.autoship_compare_at` / `custom.onetime_compare_at` metafields are no longer used.
+  Banner: "HALLOWEEN: UP TO 50% OFF + 3 FREE GIFTS ON YOUR FIRST ORDER" (text from somna-sale).
+  Sale end: set somna_sale_on to false in snippets/somna-sale.liquid.
 
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
@@ -36,13 +24,16 @@
 
 {%- liquid
   assign current_var = product_resource.selected_or_first_available_variant
-  assign somna_hw_text = product_resource.metafields.custom.halloween_sale_text.value | strip
 
-  # Halloween Sale: one-time purchases are 55% off at checkout (automatic discount) on these products
-  assign somna_once_off = 0
-  if somna_hw_text != blank
-    assign somna_once_off = 55
-  endif
+  # Halloween Sale: one-time % off at checkout (automatic discount) and banner text, set in somna-sale
+  capture somna_once_off
+    render 'somna-sale', get: 'once_off'
+  endcapture
+  assign somna_once_off = somna_once_off | plus: 0
+  capture somna_hw_text
+    render 'somna-sale', get: 'text'
+  endcapture
+  assign somna_hw_text = somna_hw_text | strip
 
   assign has_selling_plans = false
   for v in product_resource.variants
@@ -109,20 +100,9 @@
               assign v_bags = 1
             endif
 
-            # Sale "was" prices from variant metafields, in cents (0 = not set)
-            assign v_auto_cmp = 0
-            if v.metafields.custom.autoship_compare_at != blank
-              assign v_auto_cmp = v.metafields.custom.autoship_compare_at.value | times: 100 | round
-            endif
-            assign v_once_cmp = 0
-            if v.metafields.custom.onetime_compare_at != blank
-              assign v_once_cmp = v.metafields.custom.onetime_compare_at.value | times: 100 | round
-            endif
+            # One-time price the customer pays (Halloween Sale 40%: price x 0.60, e.g. 49.90 -> 29.94).
+            # The variant price is the crossed-out "was" price.
             assign v_once_pct = 0
-            if v_once_cmp > v.price
-              assign v_once_pct = v_once_cmp | minus: v.price | times: 100.0 | divided_by: v_once_cmp | round
-            endif
-            # One-time price the customer pays (Halloween Sale: price x 0.45, e.g. 264 -> 118.80)
             assign v_once_price = v.price
             if somna_once_off > 0
               assign v_once_keep = 100 | minus: somna_once_off
@@ -137,6 +117,8 @@
           "{{ v.id }}": {
             "nights": {{ v_nights }},
             "price": {{ v_once_price | money_without_trailing_zeros | json }},
+            "regular": {{ v.price | money_without_trailing_zeros | json }},
+            "onetimeSaveCents": {{ v.price | minus: v_once_price }},
             "onetimePct": {{ v_once_pct }},
             "plans": [
               {%- for alloc in v.selling_plan_allocations -%}
@@ -160,11 +142,8 @@
                     assign discount = save_cents | times: 100.0 | divided_by: regular | round
                   endif
 
-                  # Autoship "was" price + saving: the metafield price when set, else the one-time price
+                  # Autoship "was" price + saving: the variant price
                   assign auto_regular = regular
-                  if v_auto_cmp > alloc.price
-                    assign auto_regular = v_auto_cmp
-                  endif
                   assign auto_save = auto_regular | minus: alloc.price
 
                   # "You'd save $x with Autoship" (one-time box): against the one-time price actually paid
@@ -347,12 +326,17 @@
               <span class="somna-box-title">One-time purchase</span>
             </label>
             <div class="somna-price-stack">
-              <span class="somna-active-price" data-somna="onetime-price">{{ init_once_price | default: current_var.price | money_without_trailing_zeros }}</span>
+              <div class="somna-pricing-row">
+                <span class="somna-strike-price" data-somna="onetime-regular" {% unless init_once_pct > 0 %}hidden{% endunless %}>
+                  {{- current_var.price | money_without_trailing_zeros -}}
+                </span>
+                <span class="somna-active-price" data-somna="onetime-price">{{ init_once_price | default: current_var.price | money_without_trailing_zeros }}</span>
+              </div>
             </div>
           </div>
           <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
             <span>You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship</span>
-            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_discount > 0 %}{{ init_discount }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
+            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_once_pct > 0 %}{{ init_once_pct }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
           </p>
         </div>
       </div>
@@ -401,6 +385,7 @@
         const savePill = container.querySelector('.somna-save-pill');
         const perNightEl = container.querySelector('.somna-per-night');
         const oneTimeSaveEl = container.querySelector('[data-somna-onetime-save]');
+        const oneTimeRegularEl = container.querySelector('[data-somna="onetime-regular"]');
         let plans = [];
         let currentVariant = null;
         let currentVariantId = null;
@@ -419,11 +404,11 @@
         let mode = subBox && subBox.classList.contains('active') ? 'subscribe' : 'onetime';
         const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
 
-        // Nasal Strips + Mouth Tape: the size cards' "$x/night" (snippets/variant-main-picker.liquid)
+        // Size cards (all products): the size cards' "$x/night" (snippets/variant-main-picker.liquid)
         // follows the selected option: Autoship price per night, or the one-time price per night when
         // One-time purchase is picked. Uses the cards' own data-sub-numeric / data-onetime-numeric /
         // data-nights, rounded to the cent like the Liquid. Re-applied if the cards are re-rendered.
-        const nightCardsOn = ['nasal-strips', 'mouth-tape'].includes({{ product_resource.handle | json }});
+        const nightCardsOn = true;
         const nightScope = container.closest('.shopify-section') || document;
         const updateNightPrices = () => {
           if (!nightCardsOn) return;
@@ -487,7 +472,8 @@
           setText('regular', plan.regular);
           setText('save', plan.save);
           setText('auto-save', plan.autoSave);
-          setText('onetime-pct', String(currentVariant?.autoSave > 0 ? currentVariant.autoSave : plan.discount));
+          // One-time box pill: the one-time sale % (40%) while the sale is on, else the Autoship saving
+          setText('onetime-pct', String(currentVariant?.onetimePct > 0 ? currentVariant.onetimePct : plan.discount));
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
           setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
@@ -507,6 +493,8 @@
           currentVariant = variant;
 
           setText('onetime-price', variant.price);
+          setText('onetime-regular', variant.regular);
+          if (oneTimeRegularEl) oneTimeRegularEl.hidden = !(variant.onetimeSaveCents > 0);
           plans = variant.plans;
 
           if (!plans.length) {
@@ -595,3 +583,13 @@
     })();
   </script>
 {%- endif -%}
+
+{% stylesheet %}
+  /* Halloween Sale relaunch: show the crossed-out variant price before the price in both boxes
+     (assets/custom.css hides .somna-strike-price in the buy box; this rule is more specific). */
+  .somna-custom-subscription-container .somna-pricing-row .somna-strike-price:not([hidden]) {
+    display: inline;
+    color: #8c99c0;
+    text-decoration: line-through;
+  }
+{% endstylesheet %}

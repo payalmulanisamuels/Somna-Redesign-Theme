@@ -22,6 +22,12 @@
   if product.selected_or_first_available_variant.selling_plan_allocations.size > 0
     assign initial_mode = 'subscribe'
   endif
+
+  # Halloween Sale: one-time price = variant price less the % in snippets/somna-sale.liquid (40%)
+  capture somna_once_off
+    render 'somna-sale', get: 'once_off'
+  endcapture
+  assign somna_once_keep = 100 | minus: somna_once_off
 -%}
 
 {%- if supply_option -%}
@@ -86,6 +92,7 @@
             assign row_nights = product.metafields.custom.nights.value | plus: 0
           endif
 
+          assign row_once = row_variant.price | times: somna_once_keep | divided_by: 100.0 | round
           assign row_badge = ''
           assign row_badge_class = ''
           if supply_index == 2
@@ -115,8 +122,8 @@
             class="somna-sticky__row"
             data-somna-sticky-row
             data-option-value-id="{{ option_value.id }}"
-            data-onetime-price="{{ row_variant.price | money_without_trailing_zeros | escape }}"
-            data-onetime-per-night="{{ row_variant.price | times: 1.0 | divided_by: row_nights | round | money | escape }}"
+            data-onetime-price="{{ row_once | money_without_trailing_zeros | escape }}"
+            data-onetime-per-night="{{ row_once | times: 1.0 | divided_by: row_nights | round | money | escape }}"
             data-plans="{{ row_plans | strip_newlines | escape }}"
             aria-selected="{{ option_value.selected }}"
             {% unless row_variant.available %}
@@ -135,7 +142,7 @@
                 {%- if initial_mode == 'subscribe' and row_variant.selling_plan_allocations.size > 0 -%}
                   {{- row_variant.selling_plan_allocations.first.price | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- else -%}
-                  {{- row_variant.price | times: 1.0 | divided_by: row_nights | round | money -}}
+                  {{- row_once | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- endif -%}
               </span>/night
               {%- unless row_variant.available %} · {{ 'products.product.sold_out' | t }}{% endunless -%}
@@ -156,8 +163,9 @@
       assign single_nights = product.metafields.custom.nights.value | plus: 0
     endif
 
-    assign single_price = single_variant.price | money_without_trailing_zeros
-    assign single_per_night = single_variant.price | times: 1.0 | divided_by: single_nights | round | money
+    assign single_once = single_variant.price | times: somna_once_keep | divided_by: 100.0 | round
+    assign single_price = single_once | money_without_trailing_zeros
+    assign single_per_night = single_once | times: 1.0 | divided_by: single_nights | round | money
     if initial_mode == 'subscribe'
       assign single_alloc = single_variant.selling_plan_allocations.first
       assign single_price = single_alloc.price | money_without_trailing_zeros
@@ -194,8 +202,8 @@
       hidden
       data-somna-sticky-row
       aria-selected="true"
-      data-onetime-price="{{ single_variant.price | money_without_trailing_zeros | escape }}"
-      data-onetime-per-night="{{ single_variant.price | times: 1.0 | divided_by: single_nights | round | money | escape }}"
+      data-onetime-price="{{ single_once | money_without_trailing_zeros | escape }}"
+      data-onetime-per-night="{{ single_once | times: 1.0 | divided_by: single_nights | round | money | escape }}"
       data-plans="{{ single_plans | strip_newlines | escape }}"
     ></span>
   </div>

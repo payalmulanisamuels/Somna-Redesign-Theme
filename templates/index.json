@@ -185,11 +185,43 @@
               },
               "blocks": {}
             },
+            "text_FRGnxP": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>UP TO</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-display--family)",
+                "font_size": "1rem",
+                "font_size_tablet": "",
+                "font_size_desktop": "2rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
+              },
+              "blocks": {}
+            },
             "text_hw70off": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>70% OFF</p>",
+                "text": "<p>50% OFF</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -206,7 +238,7 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 20,
+                "padding-block-start": 0,
                 "padding-block-end": 4,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
@@ -214,7 +246,7 @@
                 "font_weight_desktop": "",
                 "line_height_desktop": "",
                 "letter_spacing_desktop": "",
-                "padding-block-start-desktop": 31
+                "padding-block-start-desktop": 0
               },
               "blocks": {}
             },
@@ -222,7 +254,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>On Nasal Strips & Mouth Tape. Ends Oct 31</p>",
+                "text": "<p>On all products. Ends Oct 31</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -311,6 +343,7 @@
           "block_order": [
             "text_VDbt3L",
             "text_eT6TMz",
+            "text_FRGnxP",
             "text_hw70off",
             "text_Lqf6bA",
             "button_6EgajN",
@@ -1046,7 +1079,7 @@
         "heading": "Shop the essentials",
         "eyebrow": "NO TRICK . ONLY TREATS",
         "title_icon": "shopify://shop_images/somna-halloween-title-pumpkin.png",
-        "badge_text": "70% OFF",
+        "badge_text": "UP TO 50% OFF",
         "halloween_decor": true,
         "bg_color": "#ffffff",
         "padding_top_mobile": 18,
@@ -1992,7 +2025,7 @@
         "price_prefix": "From",
         "price_override": "",
         "price_label": "Subscribe & Save",
-        "per_night_text": "3+1 sets. $1.46/night",
+        "per_night_text": "3+1 sets. $0.82/night",
         "button_label": "See the Breathe Bundle",
         "button_variant": "Breathe",
         "section_bg": "rgba(0,0,0,0)",
@@ -2168,7 +2201,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>It delivers automatically on your chosen schedule at 10% off, and you can skip, pause, or cancel anytime.</p>",
+                    "text": "<p>It delivers automatically on your chosen schedule at up to 50% off, and you can skip, pause, or cancel anytime.</p>",
                     "width": "fit-content",
                     "max_width": "none",
                     "alignment": "left",
