@@ -30,7 +30,7 @@
   <h2 class="sq-q sq-q--sm" id="sq-{{ sid }}-q1">{{ qs.q1_heading | default: "First, who's this for?" }}</h2>
   <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q1">
     <button type="button" class="sq-opt" data-tag="self" data-val="Me"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'person' %}</span><span>Me</span></button>
-    <button type="button" class="sq-opt" data-s="2" data-tag="partner" data-val="My partner"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'partner' %}</span><span>My partner – their snoring keeps me up</span></button>
+    <button type="button" class="sq-opt" data-s="2" data-tag="partner" data-val="My partner"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'partner' %}</span><span>My partner (their snoring keeps me up)</span></button>
     <button type="button" class="sq-opt" data-tag="both" data-val="Both of us"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'both' %}</span><span>Both of us</span></button>
   </div>
 </div>
@@ -43,7 +43,7 @@
     <button type="button" class="sq-opt sq-tile" data-s="3" data-key="nose"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'wind' %}</span><span>Blocked or stuffy nose</span></button>
     <button type="button" class="sq-opt sq-tile" data-t="3" data-key="mouth"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Dry mouth or sore throat</span></button>
     <button type="button" class="sq-opt sq-tile" data-s="1" data-t="1" data-key="tired"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-low' %}</span><span>Waking up tired after 7–8 hrs</span></button>
-    <button type="button" class="sq-opt sq-tile sq-tile--wide" data-s="3" data-t="3" data-key="both"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'combo' %}</span><span>Both – snoring or a blocked nose <strong>and</strong> a dry mouth</span></button>
+    <button type="button" class="sq-opt sq-tile sq-tile--wide" data-s="3" data-t="3" data-key="both"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'combo' %}</span><span>Both: snoring or a blocked nose <strong>and</strong> a dry mouth</span></button>
   </div>
   {%- if qs.q2_note != blank -%}<div class="sq-note"><p class="sq-note-h">Did you know</p><p>{{ qs.q2_note }}</p></div>{%- endif -%}
 </div>
@@ -63,7 +63,7 @@
 <div class="sq-s" data-type="q" data-q="4" data-step="4">
   <h2 class="sq-q" id="sq-{{ sid }}-q4" tabindex="-1" data-self="When you wake up, your mouth is…" data-partner="When they wake up, their mouth is…">When you wake up, your mouth is…</h2>
   <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q4">
-    <button type="button" class="sq-opt" data-t="3" data-key="dry"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span data-self="Bone dry — I reach for water at night" data-partner="Bone dry — they reach for water at night">Bone dry — I reach for water at night</span></button>
+    <button type="button" class="sq-opt" data-t="3" data-key="dry"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span data-self="Bone dry (I reach for water at night)" data-partner="Bone dry (they reach for water at night)">Bone dry (I reach for water at night)</span></button>
     <button type="button" class="sq-opt" data-t="3" data-key="drool"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Drooling or bad morning breath</span></button>
     <button type="button" class="sq-opt" data-key="fine"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'drop' %}</span><span>Fine</span></button>
   </div>
@@ -121,7 +121,7 @@
     <button type="button" class="sq-opt sq-tile" data-key="1"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-1' %}</span><span>Running on empty</span></button>
     <button type="button" class="sq-opt sq-tile" data-key="2"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-2' %}</span><span>3pm crash, every day</span></button>
     <button type="button" class="sq-opt sq-tile" data-key="3"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-3' %}</span><span>Foggy until coffee</span></button>
-    <button type="button" class="sq-opt sq-tile" data-key="4"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-4' %}</span><span>Pretty good — just want better</span></button>
+    <button type="button" class="sq-opt sq-tile" data-key="4"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'battery-4' %}</span><span>Pretty good, just want better</span></button>
   </div>
 </div>
 
@@ -137,6 +137,6 @@
     <button type="button" class="sq-opt sq-chip" data-tried="spray">Nasal spray</button>
     <button type="button" class="sq-opt sq-chip" data-tried="nothing">Nothing yet</button>
   </div>
-  {%- if qs.q6_note != blank -%}<div class="sq-note"><p class="sq-note-h">Nice — last one</p><p>{{ qs.q6_note }}</p></div>{%- endif -%}
+  {%- if qs.q6_note != blank -%}<div class="sq-note"><p class="sq-note-h">Nice, last one</p><p>{{ qs.q6_note }}</p></div>{%- endif -%}
   <button type="button" class="sq-cta" data-sq-continue disabled>See my results →</button>
 </div>
