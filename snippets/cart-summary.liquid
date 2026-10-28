@@ -21,29 +21,14 @@
     if item.selling_plan_allocation != blank
       assign orig_price = item.variant.price
     endif
-    # Somna Halloween sale (Nasal Strips + Mouth Tape only): the saving is against the offer's "was"
-    # price, as on the product page (Autoship: custom.autoship_compare_at, one-time:
-    # custom.onetime_compare_at). Other products are unchanged.
-    if item.product.handle == 'nasal-strips' or item.product.handle == 'mouth-tape'
-      assign somna_was_unit = 0
-      if item.selling_plan_allocation != blank
-        if item.variant.metafields.custom.autoship_compare_at != blank
-          assign somna_was_unit = item.variant.metafields.custom.autoship_compare_at.value | times: 100 | round
-        endif
-      elsif item.variant.metafields.custom.onetime_compare_at != blank
-        assign somna_was_unit = item.variant.metafields.custom.onetime_compare_at.value | times: 100 | round
-      endif
-      if somna_was_unit > orig_price
-        assign orig_price = somna_was_unit
-      endif
-    endif
     assign line_orig = orig_price | times: item.quantity
     assign calculated_original_total = calculated_original_total | plus: line_orig
   endfor
 
-  # Total cart discount + subscription value difference
-  assign subscription_savings = calculated_original_total | minus: cart.total_price
-  assign total_saved = cart.total_discount | plus: subscription_savings
+  # Total saved = variant prices - what the customer pays. cart.total_price is already after the
+  # automatic discount, codes and Autoship plan prices, so cart.total_discount isn't added again
+  # (adding it counted the one-time sale discount twice).
+  assign total_saved = calculated_original_total | minus: cart.total_price
   if total_saved < 0
     assign total_saved = 0
   endif
