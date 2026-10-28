@@ -301,10 +301,10 @@
       assign nights_count = 120
     endif
 
-    # Somna: "2 Bags" is the default on page load, unless the URL already picks a variant (?variant=).
+    # Somna: the first size ("1 Bag" / "1 Set", the $24.95 Autoship offer in the ads) is the default on
+    # page load, unless the URL already picks a variant (?variant=). Was "2 Bags" until 2026-10-28.
     assign is_default_size = false
-    assign value_start = product_option_value.name | downcase | strip | slice: 0, 5
-    if value_start == '2 bag' and product.selected_variant == blank and product.id == product_resource.id and product_option_value.selected == false and product_option_value.available
+    if forloop.index == 1 and product.selected_variant == blank and product.id == product_resource.id and product_option_value.selected == false and product_option_value.available
       assign is_default_size = true
     endif
   endif
@@ -352,9 +352,9 @@
     data-onetime-numeric="{{ somna_once_price | divided_by: 100.0 }}"
     data-nights="{{ nights_count }}"
   >
-    {% comment %} Top badges (Figma: Try it / Most popular / Best value) {% endcomment %}
+    {% comment %} Top badges: Recommended (orange, 2026-10-28, was "Try it") / Most popular (black) / Best value {% endcomment %}
     {% if forloop.index == 1 %}
-      <span class="variant-card__badge somna-tier__badge">Try it</span>
+      <span class="variant-card__badge somna-tier__badge somna-tier__badge--recommended">Recommended</span>
     {% elsif forloop.index == 2 %}
       <span class="variant-card__badge popular somna-tier__badge somna-tier__badge--popular">Most popular</span>
     {% else %}
@@ -411,7 +411,7 @@
       {% if forloop.index == 1 %}
         <span class="variant-card__gift somna-tier__perk somna-tier__perk--muted"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h11.5v9.5H2z"/><path d="M13.5 9.5h4l3 3.2V16h-7"/><circle cx="6" cy="17.3" r="1.7"/><circle cx="17" cy="17.3" r="1.7"/></g></svg>Free shipping</span>
       {% else %}
-        <span class="variant-card__gift somna-tier__perk"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" stroke="none"><path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7.25V7h1.5v5H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1.25 1.25 0 1 1 1.25-1.25V7H9Zm6 0h-1.25V5.75A1.25 1.25 0 1 1 15 7ZM4 13.5V20a1 1 0 0 0 1 1h6.25v-7.5H4Zm8.75 7.5H19a1 1 0 0 0 1-1v-6.5h-7.25V21Z"/></g></svg>+3 free gifts</span>
+        <span class="variant-card__gift somna-tier__perk"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" stroke="none"><path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7.25V7h1.5v5H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1.25 1.25 0 1 1 1.25-1.25V7H9Zm6 0h-1.25V5.75A1.25 1.25 0 1 1 15 7ZM4 13.5V20a1 1 0 0 0 1 1h6.25v-7.5H4Zm8.75 7.5H19a1 1 0 0 0 1-1v-6.5h-7.250V21Z"/></g></svg>+3 free gifts</span>
       {% endif %}
     </div>
 
@@ -604,7 +604,7 @@
 {% render 'somna-subscription-widget', product_resource: product_resource, section: section %}
 
 {%- comment -%}
-  Somna: select "2 Bags" once on page load (only when the URL has no ?variant=).
+  Somna: select the first size ("1 Bag" / "1 Set") once on page load (only when the URL has no ?variant=).
   Clicking the real radio runs the normal variant change, so prices, the subscription
   widget, the sticky bar and the URL all update. The customer can change it afterwards.
   Placed after the widget so its listeners are set up before the click.
@@ -633,3 +633,17 @@
 
 {% render 'swatch-styles' %}
 {% render 'variant-picker-styles' %}
+
+{% stylesheet %}
+  /* Size card badges (2026-10-28): "Recommended" (1 Bag) orange, "Most popular" black.
+     More specific than the badge colours in assets/custom.css, which stay as they are. */
+  .somna-buybox-picker .somna-tier .somna-tier__badge.somna-tier__badge--recommended {
+    background: #ff9845;
+    color: #000;
+  }
+
+  .somna-buybox-picker .somna-tier .somna-tier__badge.somna-tier__badge--popular {
+    background: #000;
+    color: #fff;
+  }
+{% endstylesheet %}
