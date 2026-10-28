@@ -1992,7 +1992,7 @@
         "price_prefix": "From",
         "price_override": "",
         "price_label": "Subscribe & Save",
-        "per_night_text": "3+1 sets. $1.46/night",
+        "per_night_text": "3+1 sets. $0.82/night",
         "button_label": "See the Breathe Bundle",
         "button_variant": "Breathe",
         "section_bg": "rgba(0,0,0,0)",
@@ -2168,7 +2168,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>It delivers automatically on your chosen schedule at 10% off, and you can skip, pause, or cancel anytime.</p>",
+                    "text": "<p>It delivers automatically on your chosen schedule at up to 50% off, and you can skip, pause, or cancel anytime.</p>",
                     "width": "fit-content",
                     "max_width": "none",
                     "alignment": "left",
