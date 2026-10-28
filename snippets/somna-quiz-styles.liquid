@@ -61,6 +61,7 @@ padding: 18px 16px 56px; min-height: 100vh;
 /* review cards */
 .sq .sq-review { display: flex; gap: 12px; align-items: center; background: var(--sq-card); border: 1px solid var(--sq-line); border-radius: 16px; padding: 14px; }
 .sq .sq-review-img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex: none; }
+.sq .sq-review--intro .sq-review-img { width: 56px; height: 56px; }
 .sq .sq-review blockquote { font-size: 14px; line-height: 1.4; font-style: italic; color: var(--sq-ink); margin-bottom: 4px; }
 .sq .sq-review figcaption { font-size: 12.5px; line-height: 1.4; }
 .sq .sq-review figcaption strong { font-weight: 700; }
@@ -225,7 +226,8 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq .sq-tile--wide { min-height: 72px; }
 .sq .sq-chip { font-size: 15px; min-height: 48px; padding: 10px 18px; }
 .sq .sq-note p:not(.sq-note-h), .sq .sq-desc { font-size: 16px; }
-.sq .sq-review--intro { padding: 16px 18px; gap: 14px; }
+.sq .sq-review--intro { padding: 16px 18px; gap: 16px; }
+.sq .sq-review--intro .sq-review-img { width: 64px; height: 64px; }
 .sq .sq-review--intro blockquote { font-size: 15px; }
 .sq .sq-timeline { grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 24px 0 0; }
 .sq .sq-timeline::before { left: 6px; right: 6px; top: 5px; bottom: auto; width: auto; height: 2px; }
