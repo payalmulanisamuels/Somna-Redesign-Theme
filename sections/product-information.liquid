@@ -6,15 +6,17 @@
 
 {%- comment -%}
   Somna Halloween 2026 (Figma PDP 3297-4934 / 3297-5224):
-  - Sale pill above the product images, only when the product's "Halloween sale text"
-    metafield (custom.halloween_sale_text, e.g. "70% OFF") has a value. Display text only;
-    prices come from the subscription plans. Clear the metafield to hide it.
+  - Sale pill above the product images on every product while the sale is on. The offer text
+    ("UP TO 50% OFF") comes from snippets/somna-sale.liquid; set somna_sale_on to false there to hide it.
   - Desktop: the sub-headline and short description sit under the images (Figma).
     On phones they stay in the details column above the buy box; CSS in
     custom.css / somna-home-desktop.css shows one copy per screen size.
 {%- endcomment -%}
 {%- liquid
-  assign somna_hw_text = closest.product.metafields.custom.halloween_sale_text.value | strip
+  capture somna_hw_text
+    render 'somna-sale', get: 'text'
+  endcapture
+  assign somna_hw_text = somna_hw_text | strip
   assign somna_intro_headline = closest.product.metafields.custom.sub_headline.value
   assign somna_intro_text = closest.product.metafields.custom.subcontent.value
 -%}
