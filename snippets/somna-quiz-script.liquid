@@ -1,4 +1,4 @@
-{%- comment -%} SOMNA quiz v5.1 logic — only rendered by sections/somna-quiz.liquid {%- endcomment -%}
+{%- comment -%} SOMNA quiz v5.2 logic: only rendered by sections/somna-quiz.liquid {%- endcomment -%}
 <script>
 (function () {
   var root = document.getElementById('sq-{{ sid }}');
@@ -52,8 +52,8 @@
     mouth: { dry: 'Bone dry', drool: 'Drooling / breath', fine: 'Fine' },
     energy: { '1': 'Running on empty', '2': '3pm crash', '3': 'Foggy until coffee', '4': 'Pretty good' },
     tried: { strips: 'cheap strips', tape: 'mouth tape', pills: 'melatonin', earlier: 'sleeping earlier', spray: 'nasal spray' },
-    check2: { snoring: ['Snoring — your biggest problem at night', 'Snoring — their biggest problem at night'],
-      nose: ['Blocked or stuffy nose — your biggest problem', 'Blocked or stuffy nose — their biggest problem'],
+    check2: { snoring: ['Snoring: your biggest problem at night', 'Snoring: their biggest problem at night'],
+      nose: ['Blocked or stuffy nose: your biggest problem', 'Blocked or stuffy nose: their biggest problem'],
       mouth: ['Dry mouth or sore throat on waking', 'Dry mouth or sore throat on waking'],
       tired: ['Waking up tired, even after a full night', 'Waking up tired, even after a full night'],
       both: ['Snoring or a blocked nose, plus a dry mouth', 'Snoring or a blocked nose, plus a dry mouth'] },
@@ -236,7 +236,7 @@
     list.push(['Daytime energy', TXT.energy[s.energy]], ['Tried before', triedText(s)]);
     list.forEach(function (t, k) {
       var d = el('div', 'sq-tilecard' + (list.length % 2 && k === list.length - 1 ? ' sq-tilecard--wide' : ''), null);
-      d.appendChild(el('p', 'sq-lbl', t[0])); d.appendChild(el('p', '', t[1] || '—')); box.appendChild(d);
+      d.appendChild(el('p', 'sq-lbl', t[0])); d.appendChild(el('p', '', t[1] || 'Not answered')); box.appendChild(d);
     });
   }
   function renderPeek() {
@@ -268,7 +268,7 @@
     var text = 'I took the SOMNA sleep quiz about your snoring. It matched you to SOMNA ' + (r ? r.getAttribute('data-ptitle') : '') + ' (' + (r ? r.getAttribute('data-name') : '') + ').';
     var msg = $('[data-sq-share-msg]');
     if (navigator.share) { navigator.share({ title: 'SOMNA sleep quiz', text: text, url: url }).catch(function () {}); }
-    else { navigator.clipboard.writeText(text + ' ' + url).then(function () { msg.textContent = 'Link copied — paste it in a message.'; msg.hidden = false; }); }
+    else { navigator.clipboard.writeText(text + ' ' + url).then(function () { msg.textContent = 'Link copied. Paste it in a message.'; msg.hidden = false; }); }
   });
 
   // ---- 11 your fix ----
