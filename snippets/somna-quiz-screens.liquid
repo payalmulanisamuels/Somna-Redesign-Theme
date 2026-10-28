@@ -99,7 +99,7 @@
     <div class="sq-story" data-story="{{ sk }}" hidden>
       {%- if svid != blank -%}
         <div class="sq-video">
-          {{ svid | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '720x' }}
+          {{ svid | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: true, preload: 'metadata', image_size: '720x', class: 'sq-video-el' }}
           {%- if svl != blank -%}<span class="sq-video-tag">{% render 'somna-quiz-icon', name: 'play' %}{{ svl }}</span>{%- endif -%}
         </div>
       {%- endif -%}
