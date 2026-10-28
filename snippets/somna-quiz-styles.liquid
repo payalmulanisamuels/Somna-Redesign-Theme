@@ -114,10 +114,11 @@ padding: 18px 16px 56px; min-height: 100vh;
 
 /* 05 story break */
 .sq .sq-story { margin-top: 4px; }
-.sq .sq-video { position: relative; border-radius: 16px; overflow: hidden; background: var(--sq-card2); border: 1px solid var(--sq-line); }
+.sq .sq-video { position: relative; max-width: 440px; margin: 0 auto; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--sq-line); }
 .sq .sq-video-tag { position: absolute; left: 12px; top: 12px; display: inline-flex; align-items: center; gap: 5px; padding: 6px 11px 6px 9px; border-radius: 999px; background: var(--sq-accent); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; line-height: 1; }
 .sq .sq-video-tag svg { width: 11px; height: 11px; fill: currentColor; stroke: none; }
-.sq .sq-video video { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; }
+/* show the whole frame (square / portrait clips keep their captions and faces); no cropping */
+.sq .sq-video video { display: block; width: 100%; height: auto; max-height: 70vh; object-fit: contain; background: #000; }
 .sq .sq-story-revs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 .sq .sq-story-revs .sq-review { flex-direction: column; align-items: flex-start; gap: 6px; }
 .sq .sq-story + .sq-story .sq-story-revs { margin-top: 10px; }
