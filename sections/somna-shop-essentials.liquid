@@ -223,10 +223,19 @@
           endif
         -%}
         <a href="{{ card_link }}" class="somna-ess__card" {{ block.shopify_attributes }}>
-          {%- comment -%} Halloween badge: the product's own "Halloween sale text" metafield (custom.halloween_sale_text). Empty = no badge. {%- endcomment -%}
-          {%- assign card_badge = product.metafields.custom.halloween_sale_text.value | strip -%}
+          {%- comment -%} Halloween badge: the sale text from snippets/somna-sale.liquid ("UP TO 50% OFF"), shown while the sale is on.
+            "UP TO" sits on its own smaller line so the text still fits the badge. {%- endcomment -%}
+          {%- capture card_badge -%}{%- render 'somna-sale', get: 'text' -%}{%- endcapture -%}
+          {%- assign card_badge = card_badge | strip -%}
           {%- if card_badge != blank -%}
-            <span class="somna-ess__badge"><span class="somna-ess__badge-text">{{ card_badge | escape }}</span></span>
+            {%- assign card_badge_up = card_badge | upcase -%}
+            <span class="somna-ess__badge"><span class="somna-ess__badge-text">
+              {%- if card_badge_up contains 'UP TO ' -%}
+                <span class="somna-ess__badge-upto">UP TO</span>{{ card_badge | remove_first: 'UP TO ' | remove_first: 'Up to ' | escape }}
+              {%- else -%}
+                {{ card_badge | escape }}
+              {%- endif -%}
+            </span></span>
           {%- endif -%}
           <div class="somna-ess__media">
             {%- if card_image != blank -%}
@@ -272,6 +281,13 @@
 </div>
 
 {% stylesheet %}
+  /* Halloween badge: smaller "UP TO" line above "50% OFF" */
+  .somna-ess__badge-upto {
+    display: block;
+    font-size: 0.6em;
+    line-height: 1;
+  }
+
   .somna-ess {
     color: #0a1a4a;
   }
