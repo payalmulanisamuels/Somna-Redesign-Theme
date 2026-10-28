@@ -336,7 +336,7 @@
           </div>
           <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
             <span>You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship</span>
-            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_discount > 0 %}{{ init_discount }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
+            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_once_pct > 0 %}{{ init_once_pct }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
           </p>
         </div>
       </div>
@@ -472,7 +472,8 @@
           setText('regular', plan.regular);
           setText('save', plan.save);
           setText('auto-save', plan.autoSave);
-          setText('onetime-pct', String(currentVariant?.autoSave > 0 ? currentVariant.autoSave : plan.discount));
+          // One-time box pill: the one-time sale % (40%) while the sale is on, else the Autoship saving
+          setText('onetime-pct', String(currentVariant?.onetimePct > 0 ? currentVariant.onetimePct : plan.discount));
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
           setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
