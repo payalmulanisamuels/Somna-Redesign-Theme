@@ -9,18 +9,23 @@
 <div class="sq-s is-on" data-type="q" data-q="1" data-step="1">
   <h1 class="sq-intro-h" tabindex="-1">{{ qs.intro_heading }}</h1>
   {%- if qs.intro_sub != blank -%}<p class="sq-intro-sub">{{ qs.intro_sub }}</p>{%- endif -%}
+  {%- comment -%} Testimonial card (old-quiz design). Content: theme editor → SOMNA quiz → "01 · Intro + Q1". Hidden while the quote is empty. {%- endcomment -%}
   {%- if qs.intro_review_quote != blank -%}
     <figure class="sq-review sq-review--intro">
       {%- if qs.intro_review_image != blank -%}
-        {{ qs.intro_review_image | image_url: width: 120 | image_tag: width: 44, height: 44, loading: 'lazy', alt: '', class: 'sq-review-img' }}
+        {{ qs.intro_review_image | image_url: width: 140 | image_tag: width: 46, height: 46, loading: 'eager', alt: '', class: 'sq-review-img' }}
+      {%- else -%}
+        {%- comment -%} Placeholder avatar until the real reviewer photo is added: their initials {%- endcomment -%}
+        {%- assign rv_words = qs.intro_review_name | strip | split: ' ' -%}
+        <span class="sq-review-img sq-review-ph" aria-hidden="true">{{ rv_words.first | slice: 0 }}{% if rv_words.size > 1 %}{{ rv_words.last | slice: 0 }}{% endif %}</span>
       {%- endif -%}
-      <div>
+      <div class="sq-review-body">
         <blockquote>“{{ qs.intro_review_quote }}”</blockquote>
-        <figcaption><strong>{{ qs.intro_review_name }}</strong> <span class="sq-verified">✓ Verified buyer</span></figcaption>
+        <figcaption><strong>{{ qs.intro_review_name }}</strong>{% if qs.intro_review_verified %} <span class="sq-verified">✓ Verified buyer</span>{% endif %}</figcaption>
       </div>
     </figure>
   {%- endif -%}
-  <h2 class="sq-q sq-q--sm" id="sq-{{ sid }}-q1">First — who's this for?</h2>
+  <h2 class="sq-q sq-q--sm" id="sq-{{ sid }}-q1">{{ qs.q1_heading | default: "First, who's this for?" }}</h2>
   <div class="sq-opts" role="group" aria-labelledby="sq-{{ sid }}-q1">
     <button type="button" class="sq-opt" data-tag="self" data-val="Me"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'person' %}</span><span>Me</span></button>
     <button type="button" class="sq-opt" data-s="2" data-tag="partner" data-val="My partner"><span class="sq-ico">{% render 'somna-quiz-icon', name: 'partner' %}</span><span>My partner – their snoring keeps me up</span></button>

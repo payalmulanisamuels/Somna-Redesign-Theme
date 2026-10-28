@@ -136,15 +136,28 @@
       {%- endfor -%}
       <p class="sq-lbl">{{ section.settings.why_heading }}</p>
       <ul class="sq-ticks" data-sq-ticks></ul>
-      <p class="sq-lbl">{{ section.settings.timeline_heading }}</p>
-      <ol class="sq-timeline">
-        <li>{{ section.settings.timeline_1 }}</li>
-        <li>{{ section.settings.timeline_2 }}{% if section.settings.timeline_2_note != blank %} <small>{{ section.settings.timeline_2_note }}</small>{% endif %}</li>
-        <li>{{ section.settings.timeline_3 }}</li>
-      </ol>
+      {%- if section.settings.timeline_heading != blank -%}
+        <section class="sq-30" aria-labelledby="sq-{{ sid }}-30">
+          <p class="sq-lbl" id="sq-{{ sid }}-30">{{ section.settings.timeline_heading }}</p>
+          <ol class="sq-timeline">
+            {%- for n in (1..3) -%}
+              {%- liquid
+                assign tl_t = 'timeline_' | append: n | append: '_title'
+                assign tl_x = 'timeline_' | append: n | append: '_text'
+              -%}
+              {%- if section.settings[tl_t] != blank -%}
+                <li><p class="sq-tl-t">{{ section.settings[tl_t] }}</p><p class="sq-tl-x">{{ section.settings[tl_x] }}{% if n == 2 and section.settings.timeline_2_note != blank %} <small>{{ section.settings.timeline_2_note }}</small>{% endif %}</p></li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ol>
+        </section>
+      {%- endif -%}
       {%- if code != blank -%}
         {%- assign code_html = code | escape | prepend: '<strong>' | append: '</strong>' -%}
         <p class="sq-code" data-sq-code hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>
+      {%- endif -%}
+      {%- if section.settings.guarantee_text != blank -%}
+        <p class="sq-trust"><span class="sq-trust-i" aria-hidden="true">{% render 'somna-quiz-icon', name: 'shield' %}</span>{{ section.settings.guarantee_text }}</p>
       {%- endif -%}
       <a class="sq-cta" data-sq-plan href="{{ fallback_url }}">{{ section.settings.result_button }}</a>
       <button type="button" class="sq-retake" data-sq-retake>Retake quiz</button>
@@ -173,6 +186,8 @@
     "triedStripsPartner": {{ section.settings.tried_strips_line_partner | json }},
     "triedPills": {{ section.settings.tried_pills_line | json }},
     "triedTape": {{ section.settings.tried_tape_line | json }},
+    "bundleTick": {{ section.settings.bundle_tick | json }},
+    "bundleTickPartner": {{ section.settings.bundle_tick_partner | json }},
     "loaderSub": {{ section.settings.loader_sub | json }},
     "loaderSelected": {{ section.settings.loader_tick_1 | json }},
     "loaderSubscribe": {{ section.settings.loader_tick_2 | json }},
@@ -196,11 +211,13 @@
   "settings": [
     { "type": "header", "content": "01 · Intro + Q1" },
     { "type": "inline_richtext", "id": "intro_heading", "label": "Heading", "info": "Use italic for the highlighted word.", "default": "Snoring, stuffy nose or dry mouth? Find out what's <em>really</em> wrecking your sleep." },
-    { "type": "text", "id": "intro_sub", "label": "Subheading", "default": "Answer 6 quick questions and we'll match you to the right SOMNA fix — in about a minute." },
-    { "type": "paragraph", "content": "Review card: one REAL Judge.me review (under 20 words). Hidden while the quote is empty." },
-    { "type": "text", "id": "intro_review_quote", "label": "Review quote" },
-    { "type": "text", "id": "intro_review_name", "label": "First name + initial", "placeholder": "Jessica M." },
-    { "type": "image_picker", "id": "intro_review_image", "label": "Reviewer photo (optional)" },
+    { "type": "text", "id": "intro_sub", "label": "Subheading", "default": "This 60-second assessment reads your symptoms and routine to find the fix built for you." },
+    { "type": "paragraph", "content": "Testimonial card. PLACEHOLDER copy for now: replace with a REAL customer review before this goes live. Clear the quote to hide the card." },
+    { "type": "text", "id": "intro_review_quote", "label": "Review quote", "default": "Took maybe a minute. First thing in years that actually gets me up, and my wife sleeps right through it." },
+    { "type": "text", "id": "intro_review_name", "label": "First name + initial", "default": "Marcus D." },
+    { "type": "image_picker", "id": "intro_review_image", "label": "Reviewer photo", "info": "Square photo. Until one is added, their initials show in a purple circle." },
+    { "type": "checkbox", "id": "intro_review_verified", "label": "Show \"✓ Verified buyer\"", "default": true },
+    { "type": "text", "id": "q1_heading", "label": "Q1 heading", "default": "First, who's this for?" },
     { "type": "header", "content": "Q2–Q6 notes" },
     { "type": "text", "id": "q2_note", "label": "Q2 'Did you know'", "default": "Snoring usually starts when air can't move freely through the nose while you're lying down." },
     { "type": "text", "id": "q3_note", "label": "Q3 'Why we ask'", "default": "Lying down can make a narrow nasal passage feel even tighter — that's often when snoring starts." },
@@ -258,13 +275,19 @@
     { "type": "text", "id": "why_heading", "label": "'Why it fits' heading", "default": "Why it fits you" },
     { "type": "text", "id": "tried_strips_line", "label": "Tick if they tried cheap strips (me / both)", "default": "Structural, all-night adhesive — unlike the cheap strips you tried" },
     { "type": "text", "id": "tried_strips_line_partner", "label": "Tick if they tried cheap strips (partner)", "default": "Structural, all-night adhesive — unlike the cheap strips they tried" },
-    { "type": "text", "id": "tried_pills_line", "label": "Tick if they tried melatonin or pills", "default": "Drug-free — nothing to swallow" },
+    { "type": "text", "id": "tried_pills_line", "label": "Drug-free tick", "info": "Shown first when they tried melatonin or pills, otherwise used to fill the list.", "default": "Drug-free. Nothing to swallow." },
+    { "type": "text", "id": "bundle_tick", "label": "Sleep Bundle tick (me / both)", "default": "Strips open the airway, while Tape helps keep the mouth closed. You said it's your nose and your mouth." },
+    { "type": "text", "id": "bundle_tick_partner", "label": "Sleep Bundle tick (partner)", "default": "Strips open the airway, while Tape helps keep the mouth closed. You said it's their nose and their mouth." },
     { "type": "text", "id": "tried_tape_line", "label": "Tick if they tried mouth tape", "info": "Wording to confirm.", "default": "Designed to be gentle on skin and peel off easily in the morning" },
     { "type": "text", "id": "timeline_heading", "label": "Timeline heading", "default": "Your first 30 nights" },
-    { "type": "inline_richtext", "id": "timeline_1", "label": "Timeline 1", "default": "<b>Night 1</b> — apply before bed" },
-    { "type": "inline_richtext", "id": "timeline_2", "label": "Timeline 2", "default": "<b>Nights 1–30</b> — log your mornings in your free Sleep Tracker" },
-    { "type": "text", "id": "timeline_2_note", "label": "Timeline 2 small print", "default": "(with subscription)" },
-    { "type": "inline_richtext", "id": "timeline_3", "label": "Timeline 3", "default": "<b>Night 30</b> — not for you? Full refund (30-Night Money-Back Guarantee)" },
+    { "type": "text", "id": "timeline_1_title", "label": "Step 1 title", "default": "Night 1" },
+    { "type": "text", "id": "timeline_1_text", "label": "Step 1 text", "default": "Apply before bed." },
+    { "type": "text", "id": "timeline_2_title", "label": "Step 2 title", "default": "Nights 1–30" },
+    { "type": "text", "id": "timeline_2_text", "label": "Step 2 text", "default": "Log your mornings in your free Sleep Tracker" },
+    { "type": "text", "id": "timeline_2_note", "label": "Step 2 small print", "info": "Keep: the Sleep Tracker is free with a subscription only.", "default": "(with subscription)." },
+    { "type": "text", "id": "timeline_3_title", "label": "Step 3 title", "default": "Night 30" },
+    { "type": "text", "id": "timeline_3_text", "label": "Step 3 text", "info": "Must match the Return & Refund Policy.", "default": "Not for you? Get a full refund under our 30-Night Money-Back Guarantee." },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee trust line (above the button)", "info": "Leave empty to hide.", "default": "30-Night Money-Back Guarantee" },
     { "type": "text", "id": "result_button", "label": "Button", "default": "Get my plan →" },
     { "type": "header", "content": "12 · Getting your plan ready" },
     { "type": "text", "id": "loader_heading", "label": "Heading", "default": "Getting your plan ready…" },

@@ -81,7 +81,7 @@
         || ((s.problem === 'mouth') ? (p ? ' — you said they wake with a dry mouth' : ' — you said you wake with a dry mouth') : '');
       out.push('Designed to keep ' + (p ? 'their lips gently closed so they breathe' : 'your lips gently closed so you breathe') + ' through the nose' + m);
     } else {
-      out.push('Strips open the airway; Tape keeps ' + (p ? 'them' : 'you') + ' breathing through it' + (p ? " — you said it's their nose and their mouth" : " — you said it's your nose and your mouth"));
+      out.push((p ? (cfg.bundleTickPartner || cfg.bundleTick) : cfg.bundleTick) || '');
     }
     var extra = [];
     if (s.tried.indexOf('strips') > -1 && s.result !== 'tape') extra.push(p ? (cfg.triedStripsPartner || cfg.triedStrips) : cfg.triedStrips);
@@ -89,8 +89,8 @@
     if (s.tried.indexOf('tape') > -1 && s.result !== 'strips') extra.push(cfg.triedTape);
     extra = extra.filter(Boolean).slice(0, 2);
     if (extra.length < 2 && extra.indexOf(cfg.triedPills) < 0 && cfg.triedPills) extra.push(cfg.triedPills);
-    if (extra.length < 2) extra.push('30-Night Money-Back Guarantee');
-    return out.concat(extra).slice(0, 3);
+    // The 30-Night Money-Back Guarantee has its own trust line above the button, so it is not repeated here.
+    return out.concat(extra).filter(Boolean).slice(0, 3);
   }
 
   function resEl(s) { return $('.sq-res[data-res="' + s.result + '"]'); }
