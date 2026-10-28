@@ -322,22 +322,19 @@
     if one_time_price > sub_price
       assign somna_save_pct = one_time_price | minus: sub_price | times: 100.0 | divided_by: one_time_price | round
     endif
-    # Sale "was" price (variant metafield custom.autoship_compare_at, Nasal Strips + Mouth Tape):
-    # the pill shows the Autoship price against it (264 -> 79.06 = 70% OFF). Others unchanged.
-    if current_variant.metafields.custom.autoship_compare_at != blank
-      assign somna_auto_cmp = current_variant.metafields.custom.autoship_compare_at.value | times: 100 | round
-      if somna_auto_cmp > sub_price
-        assign somna_save_pct = somna_auto_cmp | minus: sub_price | times: 100.0 | divided_by: somna_auto_cmp | round
-      endif
+    # Halloween Sale: one-time purchases get the % off from snippets/somna-sale.liquid (40%) at checkout
+    # (automatic discount "Halloween Sale"), so the one-time $/night uses price x 0.60. The card's
+    # "% OFF" pill shows the Autoship plan saving (50%). Captured once, outside the cards loop.
+    if somna_sale_once_off == nil
+      capture somna_sale_once_off
+        render 'somna-sale', get: 'once_off'
+      endcapture
+      assign somna_sale_once_off = somna_sale_once_off | plus: 0
     endif
-    # Halloween Sale (products with custom.halloween_sale_text): one-time purchases are 55% off at
-    # checkout (automatic discount "Halloween Sale"), so the one-time $/night uses price x 0.45.
-    # The card's "% OFF" pill keeps showing the Autoship saving (70%). Autoship values are unchanged.
-    # Same 55 as somna_once_off in snippets/somna-subscription-widget.liquid.
     assign somna_once_price = one_time_price
     assign somna_once_pct = 0
-    if product_resource.metafields.custom.halloween_sale_text.value != blank
-      assign somna_once_pct = 55
+    if somna_sale_once_off > 0
+      assign somna_once_pct = somna_sale_once_off
       assign somna_once_keep = 100 | minus: somna_once_pct
       assign somna_once_price = current_variant.price | times: somna_once_keep | divided_by: 100.0 | round
     endif
