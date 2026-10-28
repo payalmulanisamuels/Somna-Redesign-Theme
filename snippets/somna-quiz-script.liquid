@@ -120,6 +120,8 @@
   function show(n, focus) {
     clearTimeout(timer); busy = false; i = n; run++;
     screens.forEach(function (s, k) { s.classList.toggle('is-on', k === n); });
+    // stop story-break videos (and any sound) once the shopper leaves that screen
+    $$('.sq-s:not(.is-on) video').forEach(function (v) { try { v.pause(); } catch (e) {} });
     var sc = screens[n], ty = sc.getAttribute('data-type'), q = +sc.dataset.step || 0, pk = screenKey(sc);
     applyWording();
     var hasBar = PROG[pk] != null;
