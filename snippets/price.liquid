@@ -25,6 +25,21 @@
     assign price = 1999
   endif
 
+  # Somna Halloween Sale: one-time price = variant price less the % in snippets/somna-sale.liquid (40%,
+  # applied at checkout by the automatic discount), with the variant price crossed out before it.
+  capture somna_once_off
+    render 'somna-sale', get: 'once_off'
+  endcapture
+  assign somna_once_off = somna_once_off | plus: 0
+  if somna_once_off > 0 and product_resource != blank
+    assign somna_once_keep = 100 | minus: somna_once_off
+    if compare_at_price < price
+      assign compare_at_price = price
+    endif
+    assign price = price | times: somna_once_keep | divided_by: 100.0 | round
+    assign show_compare_price = true
+  endif
+
   # Check if variant has volume pricing
   assign has_volume_pricing = null
   assign price_min = null
