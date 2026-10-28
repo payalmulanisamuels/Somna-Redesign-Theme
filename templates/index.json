@@ -185,11 +185,43 @@
               },
               "blocks": {}
             },
+            "text_FRGnxP": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>UP TO</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-display--family)",
+                "font_size": "1rem",
+                "font_size_tablet": "",
+                "font_size_desktop": "2rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
+              },
+              "blocks": {}
+            },
             "text_hw70off": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>UP TO<br/>50% OFF</p>",
+                "text": "<p>50% OFF</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -206,7 +238,7 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 20,
+                "padding-block-start": 0,
                 "padding-block-end": 4,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
@@ -214,7 +246,7 @@
                 "font_weight_desktop": "",
                 "line_height_desktop": "",
                 "letter_spacing_desktop": "",
-                "padding-block-start-desktop": 31
+                "padding-block-start-desktop": 0
               },
               "blocks": {}
             },
@@ -311,6 +343,7 @@
           "block_order": [
             "text_VDbt3L",
             "text_eT6TMz",
+            "text_FRGnxP",
             "text_hw70off",
             "text_Lqf6bA",
             "button_6EgajN",
