@@ -1836,7 +1836,7 @@ a.somna-view-all {
  
 
 /* =====================================================================
-   HOMEPAGE redesign (from the Pagespeed theme, Halloween motifs removed 2026-10-30)
+   HOMEPAGE redesign (from the Pagespeed theme; Halloween motifs removed and mobile hero fitted to Main's photo, 2026-10-30)
    Base (mobile-first) rules. Tablet/desktop sizes live in somna-home-desktop.css.
    The "display" and "badge" font variables now point at the brand heading font,
    so any text block or announcement still set to them keeps the brand look.
