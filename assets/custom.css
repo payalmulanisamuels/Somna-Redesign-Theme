@@ -1885,16 +1885,56 @@ a.somna-view-all {
   background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
 }
 /* "50% OFF": bold brand heading font, tight lines */
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hw70off,
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hw70off > * {
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_hw70off"],
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_hw70off"] > * {
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: -0.02em;
 }
 /* perks line sits on the dark blanket in the photo: white with a soft shadow */
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hwperks > * {
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_hwperks"] > * {
   font-weight: 600;
   text-shadow: 0 1px 3px rgb(0 0 0 / 0.55);
+}
+/* Phones: Main's mobile photo has the two bags in the middle, so the copy and offer stay compact
+   above them and the button + perks line sit at the bottom, over the blanket */
+@media screen and (max-width: 749px) {
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .group-block {
+    height: 100%;
+    padding-top: 8px !important;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .group-block > .group-block-content {
+    height: 100%;
+    padding-bottom: 28px;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_VDbt3L"],
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_VDbt3L"] > * {
+    font-size: 12px !important;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_eT6TMz"],
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_eT6TMz"] > * {
+    font-size: 26px !important;
+    line-height: 1.05;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_FRGnxP"] {
+    margin-top: 4px;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_FRGnxP"],
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_FRGnxP"] > * {
+    font-size: 13px !important;
+    line-height: 1.1;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_hw70off"],
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_hw70off"] > * {
+    font-size: 36px !important;
+    line-height: 0.95;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__text_Lqf6bA"] > * {
+    font-weight: 600;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] [class*="__button_6EgajN"] {
+    margin-top: auto;
+  }
 }
 #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button {
   display: inline-flex;
