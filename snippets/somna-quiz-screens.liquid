@@ -135,7 +135,14 @@
     <button type="button" class="sq-opt sq-chip" data-tried="pills">Melatonin or sleep pills</button>
     <button type="button" class="sq-opt sq-chip" data-tried="earlier">Sleeping earlier</button>
     <button type="button" class="sq-opt sq-chip" data-tried="spray">Nasal spray</button>
+    <button type="button" class="sq-opt sq-chip" data-tried="other" aria-controls="sq-{{ sid }}-other">Other</button>
     <button type="button" class="sq-opt sq-chip" data-tried="nothing">Nothing yet</button>
+  </div>
+  {%- comment -%} "Other": text box shows (and is required) only while Other is picked {%- endcomment -%}
+  <div class="sq-other" id="sq-{{ sid }}-other" data-sq-other hidden>
+    <label class="sq-sr" for="sq-{{ sid }}-other-text">What else have you tried?</label>
+    <textarea class="sq-textarea" id="sq-{{ sid }}-other-text" rows="3" maxlength="300" placeholder="{{ qs.q6_other_placeholder | default: 'Please tell us more...' | escape }}" data-sq-other-text></textarea>
+    <p class="sq-err" role="alert" data-sq-other-err hidden></p>
   </div>
   {%- if qs.q6_note != blank -%}<div class="sq-note"><p class="sq-note-h">Nice, last one</p><p>{{ qs.q6_note }}</p></div>{%- endif -%}
   <button type="button" class="sq-cta" data-sq-continue disabled>See my results →</button>

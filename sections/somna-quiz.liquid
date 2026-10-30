@@ -59,14 +59,22 @@
       {%- if section.settings.email_sub != blank -%}<p class="sq-sub">{{ section.settings.email_sub }}</p>{%- endif -%}
       <div class="sq-peek" aria-hidden="true" data-sq-peek></div>
       {%- comment -%} Subscribes the email to the Klaviyo list set below (default: Quiz Signups, no flows) with source "quiz" + the result and answers. {%- endcomment -%}
+      {%- if code != blank -%}
+        {%- assign code_html = code | escape | prepend: '<strong>' | append: '</strong>' -%}
+      {%- endif -%}
+      <div class="sq-done" data-sq-done hidden>
+        <p class="sq-done-h">✓ {{ section.settings.email_done | default: "You're in." }}</p>
+        {%- if code != blank -%}<p class="sq-code">{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>{%- endif -%}
+        <button type="button" class="sq-cta" data-sq-done-next>{{ section.settings.email_done_button | default: 'See my report →' }}</button>
+      </div>
       <form class="sq-form" data-sq-form novalidate>
         <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
         <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
         <p class="sq-err" role="alert" data-sq-err hidden></p>
         <button type="submit" class="sq-cta" data-sq-send>{{ section.settings.email_button }}</button>
       </form>
-      {%- if section.settings.email_consent != blank -%}<p class="sq-fine">{{ section.settings.email_consent }}</p>{%- endif -%}
-      <button type="button" class="sq-skip" data-sq-skip>{{ section.settings.email_skip }}</button>
+      {%- if section.settings.email_consent != blank -%}<p class="sq-fine" data-sq-consent>{{ section.settings.email_consent }}</p>{%- endif -%}
+      <button type="button" class="sq-skip sq-skip--lg" data-sq-skip>{{ section.settings.email_skip }}</button>
     </div>
 
     {%- comment -%} 10 · Sleep report (sleep type, problem line, Nose vs Mouth profile from their answers, tiles) {%- endcomment -%}
@@ -74,6 +82,7 @@
       <p class="sq-pill sq-pill--c" data-self="Your sleep type" data-partner="Their sleep type">Your sleep type</p>
       <h2 class="sq-type" tabindex="-1" data-sq-type></h2>
       <p class="sq-problem" data-sq-problem hidden></p>
+      {%- if code != blank -%}<p class="sq-code sq-code--top" data-sq-code-top hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>{%- endif -%}
       <div class="sq-card sq-profile">
         <p class="sq-lbl" data-self="Your breathing profile · based on your answers" data-partner="Their breathing profile · based on your answers">Your breathing profile · based on your answers</p>
         <div class="sq-meter"><p><span>Nose signals</span><span class="sq-meter-v" data-sq-nose-lbl></span></p><div class="sq-dots" data-sq-nose></div></div>
@@ -153,7 +162,6 @@
         </section>
       {%- endif -%}
       {%- if code != blank -%}
-        {%- assign code_html = code | escape | prepend: '<strong>' | append: '</strong>' -%}
         <p class="sq-code" data-sq-code hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>
       {%- endif -%}
       {%- if section.settings.guarantee_text != blank -%}
@@ -224,6 +232,7 @@
     { "type": "text", "id": "q3_note", "label": "Q3 'Why we ask'", "default": "Lying down can make a narrow nasal passage feel even tighter, and that's often when snoring starts." },
     { "type": "text", "id": "q4_note", "label": "Q4 'Why we ask' (me / both)", "default": "Waking with a dry mouth is one of the most common signs you've been breathing through your mouth at night." },
     { "type": "text", "id": "q4_note_partner", "label": "Q4 'Why we ask' (partner)", "default": "Waking with a dry mouth is one of the most common signs they've been breathing through their mouth at night." },
+    { "type": "text", "id": "q6_other_placeholder", "label": "Q6 'Other' placeholder", "default": "Please tell us more..." },
     { "type": "text", "id": "q6_note", "label": "Q6 'Nice, last one'", "default": "This helps us explain why SOMNA is different from what you've used before." },
     { "type": "header", "content": "05 · Story break" },
     { "type": "paragraph", "content": "Shows the Strips story if their answers trend to Strips, the Tape story if they trend to Tape, and one review from each for the Bundle. Only REAL customers (Judge.me reviews or a customer who agreed to film) or a product demo labeled as a demo, never AI-generated ads shown as customers. Empty fields are hidden." },
@@ -250,7 +259,9 @@
     { "type": "text", "id": "email_heading", "label": "Heading", "default": "Unlock 10% off your SOMNA plan" },
     { "type": "text", "id": "email_sub", "label": "Subheading", "default": "Enter your email and we'll show your code with your report." },
     { "type": "text", "id": "email_button", "label": "Button", "default": "Show my report + 10% off" },
-    { "type": "text", "id": "email_skip", "label": "Skip link", "default": "Skip, just show my report" },
+    { "type": "text", "id": "email_skip", "label": "Skip link", "info": "Skipping still unlocks the discount code.", "default": "Skip, just show my report" },
+    { "type": "text", "id": "email_done", "label": "Signed-up message", "default": "You're in." },
+    { "type": "text", "id": "email_done_button", "label": "Signed-up button", "default": "See my report →" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
     { "type": "paragraph", "content": "The email is added to this Klaviyo list (default: Quiz Signups, which has no flows, so quiz sign-ups get no emails), with source 'quiz', the result and their answers on the profile." },
     { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public API key (company ID)", "default": "Tr7JSM" },
@@ -289,7 +300,7 @@
     { "type": "text", "id": "timeline_3_title", "label": "Step 3 title", "default": "Night 30" },
     { "type": "text", "id": "timeline_3_text", "label": "Step 3 text", "info": "Must match the Return & Refund Policy.", "default": "Not for you? Get a full refund under our 30-Night Money-Back Guarantee." },
     { "type": "text", "id": "guarantee_text", "label": "Guarantee trust line (above the button)", "info": "Leave empty to hide.", "default": "30-Night Money-Back Guarantee" },
-    { "type": "text", "id": "result_button", "label": "Button", "default": "Get my plan →" },
+    { "type": "text", "id": "result_button", "label": "Button", "default": "Claim My Discount →" },
     { "type": "header", "content": "12 · Getting your plan ready" },
     { "type": "text", "id": "loader_heading", "label": "Heading", "default": "Getting your plan ready…" },
     { "type": "text", "id": "loader_sub", "label": "Subheading", "info": "[product] is replaced by the product name.", "default": "Taking you to your SOMNA [product]." },
