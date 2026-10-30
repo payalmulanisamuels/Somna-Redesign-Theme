@@ -3647,11 +3647,25 @@ margin-top: 7px;
 
 /* Problem / Solution (sections/problem-solution.liquid): top spacing from Figma (93px at 1440px, 25px at 393px).
    Colours and waves: the section's own settings (Main's cream), 2026-10-30. */
-.hz-prob-sol-section {
-  padding-top: clamp(17px,6.4vw,35px);
+body .hz-prob-sol-section {
+  padding-top: clamp(28px, 4.5vw, 64px) !important; /* space between the trust bar and the Problem / Solution cards */
 }
 
-/* How To Use: colours and waves come from the section's own settings (Main's green), 2026-10-30 */
+/* How To Use (product page and How to use page): the wave edges use the smooth Pagespeed wave shapes,
+   filled with the section's own colour (Main's green), so the waves have no flat, cropped stretches. */
+.steps-section > .wave-container.top,
+.steps-section > .wave-container.bottom {
+  background-image: none !important;
+  background-color: inherit;
+}
+.steps-section > .wave-container.top {
+  -webkit-mask: url("somna-hw-howto-top.svg") center bottom / 100% 100% no-repeat;
+  mask: url("somna-hw-howto-top.svg") center bottom / 100% 100% no-repeat;
+}
+.steps-section > .wave-container.bottom {
+  -webkit-mask: url("somna-hw-howto-bottom.svg") center top / 100% 100% no-repeat;
+  mask: url("somna-hw-howto-bottom.svg") center top / 100% 100% no-repeat;
+}
 
 /* ==================== END PRODUCT PAGE — Figma fixes ==================== */
 
