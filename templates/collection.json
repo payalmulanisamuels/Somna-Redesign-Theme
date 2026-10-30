@@ -1045,7 +1045,7 @@
         "padding_bottom_mobile": 30,
         "padding_top": 40,
         "padding_bottom": 50,
-        "sale_look": true
+        "sale_look": false
       }
     },
     "featured_bundle_grid_gb9fCH": {

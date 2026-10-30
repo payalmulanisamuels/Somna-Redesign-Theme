@@ -1850,7 +1850,7 @@ a.somna-view-all {
   --font-display-spray--style: var(--font-heading--style);
   --font-badge--family: var(--font-heading--family);
   --hw-orange: #ff9845;
-  --hw-orange-text: #ef5400;
+  --hw-orange-text: #0b57e3; /* sale-look accent text: Main blue (2026-10-30) */
   --hw-navy: #0a1a4a;
 }
 
@@ -2026,7 +2026,7 @@ a.somna-view-all {
 }
 .somna-ess.somna-ess--sale .somna-ess__card {
   position: relative;
-  background: #fff2e3;
+  background: #faf2df;
 }
 .somna-ess.somna-ess--sale .somna-ess__price {
   color: var(--hw-orange-text);
@@ -2088,26 +2088,18 @@ a.somna-view-all {
   color: #0a1a4a;
 }
 
-/* ---------- Homepage colours = original Main theme (2026-10-30) ----------
-   Shared parts (announcement bar, sale badges) keep the orange sale look on other pages;
-   on the homepage they use Main's navy / blue. */
-body.template-index .announcement-bar,
-body.template-index .shopify-section:has(> .announcement-bar),
-body.template-index [id$='__header_announcements_9jGBFp'] .section,
-body.template-index [id$='__header_announcements_9jGBFp'] {
-  background-color: #071a4b !important;
-}
-body.template-index .announcement-bar .announcement-bar__text,
-body.template-index .announcement-bar .announcement-bar__text * {
+/* ---------- Original Main theme colours, all pages (2026-10-30): navy announcement bar, blue sale badges ---------- */
+.announcement-bar .announcement-bar__text,
+.announcement-bar .announcement-bar__text * {
   color: #ffffff !important;
 }
-body.template-index .announcement-bar .announcement-bar__separator-image {
+.announcement-bar .announcement-bar__separator-image {
   filter: brightness(0) invert(1);
 }
-body.template-index .somna-ess__badge {
+.somna-ess__badge {
   background: #0b57e3;
 }
-body.template-index .somna-ess__badge-text {
+.somna-ess__badge-text {
   color: #ffffff;
 }
 /* ======================= END HOMEPAGE redesign ======================= */
@@ -3536,8 +3528,8 @@ margin-top: 7px;
 
 /* =====================================================================
    PRODUCT PAGE BUY BOX — sale look (Figma 3297-4934 desktop / 3297-5224 mobile)
-   All five products get the sale look (peach panel, orange border, orange
-   button). The sale words (sale pill above the images, "UP TO 50% OFF …" banner,
+   Colours: the original Main theme's blue design (2026-10-30) — this block now only
+   keeps layout; the colours come from the base rules above and the group settings. The sale words (sale pill above the images, "UP TO 50% OFF …" banner,
    "Lock in your sale price") show while the sale is on (snippets/somna-sale.liquid).
    Every price, saving and "% OFF" pill is calculated from the real subscription plans.
    Panel background / border colours are the buy-box group's own settings
@@ -3555,11 +3547,11 @@ margin-top: 7px;
   width: 100%;
   margin: 0 0 10px;
   padding: 8px 14px;
-  border: 2px solid #ef5400;
+  border: 2px solid #0b57e3;
   border-radius: 999px;
-  background: #000;
-  box-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
-  color: #faf2df;
+  background: #0a1a4a;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 0.2);
+  color: #fff9ed;
   font-family: var(--font-body--family);
   font-size: 13px;
   font-weight: 700;
@@ -3568,121 +3560,26 @@ margin-top: 7px;
   text-transform: uppercase;
 }
 :where(.template-product) .somna-pdp-sale-pill__offer {
-  color: #ff7a12;
+  color: #7fb2ff;
 }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   :where(.template-product) .somna-pdp-sale-pill__offer {
-    background: linear-gradient(90deg, #ef5400 0%, #ff9860 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+  color: #7fb2ff;
+}
 }
 
 /* Sub-headline + short description under the images: desktop only (phones keep them above the buy box) */
 :where(.template-product) .somna-pdp-intro {
   display: none;
 }
-
-/* Review card */
-:where(.template-product, .somna-sp) .somna-buybox-review {
-  color: #0a1a4a;
-}
-:where(.template-product, .somna-sp) .somna-buybox-review__count {
-  color: #000;
-}
-
-/* Size cards */
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__title {
-  color: #000;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
-  background: #fff7ef !important;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
-  background: #eff2fc !important;
-  border: 2px solid #000 !important;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
-  background: #000;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
-  background: #000;
-  color: #fff;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
-  background: #ff9845;
-  color: #000;
-}
-:where(.template-product, .somna-sp) .somna-tier__night {
-  color: #cd4a04;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(input:checked) .somna-tier__night {
-  color: #000;
-}
 :where(.template-product, .somna-sp) .somna-tier__was {
   display: none;
 }
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk,
-:where(.template-product, .somna-sp) .somna-bundle-card .somna-tier__perk {
-  color: #fe8b4c;
-}
-:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
-  color: #8c99c0;
-}
 :where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
-  background: #000;
-  color: #efa47b;
   font-weight: 700;
-}
-
-/* Bundle card (The Color Set, Season Bundle) */
-:where(.template-product, .somna-sp) .somna-bundle-card {
-  color: #000;
-}
-
-/* Autoship & Save / One-time purchase */
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
-  border: 1px solid #d7dce7;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active {
-  border: 2px solid #cd4a04;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-banner {
-  background: #000;
-  color: #fff;
-}
-:where(.template-product, .somna-sp) .somna-box-banner__offer {
-  color: #ef5400;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-title,
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-active-price {
-  color: #000;
 }
 :where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-strike-price {
   display: none;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
-  background: #000;
-  color: #efa47b;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
-  border-color: #000;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
-  border-color: #ef5400;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
-  background: #ef5400;
-}
-:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-perks-list {
-  color: #000;
-}
-:where(.template-product, .somna-sp) .somna-perk-check {
-  color: #cd4a04;
-}
-:where(.template-product, .somna-sp) .somna-gift {
-  color: #933400;
 }
 :where(.template-product, .somna-sp) .somna-onetime-save {
   display: flex;
@@ -3690,7 +3587,6 @@ margin-top: 7px;
   align-items: center;
   justify-content: space-between;
   gap: 2px 8px;
-  color: #933400;
 }
 :where(.template-product, .somna-sp) .somna-onetime-save[hidden] {
   display: none;
@@ -3699,29 +3595,11 @@ margin-top: 7px;
   margin-left: auto;
   padding: 1px 6px;
   border-radius: 3px;
-  background: #000;
-  color: #efa47b;
+  background: #0b57e3;
+  color: #ffffff;
   font-weight: 700;
   line-height: 1.2;
   white-space: nowrap;
-}
-
-/* Add to cart: orange pill with a darker orange base, like the design */
-:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
-  --button-background-color: #ff7a12;
-  --button-color: #faf2df;
-  background-color: #ff7a12;
-  color: #faf2df;
-  box-shadow: 0 4px 0 #b8430b;
-}
-:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-']:hover {
-  --button-background-color: #f06d08;
-  background-color: #f06d08;
-}
-
-/* Under the button */
-:where(.template-product, .somna-sp) .somna-buybox-delivery {
-  color: #000;
 }
 /* ===================== END PRODUCT PAGE BUY BOX — sale look ===================== */
 
@@ -3731,17 +3609,13 @@ margin-top: 7px;
    ===================================================================== */
 /* Trust bar (Free shipping / 30-night guarantee / Delivered in / Secure payment) — ONE style for every
    page that has this bar (homepage, collection, product, contact): it is matched by its section id, never
-   by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
+   by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat band, black
    brand heading font, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
    It replaces the yellow wave picture (bg_image) and the per-page colour.
-   Homepage (2026-10-30): same size and type, but a flat band in Main's yellow (#efd374). */
-body.template-index .shopify-section[id$='__section_zELtyM'] .section-background,
-body.template-index .shopify-section[id$='__section_zELtyM'] .section {
-  background: #efd374 !important;
-}
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section-background,
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
-  background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important; /* beats the inline wave picture */
+   2026-10-30: same size and type on every page, as a flat band in Main's yellow (#efd374). */
+.shopify-section[id$='__section_zELtyM'] .section-background,
+.shopify-section[id$='__section_zELtyM'] .section {
+  background: #efd374 !important; /* Main's yellow, flat; beats the inline wave picture */
 }
 .shopify-section[id$='__section_zELtyM'] .section {
   top: 0;
@@ -3771,28 +3645,13 @@ body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
   margin-top: clamp(14px, 2.4vw, 36px);
 }
 
-/* Problem / Solution (sections/problem-solution.liquid): Figma background #fff2e3, a matching
-   peach bottom wave, and top spacing from Figma (93px at 1440px, 25px at 393px). */
-.hz-prob-sol-section {
-  background-color: #fff2e3 !important; /* replaces the section's inline cream */
-}
-.hz-prob-sol-section > .wave-container.bottom {
-  background-image: url("somna-hw-howto-bottom.svg") !important;
-}
+/* Problem / Solution (sections/problem-solution.liquid): top spacing from Figma (93px at 1440px, 25px at 393px).
+   Colours and waves: the section's own settings (Main's cream), 2026-10-30. */
 .hz-prob-sol-section {
   padding-top: clamp(17px,6.4vw,35px);
 }
 
-/* How To Use: peach background and peach top/bottom waves (Figma #fff2e3) */
-:where(.template-product) .steps-section {
-  background-color: #fff2e3 !important; /* replaces the section's inline green */
-}
-:where(.template-product) .steps-section > .wave-container.top {
-  background-image: url("somna-hw-howto-top.svg") !important;
-}
-:where(.template-product) .steps-section > .wave-container.bottom {
-  background-image: url("somna-hw-howto-bottom.svg") !important;
-}
+/* How To Use: colours and waves come from the section's own settings (Main's green), 2026-10-30 */
 
 /* ==================== END PRODUCT PAGE — Figma fixes ==================== */
 

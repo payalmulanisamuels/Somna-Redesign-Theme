@@ -392,7 +392,7 @@
       ],
       "name": "Steps Guide",
       "settings": {
-        "bg_color": "#fff2e3",
+        "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "",
         "subheading_bottom": "Remove gently in the morning, starting from one edge. Single-use a fresh strip each night holds better than reusing one.",
@@ -566,8 +566,8 @@
       ],
       "name": "Steps Guide",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/somna-hw-howto-bottom.svg",
-        "bg_color": "#fff2e3",
+        "bottom_wave_image": "shopify://shop_images/howtouse-bottom.svg",
+        "bg_color": "#e0e8d7",
         "show_waves": false,
         "title": "",
         "subheading_bottom": "Remove gently in the morning. Most people adjust within a few nights.If you have a cold, congestion, or any breathing condition, check with a doctor before use.",

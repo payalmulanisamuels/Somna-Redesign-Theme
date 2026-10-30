@@ -26,7 +26,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -42,7 +42,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -58,7 +58,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -74,7 +74,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -90,7 +90,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         },
@@ -106,7 +106,7 @@
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": "#0a1a4a"
+            "text_color": ""
           },
           "blocks": {}
         }
@@ -131,7 +131,7 @@
         "separator_size": 20,
         "separator_gap": 24,
         "section_width": "page-width",
-        "background_color": "#ff9845",
+        "background_color": "#071a4b",
         "divider_width": 0,
         "divider_color": "#ffffff",
         "padding-block-start": 8,

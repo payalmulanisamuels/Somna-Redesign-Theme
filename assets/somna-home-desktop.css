@@ -345,9 +345,6 @@
     padding: 2px 8px;
     border-radius: 5px;
   }
-  :where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
-    box-shadow: 0 6px 0 #b8430b;
-  }
 }
 /* ---------- Figma fixes 2026-10-15 — product page, tablet/desktop ---------- */
 @media screen and (min-width: 750px) {

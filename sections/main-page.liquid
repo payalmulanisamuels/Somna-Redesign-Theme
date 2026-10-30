@@ -38,7 +38,7 @@
 
 {% stylesheet %}
   /* Policy and Support pages (2026-10-16; first approved on Shipping Policy): the content sections
-     alternate peach #fff2e3 and coral #f9b38d, counted on each page in order (title first; on Support,
+     alternate Main creams #fff9ed and #faf2df (were peach/coral before 2026-10-30), counted on each page in order (title first; on Support,
      where the title is off, the hero). Every section after the first rises into the one above with the
      footer's own wave (Footer_Curved_edge.svg, the file the footer uses) in that section's colour, at
      the footer's sizes: 25px on phones, 79px from 750px, scaled to the page width and anchored to the top
@@ -69,11 +69,11 @@
   }
 
   #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):nth-child(odd of .shopify-section:is([id$='__main'], [id*='__section_'])) {
-    --sp-bg: #fff2e3;
+    --sp-bg: #fff9ed;
   }
 
   #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']):nth-child(even of .shopify-section:is([id$='__main'], [id*='__section_'])) {
-    --sp-bg: #f9b38d;
+    --sp-bg: #faf2df;
   }
 
   #MainContent:is([data-template='page.shipping-policy'], [data-template='page.support'], [data-template='page.return-refund-policy'], [data-template='page.terms-of-service'], [data-template='page.policy'], [data-template='page.order-cancellation-policy'], [data-template='page.subscription-policy'], [data-template='page.sale-policy']) > .shopify-section:is([id$='__main'], [id*='__section_']) > .section-background {
