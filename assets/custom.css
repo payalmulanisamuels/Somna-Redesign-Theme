@@ -3651,20 +3651,22 @@ body .hz-prob-sol-section {
   padding-top: clamp(28px, 4.5vw, 64px) !important; /* space between the trust bar and the Problem / Solution cards */
 }
 
-/* How To Use (product page and How to use page): the wave edges use the smooth Pagespeed wave shapes,
+/* How To Use (product page and How to use page) and the Problem / Solution bottom edge: the waves use the smooth Pagespeed wave shapes,
    filled with the section's own colour (Main's green), so the waves have no flat, cropped stretches. */
 .steps-section > .wave-container.top,
-.steps-section > .wave-container.bottom {
+.steps-section > .wave-container.bottom,
+.hz-prob-sol-section > .wave-container.bottom {
   background-image: none !important;
   background-color: inherit;
 }
 .steps-section > .wave-container.top {
-  -webkit-mask: url("somna-hw-howto-top.svg") center bottom / 100% 100% no-repeat;
-  mask: url("somna-hw-howto-top.svg") center bottom / 100% 100% no-repeat;
+  -webkit-mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 61.0219C245.496 -23.2528 283.969 -6.76441 483.664 30.2988C696.183 109.359 842.748 -27.1997 1047.94 37.4861C1209.16 87.7974 1341.07 42.2791 1440 4.22792V145.296H0V61.0219Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center bottom / 100% 100% no-repeat;
+  mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 61.0219C245.496 -23.2528 283.969 -6.76441 483.664 30.2988C696.183 109.359 842.748 -27.1997 1047.94 37.4861C1209.16 87.7974 1341.07 42.2791 1440 4.22792V145.296H0V61.0219Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center bottom / 100% 100% no-repeat;
 }
-.steps-section > .wave-container.bottom {
-  -webkit-mask: url("somna-hw-howto-bottom.svg") center top / 100% 100% no-repeat;
-  mask: url("somna-hw-howto-bottom.svg") center top / 100% 100% no-repeat;
+.steps-section > .wave-container.bottom,
+.hz-prob-sol-section > .wave-container.bottom {
+  -webkit-mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 84.2749C245.496 168.55 283.969 152.061 483.664 114.998C696.183 35.9376 842.748 172.497 1047.94 107.811C1209.16 57.4995 1341.07 103.018 1440 141.069V0.000991821H0V84.2749Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center top / 100% 100% no-repeat;
+  mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 84.2749C245.496 168.55 283.969 152.061 483.664 114.998C696.183 35.9376 842.748 172.497 1047.94 107.811C1209.16 57.4995 1341.07 103.018 1440 141.069V0.000991821H0V84.2749Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center top / 100% 100% no-repeat;
 }
 
 /* ==================== END PRODUCT PAGE — Figma fixes ==================== */
