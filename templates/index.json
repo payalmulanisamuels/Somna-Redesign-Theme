@@ -185,76 +185,11 @@
               },
               "blocks": {}
             },
-            "text_FRGnxP": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>UP TO</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-display--family)",
-                "font_size": "1rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "2rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "font_desktop": "",
-                "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": ""
-              },
-              "blocks": {}
-            },
-            "text_hw70off": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<p>50% OFF</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-display-spray--family)",
-                "font_size": "4rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "6rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "nowrap",
-                "text_color": "#0b57e3",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 4,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "font_desktop": "",
-                "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": "",
-                "padding-block-start-desktop": 0
-              },
-              "blocks": {}
-            },
             "text_Lqf6bA": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>On all products.</p>",
+                "text": "<p>A simple, drug-free system<br/>for deeper, more restorative sleep.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -287,8 +222,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Shop the sale →",
-                "link": "shopify://collections/all",
+                "label": "Shop the Breathe Bundle",
+                "link": "/products/sleep-bundle?variant=52629425979623",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "custom_button_background": "#071a4b",
@@ -306,48 +241,13 @@
                 "icon_color": "original"
               },
               "blocks": {}
-            },
-            "text_hwperks": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>Free shipping · 30-Night guarantee</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "0.75rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "#ffffff",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 10,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "font_desktop": "",
-                "font_weight_desktop": "",
-                "line_height_desktop": "",
-                "letter_spacing_desktop": ""
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "text_VDbt3L",
             "text_eT6TMz",
-            "text_FRGnxP",
-            "text_hw70off",
             "text_Lqf6bA",
-            "button_6EgajN",
-            "text_hwperks"
+            "button_6EgajN"
           ]
         }
       },
@@ -443,7 +343,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/Gift.png",
+                "image_upload": "shopify://shop_images/Gift_9b893c20-4b7e-45bb-b826-ccd957775598.png",
                 "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
@@ -596,7 +496,7 @@
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/guarantee.png",
+                "image_upload": "shopify://shop_images/gurantee.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -749,7 +649,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/ship.png",
+                "image_upload": "shopify://shop_images/Truck.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -902,7 +802,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/secure.png",
+                "image_upload": "shopify://shop_images/payment.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -1023,7 +923,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#ffffff",
+        "background_color": "#efd374",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1039,8 +939,7 @@
         "padding-block-end": 15,
         "stack_desktop": false,
         "align_items_desktop": "",
-        "content_width_desktop": "",
-        "bg_image": "shopify://shop_images/icon_bg.svg"
+        "content_width_desktop": ""
       }
     },
     "somna_shop_essentials_AhrNe9": {
@@ -1311,7 +1210,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon1-ritual.png",
+                    "image_upload": "shopify://shop_images/leaf.svg",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1449,7 +1348,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon2-drug.png",
+                    "image_upload": "shopify://shop_images/Sugar_Free.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1587,7 +1486,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon3-subscription.png",
+                    "image_upload": "shopify://shop_images/Toggle_On.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1725,7 +1624,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon4-guarantee.png",
+                    "image_upload": "shopify://shop_images/Guarantee_d420e3d3-1cf6-4dd7-a0d4-b573f0f629fb.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1871,7 +1770,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf2df",
+        "background_color": "#ffffff",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1889,9 +1788,7 @@
         "padding-block-end-desktop": 0,
         "stack_desktop": false,
         "align_items_desktop": "",
-        "content_width_desktop": "",
-        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg"
+        "content_width_desktop": ""
       }
     },
     "layered_image_with_text_LEPfjJ": {

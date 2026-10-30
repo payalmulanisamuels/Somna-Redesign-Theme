@@ -2024,7 +2024,26 @@ a.somna-view-all {
   color: #000;
 }
 
-/* ---------- Small essentials: Main's cream section with its own top/bottom curves (section settings) ---------- */
+/* ---------- Small essentials: Pagespeed design (wavy top edge + fade) in Main's cream ---------- */
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] {
+  position: relative;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-background {
+  background-image: linear-gradient(180deg, #faf2df 0%, rgb(250 242 223 / 0) 100%);
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 1px);
+  height: 12.2vw;
+  z-index: 2;
+  pointer-events: none;
+  background-color: #faf2df; /* the edge file is only used as a shape */
+  -webkit-mask: url("somna-hw-orange-edge-mobile.svg") center bottom / 100% 100% no-repeat;
+  mask: url("somna-hw-orange-edge-mobile.svg") center bottom / 100% 100% no-repeat;
+}
 #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
   margin: 0;
   line-height: 1;
@@ -3677,26 +3696,30 @@ margin-top: 7px;
    by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
    brand heading font, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
    It replaces the yellow wave picture (bg_image) and the per-page colour.
-   Homepage (2026-10-30): excluded, so it keeps Main's original white band with the wave picture. */
+   Homepage (2026-10-30): same size and type, but a flat band in Main's yellow (#efd374). */
+body.template-index .shopify-section[id$='__section_zELtyM'] .section-background,
+body.template-index .shopify-section[id$='__section_zELtyM'] .section {
+  background: #efd374 !important;
+}
 body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section-background,
 body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
   background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important; /* beats the inline wave picture */
 }
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
+.shopify-section[id$='__section_zELtyM'] .section {
   top: 0;
   height: auto;
   align-content: center;
 }
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block,
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block > *,
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block strong {
+.shopify-section[id$='__section_zELtyM'] .text-block,
+.shopify-section[id$='__section_zELtyM'] .text-block > *,
+.shopify-section[id$='__section_zELtyM'] .text-block strong {
   font-family: var(--font-display-spray--family);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
   color: #000;
 }
-body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .divider__line {
+.shopify-section[id$='__section_zELtyM'] .divider__line {
   border-color: #0a1a4a;
   border-right-width: clamp(1px, 0.14vw, 2px);
   border-bottom-width: clamp(1px, 0.14vw, 2px);

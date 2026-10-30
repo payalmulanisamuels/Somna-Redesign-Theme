@@ -1350,6 +1350,11 @@
   }
 
   /* Small essentials */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+    height: clamp(60px, 9vw, 130px);
+    -webkit-mask-image: url("somna-hw-orange-edge.svg");
+    mask-image: url("somna-hw-orange-edge.svg");
+  }
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
     font-size: clamp(30px, 3.3vw, 48px);
   }
