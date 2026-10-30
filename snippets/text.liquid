@@ -43,12 +43,12 @@
       if block_settings.font_size_tablet != blank
         echo ' custom-font-size-tablet '
       endif
-      if block_settings.font_size_desktop != blank
-        echo ' custom-font-size-desktop '
-      endif
       if block_settings.color != ''
         echo ' custom-color '
       endif
+    endif
+    if block_settings.font_size_desktop != blank
+      echo ' custom-font-size-desktop '
     endif
     if block_settings.background
       echo ' text-block--background '
@@ -69,8 +69,14 @@
     {% render 'typography-style', settings: block_settings %}
     {% if block_settings.type_preset == 'custom' %}
       {% if block_settings.font_size_tablet != blank %}--font-size-tablet: {{ block_settings.font_size_tablet }};{% endif %}
-      {% if block_settings.font_size_desktop != blank %}--font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
     {% endif %}
+    {% comment %} Desktop typography (990px and up); empty = same as mobile {% endcomment %}
+    {% if block_settings.font_size_desktop != blank %}--font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
+    {% if block_settings.font_desktop != blank %}--font-family-desktop: {{ block_settings.font_desktop }};{% endif %}
+    {% if block_settings.font_weight_desktop != blank %}--font-weight-desktop: {{ block_settings.font_weight_desktop }};{% endif %}
+    {% if block_settings.line_height_desktop != blank %}--line-height-desktop: {{ block_settings.line_height_desktop }};{% endif %}
+    {% if block_settings.letter_spacing_desktop != blank %}--letter-spacing-desktop: {{ block_settings.letter_spacing_desktop }};{% endif %}
+    {% if block_settings.max_width_desktop != blank %}--max-width-desktop: {{ block_settings.max_width_desktop }}px;{% endif %}
     {% if block_settings.text_color != blank %}
       --color: {{ block_settings.text_color }};
       --color-rgb: {{ block_settings.text_color.rgb }};

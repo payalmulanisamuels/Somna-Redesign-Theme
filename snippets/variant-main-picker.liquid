@@ -20,12 +20,93 @@
   assign fieldset_index = 0
 %}
 
+{%- comment -%}
+  Somna buybox (Figma "Purchase panel" 2707-3118 mobile / 2707-3220 desktop)
+  - Review card: rating + count come from the custom.custom_review_rating_review_count
+    product metafield (e.g. "4.6 <svg…> (248)"); the quote is set per product below.
+  - Bundle card: shown for single-variant products (The Color Set, Season Bundle).
+  Styles: custom.css (phones + shared) and somna-home-desktop.css (tablet/desktop),
+  moved there from assets/somna-buybox.css on 2026-10-15.
+{%- endcomment -%}
+{%- liquid
+  assign somna_review_raw = product_resource.metafields.custom.custom_review_rating_review_count.value | default: '' | strip
+  assign somna_rating = ''
+  assign somna_review_count = ''
+  if somna_review_raw != blank
+    assign somna_rating = somna_review_raw | split: ' ' | first | strip
+    if somna_review_raw contains '('
+      assign somna_review_count = somna_review_raw | split: '(' | last | split: ')' | first | strip
+    endif
+  endif
+
+  assign somna_quote = ''
+  assign somna_bundle_title = ''
+  assign somna_bundle_sub = ''
+  case product_resource.handle
+    when 'nasal-strips'
+      assign somna_quote = 'Comfortable all night and they actually stay put. — Jessica M.'
+    when 'mouth-tape'
+      assign somna_quote = 'Felt strange the first night, now I can’t sleep without it. — Ryan T.'
+    when 'sleep-bundle'
+      assign somna_quote = 'Love having both in one order — the blue looks so clean. — Ashley K.'
+    when 'the-colour-set'
+      assign somna_quote = 'Fun to switch colors depending on my mood. — Brittany L.'
+      assign somna_bundle_title = '3 Bags · 90 nights'
+      assign somna_bundle_sub = 'All three colors · Nasal Strips only'
+    when 'season-bundle'
+      assign somna_quote = 'Fun to switch colors depending on my mood. — Brittany L.'
+      assign somna_bundle_title = '3 Months · 90 nights'
+      assign somna_bundle_sub = '3 Black Strips + 3 Black Tape'
+  endcase
+
+  # The review card sits under the colour row when the first option is a colour (Sleep Bundle)
+  assign somna_first_option = product_resource.options_with_values.first.name | downcase
+  assign somna_review_after_color = false
+  unless product_resource.has_only_default_variant
+    if somna_first_option contains 'color' or somna_first_option contains 'colour'
+      assign somna_review_after_color = true
+    endif
+  endunless
+-%}
+{%- capture somna_review_card -%}
+  {%- if somna_rating != blank -%}
+    <div class="somna-buybox-review">
+      <div class="somna-buybox-review__top">
+        <span class="somna-buybox-review__stars" aria-hidden="true">
+          {%- for i in (1..5) -%}
+            {%- liquid
+              assign star_fill = somna_rating | times: 1.0 | minus: forloop.index0
+              if star_fill >= 1
+                assign star_pct = 100
+              elsif star_fill <= 0
+                assign star_pct = 0
+              else
+                assign star_pct = star_fill | times: 100 | round
+              endif
+            -%}
+            <span class="somna-star" style="--fill: {{ star_pct }}%;">★</span>
+          {%- endfor -%}
+        </span>
+        <span class="visually-hidden">Rated {{ somna_rating }} out of 5</span>
+        <span class="somna-buybox-review__rating">{{ somna_rating }}</span>
+        {%- if somna_review_count != blank -%}
+          <span class="somna-buybox-review__count">· {{ somna_review_count }} reviews</span>
+        {%- endif -%}
+      </div>
+      {%- if somna_quote != blank -%}
+        <p class="somna-buybox-review__quote">{{ somna_quote }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
 {% unless product_resource.has_only_default_variant %}
+  {% unless somna_review_after_color %}{{ somna_review_card }}{% endunless %}
   {% if has_custom_variant_buttons %}
     {% render 'variant-button-custom-styles', block_settings: block_settings, block_id: block.id %}
   {% endif %}
   <variant-picker
-    class="variant-picker spacing-style variant-picker--{{ block_settings.alignment }}{% if has_custom_variant_buttons %} variant-picker--custom-{{ block.id }}{% endif %}"
+    class="variant-picker somna-buybox-picker spacing-style variant-picker--{{ block_settings.alignment }}{% if has_custom_variant_buttons %} variant-picker--custom-{{ block.id }}{% endif %}"
     style="
       {% render 'spacing-style', settings: block_settings %}
        {% if block_settings.option_label_text_color != blank %}
@@ -77,6 +158,8 @@
         -%}
 
         {%- if is_color_option -%}
+              {%- assign fieldset_index = fieldset_index | plus: 1 -%}
+          {%- if somna_review_after_color and forloop.first -%}{{ somna_review_card }}{%- endif -%}
           {% comment %} =========================================================
             SOMNA COLOR SWATCHES  ("Color: Blue"  ● ● ●)
           ========================================================= {% endcomment %}
@@ -146,7 +229,7 @@
               {%- endfor -%}
             </div>
           </fieldset>
-          {%- assign fieldset_index = fieldset_index | plus: 1 -%}
+      
         {%- elsif product_option.values.size == 1 and variant_style != 'swatch' -%}
           <div
             class="variant-option"
@@ -218,10 +301,10 @@
       assign nights_count = 120
     endif
 
-    # Somna: "2 Bags" is the default on page load, unless the URL already picks a variant (?variant=).
+    # Somna: the first size ("1 Bag" / "1 Set", the $24.95 Autoship offer in the ads) is the default on
+    # page load, unless the URL already picks a variant (?variant=). Was "2 Bags" until 2026-10-28.
     assign is_default_size = false
-    assign value_start = product_option_value.name | downcase | strip | slice: 0, 5
-    if value_start == '2 bag' and product.selected_variant == blank and product.id == product_resource.id and product_option_value.selected == false and product_option_value.available
+    if forloop.index == 1 and product.selected_variant == blank and product.id == product_resource.id and product_option_value.selected == false and product_option_value.available
       assign is_default_size = true
     endif
   endif
@@ -231,21 +314,51 @@
   {% comment %} =========================================================
     SIZE / QUANTITY CARDS (DYNAMIC DATA ATTRIBUTES ENABLED)
   ========================================================= {% endcomment %}
+  {%- liquid
+    # Somna buybox: price per night (Autoship price vs one-time price), savings and badge wording
+    assign somna_night_price = sub_price | times: 1.0 | divided_by: nights_count | round
+    assign somna_night_regular = one_time_price | times: 1.0 | divided_by: nights_count | round
+    assign somna_save_pct = 0
+    if one_time_price > sub_price
+      assign somna_save_pct = one_time_price | minus: sub_price | times: 100.0 | divided_by: one_time_price | round
+    endif
+    # Halloween Sale: one-time purchases get the % off from snippets/somna-sale.liquid (40%) at checkout
+    # (automatic discount "Halloween Sale"), so the one-time $/night uses price x 0.60. The card's
+    # "% OFF" pill shows the Autoship plan saving (50%). Captured once, outside the cards loop.
+    if somna_sale_once_off == nil
+      capture somna_sale_once_off
+        render 'somna-sale', get: 'once_off'
+      endcapture
+      assign somna_sale_once_off = somna_sale_once_off | plus: 0
+    endif
+    assign somna_once_price = one_time_price
+    assign somna_once_pct = 0
+    if somna_sale_once_off > 0
+      assign somna_once_pct = somna_sale_once_off
+      assign somna_once_keep = 100 | minus: somna_once_pct
+      assign somna_once_price = current_variant.price | times: somna_once_keep | divided_by: 100.0 | round
+    endif
+    assign somna_unit = 'bag'
+    assign somna_value_lc = product_option_value.name | downcase
+    if somna_value_lc contains 'set'
+      assign somna_unit = 'set'
+    endif
+  -%}
   <label
-    class="variant-option__button-label variant-option__button-label--card {% if forloop.index == 2 %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+    class="variant-option__button-label variant-option__button-label--card somna-tier {% if forloop.index == 2 %}most_popular{% endif %} {% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
     data-sub-formatted="{{ sub_price | money_without_trailing_zeros }}"
-    data-onetime-formatted="{{ one_time_price | money_without_trailing_zeros }}"
+    data-onetime-formatted="{{ somna_once_price | money_without_trailing_zeros }}"
     data-sub-numeric="{{ sub_price | divided_by: 100.0 }}"
-    data-onetime-numeric="{{ one_time_price | divided_by: 100.0 }}"
+    data-onetime-numeric="{{ somna_once_price | divided_by: 100.0 }}"
     data-nights="{{ nights_count }}"
   >
-    {% comment %} Top Badges {% endcomment %}
+    {% comment %} Top badges: Recommended (orange, 2026-10-28, was "Try it") / Most popular (black) / Best value {% endcomment %}
     {% if forloop.index == 1 %}
-      <span class="variant-card__badge popular" style="opacity:0">None</span>
+      <span class="variant-card__badge somna-tier__badge somna-tier__badge--recommended">Recommended</span>
     {% elsif forloop.index == 2 %}
-      <span class="variant-card__badge popular">MOST POPULAR</span>
-    {% elsif forloop.index >= 3 %}
-      <span class="variant-card__badge free-bag">4th BAG FREE</span>
+      <span class="variant-card__badge popular somna-tier__badge somna-tier__badge--popular">Most popular</span>
+    {% else %}
+      <span class="variant-card__badge free-bag somna-tier__badge">Best value</span>
     {% endif %}
 
     <input
@@ -280,9 +393,7 @@
 
     <div class="variant-card__inner">
       <span class="variant-card__title">{{- product_option_value | escape -}}</span>
-      <span class="variant-card__sub-title">
-        {% if forloop.index == 1 %}30 nights . one month{% elsif forloop.index == 2 %}60 nights - two months{% else %}120 nights - four months{% endif %}
-      </span>
+      <span class="variant-card__sub-title">{{ nights_count }} nights</span>
       <div class="variant-card__img-wrap">
         {%- assign var_img = current_variant.metafields.custom.variant_image.value | default: product.featured_image -%}
         {%- if var_img != blank -%}
@@ -290,22 +401,25 @@
         {%- endif -%}
       </div>
 
-      <span class="variant-card__gift"   >
-        {% if forloop.index == 1 %}
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <mask id="mask0_1366_2731" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="15"> <rect width="15" height="15" fill="url(#pattern0_1366_2731)"/> </mask> <g mask="url(#mask0_1366_2731)"> <rect x="-2.5" y="-0.625" width="19.375" height="15.625" fill="black"/> </g> <defs> <pattern id="pattern0_1366_2731" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_1366_2731" transform="scale(0.01)"/> </pattern> <image id="image0_1366_2731" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEEklEQVR4nO2dy48MURSHP4+IhCGCxGMQJBYeCSKWFlhYiGBLRGyIeFtYW3nGH+CxsbHCggWricUsSEgYIkgsyIh4BRG0V8md3IlxVZvq6uo6t3p+X3ISMTNV55xvbp2a7qpqEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhLBgMnAMeAzUgKRN4hvwBDgBTKIiLANeRtC8pMXxAlhMBVbGUJCR+HgOTCBijkfQpLLjMBHzKIIGlR33iJh2GuBJxvhMxCRDNKLFujESEmDdGAkJsG6MhARYN0ZCAqwbIyEB1o2RkADrxkhIgHVjYhGS5IxPwF3gKDCHArBuTNWFJAPiO3AKGC0hRCGkP+4AMyWEaIS46AXmSgjRCHHxLM9KsW5MOwtJgFvAKAkhGiGJH/QSQjxCfgHrJYRohLh4B8yWEKIR4uJmlnli3ZgqCHkFbAHG0xj7UrZ1UkJoSoiTMZ18DAMup8yTtRJCbiGbaA53DdjTYJtvgBkSQi4hjR6m0liecnVPNzBSQmhYSFGkzRP3CrGEYCPEzZOLKfNknYRgIqTePHnlr6+WEAMh9ebJuSyJtHtYCXEcDPbxA1g0WCLtHpZCRgC3g/1cGCyRdg9LIY41wX5q/Xd4WTdmqArBXxwxcF97iKAxsQuZQOs4EOzrqoT8od73bad1LE253c68MbEL+QDMa5GQMSlzxLwxsQtJvJTtLTp8/ZOXdWOqICQpMy/rBCQECUkkJL4Isc5HQgKs85GQAOt8JCTAOh8JCbDOR0ICrPORkADrfCQkwDofCQmwzkdCAqzzkZCAthfSA+wFFvjX/cf4f+/1X6uakJ6S6im8UPcmy05gOP+/6mKX8dPsQmKpp3AZK8nOKkMpIbHUU2iR7jepUXZHLGSnQT19b08WUWCPX7qN4n7mfskyahmEWNTz3m3gRkFFuuGWl/0lC3mYQYhFPV3uhzcXVOT8JgpYWLKQIyk5xFBP391a7uzhegFFdjRRQEeJMnqBiSk5WNdzzd9D0sc4/x/tLqTXX5yWhmU917yDvxjmD19dOQd9rIesmp8ZR+qsjH7KrueD7/WmgSujGS4VOATDa1wvUj5Pq17PrgJPEx8UcP7fLKerXs9U4GuwYyepUfYE2/gKTKF8VqQcVoqo50uZ9ZxNOV67lw+ystp/JNHAbZzBju4W1ONWXmlM9U8lCIvYPchyH+F/k8LkX/ttWrEk5bWoZuspfbVvBH6mLPf7/i9Wd8Yx1sdCP/DCY2zit7Eee9Ju8K9cPdvqSMka7gb6HcTDoSZPtaOox62UtzmSd4e8DcTHVuBjznpiWOl9dPqb4LO8J1DzAzzvo4/KwD0B7rx/QHLWeqYRIZ1+EF71H+r4yYf70Mor/mvue6rCLP+HYsvr+Q3JGNeR99nMFgAAAABJRU5ErkJggg=="/> </defs> </svg>
-        free shipping
-        {%  else %}
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <rect width="18" height="18" fill="url(#pattern0_1178_1391)"/> <defs> <pattern id="pattern0_1178_1391" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0_1178_1391" transform="scale(0.01)"/> </pattern> <image id="image0_1178_1391" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAADYElEQVR4nO2dO2tUURRGl6Y2QtBGO0VBxQciio2iIJapLLQS8fEDtBB8kUpFEQuNSEylNrsW/AGWvvAHKLHTzhAQDElGTriBMExOJuOee77r7AUbAvdu+NbeTHLmprgQBEEQBEEQDC7bgWPAKHAUGOmiZ6S6d7Tq3VZDzv+azcA94BvQaqs54B1wFli/rCf9fK66Nteh7ytwF9hU0KuRXAamOwy0U30EdgA7gc9d9vwCLpaWbAqPuxzq8ppewwKX16PSsupc72Go/1rXSkurcgCYL7CQ9Ldmb2l5Rd4WWMZSvSktr8ZWYCEzsCngFnABGAf+dDHkdM/Tquc28D1zb/pkbik9BCWurHKK2tB2/5FVlpKuHW7rGQY+ZXou1egrz8PMoE6s0PMs05M+GZ04mel50Ee/xvEyM6jhFXrOZ3rStU4MZ3pShqBiPDOoXSv0nMn0pGud2JPpedJHv8ZxNTOo544Lmcj0pAxBxf7MoBaqpewGhnpYyFDVO7HKSS5laCz7gMnqODrbxRF0UGq2msmLur5srgPGCn2jbjWs0ozuVDPrG2MCoq2GVVpK335NxSeDNdd89ZzOnUkBuVZDKx0o3JkSEGs1tNJ/Pd2J0xQ9V3q25k5pqVbDKxaCVsVC0KpYCFoVC0GrYiFolTvpCWoUPVcQBEEQBEHQOEzgXG8NzueOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO5oy5s4vncURc28XzuqAubeD531IVNPJ876sImns8ddWETz+eOurCJ53NHXdjE87mjLmzi+dxRFzbxfO6oC5t4PnfUhU08nzvqwiaezx11YRPP5466sInnc0dd2MTzuaMubOL53FEXNvF87qgLm3g+d9SFTTyfO+rCJp7PHXVhE8/njrqwiedzR13YxPO581pc2ATyvapxH4sv0CotbOILuV/jPjgtIGziCzlV4z4WX5Pd7ZuZB3EhX9peK14Lh4DfsRDaK83kIIU4DvyMhbBUP4BjFGYjcBP4AMwM4EJmgPfAjcxLMIMgCIIgCIIgCIIgoIn8BabFMXoRIeglAAAAAElFTkSuQmCC"/> </defs> </svg>
-        +3 free gifts
-        {%  endif %}
+      <span class="somna-tier__price">
+        <span class="somna-tier__night">{{ somna_night_price | money }}/night</span>
+        {%- if somna_night_regular > somna_night_price -%}
+          <s class="somna-tier__was">{{ somna_night_regular | money }}</s>
+        {%- endif -%}
       </span>
+
+      {% if forloop.index == 1 %}
+        <span class="variant-card__gift somna-tier__perk somna-tier__perk--muted"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5h11.5v9.5H2z"/><path d="M13.5 9.5h4l3 3.2V16h-7"/><circle cx="6" cy="17.3" r="1.7"/><circle cx="17" cy="17.3" r="1.7"/></g></svg>Free shipping</span>
+      {% else %}
+        <span class="variant-card__gift somna-tier__perk"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" stroke="none"><path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7.25V7h1.5v5H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1.25 1.25 0 1 1 1.25-1.25V7H9Zm6 0h-1.25V5.75A1.25 1.25 0 1 1 15 7ZM4 13.5V20a1 1 0 0 0 1 1h6.25v-7.5H4Zm8.75 7.5H19a1 1 0 0 0 1-1v-6.5h-7.250V21Z"/></g></svg>+3 free gifts</span>
+      {% endif %}
     </div>
 
-    {%- liquid
-      assign diff_amount = one_time_price | minus: sub_price 
-    -%}
-    {% if forloop.index >= 3 and diff_amount > 0 %}
-      <span class="variant-card__bottom-save-pill">SAVE {{ diff_amount | divided_by: 100.0 | round | times: 100 | money_without_trailing_zeros }}</span>
+    {% comment %} Bottom pills (Figma: "XX% OFF" / 4th bag free). XX = real Autoship saving vs one-time price. {% endcomment %}
+    {% if forloop.index == 2 and somna_save_pct > 0 %}
+      {% comment %} <span class="variant-card__bottom-save-pill somna-tier__pill">{{ somna_save_pct }}% OFF</span> {% endcomment %}
+    {% elsif forloop.index >= 3 %}
+      <span class="variant-card__bottom-save-pill somna-tier__pill">4th {{ somna_unit }} free</span>
     {% endif %}
 
     {% render 'strikethrough-variant', product_option: product_option_value %}
@@ -443,10 +557,54 @@
   </variant-picker>
 {% endunless %}
 
+{%- if product_resource.has_only_default_variant -%}
+  {%- liquid
+    assign somna_bundle_variant = product_resource.selected_or_first_available_variant
+    assign somna_bundle_nights = product_resource.metafields.custom.nights.value | default: 30 | plus: 0
+    if somna_bundle_variant.metafields.custom.nights != blank
+      assign somna_bundle_nights = somna_bundle_variant.metafields.custom.nights.value | plus: 0
+    endif
+    assign somna_bundle_sub_price = somna_bundle_variant.price
+    assign somna_bundle_regular = somna_bundle_variant.price
+    for alloc in somna_bundle_variant.selling_plan_allocations
+      assign somna_bundle_sub_price = alloc.price
+      assign somna_bundle_regular = alloc.compare_at_price | default: somna_bundle_variant.price
+      break
+    endfor
+    assign somna_bundle_night = somna_bundle_sub_price | times: 1.0 | divided_by: somna_bundle_nights | round
+    assign somna_bundle_night_regular = somna_bundle_regular | times: 1.0 | divided_by: somna_bundle_nights | round
+    if somna_bundle_title == blank
+      assign somna_bundle_title = somna_bundle_nights | append: ' nights'
+    endif
+    assign somna_bundle_image = somna_bundle_variant.metafields.custom.variant_image.value | default: product_resource.featured_image
+  -%}
+  {{ somna_review_card }}
+  <div class="somna-bundle-card">
+    {%- if somna_bundle_image != blank -%}
+      <div class="somna-bundle-card__media">
+        {{ somna_bundle_image | image_url: width: 300 | image_tag: loading: 'lazy', class: 'somna-bundle-card__img', alt: product_resource.title }}
+      </div>
+    {%- endif -%}
+    <div class="somna-bundle-card__body">
+      <p class="somna-bundle-card__title">{{ somna_bundle_title }}</p>
+      {%- if somna_bundle_sub != blank -%}
+        <p class="somna-bundle-card__sub">{{ somna_bundle_sub }}</p>
+      {%- endif -%}
+      <p class="somna-tier__price">
+        <span class="somna-tier__night">{{ somna_bundle_night | money }}/night</span>
+        {%- if somna_bundle_night_regular > somna_bundle_night -%}
+          <s class="somna-tier__was">{{ somna_bundle_night_regular | money }}</s>
+        {%- endif -%}
+      </p>
+      <p class="somna-tier__perk"><svg class="somna-tier__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor" stroke="none"><path d="M20 7h-2.18A3 3 0 0 0 12 3.76 3 3 0 0 0 6.18 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h7.25V7h1.5v5H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1ZM9 7a1.25 1.25 0 1 1 1.25-1.25V7H9Zm6 0h-1.25V5.75A1.25 1.25 0 1 1 15 7ZM4 13.5V20a1 1 0 0 0 1 1h6.25v-7.5H4Zm8.75 7.5H19a1 1 0 0 0 1-1v-6.5h-7.25V21Z"/></g></svg>+3 free gifts</p>
+    </div>
+  </div>
+{%- endif -%}
+
 {% render 'somna-subscription-widget', product_resource: product_resource, section: section %}
 
 {%- comment -%}
-  Somna: select "2 Bags" once on page load (only when the URL has no ?variant=).
+  Somna: select the first size ("1 Bag" / "1 Set") once on page load (only when the URL has no ?variant=).
   Clicking the real radio runs the normal variant change, so prices, the subscription
   widget, the sticky bar and the URL all update. The customer can change it afterwards.
   Placed after the widget so its listeners are set up before the click.
@@ -475,3 +633,17 @@
 
 {% render 'swatch-styles' %}
 {% render 'variant-picker-styles' %}
+
+{% stylesheet %}
+  /* Size card badges (2026-10-28): "Recommended" (1 Bag) orange, "Most popular" black.
+     More specific than the badge colours in assets/custom.css, which stay as they are. */
+  .somna-buybox-picker .somna-tier .somna-tier__badge.somna-tier__badge--recommended {
+    background: #ff9845;
+    color: #000;
+  }
+
+  .somna-buybox-picker .somna-tier .somna-tier__badge.somna-tier__badge--popular {
+    background: #000;
+    color: #fff;
+  }
+{% endstylesheet %}

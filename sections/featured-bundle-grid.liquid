@@ -7,7 +7,28 @@
   overflow-x: clip; /* Prevents mobile horizontal scroll */
   width: 100%;
 }
+/* Tablet (750px and up) and desktop (990px and up) padding. Empty = keep the smaller screen's value. */
+@media screen and (min-width: 750px) {
+  {%- if section.settings.padding_top_tablet != blank %}
+  .bundle-section-{{ section.id }} { padding-top: {{ section.settings.padding_top_tablet }}px; }
+  {%- endif %}
+  {%- if section.settings.padding_bottom_tablet != blank %}
+  .bundle-section-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_tablet }}px; }
+  {%- endif %}
+}
+@media screen and (min-width: 990px) {
+  {%- if section.settings.padding_top_desktop != blank %}
+  .bundle-section-{{ section.id }} { padding-top: {{ section.settings.padding_top_desktop }}px; }
+  {%- endif %}
+  {%- if section.settings.padding_bottom_desktop != blank %}
+  .bundle-section-{{ section.id }} { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }
+  {%- endif %}
+}
 {%- endstyle -%}
+
+{%- comment -%} Halloween badge (2026-10-28): same pumpkin badge as "Shop the essentials", text from snippets/somna-sale.liquid. Hidden when the sale is off. {%- endcomment -%}
+{%- capture somna_card_badge -%}{%- render 'somna-sale', get: 'text' -%}{%- endcapture -%}
+{%- assign somna_card_badge = somna_card_badge | strip -%}
 
 <section class="bundle-section-{{ section.id }}">
   <div class="section section--page-width">
@@ -65,10 +86,30 @@
                   {{block.settings.tag }}
                 </div>
               {%endif %}
+              {%- if somna_card_badge != blank and product != blank -%}
+                {%- assign somna_card_badge_up = somna_card_badge | upcase -%}
+                <span class="somna-ess__badge somna-bundle-badge"><span class="somna-ess__badge-text">
+                  {%- if somna_card_badge_up contains 'UP TO ' -%}
+                    <span class="somna-ess__badge-upto">UP TO</span>{{ somna_card_badge | remove_first: 'UP TO ' | remove_first: 'Up to ' | escape }}
+                  {%- else -%}
+                    {{ somna_card_badge | escape }}
+                  {%- endif -%}
+                </span></span>
+              {%- endif -%}
               <div class="bundle-card__image-wrapper">
                 {%- if image != blank -%}
+                  {%- capture bundle_img_srcset -%}
+                    {%- assign bundle_img_widths = '300,450,600,800' | split: ',' -%}
+                    {%- for bw_str in bundle_img_widths -%}
+                      {%- assign bw = bw_str | plus: 0 -%}
+                      {%- if bw < image.width -%}{{ image | image_url: width: bw }} {{ bw }}w, {% endif -%}
+                    {%- endfor -%}
+                    {{ image | image_url: width: 1000 }} {{ image.width | at_most: 1000 }}w
+                  {%- endcapture -%}
                   <img
                     src="{{ image | image_url: width: 1000 }}"
+                    srcset="{{ bundle_img_srcset | strip }}"
+                    sizes="(min-width: 750px) 34vw, {% if block.settings.is_featured %}92vw{% else %}46vw{% endif %}"
                     alt="{{ title | escape }}"
                     loading="lazy"
                     class="bundle-card__image"
@@ -125,6 +166,40 @@
   </div>
 </section>
 
+{% stylesheet %}
+  /* "Or save with a bundle" on collection pages (2026-10-16): the floating strip, tape and dots
+     from assets/somna-motion.css are hidden here, same as on the homepage. The cards, heading
+     and layout are unchanged. */
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .custom-header::before,
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .custom-header::after,
+  #MainContent[data-template^='collection'] section[class^='bundle-section-'] .bundle-section__grid::before {
+    content: none;
+    animation: none;
+  }
+
+  /* Halloween pumpkin badge on the bundle cards (2026-10-28): reuses the "Shop the essentials"
+     badge (.somna-ess__badge in custom.css), tucked inside the card's top-right corner so the
+     section's overflow clip never cuts it off. */
+  .bundle-card .somna-bundle-badge {
+    top: -14px;
+    right: -6px;
+    z-index: 3;
+  }
+
+  .bundle-card .somna-bundle-badge .somna-ess__badge-upto {
+    display: block;
+    font-size: 0.6em;
+    line-height: 1;
+  }
+
+  @media screen and (min-width: 990px) {
+    .bundle-card .somna-bundle-badge {
+      top: -26px;
+      right: -14px;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Featured Bundle Grid",
@@ -160,6 +235,36 @@
       "unit": "px",
       "label": "Padding Bottom",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Tablet (750px and up)",
+      "info": "Leave empty to use the padding above."
+    },
+    {
+      "type": "number",
+      "id": "padding_top_tablet",
+      "label": "Padding Top (tablet, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_tablet",
+      "label": "Padding Bottom (tablet, px)"
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the tablet value (or the padding above if tablet is empty)."
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Padding Top (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Padding Bottom (desktop, px)"
     }
   ],
   "blocks": [

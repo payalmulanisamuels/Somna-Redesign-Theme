@@ -5,7 +5,7 @@
 {% endcapture %}
 
 <div
-  class="contact-form spacing-style size-style"
+  class="contact-form spacing-style size-style{% if block.settings.show_labels_desktop %} contact-form--labels-desktop{% endif %}{% if block.settings.stack_fields_desktop %} contact-form--stack-desktop{% endif %}"
   style="
     {% render 'spacing-style', settings: block.settings %}
     {% render 'size-style', settings: block.settings %}
@@ -15,6 +15,14 @@
       --style-border-width-inputs: {{ block.settings.border_width }}px;
       --style-border-radius-inputs: {{ block.settings.border_radius }}px;
     {% endif %}
+    {% comment %} Desktop (990px and up); empty = same as mobile {% endcomment %}
+    {% if block.settings.input_height_desktop != blank %}--contact-input-height-desktop: {{ block.settings.input_height_desktop }}px;{% endif %}
+    {% if block.settings.input_font_size_desktop != blank %}--contact-font-size-desktop: {{ block.settings.input_font_size_desktop }}px;{% endif %}
+    {% if block.settings.input_radius_desktop != blank %}--contact-input-radius-desktop: {{ block.settings.input_radius_desktop }}px;{% endif %}
+    {% if block.settings.textarea_height_desktop != blank %}--contact-textarea-height-desktop: {{ block.settings.textarea_height_desktop }}px;{% endif %}
+    {% if block.settings.field_gap_desktop != blank %}--contact-field-gap-desktop: {{ block.settings.field_gap_desktop }}px;{% endif %}
+    {% if block.settings.button_height_desktop != blank %}--contact-button-height-desktop: {{ block.settings.button_height_desktop }}px;{% endif %}
+    {% if block.settings.button_radius_desktop != blank %}--contact-button-radius-desktop: {{ block.settings.button_radius_desktop }}px;{% endif %}
   "
   {{ block.shopify_attributes }}
 >
@@ -355,6 +363,59 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_labels_desktop",
+      "label": "Show field labels (desktop)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_fields_desktop",
+      "label": "One field per row (desktop)",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "input_height_desktop",
+      "label": "Field height (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "input_font_size_desktop",
+      "label": "Field and label font size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "input_radius_desktop",
+      "label": "Field corner radius (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "textarea_height_desktop",
+      "label": "Message box height (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "field_gap_desktop",
+      "label": "Space between fields (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "button_height_desktop",
+      "label": "Button height (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "button_radius_desktop",
+      "label": "Button corner radius (desktop, px)",
+      "info": "Use 999 for a pill shape."
     }
   ],
   "presets": [

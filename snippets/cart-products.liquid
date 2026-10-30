@@ -422,6 +422,9 @@
     endif
   endif
 
+  # Somna Halloween sale (2026-10-28): every line crosses out the variant price. One-time lines show
+  # item.final_price (after the 40% automatic discount), Autoship lines the plan price (above).
+
   # Multiply per-unit price by quantity for total line display
   # Alternatively, item.final_line_price handles total active discounted line price natively
   assign total_active_price = active_unit_price | times: item.quantity

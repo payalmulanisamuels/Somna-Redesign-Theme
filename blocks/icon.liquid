@@ -11,6 +11,17 @@
   {% endstyle %}
 {% endif %}
 
+{%- comment -%} Desktop width (990px and up); the icon's width is written inline, so this needs !important {%- endcomment -%}
+{% if block_settings.width_desktop != blank %}
+  {% style %}
+    @media screen and (min-width: 990px) {
+      .icon-block-{{ block.id }} {
+        width: {{ block_settings.width_desktop }}px !important;
+      }
+    }
+  {% endstyle %}
+{% endif %}
+
 {% capture icon %}
   {% render 'icon-or-image',
     icon: block_settings.icon,
@@ -326,6 +337,16 @@
       "id": "icon_color",
       "label": "t:settings.color",
       "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "number",
+      "id": "width_desktop",
+      "label": "Width (desktop, px)"
     }
   ],
   "presets": [

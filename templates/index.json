@@ -110,37 +110,46 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 0,
+            "padding-block-start": 20,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "padding-block-start-desktop": 95,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "text_VDbt3L": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>THE somna SLEEP SYSTEM</p>",
+                "text": "<p>THE somna. HALLOWEEN SALE</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
+                "font_size": "1rem",
                 "font_size_tablet": "",
                 "font_size_desktop": "",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "#ffffff",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 8,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -148,56 +157,129 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2><strong>Calm nights.</strong><br/><strong>Clearer </strong><em>mornings</em>.</h2>",
+                "text": "<h1>NO TRICKS.<br/>ONLY TREATS.</h1>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
-                "font": "var(--font-body--family)",
+                "font": "var(--font-display--family)",
                 "font_size": "2rem",
+                "font_size_tablet": "",
+                "font_size_desktop": "4.5rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#ff9845",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 4,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
+              },
+              "blocks": {}
+            },
+            "text_FRGnxP": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>UP TO</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-display--family)",
+                "font_size": "1rem",
+                "font_size_tablet": "",
+                "font_size_desktop": "2rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
+              },
+              "blocks": {}
+            },
+            "text_hw70off": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>50% OFF</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-display-spray--family)",
+                "font_size": "7.5rem",
                 "font_size_tablet": "",
                 "font_size_desktop": "",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
-                "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "wrap": "nowrap",
+                "text_color": "#ffffff",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 2,
+                "padding-block-end": 4,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": "",
+                "padding-block-start-desktop": 0
               },
               "blocks": {}
             },
             "text_Lqf6bA": {
               "type": "text",
               "name": "t:names.text",
-              "disabled": true,
               "settings": {
-                "text": "<p>A simple, drug-free system<br/>for deeper, more restorative sleep.</p>",
+                "text": "<p>On all products. Ends Oct 31</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
-                "font_size": "0.875rem",
+                "font_size": "0.75rem",
                 "font_size_tablet": "",
                 "font_size_desktop": "",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "text_color": "#0a1a4a",
+                "text_color": "#ffffff",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 9,
+                "padding-block-end": 20,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": "",
+                "padding-block-end-desktop": 74
               },
               "blocks": {}
             },
@@ -205,21 +287,55 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Shop the Breathe Bundle",
-                "link": "/products/sleep-bundle?variant=52629425979623",
+                "label": "Shop the sale →",
+                "link": "shopify://pages/halloween-sale",
                 "open_in_new_tab": false,
                 "style_class": "button",
-                "custom_button_background": "#071a4b",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
+                "custom_button_background": "#ffffff",
+                "custom_button_text": "#ff7300",
+                "custom_button_border": "#ffffff",
                 "link_text_color": "",
                 "font_size": "",
                 "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_desktop": "2rem",
                 "width": "fit-content",
-                "custom_width": 100,
+                "custom_width": 52,
                 "width_mobile": "fit-content",
-                "custom_width_mobile": 100
+                "custom_width_mobile": 100,
+                "icon": "shopify://shop_images/pumpkin-icon.png",
+                "icon_color": "original"
+              },
+              "blocks": {}
+            },
+            "text_hwperks": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Free shipping · 30-Night guarantee</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "font_size_tablet": "",
+                "font_size_desktop": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "#ffb085",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 10,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             }
@@ -227,8 +343,11 @@
           "block_order": [
             "text_VDbt3L",
             "text_eT6TMz",
+            "text_FRGnxP",
+            "text_hw70off",
             "text_Lqf6bA",
-            "button_6EgajN"
+            "button_6EgajN",
+            "text_hwperks"
           ]
         }
       },
@@ -236,27 +355,28 @@
         "group_47iMdX"
       ],
       "custom_css": [
-        ".size-style.button {padding: 8px 12px; font-size: 14px; border: 1px solid #fff;}"
+        ".size-style.button {padding: 8px 12px; font-size: 14px; border: 1px solid #fff;}",
+        "@media (min-width: 768px) {.size-style.button {padding: 10px 22px; font-size: 18px; border: 3px solid #fff; }}"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/Hero_SOMNA_Desktop_without_text_1.png",
+        "image_1": "shopify://shop_images/somna-halloween-hero-desktop.png",
         "media_type_2": "image",
-        "stack_media_on_mobile": true,
+        "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/Hero_SOMNA_Mobile_without_text_1.png",
+        "image_1_mobile": "shopify://shop_images/somna-halloween-hero-mobile-optmize.webp",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
+        "vertical_alignment": "center",
         "align_baseline": true,
         "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
+        "vertical_alignment_flex_direction_column": "center",
         "gap": 24,
         "section_width": "page-width",
         "section_height": "full-screen",
@@ -268,6 +388,7 @@
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
         "reflection_opacity": 75,
+        "button_icon_enable": false,
         "padding-block-start": 45,
         "padding-block-end": 35
       }
@@ -311,14 +432,18 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "icon_YMW4Jk": {
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/Gift.png",
+                "image_upload": "shopify://shop_images/Gift_9b893c20-4b7e-45bb-b826-ccd957775598.png",
                 "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
@@ -362,7 +487,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "text_8jxQPc": {
@@ -388,7 +517,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -452,14 +585,18 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "icon_kGqw7f": {
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/guarantee.png",
+                "image_upload": "shopify://shop_images/gurantee.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -503,7 +640,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "text_zjGAzP": {
@@ -529,7 +670,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -593,14 +738,18 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "icon_rxWgFC": {
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/ship.png",
+                "image_upload": "shopify://shop_images/Truck.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -644,7 +793,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "text_mznam6": {
@@ -670,7 +823,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -734,14 +891,18 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "icon_ziTzc4": {
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/secure.png",
+                "image_upload": "shopify://shop_images/payment.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -785,7 +946,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "text_BGY8fg": {
@@ -811,7 +976,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -842,7 +1011,6 @@
       ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "bg_image": "shopify://shop_images/icon_bg.svg",
         "content_direction": "row",
         "vertical_on_mobile": false,
         "horizontal_alignment": "space-between",
@@ -855,7 +1023,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#ffffff",
+        "background_color": "#ff9845",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -867,17 +1035,21 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 15,
+        "padding-block-end": 15,
+        "stack_desktop": false,
+        "align_items_desktop": "",
+        "content_width_desktop": ""
       }
     },
-    "somna_shop_essentials_cDVtK3": {
+    "somna_shop_essentials_AhrNe9": {
       "type": "somna-shop-essentials",
       "blocks": {
-        "product_card_nrk8XH": {
+        "product_card_Wtc9my": {
           "type": "product_card",
           "settings": {
             "product": "nasal-strips",
+            "image": "shopify://shop_images/somna-halloween-card-strips-optimized.webp",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -885,10 +1057,11 @@
             "link": ""
           }
         },
-        "product_card_UjpHV4": {
+        "product_card_WhXmqi": {
           "type": "product_card",
           "settings": {
             "product": "mouth-tape",
+            "image": "shopify://shop_images/somna-halloween-card-tape-optimized.webp",
             "title": "",
             "price_prefix": "From",
             "subtext": "Subscribe & Save",
@@ -898,23 +1071,27 @@
         }
       },
       "block_order": [
-        "product_card_nrk8XH",
-        "product_card_UjpHV4"
+        "product_card_Wtc9my",
+        "product_card_WhXmqi"
       ],
       "name": "Shop the essentials",
       "settings": {
         "heading": "Shop the essentials",
+        "eyebrow": "NO TRICK . ONLY TREATS",
+        "title_icon": "shopify://shop_images/somna-halloween-title-pumpkin.png",
+        "badge_text": "UP TO 50% OFF",
+        "halloween_decor": true,
         "bg_color": "#ffffff",
-        "padding_top_mobile": 0,
+        "padding_top_mobile": 18,
         "padding_bottom_mobile": 30,
-        "padding_top": 0,
-        "padding_bottom": 40
+        "padding_top": 40,
+        "padding_bottom": 50
       }
     },
-    "featured_bundle_grid_6jFGFr": {
+    "featured_bundle_grid_gb9fCH": {
       "type": "featured-bundle-grid",
       "blocks": {
-        "bundle_gCFgge": {
+        "bundle_BPHXgH": {
           "type": "bundle",
           "settings": {
             "product": "sleep-bundle",
@@ -926,7 +1103,7 @@
             "button_label": "Shop now"
           }
         },
-        "bundle_6MqjwE": {
+        "bundle_Vge79H": {
           "type": "bundle",
           "settings": {
             "product": "the-colour-set",
@@ -938,33 +1115,32 @@
             "button_label": "Shop now"
           }
         },
-        "bundle_LHB8m9": {
+        "bundle_L4B3MH": {
           "type": "bundle",
           "settings": {
             "product": "season-bundle",
             "tag": "",
             "is_featured": true,
             "custom_title": "Three months, Black Strips + Black Tape",
-            "custom_image": "shopify://shop_images/season-bundle.png",
+            "custom_image": "shopify://shop_images/season-bundle-optimized.webp",
             "subtext": "Subscribe & Save",
             "button_label": "Shop now"
           }
         }
       },
       "block_order": [
-        "bundle_gCFgge",
-        "bundle_6MqjwE",
-        "bundle_LHB8m9"
-      ],
-      "custom_css": [
-        "@media (min-width: 768px) {.bundle-section__grid {padding-bottom: 100px;}}"
+        "bundle_BPHXgH",
+        "bundle_Vge79H",
+        "bundle_L4B3MH"
       ],
       "name": "Featured Bundle Grid",
       "settings": {
         "heading": "Or save with a bundle",
         "bg_color": "#ffffff",
         "padding_top": 0,
-        "padding_bottom": 45
+        "padding_bottom": 70,
+        "padding_bottom_tablet": 100,
+        "padding_bottom_desktop": 150
       }
     },
     "custom_cards_slider_pyJahK": {
@@ -1015,27 +1191,31 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Small essentials. Thoughtfully made.</p>",
+            "text": "<h2>Small essentials. Thoughtfully made.</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
+            "type_preset": "custom",
+            "font": "var(--font-display--family)",
             "font_size": "1.125rem",
             "font_size_tablet": "",
             "font_size_desktop": "",
-            "line_height": "normal",
+            "line_height": "tight",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#0a1a4a",
+            "text_color": "#000000",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -1076,7 +1256,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "group_aP6tjC": {
@@ -1115,14 +1299,18 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "icon_ELMiEM": {
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon1-ritual.png",
+                    "image_upload": "shopify://shop_images/leaf.svg",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1140,8 +1328,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1.25rem",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1153,7 +1341,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 },
@@ -1161,15 +1353,15 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Two products, <br/>applied nightly,<br/>no machines, no<br/>learning curve.</p>",
+                    "text": "<p>Two products,&nbsp;<br/>applied nightly,<br/>no machines, no<br/>learning curve.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-accent--family)",
                     "font_size": "0.5rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1181,7 +1373,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1241,14 +1437,18 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "icon_zXq8DA": {
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon2-drug.png",
+                    "image_upload": "shopify://shop_images/Sugar_Free.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1266,8 +1466,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1.25rem",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1279,7 +1479,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 },
@@ -1287,15 +1491,15 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Nothing to swallow, <br/>nothing invasive. <br/>Just a strip and a<br/>piece of tape.</p>",
+                    "text": "<p>Nothing to swallow,&nbsp;<br/>nothing invasive.&nbsp;<br/>Just a strip and a<br/>piece of tape.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1307,7 +1511,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1367,14 +1575,18 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "icon_kXmBPb": {
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon3-subscription.png",
+                    "image_upload": "shopify://shop_images/Toggle_On.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1392,8 +1604,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1.25rem",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1405,7 +1617,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 },
@@ -1413,15 +1629,15 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Skip, pause, or <br/>cancel anytime.<br/>No commitment, no<br/>calls.</p>",
+                    "text": "<p>Skip, pause, or&nbsp;<br/>cancel anytime.<br/>No commitment, no<br/>calls.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1433,7 +1649,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1493,14 +1713,18 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "stack_desktop": false,
+                "align_items_desktop": "",
+                "align_page_width_desktop": false,
+                "border_corners_desktop": "all"
               },
               "blocks": {
                 "icon_pLyVXB": {
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/icon4-guarantee.png",
+                    "image_upload": "shopify://shop_images/Guarantee_d420e3d3-1cf6-4dd7-a0d4-b573f0f629fb.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1518,8 +1742,8 @@
                     "type_preset": "custom",
                     "font": "var(--font-heading--family)",
                     "font_size": "0.625rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1.25rem",
+                    "font_size_desktop": "1.25rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1531,7 +1755,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 },
@@ -1539,15 +1767,15 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>30 Nights,<br/>counted from <br/>delivery, on every<br/>product.</p>",
+                    "text": "<p>30 Nights,<br/>counted from&nbsp;<br/>delivery, on every<br/>product.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.5rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "1rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1559,7 +1787,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1606,7 +1838,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         }
@@ -1616,10 +1852,12 @@
         "group_VC3f3X",
         "text_LNDHbX"
       ],
+      "custom_css": [
+        ".wave-container.bottom {bottom: -25px;}",
+        "@media screen and (min-width: 750px) {.wave-container.bottom {bottom: -95px; }}"
+      ],
       "name": "t:names.icons_with_text",
       "settings": {
-        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
-        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -1632,7 +1870,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#faf2df",
+        "background_color": "#ffffff",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1644,8 +1882,13 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 0,
+        "padding-block-end": 48,
+        "padding-block-start-desktop": 0,
+        "padding-block-end-desktop": 0,
+        "stack_desktop": false,
+        "align_items_desktop": "",
+        "content_width_desktop": ""
       }
     },
     "layered_image_with_text_LEPfjJ": {
@@ -1655,7 +1898,7 @@
           "type": "_layered-slide",
           "settings": {
             "media_type_1": "image",
-            "image_1": "shopify://shop_images/breath-banner.png",
+            "image_1": "shopify://shop_images/simple-banner-optimized.webp",
             "content_direction": "column",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
@@ -1663,7 +1906,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-end",
-            "gap": 10,
+            "gap": 0,
             "background_color": "",
             "toggle_overlay": false,
             "overlay_color": "#00000026",
@@ -1686,8 +1929,8 @@
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_tablet": "1.5rem",
+                "font_size_desktop": "2.5rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1699,7 +1942,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -1707,15 +1954,15 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>somna Strips gently open nasal<br/>passages, while Tape encourages&nbsp;<br/>nasal breathing as you sleep.&nbsp;<br/>Together, they support one&nbsp;<br/>simple nightly habit.</p>",
+                "text": "<p>somna Strips gently open nasal passages,<br/>while Tape encourages&nbsp;nasal&nbsp;breathing as you sleep. &nbsp;Together, they support one&nbsp;simple nightly habit.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "0.625rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "",
+                "font_size_tablet": "1rem",
+                "font_size_desktop": "1.125rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1727,7 +1974,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             }
@@ -1742,18 +1993,21 @@
         "layered_slide_jqmf8i"
       ],
       "custom_css": [
-        ".wave-container.bottom {background-position: top; bottom: 0;}"
+        ".wave-container.bottom {background-position: top; bottom: 0;}",
+        ".layered-slideshow-section {overflow: hidden;}",
+        ".layered-slideshow__container,.layered-slideshow__panels,.layered-slideshow__panel-content {overflow: visible;}",
+        ".layered-slideshow-section {overflow: hidden;}",
+        "@media screen and (max-width: 749px) {.layered-slideshow__container[size=\"auto\"] {position: relative; z-index: 111; }}"
       ],
       "name": "Layered Image with Text",
       "settings": {
-        "bottom_wave_image": "shopify://shop_images/bundle-curved.svg",
         "section_width": "full-width",
         "height": "auto",
         "corner_radius": 0,
-        "border_width": 1,
+        "border_width": 0,
         "drop_shadow": false,
         "background_color": "",
-        "padding-block-start": 0,
+        "padding-block-start": 2,
         "padding-block-end": 0
       }
     },
@@ -1764,16 +2018,17 @@
         "product": "sleep-bundle",
         "badge_text": "3 Colors",
         "show_badge_icon": true,
+        "image": "shopify://shop_images/somna_breathe_blue_final-optimized.webp",
         "show_rating": true,
         "title": "The Sleep Bundle",
         "subtitle": "Strips + Tape in Blue, Red or Black.",
         "price_prefix": "From",
         "price_override": "",
         "price_label": "Subscribe & Save",
-        "per_night_text": "3+1 sets. $1.46/night",
+        "per_night_text": "3+1 sets. $0.82/night",
         "button_label": "See the Breathe Bundle",
         "button_variant": "Breathe",
-        "section_bg": "#ffffff",
+        "section_bg": "rgba(0,0,0,0)",
         "card_bg": "#ffffff",
         "border_color": "#0a1a4a",
         "accent_color": "#0b57e3",
@@ -1781,7 +2036,7 @@
         "muted_color": "#5b6b94",
         "button_bg": "#0a1a4a",
         "button_text_color": "#ffffff",
-        "padding_top": 0,
+        "padding_top": 24,
         "padding_bottom": 0
       }
     },
@@ -1812,7 +2067,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "font_desktop": "",
+            "font_weight_desktop": "",
+            "line_height_desktop": "",
+            "letter_spacing_desktop": ""
           },
           "blocks": {}
         },
@@ -1834,7 +2093,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "divider_last_desktop": false
           },
           "blocks": {
             "accordion_row_Ebj6H3": {
@@ -1850,14 +2110,14 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Sleep Bundle comes in three colors — Breathe (Blue), Bold (Red), and Night (Black) — same price, same value, just pick your colour. The Colour Set includes all three colors of Strips only, no Tape. Season Bundle is a three-month supply in Black.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "width": "fit-content",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.75rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "0.875rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1869,7 +2129,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1891,14 +2155,14 @@
                   "type": "text",
                   "settings": {
                     "text": "<p>Yes — both are available as singles if you'd rather start with one.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "width": "fit-content",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.75rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "0.875rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1910,7 +2174,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1933,14 +2201,14 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>It delivers automatically on your chosen schedule at 10% off, and you can skip, pause, or cancel anytime.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "text": "<p>It delivers automatically on your chosen schedule at up to 50% off, and you can skip, pause, or cancel anytime.</p>",
+                    "width": "fit-content",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.75rem",
-                    "font_size_tablet": "",
+                    "font_size": "0.875rem",
+                    "font_size_tablet": "1rem",
                     "font_size_desktop": "",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1953,7 +2221,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -1977,14 +2249,14 @@
                   "name": "t:names.text",
                   "settings": {
                     "text": "<p>We currently ship within the United States only.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "width": "fit-content",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.75rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "0.875rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1996,7 +2268,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -2020,14 +2296,14 @@
                   "name": "t:names.text",
                   "settings": {
                     "text": "<p>Every product is covered by our 30-Night Money-Back Guarantee, counted from delivery</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "width": "fit-content",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "custom",
                     "font": "var(--font-body--family)",
                     "font_size": "0.75rem",
-                    "font_size_tablet": "",
-                    "font_size_desktop": "",
+                    "font_size_tablet": "0.875rem",
+                    "font_size_desktop": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -2039,7 +2315,11 @@
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "padding-inline-end": 0,
+                    "font_desktop": "",
+                    "font_weight_desktop": "",
+                    "line_height_desktop": "",
+                    "letter_spacing_desktop": ""
                   },
                   "blocks": {}
                 }
@@ -2089,7 +2369,10 @@
         "border_color": "",
         "border_radius": 0,
         "padding-block-start": 30,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "stack_desktop": false,
+        "align_items_desktop": "",
+        "content_width_desktop": "90rem"
       }
     },
     "footer_m9NzUG": {
@@ -2131,7 +2414,11 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "stack_desktop": false,
+            "align_items_desktop": "",
+            "align_page_width_desktop": false,
+            "border_corners_desktop": "all"
           },
           "blocks": {
             "text_LWt8Pz": {
@@ -2144,10 +2431,10 @@
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
                 "font_size": "1.125rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
+                "font_size_tablet": "1.5rem",
+                "font_size_desktop": "3rem",
+                "line_height": "tight",
+                "letter_spacing": "tight",
                 "case": "none",
                 "wrap": "pretty",
                 "text_color": "{{ settings.color_palette.background }}",
@@ -2157,7 +2444,11 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -2171,9 +2462,9 @@
                 "type_preset": "custom",
                 "font": "var(--font-body--family)",
                 "font_size": "0.625rem",
-                "font_size_tablet": "",
-                "font_size_desktop": "",
-                "line_height": "normal",
+                "font_size_tablet": "1.5rem",
+                "font_size_desktop": "1.25rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
@@ -2182,9 +2473,13 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 7,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "font_desktop": "",
+                "font_weight_desktop": "",
+                "line_height_desktop": "",
+                "letter_spacing_desktop": ""
               },
               "blocks": {}
             },
@@ -2254,8 +2549,8 @@
     "custom_circle_categories_DqUCEF",
     "hero_jVaWmY",
     "section_zELtyM",
-    "somna_shop_essentials_cDVtK3",
-    "featured_bundle_grid_6jFGFr",
+    "somna_shop_essentials_AhrNe9",
+    "featured_bundle_grid_gb9fCH",
     "custom_cards_slider_pyJahK",
     "section_ibM3ft",
     "layered_image_with_text_LEPfjJ",

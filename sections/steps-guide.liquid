@@ -57,6 +57,37 @@
  
 {% endif %}
 
+{%- comment -%} Desktop settings (990px and up); empty = same as mobile {%- endcomment -%}
+{% style %}
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} {
+      {% if section.settings.content_width_desktop != blank %}--page-content-width: {{ section.settings.content_width_desktop }}; --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));{% endif %}
+    }
+    {% if section.settings.padding_top_desktop != blank %}#shopify-section-{{ section.id }} .steps-section { padding-top: {{ section.settings.padding_top_desktop }}px; }{% endif %}
+    {% if section.settings.padding_bottom_desktop != blank %}#shopify-section-{{ section.id }} .steps-section { padding-bottom: {{ section.settings.padding_bottom_desktop }}px; }{% endif %}
+    {% if section.settings.image_size_desktop != blank %}
+      #shopify-section-{{ section.id }} .step-image-wrapper img { width: {{ section.settings.image_size_desktop }}px; height: auto; max-width: none; max-height: none; }
+    {% endif %}
+    {% if section.settings.title_size_desktop != blank %}
+      #shopify-section-{{ section.id }} :is(.step-title, .step-title > *) { font-size: {{ section.settings.title_size_desktop }}px; line-height: 1.5; }
+      #shopify-section-{{ section.id }} .step-title { max-inline-size: 13.5em; }
+    {% endif %}
+    {% if section.settings.note_size_desktop != blank %}
+      #shopify-section-{{ section.id }} .steps-subheading-bottom { font-size: {{ section.settings.note_size_desktop }}px; line-height: 1.5; }
+    {% endif %}
+    {% if section.settings.note_width_desktop != blank %}
+      #shopify-section-{{ section.id }} .steps-subheading-bottom { max-width: {{ section.settings.note_width_desktop }}px; margin-inline: auto; }
+    {% endif %}
+    {% if section.settings.arrow_size_desktop != blank %}
+      #shopify-section-{{ section.id }} .step-image-wrapper::before,
+      #shopify-section-{{ section.id }} .step-image-wrapper::after { width: {{ section.settings.arrow_size_desktop }}px; height: {{ section.settings.arrow_size_desktop }}px; }
+    {% endif %}
+    {% if section.settings.image_gap_desktop != blank %}
+      #shopify-section-{{ section.id }} .step-image-wrapper { margin-bottom: {{ section.settings.image_gap_desktop }}px; }
+    {% endif %}
+  }
+{% endstyle %}
+
 {% schema %}
 {
   "name": "Steps Guide",
@@ -101,6 +132,75 @@
       "id": "subheading_bottom",
       "label": "Bottom Subheading",
       "default": "Follow the directions on your pack."
+    },
+    {
+      "type": "header",
+      "content": "Desktop (990px and up)",
+      "info": "Leave empty to use the mobile value."
+    },
+    {
+      "type": "select",
+      "id": "content_width_desktop",
+      "label": "Content width (desktop)",
+      "options": [
+        {
+          "value": "",
+          "label": "Same as mobile"
+        },
+        {
+          "value": "65rem",
+          "label": "Narrow (1040px)"
+        },
+        {
+          "value": "80rem",
+          "label": "Wide (1280px)"
+        },
+        {
+          "value": "90rem",
+          "label": "Extra wide (1440px)"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "number",
+      "id": "padding_top_desktop",
+      "label": "Top padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "padding_bottom_desktop",
+      "label": "Bottom padding (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "image_size_desktop",
+      "label": "Step image size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "image_gap_desktop",
+      "label": "Space under step image (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "title_size_desktop",
+      "label": "Step text size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "note_size_desktop",
+      "label": "Bottom note size (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "note_width_desktop",
+      "label": "Bottom note max width (desktop, px)"
+    },
+    {
+      "type": "number",
+      "id": "arrow_size_desktop",
+      "label": "Arrow size (desktop, px)"
     }
   ],
   "blocks": [

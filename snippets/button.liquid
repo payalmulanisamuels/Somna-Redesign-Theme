@@ -26,12 +26,21 @@
     {% if block_settings.font_size != blank %}button-font-size{% endif %}
     {% if block_settings.font_size_tablet != blank %}button-font-size-tablet{% endif %}
     {% if block_settings.font_size_desktop != blank %}button-font-size-desktop{% endif %}
+    {% if block_settings.height_desktop != blank %}button-height-desktop{% endif %}
+    {% if block_settings.padding_inline_desktop != blank %}button-padding-desktop{% endif %}
+    {% if block_settings.button_radius_desktop != blank %}button-radius-desktop{% endif %}
+    {% if block_settings.icon != blank %}button--has-icon{% if block_settings.icon_size != blank %} button--icon-size{% endif %}{% if block_settings.icon_color == 'white' or block_settings.icon_color == 'black' %} button--icon-{{ block_settings.icon_color }}{% endif %}{% endif %}
   "
   style="
     {% render 'size-style', settings: block_settings %}
     {% if block_settings.font_size != blank %}--button-font-size: {{ block_settings.font_size }};{% endif %}
     {% if block_settings.font_size_tablet != blank %}--button-font-size-tablet: {{ block_settings.font_size_tablet }};{% endif %}
     {% if block_settings.font_size_desktop != blank %}--button-font-size-desktop: {{ block_settings.font_size_desktop }};{% endif %}
+    {% if block_settings.height_desktop != blank %}--button-height-desktop: {{ block_settings.height_desktop }}px;{% endif %}
+    {% if block_settings.padding_inline_desktop != blank %}--button-padding-desktop: {{ block_settings.padding_inline_desktop }}px;{% endif %}
+    {% if block_settings.button_radius_desktop != blank %}--button-radius-desktop: {{ block_settings.button_radius_desktop }}px;{% endif %}
+    {% if block_settings.icon != blank %}--button-icon: url('{{ block_settings.icon | image_url: width: 160 }}');{% endif %}
+    {% if block_settings.icon != blank and block_settings.icon_size != blank %}--button-icon-size: {{ block_settings.icon_size }}px;{% endif %}
   "
   {%- if block_settings.open_in_new_tab -%}
     target="_blank"
@@ -44,6 +53,40 @@
 {%  endif %}
 
 {% stylesheet %}
+  /* Button icon (block setting "Icon"): drawn before the label. It replaces any icon that
+     section CSS already puts there (e.g. the hero's pumpkin), so each button can have an
+     icon that suits its own colour. Size and spacing come from the existing button styles,
+     or from "Icon size (px)" when that is filled in. */
+  .size-style.button--has-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  .size-style.button--has-icon::before {
+    content: '';
+    flex: none;
+    width: var(--button-icon-size, 1.6em);
+    height: var(--button-icon-size, 1.6em);
+    background: var(--button-icon) center / contain no-repeat !important;
+    filter: none !important;
+  }
+
+  /* "Icon colour": White / Black turns the whole icon one colour */
+  .size-style.button--has-icon.button--icon-white::before {
+    filter: brightness(0) invert(1) !important;
+  }
+
+  .size-style.button--has-icon.button--icon-black::before {
+    filter: brightness(0) !important;
+  }
+
+  .size-style.button--icon-size::before {
+    width: var(--button-icon-size) !important;
+    height: var(--button-icon-size) !important;
+  }
+
   /* Responsive button font size (mobile first) */
   .size-style.button-font-size {
     font-size: var(--button-font-size);

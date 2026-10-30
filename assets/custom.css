@@ -169,11 +169,11 @@ search-button.search-action.search-action--hidden-on-menu {
     max-height: 20px;
 } */
 .wave-container.bottom {
-    bottom: -24px;
+    bottom: -25px;
     background-position: bottom;
 }
 .wave-container.top {
-    top: -18px;
+    top: -24px;
 }
 .wave-container.top img {
     object-position: top;
@@ -329,12 +329,9 @@ li.menu__item.paragraph a {
   font-weight: 400;
   line-height: 12px; /* 150% */
   max-width: 141px;
-    min-height: 25px;
 }
 
-.bundle-card--featured .bundle-subtext{
-    min-height: auto;
-}
+
 .bundle-card__price {
   font-size: 11px;
   font-weight: 800;
@@ -388,9 +385,7 @@ li.menu__item.paragraph a {
 .bundle-card--featured .bundle-card__content-wrapper {
     flex-wrap: wrap;
 }
-.bundle-card--featured .bundle-card__price {
-  font-size: 14px;
-}
+
 
 /* Feature Bundle section*/
 
@@ -434,7 +429,7 @@ li.menu__item.paragraph a {
   display: flex;
   gap: 5px;
 }
-.hz-card {
+.hz-card ,.hz-card-outer{
   flex: 0 0 300px;
   max-width: 300px;
   aspect-ratio: 2 / 1;  
@@ -512,27 +507,6 @@ li.menu__item.paragraph a {
 }
 
 /* Dot navigation */
-.hz-slider-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 30px;
-}
-.hz-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid #4a5c68;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
-}
-.hz-dot.is-active {
-  background-color: #4a5c68;
-  transform: scale(1.1);
-}
 /* Small Product */
 /* Signup Form*/
 
@@ -607,14 +581,6 @@ height: 100%;
     padding: 10px 40px;
 }
 
-.hero__container .button-custom:after {
-    content: '';
-    background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEzIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xMi4zNTM2IDQuMDM1NTZDMTIuNTQ4OCAzLjg0MDMgMTIuNTQ4OCAzLjUyMzcyIDEyLjM1MzYgMy4zMjg0NUw5LjE3MTU3IDAuMTQ2NDczQzguOTc2MzEgLTAuMDQ4Nzg5MyA4LjY1OTczIC0wLjA0ODc4OTMgOC40NjQ0NyAwLjE0NjQ3M0M4LjI2OTIgMC4zNDE3MzUgOC4yNjkyIDAuNjU4MzE4IDguNDY0NDcgMC44NTM1OEwxMS4yOTI5IDMuNjgyMDFMOC40NjQ0NyA2LjUxMDQzQzguMjY5MiA2LjcwNTcgOC4yNjkyIDcuMDIyMjggOC40NjQ0NyA3LjIxNzU0QzguNjU5NzMgNy40MTI4IDguOTc2MzEgNy40MTI4IDkuMTcxNTcgNy4yMTc1NEwxMi4zNTM2IDQuMDM1NTZaTTAgMy42ODIwMVY0LjE4MjAxSDEyVjMuNjgyMDFWMy4xODIwMUgwVjMuNjgyMDFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
-    width: 12px;
-    background-repeat: no-repeat;
-    background-size: 12px;
-    background-position: center;
-}
 /* Hero section */
 
 /* Cart Drawer */
@@ -1056,22 +1022,6 @@ h2.upsell_heading {
     gap: 2px;
     min-width: 0;
 }
-.hz-minicart-upsell__stars {
-    position: relative;
-    align-self: flex-start;
-    color: #E0E0E0;
-    font-size: 13px;
-    letter-spacing: 2px;
-    line-height: 1;
-}
-.hz-minicart-upsell__stars::before {
-    content: "★★★★★";
-    position: absolute;
-    inset: 0;
-    width: var(--hz-rating, 100%);
-    overflow: hidden;
-    color: #F1C644;
-}
 .hz-minicart-upsell__title {
     margin: 0;
     color: #0A1A4A;
@@ -1379,9 +1329,13 @@ html,
 }
 .somna-drawer-section {
     padding: 16px 16px 40px 16px;
-    border-top: 1px solid rgba(10, 26, 74, 0.11);
     width: 100%;
 }
+a#HeaderDrawer-sale {
+    color: #EF5400;
+}
+
+a#HeaderDrawer-sale svg path {stroke: #EF5400 !important;}
 .somna-products-grid {
     display: grid;
     grid-template-columns: calc(50% - 8px) calc(50% - 8px);
@@ -1397,7 +1351,6 @@ h4.somna-product-title {
     font-family: var(--headfont);
     margin-bottom: 0;
 }
-
 span.somna-product-price {
     color: rgba(10, 26, 74, 0.60);
     font-size: 13px;
@@ -1689,7 +1642,7 @@ a.somna-view-all {
   }
 
   .sleep-card-subtitle {
-    margin-bottom: 14px;
+    margin-bottom: 0px;
     color: #0B57E3;
     font-family: Inter;
     font-size: 14px;
@@ -1712,16 +1665,18 @@ a.somna-view-all {
     height: 100%;
     object-fit: cover;
   }
-
+  .sleep-warap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
   .sleep-card-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
     background: #ffffff;
     color: #111827;
-    font-size: 11px;
+    font-size: 7px;
     font-weight: 700;
-    padding: 6px 10px;
+    padding: 6px 6px;
     border-radius: 50px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     text-transform: uppercase;
@@ -1806,12 +1761,6 @@ a.somna-view-all {
   color: #0A1A4A;
   padding: 20px 0;
 }
-.steps-subheading-top {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  letter-spacing: 0.02em;
-}
 .steps-grid {
   display: flex;
   justify-content: space-between;
@@ -1884,55 +1833,1311 @@ a.somna-view-all {
 }
 /* How to use*/
 
-/* How it works*/
-.hz-hiw-section {
-  position: relative;
-  padding: 45px 0 30px 0px;
+ 
+
+/* =====================================================================
+   HALLOWEEN 2026 — homepage redesign (Figma 3297:6613 mobile / 3297:5520 desktop)
+   Base (mobile-first) rules. Tablet/desktop sizes live in somna-home-desktop.css.
+   Decorations are pointer-events: none and aria-hidden. Only the homepage is
+   affected, except the header (announcement bar + logo), which is sitewide
+   by request.
+   ===================================================================== */
+:root {
+  --font-display--family: "Rubik Wet Paint", "Impact", "Arial Black", sans-serif;
+  --font-display--weight: 400;
+  --font-display--style: normal;
+  --font-display-spray--family: "Rubik Spray Paint", "Impact", "Arial Black", sans-serif;
+  --font-display-spray--weight: 400;
+  --font-display-spray--style: normal;
+  --font-badge--family: "Bigshot One", Georgia, serif;
+  --hw-orange: #ff9845;
+  --hw-orange-text: #ef5400;
+  --hw-navy: #0a1a4a;
+  --hw-web-left: url("/cdn/shop/files/somna-halloween-web-spider.png");
+  --hw-web-right: url("/cdn/shop/files/somna-halloween-web-right.png");
+  --hw-web-right-2: url("/cdn/shop/files/somna-halloween-web-right-2.png");
 }
-.hz-hiw-wave-img {
+
+/* ---------- Announcement bar (sitewide): Halloween drip font ---------- */
+.announcement-bar__slide[style*="font-display"] .announcement-bar__text {
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.announcement-bar__slide[style*="font-display"] .annoucement_bar_wrap {
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Logo (sitewide): pumpkin over the "o" + witch hat ----------
+   Positions are measured from the logo file (515 x 82 px of lettering)
+   against the Figma logo, so they scale with the logo. */
+.header-logo span[data-testid="header-logo"] {
+  position: relative;
+  display: block;
+  width: 102px;
+  max-width: none;
+  line-height: 0;
+}
+.header-logo span[data-testid="header-logo"] > .header-logo__image {
+  display: block;
+  width: 100% !important; /* overrides the logo's own size so the overlay lines up */
+  height: auto !important;
+  max-width: none;
+}
+.header-logo span[data-testid="header-logo"]::before,
+.header-logo span[data-testid="header-logo"]::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+/* pumpkin over the "o" (top layer) with a white patch hiding the "o" underneath */
+.header-logo span[data-testid="header-logo"]::before {
+  left: 14.7%;
+  top: -17%;
+  width: 18.6%;
+  height: 117%;
+  background:
+    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png?width=200") center top / 100% auto no-repeat,
+    linear-gradient(#fff, #fff) 48.6% 100% / 82.3% 85.5% no-repeat;
+}
+/* witch hat on the "a." (the hat file has a white background, multiply drops it) */
+.header-logo span[data-testid="header-logo"]::after {
+  left: 70.7%;
+  top: -200.7%;
+  width: 50%;
+  aspect-ratio: 1;
+  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913&width=300") center / contain no-repeat;
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Hero ---------- */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+  position: relative;
+  min-height: 141vw; /* Figma mobile hero: 393 x 555 */
+}
+/* the header's white wave running over the top of the photo */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 7.6vw;
+  z-index: 3;
+  pointer-events: none;
+  background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] h1 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #ff9845;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] {
+  rotate: -3deg;
+  transform-origin: left center;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"],
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] > * {
+  line-height: 0.98;
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
+  border: 2px solid #fff !important;
+  border-radius: 999px;
+  background: #fff !important;
+  color: #ff7300 !important;
+  font-family: var(--font-body--family);
+  font-weight: 600;
+  box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
+}
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button::before {
+  content: "";
+  flex: none;
+  width: 34px;
+  height: 34px;
+  background: url("/cdn/shop/files/pumpkin-icon.png?width=128") center / contain no-repeat;
+}
+
+/* ---------- Shop the essentials ---------- */
+.somna-ess.somna-ess--halloween .somna-ess__title::before,
+.somna-ess.somna-ess--halloween .somna-ess__title::after,
+.somna-ess.somna-ess--halloween .somna-ess__inner::before,
+.somna-ess.somna-ess--halloween .somna-ess__card .somna-ess__media::after {
+  content: none;
+  animation: none;
+}
+.somna-ess__web {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  mix-blend-mode: multiply; /* web files have a white background */
+}
+.somna-ess__web--left {
+  left: 0;
+  width: 122px;
+  aspect-ratio: 439 / 620;
+  background-image: var(--hw-web-left);
+  z-index: 11;
+}
+.somna-ess__web--right {
+  right: 0;
+  width: 90px;
+  aspect-ratio: 333 / 178;
+  background-image: var(--hw-web-right);
+  background-position: right top;
+}
+.somna-ess--halloween .somna-ess__inner {
+  z-index: 1;
+}
+.somna-ess__eyebrow {
+  margin: 0 0 6px;
+  font-family: var(--font-body--family);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--hw-orange-text);
+}
+.somna-ess.somna-ess--halloween .somna-ess__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 22px;
+  font-family: var(--font-display--family);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 0.98;
+  color: var(--hw-navy);
+}
+.somna-ess__title-icon {
+  flex: none;
+  width: 32px;
+  height: auto;
+  rotate: 10deg;
+}
+.somna-ess.somna-ess--halloween .somna-ess__card {
+  position: relative;
+  background: #fff2e3;
+}
+.somna-ess.somna-ess--halloween .somna-ess__price {
+  color: var(--hw-orange-text);
+}
+.somna-ess__badge {
+  position: absolute;
+  top: -20px;
+  right: -12px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  aspect-ratio: 164 / 161;
+  padding-top: 10px;
+  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/badge.png?v=1791982298&width=160") center / contain no-repeat;
+  pointer-events: none;
+}
+.somna-ess__badge-text {
+  display: block;
+  width: 72%;
+  font-family: var(--font-badge--family);
+  font-size: 11px;
+  line-height: 0.95;
+  text-align: center;
+  color: #000;
+  rotate: 4deg;
+}
+
+/* ---------- Small essentials: orange wavy edge + orange fade ---------- */
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] {
+  position: relative;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-background {
+  background-image: linear-gradient(180deg, var(--hw-orange) 0%, rgb(255 152 69 / 0) 100%);
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 1px);
+  height: 12.2vw;
+  z-index: 2;
+  pointer-events: none;
+  background: url("somna-hw-orange-edge-mobile.svg") center bottom / 100% 100% no-repeat;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+  background-image: none !important; /* draws the existing bottom wave in white instead */
+  background-color: #fff;
+  -webkit-mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+  mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+}
+#MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 1;
+  color: #000;
+}
+
+/* ---------- The Sleep Bundle: spiderwebs ---------- */
+#MainContent[data-template="index"] .somna-sleep-bundle {
+  position: relative;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::before,
+#MainContent[data-template="index"] .somna-sleep-bundle::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  mix-blend-mode: multiply;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::before {
+  left: 0;
+  width: 122px;
+  aspect-ratio: 439 / 620;
+  background-image: var(--hw-web-left);
+}
+#MainContent[data-template="index"] .somna-sleep-bundle::after {
+  right: 0;
+  width: 105px;
+  aspect-ratio: 354 / 237;
+  background-image: var(--hw-web-right-2);
+  background-position: right top;
+}
+#MainContent[data-template="index"] .somna-sleep-bundle > * {
+  position: relative;
+  z-index: 1;
+}
+/* ======================= END HALLOWEEN 2026 ======================= */
+
+/* =====================================================================
+   PRODUCT & COLLECTION PAGES — moved here on 2026-10-15 from
+   assets/product-col-custom.css and assets/somna-buybox.css (no longer loaded).
+   Same rules, same order. Every selector is prefixed with
+   :where(.template-product, .template-collection, .template-list-collections, .somna-sp)
+   so they still only apply on those pages (the body class comes from
+   layout/theme.liquid) and keep their original specificity.
+   .somna-sp (2026-10-15) = the buy boxes on the Halloween Sale page (sections/somna-sale-product.liquid).
+   Their min-width: 768px blocks moved to the top of somna-home-desktop.css.
+   ===================================================================== */
+
+/* ---- from product-col-custom.css ---- */
+ 
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .review_content{
+margin-top: 7px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid {
+    padding: 0 5px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .custom-header{
+  margin-bottom: 0;
+}
+:where(.template-collection, .template-list-collections, .somna-sp) .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
+    object-fit: cover !important;
+    border-radius: 0 0 20px 20px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details {
+    padding-bottom: 15px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-form-buttons button {
+    border-radius: 12px;
+    font-size: 15px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option--buttons legend {
+    font-size: 15px;
+    color: #0A1A4A;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label {
+    overflow: inherit !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__inner {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 0px;
+    justify-content: center;
+    padding-top: 9px;
+}
+ 
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option--equal-width-buttons .variant-option__button-label {
+    border: 1px solid #000 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__title,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__title  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__sub-price,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__sub-price  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:has(:checked) .variant-card__onetime-price,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover .variant-card__onetime-price  {
+    color: #0A1A4A;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:hover{
+    background: #C9E5FE !important;
+    color: #0A1A4A !important;
+}
+ 
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__title {
+    color: #061C42;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: var(--headfont);
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-picker__form legend {
+    display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  font-size: 7.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 14px 14px 0 0;
+  width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}
+   
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .subscription_group:has(input[type="radio"]:checked) {
+  border-color: #0E63E9 !important;
+  background:#F4FAFF;
+}
+/* Subscription box*/
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__gift {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+    color: #061C42;
+    font-family: var(--headfont);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label .variant-card__gift svg {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    text-align: center;
+    stroke-width: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    stroke: #000 !important;
+    max-width: 18px;
+}
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card {
+    border-radius: 16px;
+    padding: 12px 9px;
+    background: #fff;
+    flex-direction: column;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card.selected,
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(input:checked) {
+    border-color: #1354c4 !important;
+    background-color: #C9E5FE !important;
+  }
+
+  /* Selected card: 2px border traced in from two opposite corners (like histrips.com).
+     A new ::after is created each time a card becomes :checked, so the animation replays on every pick.
+     Without @property support the angle falls back to 180deg and the full border just shows. */
+  @property --somna-border-reveal {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes somna-border-trace {
+    0%,
+    10% { --somna-border-reveal: 0deg; }
+    100% { --somna-border-reveal: 180deg; }
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(:checked):not(:has([data-option-available='false']))::after {
+    --reveal: var(--somna-border-reveal, 180deg);
+    content: '';
+    position: absolute;
+    inset: calc(var(--options-border-width, 1px) * -1);
+    padding: 2px;
+    border: 0;
+    border-radius: inherit;
+    background: #1354c4;
+    pointer-events: none;
+    z-index: 3;
+    clip-path: none;
+    -webkit-mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    -webkit-mask-composite: source-in, xor;
+    mask:
+      conic-gradient(
+        from 45deg,
+        #000 0deg var(--reveal),
+        transparent var(--reveal) 180deg,
+        #000 180deg calc(180deg + var(--reveal)),
+        transparent calc(180deg + var(--reveal)) 360deg
+      ),
+      linear-gradient(#000 0 0) border-box,
+      linear-gradient(#000 0 0) content-box;
+    mask-composite: intersect, exclude;
+    animation: somna-border-trace 680ms cubic-bezier(.45, 0, .2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label--card:has(:checked)::after {
+      animation: none;
+      --somna-border-reveal: 180deg;
+    }
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge.popular { background: #1354c4; }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge.free-bag { background: #0a1a4a; }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__sub-title {
+    margin-bottom: 6px;
+    display: block;
+    color: #061c42;
+    font-family: Inter;
+    font-size: 6.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 2px;
+    width: 100%;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img {
+    height: 40px;
+    object-fit: contain;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__bottom-save-pill {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1354c4;
+    color: #fff;
+    font-size: 9.8px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    z-index: 11;
+  }
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label:not(.variant-option__button-label--has-swatch):before {
+    inset: inherit !important;
+}
+  /* Subscription Box Styles */
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container {
+    background-color: transparent;
+    border-radius: 16px;
+    padding: 0;
+    font-family: var(--font-body--family);
+    color: #0a1a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 0px;
+  }
+    :where( .somna-sp) .somna-custom-subscription-container {
+   
+    margin-top: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box {
+    background: #FFF9EE;
+    border: 1px solid #000;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box.active {
+    border-color: #1354c4;
+    background: #F4FAFF;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-banner {
+    background: #1354c4;
+    text-align: center;
+    padding: 3.5px 0;
+    letter-spacing: .05em;
+    color: #FFF;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-inner {
+    padding: 6px 17px;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box[data-purchase-card="subscribe"] .somna-box-top-row{
+    padding: 5px 10px 7px;
+    border-bottom: 1px solid #000;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-label input {
+    position: absolute;
+    opacity: 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-radio-bullet {
+    width: 14px;
+    height: 14px;
+    border: 1.2px solid #061C42;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box.active .somna-radio-bullet::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: #1354c4;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    text-align: center;
+    margin: 0 auto;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-title-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-title {
+    color: #061C42;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: var(--headfont);
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-per-night {
+    color: #061C42;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-price-stack {
+    text-align: right;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-pricing-row {
+    display: flex;
+    gap: 3px;
+    align-items: baseline;
+    justify-content: flex-end;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-strike-price {
+    text-decoration: line-through;
+    color: #000;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: line-through;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-active-price {
+    color: #061C42;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-save-pill {
+    color: #FFF;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    border-radius: 2px;
+    background: #0B57E3;
+    line-height: normal;
+    padding: 0 2px;
+    text-align: center;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #061C42;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list li{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-dropdown-wrap {
+    margin-top: 6px;
+    position: relative;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-dropdown-wrap:after {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjYiIHZpZXdCb3g9IjAgMCA5IDYiIGZpbGw9Im5vbmUiPgogIDxwYXRoIGQ9Ik0wLjUgMC41TDQuNzY2NjcgNC41TDguNSAwLjUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4=");
+    content: '';
+    position: absolute;
+    right: 14px;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-frequency-dropdown {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 9px;
+    color: #0A1A4A;
+    border-radius: 39px;
+    border: 0.7px solid #505050;
+    background: #FFF;
+    cursor: pointer;
+    font-family: var(--headfont);
+    appearance: none;
+  }
+    
+      :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .button[id^=BuyButtons-ProductSubmitButton-] {
+    --button-border-color: transparent;
+    border-radius: 999px;
+    color: #FFF;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    height: 34px !important;
+    padding: 0;
+}
+/* Subscription box*/
+ :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails{
+  margin: 0 !important;
+ }
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control {
+    width: 74px !important;
+    height: 71px !important;
+    border-radius: 8px !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) slideshow-arrows[position=center].pagination-arrows {
+    mix-blend-mode: normal;
+    margin: 0 10px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) slideshow-arrows .slideshow-control {
+    background: #FFFFFF8C;
+    border: 0.5px solid #FFFFFF;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    display: flex;
+    justify-content: center;
+    padding-inline: 0 !important;
+    border-radius: 100%;
+    opacity: 1 !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .media-gallery--carousel slideshow-arrows .slideshow-control svg path {stroke: #0A1A4A;}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .media-gallery--carousel slideshow-arrows .slideshow-control svg {
+    width: 14px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails {
+  gap: 2px !important;
+  padding-inline: 0 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control:is([aria-selected=true]) {
+    outline: none !important;
+    border: 2px solid #000 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .slideshow-controls__thumbnails .slideshow-control {border: 2px solid transparent;}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .accordion .details{
+    border-bottom: 1px solid #B9B7AC;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .accordion--dividers .details-content,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .accordion--dividers .details-content p {
+  color: #0a1a4a;
+  line-height: 1.2;
+  font-size: 12px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-faq-wrapper .accordion .details__header {
+ justify-content: space-between;
+}
+
+/* Collection */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .header_main ul li {
+    display: block;
+    margin-bottom: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .header_main ul {
+    padding: 0;
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-grid {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-media img {
+    height: 62px;
+    object-fit: contain;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-title {
+    color: #0A1A4A;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px; /* 160% */
+    width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-text-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-metaobject-subtitle {
+    color: #0A1A4A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14px;
+}
+
+/* Collection */
+
+/* ==========================================================
+   Somna color swatches – "Color: Blue  ● ● ●"
+   Markup: snippets/variant-main-picker.liquid (is_color_option)
+   ========================================================== */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 8px 14px;
+  background: #FFF9EE;
+  border: 1px solid #000;
+  border-radius: 10px;
+  min-width: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-picker__form .somna-color-option legend.visually-hidden {
+  display: block;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label {
+  font-size: 15px;
+  line-height: 1.2;
+  color: #0A1A4A;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label strong {
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__swatches {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch {
+  --somna-swatch: #d9d9d9;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--somna-swatch);
+  color: #fff;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch__check {
+  width: 13px;
+  height: 11px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+/* Selected: white gap + ring in the swatch's own colour, white tick */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:checked) .somna-color-swatch__dot {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--somna-swatch);
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:checked) .somna-color-swatch__check {
+  opacity: 1;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:hover .somna-color-swatch__dot {
+  transform: scale(1.06);
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch:has(input:focus-visible) .somna-color-swatch__dot {
+  outline: 2px solid #0A1A4A;
+  outline-offset: 5px;
+}
+/* Sold out: faded with a diagonal line */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch--unavailable .somna-color-swatch__dot {
+  opacity: .4;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch--unavailable::after {
+  content: "";
+  position: absolute;
+  width: 130%;
+  height: 1.5px;
+  background: #0A1A4A;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+@media screen and (max-width: 749px) {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option {
+    padding: 7px 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__label {
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-option__swatches {
+    gap: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-color-swatch {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-purchase-box[hidden],
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container [hidden] {
+    display: none !important;
+  }
+
+/* =========================================================
+   Somna sticky add-to-cart (inspiration/stickybar, stickybar-flow)
+   Markup: snippets/somna-sticky-options.liquid + sections/product-information.liquid
+   Mode is set on <sticky-add-to-cart data-purchase-mode> by assets/sticky-add-to-cart.js
+   ========================================================= */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__mode--subscribe,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart:not([data-purchase-mode='onetime']) .somna-sticky__mode--onetime {
+  display: none !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+  --somna-navy: #1c2a6b;
+  --somna-navy-dark: #0a1a4a;
+  --somna-blue: #1354c4;
+  --somna-sky: #DEE6FA;
+  --somna-row-active: #eef3ff;
+  --somna-onetime: #d2461e;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding:0 0 10px 0;
+  border-radius: 0;
+  background: var(--somna-navy);
+  color: var(--somna-navy-dark);
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.25);
+  max-width: 800px;
+  z-index: 11111 !important;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna::before {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar{
+  z-index: 1111 !important;
+  bottom: 0 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__banner {
+  flex: 1 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  padding: 4.5px 12px;
+  border-radius:0;
+  background: var(--somna-sky);
+  color: var(--somna-navy-dark);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky_bar_main {
+    width: 100%;
+    display: flex;
+    padding:10px 15px 0;
+    gap: 10px;
+    align-items: center;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+  height: 48px;
+  border-radius: 4px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky {
+  flex: 1;
+  min-width: 0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-title {
+  overflow: hidden;
+  color: #0A1A4A;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger-meta {
+  overflow: hidden;
+  color: #0a1a4a70;
+  text-overflow: ellipsis;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 2px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__caret {
+  flex-shrink: 0;
+  width: 10px;
+  transition: transform 0.2s ease;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__trigger[aria-expanded='true'] .somna-sticky__caret {
+  transform: rotate(180deg);
+}
+
+/* Dropdown opens upward, spanning the bar (the fixed bar is the containing block) */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel {
+  position: absolute;
+  right: 10px;
+  bottom: calc(100% + 8px);
+  left: 10px;
+  padding: 10px;
+  border: 1.5px solid var(--somna-navy-dark);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgb(10 26 74 / 0.2);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel[hidden] {
+  display: none;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__panel-heading {
+  margin: 0 0 8px;
+  color: rgb(10 26 74 / 0.65);
+  font-size: 12px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--somna-navy-dark);
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-paragraph--family);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row:hover,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row[aria-selected='true'] {
+  border-left-color: var(--somna-blue);
+  background: var(--somna-row-active);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__row-meta {
+  color: rgb(10 26 74 / 0.65);
+  font-size: 11px;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
+  color: var(--somna-onetime);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge {
+  padding: 2px 7px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge--popular {
+  background: var(--somna-blue);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-sticky__badge--free {
+  background: var(--somna-navy-dark);
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+  width: auto;
+  max-width: 120px;
+  height: 45px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  background: var(--somna-navy-dark);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text .svg-wrapper {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+  color: #FFF;
+  text-align: center;
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%; /* 9.35px */
+}
+
+@media screen and (max-width: 749px) {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  /* Horizon hides the button text on mobile; the Somna bar keeps it (design) */
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+    display: initial;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+    width: auto;
+    padding: 6px 12px;
+  }
+}
+
+/* Problem solution section*/
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-prob-sol-section {
+  padding:0 0px 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .pro_solu_image {
+    margin-bottom: 5px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  position: relative;
+  z-index: 2;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #064BD8;
+  margin-bottom: 5px;
+  font-family: var(--font-accent--family);
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #0A1A4A;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text p {
+  margin: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-arrow-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-arrow-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #0A1A4A;
+  border: 1px solid #0A1A4A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+/* Problem solution section*/
+
+/* How it works*/
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-section {
+  position: relative;
+  padding: 20px 0 15px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-wave-img {
   display: block;
   width: 100%;
   height: 60px;
   object-fit: fill;
 }
-.hz-hiw-main-title {
-  text-align: center;
-  font-size: 38px;
-  font-family: serif;
-  font-weight: 500;
-  color: #0b1a30;
-  margin: 0 0 40px 0;
-}
-.hz-hiw-grid {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 28px;
+  padding: 20px 0 0;
 }
 
-.hz-hiw-card {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card {
   background-color: #dceaf7;
   border-radius: 24px;
   padding: 12px 10px;
 }
-.hz-hiw-card-inner{
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-inner{
   display: flex;
   justify-content: space-between;
 }
-.hz-hiw-card:nth-child(2) {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card:nth-child(2) {
   background-color: #eee9e0;
 }
 
-.hz-hiw-card-header {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-header {
   display: flex;
   align-items: flex-start;
   margin-bottom: 5px;
 }
 
-.hz-hiw-card-info {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-info {
   flex: 1;
 }
 
-.hz-hiw-card-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-title {
   font-size: 24px;
   font-family: serif;
   font-weight: 600;
@@ -1941,159 +3146,1642 @@ a.somna-view-all {
   line-height: 1.15;
 }
 
-.hz-hiw-card-desc {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-desc {
   font-size: 8px;
   line-height: 1.55;
   color: #1a2a3e;
 }
-.hz-hiw-card-bottom-image {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-bottom-image {
   max-width: 167px;
 }
-.hz-hiw-single-row {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
-.hz-hiw-single-content {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-content {
   flex: 1;
 }
 
-.hz-hiw-single-title {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-title {
   font-size: 18px;
   font-weight: 500;
   color: #0A1A4A;
   margin: 0 0 5px 0;
   font-family: var(--headfont);
 }
-.hz-hiw-single-desc {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-desc {
   font-size: 10px;
   line-height: 1.5;
   color: #0A1A4A;
 }
-.hz-hiw-single-desc p {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-desc p {
   margin: 0;
 }
 
-.hz-hiw-single-media {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-media {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.hz-hiw-single-media img {
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-media img {
   max-width: 100%;
   height: auto;
   display: block;
   object-fit: contain;
 }
 /* How it works*/
-@media(min-width:768px){
-
-    .bundle-card__title {
-        font-size: 22px;
-    }
-    .bundle-subtext {
-        font-size: 16px;
-        max-width: calc(100% - 90px);
-        margin-top: 11px;
-        line-height: 1.2;
-    }
-
-    .bundle-card__price {
-        font-size: 22px;
-    }
-
-    .bundle-card__subtext {
-        font-size: 16px;
-    }
-    .header-logo span[data-testid=header-logo] {
-        max-width: 173px;
-    }
-    .header__column--right {
-        gap: 37px !important;
-    }
-    .header-actions__action:not(.account-button) svg {
-        width: 28px;
-        height: 28px;
-    }
-    .menu-list__link {
-    --menu-top-level-font-size-desktop: 16px;
-    }
-    h2.custom-header {
-        font-size: 32px !important;
-    }
-    p.announcement-bar__text{
-        font-size: 14px;
-    }
-    .header__columns {
-        --header-padding: 20px;
-    }
-    .product-details {
-        margin-top: 40px;
-    }
-    .bg_image {
-        height: 265px;
-        top: -50px;
-    }
-    .wave-container {
-        height: 80px;
-    }
-    .wave-container.bottom {
-        bottom: -80px;
-    }
-    .wave-container.top {
-        top: -70px;
-        z-index: 1;
-    }
-    h2.hz-banner-heading {
-        font-size: 50px;
-    }
-    a.hz-banner-btn {
-        font-size: 32px;
-        padding: 20px 40px;
-        margin-top: 20px;
-    }
-    .accordion .details__header {
-        font-size: 22px !important;
-        padding-top: 30px;
-        padding-bottom: 10px;
-    }
-    li.menu__item.paragraph a {
-        font-size: 18px;
-    }
-    .footer-content summary.menu__heading.h5 {
-        font-size: 20px;
-    }
-    .shopify-section-group-footer-group:last-child .footer-content {
-        display: block;
-    }
-    .header__columns:has(.header__column--center header-menu){
-        justify-content: space-between;
-    }
-    .header__columns:has(.header__column--center header-menu) .header__column--left{
-        flex: none;
-    }
-    .review_content {
-    font-size: 16px;
-    }
-    .review_content svg {
-    height: 18px;
-    width: 85px;
-    }
-    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
-        font-size: 18px !important;
-        height: 40px !important;
-    }
-    .klaviyo-form .klaviyo-form-button {
-        height: 23px !important;
-        font-size: 18px !important;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-    }
-    .footer-content .shopify-block.shopify-app-block {
-        max-width: 400px;
-        margin-bottom: 45px;
-     }
+@media(max-width:1000px){
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .klaviyo-form input[name=email], :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .klaviyo-form input[name=email]::placeholder {
+    font-size: 14px !important;
+  }
 }
+
+/* ---- from somna-buybox.css ---- */
+/* ==========================================================================
+   Somna buybox – Figma "Purchase panel" (mobile 2707-3118…, desktop 2707-3220…)
+   Loaded after assets/product-col-custom.css (snippets/stylesheets.liquid); that file is unchanged.
+   Markup: snippets/variant-main-picker.liquid, snippets/somna-subscription-widget.liquid,
+           templates/product.json (footer custom liquid under Add to cart).
+   The blue panel itself is the buybox group's own settings in the theme editor.
+   Font families and the existing font sizes are kept; this block sets the
+   design's layout and colours, and sizes only the new elements.
+   ========================================================================== */
+
+/* Review card */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review {
+  width: 100%;
+  margin: 0 0 5px;
+  padding: 8px 10px 7px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__stars {
+  display: inline-flex;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-star {
+  --fill: 100%;
+  background: linear-gradient(90deg, #eeb229 var(--fill), #c7c7c7 var(--fill));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__rating {
+  margin-left: 3px;
+  color: #292929;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__quote {
+  margin: 3px 0 0;
+  font-size: 8px;
+  line-height: 1.5;
+  color: #0a1a4a;
+}
+
+/* Colour row: white card, no border */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-color-option {
+  background: #fff;
+  border: 0;
+  margin-bottom: 12px;
+}
+
+/* Size cards: three equal columns, room for the badges above */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding-top: 9px;
+  width: 100%;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+  position: relative;
+  justify-content: flex-start;
+  width: auto;
+  min-width: 0;
+  padding: 4px 3px 16px;
+  border-radius: 10px;
+  background: #fff !important;
+  overflow: visible !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier {
+  border: 1px solid #d7dce7 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+  background: #f6f8fe !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+  background: #eff2fc !important;
+  border: 1.7px solid #0b57e3 !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
+  top: 0;
+  left: 50%;
+  width: auto;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #152963;
+  line-height: 1;
+  transform: translate(-50%, -55%);
+  z-index: 4;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__title {
+  color: #152963;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__sub-title {
+  color: #5366aa;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px 4px;
+  width: 100%;
+  margin: 6px 0 0;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__night {
+  color: #0b57e3;
+  font-size: 10px;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__was {
+  color: #8c99c0;
+  font-size: 8.8px;
+  text-decoration: line-through;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__perk {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  color: #246335;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk {
+  justify-content: center;
+  width: 100%;
+  margin-top: 3px;
+  color: #246335;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+  color: #8c99c0;
+  font-weight: 400;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__icon,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  max-width: 12px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
+  bottom: -7px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: #1b7c46;
+  line-height: 1;
+}
+
+/* Bundle card (single-variant products: The Color Set, Season Bundle) */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  background: #fff;
+  border-radius: 10px;
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__media {
+  flex: 0 0 34%;
+  max-width: 140px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 96px;
+  object-fit: contain;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__sub {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card .somna-tier__price {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Autoship & Save / One-time purchase */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
+  background: #fff;
+  border: 1px solid #d7dce7;
+  border-radius: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active {
+  background: #fff;
+  border: 1.6px solid #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-box-banner {
+  background: #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+  padding: 10px 10px 2px;
+  border-bottom: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+  padding-top: 2px;
+  padding-bottom: 10px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-per-night,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-dropdown-wrap {
+  display: none !important;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-active-price {
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-pricing-row {
+  gap: 6px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-strike-price {
+  color: #8c99c0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #1b7c46;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
+  flex-shrink: 0;
+  border-color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+  border: 2px solid #0b57e3;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+  width: 6px;
+  height: 6px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-perks-list {
+  color: #152963;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-perks-list li {
+  align-items: baseline;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perk-check {
+  flex-shrink: 0;
+  color: #0b57e3;
+  font-weight: 700;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gifts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  margin: 8px 0 2px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 39px;
+  padding: 4px;
+  border-radius: 7px;
+  background: #e5f4eb;
+  color: #246a3b;
+  font-size: 9.2px;
+  line-height: 1.1;
+  text-align: center;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift__icon {
+  width: 14px;
+  height: 14px;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-onetime-save {
+  margin: 1px 0 0 22px;
+  color: #ef5400;
+  font-size: 9.8px;
+  line-height: 1.15;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-onetime-save[hidden] {
+  display: none;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+  padding: 8px 10px;
+}
+
+/* Add to cart */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #0b57e3;
+  background-color: #0b57e3;
+}
+
+/* Under the button: flexibility line + delivery promise */
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  margin: 0 0 7px;
+  color: #5366aa;
+  font-size: 9.7px;
+  line-height: 1.2;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex__icon {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-delivery {
+  width: 100%;
+  margin: 0;
+  padding: 7px 8px;
+  border-radius: 10px;
+  background: #fff;
+  color: #152963;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+    height: 41px !important;
+  }
+}
+/* ==================== END PRODUCT & COLLECTION PAGES ==================== */
+
+/* =====================================================================
+   HALLOWEEN 2026 — PRODUCT PAGE BUY BOX (Figma 3297-4934 desktop / 3297-5224 mobile)
+   All five products get the Halloween look (peach panel, orange border, orange
+   button). The Halloween words (sale pill above the images, "HALLOWEEN: …" banner,
+   "Lock in your Halloween price") only show when the product's "Halloween sale text"
+   metafield (custom.halloween_sale_text) has a value — Nasal Strips and Mouth Tape.
+   Every price, saving and "% OFF" pill is calculated from the real subscription plans.
+   Panel background / border colours are the buy-box group's own settings
+   (templates/product.json, group_6Ynwc9). Tablet/desktop sizes: somna-home-desktop.css.
+   After Halloween: delete this block and set the group colours back to restore the blue design.
+   ===================================================================== */
+
+/* Sale pill above the product images (only rendered when the metafield is filled) */
+:where(.template-product) .somna-pdp-sale-pill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 0.3em;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 8px 14px;
+  border: 2px solid #ef5400;
+  border-radius: 999px;
+  background: #000;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 0.25);
+  color: #faf2df;
+  font-family: var(--font-body--family);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+:where(.template-product) .somna-pdp-sale-pill__offer {
+  color: #ff7a12;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  :where(.template-product) .somna-pdp-sale-pill__offer {
+    background: linear-gradient(90deg, #ef5400 0%, #ff9860 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Sub-headline + short description under the images: desktop only (phones keep them above the buy box) */
+:where(.template-product) .somna-pdp-intro {
+  display: none;
+}
+
+/* Review card */
+:where(.template-product, .somna-sp) .somna-buybox-review {
+  color: #0a1a4a;
+}
+:where(.template-product, .somna-sp) .somna-buybox-review__count {
+  color: #000;
+}
+
+/* Size cards */
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .variant-card__title {
+  color: #000;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:hover {
+  background: #fff7ef !important;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .variant-option--buttons .variant-option__button-label--card.somna-tier:has(input:checked) {
+  background: #eff2fc !important;
+  border: 2px solid #000 !important;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(:checked):not(:has([data-option-available='false']))::after {
+  background: #000;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
+  background: #000;
+  color: #fff;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge--popular {
+  background: #ff9845;
+  color: #000;
+}
+:where(.template-product, .somna-sp) .somna-tier__night {
+  color: #cd4a04;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier:has(input:checked) .somna-tier__night {
+  color: #000;
+}
+:where(.template-product, .somna-sp) .somna-tier__was {
+  display: none;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk,
+:where(.template-product, .somna-sp) .somna-bundle-card .somna-tier__perk {
+  color: #fe8b4c;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__perk--muted {
+  color: #8c99c0;
+}
+:where(.template-product, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
+  background: #000;
+  color: #efa47b;
+  font-weight: 700;
+}
+
+/* Bundle card (The Color Set, Season Bundle) */
+:where(.template-product, .somna-sp) .somna-bundle-card {
+  color: #000;
+}
+
+/* Autoship & Save / One-time purchase */
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
+  border: 1px solid #d7dce7;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active {
+  border: 2px solid #cd4a04;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-banner {
+  background: #000;
+  color: #fff;
+}
+:where(.template-product, .somna-sp) .somna-box-banner__offer {
+  color: #ef5400;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-box-title,
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-active-price {
+  color: #000;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-strike-price {
+  display: none;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
+  background: #000;
+  color: #efa47b;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
+  border-color: #000;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet {
+  border-color: #ef5400;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+  background: #ef5400;
+}
+:where(.template-product, .somna-sp) .somna-custom-subscription-container .somna-perks-list {
+  color: #000;
+}
+:where(.template-product, .somna-sp) .somna-perk-check {
+  color: #cd4a04;
+}
+:where(.template-product, .somna-sp) .somna-gift {
+  color: #933400;
+}
+:where(.template-product, .somna-sp) .somna-onetime-save {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px 8px;
+  color: #933400;
+}
+:where(.template-product, .somna-sp) .somna-onetime-save[hidden] {
+  display: none;
+}
+:where(.template-product, .somna-sp) .somna-onetime-pill {
+  margin-left: auto;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #000;
+  color: #efa47b;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Add to cart: orange pill with a darker orange base, like the design */
+:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #ff7a12;
+  --button-color: #faf2df;
+  background-color: #ff7a12;
+  color: #faf2df;
+  box-shadow: 0 4px 0 #b8430b;
+}
+:where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-']:hover {
+  --button-background-color: #f06d08;
+  background-color: #f06d08;
+}
+
+/* Under the button */
+:where(.template-product, .somna-sp) .somna-buybox-delivery {
+  color: #000;
+}
+/* ===================== END HALLOWEEN 2026 — PRODUCT PAGE ===================== */
+
+/* =====================================================================
+   PRODUCT PAGE — Figma fixes 2026-10-15 (Nasal Strips 3297:4934 desktop / 3297:5224 mobile)
+   Phones + all sizes here; tablet/desktop sizes in somna-home-desktop.css.
+   ===================================================================== */
+/* Trust bar (Free shipping / 30-night guarantee / Delivered in / Secure payment) — ONE style for every
+   page that has this bar (homepage, collection, product, contact): it is matched by its section id, never
+   by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
+   Rubik Spray Paint, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
+   It replaces the yellow wave picture (bg_image) and the per-page colour. */
+.shopify-section[id$='__section_zELtyM'] .section-background,
+.shopify-section[id$='__section_zELtyM'] .section {
+  background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important; /* beats the inline wave picture */
+}
+.shopify-section[id$='__section_zELtyM'] .section {
+  top: 0;
+  height: auto;
+  align-content: center;
+}
+.shopify-section[id$='__section_zELtyM'] .text-block,
+.shopify-section[id$='__section_zELtyM'] .text-block > *,
+.shopify-section[id$='__section_zELtyM'] .text-block strong {
+  font-family: var(--font-display-spray--family);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: #000;
+}
+.shopify-section[id$='__section_zELtyM'] .divider__line {
+  border-color: #0a1a4a;
+  border-right-width: clamp(1px, 0.14vw, 2px);
+  border-bottom-width: clamp(1px, 0.14vw, 2px);
+}
+/* Figma: "Delivered in" and "Secure payment" are set in Rubik Wet Paint (the first two in Spray Paint) */
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block,
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block > *,
+.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block strong {
+  font-family: var(--font-display--family);
+}
+.shopify-section[id$='__section_zELtyM'] .icon-block__media {
+  height: auto;
+}
+
+/* Sale pill: clear of the header's wavy bottom edge (it was cutting into the pill's top) */
+:where(.template-product) .somna-pdp-sale-pill {
+  margin-top: clamp(14px, 2.4vw, 36px);
+}
+
+/* Problem / Solution (sections/problem-solution.liquid): Figma background #fff2e3, a matching
+   peach bottom wave, and top spacing from Figma (93px at 1440px, 25px at 393px).
+   The Halloween spiderweb + spider and their animation live in somna-motion.css (section 15). */
+.hz-prob-sol-section {
+  background-color: #fff2e3 !important; /* replaces the section's inline cream */
+}
+.hz-prob-sol-section > .wave-container.bottom {
+  background-image: url("somna-hw-howto-bottom.svg") !important;
+}
+.hz-prob-sol-section.somna-ps--halloween {
+  padding-top: clamp(17px,6.4vw,35px);
+}
+
+/* How To Use: peach background and peach top/bottom waves (Figma #fff2e3) */
+:where(.template-product) .steps-section {
+  background-color: #fff2e3 !important; /* replaces the section's inline green */
+}
+:where(.template-product) .steps-section > .wave-container.top {
+  background-image: url("somna-hw-howto-top.svg") !important;
+}
+:where(.template-product) .steps-section > .wave-container.bottom {
+  background-image: url("somna-hw-howto-bottom.svg") !important;
+}
+
+/* "Get 10% off your first order." — Figma images, on every page that has this section */
+[id$='__footer_m9NzUG'] .section {
+  background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter-mobile.png?v=1792041619&width=1200") !important;
+  background-position: center !important;
+}
+/* ==================== END PRODUCT PAGE — Figma fixes ==================== */
+
+/* =====================================================================
+   HALLOWEEN SALE PAGE (pages/halloween-sale, templates/page.halloween-sale.json)
+   Figma 3316:8669 desktop / 3316:11976 mobile. Phones + all sizes here;
+   tablet/desktop sizes in somna-home-desktop.css ("HALLOWEEN SALE PAGE").
+   Everything is scoped to this page's own sections:
+   - [id$='__hero_hwsale'] = the shared hero (homepage banner) section placed on this page;
+   - .somna-sp = sections/somna-sale-product.liquid (only used on this page).
+   The trust bar and "Get 10% off" use their universal rules above.
+   ===================================================================== */
+
+/* ---------- Hero (same look as the homepage hero) ---------- */
+[id$='__hero_hwsale'] .hero {
+  position: relative;
+  min-height: 120vw;
+}
+/* the header's white wave running over the top of the photo */
+[id$='__hero_hwsale'] .hero::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0 auto;
+  height: 7.6vw;
+  z-index: 3;
+  pointer-events: none;
+  background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
+}
+[id$='__hero_hwsale'] h1 {
+  margin: 0;
+  font-family: var(--font-display--family);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: 0;
+  color: #ff9845;
+  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] {
+  rotate: -3deg;
+  transform-origin: left center;
+}
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"],
+[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] > * {
+  line-height: 0.98;
+}
+/* Pill buttons; the pumpkin comes from the hero's "Button icon" setting */
+[id$='__hero_hwsale'] .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
+  border: 2px solid #fff !important;
+  border-radius: 999px;
+  background: #fff !important;
+  color: #ff7300 !important;
+  font-family: var(--font-body--family);
+  font-weight: 600;
+  box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
+}
+[id$='__hero_hwsale'] .button::before {
+  width: 34px;
+  height: 34px;
+}
+/* "Shop Mouth Tape" (desktop): orange pill, white pumpkin with the face cut out (Figma Frame 55) */
+[id$='__hero_hwsale'] .button--button_hwtape {
+  border-color: #ef5400 !important;
+  background: #ef5400 !important;
+  color: #fff !important;
+}
+[id$='__hero_hwsale'] .button--button_hwtape::before {
+  background-image: url("/cdn/shop/files/somna-halloween-pumpkin-navy.png?width=128");
+  filter: brightness(0) invert(1);
+}
+/* Phones: one "Shop the sale" button (Figma mobile); the two product buttons are desktop only */
+[id$='__hero_hwsale'] :is(.button--button_hwnasal, .button--button_hwtape) {
+  display: none;
+}
+
+/* ---------- Sale products (sections/somna-sale-product.liquid) ---------- */
+.somna-sp {
+  position: relative;
+  display: block;
+  overflow-x: clip;
+  padding: 32px 16px 40px;
+  background: var(--sp-bg, #fff);
+  color: #0a1a4a;
+}
+.somna-sp--web-left {
+  padding-top: 30px; /* room for the web + spider above the image */
+}
+.somna-sp--web-right {
+  padding-top: 56px;
+}
+.somna-sp-section + .somna-sp-section .somna-sp {
+  padding-top: 8px;
+}
+.somna-sp-section + .somna-sp-section .somna-sp--web-right {
+  padding-top: 15px;
+}
+.somna-sp__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 592px;
+  margin-inline: auto;
+  scroll-margin-top: 110px; /* clears the sticky header when a hero button jumps here */
+}
+.somna-sp__image-link {
+  display: block;
+}
+.somna-sp__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgb(10 26 74 / 0.12);
+}
+.somna-sp__intro {
+  padding: 14px 4px 0;
+}
+.somna-sp__rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #0a1a4a;
+}
+.somna-sp__stars {
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #f5b400;
+  background: linear-gradient(90deg, #f5b400 var(--sp-rating, 100%), #d6dbe8 var(--sp-rating, 100%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.somna-sp__eyebrow {
+  margin: 0 0 4px;
+  font-family: var(--font-body--family);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+.somna-sp__heading {
+  margin: 0 0 8px;
+  font-family: var(--headfont, var(--font-heading--family));
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-wrap: balance;
+  color: #0a1a4a;
+}
+.somna-sp__text,
+.somna-sp__text p {
+  margin: 0;
+  max-width: 34em;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #0a1a4a;
+}
+/* Buy box panel: same peach panel + orange border as the product page */
+.somna-sp__panel {
+  margin-top: 20px;
+  padding: 16px;
+  border: 2px solid #ef5400;
+  border-radius: 24px;
+  background: #fff2e3;
+}
+.somna-sp .button[id^='BuyButtons-ProductSubmitButton-'] {
+  --button-background-color: #ff7a12;
+  --button-color: #faf2df;
+  width: 100%;
+  height: 41px !important; /* beats the shared buy-box height */
+  border-radius: 999px;
+  background-color: #ff7a12;
+  color: #faf2df;
+  font-weight: 700;
+  box-shadow: 0 4px 0 #b8430b;
+}
+.somna-sp .button[id^='BuyButtons-ProductSubmitButton-']:hover {
+  --button-background-color: #f06d08;
+  background-color: #f06d08;
+}
+.somna-sp__details {
+  display: block;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  color: #0a1a4a;
+}
+.somna-sp__details:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Halloween web + spider (homepage animation, somna-motion.css section 15): placement only.
+   Phones: small web in the top corner, the spider stops above the image. */
+.somna-sp > .somna-ess__web--left {
+  --web-w: 96px;
+  --hang: 120;
+  z-index: 11;
+}
+.somna-sp > .somna-ess__web--right {
+  --rweb-w: 90px;
+}
+/* ==================== END HALLOWEEN SALE PAGE ==================== */
+
+
+/* =====================================================================
+   SOMNA MOTION: FIRST-PAINT RULES (moved unchanged from assets/somna-motion.css, 2026-10-19, speed)
+   These are the motion rules that affect what is on screen when a page first appears: the motion
+   variables, the reveal classes, the hero text entrance, the image settle, and the Halloween webs,
+   spider and pumpkins. Everything else in somna-motion.css (hover / focus effects and decorations
+   further down the page) now loads without blocking the page (layout/theme.liquid).
+   Order inside this block is the same as it was in somna-motion.css.
+   ===================================================================== */
+
+:root {
+  --sm-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --sm-reveal-duration: 700ms;
+  --sm-reveal-distance: 14px;
+  --sm-reveal-image-scale: 1.03;
+  --sm-stagger: 70ms;
+
+  --sm-hover-duration: 280ms;
+  --sm-hover-lift: -2px;
+  --sm-hover-shadow: 0 10px 22px -12px rgb(10 26 74 / 0.45);
+  --sm-press-scale: 0.98;
+  --sm-arrow-shift: 3px;
+  --sm-focus-color: #0a1a4a;
+}
+
+/* --------------------------------------------------------------------------
+   1. Reveal on scroll
+   The script only marks elements that start below the visible screen, so the
+   hero / LCP image and anything visible on load are never hidden.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .sm-reveal {
+    opacity: 0;
+    translate: 0 var(--sm-reveal-distance);
+  }
+
+  .sm-reveal--image {
+    translate: none;
+    scale: var(--sm-reveal-image-scale);
+  }
+
+  .sm-reveal.sm-in {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    transition: opacity var(--sm-reveal-duration) var(--sm-ease),
+      translate var(--sm-reveal-duration) var(--sm-ease),
+      scale var(--sm-reveal-duration) var(--sm-ease);
+    transition-delay: calc(var(--sm-i, 0) * var(--sm-stagger));
+    will-change: opacity, translate, scale;
+  }
+}
+
+@media print {
+  .sm-reveal {
+    opacity: 1;
+    translate: none;
+    scale: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Hero text entrance (CSS only, plays once when the page loads)
+   The heading only rises and is fully visible from the first frame, so
+   Largest Contentful Paint is not delayed. The eyebrow, any text below the
+   heading and the button fade in and rise, one after another.
+   "backwards" means nothing stays applied after the animation, so button
+   hover works normally afterwards.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-hero-duration: 900ms;
+  --sm-hero-distance: 12px;
+  --sm-hero-step: 160ms;
+}
+
+@keyframes sm-hero-rise {
+  from {
+    translate: 0 var(--sm-hero-distance);
+  }
+}
+
+@keyframes sm-hero-fade-rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--sm-hero-distance);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__content-wrapper .text-block:not(:has(h1, h2, h3)),
+  .hero__content-wrapper :is(.button, .button-secondary) {
+    animation: sm-hero-fade-rise var(--sm-hero-duration) var(--sm-ease) var(--sm-hero-delay, 0ms) backwards;
+  }
+
+  .hero__content-wrapper .text-block:has(h1, h2, h3) {
+    animation: sm-hero-rise var(--sm-hero-duration) var(--sm-ease) backwards;
+  }
+
+  .hero__content-wrapper .text-block:has(h1, h2, h3) ~ .text-block {
+    --sm-hero-delay: var(--sm-hero-step);
+  }
+
+  .hero__content-wrapper :is(.button, .button-secondary) {
+    --sm-hero-delay: calc(var(--sm-hero-step) * 2);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Image settle on scroll (like drinkohza.com's category tiles)
+   Images inside cropped frames start very slightly zoomed and ease to normal
+   size as they scroll into view. Scale only, inside frames that already crop
+   (overflow: hidden), so nothing moves in the layout.
+   CSS scroll-driven animation: no JavaScript. Browsers without support
+   (and reduced-motion visitors) simply see the normal, still image.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-settle-scale: 1.08;
+}
+
+@keyframes sm-settle {
+  from {
+    scale: var(--sm-settle-scale);
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The frame is what we track; the image inside it is what settles */
+    .bundle-card__image-wrapper,
+    .somna-sleep-bundle__media,
+    layered-slideshow-component {
+      view-timeline-name: --sm-settle;
+    }
+
+    .bundle-card__image-wrapper img,
+    .somna-sleep-bundle__media img,
+    .layered-slideshow__panel-content > .layered-slideshow__image {
+      animation: sm-settle linear both;
+      animation-timeline: --sm-settle;
+      animation-range: entry 0% cover 50%;
+    }
+  }
+}
+
+/* 13. Homepage scroll-driven fade-up for "Shop the essentials": removed (2026-10-14).
+   It was already switched off by section 14 (the reveal in custom.js is used instead). */
+
+/* --------------------------------------------------------------------------
+   14. One calm fade-up everywhere, like the reference video (all pages)
+   Added as a new block; nothing above is changed.
+   - The video timing from section 13 (40px rise, 1s fade, 0.14s stagger; phones
+     26px / 0.11s) now applies on every page, not only the homepage.
+   - The scroll-linked text entrances from sections 10, 12 and 13 (banner text,
+     "Small essentials" heading + columns, "Shop the essentials" heading + cards)
+     are switched off here, so those elements get the same timed fade-up as the
+     rest of the page instead (from the reveal scripts in assets/custom.js).
+     Their decorations (moon, fireflies, breathing icons, cut-outs, dividers) are untouched.
+   Motion only: sizes, spacing and positions are exactly as before.
+   -------------------------------------------------------------------------- */
+#MainContent {
+  --sm-reveal-duration: 1000ms;
+  --sm-reveal-distance: 40px;
+  --sm-stagger: 140ms;
+}
+
+@media screen and (max-width: 749px) {
+  #MainContent {
+    --sm-reveal-distance: 26px;
+    --sm-stagger: 110ms;
+  }
+}
+
+/* (The rule that switched off the entrances of sections 10, 12 and 13 was removed with them.) */
+
+/* --------------------------------------------------------------------------
+   15. HALLOWEEN 2026: "Shop the essentials" (sections/somna-shop-essentials.liquid)
+   Approved demo v3 (2026-10-14). Only active while the section's
+   "Show Halloween decorations" setting is on (.somna-ess--halloween).
+   Sequence, started by the section's small script when the web is a quarter of the
+   way up the screen (.hw-ready = script running, .is-in = in view; replays each time
+   the section comes back into view):
+     0.00s  the left Figma web draws itself: top strand, radial strands, then the
+            spiral ring by ring (SVG mask strokes drawn with stroke-dashoffset over
+            the real web image somna-hw-web.png); the right web (somna-hw-web-right.png,
+            no spider, as in Figma) draws itself from its centre, a beat later
+     1.50s  the spider appears at the top of its thread, on the left web
+     1.60s  it lowers itself in two smooth drops, the silk paying out with it
+     3.75s  short pause, then a gentle swing (3 swings, each smaller) and rest
+   Also: the title pumpkin hops and smiles every 7s, and the "70% OFF" pumpkin
+   badges give a short shake every 4.5s.
+   Without the script, or with reduced motion: finished web, spider hanging,
+   pumpkin smiling, nothing moves.
+   The same webs and spider are used above "The Sleep Bundle" card on the homepage
+   (sections/sleep-bundle.liquid adds .somna-sb--halloween) and, on the product page, in the
+   Problem / Solution section (sections/problem-solution.liquid adds .somna-ps--halloween);
+   the rules below are shared, and each placement is at the end of this section.
+   Sizes: --web-w is 122px on phones; somna-home-desktop.css sets the desktop width.
+   Motion only (transform / rotate / translate / opacity / stroke-dashoffset):
+   no layout shift and nothing can be clicked.
+   -------------------------------------------------------------------------- */
+
+/* ---- Web and spider: size and placement ---- */
+:where(.somna-ess__web--left) {
+  --web-w: 122px;
+  --hang: 230; /* phones: shorter silk, so the spider stops beside the heading, clear of the first card */
+}
+
+@media screen and (min-width: 750px) {
+  :where(.somna-ess__web--left) {
+    --hang: 341; /* desktop: same resting place as the Figma design */
+  }
+}
+
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--left {
+  width: var(--web-w);
+  aspect-ratio: auto;
+  background-image: none; /* replaces the old web-with-spider background picture */
+}
+
+/* Right web (Figma right-hand web, 333 x 178, no spider): 90px on phones,
+   the desktop width matches somna-home-desktop.css. */
+:where(.somna-ess__web--right) {
+  --rweb-w: 90px;
+}
+
+@media screen and (min-width: 750px) {
+  :where(.somna-ess__web--right) {
+    --rweb-w: clamp(160px, 21vw, 333px);
+  }
+}
+
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--right {
+  width: var(--rweb-w);
+  aspect-ratio: auto;
+  background-image: none; /* replaces the old right web background picture */
+}
+
+.somna-ess__web-svg {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  overflow: visible;
+}
+
+/* Mask strokes that "draw" the web (in the 439 x 268 units of the web image) */
+.somna-ess__web-svg .hw-m {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.somna-ess__web-svg .hw-m--frame {
+  stroke-width: 9;
+}
+
+.somna-ess__web-svg .hw-m--spoke {
+  stroke-width: 10;
+}
+
+.somna-ess__web-svg .hw-m--ring {
+  stroke-width: 30;
+}
+
+.somna-spider {
+  position: absolute;
+  top: calc(var(--web-w) * 145 / 439);
+  left: calc(var(--web-w) * 44 / 439);
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  --len: calc(var(--web-w) * var(--hang, 341) / 439);
+}
+
+.somna-spider__thread {
+  position: absolute;
+  top: 0;
+  left: 2.4px;
+  width: 1.2px;
+  height: var(--len);
+  background: #1a1a1a;
+  transform-origin: 50% 0;
+}
+
+@media screen and (min-width: 750px) {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-spider__thread {
+    left: -0.75px;
+    width: 1.5px;
+  }
+}
+
+.somna-spider__body {
+  position: absolute;
+  top: 0;
+  left: calc(var(--web-w) * -43.5 / 439);
+  display: block;
+  width: calc(var(--web-w) * 90 / 439);
+  max-width: none;
+  height: auto;
+  translate: 0 calc(var(--len) - 1px);
+}
+
+/* ---- Pumpkin after the heading ---- */
+.somna-pk {
+  display: block;
+}
+
+.somna-pk svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 100%;
+}
+
+.somna-pk__smile,
+.somna-pk__happy {
+  opacity: 0;
+}
+
+.somna-pk__smile {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+}
+
+/* ---- Waiting to scroll into view (only when the script runs) ---- */
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
+  stroke-dashoffset: 1;
+}
+
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
+:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Step 1: the web draws itself */
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m {
+    animation: somna-web-draw var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.35, 1) var(--t, 0s) both;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--frame {
+    --d: 0.4s;
+    --t: 0s;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--ring {
+    animation-timing-function: cubic-bezier(0.3, 0.05, 0.6, 1);
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--all {
+    animation: somna-web-fade 0.3s ease 1.4s both;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__web--right .hw-m--all {
+    animation-delay: 1.6s;
+  }
+
+  /* Step 2: the spider lowers itself; Step 3: pause, then a gentle swing */
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider {
+    animation: somna-spider-appear 0.25s ease 1.5s both, somna-spider-sway 2.6s ease-in-out 3.75s 1 both;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__thread {
+    animation: somna-spider-thread 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__body {
+    animation: somna-spider-drop 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
+  }
+
+  /* Pumpkin: hop, land, smile */
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk svg {
+    animation: somna-pk-hop 7s ease-in-out 1.6s infinite;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__smile {
+    animation: somna-pk-smile 7s ease-out 1.6s infinite;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__happy {
+    animation: somna-pk-on 7s linear 1.6s infinite;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__calm,
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__eyes {
+    animation: somna-pk-off 7s linear 1.6s infinite;
+  }
+
+  /* "70% OFF" pumpkin badges: a short shake, repeated every 4.5s (the second card follows a beat later) */
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__badge {
+    transform-origin: 50% 12%;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__badge {
+    animation: somna-badge-shake 4.5s ease-in-out 1s infinite;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
+    animation-delay: 1.35s;
+  }
+}
+
+@keyframes somna-web-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes somna-web-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes somna-spider-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Thread length and spider position share the same stops, so they stay joined */
+@keyframes somna-spider-thread {
+  0% {
+    transform: scaleY(0);
+  }
+
+  38% {
+    transform: scaleY(0.46);
+  }
+
+  50% {
+    transform: scaleY(0.48);
+  }
+
+  86% {
+    transform: scaleY(1.035);
+  }
+
+  94% {
+    transform: scaleY(0.99);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes somna-spider-drop {
+  0% {
+    translate: 0 -1px;
+  }
+
+  38% {
+    translate: 0 calc(var(--len) * 0.46 - 1px);
+  }
+
+  50% {
+    translate: 0 calc(var(--len) * 0.48 - 1px);
+  }
+
+  86% {
+    translate: 0 calc(var(--len) * 1.035 - 1px);
+  }
+
+  94% {
+    translate: 0 calc(var(--len) * 0.99 - 1px);
+  }
+
+  100% {
+    translate: 0 calc(var(--len) - 1px);
+  }
+}
+
+@keyframes somna-spider-sway {
+  0% {
+    rotate: 0deg;
+  }
+
+  18% {
+    rotate: 5deg;
+  }
+
+  40% {
+    rotate: -3.6deg;
+  }
+
+  60% {
+    rotate: 2deg;
+  }
+
+  80% {
+    rotate: -0.8deg;
+  }
+
+  100% {
+    rotate: 0deg;
+  }
+}
+
+@keyframes somna-pk-hop {
+  0% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+
+  3% {
+    transform: translateY(0) scale(1.14, 0.84) rotate(0);
+  }
+
+  7% {
+    transform: translateY(-34%) scale(0.9, 1.12) rotate(0);
+  }
+
+  10% {
+    transform: translateY(-42%) scale(1, 1) rotate(0);
+  }
+
+  14% {
+    transform: translateY(0) scale(1.16, 0.82) rotate(0);
+  }
+
+  17% {
+    transform: translateY(0) scale(0.97, 1.04) rotate(-7deg);
+  }
+
+  20% {
+    transform: translateY(0) scale(1, 1) rotate(5deg);
+  }
+
+  23% {
+    transform: translateY(0) scale(1, 1) rotate(-2.5deg);
+  }
+
+  26%,
+  100% {
+    transform: translateY(0) scale(1, 1) rotate(0);
+  }
+}
+
+@keyframes somna-pk-smile {
+  0%,
+  13% {
+    opacity: 0;
+    transform: scaleY(0.35);
+  }
+
+  16% {
+    opacity: 1;
+    transform: scaleY(1.12);
+  }
+
+  19%,
+  44% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  48%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.35);
+  }
+}
+
+@keyframes somna-pk-on {
+  0%,
+  13% {
+    opacity: 0;
+  }
+
+  15%,
+  45% {
+    opacity: 1;
+  }
+
+  48%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes somna-pk-off {
+  0%,
+  13% {
+    opacity: 1;
+  }
+
+  15%,
+  45% {
+    opacity: 0;
+  }
+
+  48%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Shake lasts about 0.9s of each 4.5s cycle, then the badge rests */
+@keyframes somna-badge-shake {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+
+  3% {
+    rotate: -9deg;
+  }
+
+  7% {
+    rotate: 8deg;
+  }
+
+  11% {
+    rotate: -6deg;
+  }
+
+  15% {
+    rotate: 4deg;
+  }
+
+  18% {
+    rotate: -2deg;
+  }
+
+  20% {
+    rotate: 0deg;
+  }
+}
+
+/* Reduced motion: finished web, spider hanging, pumpkin smiling, badges still */
+@media (prefers-reduced-motion: reduce) {
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
+    stroke-dashoffset: 0;
+  }
+
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
+  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
+    opacity: 1;
+  }
+
+  .somna-pk__calm,
+  .somna-pk__eyes {
+    opacity: 0;
+  }
+
+  .somna-pk__smile,
+  .somna-pk__happy {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- "The Sleep Bundle" (sections/sleep-bundle.liquid, homepage): placement of the two webs ----
+   Same webs as "Shop the essentials": the left web with the spider dropping on its thread, and the
+   Figma right-hand web (no spider), tilted about 6deg and hung from the picture's wavy edge, as in Figma.
+   These replace the still web pictures custom.css draws with ::before / ::after. */
+#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::before,
+#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::after {
+  content: none;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween {
+  position: relative;
+  overflow-x: clip; /* the tilted right web never makes the page scroll sideways */
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+  top: -50px;
+  left: 0;
+}
+
+#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
+  top: -50px;
+  right: calc(var(--rweb-w) * -0.06);
+  left: auto;
+  width: calc(var(--rweb-w) * 1.1);
+  rotate: 6deg;
+  transform-origin: 100% 0;
+}
+
+@media screen and (min-width: 750px) {
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
+    top: -50px;
+  }
+
+  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
+    top: calc(-5px - 2.6vw);
+  }
+}
+
+/* ---- Problem / Solution (sections/problem-solution.liquid, product page): the left web + spider ----
+   Figma Nasal Strips ("image 194"): the web hangs from the section's top-left corner, 31.3% of the
+   screen wide (451px at 1440px, 123px at 393px), with the spider resting beside the Problem card.
+   Same drawing / dropping animation as the homepage. The cards sit above the web. */
+.hz-prob-sol-section.somna-ps--halloween {
+  position: relative;
+  overflow-x: clip;
+}
+
+.somna-ps--halloween > .somna-ess__web--left {
+  --web-w: clamp(110px, 28.3vw, 451px);
+  --hang: 341;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+.somna-ps--halloween > .section {
+  position: relative;
+  z-index: 2;
+}
+/* ==================== END SOMNA MOTION: FIRST-PAINT RULES ==================== */

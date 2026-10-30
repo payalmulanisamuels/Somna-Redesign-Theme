@@ -9,8 +9,12 @@
   the top Buy Box by assets/sticky-add-to-cart.js — this markup only holds the data.
   Rendered inside the sticky bar, so it is re-rendered (morphed) on every variant change.
 
+  Single-variant bundles (no Size option, e.g. The Colour Set / Season Bundle): the same trigger look
+  shows a fixed summary (product title · purchase option, price · per night) with no dropdown; one
+  hidden row holds that variant's prices so the script mirrors subscribe / one-time the same way.
+
   @param {object} product - The product object.
-  @param {object} supply_option - The Size / Quantity / Set option (from product.options_with_values).
+  @param {object} [supply_option] - The Size / Quantity / Set option (from product.options_with_values).
 {%- enddoc -%}
 
 {%- liquid
@@ -18,8 +22,15 @@
   if product.selected_or_first_available_variant.selling_plan_allocations.size > 0
     assign initial_mode = 'subscribe'
   endif
+
+  # Halloween Sale: one-time price = variant price less the % in snippets/somna-sale.liquid (40%)
+  capture somna_once_off
+    render 'somna-sale', get: 'once_off'
+  endcapture
+  assign somna_once_keep = 100 | minus: somna_once_off
 -%}
 
+{%- if supply_option -%}
 <div class="somna-sticky" data-somna-sticky>
   <button
     type="button"
@@ -81,6 +92,7 @@
             assign row_nights = product.metafields.custom.nights.value | plus: 0
           endif
 
+          assign row_once = row_variant.price | times: somna_once_keep | divided_by: 100.0 | round
           assign row_badge = ''
           assign row_badge_class = ''
           if supply_index == 2
@@ -110,8 +122,8 @@
             class="somna-sticky__row"
             data-somna-sticky-row
             data-option-value-id="{{ option_value.id }}"
-            data-onetime-price="{{ row_variant.price | money_without_trailing_zeros | escape }}"
-            data-onetime-per-night="{{ row_variant.price | times: 1.0 | divided_by: row_nights | round | money | escape }}"
+            data-onetime-price="{{ row_once | money_without_trailing_zeros | escape }}"
+            data-onetime-per-night="{{ row_once | times: 1.0 | divided_by: row_nights | round | money | escape }}"
             data-plans="{{ row_plans | strip_newlines | escape }}"
             aria-selected="{{ option_value.selected }}"
             {% unless row_variant.available %}
@@ -130,7 +142,7 @@
                 {%- if initial_mode == 'subscribe' and row_variant.selling_plan_allocations.size > 0 -%}
                   {{- row_variant.selling_plan_allocations.first.price | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- else -%}
-                  {{- row_variant.price | times: 1.0 | divided_by: row_nights | round | money -}}
+                  {{- row_once | times: 1.0 | divided_by: row_nights | round | money -}}
                 {%- endif -%}
               </span>/night
               {%- unless row_variant.available %} · {{ 'products.product.sold_out' | t }}{% endunless -%}
@@ -141,3 +153,145 @@
     </ul>
   </div>
 </div>
+{%- else -%}
+  {%- liquid
+    assign single_variant = product.selected_or_first_available_variant
+    assign single_nights = 30
+    if single_variant.metafields.custom.nights != blank
+      assign single_nights = single_variant.metafields.custom.nights.value | plus: 0
+    elsif product.metafields.custom.nights != blank
+      assign single_nights = product.metafields.custom.nights.value | plus: 0
+    endif
+
+    assign single_once = single_variant.price | times: somna_once_keep | divided_by: 100.0 | round
+    assign single_price = single_once | money_without_trailing_zeros
+    assign single_per_night = single_once | times: 1.0 | divided_by: single_nights | round | money
+    if initial_mode == 'subscribe'
+      assign single_alloc = single_variant.selling_plan_allocations.first
+      assign single_price = single_alloc.price | money_without_trailing_zeros
+      assign single_per_night = single_alloc.price | times: 1.0 | divided_by: single_nights | round | money
+    endif
+  -%}
+
+  {%- capture single_plans -%}
+    { {%- for alloc in single_variant.selling_plan_allocations -%}
+      {%- capture plan_label -%}{%- render 'somna-plan-label', selling_plan: alloc.selling_plan -%}{%- endcapture -%}
+      "{{ alloc.selling_plan.id }}": {
+        "price": {{ alloc.price | money_without_trailing_zeros | json }},
+        "perNight": {{ alloc.price | times: 1.0 | divided_by: single_nights | round | money | json }},
+        "label": {{ plan_label | strip | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%} }
+  {%- endcapture -%}
+
+  <div class="somna-sticky somna-sticky--single" data-somna-sticky>
+    <div class="somna-sticky__trigger somna-sticky__trigger--static" data-somna-sticky-toggle>
+      <span class="somna-sticky__trigger-text">
+        <span class="somna-sticky__trigger-title">
+          {{- product.title | escape }} ·
+          <span class="somna-sticky__mode--subscribe">Subscribe</span>
+          <span class="somna-sticky__mode--onetime">One-time</span>
+        </span>
+        <span class="somna-sticky__trigger-meta">
+          <span data-somna-sticky-field="price">{{ single_price }}</span> ·
+          <span data-somna-sticky-field="per-night">{{ single_per_night }}</span>/night
+        </span>
+      </span>
+    </div>
+    <span
+      hidden
+      data-somna-sticky-row
+      aria-selected="true"
+      data-onetime-price="{{ single_once | money_without_trailing_zeros | escape }}"
+      data-onetime-per-night="{{ single_once | times: 1.0 | divided_by: single_nights | round | money | escape }}"
+      data-plans="{{ single_plans | strip_newlines | escape }}"
+    ></span>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  /* Somna sticky bar, desktop only (990px and up). Phones and tablets keep the approved layout.
+     The desktop bar reused the phone sizes (8.5px button text, 9px price line) inside an
+     800px square box; here it becomes a centred floating card with desktop-sized text. */
+  /* Single-variant bundles: the summary looks like the dropdown trigger but has nothing to open */
+  .somna-sticky__trigger.somna-sticky__trigger--static {
+    cursor: default;
+  }
+
+  @media screen and (min-width: 990px) {
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna {
+      bottom: 16px !important;
+      gap: 0;
+      width: min(720px, calc(100% - 48px));
+      max-width: 720px;
+      padding: 0 0 12px;
+      border-radius: 14px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__banner {
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 14px 14px 0 0;
+      font-size: 13px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__banner svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .sticky_bar_main {
+      gap: 12px;
+      padding: 12px 16px 0;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__image {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger {
+      gap: 12px;
+      height: 48px;
+      padding: 6px 16px;
+      border-radius: 10px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger-title {
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__trigger-meta {
+      margin-top: 3px;
+      color: rgb(10 26 74 / 0.65);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__caret {
+      width: 12px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar--somna .somna-sticky__panel {
+      right: 16px;
+      left: 16px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .sticky-add-to-cart__button {
+      flex-shrink: 0;
+      min-width: 168px;
+      max-width: none;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 10px;
+    }
+
+    sticky-add-to-cart .sticky-add-to-cart__bar.sticky-add-to-cart__bar--somna .add-to-cart-text__content {
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+  }
+{% endstylesheet %}

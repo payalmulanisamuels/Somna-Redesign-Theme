@@ -6,14 +6,13 @@ margin-top: 7px;
 }
 
 .hz-faq-wrapper {
-    margin: -29px 0 0 0;
+    padding: 40px 0 50px 0 !important;
 }
 .hz-faq-wrapper .custom-header{
   margin-bottom: 0;
 }
 .product-information__grid .media-fit-contain :is(img, video, iframe, .deferred-media__poster-image){
     object-fit: cover !important;
-    border-radius: 0 0 20px 20px;
 }
 .product-details {
     padding-bottom: 15px;
@@ -213,7 +212,7 @@ margin-top: 7px;
     transform: translateX(-50%);
     background: #1354c4;
     color: #fff;
-    font-size: 7.5px;
+    font-size: 9.8px;
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 10px;
@@ -1030,9 +1029,131 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
 }
 /* Problem solution section*/
 
+/* How it works*/
+.hz-hiw-section {
+  position: relative;
+  padding: 45px 0 30px 0px;
+}
+.hz-hiw-wave-img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  object-fit: fill;
+}
+.hz-hiw-main-title {
+  text-align: center;
+  font-size: 38px;
+  font-family: serif;
+  font-weight: 500;
+  color: #0b1a30;
+  margin: 0 0 40px 0;
+}
+.hz-hiw-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.hz-hiw-card {
+  background-color: #dceaf7;
+  border-radius: 24px;
+  padding: 12px 10px;
+}
+.hz-hiw-card-inner{
+  display: flex;
+  justify-content: space-between;
+}
+.hz-hiw-card:nth-child(2) {
+  background-color: #eee9e0;
+}
+
+.hz-hiw-card-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.hz-hiw-card-info {
+  flex: 1;
+}
+
+.hz-hiw-card-title {
+  font-size: 24px;
+  font-family: serif;
+  font-weight: 600;
+  color: #0b1a30;
+  margin: 0 0 12px 0;
+  line-height: 1.15;
+}
+
+.hz-hiw-card-desc {
+  font-size: 8px;
+  line-height: 1.55;
+  color: #1a2a3e;
+}
+.hz-hiw-card-bottom-image {
+  max-width: 167px;
+}
+.hz-hiw-single-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.hz-hiw-single-content {
+  flex: 1;
+}
+
+.hz-hiw-single-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #0A1A4A;
+  margin: 0 0 5px 0;
+  font-family: var(--headfont);
+}
+.hz-hiw-single-desc {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #0A1A4A;
+}
+.hz-hiw-single-desc p {
+  margin: 0;
+}
+
+.hz-hiw-single-media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hz-hiw-single-media img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+/* How it works*/
 
 
 @media(min-width:768px){
+  .hero__container {
+    padding: 150px 0 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hz-hiw-section {
+    padding: 100px 0 100px;
+  }
+   .hz-hiw-card-desc {
+    font-size: 16px;
+  }
+  .hz-hiw-card-title {
+    font-size: 40px;
+  }
+  .hz-hiw-card {
+    padding: 25px 20px;
+  }
   .hz-ps-text{
     font-size: 20px;
     line-height: 1.2;
@@ -1156,9 +1277,7 @@ sticky-add-to-cart[data-purchase-mode='onetime'] .somna-sticky__row-per-night {
     width: 200px;
     height: 10px;
   }
-  .product-information__grid {
-    margin-bottom: 90px;
-  }
+ 
  
 
 

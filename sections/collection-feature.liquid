@@ -133,17 +133,20 @@
         -%}
 
         <div id="tab-content-{{ block.id }}" class="sleep-tab-content {% if forloop.first %}active{% endif %}" role="tabpanel">
+
+          <div class="sleep-warap">
           <div class="sleep-card-subtitle">{{ block.settings.badge_subtitle }}</div>
-          
+             {%- if block.settings.overlay_badge != blank -%}
+              <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
+            {%- endif -%}
+          </div>
           <div class="sleep-card-image-wrapper">
             {%- if card_image != blank -%}
               {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'sleep-card-main-image' }}
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
-            {%- if block.settings.overlay_badge != blank -%}
-              <div class="sleep-card-badge">{{ block.settings.overlay_badge }}</div>
-            {%- endif -%}
+         
           </div>
 
           {% if selected_product.metafields.custom.custom_review_rating_review_count.value %}
@@ -200,6 +203,95 @@
     });
   });
 </script>
+
+{% stylesheet %}
+  /* "What keeps you from sleeping well?" on collection pages (2026-10-16): a shorter section, a
+     full-width but shorter product photo, and a soft shadow around the white container.
+     Same content, type, colours and layout. */
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+    margin: 24px auto 32px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgb(10 26 74 / 0.08), 0 2px 6px rgb(10 26 74 / 0.05);
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-header {
+    margin-bottom: 14px;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+    margin-bottom: 16px;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-container {
+    padding: 14px;
+  }
+
+  /* Photo: full width of the card, shorter fixed height; the photo fills it without stretching
+     (object-fit: cover), centred so the product stays in view */
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
+    width: 100%;
+    height: 280px;
+    margin: 10px 0 12px;
+    aspect-ratio: auto;
+  }
+
+  #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+      margin: 40px auto 48px;
+      padding: 32px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-header {
+      margin-bottom: 18px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+      margin-bottom: 20px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-container {
+      padding: 20px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-image-wrapper {
+     height: 330px;
+      margin-bottom: 14px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-description {
+      margin-bottom: 8px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-price {
+      margin-bottom: 14px;
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-card-button {
+      min-height: 46px;
+    }
+   
+  }
+
+  @media screen and (min-width: 990px) {
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-section {
+      margin: 40px auto 48px;
+      padding: clamp(28px, 2.8vw, 40px);
+    }
+
+    #MainContent[data-template^='collection'] .sleep-tabs-section-main .sleep-tabs-list {
+      margin-bottom: 0;
+    }
+
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

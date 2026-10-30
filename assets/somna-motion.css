@@ -1,0 +1,1149 @@
+/* ==========================================================================
+   Somna motion — calm, slow, restful.
+   1. Reveal on scroll (classes added by the small observer at the end of assets/custom.js)
+   2. Button hover / focus / press (sitewide)
+
+   Motion only: these rules change opacity, translate, scale, colour and shadow.
+   They never change size, spacing or position in the layout, so there is no layout shift.
+   Everything is switched off for visitors who ask their device for reduced motion.
+   Tune the whole feel here.
+   ========================================================================== */
+
+/* Motion variables and section 1 (reveal on scroll): moved unchanged to the end of assets/custom.css
+   (2026-10-19, speed) so they apply from the first paint. This file now loads without blocking the page. */
+
+/* --------------------------------------------------------------------------
+   2. Buttons
+   Disabled, sold-out (disabled), loading (aria-busy) and "added" states are
+   excluded, so their own styling and the theme's add-to-cart animation are untouched.
+   No pseudo-elements are added, so nothing can cover a button or block its clicks.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Smooth hover/press for every button; the add-to-cart button keeps its own transition list,
+     which already includes translate and scale. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.add-to-cart-button, .button-unstyled) {
+    transition-property: color, background-color, box-shadow, opacity, translate, scale, transform;
+    transition-duration: var(--sm-hover-duration);
+    transition-timing-function: var(--sm-ease);
+  }
+
+  :is(
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .hz-card-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-banner-btn
+    )
+    > svg:last-child {
+    transition: translate var(--sm-hover-duration) var(--sm-ease);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  /* Lift + soft shadow. .hz-card-btn and .hz-bundle-btn already lift with transform, so they only get the shadow. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .bundle-card__button,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+    translate: 0 var(--sm-hover-lift);
+  }
+
+  :is(
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(:disabled, [aria-disabled='true'], [aria-busy='true']):hover {
+    box-shadow: var(--sm-hover-shadow);
+  }
+
+  /* Theme buttons draw their border with an inset shadow, so keep it and add the soft shadow after it */
+  :is(.button, .button-secondary, .button-custom):not(
+      .button-unstyled,
+      :disabled,
+      [aria-disabled='true'],
+      [aria-busy='true'],
+      [data-added='true']
+    ):hover {
+    box-shadow: inset 0 0 0 var(--button-border-width, 0px) var(--button-border-color, transparent),
+      var(--sm-hover-shadow);
+  }
+
+  /* About 8% colour shift on theme buttons (only where the browser supports color-mix) */
+  @supports (color: color-mix(in srgb, red 50%, blue)) {
+    .button:not(.button-secondary, .button-unstyled, .button-custom, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+      --button-background-color: color-mix(in srgb, var(--color-primary-button-hover-background) 92%, #fff);
+    }
+
+    .button-secondary:not(:disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):hover {
+      --button-background-color: color-mix(
+        in srgb,
+        var(--color-secondary-button-hover-background) 92%,
+        var(--color-secondary-button-hover-text)
+      );
+    }
+  }
+
+  /* Arrow nudges right */
+  :is(
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .hz-card-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-banner-btn
+    ):not(:disabled, [aria-busy='true']):hover
+    > svg:last-child,
+  .hz-card:hover .hz-card-btn > svg:last-child {
+    translate: var(--sm-arrow-shift) 0;
+  }
+}
+
+/* Keyboard focus: the same lift and a clear outline */
+:is(
+    .hz-banner-btn,
+    .hz-card-btn,
+    .bundle-card__button,
+    .hz-bundle-btn,
+    .somna-offer__button,
+    .somna-sleep-bundle__button,
+    .hz-upsell-add-btn
+  ):focus-visible {
+  outline: 2px solid var(--sm-focus-color);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .bundle-card__button,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true'], [data-added='true']):focus-visible {
+    translate: 0 var(--sm-hover-lift);
+  }
+
+  /* Gentle press. The add-to-cart button keeps the theme's own press. */
+  :is(
+      .button,
+      .button-secondary,
+      .button-custom,
+      .hz-banner-btn,
+      .hz-card-btn,
+      .bundle-card__button,
+      .hz-bundle-btn,
+      .somna-offer__button,
+      .somna-sleep-bundle__button,
+      .hz-upsell-add-btn
+    ):not(.add-to-cart-button, .button-unstyled, :disabled, [aria-disabled='true'], [aria-busy='true']):active {
+    scale: var(--sm-press-scale);
+  }
+}
+
+/* Sections 3 (hero text entrance) and 4 (image settle on scroll): moved unchanged to the end of
+   assets/custom.css (2026-10-19, speed) so they apply from the first paint. */
+
+/* 5. Floating images: removed (2026-10-19, speed). No page used the "Floating image" block; the old rules are in the theme's Git history. */
+
+/* --------------------------------------------------------------------------
+   6. "Start with a bundle": floating nasal strip, mouth tape and dots (desktop only)
+   Like the floating fruit on drinkohza.com, using Somna's own strip (Breathe blue)
+   and tape (Bold red). Images: assets/somna-deco-strip.webp and assets/somna-deco-tape.webp.
+   Pure CSS decoration on pseudo-elements behind the content: can't be clicked and
+   takes no space, so the cards, buttons and layout are exactly as before.
+   Motion: a springy pop-in as the section scrolls into view, then a soft bounce loop.
+   Reduced-motion visitors see them standing still. Tune with the variables below.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-deco-strip-w: 150px;
+  --sm-deco-strip-h: 51px;
+  --sm-deco-tape-w: 112px;
+  --sm-deco-tape-h: 47px;
+  --sm-deco-dot: #efd27a;
+  --sm-deco-bounce: 20px;
+}
+
+/* Soft bounce: rises, drops, squashes a little on landing, small rebound, rests */
+@keyframes sm-deco-bounce {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  38% {
+    translate: 0 calc(var(--sm-deco-bounce) * -1);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  58% {
+    translate: 0 0;
+    scale: 1.06 0.92;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  68% {
+    translate: 0 calc(var(--sm-deco-bounce) * -0.3);
+    scale: 0.98 1.02;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  78% {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+/* Springy pop-in, driven by scrolling the section into view */
+@keyframes sm-deco-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(0.3);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.12);
+  }
+
+  75% {
+    transform: translateY(5px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Dots just fade up into place (scaling their wide layer would make them fly in from the middle) */
+@keyframes sm-deco-dots-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: none;
+  }
+}
+
+@keyframes sm-deco-dots {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+
+  45% {
+    translate: 0 -4px;
+    scale: 1.03;
+  }
+
+  65% {
+    translate: 0 0;
+    scale: 0.99;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  section[class^='bundle-section-'] {
+    isolation: isolate;
+  }
+
+  section[class^='bundle-section-'] .custom-header,
+  section[class^='bundle-section-'] .bundle-section__grid {
+    position: relative;
+  }
+
+  section[class^='bundle-section-'] .custom-header::before,
+  section[class^='bundle-section-'] .custom-header::after,
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  /* Nasal strip (blue): left edge, above the heading */
+  section[class^='bundle-section-'] .custom-header::before {
+    top: calc(50% - 106px - var(--sm-deco-strip-h) / 2);
+    left: calc(50% - 50vw + 104px - var(--sm-deco-strip-w) / 2);
+    width: var(--sm-deco-strip-w);
+    height: var(--sm-deco-strip-h);
+    rotate: -18deg;
+    background-image: url('somna-deco-strip.webp');
+    background-size: contain;
+    filter: drop-shadow(0 14px 16px rgb(10 26 74 / 0.22));
+  }
+
+  /* Dots: two beside the heading on the left, two above it on the right */
+  section[class^='bundle-section-'] .custom-header::after {
+    top: calc(50% - 120px);
+    left: calc(50% - 50vw);
+    width: 100vw;
+    height: 240px;
+    background-image: radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%);
+    background-size: 16px 16px, 10px 10px, 12px 12px, 18px 18px;
+    background-position: left 132px top 84px, left 205px top 123px, right 324px top 24px, right 283px top 53px;
+    opacity: 0.9;
+  }
+
+  /* Mouth tape (red): right edge, beside the second card.
+     100vw includes the scrollbar, so keep about 17px extra clear of the edge. */
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    top: calc(71px - var(--sm-deco-tape-h) / 2);
+    right: calc(45% - 50vw + 17px + 84px - var(--sm-deco-tape-w) / 2);
+    width: var(--sm-deco-tape-w);
+    height: var(--sm-deco-tape-h);
+    rotate: 14deg;
+    background-image: url('somna-deco-tape.webp');
+    background-size: contain;
+    filter: drop-shadow(0 14px 16px rgb(10 26 74 / 0.22));
+  }
+}
+
+@media screen and (min-width: 990px) and (prefers-reduced-motion: no-preference) {
+  section[class^='bundle-section-'] .custom-header::before {
+    animation: sm-deco-bounce 3.2s infinite;
+  }
+
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    animation: sm-deco-bounce 3.6s -1.4s infinite;
+  }
+
+  section[class^='bundle-section-'] .custom-header::after {
+    animation: sm-deco-dots 2.8s ease-in-out -0.6s infinite;
+  }
+
+  /* Pop-in while scrolling into view (browsers without support just show the bounce) */
+  @supports (animation-timeline: view()) {
+    section[class^='bundle-section-'] {
+      view-timeline-name: --sm-deco;
+    }
+
+    section[class^='bundle-section-'] .custom-header::before,
+    section[class^='bundle-section-'] .bundle-section__grid::before,
+    section[class^='bundle-section-'] .custom-header::after {
+      animation-name: sm-deco-bounce, sm-deco-pop;
+      animation-duration: 3.2s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-deco;
+      animation-range: normal, entry 5% entry 45%;
+    }
+
+    section[class^='bundle-section-'] .bundle-section__grid::before {
+      animation-duration: 3.6s, auto;
+      animation-delay: -1.4s, 0s;
+      animation-range: normal, entry 15% entry 55%;
+    }
+
+    section[class^='bundle-section-'] .custom-header::after {
+      animation-name: sm-deco-dots, sm-deco-dots-in;
+      animation-duration: 2.8s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: -0.6s, 0s;
+      animation-range: normal, entry 10% entry 50%;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Nasal Strips / Mouth Tape cards (desktop only)
+   - The photo starts slightly zoomed and settles as the card scrolls in.
+   - Title, price and button rise in one after another as the card scrolls in.
+   - On hover, the photo slowly zooms in.
+   Motion only (scale, translate, opacity) inside cards that already crop their
+   photo, so nothing moves in the layout and the links work as before.
+   -------------------------------------------------------------------------- */
+@keyframes sm-card-photo {
+  from {
+    scale: 1.14;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes sm-card-text {
+  from {
+    opacity: 0;
+    translate: 0 26px;
+  }
+
+  to {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+@media screen and (min-width: 990px) and (prefers-reduced-motion: no-preference) {
+  .hz-slider-section .hz-card .hz-card-media img {
+    transition: transform 1.1s var(--sm-ease);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hz-slider-section .hz-card:hover .hz-card-media img {
+      transform: scale(1.06);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    /* The section is tracked (it crops with overflow: hidden, so the cards themselves can't be) */
+    .hz-slider-section {
+      view-timeline-name: --sm-card;
+    }
+
+    .hz-slider-section .hz-card .hz-card-media img {
+      animation: sm-card-photo linear both;
+      animation-timeline: --sm-card;
+      animation-range: entry 0% cover 55%;
+    }
+
+    .hz-slider-section .hz-card :is(.hz-card-title, .hz-card-price, .hz-card-btn) {
+      animation: sm-card-text linear both;
+      animation-timeline: --sm-card;
+      animation-range: entry 25% entry 75%;
+    }
+
+    .hz-slider-section .hz-card .hz-card-price {
+      animation-range: entry 35% entry 85%;
+    }
+
+    .hz-slider-section .hz-card .hz-card-btn {
+      animation-range: entry 45% entry 95%;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. Nasal Strips / Mouth Tape cards: bouncing cut-outs and icons (desktop only)
+   Added as a new block; nothing above is changed. Self-contained: own keyframes
+   (sm-cd-*), own colour and its own scroll timeline (--sm-cdeco).
+   - Night (black) strip on the left edge of the first card
+   - Breathe (blue) tape on the right edge of the second card
+   - A twinkling sparkle on the first card and a rocking moon on the second card
+   - A few soft yellow dots in the side margins
+   Images: assets/somna-deco-strip-black.webp, somna-deco-tape-blue.webp,
+   somna-deco-sparkle.svg and somna-deco-moon.svg.
+   Pseudo-elements that can't be clicked (clicks pass straight through to the card)
+   and take no space, so the cards and layout are exactly as before.
+   -------------------------------------------------------------------------- */
+:root {
+  --sm-cd-dot: #efd27a;
+  --sm-cd-bounce: 18px;
+}
+
+@keyframes sm-cd-bounce {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  38% {
+    translate: 0 calc(var(--sm-cd-bounce) * -1);
+    scale: 1;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  58% {
+    translate: 0 0;
+    scale: 1.06 0.92;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1);
+  }
+
+  68% {
+    translate: 0 calc(var(--sm-cd-bounce) * -0.3);
+    scale: 0.98 1.02;
+    animation-timing-function: cubic-bezier(0.55, 0, 0.8, 0.4);
+  }
+
+  78% {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes sm-cd-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.3);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-12px) scale(1.12);
+  }
+
+  75% {
+    transform: translateY(4px) scale(0.95);
+  }
+
+  90% {
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sm-cd-twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+    scale: 0.7;
+    rotate: 0deg;
+  }
+
+  50% {
+    opacity: 1;
+    scale: 1.1;
+    rotate: 45deg;
+  }
+}
+
+@keyframes sm-cd-rock {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -10deg;
+  }
+
+  50% {
+    translate: 0 -6px;
+    rotate: 8deg;
+  }
+}
+
+@keyframes sm-cd-dots {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@keyframes sm-cd-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hz-slider-section .hz-slider-viewport,
+  .hz-slider-section .hz-slider-track > .hz-card-outer {
+    position: relative;
+  }
+.hz-slider-section .hz-slider-track:before,
+.hz-slider-section .hz-slider-track:after,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::before,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after,
+  .hz-slider-section .hz-slider-viewport::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Black strip: half over the first card's left edge */
+  .hz-slider-section .hz-slider-track:nth-child(1)::before {
+    top: 16%;
+    left: -64px;
+    width: 128px;
+    height: 43px;
+    rotate: -24deg;
+    background-image: url('somna-deco-strip-black.webp');
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.3));
+  }
+
+  /* Sparkle: top-right corner of the first card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    top: 22px;
+    right: 26px;
+    width: 26px;
+    height: 26px;
+    background-image: url('somna-deco-sparkle.svg');
+  }
+
+  /* Blue tape: half over the second card's right edge */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+    right: -52px;
+    bottom: 14%;
+    width: 104px;
+    height: 44px;
+    rotate: 18deg;
+    background-image: url('somna-deco-tape-blue.webp');
+    filter: drop-shadow(0 12px 14px rgb(10 26 74 / 0.3));
+  }
+
+  /* Moon: top-right corner of the second card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    top: 20px;
+    right: 26px;
+    width: 34px;
+    height: 34px;
+    background-image: url('somna-deco-moon.svg');
+    filter: drop-shadow(0 4px 8px rgb(239 210 122 / 0.5));
+  }
+
+  /* Soft yellow dots in the side margins */
+  .hz-slider-section .hz-slider-viewport::after {
+    inset: 0 -110px;
+    z-index: 0;
+    background-image: radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-cd-dot) 62%, transparent 66%);
+    background-size: 14px 14px, 9px 9px, 12px 12px, 17px 17px;
+    background-position: left 44px top 70%, left 76px top 86%, right 52px top 14%, right 30px top 30%;
+    opacity: 0.9;
+  }
+}
+
+@media screen and (min-width: 990px) and (prefers-reduced-motion: no-preference) {
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+    animation: sm-cd-bounce 3.4s -0.8s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+    animation: sm-cd-bounce 3.8s -2.2s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    animation: sm-cd-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    animation: sm-cd-rock 4.2s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-viewport::after {
+    animation: sm-cd-dots 2.8s ease-in-out -1.2s infinite;
+  }
+
+  /* Pop-in as the cards scroll into view. The timeline sits on the Shopify section
+     wrapper, because the cards section itself crops with overflow: hidden. */
+  @supports (animation-timeline: view()) {
+    .shopify-section:has(> .hz-slider-section) {
+      view-timeline-name: --sm-cdeco;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::before {
+      animation-name: sm-cd-bounce, sm-cd-pop;
+      animation-duration: 3.4s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: -0.8s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 10% entry 60%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::before {
+      animation-name: sm-cd-bounce, sm-cd-pop;
+      animation-duration: 3.8s, auto;
+      animation-timing-function: ease, linear;
+      animation-delay: -2.2s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 30% entry 80%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+      animation-name: sm-cd-twinkle, sm-cd-pop;
+      animation-duration: 2.4s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 20% entry 70%;
+    }
+
+    .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+      animation-name: sm-cd-rock, sm-cd-pop;
+      animation-duration: 4.2s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 35% entry 85%;
+    }
+
+    .hz-slider-section .hz-slider-viewport::after {
+      animation-name: sm-cd-dots, sm-cd-fade-in;
+      animation-duration: 2.8s, auto;
+      animation-timing-function: ease-in-out, linear;
+      animation-delay: -1.2s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-cdeco;
+      animation-range: normal, entry 15% entry 65%;
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Mobile version of the bouncing cut-outs (sections 6 and 8), phones only (up to 749px)
+   Added as a new block; nothing above is changed. Same images and the same bounce
+   as desktop, made mobile-friendly:
+   - smaller cut-outs and about half the bounce height
+   - fewer, smaller dots
+   - no scroll-linked pop-in on phones: the loops run on the graphics chip only,
+     so scrolling stays smooth and the page script does no extra work
+   - everything stays inside the screen width, so there is no sideways scroll
+   Pseudo-elements that can't be tapped (taps pass straight through) and take no
+   space, so the mobile layout is exactly as before. Reduced-motion visitors see
+   the cut-outs standing still.
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  /* ---- "Start with a bundle": blue strip left of the heading, red tape right of it, a few dots ---- */
+  section[class^='bundle-section-'] {
+    isolation: isolate;
+  }
+
+  section[class^='bundle-section-'] .custom-header,
+  section[class^='bundle-section-'] .bundle-section__grid {
+    position: relative;
+  }
+
+  section[class^='bundle-section-'] .custom-header::before,
+  section[class^='bundle-section-'] .custom-header::after,
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Blue nasal strip: left side of the heading */
+  section[class^='bundle-section-'] .custom-header::before {
+    --sm-deco-bounce: 9px;
+    top: calc(50% - 12px);
+    left: calc(50% - 50vw + 12px);
+    width: 66px;
+    height: 23px;
+    rotate: -16deg;
+    background-image: url('somna-deco-strip.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.18));
+  }
+
+  /* Red mouth tape: right side of the heading */
+  section[class^='bundle-section-'] .custom-header::after {
+    --sm-deco-bounce: 8px;
+    top: calc(50% - 12px);
+    right: calc(50% - 50vw + 12px);
+    width: 56px;
+    height: 24px;
+    rotate: 14deg;
+    background-image: url('somna-deco-tape.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.18));
+  }
+
+  /* Three small dots around the strip and tape (kept clear of the heading text) */
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-image: radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%),
+      radial-gradient(circle, var(--sm-deco-dot) 62%, transparent 66%);
+    background-size: 9px 9px, 6px 6px, 8px 8px;
+    background-position: left 58px top 2px, left 30px top 54px, right 40px top 54px;
+    opacity: 0.9;
+  }
+
+  /* ---- Nasal Strips / Mouth Tape cards ----
+     On phones the cards scroll sideways and crop their edges, so:
+     - the black strip and blue tape sit on the section's corners (they stay put while the cards swipe)
+     - the sparkle and moon sit inside the top-right corner of the first two cards */
+  .shopify-section:has(> .hz-slider-section) {
+    position: relative;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::before,
+  .shopify-section:has(> .hz-slider-section)::after,
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(-n + 2)::after {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+  }
+
+  /* Black strip: over the top-left corner of the first card */
+  .shopify-section:has(> .hz-slider-section)::before {
+    --sm-cd-bounce: 8px;
+    top: 8px;
+    left: 4px;
+    width: 64px;
+    height: 22px;
+    rotate: -20deg;
+    background-image: url('somna-deco-strip-black.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.25));
+  }
+
+  /* Blue tape: over the bottom-right corner of the slider */
+  .shopify-section:has(> .hz-slider-section)::after {
+    --sm-cd-bounce: 8px;
+    right: 6px;
+    bottom: 10px;
+    width: 54px;
+    height: 23px;
+    rotate: 16deg;
+    background-image: url('somna-deco-tape-blue.webp');
+    filter: drop-shadow(0 8px 8px rgb(10 26 74 / 0.25));
+  }
+
+  /* Sparkle: top-right corner of the first card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    top: 12px;
+    right: 14px;
+    width: 18px;
+    height: 18px;
+    background-image: url('somna-deco-sparkle.svg');
+  }
+
+  /* Moon: top-right corner of the second card */
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    top: 12px;
+    right: 14px;
+    width: 22px;
+    height: 22px;
+    background-image: url('somna-deco-moon.svg');
+    filter: drop-shadow(0 3px 6px rgb(239 210 122 / 0.5));
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  section[class^='bundle-section-'] .custom-header::before {
+    animation: sm-deco-bounce 3.2s infinite;
+  }
+
+  section[class^='bundle-section-'] .custom-header::after {
+    animation: sm-deco-bounce 3.6s -1.4s infinite;
+  }
+
+  section[class^='bundle-section-'] .bundle-section__grid::before {
+    animation: sm-cd-dots 2.8s ease-in-out -0.6s infinite;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::before {
+    animation: sm-cd-bounce 3.4s -0.8s infinite;
+  }
+
+  .shopify-section:has(> .hz-slider-section)::after {
+    animation: sm-cd-bounce 3.8s -2.2s infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(1)::after {
+    animation: sm-cd-twinkle 2.4s ease-in-out infinite;
+  }
+
+  .hz-slider-section .hz-slider-track > .hz-card-outer:nth-child(2)::after {
+    animation: sm-cd-rock 4.2s ease-in-out infinite;
+  }
+}
+
+/* 10. "Breathe through your nose" banner text entrance: removed (2026-10-14).
+   It was already switched off by section 14; the banner text uses the reveal in custom.js. */
+
+/* 11. "Shop the essentials" bouncing cut-outs (switched off for Halloween): removed (2026-10-19, speed).
+   To bring them back after Halloween, restore section 11 from the theme's Git history (before this date). */
+
+/* --------------------------------------------------------------------------
+   12. "Small essentials. Thoughtfully made." (the 4-column section with yellow icons)
+   Added as a new block; nothing above is changed. Desktop, tablet and mobile.
+   Calm "lights down, slow breath" motion, with a moon:
+   - the heading settles in from a soft blur as the section scrolls into view
+   - the four columns rise gently into place, one after another, and the thin
+     dividers draw downward
+   - a slow breath (about 4s in, 4s out) travels across the four yellow icons,
+     left to right (the honey glow behind each icon was removed 2026-10-15)
+   - the thin column dividers are navy, like the design (2026-10-15)
+   - a honey crescent moon sits in the top-right corner, gently rocking
+     (on desktop and tablet it rises into place as the section scrolls in)
+   - a few honey fireflies drift and fade in the cream background
+   The section is found by the end of its ID (section_ibM3ft), so only this section
+   is affected. Motion only (opacity, translate, scale, blur): sizes, spacing and
+   positions are exactly as before. Decorations can't be clicked and take no space.
+   Browsers without scroll-driven animation support skip the entrance and simply
+   show the section. Reduced-motion visitors see everything standing still.
+   -------------------------------------------------------------------------- */
+@keyframes sm-sm-draw {
+  from {
+    scale: 1 0;
+  }
+
+  to {
+    scale: 1 1;
+  }
+}
+
+/* One slow breath: in for about 4s, out for about 4s */
+@keyframes sm-sm-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  45% {
+    scale: 1.06;
+  }
+}
+
+@keyframes sm-sm-fireflies {
+  0%,
+  100% {
+    opacity: 0.25;
+    translate: 0 0;
+  }
+
+  30% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 0.45;
+    translate: 8px -10px;
+  }
+
+  75% {
+    opacity: 0.85;
+    translate: -4px -4px;
+  }
+}
+
+@keyframes sm-sm-moon {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -8deg;
+  }
+
+  50% {
+    translate: 0 -5px;
+    rotate: 6deg;
+  }
+}
+
+@keyframes sm-sm-moonrise {
+  from {
+    opacity: 0;
+    transform: translate(-30px, 50px) scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Decorations ---- */
+.shopify-section[id$='__section_ibM3ft'] .section::before,
+.shopify-section[id$='__section_ibM3ft'] .section::after,
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+/* Fireflies: two layers that drift on different beats, kept in the side margins */
+.shopify-section[id$='__section_ibM3ft'] .section::before,
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
+  inset: 0 14px;
+  background-image: radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%),
+    radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%),
+    radial-gradient(circle, rgb(240 210 122 / 0.95) 0 35%, rgb(240 210 122 / 0) 70%);
+  background-size: 14px 14px, 10px 10px, 12px 12px;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .section::before {
+  background-position: 6% 34%, 92% 70%, 10% 86%;
+}
+
+.shopify-section[id$='__section_ibM3ft'] .section-background::before {
+  background-position: 95% 40%, 4% 62%, 88% 88%;
+}
+
+/* Moon: top-right corner */
+.shopify-section[id$='__section_ibM3ft'] .section::after {
+  top: 10%;
+  right: 7%;
+  width: 46px;
+  height: 46px;
+  background-image: url('somna-deco-moon.svg');
+  background-size: contain;
+  filter: drop-shadow(0 0 12px rgb(240 210 122 / 0.7));
+}
+
+.shopify-section[id$='__section_ibM3ft'] .icon-block__media {
+  position: relative;
+}
+
+/* Column dividers: solid navy lines like the design (the block setting is a light grey) */
+.shopify-section[id$='__section_ibM3ft'] .divider__line {
+  border-color: #0a1a4a;
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section[id$='__section_ibM3ft'] .section::before,
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    background-size: 8px 8px, 6px 6px, 7px 7px;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::before {
+    background-position: 5% 12%, 94% 92%, 30% 96%;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    background-position: 96% 30%, 3% 60%, 72% 6%;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::after {
+    top: 5%;
+    right: 2%;
+    width: 20px;
+    height: 20px;
+    filter: drop-shadow(0 0 6px rgb(240 210 122 / 0.7));
+  }
+}
+
+/* ---- Loops (all screen sizes) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .shopify-section[id$='__section_ibM3ft'] .icon-block__media {
+    animation: sm-sm-breathe 8s ease-in-out 1.6s infinite;
+  }
+
+  /* The breath travels left to right: each column starts 0.9s after the one before */
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(3) .icon-block__media {
+    animation-delay: 2.5s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(5) .icon-block__media {
+    animation-delay: 3.4s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .group-block-content > .group-block:nth-child(7) .icon-block__media {
+    animation-delay: 4.3s;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::before {
+    animation: sm-sm-fireflies 9s ease-in-out infinite;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section-background::before {
+    animation: sm-sm-fireflies 12s ease-in-out -5s infinite reverse;
+  }
+
+  .shopify-section[id$='__section_ibM3ft'] .section::after {
+    animation: sm-sm-moon 6s ease-in-out infinite;
+  }
+}
+
+/* ---- Entrance as the section scrolls into view (all screen sizes) ---- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .shopify-section[id$='__section_ibM3ft'] {
+      view-timeline-name: --sm-small;
+    }
+
+    .shopify-section[id$='__section_ibM3ft'] .divider__line {
+      transform-origin: top;
+      animation: sm-sm-draw ease-out both;
+      animation-timeline: --sm-small;
+      animation-range: entry 40% cover 45%;
+    }
+  }
+
+  /* Desktop and tablet: the moon rises into place (the heading/column entrances were removed
+     2026-10-14: section 14 had already switched them off) */
+  @media screen and (min-width: 750px) and (prefers-reduced-motion: no-preference) {
+    .shopify-section[id$='__section_ibM3ft'] .section::after {
+      animation-name: sm-sm-moon, sm-sm-moonrise;
+      animation-duration: 6s, auto;
+      animation-timing-function: ease-in-out, ease-out;
+      animation-delay: 0s, 0s;
+      animation-iteration-count: infinite, 1;
+      animation-fill-mode: none, both;
+      animation-timeline: auto, --sm-small;
+      animation-range: normal, entry 15% entry 70%;
+    }
+  }
+}
+
+/* Sections 13-15 (motion variables, Halloween webs / spider / pumpkins, Sleep Bundle and Problem / Solution
+   webs): moved unchanged to the end of assets/custom.css (2026-10-19, speed) so they apply from the first paint. */
+
+/* ---- "Or save with a bundle" on the homepage: the old floating strip, tape and dots
+   (sections 6 and 9 above) are hidden here. They still show on the collection page. ---- */
+#MainContent[data-template='index'] section[class^='bundle-section-'] .custom-header::before,
+#MainContent[data-template='index'] section[class^='bundle-section-'] .custom-header::after,
+#MainContent[data-template='index'] section[class^='bundle-section-'] .bundle-section__grid::before {
+  content: none;
+  animation: none;
+}

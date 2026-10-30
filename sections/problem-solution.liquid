@@ -3,7 +3,7 @@
 
 {% if problem != blank or solution  != blank %}
 
-<div class="hz-prob-sol-section" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
+<div class="hz-prob-sol-section{% if section.settings.halloween_web %} somna-ps--halloween{% endif %}" id="hz-prob-sol-{{ section.id }}" style="background-color: {{ section.settings.bg_color }};">
   
   {% comment %} Top Wave Divider {% endcomment %}
     {% if section.settings.top_wave_image != blank %}
@@ -15,6 +15,68 @@
     <div class="wave-container bottom" style="background-image: url({{ section.settings.bottom_wave_image | image_url: width: 1440 }})">
     </div>
     {% endif %}
+
+  {%- if section.settings.halloween_web -%}
+    {%- comment -%}
+      Halloween 2026 (Figma Nasal Strips "image 194"): the homepage's left spiderweb + spider in the
+      top-left corner. It draws itself and the spider drops when the section scrolls into view
+      (CSS: assets/somna-motion.css, section 15; size and spacing there and in custom.css).
+      Decorative only. Turn it off with the section's "Show Halloween spiderweb" setting.
+    {%- endcomment -%}
+    <span class="somna-ess__web somna-ess__web--left" aria-hidden="true">
+      <svg class="somna-ess__web-svg" viewBox="0 0 439 268" width="439" height="268" focusable="false">
+        <defs>
+          <mask id="somna-psweb-{{ section.id }}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="480" height="310">
+            <path class="hw-m hw-m--frame" pathLength="1" d="M0 2 L300 2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.15s" d="M65 70 L55.9 -4.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.21s" d="M65 70 L-3.0 8.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.27s" d="M65 70 L-4.0 62.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.33s" d="M65 70 L120.2 -3.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.39s" d="M65 70 L189.7 -2.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.45s" d="M65 70 L284.2 -1.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.51s" d="M65 70 L-2.2 173.4"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.57s" d="M65 70 L-0.6 271.8"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:0.5s;--d:0.5s" d="M62.9 81.8 A12 12 0 1 1 76.8 67.9 L102.4 63.4 A38 38 0 1 0 58.4 107.4 L53.9 133.0 A64 64 0 1 1 128.0 58.9 L153.6 54.4 A90 90 0 1 0 49.4 158.6 L44.9 184.2 A116 116 0 1 1 179.2 49.9"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:0.95s;--d:0.5s" d="M204.8 45.3 A142 142 0 1 0 40.3 209.8 L35.8 235.4 A168 168 0 1 1 230.4 40.8 L256.1 36.3 A194 194 0 1 0 31.3 261.1 L26.8 286.7 A220 220 0 1 1 281.7 31.8 L307.3 27.3 A246 246 0 1 0 22.3 312.3"/>
+            <rect class="hw-m--all" x="-20" y="-20" width="480" height="310" fill="#fff"/>
+          </mask>
+        </defs>
+        <image href="{{ 'somna-hw-web.png' | asset_url }}" width="439" height="268" mask="url(#somna-psweb-{{ section.id }})"/>
+      </svg>
+      <span class="somna-spider">
+        <i class="somna-spider__thread"></i>
+        <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
+      </span>
+    </span>
+    <script>
+      /* Starts the web / spider animation when the web is a quarter of the way up the screen, and
+         replays it each time the section comes back into view. Without this script it simply shows still. */
+      (function () {
+        function setup(s) {
+          if (!s || s.getAttribute('data-hw-init')) return;
+          s.setAttribute('data-hw-init', '1');
+          if (!('IntersectionObserver' in window)) return;
+          var target = s.querySelector('.somna-ess__web--left') || s;
+          s.classList.add('hw-ready');
+          new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) s.classList.add('is-in');
+          }, { rootMargin: '0px 0px -25% 0px' }).observe(target);
+          new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) s.classList.remove('is-in');
+          }).observe(s);
+        }
+        function scan() {
+          document.querySelectorAll('.somna-ps--halloween').forEach(setup);
+        }
+        scan();
+        if (!window.somnaPsHwBound) {
+          window.somnaPsHwBound = true;
+          document.addEventListener('DOMContentLoaded', scan);
+          document.addEventListener('shopify:section:load', scan);
+        }
+      })();
+    </script>
+  {%- endif -%}
     
   <div class="section section--page-width">
   <div class="hz-ps-container">
@@ -80,6 +142,23 @@
  
     {% endif %}
 
+{% stylesheet %}
+  /* Halloween spider, phones only (2026-10-16, Figma Mouth Tape mobile): shorter silk and a smaller
+     spider, so it rests in the gap left of the Problem card, about two-thirds of the way down it,
+     instead of dropping onto the "Problem" heading and text. Tablet and desktop are unchanged. */
+  @media screen and (max-width: 749px) {
+    .somna-ps--halloween > .somna-ess__web--left .somna-spider {
+      left: calc(var(--web-w) * 30 / 439);
+      --len: calc(var(--web-w) * 168 / 439);
+    }
+
+    .somna-ps--halloween > .somna-ess__web--left .somna-spider__body {
+      left: calc(var(--web-w) * -15 / 439);
+      width: calc(var(--web-w) * 52 / 439);
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Problem Solution",
@@ -105,6 +184,13 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#fdf8ee"
+    },
+    {
+      "type": "checkbox",
+      "id": "halloween_web",
+      "label": "Show Halloween spiderweb",
+      "info": "Animated spiderweb and spider in the top-left corner (Halloween 2026).",
+      "default": true
     },
     {
       "type": "header",

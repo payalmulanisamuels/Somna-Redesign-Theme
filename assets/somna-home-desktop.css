@@ -1,0 +1,1543 @@
+/* =====================================================================
+   SOMNA — DESKTOP & TABLET (homepage 2026-10-07, collection added same day)
+   ---------------------------------------------------------------------
+   Loaded on the homepage, collection, product and page templates, after
+   custom.css (snippets/stylesheets). Shared components (container width,
+   section headings, trust bar, bundle grid, product cards, FAQ, newsletter)
+   use one rule; page-only sections are scoped to their template.
+   Source of truth: Figma "Home" frame (node 796-327), with sizes
+   re-proportioned for real desktop screens.
+
+   Mobile (<750px) is locked: every rule in this file sits inside a
+   min-width media query (750px / 990px / 1200px), so nothing here
+   applies to phones. Rules are scoped through #MainContent[data-template]
+   and, where a single section is targeted, its section-ID suffix.
+
+   Breakpoints follow the theme: 750px (tablet) and 990px (desktop),
+   plus 1200px for wide-screen refinements. Fluid sizes use clamp().
+
+   The few !important flags only override existing !important rules or
+   inline widths written by theme blocks.
+   ===================================================================== */
+
+/* =====================================================================
+   PRODUCT & COLLECTION PAGES — tablet/desktop blocks moved here on 2026-10-15
+   from assets/product-col-custom.css and assets/somna-buybox.css (no longer loaded).
+   Kept at the top of this file so the rules below still win, exactly as before.
+   Scoped to the product / collection pages with :where(...) (no extra specificity);
+   .somna-sp (2026-10-15) = the buy boxes on the Halloween Sale page.
+   ===================================================================== */
+/* ---- from product-col-custom.css ---- */
+@media(min-width:768px){
+ 
+  :where(.template-product,.template-collection,.template-list-collections,.somna-sp) .hz-hiw-grid{
+    padding: 50px 0 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hero__container {
+    padding: 150px 0 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-section {
+    padding: 50px 0 50px;
+  }
+   :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-desc {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card-title {
+    font-size: 40px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-card {
+    padding: 25px 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-ps-text{
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) h3.hz-ps-tag {
+    font-size: 25px;
+    margin-bottom: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-prob-sol-section {
+    padding: 0 0 1px 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .hz-hiw-single-desc {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) h2.hz-hiw-single-title {
+    font-size: 32px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .steps-section{
+    padding: 0px 0;
+  }
+
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) h2.hz-hiw-single-title {
+    font-size: 32px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) h3.step-title {
+    font-size: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) p.steps-subheading-bottom {
+    font-size: 24px;
+    margin-top: 40px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__title {
+    font-size: 22px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__sub-title {
+    font-size: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__badge {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__inner {
+    padding-top: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__gift {
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-option__button-label .variant-card__gift svg {
+    width: 25px;
+    height: 25px;
+    max-width: 25px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .variant-card__img {
+    height: 65px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-banner {
+    font-size: 13px;
+    padding: 5px 0;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-title {
+    font-size: 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-per-night {
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-guarantee-text {
+    font-size: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-policy-link {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-strike-price {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-active-price {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-save-pill {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list li svg {
+    width: 12px;
+    height: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-perks-list {
+    font-size: 15px;
+    gap: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-frequency-dropdown {
+    font-size: 15px;
+    padding: 10px 23px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-dropdown-wrap:after {
+    width: 13px;
+    right: 23px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-box-inner {
+    padding: 10px 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .button[id^=BuyButtons-ProductSubmitButton-] {
+    height: 57px !important;
+    font-size: 25px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .svg-wrapper.add-to-cart-icon svg,:where(.template-product, .template-collection, .template-list-collections, .somna-sp) .svg-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-guarantee-text {
+    font-size: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-policy-link {
+    font-size: 11px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span {
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-header span:last-child {
+    max-width: 115px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-timeline-line svg {
+    width: 200px;
+    height: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .product-information__grid {
+    margin-bottom: 30px;
+  }
+ 
+
+
+}
+
+/* ---- from somna-buybox.css ---- */
+@media (min-width: 768px) {
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review {
+    margin-bottom: 20px;
+    padding: 12px 16px 10px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__top {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-review__quote {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-color-option {
+    margin-bottom: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option--buttons:has(> .somna-tier) {
+    gap: 12px;
+    padding-top: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label--card.somna-tier {
+    padding: 4px 6px 24px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__badge {
+    padding: 3px 10px;
+    border-radius: 6px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__price {
+    margin-top: 10px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__night {
+    font-size: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__was {
+    font-size: 13px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__perk {
+    gap: 6px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-tier__icon,
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .variant-option__button-label .somna-tier__perk svg {
+    width: 17px;
+    height: 17px;
+    max-width: 17px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-picker .somna-tier .somna-tier__pill {
+    bottom: -5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card {
+    gap: 18px;
+    margin-bottom: 16px;
+    padding: 12px 18px;
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__img {
+    max-height: 130px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__title {
+    font-size: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-bundle-card__sub {
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box {
+    border-radius: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-top-row {
+    padding: 16px 18px 4px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='subscribe'] .somna-box-inner {
+    padding-bottom: 16px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-radio-bullet {
+    width: 20px;
+    height: 20px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box.active .somna-radio-bullet::after {
+    width: 9px;
+    height: 9px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-save-pill {
+    padding: 1px 8px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gifts {
+    gap: 8px;
+    margin-top: 12px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift {
+    gap: 5px;
+    min-height: 64px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-gift__icon {
+    width: 22px;
+    height: 22px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-onetime-save {
+    margin-left: 28px;
+    font-size: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-custom-subscription-container .somna-purchase-box[data-purchase-card='onetime'] .somna-box-inner {
+    padding: 14px 18px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex {
+    gap: 5px;
+    margin: 4px 0 10px;
+    font-size: 14px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-flex__icon {
+    width: 15px;
+    height: 15px;
+  }
+  :where(.template-product, .template-collection, .template-list-collections, .somna-sp) .somna-buybox-delivery {
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 15px;
+  }
+}
+
+/* ---------- HALLOWEEN 2026 — product page buy box, tablet/desktop (mobile + colours: custom.css) ---------- */
+@media screen and (min-width: 750px) {
+  :where(.template-product) .somna-pdp-sale-pill {
+    margin-bottom: 16px;
+    padding: 12px 24px;
+    font-size: clamp(15px, 1.4vw, 20px);
+    margin-top: 40px;
+  }
+  /* Figma desktop: sub-headline + description under the images; the copies in the details column are hidden */
+  :where(.template-product) .somna-pdp-intro {
+    display: block;
+    margin-top: 20px;
+    color: #0a1a4a;
+  }
+  :where(.template-product) .somna-pdp-intro__headline {
+    margin: 0 0 6px;
+    font-family: var(--headfont, var(--font-heading--family));
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.15;
+  }
+  :where(.template-product) .somna-pdp-intro__text {
+    margin: 0;
+    max-width: 620px;
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.45;
+  }
+  :where(.template-product) .product-information:has(.somna-pdp-intro) :is(.text-block--text_Da8zQC, .text-block--text_VDdr8z) {
+    display: none;
+  }
+  /* Product name above the buy box (blue eyebrow) */
+  :where(.template-product) .text-block.text-block--text_xrnftG,
+  :where(.template-product) .text-block.text-block--text_xrnftG > * {
+    font-size: clamp(22px, 2vw, 30px);
+  }
+  :where(.template-product, .somna-sp) .somna-onetime-pill {
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  :where(.template-product) .product-details .button[id^='BuyButtons-ProductSubmitButton-'] {
+    box-shadow: 0 6px 0 #b8430b;
+  }
+}
+/* ---------- Figma fixes 2026-10-15 — product page, tablet/desktop ---------- */
+@media screen and (min-width: 750px) {
+  /* The gallery no longer sticks while scrolling, so the text under the images can't slide over the thumbnails */
+  :where(.template-product) .product-information__media media-gallery.sticky-content {
+    position: relative;
+    top: auto;
+  }
+  /* Headline + description show once, under the images (Figma); hide the copies in the details column */
+  :where(.template-product) .product-details :is([class*='text_Da8zQC'], [class*='text_VDdr8z']) {
+    display: none !important;
+  }
+  /* "Get 10% off your first order." — Figma desktop image */
+  [id$='__footer_m9NzUG'] .section {
+    background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter.png?v=1792041427&width=2000") !important;
+  }
+}
+/* ---------- END HALLOWEEN 2026 — product page ---------- */
+/* ==================== END PRODUCT & COLLECTION PAGES ==================== */
+
+
+@media screen and (min-width: 750px) {
+
+    .bundle-card__title {
+        font-size: 22px;
+    }
+    .bundle-subtext {
+        font-size: 16px;
+        max-width: calc(100% - 90px);
+        margin-top: 11px;
+        line-height: 1.2;
+    min-height: 42px;
+    }
+
+    .bundle-card__price {
+        font-size: 22px;
+    }
+
+    .bundle-card__subtext {
+        font-size: 16px;
+    }
+    .header-logo span[data-testid=header-logo] {
+        max-width: 173px;
+    }
+    .header__column--right {
+        gap: 37px !important;
+    }
+    .header-actions__action:not(.account-button) svg {
+        width: 28px;
+        height: 28px;
+    }
+    .menu-list__link {
+    --menu-top-level-font-size-desktop: 16px;
+    }
+    h2.custom-header {
+        font-size: 32px !important;
+    }
+    p.announcement-bar__text{
+        font-size: 14px;
+    }
+    .header__columns {
+        --header-padding: 20px;
+    }
+    .product-details {
+        margin-top: 40px;
+    }
+    .bg_image {
+        height: 165px;
+        top: -65px;
+    }
+    .wave-container {
+        height: 65px;
+    }
+    .wave-container.bottom {
+      bottom: -65px;
+    }
+    .wave-container.top {
+        top: -65px;
+        z-index: 1;
+    }
+  
+    .template-page .wave-container {
+        height: 79px;
+    }
+    .template-page  .wave-container.bottom {
+      bottom: -79px;
+    }
+    .template-page  .wave-container.top {
+        top: -79px;
+        z-index: 1;
+    }
+    .accordion .details__header {
+        font-size: 22px !important;
+        padding-top: 30px;
+        padding-bottom: 10px;
+    }
+    li.menu__item.paragraph a {
+        font-size: 18px;
+    }
+    .footer-content summary.menu__heading.h5 {
+        font-size: 20px;
+    }
+    .shopify-section-group-footer-group:last-child .footer-content {
+        display: block;
+    }
+    .header__columns:has(.header__column--center header-menu){
+        justify-content: space-between;
+    }
+    .header__columns:has(.header__column--center header-menu) .header__column--left{
+        flex: none;
+    }
+    .review_content {
+    font-size: 16px;
+    }
+    .review_content svg {
+    height: 18px;
+    width: 85px;
+    }
+    .klaviyo-form input[name=email], .klaviyo-form input[name=email]::placeholder {
+        font-size: 18px !important;
+        height: 40px !important;
+    }
+    .klaviyo-form .klaviyo-form-button {
+        height: 23px !important;
+        font-size: 18px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    .footer-content .shopify-block.shopify-app-block {
+        max-width: 400px;
+        margin-bottom: 45px;
+     }
+  /* ---------- Hero ---------- */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+    /* Desktop hero image is 2.5:1 — size the hero to the image, not the viewport */
+    min-height: clamp(440px, 42vw, 720px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero__container {
+    /* Figma places the copy in the upper-left of the hero, about 1/6 down the image */
+    padding-block: clamp(40px, 6vw, 96px) 96px; /* bottom space clears the trust-bar wave */
+  }
+  #MainContent[data-template="index"] .text-block--text_VDbt3L,
+  #MainContent[data-template="index"] .text-block--text_VDbt3L > * {
+    font-size: clamp(13px, 1.05vw, 15px);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz {
+    margin-block: 12px 28px;
+    padding-block-end: 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz,
+  #MainContent[data-template="index"] .text-block--text_eT6TMz > * {
+    font-size: clamp(36px, 4.2vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 999px;
+  }
+  /* Tablet + smaller desktops: "50% OFF" is fluid (theme scales it with the viewport), so the
+     headline and the "UP TO" line scale with it and keep the desktop proportions. The sizes set in
+     the editor stay the maximum, reached at 1280px, so 1280px and wider look exactly as before. */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(> h1),
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(> h1) > h1 {
+    font-size: min(var(--font-size-desktop, 4.5rem), 5.625vw);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(+ .text-block[style*="font-display-spray"]),
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block:has(+ .text-block[style*="font-display-spray"]) > * {
+    font-size: min(var(--font-size-desktop, 2rem), 2.5vw);
+  }
+
+  /* ---------- Trust bar (all pages that have it; colours, font and text size: custom.css) ---------- */
+ .icon-block__media {
+    width: 26px !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+  .shopify-section[id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+    gap: 10px;
+  }
+
+  /* ---------- Section headings (Lora) ---------- */
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header,
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .custom-header > * {
+    font-size: clamp(30px, 3vw, 42px) !important; /* overrides existing !important heading sizes */
+    line-height: 1.1;
+  }
+
+  /* ---------- Bundle grid: two cards + full-width Season card ---------- */
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__featured_bundle_grid_6jFGFr"] > section {
+    padding-block: 32px 40px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) h2.custom-header {
+    margin: 0 0 clamp(24px, 2.6vw, 40px);
+  }
+  .bundle-section__grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .bundle-card--featured {
+    grid-column: auto;
+    align-items: flex-start;
+    display: block;
+  }
+   .bundle-section__grid {
+    gap: clamp(16px, 1.8vw, 24px);
+  }
+   .bundle-card {
+    padding: 10px 10px 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 14px rgb(10 26 74 / 0.12);
+  }
+   .bundle-card__image-wrapper {
+    border-radius: 12px;
+    height: clamp(210px,34vw,210px);
+  }
+   .bundle-card__content {
+    flex: 1;
+    align-content: space-between;
+    row-gap: 16px;
+    margin-top: 16px;
+    padding-inline: 8px;
+  }
+   .bundle-card .review_content {
+    font-size: 13px;
+    gap: 6px;
+  }
+   .bundle-card .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+   .bundle-card__title {
+    font-size: clamp(18px, 1.7vw, 24px);
+    line-height: 1.25;
+    margin-top: 6px;
+  }
+
+   .bundle-card__content-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+  }
+   .bundle-card__price {
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1.2;
+    margin: 0 0 4px;
+  }
+   .bundle-card__subtext {
+    font-size: clamp(13px, 1.05vw, 15px);
+    line-height: 1.4;
+  }
+   .bundle-card__button {
+    min-height: 44px;
+    padding: 0 24px;
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 500;
+  }
+   .tag_text {
+    top: -14px;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+   .bundle-card--featured .bundle-card__image {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- Nasal Strips / Mouth Tape cards (tablet: wider slider cards) ---------- */
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-section {
+    padding-bottom: 104px; /* clears the next section's top wave (70px overlap on desktop) */
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
+    padding: 10px calc(50vw - 2000px);
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-track {
+    gap: 16px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card,.hz-card-outer {
+    flex: 0 0 460px;
+    max-width: 460px;
+    border-radius: 16px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content {
+    padding: 28px 24px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-title {
+    font-size: clamp(17px, 1.6vw, 24px);
+    margin-bottom: 8px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-price {
+    font-size: clamp(26px, 2.6vw, 40px);
+    margin-bottom: 18px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-btn {
+    min-height: 40px;
+    padding: 0 22px;
+    font-size: clamp(13px, 1.05vw, 15px);
+  }
+  /* Right-aligned card (Mouth Tape): content hugs its text so the price stays on one
+     line, stacked and left-aligned like the Nasal Strips card */
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content:not(.alignment-right) {
+    width: auto;
+    max-width: 50%;
+    align-items: flex-start;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-price {
+    white-space: nowrap;
+  }
+
+  /* ---------- Four-column features ("Small essentials") ---------- */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
+    gap: clamp(28px, 3vw, 44px);
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--row {
+    width: 100%;
+    max-width: 1100px;
+    margin-inline: auto;
+    align-items: flex-start;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--row > .group-block {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .group-block-content.layout-panel-flex--column {
+    gap: 14px;
+  }
+   .icon-block__media {
+    width: clamp(48px, 4.6vw, 64px) !important; /* overrides the icon block's inline width */
+    height: auto;
+  }
+  #MainContent[data-template="index"] :is(.text-block--text_jdiCtc, .text-block--text_k8RLU6, .text-block--text_6dYGUM, .text-block--text_gUzH3C),
+  #MainContent[data-template="index"] :is(.text-block--text_jdiCtc, .text-block--text_k8RLU6, .text-block--text_6dYGUM, .text-block--text_gUzH3C) > * {
+    font-size: clamp(15px, 1.5vw, 21px);
+    line-height: 1.3;
+  }
+  #MainContent[data-template="index"] :is(.text-block--text_XpGJhd, .text-block--text_Czr7MH, .text-block--text_9rK86g, .text-block--text_T6N9EM),
+  #MainContent[data-template="index"] :is(.text-block--text_XpGJhd, .text-block--text_Czr7MH, .text-block--text_9rK86g, .text-block--text_T6N9EM) > * {
+    font-size: clamp(12px, 1.05vw, 15px);
+    line-height: 1.55;
+    text-align: center;
+  }
+
+  /* Bottom wave of this section sits over the banner photo. The wave graphic carries a
+     white under-layer, which showed as a white band on the photo. Draw the wave in the
+     section's cream instead, using the same graphic as the shape (white areas turn cream). */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+    background-image: none !important; /* replaces the inline wave image */
+    background-color: #faf2df;
+    -webkit-mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+    mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
+  }
+
+  /* ---------- "Breathe through your nose" banner ---------- */
+  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content {
+    padding-block: 40px 96px; /* bottom space clears the wave inside this banner */
+    padding-inline: max(40px, calc((100vw - 1280px) / 2)) 40px;
+  }
+  /* The banner's script sizes it from this inner group plus the padding above, so the
+     min-height lives here. Banner image is ~2.1:1: total height tracks the image. */
+  #MainContent[data-template="index"] [id$="__layered_image_with_text_LEPfjJ"] .layered-slideshow__content > .group-block-content {
+    min-height: calc(clamp(380px, 47vw, 760px) - 144px);
+    justify-content: center;
+    margin: 0;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+  #MainContent[data-template="index"] .text-block--text_QmeLq9,
+  #MainContent[data-template="index"] .text-block--text_QmeLq9 > * {
+    font-size: clamp(30px, 3.3vw, 48px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="index"] .text-block--text_jdwziN,
+  #MainContent[data-template="index"] .text-block--text_jdwziN > * {
+    font-size: clamp(14px, 1.25vw, 18px);
+    line-height: 1.55;
+    max-inline-size: 30em;
+  }
+
+  /* ---------- The Sleep Bundle card ---------- */
+  #MainContent[data-template="index"] .somna-sleep-bundle {
+    padding: 56px 40px 0px;
+  }
+
+  /* ---------- FAQ ---------- */
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+    width: 100%;
+    margin-inline: auto;
+    gap: 20px;
+    padding-block: 30px 72px;
+  }
+  
+  .hz-faq-wrapper {
+    padding: 50px 0 110px 0 !important;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details__header,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details__header {
+    font-size: clamp(16px, 1.4vw, 19px) !important; /* overrides existing !important size */
+    line-height: 1.4;
+    padding-block: 22px;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block,
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .text-block > *,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content :is(.text-block, p) {
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.6;
+  }
+  #MainContent[data-template="index"] .accordion--accordion_MJDpwz .details-content,
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .details-content {
+    padding-block-end: 20px;
+  }
+
+  /* ---------- Newsletter ("Get 10% off your first order") ----------
+     SHARED: the same section (footer_m9NzUG) sits on the homepage, product page,
+     page template and the policy pages, so these rules apply on every template.
+     The section above it and the footer below both overlap it with waves, so the
+     padding keeps the copy clear of both and centred in the visible photo. */
+  #MainContent [id$="__footer_m9NzUG"] .section {
+    min-height: clamp(400px, 36vw, 600px);
+    align-content: center;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .footer-content {
+    padding-block: 88px 104px;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .group-block-content {
+    gap: 14px;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz > * {
+    line-height: 1.1;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH > * {
+    line-height: 1.5;
+  }
+
+  /* ================= Collection page only ================= */
+
+  /* Title: "Two Essentials. Every Way to Get Them." */
+  #MainContent[data-template^="collection"] [id$="__section_qEUCdJ"] .section-content-wrapper {
+    gap: 12px;
+    padding-block: clamp(40px, 5vw, 72px) 96px; /* bottom space clears the trust-bar wave */
+  }
+  #MainContent[data-template^="collection"] .text-block--text_LxVzjr,
+  #MainContent[data-template^="collection"] .text-block--text_LxVzjr > * {
+    font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  #MainContent[data-template^="collection"] .text-block--text_g7Qiix,
+  #MainContent[data-template^="collection"] .text-block--text_g7Qiix > * {
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  /* "What keeps you from sleeping well?" picker (collection-feature) */
+  #MainContent[data-template^="collection"] .sleep-tabs-section {
+    max-width: 720px;
+    margin: 64px auto 72px;
+    padding: 40px;
+    border-radius: 36px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header {
+    margin-bottom: 24px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header h2 {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.2;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-list {
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tab-btn {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container {
+    padding: 24px;
+    border-radius: 24px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-subtitle {
+    margin-bottom: 0px;
+    font-size: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-image-wrapper {
+    margin-bottom: 16px;
+    border-radius: 18px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-badge {
+    top: 16px;
+    right: 16px;
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container .review_content {
+    font-size: 14px;
+    gap: 6px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-title {
+    margin-bottom: 4px;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.25;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-description {
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-price {
+    margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+
+  /* FAQ (faq-accordion): same reading width as the homepage FAQ */
+  #MainContent[data-template^="collection"] .hz-faq-wrapper .accordion {
+    width: 100%;
+    justify-self: center;
+  }
+ 
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  
+  /* Newsletter text on tablets (shared). From 990px the blocks' own desktop
+     font-size setting applies, so it isn't overridden here. */
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz,
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz > * {
+    font-size: 28px;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH,
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH > * {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+   .bundle-card__image-wrapper {
+    border-radius: 12px;
+    height: clamp(195px,34vw,195px);
+  }
+  /* Homepage + collection content width: 1280px max (other pages keep the theme's 1040px;
+     sections can widen themselves with their "Content width (desktop)" setting) */
+  #MainContent:is([data-template="index"], [data-template^="collection"]),
+  body:has(#MainContent:is([data-template="index"], [data-template^="collection"])) .shopify-section-group-footer-group {
+    --page-content-width: 80rem;
+    --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+  }
+
+  /* ---------- Hero ---------- */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero {
+    min-height: clamp(480px, 42vw, 720px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    min-height: 54px;
+    padding: 0 34px;
+    font-size: 16px;
+  }
+
+  /* ---------- Trust bar (all pages that have it) ---------- */
+   .icon-block__media {
+    width: clamp(50px, 2.4vw, 50px) !important; /* overrides the icon block's inline width */
+  }
+  .shopify-section[id$="__section_zELtyM"] .group-block-content.layout-panel-flex--row {
+    gap: 14px;
+  }
+
+  /* ---------- Bundle grid ---------- */
+  #MainContent:is([data-template="index"], [data-template^="collection"]) [id$="__featured_bundle_grid_6jFGFr"] > section {
+    padding-block: 48px 56px;
+  }
+   .bundle-card {
+    padding: 14px 14px 26px;
+    border-radius: 20px;
+  }
+   .bundle-card__image-wrapper {
+    border-radius: 14px;
+  }
+   .bundle-card__content {
+    margin-top: 20px;
+    padding-inline: 12px;
+  }
+   .bundle-card .review_content {
+    font-size: 14px;
+  }
+   .bundle-card__button {
+    min-height: 48px;
+    padding: 0 30px;
+  }
+   .tag_text {
+    top: -15px;
+    font-size: 13px;
+  }
+
+  /* ---------- Nasal Strips / Mouth Tape: both cards visible side by side ---------- */
+   #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-viewport {
+    overflow: visible;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-slider-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 1.8vw, 24px);
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card,.hz-card-outer {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    border-radius: 20px;
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-content {
+    padding: clamp(28px, 3vw, 44px);
+  }
+  #MainContent:is([data-template="index"], [data-template^="collection"]) .hz-card-btn {
+    min-height: 46px;
+    padding: 0 28px;
+  }
+
+  /* ---------- Features ---------- */
+ 
+
+  /* ---------- The Sleep Bundle card ---------- */
+  #MainContent[data-template="index"] .somna-sleep-bundle {
+    padding: 64px 40px 40px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__card {
+    max-width: 960px;
+    padding: 52px clamp(40px, 4vw, 64px) 48px;
+    border-radius: 28px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__badge {
+    top: -19px;
+    left: clamp(32px, 3.2vw, 48px);
+    gap: 8px;
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__top {
+    grid-template-columns: clamp(220px, 20vw, 260px) 1fr;
+    gap: clamp(32px, 3.4vw, 48px);
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__media {
+    border-radius: 20px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .review_content {
+    font-size: 14px;
+    gap: 6px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .review_content svg {
+    width: 76px;
+    height: 16px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__title {
+    margin-top: 6px !important; /* section sets margin-top with !important */
+    font-size: clamp(30px, 2.7vw, 38px);
+    line-height: 1.15;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__subtitle {
+    margin-top: 10px !important; /* section sets margin-top with !important */
+    font-size: 17px;
+    line-height: 1.5;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__price {
+    margin-top: 16px !important; /* section sets margin-top with !important */
+    margin-bottom: 6px;
+    font-size: clamp(22px, 2vw, 26px);
+    line-height: 1.25;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__per-night {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__colors {
+    gap: 12px;
+    margin-top: 32px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__color {
+    min-width: 120px;
+    min-height: 44px;
+    padding: 0 22px;
+    gap: 10px;
+    font-size: 15px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__dot {
+    width: 14px;
+    height: 14px;
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle .somna-sleep-bundle__button {
+    max-width: 440px;
+    min-height: 56px;
+    margin: 24px auto 0;
+    padding: 0 32px;
+    font-size: 17px;
+  }
+
+  /* ---------- FAQ ---------- */
+  #MainContent[data-template="index"] [id$="__section_HiaPwG"] .section-content-wrapper {
+    gap: 24px;
+    padding-block: 0px 80px;
+  }
+
+  /* ---------- Newsletter (shared) ----------
+     Desktop sizes follow the blocks' "desktop font size" setting (2rem / 1.25rem).
+     Where a template's copy of the section has no desktop size set (e.g. the order
+     cancellation page), use the same values so every page matches. */
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz:not(.custom-font-size-desktop),
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_LWt8Pz:not(.custom-font-size-desktop) > * {
+    font-size: 2rem;
+  }
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH:not(.custom-font-size-desktop),
+  #MainContent [id$="__footer_m9NzUG"] .text-block--text_f9CFLH:not(.custom-font-size-desktop) > * {
+    font-size: 1.25rem;
+  }
+
+  /* ================= Collection page only ================= */
+
+  /* Picker: question + options on the left, recommendation on the right */
+  #MainContent[data-template^="collection"] .sleep-tabs-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    column-gap: clamp(40px, 5vw, 80px);
+    align-items: center;
+    max-width: 1120px;
+    margin: 72px auto 88px;
+    padding: clamp(40px, 4vw, 64px);
+    border-radius: 40px;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-header {
+    grid-column: 1;
+    align-self: end;
+  }
+  #MainContent[data-template^="collection"] .sleep-tabs-list {
+    grid-column: 1;
+    align-self: start;
+    margin-bottom: 0;
+  }
+  #MainContent[data-template^="collection"] .sleep-card-container {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+
+  /* ================= Desktop settings (theme editor) =================
+     Applies the optional "(desktop)" settings on sections and blocks: padding, gap,
+     stacking, corners, typography, images, accordion, contact form and buttons.
+     Each rule only matches when its setting is filled in, so an empty setting changes
+     nothing. No page names or section IDs: any page using these blocks gets them. */
+
+  /* Padding (section, group, text, layered slide, image) */
+  .spacing-style[style*='--padding-block-start-desktop'] {
+    padding-block-start: calc(var(--padding-block-start-desktop) + var(--section-top-offset, 0px));
+  }
+  .spacing-style[style*='--padding-block-end-desktop'] {
+    padding-block-end: var(--padding-block-end-desktop);
+  }
+  .spacing-style[style*='--padding-inline-start-desktop'] {
+    padding-inline-start: var(--padding-inline-start-desktop);
+  }
+  .spacing-style[style*='--padding-inline-end-desktop'] {
+    padding-inline-end: var(--padding-inline-end-desktop);
+  }
+
+  /* Layout: gap, stack vertically, line content up with the page width */
+  .layout-panel-flex[style*='--gap-desktop'] {
+    gap: var(--gap-desktop);
+  }
+  .layout-panel-flex[style*='--stack-desktop'] {
+    flex-flow: column nowrap;
+    align-items: stretch;
+  }
+  .layout-panel-flex[style*='--align-items-desktop'] {
+    align-items: var(--align-items-desktop);
+  }
+  .layout-panel-flex[style*='--align-page-width-desktop'] {
+    padding-inline: max(var(--page-margin, 40px), calc((100% - var(--page-content-width)) / 2));
+  }
+
+  /* Corner radius (group, section, image) */
+  .border-style[style*='--border-radius-desktop'] {
+    border-radius: var(--border-radius-desktop);
+  }
+
+  /* Image: width and aspect ratio */
+  .image-block[style*='--image-width-desktop'] .image-block__image {
+    width: var(--image-width-desktop);
+    max-width: none;
+    height: auto;
+  }
+  .image-block__image[style*='--ratio-desktop'] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: var(--ratio-desktop);
+  }
+
+  /* Text: font, weight, line height, letter spacing, max width */
+  .text-block[style*='--font-family-desktop'],
+  .text-block[style*='--font-family-desktop'] * {
+    font-family: var(--font-family-desktop);
+  }
+  .text-block[style*='--font-weight-desktop'],
+  .text-block[style*='--font-weight-desktop'] * {
+    font-weight: var(--font-weight-desktop);
+  }
+  .text-block[style*='--line-height-desktop'],
+  .text-block[style*='--line-height-desktop'] > * {
+    line-height: var(--line-height-desktop);
+  }
+  .text-block[style*='--letter-spacing-desktop'],
+  .text-block[style*='--letter-spacing-desktop'] * {
+    letter-spacing: var(--letter-spacing-desktop);
+  }
+  .text-block[style*='--max-width-desktop'] > * {
+    max-inline-size: var(--max-width-desktop);
+  }
+  /* Desktop font size on non-"custom" presets (heading, paragraph): beats custom.css preset sizes */
+  .text-block.custom-font-size-desktop:not(.custom-typography),
+  .text-block.custom-font-size-desktop:not(.custom-typography) > * {
+    font-size: var(--font-size-desktop);
+  }
+  .text-block.custom-header.custom-font-size-desktop,
+  .text-block.custom-header.custom-font-size-desktop > * {
+    font-size: var(--font-size-desktop) !important; /* .custom-header sets its size with !important */
+  }
+
+  /* Accordion: question size, spacing, line under the last question */
+  .accordion[style*='--accordion-heading-size-desktop'] .details__header {
+    font-size: var(--accordion-heading-size-desktop) !important; /* custom.css sets it with !important */
+  }
+  .accordion[style*='--accordion-row-top-desktop'] accordion-custom:not(:first-child) .details__header {
+    padding-block-start: var(--accordion-row-top-desktop);
+  }
+  .accordion[style*='--accordion-row-top-desktop'] accordion-custom:first-child .details__header {
+    padding-block-start: 0;
+  }
+  .accordion[style*='--accordion-row-bottom-desktop'] .details__header,
+  .accordion[style*='--accordion-row-bottom-desktop'] .details-content {
+    padding-block-end: var(--accordion-row-bottom-desktop);
+  }
+  .accordion--last-divider-desktop accordion-custom:last-child .details {
+    border-block-end: var(--style-border-width) solid var(--color-border);
+  }
+
+  /* Contact form */
+  .contact-form--stack-desktop :is(.contact-form__form, .contact-form__form-row) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .contact-form--labels-desktop label.visually-hidden {
+    position: static !important; /* shows the form's own labels */
+    width: auto;
+    height: auto;
+    margin: 0 0 6px;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    font-size: var(--contact-font-size-desktop, inherit);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .contact-form[style*='--contact-input-height-desktop'] .contact-form__input {
+    min-height: var(--contact-input-height-desktop);
+    padding: 10px 16px;
+  }
+  .contact-form[style*='--contact-font-size-desktop'] .contact-form__input {
+    font-size: var(--contact-font-size-desktop);
+    line-height: 1.2;
+  }
+  .contact-form[style*='--contact-input-radius-desktop'] .contact-form__input {
+    border-radius: var(--contact-input-radius-desktop);
+  }
+  .contact-form[style*='--contact-textarea-height-desktop'] .contact-form__input--textarea {
+    height: var(--contact-textarea-height-desktop);
+    min-height: var(--contact-textarea-height-desktop);
+  }
+  .contact-form[style*='--contact-field-gap-desktop'] .contact-form__input {
+    margin-block-end: var(--contact-field-gap-desktop);
+  }
+  .contact-form[style*='--contact-button-height-desktop'] .submit-button {
+    height: auto;
+    min-height: var(--contact-button-height-desktop);
+    font-size: 16px;
+  }
+  .contact-form[style*='--contact-button-radius-desktop'] .submit-button {
+    border-radius: var(--contact-button-radius-desktop);
+  }
+
+  /* Button: height, side padding, corners */
+  .size-style.button-height-desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--button-height-desktop);
+  }
+  .size-style.button-padding-desktop {
+    padding-inline: var(--button-padding-desktop);
+  }
+  .size-style.button-radius-desktop {
+    border-radius: var(--button-radius-desktop);
+  }
+
+  /* Layered image with text: banner height */
+  layered-slideshow-component[style*='--layered-content-min-height-desktop'] .layered-slideshow__content > .group-block-content {
+    min-height: calc(var(--layered-content-min-height-desktop) - var(--padding-block-start-desktop, var(--padding-block-start, 0px)) - var(--padding-block-end-desktop, var(--padding-block-end, 0px)));
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-content-wrapper {
+    padding-block: 0px 80px;
+  }
+}
+/* =====================================================================
+   HALLOWEEN 2026 — tablet & desktop (Figma 3297:5520)
+   Figma's desktop type is oversized, so sizes are re-proportioned for real
+   screens with clamp(). Base rules are in custom.css.
+   ===================================================================== */
+@media screen and (min-width: 750px) {
+  /* Announcement bar (sitewide) */
+  .announcement-bar__slide[style*="font-display"] .announcement-bar__text {
+    font-size: 18px;
+  }
+  .announcement-bar .announcement-bar__separator-image {
+    height: 24px;
+  }
+
+  /* Logo (sitewide) */
+  .header-logo span[data-testid="header-logo"] {
+    width: 173px;
+  }
+
+  /* Hero */
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .hero::before {
+    height: clamp(40px, 5vw, 72px);
+    background-image: url("somna-hw-header-wave.svg");
+  }
+  #MainContent[data-template="index"] .text-block--text_VDbt3L,
+  #MainContent[data-template="index"] .text-block--text_VDbt3L > * {
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz {
+    margin-block: 4px 0;
+  }
+  #MainContent[data-template="index"] .text-block--text_eT6TMz,
+  #MainContent[data-template="index"] .text-block--text_eT6TMz > * {
+    font-size: clamp(46px, 5.2vw, 76px);
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+
+  #MainContent[data-template="index"] .text-block--text_Lqf6bA,
+  #MainContent[data-template="index"] .text-block--text_Lqf6bA > *,
+  #MainContent[data-template="index"] .text-block--text_hwperks,
+  #MainContent[data-template="index"] .text-block--text_hwperks > * {
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .size-style.button.button--button_6EgajN {
+    min-height: 54px;
+    gap: 12px;
+    padding: 3px 30px 3px 8px !important; /* overrides the hero's own button padding */
+    font-size: clamp(16px, 1.4vw, 20px) !important;
+  }
+  #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button::before {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* Shop the essentials */
+  .somna-ess__web--left {
+    --web-w: clamp(150px, 19vw, 300px); /* the spider scales from this width */
+    width: var(--web-w);
+  }
+  .somna-spider__thread {
+    width: 1.5px;
+    left: -0.75px;
+  }
+  .somna-ess__web--right {
+    width: clamp(160px, 21vw, 333px);
+  }
+  .somna-ess__eyebrow {
+    margin-bottom: 10px;
+    font-size: clamp(13px, 1.1vw, 16px);
+    font-weight: 900;
+    letter-spacing: 0.23em;
+  }
+  .somna-ess.somna-ess--halloween .somna-ess__title {
+    gap: 14px;
+    margin-bottom: 34px;
+    font-size: clamp(36px, 4vw, 58px);
+  }
+  .somna-ess__title-icon {
+    width: clamp(40px, 4vw, 60px);
+  }
+  .somna-ess__badge {
+    top: -34px;
+    right: -26px;
+    width: clamp(76px, 7.4vw, 104px);
+  }
+  .somna-ess__badge-text {
+    font-size: clamp(17px, 1.6vw, 24px);
+  }
+
+  /* Small essentials */
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
+    height: clamp(60px, 9vw, 130px);
+    background-image: url("somna-hw-orange-edge.svg");
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
+    background-color: #fff; /* replaces the cream wave colour set above */
+  }
+  #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
+    font-size: clamp(30px, 3.3vw, 48px);
+  }
+
+  /* Sleep Bundle webs */
+  #MainContent[data-template="index"] .somna-sleep-bundle::before {
+    top: -60px;
+    width: clamp(150px, 19vw, 300px);
+  }
+  #MainContent[data-template="index"] .somna-sleep-bundle::after {
+    top: -30px;
+    width: clamp(160px, 21vw, 354px);
+  }
+}
+/* ======================= END HALLOWEEN 2026 ======================= */
+
+/* ======================= END SOMNA DESKTOP ======================= */
+
+/* =====================================================================
+   HALLOWEEN SALE PAGE — tablet/desktop (phones + colours: custom.css "HALLOWEEN SALE PAGE")
+   Figma 3316:8669 (1440px). Type is re-proportioned for real screens with clamp(),
+   not copied from the oversized Figma desktop frame.
+   ===================================================================== */
+@media screen and (min-width: 750px) {
+  /* Hero */
+  [id$='__hero_hwsale'] .hero {
+    min-height: clamp(520px, 50vw, 780px);
+  }
+  [id$='__hero_hwsale'] .hero__container {
+    padding-block: clamp(40px, 6vw, 96px) 96px; /* bottom space clears the trust bar */
+  }
+  [id$='__hero_hwsale'] .hero::before {
+    height: clamp(40px, 5vw, 72px);
+    background-image: url("somna-hw-header-wave.svg");
+  }
+  [id$='__hero_hwsale'] .text-block--text_hwsub,
+  [id$='__hero_hwsale'] .text-block--text_hwsub > * {
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+  [id$='__hero_hwsale'] .text-block--text_hwtitle {
+    margin-block: 4px 0;
+  }
+  [id$='__hero_hwsale'] .text-block--text_hwtitle,
+  [id$='__hero_hwsale'] .text-block--text_hwtitle > * {
+    line-height: 0.98;
+    letter-spacing: 0;
+  }
+ 
+  /* Two product buttons (Figma 440 x 82 at 1440px), same width, stacked */
+  [id$='__hero_hwsale'] :is(.button--button_hwnasal, .button--button_hwtape) {
+    display: inline-flex;
+    min-width: clamp(250px, 24vw, 340px);
+  }
+  [id$='__hero_hwsale'] .button--button_hwshop {
+    display: none;
+  }
+  [id$='__hero_hwsale'] .button--button_hwtape {
+    margin-top: clamp(10px, 1.4vw, 20px);
+  }
+  [id$='__hero_hwsale'] .button {
+    min-height: 54px;
+    gap: 12px;
+    padding: 3px 30px 3px 8px !important; /* overrides the hero's own button padding */
+    font-size: clamp(16px, 1.4vw, 20px) !important;
+  }
+  [id$='__hero_hwsale'] .button::before {
+    width: 46px;
+    height: 46px;
+  }
+
+  .somna-sp__image {
+    border-radius: clamp(16px, 1.7vw, 24px);
+  }
+  .somna-sp__intro {
+    padding: clamp(14px, 1.5vw, 21px) clamp(4px, 1.2vw, 18px) 0;
+  }
+  .somna-sp__rating {
+    font-size: clamp(13px, 1.1vw, 16px);
+  }
+  .somna-sp__stars {
+    font-size: clamp(14px, 1.2vw, 17px);
+  }
+  .somna-sp__eyebrow {
+    font-size: clamp(12px, 1.1vw, 16px);
+  }
+  .somna-sp__heading {
+    font-size: clamp(24px, 2.4vw, 34px);
+  }
+  .somna-sp__text,
+  .somna-sp__text p {
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.5;
+  }
+  .somna-sp__panel {
+    margin: clamp(24px, 3.6vw, 52px) clamp(0px, 0.6vw, 9px) 0;
+    padding: clamp(14px, 1.5vw, 22px);
+  }
+  .somna-sp .button[id^='BuyButtons-ProductSubmitButton-'] {
+    height: clamp(48px, 4vw, 57px) !important;
+    font-size: clamp(18px, 1.7vw, 25px);
+    box-shadow: 0 6px 0 #b8430b;
+  }
+  .somna-sp__details {
+    margin-top: clamp(15px, 3.3vw, 15px);
+    font-size: clamp(15px, 1.25vw, 18px);
+  }
+}
+@media screen and (min-width: 990px) {
+  /* Sale products: two sections side by side (Figma: two 592px columns, 52px apart).
+     Below 990px they stay stacked, so each buy box keeps a comfortable width. */
+  #MainContent:has(> .somna-sp-section) {
+    flex-flow: row wrap;
+  }
+  #MainContent:has(> .somna-sp-section) > * {
+    flex: 0 0 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #MainContent > .somna-sp-section {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .somna-sp,
+  .somna-sp--web-left,
+  .somna-sp--web-right,
+  .somna-sp-section + .somna-sp-section .somna-sp,
+  .somna-sp-section + .somna-sp-section .somna-sp--web-right {
+    height: 100%;
+    padding: clamp(48px, 6.6vw, 95px) clamp(12px, 1.8vw, 26px) clamp(32px, 3.9vw, 56px) clamp(16px, 7.1vw, 102px);
+  }
+  .somna-sp__inner {
+    margin-inline: auto 0;
+  }
+  /* the second product mirrors the first */
+  .somna-sp-section + .somna-sp-section .somna-sp {
+    padding-inline: clamp(12px, 1.8vw, 26px) clamp(16px, 7.1vw, 102px);
+  }
+  .somna-sp-section + .somna-sp-section .somna-sp__inner {
+    margin-inline: 0 auto;
+  }
+  /* Webs: same size as the homepage webs (left 150-300px with spider, right 160-333px);
+     the spider hangs in the outer margin, beside the image, never over text or buttons */
+  .somna-sp > .somna-ess__web--left {
+    --web-w: clamp(150px, 19vw, 300px);
+    --hang: 341;
+  }
+  .somna-sp > .somna-ess__web--right {
+    --rweb-w: clamp(160px, 21vw, 333px);
+  }
+}
+/* Product page Problem / Solution web: same size as the homepage web from 750px
+   (overrides the larger placement in somna-motion.css; phones keep ~122px, like the homepage) */
+@media screen and (min-width: 750px) {
+  .hz-prob-sol-section.somna-ps--halloween > .somna-ess__web--left {
+    --web-w: clamp(150px, 19vw, 300px);
+  }
+}
+/* ==================== END HALLOWEEN SALE PAGE ==================== */

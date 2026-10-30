@@ -60,6 +60,14 @@
         assign upsell_selling_plan = upsell_allocation.selling_plan.id
       endif
     endif
+    # Somna Halloween Sale: one-time upsells get the % in snippets/somna-sale.liquid (40%) at checkout
+    if upsell_selling_plan == ''
+      capture somna_once_off
+        render 'somna-sale', get: 'once_off'
+      endcapture
+      assign somna_once_keep = 100 | minus: somna_once_off
+      assign upsell_price = upsell_price | times: somna_once_keep | divided_by: 100.0 | round
+    endif
 
     assign upsell_compare = upsell_variant.price
     if upsell_variant.compare_at_price > upsell_compare

@@ -35,7 +35,7 @@
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 <div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.settings.background_image != blank %} footer-photo{% endif %}"
 {% if section.settings.background_image != blank %}
 style="background-image:url({{ section.settings.background_image |  image_url }});background-size: cover;background-position: center;"
 {% endif %}
@@ -89,6 +89,113 @@ style="background-image:url({{ section.settings.background_image |  image_url }}
 </div>
 
 {% stylesheet %}
+  /* Somna footer, desktop and tablet (2026-10-15), matching the Figma desktop homepage
+     "Curved edge" (3316:8680) above the footer.
+     - Top wave: drawn with the exact Figma curve and scaled to the screen width (62px tall at
+       1440px), in the footer's navy (#071A4B, the section's background colour setting).
+     - Less navy above the logo: the footer content moves up so the "somna." logo sits just
+       under the curve, as in Figma. This cancels the section's top padding and rises 17px at 1440px.
+     Only the footer section that has a top wave is affected; phones (under 750px) are unchanged.
+     The section's settings are unchanged. Kept in this file, not somna-home-desktop.css, because
+     the footer shows on every page and that file only loads on some templates. */
+  @media screen and (min-width: 750px) {
+    .shopify-section-group-footer-group > .wave-container.top {
+      top: calc(1px - 62 / 1440 * 100vw);
+      height: calc(62 / 1440 * 100vw);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 0 1441.69 62' preserveAspectRatio='none'%3E%3Cpath d='M-2 45.3253C-2 45.3253 320.822 -44.5513 482.233 28.8174C695.002 129.699 841.74 -44.5513 1047.17 37.9884C1208.58 102.186 1340.65 -26.2091 1439.69 28.8174V62H-2Z' fill='%23071A4B'/%3E%3C/svg%3E") center top / 100% 100% no-repeat !important;
+    }
+
+    .shopify-section-group-footer-group:has(> .wave-container.top) .footer-content {
+      position: relative;
+      z-index: 2;
+      margin-block-start: calc(-1 * var(--padding-block-start, 0px) - 17 / 1440 * 100vw);
+    }
+  }
+
+  /* Somna photo banner (2026-10-15): this section with a "Section background image" is the
+     "Get 10% off your first order." newsletter (Figma desktop 3316:8670, mobile 3394:963).
+     Less empty photo above and below the copy on every screen size, and on tablet/desktop
+     the form scales with the screen, closer to the Figma proportions.
+     The bottom padding includes the footer wave that overlaps the photo (18px on phones,
+     62px at 1440px on desktop). Spacing and sizes only; the section settings are unchanged. */
+  @media screen and (max-width: 749px) {
+    #MainContent .footer-photo.footer-photo > .footer-content {
+      padding-block: 22px 40px;
+    }
+
+    /* Phones: Figma mobile photo (3316:11976 "image 38", the Tape pack by the pumpkins) on every
+       page that has this banner; the pack stays in view on the right, the copy sits on the dark left */
+    #MainContent [id$='__footer_m9NzUG'] .section.footer-photo {
+      background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter-mobile-tape.png?v=1792060111&width=1200") !important;
+      background-size: cover !important;
+      background-position: 72% center !important;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    /* Height follows the Figma banner (1440 x 491), so the photo is never cropped at the top;
+       the copy is centred in the part above the footer wave */
+    #MainContent .section.footer-photo.footer-photo {
+      min-height: calc(100vw * 491 / 1440);
+      align-content: center;
+    }
+
+    #MainContent .footer-photo.footer-photo > .footer-content {
+      padding-block: clamp(24px, 2.6vw, 48px) calc(62 / 1440 * 100vw + clamp(20px, 2.2vw, 40px));
+    }
+
+    #MainContent .footer-photo .group-block-content {
+      gap: clamp(6px, 0.6vw, 10px);
+    }
+
+    #MainContent .footer-photo .text-block--text_f9CFLH {
+      padding-block-end: clamp(10px, 1.4vw, 22px);
+    }
+
+    /* Klaviyo sign-up form: no extra space under it, and scaled up on larger screens */
+    #MainContent .footer-photo .shopify-app-block {
+      margin-bottom: 0;
+    }
+  }
+
+  /* Every page that has this banner looks like the homepage one: same 1280px content width
+     (other pages use the theme's narrower width) and the homepage's text sizes, 48px headline
+     and 20px text (the other templates' copies of this section have a 32px headline) */
+  @media screen and (min-width: 990px) {
+    #MainContent .section.footer-photo.footer-photo {
+      --page-content-width: 80rem;
+      --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+    }
+
+    #MainContent .footer-photo .text-block--text_LWt8Pz,
+    #MainContent .footer-photo .text-block--text_LWt8Pz > * {
+      font-size: 3rem !important;
+    }
+
+    #MainContent .footer-photo .text-block--text_f9CFLH,
+    #MainContent .footer-photo .text-block--text_f9CFLH > * {
+      font-size: 1.25rem !important;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.12;
+    }
+  }
+
+  @media screen and (min-width: 1440px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.25;
+    }
+  }
+
+  @media screen and (min-width: 1800px) {
+    #MainContent .footer-photo .shopify-app-block {
+      zoom: 1.35;
+    }
+  }
+
   .footer-content {
     contain: content;
     content-visibility: auto;

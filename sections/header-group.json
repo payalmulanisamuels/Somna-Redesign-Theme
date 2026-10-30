@@ -18,15 +18,15 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "33% OFF Subscriptions&nbsp;",
+            "text": "HALLOWEEN SALE",
             "link": "",
-            "separator_image": "shopify://shop_images/somna-discount.png",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "text_color": "#0a1a4a"
           },
           "blocks": {}
         },
@@ -34,15 +34,15 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "3 Free Gifts",
+            "text": "UP TO 50% OFF",
             "link": "",
-            "separator_image": "shopify://shop_images/somna-gift.png",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "text_color": "#0a1a4a"
           },
           "blocks": {}
         },
@@ -50,15 +50,63 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Free Shipping",
+            "text": "NO TRICKS ONLY TREATS",
             "link": "",
-            "separator_image": "shopify://shop_images/free-shipping.png",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
             "weight": "",
             "letter_spacing": "normal",
             "case": "none",
-            "text_color": ""
+            "text_color": "#0a1a4a"
+          },
+          "blocks": {}
+        },
+        "announcement_mtnfxA": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "HALLOWEEN SALE",
+            "link": "",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": "#0a1a4a"
+          },
+          "blocks": {}
+        },
+        "announcement_QyMwbn": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "UP TO 50% OFF",
+            "link": "",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": "#0a1a4a"
+          },
+          "blocks": {}
+        },
+        "announcement_Mc8m7Y": {
+          "type": "_announcement",
+          "name": "t:names.announcement",
+          "settings": {
+            "text": "NO TRICKS ONLY TREATS",
+            "link": "",
+            "separator_image": "shopify://shop_images/pumpkin_923560d0-5977-4b91-b552-0eba84a2d28e.png",
+            "font": "var(--font-display--family)",
+            "font_size": "0.875rem",
+            "weight": "",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": "#0a1a4a"
           },
           "blocks": {}
         }
@@ -66,7 +114,10 @@
       "block_order": [
         "announcement_dwf6Jk",
         "announcement_wwtXFc",
-        "announcement_34JFi9"
+        "announcement_34JFi9",
+        "announcement_mtnfxA",
+        "announcement_QyMwbn",
+        "announcement_Mc8m7Y"
       ],
       "custom_css": [
         ".wave-container.bottom {bottom: -10px;}",
@@ -76,16 +127,15 @@
       "settings": {
         "display_mode": "marquee",
         "speed": 7,
-        "marquee_speed": 10,
-        "separator_size": 16,
+        "marquee_speed": 13,
+        "separator_size": 20,
         "separator_gap": 24,
-        "bottom_wave_image": "shopify://shop_images/annoucement.png",
         "section_width": "page-width",
-        "background_color": "#071a4b",
+        "background_color": "#ff9845",
         "divider_width": 0,
         "divider_color": "#ffffff",
         "padding-block-start": 8,
-        "padding-block-end": 0
+        "padding-block-end": 6
       }
     },
     "header_section": {
@@ -105,7 +155,7 @@
           "type": "_header-menu",
           "static": true,
           "settings": {
-            "menu": "main-menu",
+            "menu": "main-menu-sale",
             "background_color": "{{ settings.color_palette.background }}",
             "text_color": "",
             "type_font_primary_size": "0.875rem",

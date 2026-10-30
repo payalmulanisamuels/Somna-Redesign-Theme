@@ -19,6 +19,20 @@
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'card-hover-effect-styles' -%}
+    {%- comment -%} Speed (2026-10-19): somna-motion.css only holds hover/focus effects and decorations further down the page,
+      so it loads without blocking the first paint. Its first-paint rules are at the end of custom.css. {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'somna-motion.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'somna-motion.css' | asset_url | stylesheet_tag }}</noscript>
+    {%- comment -%} Halloween display fonts (Rubik Wet Paint, Rubik Spray Paint, Bigshot One): Latin-only subsets, loaded without blocking the page {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {%- comment -%} Speed (2026-10-19): fetch the 3 font stylesheets early at high priority; the print/onload links below still apply them, so nothing renders differently {%- endcomment -%}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap&text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%86%92%C2%B7%E2%80%99%E2%80%98%E2%80%9C%E2%80%9D%E2%80%93%E2%80%94" media="print" onload="this.media='all'">
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
@@ -28,6 +42,73 @@
       {%- render 'theme-editor' -%}
     {% endif %}
 
+    {%- unless request.design_mode -%}
+    {%- comment -%}
+      Speed TEST (2026-10-22, Pagespeed theme only, not approved for live yet):
+      hold Klaviyo's onsite script (static.klaviyo.com/onsite/js/...) until the visitor first scrolls, taps,
+      clicks or presses a key. Klaviyo's own queue (window.klaviyo / _learnq) keeps every tracking call
+      made before that and sends it once the script runs. Remove this block to undo.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        var KL = 'static.klaviyo.com/onsite/js/';
+        var held = [];
+        var started = false;
+        function isKlaviyo(n) {
+          return n && n.tagName === 'SCRIPT' && n.src && n.src.indexOf(KL) > -1 && !n.hasAttribute('data-somna-late');
+        }
+        function addLate(src) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = src;
+          s.setAttribute('data-somna-late', '');
+          document.head.appendChild(s);
+        }
+        var obs = new MutationObserver(function (list) {
+          list.forEach(function (m) {
+            m.addedNodes.forEach(function (n) {
+              if (!isKlaviyo(n)) return;
+              if (started) return;
+              n.type = 'javascript/blocked';
+              if (n.parentNode) n.parentNode.removeChild(n);
+              if (held.indexOf(n.src) < 0) held.push(n.src);
+            });
+          });
+        });
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+        // Scripts added later by other code (e.g. Klaviyo's Shopify app file) are held too:
+        // a script with an unknown type is never downloaded or run.
+        var srcProp = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
+        var create = document.createElement;
+        document.createElement = function (tag) {
+          var el = create.apply(document, arguments);
+          if (!started && srcProp && String(tag).toLowerCase() === 'script') {
+            Object.defineProperty(el, 'src', {
+              configurable: true,
+              get: function () { return srcProp.get.call(el); },
+              set: function (v) {
+                if (!started && String(v).indexOf(KL) > -1) {
+                  el.type = 'javascript/blocked';
+                  if (held.indexOf(String(v)) < 0) held.push(String(v));
+                }
+                srcProp.set.call(el, v);
+              }
+            });
+          }
+          return el;
+        };
+        var events = ['scroll', 'wheel', 'pointerdown', 'touchstart', 'keydown'];
+        function start() {
+          if (started) return;
+          started = true;
+          events.forEach(function (e) { removeEventListener(e, start, true); });
+          held.splice(0).forEach(addLate);
+          obs.disconnect();
+        }
+        events.forEach(function (e) { addEventListener(e, start, { capture: true, passive: true }); });
+      })();
+    </script>
+    {%- endunless -%}
     {{ content_for_header }}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMTP7PT99F"></script>
@@ -40,10 +121,22 @@
     </script>
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_qEMmz3b69CKgSSegGDPT4etRcfuXSrha3AKWpp34PAws', {
-            api_host: 'https://us.i.posthog.com',
-            defaults: '2026-05-30'
-        })
+        // Speed (2026-10-21): same PostHog project and options; it now starts once the page has
+        // loaded (in idle time) so its scripts don't compete with the page's own files.
+        (function () {
+          var startPostHog = function () {
+            posthog.init('phc_qEMmz3b69CKgSSegGDPT4etRcfuXSrha3AKWpp34PAws', {
+                api_host: 'https://us.i.posthog.com',
+                defaults: '2026-05-30'
+            })
+          };
+          var whenIdle = function () {
+            if ('requestIdleCallback' in window) requestIdleCallback(startPostHog, { timeout: 2000 });
+            else setTimeout(startPostHog, 1);
+          };
+          if (document.readyState === 'complete') whenIdle();
+          else window.addEventListener('load', whenIdle, { once: true });
+        })();
     </script>
 
     <script
@@ -52,16 +145,10 @@
   fetchpriority="low"
 ></script>
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ydo9dwsvok");
-</script>
+
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }} template-{{ template.name }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}
@@ -186,11 +273,12 @@
         data-product-transition="{{ settings.transition_to_main_product }}"
         data-template="{{ template }}"
       >
+        {%- if template.name == 'product' -%}{% render 'somna-quiz-match' %}{%- endif -%}
         {{ content_for_layout }}
       </main>
 
       <footer>
-    {% section 'somna-scratch-popup' %}
+        {% section 'somna-scratch-popup' %}
         {% sections 'footer-group' %}
       </footer>
     </div>

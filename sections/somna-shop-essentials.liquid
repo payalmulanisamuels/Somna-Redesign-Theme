@@ -39,12 +39,129 @@
   }
 {%- endstyle -%}
 
-<div class="somna-ess">
+<div class="somna-ess{% if section.settings.halloween_decor %} somna-ess--halloween{% endif %}">
   {%- comment -%} The tape and strips are cut off on one side, so they sit on the screen edges {%- endcomment -%}
+  {%- if section.settings.halloween_decor -%}
+    {%- comment -%} Halloween: spiderwebs in the two top corners (decorative, ignored by screen readers) {%- endcomment -%}
+    {%- comment -%} Left web: the Figma web image; the spider is separate so it can drop on its thread {%- endcomment -%}
+    <span class="somna-ess__web somna-ess__web--left" aria-hidden="true">
+      {%- comment -%} The Figma web image, drawn in by an SVG mask (animation: assets/somna-motion.css, section 15) {%- endcomment -%}
+      <svg class="somna-ess__web-svg" viewBox="0 0 439 268" width="439" height="268" focusable="false">
+        <defs>
+          <mask id="somna-web-{{ section.id }}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="480" height="310">
+            <path class="hw-m hw-m--frame" pathLength="1" d="M0 2 L300 2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.15s" d="M65 70 L55.9 -4.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.21s" d="M65 70 L-3.0 8.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.27s" d="M65 70 L-4.0 62.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.33s" d="M65 70 L120.2 -3.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.39s" d="M65 70 L189.7 -2.0"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.45s" d="M65 70 L284.2 -1.2"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.51s" d="M65 70 L-2.2 173.4"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.57s" d="M65 70 L-0.6 271.8"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:0.5s;--d:0.5s" d="M62.9 81.8 A12 12 0 1 1 76.8 67.9 L102.4 63.4 A38 38 0 1 0 58.4 107.4 L53.9 133.0 A64 64 0 1 1 128.0 58.9 L153.6 54.4 A90 90 0 1 0 49.4 158.6 L44.9 184.2 A116 116 0 1 1 179.2 49.9"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:0.95s;--d:0.5s" d="M204.8 45.3 A142 142 0 1 0 40.3 209.8 L35.8 235.4 A168 168 0 1 1 230.4 40.8 L256.1 36.3 A194 194 0 1 0 31.3 261.1 L26.8 286.7 A220 220 0 1 1 281.7 31.8 L307.3 27.3 A246 246 0 1 0 22.3 312.3"/>
+            <rect class="hw-m--all" x="-20" y="-20" width="480" height="310" fill="#fff"/>
+          </mask>
+        </defs>
+        <image href="{{ 'somna-hw-web.png' | asset_url }}" width="439" height="268" mask="url(#somna-web-{{ section.id }})"/>
+      </svg>
+      <span class="somna-spider">
+        <i class="somna-spider__thread"></i>
+        <img class="somna-spider__body" src="{{ 'somna-hw-spider.png' | asset_url }}" alt="" width="90" height="100" loading="lazy" decoding="async">
+      </span>
+    </span>
+    {%- comment -%} Right web: the Figma right-hand web (no spider), drawn in the same way {%- endcomment -%}
+    <span class="somna-ess__web somna-ess__web--right" aria-hidden="true">
+      <svg class="somna-ess__web-svg" viewBox="0 0 333 178" width="333" height="178" focusable="false">
+        <defs>
+          <mask id="somna-web-r-{{ section.id }}" maskUnits="userSpaceOnUse" x="-20" y="-20" width="380" height="220">
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.35s" d="M286 62 L308.7 -3.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.43s" d="M286 62 L336.4 31.7"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.51s" d="M286 62 L218.9 -2.8"/>
+            <path class="hw-m hw-m--spoke" pathLength="1" style="--t:0.59s" d="M286 62 L336.6 86.7"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:0.6s;--d:0.5s" d="M296.0 62.0 A10 10 0 0 1 281.0 70.7 A10 10 0 0 1 281.0 53.3 A10 10 0 0 1 296.0 62.0 M322.0 61.9 A36 36 0 0 0 268.0 30.8 A36 36 0 0 0 268.0 93.2 A36 36 0 0 0 322.0 62.0 M345.0 81.2 A62 62 0 0 1 224.0 62.0 A62 62 0 0 1 345.0 42.8 M238.1 -11.8 A88 88 0 0 0 216.2 115.6 A88 88 0 0 0 344.9 127.4 M344.7 159.7 A114 114 0 0 1 198.7 -11.3"/>
+            <path class="hw-m hw-m--ring" pathLength="1" style="--t:1.05s;--d:0.55s" d="M166.0 -10.1 A140 140 0 0 0 229.1 189.9 M179.3 189.2 A166 166 0 0 1 136.8 -10.8 M108.0 -9.9 A192 192 0 0 0 141.1 188.0 M107.4 187.0 A218 218 0 0 1 79.9 -9.0 M52.7 -9.3 A244 244 0 0 0 76.9 187.7 M47.6 188.8 A270 270 0 0 1 25.2 -7.9 M-1.2 -9.6 A296 296 0 0 0 17.7 187.1 M-10.4 187.8 A322 322 0 0 0 -10.4 187.8"/>
+            <rect class="hw-m--all" x="-20" y="-20" width="380" height="220" fill="#fff"/>
+          </mask>
+        </defs>
+        <image href="{{ 'somna-hw-web-right.png' | asset_url }}" width="333" height="178" mask="url(#somna-web-r-{{ section.id }})"/>
+      </svg>
+    </span>
+  {%- endif -%}
+  {%- if section.settings.halloween_decor -%}
+    <script>
+      /* Halloween web, spider, pumpkin and badge animation (CSS: assets/somna-motion.css, section 15).
+         Plays when the web is a quarter of the way up the screen, and again
+         each time the section comes back into view. Without this script everything simply shows still. */
+      (function () {
+        function setup(s) {
+          if (!s || s.getAttribute('data-hw-init')) return;
+          s.setAttribute('data-hw-init', '1');
+          if (!('IntersectionObserver' in window)) return;
+          var target = s.querySelector('.somna-ess__web--left') || s;
+          s.classList.add('hw-ready');
+          new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting) s.classList.add('is-in');
+          }, { rootMargin: '0px 0px -25% 0px' }).observe(target);
+          new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) s.classList.remove('is-in');
+          }).observe(s);
+        }
+        function scan() {
+          document.querySelectorAll('.somna-ess--halloween').forEach(setup);
+        }
+        scan();
+        if (!window.somnaHwBound) {
+          window.somnaHwBound = true;
+          document.addEventListener('DOMContentLoaded', scan);
+          document.addEventListener('shopify:section:load', scan);
+        }
+      })();
+    </script>
+  {%- endif -%}
   <div class="somna-ess__inner">
 
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="somna-ess__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
     {%- if section.settings.heading != blank -%}
-      <h2 class="somna-ess__title">{{ section.settings.heading }}</h2>
+      <h2 class="somna-ess__title">
+        <span class="somna-ess__title-text">{{ section.settings.heading }}</span>
+        {%- if section.settings.halloween_decor -%}
+          {%- comment -%} Animated pumpkin: hops, then smiles (eyes and mouth swap). Decorative. {%- endcomment -%}
+          <span class="somna-ess__title-icon somna-pk" aria-hidden="true">
+            <svg viewBox="0 0 120 118" focusable="false">
+              <defs>
+                <mask id="somna-pk-{{ section.id }}" maskUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="140">
+                  <rect x="-10" y="-10" width="140" height="140" fill="#fff"/>
+                  <g class="somna-pk__eyes" fill="#000"><path d="M27 60 L38 43 L50 59 Z"/><path d="M71 59 L83 44 L94 60 Z"/></g>
+                  <g class="somna-pk__happy" fill="none" stroke="#000" stroke-width="5.5" stroke-linecap="round"><path d="M28 57 Q39 43 50 57"/><path d="M71 57 Q82 43 93 57"/></g>
+                  <path fill="#000" d="M55 72 L60 64 L65 72 Z"/>
+                  <path class="somna-pk__calm" fill="#000" d="M30 80 Q60 90 90 80 L86 86 Q60 96 34 86 Z"/>
+                  <g class="somna-pk__smile">
+                    <path fill="#000" d="M25 75 Q60 87 95 75 Q91 97 60 99 Q29 97 25 75 Z"/>
+                    <rect x="45" y="79" width="10" height="8" rx="1.5" fill="#fff"/>
+                    <rect x="64" y="90" width="10" height="9" rx="1.5" fill="#fff"/>
+                  </g>
+                </mask>
+              </defs>
+              <g fill="#ff9845" mask="url(#somna-pk-{{ section.id }})">
+                <path d="M58 30 Q57 18 62 10 Q66 8 70 11 Q66 19 67 30 Z"/>
+                <ellipse cx="36" cy="68" rx="28" ry="36"/>
+                <ellipse cx="84" cy="68" rx="28" ry="36"/>
+                <ellipse cx="60" cy="66" rx="34" ry="40"/>
+              </g>
+            </svg>
+          </span>
+        {%- elsif section.settings.title_icon != blank -%}
+          {{
+            section.settings.title_icon
+            | image_url: width: 160
+            | image_tag: class: 'somna-ess__title-icon', alt: '', loading: 'lazy'
+          }}
+        {%- endif -%}
+      </h2>
     {%- endif -%}
 
     <div class="somna-ess__grid">
@@ -106,6 +223,20 @@
           endif
         -%}
         <a href="{{ card_link }}" class="somna-ess__card" {{ block.shopify_attributes }}>
+          {%- comment -%} Halloween badge: the sale text from snippets/somna-sale.liquid ("UP TO 50% OFF"), shown while the sale is on.
+            "UP TO" sits on its own smaller line so the text still fits the badge. {%- endcomment -%}
+          {%- capture card_badge -%}{%- render 'somna-sale', get: 'text' -%}{%- endcapture -%}
+          {%- assign card_badge = card_badge | strip -%}
+          {%- if card_badge != blank -%}
+            {%- assign card_badge_up = card_badge | upcase -%}
+            <span class="somna-ess__badge"><span class="somna-ess__badge-text">
+              {%- if card_badge_up contains 'UP TO ' -%}
+                <span class="somna-ess__badge-upto">UP TO</span>{{ card_badge | remove_first: 'UP TO ' | remove_first: 'Up to ' | escape }}
+              {%- else -%}
+                {{ card_badge | escape }}
+              {%- endif -%}
+            </span></span>
+          {%- endif -%}
           <div class="somna-ess__media">
             {%- if card_image != blank -%}
               {{
@@ -150,6 +281,13 @@
 </div>
 
 {% stylesheet %}
+  /* Halloween badge: smaller "UP TO" line above "50% OFF" */
+  .somna-ess__badge-upto {
+    display: block;
+    font-size: 0.6em;
+    line-height: 1;
+  }
+
   .somna-ess {
     color: #0a1a4a;
   }
@@ -201,7 +339,7 @@
   .somna-ess__media {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 163 / 95;
+    aspect-ratio: 95 / 95;
     border-radius: 7px;
     background: #efe7d6;
   }
@@ -422,6 +560,7 @@
       height: 138px;
     }
   }
+
 {% endstylesheet %}
 
 {% schema %}
@@ -434,6 +573,31 @@
       "id": "heading",
       "label": "Heading",
       "default": "Shop the essentials"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "info": "Small line above the heading. Leave empty to hide."
+    },
+    {
+      "type": "image_picker",
+      "id": "title_icon",
+      "label": "Title icon",
+      "info": "Small decorative image after the heading (e.g. a pumpkin)."
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text (no longer used)",
+      "info": "Not used any more: each card's badge now comes from its product's \"Halloween sale text\" metafield (Products > metafields). Empty metafield = no badge."
+    },
+    {
+      "type": "checkbox",
+      "id": "halloween_decor",
+      "label": "Show Halloween decorations",
+      "info": "Spiderwebs in the top corners, the dropping spider and the smiling pumpkin after the heading (used instead of the title icon).",
+      "default": false
     },
     {
       "type": "color",

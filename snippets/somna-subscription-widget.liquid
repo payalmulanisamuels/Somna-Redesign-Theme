@@ -10,12 +10,30 @@
   `custom.nights` variant metafield, then the `custom.nights` product metafield,
   falling back to variant position (1st = 30, 2nd = 60, 3rd+ = 120).
 
+  Halloween Sale relaunch (2026-10-28): every product gets the one-time % off from
+  snippets/somna-sale.liquid (40%, the automatic discount "Halloween Sale"). One-time price =
+  variant price x 0.60, with the variant price crossed out before it. Autoship shows the plan
+  price with the variant price crossed out and "YOU SAVE" = variant price - plan price.
+  The `custom.autoship_compare_at` / `custom.onetime_compare_at` metafields are no longer used.
+  Banner: "HALLOWEEN: UP TO 50% OFF + 3 FREE GIFTS ON YOUR FIRST ORDER" (text from somna-sale).
+  Sale end: set somna_sale_on to false in snippets/somna-sale.liquid.
+
   @param {object} product_resource - The product object.
   @param {object} section - The section object.
 {%- enddoc -%}
 
 {%- liquid
   assign current_var = product_resource.selected_or_first_available_variant
+
+  # Halloween Sale: one-time % off at checkout (automatic discount) and banner text, set in somna-sale
+  capture somna_once_off
+    render 'somna-sale', get: 'once_off'
+  endcapture
+  assign somna_once_off = somna_once_off | plus: 0
+  capture somna_hw_text
+    render 'somna-sale', get: 'text'
+  endcapture
+  assign somna_hw_text = somna_hw_text | strip
 
   assign has_selling_plans = false
   for v in product_resource.variants
@@ -81,10 +99,27 @@
             if v_bags < 1
               assign v_bags = 1
             endif
+
+            # One-time price the customer pays (Halloween Sale 40%: price x 0.60, e.g. 49.90 -> 29.94).
+            # The variant price is the crossed-out "was" price.
+            assign v_once_pct = 0
+            assign v_once_price = v.price
+            if somna_once_off > 0
+              assign v_once_keep = 100 | minus: somna_once_off
+              assign v_once_price = v.price | times: v_once_keep | divided_by: 100.0 | round
+              assign v_once_pct = somna_once_off
+            endif
+            if is_current
+              assign init_once_pct = v_once_pct
+              assign init_once_price = v_once_price
+            endif
           -%}
           "{{ v.id }}": {
             "nights": {{ v_nights }},
-            "price": {{ v.price | money_without_trailing_zeros | json }},
+            "price": {{ v_once_price | money_without_trailing_zeros | json }},
+            "regular": {{ v.price | money_without_trailing_zeros | json }},
+            "onetimeSaveCents": {{ v.price | minus: v_once_price }},
+            "onetimePct": {{ v_once_pct }},
             "plans": [
               {%- for alloc in v.selling_plan_allocations -%}
                 {%- liquid
@@ -107,6 +142,16 @@
                     assign discount = save_cents | times: 100.0 | divided_by: regular | round
                   endif
 
+                  # Autoship "was" price + saving: the variant price
+                  assign auto_regular = regular
+                  assign auto_save = auto_regular | minus: alloc.price
+
+                  # "You'd save $x with Autoship" (one-time box): against the one-time price actually paid
+                  assign once_save = save_cents
+                  if somna_once_off > 0
+                    assign once_save = v_once_price | minus: alloc.price
+                  endif
+
                   # Subscription price per bag (1 / 2 / 4), kept in cents so it shows with decimals.
                   assign per_bag = alloc.price | times: 1.0 | divided_by: v_bags | round
 
@@ -125,8 +170,9 @@
                       assign init_plan_id = plan.id
                       assign init_name = plan_label
                       assign init_price = alloc.price
-                      assign init_regular = regular
-                      assign init_save = save_cents
+                      assign init_regular = auto_regular
+                      assign init_save = once_save
+                      assign init_auto_save = auto_save
                       assign init_per_bag = per_bag
                       assign init_discount = discount
                       assign init_per_night = per_night
@@ -139,9 +185,11 @@
                   "interval": {{ plan_label | json }},
                   "days": {{ plan_days }},
                   "price": {{ alloc.price | money_without_trailing_zeros | json }},
-                  "regular": {{ regular | money_without_trailing_zeros | json }},
-                  "save": {{ save_cents | money_without_trailing_zeros | json }},
-                  "saveCents": {{ save_cents }},
+                  "regular": {{ auto_regular | money_without_trailing_zeros | json }},
+                  "save": {{ once_save | money_without_trailing_zeros | json }},
+                  "saveCents": {{ once_save }},
+                  "autoSave": {{ auto_save | money_without_trailing_zeros | json }},
+                  "autoSaveCents": {{ auto_save }},
                   "perBag": {{ per_bag | money_without_trailing_zeros | json }},
                   "discount": {{ discount }},
                   "perNight": {{ per_night | json }}
@@ -173,7 +221,11 @@
       {% if one_time_selected %}hidden{% endif %}
     >
       <div class="somna-box-banner">
-        <span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- if somna_hw_text != blank -%}
+          HALLOWEEN: <span class="somna-box-banner__offer">{{ somna_hw_text | escape }}</span> + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- else -%}
+          <span class="somna-box-banner__offer"><span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF</span> + 3 FREE GIFTS ON YOUR FIRST ORDER
+        {%- endif -%}
       </div>
       <div class="somna-box-top-row">
         <label class="somna-radio-label">
@@ -188,44 +240,61 @@
         </label>
         <div class="somna-price-stack">
           <div class="somna-pricing-row">
-            <span class="somna-strike-price" data-somna="regular" {% if init_save <= 0 %}hidden{% endif %}>
+            <span class="somna-strike-price" data-somna="regular" {% if init_auto_save <= 0 %}hidden{% endif %}>
               {{- init_regular | money_without_trailing_zeros -}}
             </span>
             <span class="somna-active-price" data-somna="price">{{ init_price | money_without_trailing_zeros }}</span>
           </div>
-          <div class="somna-save-pill" {% if init_save <= 0 %}hidden{% endif %}>
-            SAVE <span data-somna="save">{{ init_save | money_without_trailing_zeros }}</span>
+          <div class="somna-save-pill" {% if init_auto_save <= 0 %}hidden{% endif %}>
+            YOU SAVE <span data-somna="auto-save">{{ init_auto_save | money_without_trailing_zeros }}</span>
           </div>
         </div>
       </div>
       <div class="somna-box-inner">
+        {%- liquid
+          # "Delivery every 60 days" -> "delivery every 60 days" for the perk line
+          assign init_name_first = init_name | slice: 0 | downcase
+          assign init_name_rest = init_name | slice: 1, 200
+          assign init_name_lc = init_name_first | append: init_name_rest
+        -%}
         <ul class="somna-perks-list">
           <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>
-              <span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo after first order
-              {% comment %} · <span data-somna="interval">{{ init_name }}</span> {% endcomment %}
-              (<span data-somna="discount">{{ init_discount | default: 0 }}</span>% OFF ongoing)
-            </b>
-          </li>
-          <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <strong>FREE</strong> shipping
-          </li>
-          <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>FREE 3 Gifts</b> with every subscription
-          </li>
-          <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-            <b>FREE 30-Night Sleep Tracker</b> with every subscription
-          </li>
-             <li>
-            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M-4.43459e-05 2.41763L0.801092 1.61365L2.11643 2.90627L5.03405 1.66893e-05L5.84087 0.803994L2.11643 4.50854L-4.43459e-05 2.41763Z" fill="#0B57E3"/> </svg>
-           <b>Skip, pause or cancel anytime</b>
-          </li>
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            <b><span data-somna="per-bag">{{ init_per_bag | money_without_trailing_zeros }}</span>/mo · 
+            
+            {%  if product.handle contains 'nasal-strips' and product.handle contains 'mouth-tape' %}
+            <span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every order
+            {% endif %}</b>
 
+          </li>
+          <li>
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            <span><strong>FREE</strong> shipping · <span data-somna="interval-lc">{{ init_name_lc }}</span></span>
+          </li>
+          <li>
+            <span class="somna-perk-check" aria-hidden="true">✓</span>
+            {%- if somna_hw_text != blank -%}
+              <span><b>Lock in your Halloween price</b> on every delivery.</span>
+            {%- else -%}
+              <b><span data-somna="discount">{{ init_discount | default: 0 }}</span>% off every delivery, not just the first</b>
+            {%- endif -%}
+          </li>
         </ul>
+
+        <div class="somna-gifts" aria-label="Free gifts included">
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.3 5 7.6 4.3 3 4.5v14c4.6-.2 7.3.5 9 2 1.7-1.5 4.4-2.2 9-2v-14c-4.6-.2-7.3.5-9 2Z"/><path d="M12 6.5v14"/></g></svg>
+            <span>Sleep Guide 1</span>
+          </div>
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.3 5 7.6 4.3 3 4.5v14c4.6-.2 7.3.5 9 2 1.7-1.5 4.4-2.2 9-2v-14c-4.6-.2-7.3.5-9 2Z"/><path d="M12 6.5v14"/></g></svg>
+            <span>Sleep Guide 2</span>
+          </div>
+          <div class="somna-gift">
+            <svg class="somna-gift__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m8.5 15 2.5 2.5 4.5-4.5"/></g></svg>
+            <span>30-Night Tracker</span>
+          </div>
+        </div>
 
         <div class="somna-dropdown-wrap">
           <select
@@ -254,12 +323,21 @@
             <label class="somna-radio-label">
               <input type="radio" name="somna_purchase_type_{{ section.id }}" value="onetime" {% if one_time_selected %}checked{% endif %}>
               <span class="somna-radio-bullet"></span>
-              <span class="somna-box-title">One-Time Purchase</span>
+              <span class="somna-box-title">One-time purchase</span>
             </label>
             <div class="somna-price-stack">
-              <span class="somna-active-price" data-somna="onetime-price">{{ current_var.price | money_without_trailing_zeros }}</span>
+              <div class="somna-pricing-row">
+                <span class="somna-strike-price" data-somna="onetime-regular" {% unless init_once_pct > 0 %}hidden{% endunless %}>
+                  {{- current_var.price | money_without_trailing_zeros -}}
+                </span>
+                <span class="somna-active-price" data-somna="onetime-price">{{ init_once_price | default: current_var.price | money_without_trailing_zeros }}</span>
+              </div>
             </div>
           </div>
+          <p class="somna-onetime-save" data-somna-onetime-save {% if init_save <= 0 %}hidden{% endif %}>
+            <span>You'd save <b data-somna="save">{{ init_save | money_without_trailing_zeros }}</b> with Autoship</span>
+            <span class="somna-onetime-pill"><span data-somna="onetime-pct">{% if init_once_pct > 0 %}{{ init_once_pct }}{% else %}{{ init_discount | default: 0 }}{% endif %}</span>% OFF</span>
+          </p>
         </div>
       </div>
     {%- endunless -%}
@@ -286,19 +364,30 @@
         if (!productForm) return;
 
         // The real selling plan id submitted to /cart/add. Disabled = one-time purchase.
-        let planInput = productForm.querySelector('input[name="selling_plan"]');
-        if (!planInput) {
-          planInput = document.createElement('input');
-          planInput.type = 'hidden';
-          planInput.name = 'selling_plan';
-          productForm.appendChild(planInput);
-        }
+        // Halloween Sale page: a size change re-renders (morphs) the whole sale section from the server,
+        // which drops this script-made input, so Autoship was added as one-time. The input is looked up
+        // (and re-made if missing) every time it is used, and synced again just before every submit.
+        const getPlanInput = () => {
+          const form = document.getElementById(`BuyButtons-ProductForm-${sectionId}`) || productForm;
+          let input = form.querySelector('input[name="selling_plan"]');
+          if (!input) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'selling_plan';
+            form.appendChild(input);
+          }
+          return input;
+        };
+        let planInput = getPlanInput();
 
         const variantIdInput = productForm.querySelector('input[name="id"]');
         const regularEl = container.querySelector('[data-somna="regular"]');
         const savePill = container.querySelector('.somna-save-pill');
         const perNightEl = container.querySelector('.somna-per-night');
+        const oneTimeSaveEl = container.querySelector('[data-somna-onetime-save]');
+        const oneTimeRegularEl = container.querySelector('[data-somna="onetime-regular"]');
         let plans = [];
+        let currentVariant = null;
         let currentVariantId = null;
 
         // The widget isn't re-rendered on variant change, so look each field's nodes up once.
@@ -310,9 +399,40 @@
           });
         };
 
+        // The customer's choice (Autoship or one-time). Kept here as well as in the boxes' "active" class,
+        // because the sale page's section re-render resets that class to the server's default.
+        let mode = subBox && subBox.classList.contains('active') ? 'subscribe' : 'onetime';
         const isSubscribe = () => subBox && !subBox.hidden && subBox.classList.contains('active');
 
+        // Size cards (all products): the size cards' "$x/night" (snippets/variant-main-picker.liquid)
+        // follows the selected option: Autoship price per night, or the one-time price per night when
+        // One-time purchase is picked. Uses the cards' own data-sub-numeric / data-onetime-numeric /
+        // data-nights, rounded to the cent like the Liquid. Re-applied if the cards are re-rendered.
+        const nightCardsOn = true;
+        const nightScope = container.closest('.shopify-section') || document;
+        const updateNightPrices = () => {
+          if (!nightCardsOn) return;
+          const key = isSubscribe() ? 'subNumeric' : 'onetimeNumeric';
+          nightScope.querySelectorAll('.somna-tier[data-nights]').forEach((card) => {
+            const nightEl = card.querySelector('.somna-tier__night');
+            const total = parseFloat(card.dataset[key]);
+            const nights = parseFloat(card.dataset.nights);
+            if (!nightEl || !(total > 0) || !(nights > 0)) return;
+            const perNight = (Math.round((total * 100) / nights) / 100).toFixed(2);
+            const text = nightEl.textContent.replace(/\d[\d,]*(\.\d+)?/, perNight);
+            if (nightEl.textContent !== text) nightEl.textContent = text;
+          });
+        };
+        if (nightCardsOn) {
+          let nightFrame = 0;
+          new MutationObserver(() => {
+            cancelAnimationFrame(nightFrame);
+            nightFrame = requestAnimationFrame(updateNightPrices);
+          }).observe(nightScope, { childList: true, subtree: true });
+        }
+
         const syncForm = () => {
+          planInput = getPlanInput();
           if (isSubscribe() && select.value) {
             planInput.value = select.value;
             planInput.disabled = false;
@@ -320,6 +440,7 @@
             planInput.value = '';
             planInput.disabled = true;
           }
+          updateNightPrices();
 
           // Programmatic changes fire no `change` event, so announce the new purchase option
           // (the sticky add-to-cart bar mirrors it — see assets/sticky-add-to-cart.js).
@@ -350,10 +471,15 @@
           setText('per-bag', plan.perBag);
           setText('regular', plan.regular);
           setText('save', plan.save);
+          setText('auto-save', plan.autoSave);
+          // One-time box pill: the one-time sale % (40%) while the sale is on, else the Autoship saving
+          setText('onetime-pct', String(currentVariant?.onetimePct > 0 ? currentVariant.onetimePct : plan.discount));
           setText('per-night', plan.perNight);
           setText('interval', plan.interval);
-          regularEl.hidden = plan.saveCents <= 0;
-          savePill.hidden = plan.saveCents <= 0;
+          setText('interval-lc', plan.interval.charAt(0).toLowerCase() + plan.interval.slice(1));
+          regularEl.hidden = plan.autoSaveCents <= 0;
+          if (oneTimeSaveEl) oneTimeSaveEl.hidden = plan.saveCents <= 0;
+          savePill.hidden = plan.autoSaveCents <= 0;
           perNightEl.hidden = !plan.perNight;
           syncForm();
         };
@@ -364,12 +490,16 @@
           const variant = data.variants[String(variantId)];
           if (!variant) return;
           currentVariantId = String(variantId);
+          currentVariant = variant;
 
           setText('onetime-price', variant.price);
+          setText('onetime-regular', variant.regular);
+          if (oneTimeRegularEl) oneTimeRegularEl.hidden = !(variant.onetimeSaveCents > 0);
           plans = variant.plans;
 
           if (!plans.length) {
             subBox.hidden = true;
+            if (oneTimeSaveEl) oneTimeSaveEl.hidden = true;
             activate(oneTimeBox);
             return;
           }
@@ -390,8 +520,34 @@
         };
 
         boxes.forEach((box) => {
-          box.addEventListener('click', () => activate(box));
+          box.addEventListener('click', () => {
+            mode = box === subBox ? 'subscribe' : 'onetime';
+            activate(box);
+          });
         });
+
+        // After the sale page's section re-render: show this variant's plans again, restore the
+        // customer's Autoship / one-time choice and put the selling plan input back.
+        const restoreAfterRender = (variantId) => {
+          if (container.dataset.somnaReady) return; // nothing was re-rendered (product page)
+          container.dataset.somnaReady = 'true';
+          currentVariantId = null;
+          renderVariant(variantId);
+          const box = mode === 'subscribe' && subBox && !subBox.hidden ? subBox : oneTimeBox || subBox;
+          if (box) activate(box);
+        };
+
+        // Last check before /cart/add reads the form: the input matches what is selected on screen.
+        // Capture phase, so it runs before the product form's own submit handler.
+        window.addEventListener(
+          'submit',
+          (event) => {
+            if (event.target instanceof HTMLFormElement && event.target.id === `BuyButtons-ProductForm-${sectionId}`) {
+              syncForm();
+            }
+          },
+          true
+        );
 
         select.addEventListener('change', renderPlan);
 
@@ -403,14 +559,13 @@
         scope.addEventListener('shopify:product:select', (event) => {
           if (event.target instanceof Element && event.target.closest('product-card')) return;
           const variantId = event.detail?.variantId;
-          if (variantId) {
-            renderVariant(variantId);
-            return;
-          }
+          if (variantId) renderVariant(variantId);
           event.promise
             .then((result) => {
-              const id = result?.detail?.resource?.id ?? variantIdInput?.value;
-              if (id) renderVariant(id);
+              const id = result?.detail?.resource?.id ?? variantId ?? getPlanInput().form?.querySelector('input[name="id"]')?.value;
+              if (!id) return;
+              if (!variantId) renderVariant(id);
+              restoreAfterRender(id);
             })
             .catch(() => {
               /* aborted fetch — a newer selection will follow */
@@ -428,3 +583,13 @@
     })();
   </script>
 {%- endif -%}
+
+{% stylesheet %}
+  /* Halloween Sale relaunch: show the crossed-out variant price before the price in both boxes
+     (assets/custom.css hides .somna-strike-price in the buy box; this rule is more specific). */
+  .somna-custom-subscription-container .somna-pricing-row .somna-strike-price:not([hidden]) {
+    display: inline;
+    color: #8c99c0;
+    text-decoration: line-through;
+  }
+{% endstylesheet %}

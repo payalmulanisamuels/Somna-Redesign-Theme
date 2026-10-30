@@ -4,12 +4,44 @@
   {{ closest.product | structured_data }}
 </script>
 
+{%- comment -%}
+  Somna Halloween 2026 (Figma PDP 3297-4934 / 3297-5224):
+  - Sale pill above the product images on every product while the sale is on. The offer text
+    ("UP TO 50% OFF") comes from snippets/somna-sale.liquid; set somna_sale_on to false there to hide it.
+  - Desktop: the sub-headline and short description sit under the images (Figma).
+    On phones they stay in the details column above the buy box; CSS in
+    custom.css / somna-home-desktop.css shows one copy per screen size.
+{%- endcomment -%}
+{%- liquid
+  capture somna_hw_text
+    render 'somna-sale', get: 'text'
+  endcapture
+  assign somna_hw_text = somna_hw_text | strip
+  assign somna_intro_headline = closest.product.metafields.custom.sub_headline.value
+  assign somna_intro_text = closest.product.metafields.custom.subcontent.value
+-%}
 {% capture media_gallery %}
+  {%- if somna_hw_text != blank -%}
+    <p class="somna-pdp-sale-pill">
+      HALLOWEEN SALE <span class="somna-pdp-sale-pill__star" aria-hidden="true">*</span>
+      <span class="somna-pdp-sale-pill__offer">{{ somna_hw_text | escape }}</span> THROUGH OCT 31
+    </p>
+  {%- endif -%}
   {%- content_for 'block',
     type: '_product-media-gallery',
     id: 'media-gallery',
     closest.product: closest.product
   -%}
+  {%- if somna_intro_headline != blank or somna_intro_text != blank -%}
+    <div class="somna-pdp-intro">
+      {%- if somna_intro_headline != blank -%}
+        <p class="somna-pdp-intro__headline">{{ somna_intro_headline | escape }}</p>
+      {%- endif -%}
+      {%- if somna_intro_text != blank -%}
+        <p class="somna-pdp-intro__text">{{ somna_intro_text | escape }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 {% endcapture %}
 
 {% capture product_details %}
@@ -48,6 +80,11 @@
 
     assign somna_sticky = false
     if somna_supply_option and product.selling_plan_groups.size > 0
+      assign somna_sticky = true
+    endif
+    # Single-variant bundles with a selling plan (e.g. The Colour Set, Season Bundle) use the same bar,
+    # with a fixed summary (title, price, per night) instead of the size dropdown.
+    if product.has_only_default_variant and product.selling_plan_groups.size > 0
       assign somna_sticky = true
     endif
 
@@ -242,6 +279,19 @@
 %}
 
 {% stylesheet %}
+  /* Somna Halloween sale pill (2026-10-15): space above it so the header's wavy bottom edge
+     no longer cuts into it. Scales with the screen; overrides the top margins in custom.css
+     (phones) and somna-home-desktop.css (tablet/desktop). */
+  .product-information .somna-pdp-sale-pill {
+    margin-top: clamp(30px, 7vw, 40px);
+  }
+
+ @media(min-width:768px){
+    .product-information__grid{
+      padding: 0 50px;
+    }
+ }
+
   .sticky-add-to-cart__bar {
     position: fixed;
     bottom: max(20px, var(--safe-area-inset-bottom));

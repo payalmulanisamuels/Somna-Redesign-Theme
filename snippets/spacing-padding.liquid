@@ -12,3 +12,8 @@
 px; --padding-inline-start:{{ settings['padding-inline-start'] | default: 0 }}px; --padding-inline-end:
 {{- settings['padding-inline-end'] | default: 0 -}}
 px;
+{%- comment -%} Desktop overrides (990px and up); empty = same as mobile {%- endcomment -%}
+{%- if settings['padding-block-start-desktop'] != blank %} --padding-block-start-desktop: {{ settings['padding-block-start-desktop'] }}px;{% endif -%}
+{%- if settings['padding-block-end-desktop'] != blank %} --padding-block-end-desktop: {{ settings['padding-block-end-desktop'] }}px;{% endif -%}
+{%- if settings['padding-inline-start-desktop'] != blank %} --padding-inline-start-desktop: {{ settings['padding-inline-start-desktop'] }}px;{% endif -%}
+{%- if settings['padding-inline-end-desktop'] != blank %} --padding-inline-end-desktop: {{ settings['padding-inline-end-desktop'] }}px;{% endif -%}
