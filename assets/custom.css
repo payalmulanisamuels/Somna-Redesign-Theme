@@ -3659,6 +3659,14 @@ body .hz-prob-sol-section {
   background-image: none !important;
   background-color: inherit;
 }
+/* overlap the section by 1px so no hairline shows between the wave and the section */
+.steps-section > .wave-container.top {
+  transform: translateY(1px);
+}
+.steps-section > .wave-container.bottom,
+.hz-prob-sol-section > .wave-container.bottom {
+  transform: translateY(-1px);
+}
 .steps-section > .wave-container.top {
   -webkit-mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 61.0219C245.496 -23.2528 283.969 -6.76441 483.664 30.2988C696.183 109.359 842.748 -27.1997 1047.94 37.4861C1209.16 87.7974 1341.07 42.2791 1440 4.22792V145.296H0V61.0219Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center bottom / 100% 100% no-repeat;
   mask: url('data:image/svg+xml,%3Csvg preserveAspectRatio="none" width="1440" height="146" viewBox="0 0 1440 146" fill="none" xmlns="http://www.w3.org/2000/svg"%3E %3Cpath d="M0 61.0219C245.496 -23.2528 283.969 -6.76441 483.664 30.2988C696.183 109.359 842.748 -27.1997 1047.94 37.4861C1209.16 87.7974 1341.07 42.2791 1440 4.22792V145.296H0V61.0219Z" fill="%23FFF2E3"/%3E %3C/svg%3E') center bottom / 100% 100% no-repeat;
