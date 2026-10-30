@@ -5,7 +5,7 @@
 </script>
 
 {%- comment -%}
-  Somna Halloween 2026 (Figma PDP 3297-4934 / 3297-5224):
+  Somna sale look (Figma PDP 3297-4934 / 3297-5224):
   - Sale pill above the product images on every product while the sale is on. The offer text
     ("UP TO 50% OFF") comes from snippets/somna-sale.liquid; set somna_sale_on to false there to hide it.
   - Desktop: the sub-headline and short description sit under the images (Figma).
@@ -23,8 +23,8 @@
 {% capture media_gallery %}
   {%- if somna_hw_text != blank -%}
     <p class="somna-pdp-sale-pill">
-      HALLOWEEN SALE <span class="somna-pdp-sale-pill__star" aria-hidden="true">*</span>
-      <span class="somna-pdp-sale-pill__offer">{{ somna_hw_text | escape }}</span> THROUGH OCT 31
+      SALE <span class="somna-pdp-sale-pill__star" aria-hidden="true">*</span>
+      <span class="somna-pdp-sale-pill__offer">{{ somna_hw_text | escape }}</span> ON ALL PRODUCTS
     </p>
   {%- endif -%}
   {%- content_for 'block',
@@ -279,7 +279,7 @@
 %}
 
 {% stylesheet %}
-  /* Somna Halloween sale pill (2026-10-15): space above it so the header's wavy bottom edge
+  /* Somna sale pill (2026-10-15): space above it so the header's wavy bottom edge
      no longer cuts into it. Scales with the screen; overrides the top margins in custom.css
      (phones) and somna-home-desktop.css (tablet/desktop). */
   .product-information .somna-pdp-sale-pill {

@@ -909,8 +909,8 @@
 /* 10. "Breathe through your nose" banner text entrance: removed (2026-10-14).
    It was already switched off by section 14; the banner text uses the reveal in custom.js. */
 
-/* 11. "Shop the essentials" bouncing cut-outs (switched off for Halloween): removed (2026-10-19, speed).
-   To bring them back after Halloween, restore section 11 from the theme's Git history (before this date). */
+/* 11. "Shop the essentials" bouncing cut-outs: removed (2026-10-19, speed).
+   To bring them back, restore section 11 from the theme's Git history (before this date). */
 
 /* --------------------------------------------------------------------------
    12. "Small essentials. Thoughtfully made." (the 4-column section with yellow icons)
@@ -1136,8 +1136,8 @@
   }
 }
 
-/* Sections 13-15 (motion variables, Halloween webs / spider / pumpkins, Sleep Bundle and Problem / Solution
-   webs): moved unchanged to the end of assets/custom.css (2026-10-19, speed) so they apply from the first paint. */
+/* Sections 13-14 (motion variables, reveal and fade-up): moved unchanged to the end of assets/custom.css
+   (2026-10-19, speed) so they apply from the first paint. The seasonal section 15 was removed on 2026-10-30. */
 
 /* ---- "Or save with a bundle" on the homepage: the old floating strip, tape and dots
    (sections 6 and 9 above) are hidden here. They still show on the collection page. ---- */

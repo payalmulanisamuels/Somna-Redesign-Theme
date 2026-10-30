@@ -140,14 +140,14 @@
   .header-logo__transparent-header-image-container {
     display: var(--header-logo-inverse-display, none);
   }
-  /* Somna (2026-10-15): header + Halloween banner fit on one screen on laptops and desktops
+  /* Somna (2026-10-15): header + homepage banner fit on one screen on laptops and desktops
      (990px and up; phones and tablets unchanged). Kept here because this logo block is in the
      header on every page.
      - Header (every page): less white above and below the logo row, logo 160px wide (was 173px);
-       the witch hat still clears the orange announcement bar.
-     - Banner (homepage + Halloween Sale page): exactly the screen height left under the header
+       clears the orange announcement bar.
+     - Banner (homepage): exactly the screen height left under the header
        (--header-group-height is measured by the theme), never taller than 62% of the width or
-       shorter than 480px. The white wave is shallower, and the copy, "70% OFF" and the homepage
+       shorter than 480px. The white wave is shallower, and the copy, "50% OFF" and the homepage
        button scale with the screen height, so everything shows on a 16-inch laptop. Same layout as Figma. */
   @media screen and (min-width: 990px) {
     #header-component {
@@ -163,56 +163,45 @@
       width: 160px;
     }
 
-    :is(#MainContent[data-template='index'] [id$='__hero_jVaWmY'], #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale']) .hero {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .hero {
       min-height: max(480px, min(62vw, calc(100svh - var(--header-group-height, 128px)))) !important;
     }
 
     /* The whole wave curve (Figma 1442 x 533 shape; its curve is the bottom 86 units) is scaled
        into this shorter strip, so it stays smooth instead of being cut flat at the top */
-    :is(#MainContent[data-template='index'] [id$='__hero_jVaWmY'], #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale']) .hero::before {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .hero::before {
       height: clamp(36px, 3.6vw, 56px) !important;
       background-size: 100% calc(clamp(36px, 3.6vw, 56px) * 6.2) !important;
     }
 
-    :is(#MainContent[data-template='index'] [id$='__hero_jVaWmY'], #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale']) .hero__container {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .hero__container {
       padding-block: calc(clamp(36px, 3.6vw, 56px) + clamp(12px, 3svh, 36px)) clamp(40px, 8svh, 96px) !important;
     }
 
-    /* "THE somna. HALLOWEEN SALE" */
+    /* Eyebrow ("THE somna SLEEP SYSTEM") */
     #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_VDbt3L,
-    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_VDbt3L > *,
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .text-block--text_hwsub,
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .text-block--text_hwsub > * {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_VDbt3L > * {
       font-size: clamp(14px, min(1.6vw, 2.6svh), 22px) !important;
     }
 
-    /* "NO TRICKS. ONLY TREATS." */
+    /* Headline */
     #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_eT6TMz,
-    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_eT6TMz > *,
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .text-block--text_hwtitle,
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] .text-block--text_hwtitle > * {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .text-block--text_eT6TMz > * {
       font-size: clamp(40px, min(5.2vw, 8svh), 76px) !important;
     }
 
   
 
 
-    /* "On Nasal Strips & Mouth Tape. Ends Oct 31" + perks line */
+    /* "On all products." + perks line */
     #MainContent[data-template='index'] [id$='__hero_jVaWmY'] :is(.text-block--text_Lqf6bA, .text-block--text_hwperks),
-    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] :is(.text-block--text_Lqf6bA, .text-block--text_hwperks) > *,
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] :is(.text-block--text_hwon, .text-block--text_hwperks),
-    #MainContent[data-template='page.halloween-sale'] [id$='__hero_hwsale'] :is(.text-block--text_hwon, .text-block--text_hwperks) > * {
+    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] :is(.text-block--text_Lqf6bA, .text-block--text_hwperks) > * {
       font-size: clamp(13px, min(1.2vw, 2.2svh), 17px) !important;
     }
 
     /* Homepage "Shop the sale" button: a little shorter on short screens */
     #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .size-style.button.button--button_6EgajN {
       min-height: clamp(44px, 7svh, 54px) !important;
-    }
-
-    #MainContent[data-template='index'] [id$='__hero_jVaWmY'] .button::before {
-      width: clamp(36px, 5.6svh, 46px) !important;
-      height: clamp(36px, 5.6svh, 46px) !important;
     }
   }
   /* Somna (2026-10-15): "Small essentials. Thoughtfully made." (homepage, section_ibM3ft) shows
@@ -237,92 +226,6 @@
     translate: none !important;
     scale: none !important;
     transition: none !important;
-  }
-  /* Somna (2026-10-15): Halloween "Sale" link in the header menu (the link set as "Highlighted link"
-     in the menu block). The theme's jack-o'-lantern (the one on the logo's "o") sits before the word
-     and gives a little wobble every few seconds, the word glows softly like a lantern, and on hover
-     the pumpkin hops. Visitors who prefer reduced motion see a still pumpkin. */
-  .menu-list__link--highlight .menu-list__link-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
-  }
-
-  .menu-list__link--highlight .menu-list__link-title::before {
-    content: '';
-    flex: none;
-    width: 1.3em;
-    height: 1.3em;
-    background: url('/cdn/shop/files/somna-halloween-pumpkin-lantern.png?width=80') center / contain no-repeat;
-    transform-origin: 50% 90%;
-  }
-
-  @keyframes somna-sale-wobble {
-    0%, 60%, 100% {
-      rotate: 0deg;
-      translate: 0 0;
-    }
-
-    66% {
-      rotate: -14deg;
-      translate: 0 -2px;
-    }
-
-    74% {
-      rotate: 12deg;
-      translate: 0 -3px;
-    }
-
-    82% {
-      rotate: -7deg;
-      translate: 0 -1px;
-    }
-
-    90% {
-      rotate: 3deg;
-      translate: 0 0;
-    }
-  }
-
-  @keyframes somna-sale-glow {
-    0%, 100% {
-      text-shadow: 0 0 0 rgb(255 152 69 / 0);
-    }
-
-    50% {
-      text-shadow: 0 0 10px rgb(255 152 69 / 0.8);
-    }
-  }
-
-  @keyframes somna-sale-hop {
-    0%, 100% {
-      rotate: 0deg;
-      translate: 0 0;
-    }
-
-    40% {
-      rotate: -10deg;
-      translate: 0 -5px;
-    }
-
-    70% {
-      rotate: 6deg;
-      translate: 0 0;
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .menu-list__link--highlight .menu-list__link-title {
-      animation: somna-sale-glow 3.2s ease-in-out infinite;
-    }
-
-    .menu-list__link--highlight .menu-list__link-title::before {
-      animation: somna-sale-wobble 3.2s ease-in-out infinite;
-    }
-
-    .menu-list__link--highlight:hover .menu-list__link-title::before {
-      animation: somna-sale-hop 0.6s ease-in-out infinite;
-    }
   }
 {% endstylesheet %}
 

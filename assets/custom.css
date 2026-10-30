@@ -1836,44 +1836,25 @@ a.somna-view-all {
  
 
 /* =====================================================================
-   HALLOWEEN 2026 — homepage redesign (Figma 3297:6613 mobile / 3297:5520 desktop)
+   HOMEPAGE redesign (from the Pagespeed theme, Halloween motifs removed 2026-10-30)
    Base (mobile-first) rules. Tablet/desktop sizes live in somna-home-desktop.css.
-   Decorations are pointer-events: none and aria-hidden. Only the homepage is
-   affected, except the header (announcement bar + logo), which is sitewide
-   by request.
+   The "display" and "badge" font variables now point at the brand heading font,
+   so any text block or announcement still set to them keeps the brand look.
    ===================================================================== */
 :root {
-  --font-display--family: "Rubik Wet Paint", "Impact", "Arial Black", sans-serif;
-  --font-display--weight: 400;
-  --font-display--style: normal;
-  --font-display-spray--family: "Rubik Spray Paint", "Impact", "Arial Black", sans-serif;
-  --font-display-spray--weight: 400;
-  --font-display-spray--style: normal;
-  --font-badge--family: "Bigshot One", Georgia, serif;
+  --font-display--family: var(--font-heading--family);
+  --font-display--weight: var(--font-heading--weight);
+  --font-display--style: var(--font-heading--style);
+  --font-display-spray--family: var(--font-heading--family);
+  --font-display-spray--weight: var(--font-heading--weight);
+  --font-display-spray--style: var(--font-heading--style);
+  --font-badge--family: var(--font-heading--family);
   --hw-orange: #ff9845;
   --hw-orange-text: #ef5400;
   --hw-navy: #0a1a4a;
-  --hw-web-left: url("/cdn/shop/files/somna-halloween-web-spider.png");
-  --hw-web-right: url("/cdn/shop/files/somna-halloween-web-right.png");
-  --hw-web-right-2: url("/cdn/shop/files/somna-halloween-web-right-2.png");
 }
 
-/* ---------- Announcement bar (sitewide): Halloween drip font ---------- */
-.announcement-bar__slide[style*="font-display"] .announcement-bar__text {
-  font-family: var(--font-display--family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: 0.01em;
-}
-.announcement-bar__slide[style*="font-display"] .annoucement_bar_wrap {
-  align-items: center;
-  gap: 8px;
-}
-
-/* ---------- Logo (sitewide): pumpkin over the "o" + witch hat ----------
-   Positions are measured from the logo file (515 x 82 px of lettering)
-   against the Figma logo, so they scale with the logo. */
+/* ---------- Logo (sitewide): fixed width, 102px on phones (tablet/desktop: somna-home-desktop.css, _header-logo.liquid) ---------- */
 .header-logo span[data-testid="header-logo"] {
   position: relative;
   display: block;
@@ -1883,35 +1864,9 @@ a.somna-view-all {
 }
 .header-logo span[data-testid="header-logo"] > .header-logo__image {
   display: block;
-  width: 100% !important; /* overrides the logo's own size so the overlay lines up */
+  width: 100% !important; /* overrides the logo's own size so the width above applies */
   height: auto !important;
   max-width: none;
-}
-.header-logo span[data-testid="header-logo"]::before,
-.header-logo span[data-testid="header-logo"]::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-}
-/* pumpkin over the "o" (top layer) with a white patch hiding the "o" underneath */
-.header-logo span[data-testid="header-logo"]::before {
-  left: 14.7%;
-  top: -17%;
-  width: 18.6%;
-  height: 117%;
-  background:
-    url("/cdn/shop/files/somna-halloween-pumpkin-lantern.png?width=200") center top / 100% auto no-repeat,
-    linear-gradient(#fff, #fff) 48.6% 100% / 82.3% 85.5% no-repeat;
-}
-/* witch hat on the "a." (the hat file has a white background, multiply drops it) */
-.header-logo span[data-testid="header-logo"]::after {
-  left: 70.7%;
-  top: -200.7%;
-  width: 50%;
-  aspect-ratio: 1;
-  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/capicon.png?v=1791981913&width=300") center / contain no-repeat;
-  mix-blend-mode: multiply;
 }
 
 /* ---------- Hero ---------- */
@@ -1929,82 +1884,22 @@ a.somna-view-all {
   pointer-events: none;
   background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
 }
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] h1 {
-  margin: 0;
-  font-family: var(--font-display--family);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: 0;
-  color: #ff9845;
-  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] {
-  rotate: -3deg;
-  transform-origin: left center;
-}
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"],
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block[style*="font-display-spray"] > * {
-  line-height: 0.98;
-}
 #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-height: 38px;
-  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
-  border: 2px solid #fff !important;
+  padding: 2px 22px !important; /* overrides the hero's own button padding */
+  border: 2px solid #ef5400 !important;
   border-radius: 999px;
-  background: #fff !important;
-  color: #ff7300 !important;
+  background: #ef5400 !important; /* orange pill: the hero photo is light, so a white pill would disappear */
+  color: #fff !important;
   font-family: var(--font-body--family);
   font-weight: 600;
   box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
 }
-#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button::before {
-  content: "";
-  flex: none;
-  width: 34px;
-  height: 34px;
-  background: url("/cdn/shop/files/pumpkin-icon.png?width=128") center / contain no-repeat;
-}
 
 /* ---------- Shop the essentials ---------- */
-.somna-ess.somna-ess--halloween .somna-ess__title::before,
-.somna-ess.somna-ess--halloween .somna-ess__title::after,
-.somna-ess.somna-ess--halloween .somna-ess__inner::before,
-.somna-ess.somna-ess--halloween .somna-ess__card .somna-ess__media::after {
-  content: none;
-  animation: none;
-}
-.somna-ess__web {
-  position: absolute;
-  top: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  mix-blend-mode: multiply; /* web files have a white background */
-}
-.somna-ess__web--left {
-  left: 0;
-  width: 122px;
-  aspect-ratio: 439 / 620;
-  background-image: var(--hw-web-left);
-  z-index: 11;
-}
-.somna-ess__web--right {
-  right: 0;
-  width: 90px;
-  aspect-ratio: 333 / 178;
-  background-image: var(--hw-web-right);
-  background-position: right top;
-}
-.somna-ess--halloween .somna-ess__inner {
-  z-index: 1;
-}
 .somna-ess__eyebrow {
   margin: 0 0 6px;
   font-family: var(--font-body--family);
@@ -2016,7 +1911,7 @@ a.somna-view-all {
   text-transform: uppercase;
   color: var(--hw-orange-text);
 }
-.somna-ess.somna-ess--halloween .somna-ess__title {
+.somna-ess.somna-ess--sale .somna-ess__title {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2024,7 +1919,6 @@ a.somna-view-all {
   margin-bottom: 22px;
   font-family: var(--font-display--family);
   font-size: 26px;
-  font-weight: 400;
   line-height: 0.98;
   color: var(--hw-navy);
 }
@@ -2032,15 +1926,22 @@ a.somna-view-all {
   flex: none;
   width: 32px;
   height: auto;
-  rotate: 10deg;
 }
-.somna-ess.somna-ess--halloween .somna-ess__card {
+.somna-ess.somna-ess--sale .somna-ess__title::before,
+.somna-ess.somna-ess--sale .somna-ess__title::after,
+.somna-ess.somna-ess--sale .somna-ess__inner::before,
+.somna-ess.somna-ess--sale .somna-ess__card .somna-ess__media::after {
+  content: none;
+  animation: none;
+}
+.somna-ess.somna-ess--sale .somna-ess__card {
   position: relative;
   background: #fff2e3;
 }
-.somna-ess.somna-ess--halloween .somna-ess__price {
+.somna-ess.somna-ess--sale .somna-ess__price {
   color: var(--hw-orange-text);
 }
+/* Sale badge ("UP TO 50% OFF") on the essentials and bundle cards: a plain orange circle */
 .somna-ess__badge {
   position: absolute;
   top: -20px;
@@ -2049,20 +1950,22 @@ a.somna-view-all {
   display: grid;
   place-items: center;
   width: 46px;
-  aspect-ratio: 164 / 161;
-  padding-top: 10px;
-  background: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/badge.png?v=1791982298&width=160") center / contain no-repeat;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--hw-orange);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.18);
   pointer-events: none;
 }
 .somna-ess__badge-text {
   display: block;
-  width: 72%;
+  width: 78%;
   font-family: var(--font-badge--family);
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 700;
   line-height: 0.95;
   text-align: center;
+  text-transform: uppercase;
   color: #000;
-  rotate: 4deg;
 }
 
 /* ---------- Small essentials: orange wavy edge + orange fade ---------- */
@@ -2091,45 +1994,10 @@ a.somna-view-all {
 }
 #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
   margin: 0;
-  font-family: var(--font-display--family);
-  font-weight: 400;
   line-height: 1;
   color: #000;
 }
-
-/* ---------- The Sleep Bundle: spiderwebs ---------- */
-#MainContent[data-template="index"] .somna-sleep-bundle {
-  position: relative;
-}
-#MainContent[data-template="index"] .somna-sleep-bundle::before,
-#MainContent[data-template="index"] .somna-sleep-bundle::after {
-  content: "";
-  position: absolute;
-  top: -40px;
-  z-index: 0;
-  pointer-events: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  mix-blend-mode: multiply;
-}
-#MainContent[data-template="index"] .somna-sleep-bundle::before {
-  left: 0;
-  width: 122px;
-  aspect-ratio: 439 / 620;
-  background-image: var(--hw-web-left);
-}
-#MainContent[data-template="index"] .somna-sleep-bundle::after {
-  right: 0;
-  width: 105px;
-  aspect-ratio: 354 / 237;
-  background-image: var(--hw-web-right-2);
-  background-position: right top;
-}
-#MainContent[data-template="index"] .somna-sleep-bundle > * {
-  position: relative;
-  z-index: 1;
-}
-/* ======================= END HALLOWEEN 2026 ======================= */
+/* ======================= END HOMEPAGE redesign ======================= */
 
 /* =====================================================================
    PRODUCT & COLLECTION PAGES — moved here on 2026-10-15 from
@@ -2138,7 +2006,7 @@ a.somna-view-all {
    :where(.template-product, .template-collection, .template-list-collections, .somna-sp)
    so they still only apply on those pages (the body class comes from
    layout/theme.liquid) and keep their original specificity.
-   .somna-sp (2026-10-15) = the buy boxes on the Halloween Sale page (sections/somna-sale-product.liquid).
+   .somna-sp (2026-10-15) = the buy boxes of the old sale page section (no longer in this theme; the selector is inert).
    Their min-width: 768px blocks moved to the top of somna-home-desktop.css.
    ===================================================================== */
 
@@ -3554,15 +3422,14 @@ margin-top: 7px;
 /* ==================== END PRODUCT & COLLECTION PAGES ==================== */
 
 /* =====================================================================
-   HALLOWEEN 2026 — PRODUCT PAGE BUY BOX (Figma 3297-4934 desktop / 3297-5224 mobile)
-   All five products get the Halloween look (peach panel, orange border, orange
-   button). The Halloween words (sale pill above the images, "HALLOWEEN: …" banner,
-   "Lock in your Halloween price") only show when the product's "Halloween sale text"
-   metafield (custom.halloween_sale_text) has a value — Nasal Strips and Mouth Tape.
+   PRODUCT PAGE BUY BOX — sale look (Figma 3297-4934 desktop / 3297-5224 mobile)
+   All five products get the sale look (peach panel, orange border, orange
+   button). The sale words (sale pill above the images, "UP TO 50% OFF …" banner,
+   "Lock in your sale price") show while the sale is on (snippets/somna-sale.liquid).
    Every price, saving and "% OFF" pill is calculated from the real subscription plans.
    Panel background / border colours are the buy-box group's own settings
    (templates/product.json, group_6Ynwc9). Tablet/desktop sizes: somna-home-desktop.css.
-   After Halloween: delete this block and set the group colours back to restore the blue design.
+   To go back to the blue design: delete this block and set the group colours back.
    ===================================================================== */
 
 /* Sale pill above the product images (only rendered when the metafield is filled) */
@@ -3743,7 +3610,7 @@ margin-top: 7px;
 :where(.template-product, .somna-sp) .somna-buybox-delivery {
   color: #000;
 }
-/* ===================== END HALLOWEEN 2026 — PRODUCT PAGE ===================== */
+/* ===================== END PRODUCT PAGE BUY BOX — sale look ===================== */
 
 /* =====================================================================
    PRODUCT PAGE — Figma fixes 2026-10-15 (Nasal Strips 3297:4934 desktop / 3297:5224 mobile)
@@ -3752,7 +3619,7 @@ margin-top: 7px;
 /* Trust bar (Free shipping / 30-night guarantee / Delivered in / Secure payment) — ONE style for every
    page that has this bar (homepage, collection, product, contact): it is matched by its section id, never
    by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
-   Rubik Spray Paint, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
+   brand heading font, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
    It replaces the yellow wave picture (bg_image) and the per-page colour. */
 .shopify-section[id$='__section_zELtyM'] .section-background,
 .shopify-section[id$='__section_zELtyM'] .section {
@@ -3777,12 +3644,6 @@ margin-top: 7px;
   border-right-width: clamp(1px, 0.14vw, 2px);
   border-bottom-width: clamp(1px, 0.14vw, 2px);
 }
-/* Figma: "Delivered in" and "Secure payment" are set in Rubik Wet Paint (the first two in Spray Paint) */
-.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block,
-.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block > *,
-.shopify-section[id$='__section_zELtyM'] .group-block:nth-child(n+5) .text-block strong {
-  font-family: var(--font-display--family);
-}
 .shopify-section[id$='__section_zELtyM'] .icon-block__media {
   height: auto;
 }
@@ -3793,15 +3654,14 @@ margin-top: 7px;
 }
 
 /* Problem / Solution (sections/problem-solution.liquid): Figma background #fff2e3, a matching
-   peach bottom wave, and top spacing from Figma (93px at 1440px, 25px at 393px).
-   The Halloween spiderweb + spider and their animation live in somna-motion.css (section 15). */
+   peach bottom wave, and top spacing from Figma (93px at 1440px, 25px at 393px). */
 .hz-prob-sol-section {
   background-color: #fff2e3 !important; /* replaces the section's inline cream */
 }
 .hz-prob-sol-section > .wave-container.bottom {
   background-image: url("somna-hw-howto-bottom.svg") !important;
 }
-.hz-prob-sol-section.somna-ps--halloween {
+.hz-prob-sol-section {
   padding-top: clamp(17px,6.4vw,35px);
 }
 
@@ -3816,239 +3676,14 @@ margin-top: 7px;
   background-image: url("somna-hw-howto-bottom.svg") !important;
 }
 
-/* "Get 10% off your first order." — Figma images, on every page that has this section */
-[id$='__footer_m9NzUG'] .section {
-  background-image: url("https://cdn.shopify.com/s/files/1/0796/2545/3799/files/somna-hw-newsletter-mobile.png?v=1792041619&width=1200") !important;
-  background-position: center !important;
-}
 /* ==================== END PRODUCT PAGE — Figma fixes ==================== */
 
-/* =====================================================================
-   HALLOWEEN SALE PAGE (pages/halloween-sale, templates/page.halloween-sale.json)
-   Figma 3316:8669 desktop / 3316:11976 mobile. Phones + all sizes here;
-   tablet/desktop sizes in somna-home-desktop.css ("HALLOWEEN SALE PAGE").
-   Everything is scoped to this page's own sections:
-   - [id$='__hero_hwsale'] = the shared hero (homepage banner) section placed on this page;
-   - .somna-sp = sections/somna-sale-product.liquid (only used on this page).
-   The trust bar and "Get 10% off" use their universal rules above.
-   ===================================================================== */
-
-/* ---------- Hero (same look as the homepage hero) ---------- */
-[id$='__hero_hwsale'] .hero {
-  position: relative;
-  min-height: 120vw;
-}
-/* the header's white wave running over the top of the photo */
-[id$='__hero_hwsale'] .hero::before {
-  content: "";
-  position: absolute;
-  inset: -1px 0 auto;
-  height: 7.6vw;
-  z-index: 3;
-  pointer-events: none;
-  background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
-}
-[id$='__hero_hwsale'] h1 {
-  margin: 0;
-  font-family: var(--font-display--family);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: 0;
-  color: #ff9845;
-  background-image: linear-gradient(180deg, #ffffff 0%, #ffcfa4 40%, #fe8b4c 58%, #d84f04 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] {
-  rotate: -3deg;
-  transform-origin: left center;
-}
-[id$='__hero_hwsale'] .text-block[style*="font-display-spray"],
-[id$='__hero_hwsale'] .text-block[style*="font-display-spray"] > * {
-  line-height: 0.98;
-}
-/* Pill buttons; the pumpkin comes from the hero's "Button icon" setting */
-[id$='__hero_hwsale'] .button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 38px;
-  padding: 2px 22px 2px 6px !important; /* overrides the hero's own button padding */
-  border: 2px solid #fff !important;
-  border-radius: 999px;
-  background: #fff !important;
-  color: #ff7300 !important;
-  font-family: var(--font-body--family);
-  font-weight: 600;
-  box-shadow: 0 2px 1px rgb(0 0 0 / 0.25);
-}
-[id$='__hero_hwsale'] .button::before {
-  width: 34px;
-  height: 34px;
-}
-/* "Shop Mouth Tape" (desktop): orange pill, white pumpkin with the face cut out (Figma Frame 55) */
-[id$='__hero_hwsale'] .button--button_hwtape {
-  border-color: #ef5400 !important;
-  background: #ef5400 !important;
-  color: #fff !important;
-}
-[id$='__hero_hwsale'] .button--button_hwtape::before {
-  background-image: url("/cdn/shop/files/somna-halloween-pumpkin-navy.png?width=128");
-  filter: brightness(0) invert(1);
-}
-/* Phones: one "Shop the sale" button (Figma mobile); the two product buttons are desktop only */
-[id$='__hero_hwsale'] :is(.button--button_hwnasal, .button--button_hwtape) {
-  display: none;
-}
-
-/* ---------- Sale products (sections/somna-sale-product.liquid) ---------- */
-.somna-sp {
-  position: relative;
-  display: block;
-  overflow-x: clip;
-  padding: 32px 16px 40px;
-  background: var(--sp-bg, #fff);
-  color: #0a1a4a;
-}
-.somna-sp--web-left {
-  padding-top: 30px; /* room for the web + spider above the image */
-}
-.somna-sp--web-right {
-  padding-top: 56px;
-}
-.somna-sp-section + .somna-sp-section .somna-sp {
-  padding-top: 8px;
-}
-.somna-sp-section + .somna-sp-section .somna-sp--web-right {
-  padding-top: 15px;
-}
-.somna-sp__inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  max-width: 592px;
-  margin-inline: auto;
-  scroll-margin-top: 110px; /* clears the sticky header when a hero button jumps here */
-}
-.somna-sp__image-link {
-  display: block;
-}
-.somna-sp__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgb(10 26 74 / 0.12);
-}
-.somna-sp__intro {
-  padding: 14px 4px 0;
-}
-.somna-sp__rating {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 6px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: #0a1a4a;
-}
-.somna-sp__stars {
-  font-size: 14px;
-  letter-spacing: 1px;
-  line-height: 1;
-  color: #f5b400;
-  background: linear-gradient(90deg, #f5b400 var(--sp-rating, 100%), #d6dbe8 var(--sp-rating, 100%));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.somna-sp__eyebrow {
-  margin: 0 0 4px;
-  font-family: var(--font-body--family);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #2563eb;
-}
-.somna-sp__heading {
-  margin: 0 0 8px;
-  font-family: var(--headfont, var(--font-heading--family));
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: 0;
-  text-wrap: balance;
-  color: #0a1a4a;
-}
-.somna-sp__text,
-.somna-sp__text p {
-  margin: 0;
-  max-width: 34em;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #0a1a4a;
-}
-/* Buy box panel: same peach panel + orange border as the product page */
-.somna-sp__panel {
-  margin-top: 20px;
-  padding: 16px;
-  border: 2px solid #ef5400;
-  border-radius: 24px;
-  background: #fff2e3;
-}
-.somna-sp .button[id^='BuyButtons-ProductSubmitButton-'] {
-  --button-background-color: #ff7a12;
-  --button-color: #faf2df;
-  width: 100%;
-  height: 41px !important; /* beats the shared buy-box height */
-  border-radius: 999px;
-  background-color: #ff7a12;
-  color: #faf2df;
-  font-weight: 700;
-  box-shadow: 0 4px 0 #b8430b;
-}
-.somna-sp .button[id^='BuyButtons-ProductSubmitButton-']:hover {
-  --button-background-color: #f06d08;
-  background-color: #f06d08;
-}
-.somna-sp__details {
-  display: block;
-  margin-top: 20px;
-  font-size: 15px;
-  font-weight: 800;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
-  color: #0a1a4a;
-}
-.somna-sp__details:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-/* Halloween web + spider (homepage animation, somna-motion.css section 15): placement only.
-   Phones: small web in the top corner, the spider stops above the image. */
-.somna-sp > .somna-ess__web--left {
-  --web-w: 96px;
-  --hang: 120;
-  z-index: 11;
-}
-.somna-sp > .somna-ess__web--right {
-  --rweb-w: 90px;
-}
-/* ==================== END HALLOWEEN SALE PAGE ==================== */
 
 
 /* =====================================================================
    SOMNA MOTION: FIRST-PAINT RULES (moved unchanged from assets/somna-motion.css, 2026-10-19, speed)
    These are the motion rules that affect what is on screen when a page first appears: the motion
-   variables, the reveal classes, the hero text entrance, the image settle, and the Halloween webs,
-   spider and pumpkins. Everything else in somna-motion.css (hover / focus effects and decorations
+   variables, the reveal classes, the hero text entrance and the image settle. Everything else in somna-motion.css (hover / focus effects and decorations
    further down the page) now loads without blocking the page (layout/theme.liquid).
    Order inside this block is the same as it was in somna-motion.css.
    ===================================================================== */
@@ -4221,567 +3856,4 @@ margin-top: 7px;
 
 /* (The rule that switched off the entrances of sections 10, 12 and 13 was removed with them.) */
 
-/* --------------------------------------------------------------------------
-   15. HALLOWEEN 2026: "Shop the essentials" (sections/somna-shop-essentials.liquid)
-   Approved demo v3 (2026-10-14). Only active while the section's
-   "Show Halloween decorations" setting is on (.somna-ess--halloween).
-   Sequence, started by the section's small script when the web is a quarter of the
-   way up the screen (.hw-ready = script running, .is-in = in view; replays each time
-   the section comes back into view):
-     0.00s  the left Figma web draws itself: top strand, radial strands, then the
-            spiral ring by ring (SVG mask strokes drawn with stroke-dashoffset over
-            the real web image somna-hw-web.png); the right web (somna-hw-web-right.png,
-            no spider, as in Figma) draws itself from its centre, a beat later
-     1.50s  the spider appears at the top of its thread, on the left web
-     1.60s  it lowers itself in two smooth drops, the silk paying out with it
-     3.75s  short pause, then a gentle swing (3 swings, each smaller) and rest
-   Also: the title pumpkin hops and smiles every 7s, and the "70% OFF" pumpkin
-   badges give a short shake every 4.5s.
-   Without the script, or with reduced motion: finished web, spider hanging,
-   pumpkin smiling, nothing moves.
-   The same webs and spider are used above "The Sleep Bundle" card on the homepage
-   (sections/sleep-bundle.liquid adds .somna-sb--halloween) and, on the product page, in the
-   Problem / Solution section (sections/problem-solution.liquid adds .somna-ps--halloween);
-   the rules below are shared, and each placement is at the end of this section.
-   Sizes: --web-w is 122px on phones; somna-home-desktop.css sets the desktop width.
-   Motion only (transform / rotate / translate / opacity / stroke-dashoffset):
-   no layout shift and nothing can be clicked.
-   -------------------------------------------------------------------------- */
-
-/* ---- Web and spider: size and placement ---- */
-:where(.somna-ess__web--left) {
-  --web-w: 122px;
-  --hang: 230; /* phones: shorter silk, so the spider stops beside the heading, clear of the first card */
-}
-
-@media screen and (min-width: 750px) {
-  :where(.somna-ess__web--left) {
-    --hang: 341; /* desktop: same resting place as the Figma design */
-  }
-}
-
-:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--left {
-  width: var(--web-w);
-  aspect-ratio: auto;
-  background-image: none; /* replaces the old web-with-spider background picture */
-}
-
-/* Right web (Figma right-hand web, 333 x 178, no spider): 90px on phones,
-   the desktop width matches somna-home-desktop.css. */
-:where(.somna-ess__web--right) {
-  --rweb-w: 90px;
-}
-
-@media screen and (min-width: 750px) {
-  :where(.somna-ess__web--right) {
-    --rweb-w: clamp(160px, 21vw, 333px);
-  }
-}
-
-:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__web--right {
-  width: var(--rweb-w);
-  aspect-ratio: auto;
-  background-image: none; /* replaces the old right web background picture */
-}
-
-.somna-ess__web-svg {
-  display: block;
-  width: 100%;
-  max-width: none;
-  height: auto;
-  overflow: visible;
-}
-
-/* Mask strokes that "draw" the web (in the 439 x 268 units of the web image) */
-.somna-ess__web-svg .hw-m {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-}
-
-.somna-ess__web-svg .hw-m--frame {
-  stroke-width: 9;
-}
-
-.somna-ess__web-svg .hw-m--spoke {
-  stroke-width: 10;
-}
-
-.somna-ess__web-svg .hw-m--ring {
-  stroke-width: 30;
-}
-
-.somna-spider {
-  position: absolute;
-  top: calc(var(--web-w) * 145 / 439);
-  left: calc(var(--web-w) * 44 / 439);
-  width: 0;
-  height: 0;
-  transform-origin: 0 0;
-  --len: calc(var(--web-w) * var(--hang, 341) / 439);
-}
-
-.somna-spider__thread {
-  position: absolute;
-  top: 0;
-  left: 2.4px;
-  width: 1.2px;
-  height: var(--len);
-  background: #1a1a1a;
-  transform-origin: 50% 0;
-}
-
-@media screen and (min-width: 750px) {
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-spider__thread {
-    left: -0.75px;
-    width: 1.5px;
-  }
-}
-
-.somna-spider__body {
-  position: absolute;
-  top: 0;
-  left: calc(var(--web-w) * -43.5 / 439);
-  display: block;
-  width: calc(var(--web-w) * 90 / 439);
-  max-width: none;
-  height: auto;
-  translate: 0 calc(var(--len) - 1px);
-}
-
-/* ---- Pumpkin after the heading ---- */
-.somna-pk {
-  display: block;
-}
-
-.somna-pk svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-  transform-origin: 50% 100%;
-}
-
-.somna-pk__smile,
-.somna-pk__happy {
-  opacity: 0;
-}
-
-.somna-pk__smile {
-  transform-box: fill-box;
-  transform-origin: 50% 0;
-}
-
-/* ---- Waiting to scroll into view (only when the script runs) ---- */
-:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
-  stroke-dashoffset: 1;
-}
-
-:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
-:is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  /* Step 1: the web draws itself */
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m {
-    animation: somna-web-draw var(--d, 0.35s) cubic-bezier(0.45, 0.05, 0.35, 1) var(--t, 0s) both;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--frame {
-    --d: 0.4s;
-    --t: 0s;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--ring {
-    animation-timing-function: cubic-bezier(0.3, 0.05, 0.6, 1);
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .hw-m--all {
-    animation: somna-web-fade 0.3s ease 1.4s both;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__web--right .hw-m--all {
-    animation-delay: 1.6s;
-  }
-
-  /* Step 2: the spider lowers itself; Step 3: pause, then a gentle swing */
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider {
-    animation: somna-spider-appear 0.25s ease 1.5s both, somna-spider-sway 2.6s ease-in-out 3.75s 1 both;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__thread {
-    animation: somna-spider-thread 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-spider__body {
-    animation: somna-spider-drop 2s cubic-bezier(0.45, 0, 0.4, 1) 1.6s both;
-  }
-
-  /* Pumpkin: hop, land, smile */
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk svg {
-    animation: somna-pk-hop 7s ease-in-out 1.6s infinite;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__smile {
-    animation: somna-pk-smile 7s ease-out 1.6s infinite;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__happy {
-    animation: somna-pk-on 7s linear 1.6s infinite;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__calm,
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-pk__eyes {
-    animation: somna-pk-off 7s linear 1.6s infinite;
-  }
-
-  /* "70% OFF" pumpkin badges: a short shake, repeated every 4.5s (the second card follows a beat later) */
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween) .somna-ess__badge {
-    transform-origin: 50% 12%;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__badge {
-    animation: somna-badge-shake 4.5s ease-in-out 1s infinite;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).is-in .somna-ess__card:nth-child(2) .somna-ess__badge {
-    animation-delay: 1.35s;
-  }
-}
-
-@keyframes somna-web-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes somna-web-fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes somna-spider-appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-/* Thread length and spider position share the same stops, so they stay joined */
-@keyframes somna-spider-thread {
-  0% {
-    transform: scaleY(0);
-  }
-
-  38% {
-    transform: scaleY(0.46);
-  }
-
-  50% {
-    transform: scaleY(0.48);
-  }
-
-  86% {
-    transform: scaleY(1.035);
-  }
-
-  94% {
-    transform: scaleY(0.99);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes somna-spider-drop {
-  0% {
-    translate: 0 -1px;
-  }
-
-  38% {
-    translate: 0 calc(var(--len) * 0.46 - 1px);
-  }
-
-  50% {
-    translate: 0 calc(var(--len) * 0.48 - 1px);
-  }
-
-  86% {
-    translate: 0 calc(var(--len) * 1.035 - 1px);
-  }
-
-  94% {
-    translate: 0 calc(var(--len) * 0.99 - 1px);
-  }
-
-  100% {
-    translate: 0 calc(var(--len) - 1px);
-  }
-}
-
-@keyframes somna-spider-sway {
-  0% {
-    rotate: 0deg;
-  }
-
-  18% {
-    rotate: 5deg;
-  }
-
-  40% {
-    rotate: -3.6deg;
-  }
-
-  60% {
-    rotate: 2deg;
-  }
-
-  80% {
-    rotate: -0.8deg;
-  }
-
-  100% {
-    rotate: 0deg;
-  }
-}
-
-@keyframes somna-pk-hop {
-  0% {
-    transform: translateY(0) scale(1, 1) rotate(0);
-  }
-
-  3% {
-    transform: translateY(0) scale(1.14, 0.84) rotate(0);
-  }
-
-  7% {
-    transform: translateY(-34%) scale(0.9, 1.12) rotate(0);
-  }
-
-  10% {
-    transform: translateY(-42%) scale(1, 1) rotate(0);
-  }
-
-  14% {
-    transform: translateY(0) scale(1.16, 0.82) rotate(0);
-  }
-
-  17% {
-    transform: translateY(0) scale(0.97, 1.04) rotate(-7deg);
-  }
-
-  20% {
-    transform: translateY(0) scale(1, 1) rotate(5deg);
-  }
-
-  23% {
-    transform: translateY(0) scale(1, 1) rotate(-2.5deg);
-  }
-
-  26%,
-  100% {
-    transform: translateY(0) scale(1, 1) rotate(0);
-  }
-}
-
-@keyframes somna-pk-smile {
-  0%,
-  13% {
-    opacity: 0;
-    transform: scaleY(0.35);
-  }
-
-  16% {
-    opacity: 1;
-    transform: scaleY(1.12);
-  }
-
-  19%,
-  44% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  48%,
-  100% {
-    opacity: 0;
-    transform: scaleY(0.35);
-  }
-}
-
-@keyframes somna-pk-on {
-  0%,
-  13% {
-    opacity: 0;
-  }
-
-  15%,
-  45% {
-    opacity: 1;
-  }
-
-  48%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes somna-pk-off {
-  0%,
-  13% {
-    opacity: 1;
-  }
-
-  15%,
-  45% {
-    opacity: 0;
-  }
-
-  48%,
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Shake lasts about 0.9s of each 4.5s cycle, then the badge rests */
-@keyframes somna-badge-shake {
-  0%,
-  100% {
-    rotate: 0deg;
-  }
-
-  3% {
-    rotate: -9deg;
-  }
-
-  7% {
-    rotate: 8deg;
-  }
-
-  11% {
-    rotate: -6deg;
-  }
-
-  15% {
-    rotate: 4deg;
-  }
-
-  18% {
-    rotate: -2deg;
-  }
-
-  20% {
-    rotate: 0deg;
-  }
-}
-
-/* Reduced motion: finished web, spider hanging, pumpkin smiling, badges still */
-@media (prefers-reduced-motion: reduce) {
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m {
-    stroke-dashoffset: 0;
-  }
-
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .hw-m--all,
-  :is(.somna-ess--halloween, .somna-sb--halloween, .somna-ps--halloween).hw-ready:not(.is-in) .somna-spider {
-    opacity: 1;
-  }
-
-  .somna-pk__calm,
-  .somna-pk__eyes {
-    opacity: 0;
-  }
-
-  .somna-pk__smile,
-  .somna-pk__happy {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ---- "The Sleep Bundle" (sections/sleep-bundle.liquid, homepage): placement of the two webs ----
-   Same webs as "Shop the essentials": the left web with the spider dropping on its thread, and the
-   Figma right-hand web (no spider), tilted about 6deg and hung from the picture's wavy edge, as in Figma.
-   These replace the still web pictures custom.css draws with ::before / ::after. */
-#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::before,
-#MainContent[data-template='index'] .somna-sleep-bundle.somna-sb--halloween::after {
-  content: none;
-}
-
-#MainContent .somna-sleep-bundle.somna-sb--halloween {
-  position: relative;
-  overflow-x: clip; /* the tilted right web never makes the page scroll sideways */
-}
-
-#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  mix-blend-mode: normal;
-}
-
-#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
-  top: -50px;
-  left: 0;
-}
-
-#MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
-  top: -50px;
-  right: calc(var(--rweb-w) * -0.06);
-  left: auto;
-  width: calc(var(--rweb-w) * 1.1);
-  rotate: 6deg;
-  transform-origin: 100% 0;
-}
-
-@media screen and (min-width: 750px) {
-  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--left {
-    top: -50px;
-  }
-
-  #MainContent .somna-sleep-bundle.somna-sb--halloween > .somna-ess__web--right {
-    top: calc(-5px - 2.6vw);
-  }
-}
-
-/* ---- Problem / Solution (sections/problem-solution.liquid, product page): the left web + spider ----
-   Figma Nasal Strips ("image 194"): the web hangs from the section's top-left corner, 31.3% of the
-   screen wide (451px at 1440px, 123px at 393px), with the spider resting beside the Problem card.
-   Same drawing / dropping animation as the homepage. The cards sit above the web. */
-.hz-prob-sol-section.somna-ps--halloween {
-  position: relative;
-  overflow-x: clip;
-}
-
-.somna-ps--halloween > .somna-ess__web--left {
-  --web-w: clamp(110px, 28.3vw, 451px);
-  --hang: 341;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  pointer-events: none;
-  mix-blend-mode: normal;
-}
-
-.somna-ps--halloween > .section {
-  position: relative;
-  z-index: 2;
-}
 /* ==================== END SOMNA MOTION: FIRST-PAINT RULES ==================== */

@@ -26,7 +26,7 @@
 }
 {%- endstyle -%}
 
-{%- comment -%} Halloween badge (2026-10-28): same pumpkin badge as "Shop the essentials", text from snippets/somna-sale.liquid. Hidden when the sale is off. {%- endcomment -%}
+{%- comment -%} Sale badge (2026-10-28): same badge as "Shop the essentials", text from snippets/somna-sale.liquid. Hidden when the sale is off. {%- endcomment -%}
 {%- capture somna_card_badge -%}{%- render 'somna-sale', get: 'text' -%}{%- endcapture -%}
 {%- assign somna_card_badge = somna_card_badge | strip -%}
 
@@ -177,7 +177,7 @@
     animation: none;
   }
 
-  /* Halloween pumpkin badge on the bundle cards (2026-10-28): reuses the "Shop the essentials"
+  /* Sale badge on the bundle cards (2026-10-28): reuses the "Shop the essentials"
      badge (.somna-ess__badge in custom.css), tucked inside the card's top-right corner so the
      section's overflow clip never cuts it off. */
   .bundle-card .somna-bundle-badge {
