@@ -1993,6 +1993,10 @@ a.somna-view-all {
 .somna-ess.somna-ess--sale .somna-ess__price {
   color: var(--hw-orange-text);
 }
+/* each card anchors its own badge, with or without the sale look */
+.somna-ess__card {
+  position: relative;
+}
 /* Sale badge ("UP TO 50% OFF") on the essentials and bundle cards: a plain orange circle */
 .somna-ess__badge {
   position: absolute;
