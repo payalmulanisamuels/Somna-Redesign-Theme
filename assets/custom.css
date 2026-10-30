@@ -1884,6 +1884,18 @@ a.somna-view-all {
   pointer-events: none;
   background: url("somna-hw-header-wave-mobile.svg") center bottom / 100% auto no-repeat;
 }
+/* "50% OFF": bold brand heading font, tight lines */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hw70off,
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hw70off > * {
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+/* perks line sits on the dark blanket in the photo: white with a soft shadow */
+#MainContent[data-template="index"] [id$="__hero_jVaWmY"] .text-block--text_hwperks > * {
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.55);
+}
 #MainContent[data-template="index"] [id$="__hero_jVaWmY"] .button {
   display: inline-flex;
   align-items: center;
