@@ -234,7 +234,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "nowrap",
-                "text_color": "#ef5400",
+                "text_color": "#0b57e3",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -291,9 +291,9 @@
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
-                "custom_button_background": "#ef5400",
-                "custom_button_text": "#ffffff",
-                "custom_button_border": "#ef5400",
+                "custom_button_background": "#071a4b",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
                 "link_text_color": "",
                 "font_size": "",
                 "font_size_tablet": "",
@@ -443,7 +443,7 @@
               "type": "icon",
               "settings": {
                 "icon": "eye",
-                "image_upload": "shopify://shop_images/Gift_9b893c20-4b7e-45bb-b826-ccd957775598.png",
+                "image_upload": "shopify://shop_images/Gift.png",
                 "width": 16,
                 "link": "",
                 "open_in_new_tab": false,
@@ -596,7 +596,7 @@
               "type": "icon",
               "settings": {
                 "icon": "heart",
-                "image_upload": "shopify://shop_images/gurantee.png",
+                "image_upload": "shopify://shop_images/guarantee.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -749,7 +749,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/Truck.png",
+                "image_upload": "shopify://shop_images/ship.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -902,7 +902,7 @@
               "type": "icon",
               "settings": {
                 "icon": "silhouette",
-                "image_upload": "shopify://shop_images/payment.png",
+                "image_upload": "shopify://shop_images/secure.png",
                 "width": 20,
                 "link": "",
                 "open_in_new_tab": false,
@@ -1023,7 +1023,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#ff9845",
+        "background_color": "#ffffff",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1039,7 +1039,8 @@
         "padding-block-end": 15,
         "stack_desktop": false,
         "align_items_desktop": "",
-        "content_width_desktop": ""
+        "content_width_desktop": "",
+        "bg_image": "shopify://shop_images/icon_bg.svg"
       }
     },
     "somna_shop_essentials_AhrNe9": {
@@ -1085,7 +1086,7 @@
         "padding_bottom_mobile": 30,
         "padding_top": 40,
         "padding_bottom": 50,
-        "sale_look": true
+        "sale_look": false
       }
     },
     "featured_bundle_grid_gb9fCH": {
@@ -1204,7 +1205,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#000000",
+            "text_color": "#0a1a4a",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -1310,7 +1311,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/leaf.svg",
+                    "image_upload": "shopify://shop_images/icon1-ritual.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1448,7 +1449,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/Sugar_Free.png",
+                    "image_upload": "shopify://shop_images/icon2-drug.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1586,7 +1587,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/Toggle_On.png",
+                    "image_upload": "shopify://shop_images/icon3-subscription.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1724,7 +1725,7 @@
                   "type": "icon",
                   "settings": {
                     "icon": "eye",
-                    "image_upload": "shopify://shop_images/Guarantee_d420e3d3-1cf6-4dd7-a0d4-b573f0f629fb.png",
+                    "image_upload": "shopify://shop_images/icon4-guarantee.png",
                     "width": 32,
                     "link": "",
                     "open_in_new_tab": false,
@@ -1870,7 +1871,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#ffffff",
+        "background_color": "#faf2df",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1888,7 +1889,9 @@
         "padding-block-end-desktop": 0,
         "stack_desktop": false,
         "align_items_desktop": "",
-        "content_width_desktop": ""
+        "content_width_desktop": "",
+        "top_wave_image": "shopify://shop_images/brand-top-curve.svg",
+        "bottom_wave_image": "shopify://shop_images/brand-bottom-curve.svg"
       }
     },
     "layered_image_with_text_LEPfjJ": {
@@ -2028,7 +2031,7 @@
         "per_night_text": "3+1 sets. $0.82/night",
         "button_label": "See the Breathe Bundle",
         "button_variant": "Breathe",
-        "section_bg": "rgba(0,0,0,0)",
+        "section_bg": "#ffffff",
         "card_bg": "#ffffff",
         "border_color": "#0a1a4a",
         "accent_color": "#0b57e3",

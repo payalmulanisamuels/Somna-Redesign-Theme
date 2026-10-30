@@ -1350,13 +1350,6 @@
   }
 
   /* Small essentials */
-  #MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
-    height: clamp(60px, 9vw, 130px);
-    background-image: url("somna-hw-orange-edge.svg");
-  }
-  #MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
-    background-color: #fff; /* replaces the cream wave colour set above */
-  }
   #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
     font-size: clamp(30px, 3.3vw, 48px);
   }

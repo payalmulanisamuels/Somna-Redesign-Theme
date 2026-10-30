@@ -1942,9 +1942,9 @@ a.somna-view-all {
   gap: 10px;
   min-height: 38px;
   padding: 2px 22px !important; /* overrides the hero's own button padding */
-  border: 2px solid #ef5400 !important;
+  border: 2px solid #071a4b !important;
   border-radius: 999px;
-  background: #ef5400 !important; /* orange pill: the hero photo is light, so a white pill would disappear */
+  background: #071a4b !important; /* navy pill (Main's colour); the hero photo is light, so a white pill would disappear */
   color: #fff !important;
   font-family: var(--font-body--family);
   font-weight: 600;
@@ -2020,34 +2020,34 @@ a.somna-view-all {
   color: #000;
 }
 
-/* ---------- Small essentials: orange wavy edge + orange fade ---------- */
-#MainContent[data-template="index"] [id$="__section_ibM3ft"] {
-  position: relative;
-}
-#MainContent[data-template="index"] [id$="__section_ibM3ft"] .section-background {
-  background-image: linear-gradient(180deg, var(--hw-orange) 0%, rgb(255 152 69 / 0) 100%);
-}
-#MainContent[data-template="index"] [id$="__section_ibM3ft"]::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: calc(100% - 1px);
-  height: 12.2vw;
-  z-index: 2;
-  pointer-events: none;
-  background: url("somna-hw-orange-edge-mobile.svg") center bottom / 100% 100% no-repeat;
-}
-#MainContent[data-template="index"] [id$="__section_ibM3ft"] .wave-container.bottom {
-  background-image: none !important; /* draws the existing bottom wave in white instead */
-  background-color: #fff;
-  -webkit-mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
-  mask: url("/cdn/shop/files/brand-bottom-curve.svg") bottom / cover no-repeat;
-}
+/* ---------- Small essentials: Main's cream section with its own top/bottom curves (section settings) ---------- */
 #MainContent[data-template="index"] [id$="__section_ibM3ft"] h2 {
   margin: 0;
   line-height: 1;
-  color: #000;
+  color: #0a1a4a;
+}
+
+/* ---------- Homepage colours = original Main theme (2026-10-30) ----------
+   Shared parts (announcement bar, sale badges) keep the orange sale look on other pages;
+   on the homepage they use Main's navy / blue. */
+body.template-index .announcement-bar,
+body.template-index .shopify-section:has(> .announcement-bar),
+body.template-index [id$='__header_announcements_9jGBFp'] .section,
+body.template-index [id$='__header_announcements_9jGBFp'] {
+  background-color: #071a4b !important;
+}
+body.template-index .announcement-bar .announcement-bar__text,
+body.template-index .announcement-bar .announcement-bar__text * {
+  color: #ffffff !important;
+}
+body.template-index .announcement-bar .announcement-bar__separator-image {
+  filter: brightness(0) invert(1);
+}
+body.template-index .somna-ess__badge {
+  background: #0b57e3;
+}
+body.template-index .somna-ess__badge-text {
+  color: #ffffff;
 }
 /* ======================= END HOMEPAGE redesign ======================= */
 
@@ -3672,26 +3672,27 @@ margin-top: 7px;
    page that has this bar (homepage, collection, product, contact): it is matched by its section id, never
    by page. Figma (homepage 3297:5520 + Nasal Strips 3297:4934): flat peach-to-orange band, black
    brand heading font, navy dividers; 137px tall / 29px text at 1440px, 35px / 8px at 393px.
-   It replaces the yellow wave picture (bg_image) and the per-page colour. */
-.shopify-section[id$='__section_zELtyM'] .section-background,
-.shopify-section[id$='__section_zELtyM'] .section {
+   It replaces the yellow wave picture (bg_image) and the per-page colour.
+   Homepage (2026-10-30): excluded, so it keeps Main's original white band with the wave picture. */
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section-background,
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
   background: linear-gradient(90deg, #f9b38d 0%, #e6651f 100%) !important; /* beats the inline wave picture */
 }
-.shopify-section[id$='__section_zELtyM'] .section {
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .section {
   top: 0;
   height: auto;
   align-content: center;
 }
-.shopify-section[id$='__section_zELtyM'] .text-block,
-.shopify-section[id$='__section_zELtyM'] .text-block > *,
-.shopify-section[id$='__section_zELtyM'] .text-block strong {
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block,
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block > *,
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .text-block strong {
   font-family: var(--font-display-spray--family);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0.01em;
   color: #000;
 }
-.shopify-section[id$='__section_zELtyM'] .divider__line {
+body:not(.template-index) .shopify-section[id$='__section_zELtyM'] .divider__line {
   border-color: #0a1a4a;
   border-right-width: clamp(1px, 0.14vw, 2px);
   border-bottom-width: clamp(1px, 0.14vw, 2px);
