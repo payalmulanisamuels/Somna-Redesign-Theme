@@ -17,6 +17,7 @@
 
     # "From" price: lowest subscription price across variants, else lowest price
     assign from_price = bundle_product.price_min
+    assign from_compare = 0
     for variant in bundle_product.variants
       assign variant_price = variant.price
       for allocation in variant.selling_plan_allocations
@@ -26,6 +27,10 @@
       endfor
       if variant_price < from_price
         assign from_price = variant_price
+        assign from_compare = variant.price
+        if variant.compare_at_price > variant.price
+          assign from_compare = variant.compare_at_price
+        endif
       endif
     endfor
 
@@ -121,6 +126,7 @@
               {%- if section.settings.price_override != blank -%}
                 {{- section.settings.price_override -}}
               {%- else -%}
+                {%- if section.settings.show_compare_price and from_compare > from_price -%}<s class="somna-compare-price">{{ from_compare | money_without_trailing_zeros }}</s>{%- endif -%}
                 {{- from_price | money_without_trailing_zeros -}}
               {%- endif -%}
             </strong>
@@ -184,6 +190,17 @@
 {% endif %}
 
 {% stylesheet %}
+  /* Compare-at price (2026-10-30): crossed-out regular price before the subscription price */
+  .somna-compare-price {
+    margin-right: 0.3em;
+    font-size: 0.78em;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.55;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
   .somna-sleep-bundle {
     background: var(--ssb-section-bg);
     padding: var(--ssb-pt) 16px var(--ssb-pb);
@@ -418,6 +435,13 @@
   "tag": "section",
   "class": "section-sleep-bundle",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_compare_price",
+      "label": "Show compare-at price",
+      "info": "Crossed-out regular price before the subscription price.",
+      "default": false
+    },
     {
       "type": "header",
       "content": "Product"

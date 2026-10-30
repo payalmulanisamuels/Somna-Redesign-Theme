@@ -71,10 +71,12 @@
             endfor
           endif
 
+          assign compare_price = ''
           if auto_discount_percent > 0
             assign discount_multiplier = 100 | minus: auto_discount_percent
             assign calculated_price = base_price | times: discount_multiplier | divided_by: 100
             assign price = calculated_price | money
+            assign compare_price = base_price | money
           else
             assign price = product.price | money
           endif
@@ -145,7 +147,7 @@
                   <div class="bundle-card__info">
 
                     {%- if product != blank -%}
-                      <p class="bundle-card__price">{{ price }}</p>
+                      <p class="bundle-card__price">{% if section.settings.show_compare_price and compare_price != blank %}<s class="somna-compare-price">{{ compare_price }}</s>{% endif %}{{ price }}</p>
                     {%- endif -%}
 
                     {%- if block.settings.subtext != blank -%}
@@ -167,6 +169,17 @@
 </section>
 
 {% stylesheet %}
+  /* Compare-at price (2026-10-30): crossed-out regular price before the subscription price */
+  .somna-compare-price {
+    margin-right: 0.3em;
+    font-size: 0.78em;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.55;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
   /* "Or save with a bundle" on collection pages (2026-10-16): the floating strip, tape and dots
      from assets/somna-motion.css are hidden here, same as on the homepage. The cards, heading
      and layout are unchanged. */
@@ -204,6 +217,13 @@
 {
   "name": "Featured Bundle Grid",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_compare_price",
+      "label": "Show compare-at price",
+      "info": "Crossed-out regular price before the subscription price.",
+      "default": false
+    },
     {
       "type": "text",
       "id": "heading",

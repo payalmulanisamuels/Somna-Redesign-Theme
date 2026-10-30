@@ -88,6 +88,7 @@
           assign card_link = block.settings.link | default: product.url | default: '#'
 
           assign card_price = ''
+          assign card_compare = ''
           if product != blank
             assign base_price = product.price | default: 0
             if product.compare_at_price > product.price
@@ -113,6 +114,7 @@
             if discount_percent > 0
               assign multiplier = 100 | minus: discount_percent
               assign card_price = base_price | times: multiplier | divided_by: 100 | money
+              assign card_compare = base_price | money
             else
               assign card_price = product.price | money
             endif
@@ -161,7 +163,7 @@
               <h3 class="somna-ess__name">{{ card_title }}</h3>
             {%- endif -%}
             {%- if card_price != blank -%}
-              <p class="somna-ess__price">{{ block.settings.price_prefix }} {{ card_price }}</p>
+              <p class="somna-ess__price">{{ block.settings.price_prefix }} {% if section.settings.show_compare_price and card_compare != blank %}<s class="somna-compare-price">{{ card_compare }}</s>{% endif %}{{ card_price }}</p>
             {%- endif -%}
             {%- if block.settings.subtext != blank -%}
               <p class="somna-ess__subtext">{{ block.settings.subtext }}</p>
@@ -177,6 +179,17 @@
 </div>
 
 {% stylesheet %}
+  /* Compare-at price (2026-10-30): crossed-out regular price before the subscription price */
+  .somna-compare-price {
+    margin-right: 0.3em;
+    font-size: 0.78em;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.55;
+    text-decoration: line-through;
+    white-space: nowrap;
+  }
+
   /* Sale badge: smaller "UP TO" line above "50% OFF" */
   .somna-ess__badge-upto {
     display: block;
@@ -464,6 +477,13 @@
   "name": "Shop the essentials",
   "class": "somna-ess-section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_compare_price",
+      "label": "Show compare-at price",
+      "info": "Crossed-out regular price before the subscription price.",
+      "default": false
+    },
     {
       "type": "text",
       "id": "heading",
