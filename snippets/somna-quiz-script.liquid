@@ -22,7 +22,7 @@
   var PROG = { q1: 12, q2: 25, q3: 38, q4: 50, story: 58, q5: 70, multi6: 82, analyze: 90, email: 95, report: 100, fix: 100 };
 
   // ---- state ----
-  // unlocked: the discount code is earned by signing up OR by choosing Skip; it is shown and applied either way
+  // unlocked: the discount code is earned only by signing up with an email (Skip shows the report without a code)
   var i = 0, answers = {}, busy = false, timer = null, signedUp = false, unlocked = false, sending = false, run = 0;
 
   function opt(q) { var s = qScreens[q]; return answers[q] == null || !s ? null : s.querySelectorAll('.sq-opt')[answers[q]]; }
@@ -375,8 +375,8 @@
   });
   var sendLabel = sendBtn.textContent;
   emailIn.addEventListener('input', function () { if (!err.hidden) showErr(''); });
-  // Skip: no email needed; the code is still unlocked, shown on the report and applied via the discount link
-  $('[data-sq-skip]').addEventListener('click', function () { if (!sending) { unlocked = true; go(idx('report')); } });
+  // Skip: no email needed; shows the report without the discount code
+  $('[data-sq-skip]').addEventListener('click', function () { if (!sending) go(idx('report')); });
   // Email step after a successful sign-up (e.g. Back from the report): show "You're in" + code instead of the form
   var done = $('[data-sq-done]'), consent = $('[data-sq-consent]'), skipBtn = $('[data-sq-skip]');
   function renderEmail() {
