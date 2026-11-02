@@ -44,7 +44,66 @@
         "bundle_name": "The Double Trouble",
         "bundle_self": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together.",
         "bundle_partner": "It's their nose and their mouth. Strips open the airway; Tape keeps them breathing through it. Built to work together."
-      }
+      },
+      "blocks": {
+        "rv1": {
+          "type": "review",
+          "settings": {
+            "product": "strips",
+            "name": "[TEST] Reviewer 1",
+            "rating": 5,
+            "text": "[TEST placeholder for layout check, not a real review] Card 1 for strips. Line two of text to check wrapping on small screens.",
+            "verified": true
+          }
+        },
+        "rv2": {
+          "type": "review",
+          "settings": {
+            "product": "strips",
+            "name": "[TEST] Reviewer 2",
+            "rating": 5,
+            "text": "[TEST placeholder for layout check, not a real review] Card 2 for strips. Line two of text to check wrapping on small screens.",
+            "verified": true
+          }
+        },
+        "rv3": {
+          "type": "review",
+          "settings": {
+            "product": "tape",
+            "name": "[TEST] Reviewer 3",
+            "rating": 5,
+            "text": "[TEST placeholder for layout check, not a real review] Card 3 for tape. Line two of text to check wrapping on small screens.",
+            "verified": true
+          }
+        },
+        "rv4": {
+          "type": "review",
+          "settings": {
+            "product": "tape",
+            "name": "[TEST] Reviewer 4",
+            "rating": 4,
+            "text": "[TEST placeholder for layout check, not a real review] Card 4 for tape. Line two of text to check wrapping on small screens.",
+            "verified": true
+          }
+        },
+        "rv5": {
+          "type": "review",
+          "settings": {
+            "product": "bundle",
+            "name": "[TEST] Reviewer 5",
+            "rating": 5,
+            "text": "[TEST placeholder for layout check, not a real review] Card 5 for bundle. Line two of text to check wrapping on small screens.",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "rv1",
+        "rv2",
+        "rv3",
+        "rv4",
+        "rv5"
+      ]
     }
   },
   "order": [
