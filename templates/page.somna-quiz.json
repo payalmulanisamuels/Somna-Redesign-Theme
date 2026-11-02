@@ -22,10 +22,58 @@
             "text": "Simple, clean, and effective. Will definitely be reordering when this box runs low.",
             "verified": true
           }
+        },
+        "review_dyGjF4": {
+          "type": "review",
+          "settings": {
+            "product": "strips",
+            "image": "shopify://shop_images/somna_selfie_strips_runner.png",
+            "name": "Christian Phillips",
+            "rating": 5,
+            "text": "Glad these are completely drug-free. Simple nightly ritual that's easy to get used to after a couple of tries.",
+            "verified": true
+          }
+        },
+        "review_AGyPqf": {
+          "type": "review",
+          "settings": {
+            "product": "tape",
+            "image": "shopify://shop_images/somna_tape_06_gym.png",
+            "name": "Brandon Robinson",
+            "rating": 5,
+            "text": "Decided to try this out to encourage nasal breathing. Snug fit without feeling tight when applied right.",
+            "verified": true
+          }
+        },
+        "review_U7gqcm": {
+          "type": "review",
+          "settings": {
+            "product": "tape",
+            "image": "shopify://shop_images/somna_tape_03_sofa.png",
+            "name": "Kayla Turner",
+            "rating": 5,
+            "text": "Great addition to my evening self-care and sleep hygiene habits.",
+            "verified": true
+          }
+        },
+        "review_b6njzh": {
+          "type": "review",
+          "settings": {
+            "product": "bundle",
+            "image": "shopify://shop_images/somna_selfie_strips_bedroom.png",
+            "name": "Ashley Lee",
+            "rating": 5,
+            "text": "Super easy to incorporate into nightly wind-down time",
+            "verified": true
+          }
         }
       },
       "block_order": [
-        "review_NUeAkD"
+        "review_NUeAkD",
+        "review_dyGjF4",
+        "review_AGyPqf",
+        "review_U7gqcm",
+        "review_b6njzh"
       ],
       "settings": {
         "intro_heading": "Snoring, stuffy nose or dry mouth? Find out what's <em>really</em> wrecking your sleep.",
