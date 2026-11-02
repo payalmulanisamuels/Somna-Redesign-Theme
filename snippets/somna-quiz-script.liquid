@@ -336,18 +336,9 @@
     tiles($('[data-sq-tilegrid]'), s);
     $('[data-sq-desc]').textContent = r ? r.getAttribute(p ? 'data-copy-partner' : 'data-copy-self') : '';
     var ct = $('[data-sq-code-top]'); if (ct) ct.hidden = !(unlocked && cfg.code);
-    var share = $('[data-sq-share]'); share.hidden = !(p && (navigator.share || (navigator.clipboard && window.isSecureContext)));
-    $('[data-sq-share-msg]').hidden = true;
     renderFix();
     prefetch(productUrl(s));                                 // product page is ready before they tap "Claim"
   }
-  $('[data-sq-share]').addEventListener('click', function () {
-    var s = score(), r = resEl(s), url = location.origin + productUrl(s).replace(/^\/discount\/[^?]+\?redirect=([^&]+)&/, function (m, p1) { return decodeURIComponent(p1) + '?'; });
-    var text = 'I took the SOMNA sleep quiz about your snoring. It matched you to SOMNA ' + (r ? r.getAttribute('data-ptitle') : '') + ' (' + (r ? r.getAttribute('data-name') : '') + ').';
-    var msg = $('[data-sq-share-msg]');
-    if (navigator.share) { navigator.share({ title: 'SOMNA sleep quiz', text: text, url: url }).catch(function () {}); }
-    else { navigator.clipboard.writeText(text + ' ' + url).then(function () { msg.textContent = 'Link copied. Paste it in a message.'; msg.hidden = false; }); }
-  });
 
   // ---- 11 your fix ----
   function renderFix() {

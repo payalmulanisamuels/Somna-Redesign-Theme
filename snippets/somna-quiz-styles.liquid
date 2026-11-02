@@ -79,7 +79,7 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq .sq-opt[aria-pressed="true"] { background: var(--sq-accent); border-color: var(--sq-accent); }
 .sq .sq-ico { flex: none; width: 36px; height: 36px; border-radius: 10px; background: rgba(152,163,222,.14); color: var(--sq-lav); display: inline-flex; align-items: center; justify-content: center; transition: background-color .15s, color .15s; }
 .sq .sq-ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.sq .sq-ico svg .fill, .sq-share svg .fill { fill: currentColor; stroke: none; }
+.sq .sq-ico svg .fill { fill: currentColor; stroke: none; }
 .sq .sq-opt[aria-pressed="true"] .sq-ico { background: rgba(255,255,255,.18); color: #fff; }
 
 /* answers: tiles (Q2, Q5) */
@@ -188,10 +188,6 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq .sq-tilecard .sq-lbl { font-size: 10.5px; letter-spacing: .08em; margin-bottom: 5px; }
 .sq .sq-tilecard p:last-child { font-size: 15px; font-weight: 700; line-height: 1.3; }
 .sq .sq-desc { font-size: 15px; line-height: 1.55; color: var(--sq-mut); text-align: left; margin-top: 16px; }
-.sq .sq-share { appearance: none; display: inline-flex; align-items: center; gap: 8px; margin: 16px auto 0; padding: 11px 18px; border: 1.5px solid var(--sq-lav); border-radius: 999px; background: transparent; color: var(--sq-lav); font: 500 14px/1 var(--sq-sans); cursor: pointer; transition: background-color .15s, color .15s; }
-.sq .sq-share:hover { background: var(--sq-lav); color: var(--sq-bg); }
-.sq .sq-share svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.sq .sq-share-msg { font-size: 13px; color: var(--sq-mut); margin-top: 8px; }
 
 /* 11 your fix */
 .sq .sq-fix .sq-q { font-size: 25px; }
@@ -249,8 +245,7 @@ padding: 18px 16px 56px; min-height: 100vh;
 
 /* visible keyboard focus (the theme turns outlines off globally) */
 .sq .sq-opt:focus-visible, .sq .sq-cta:focus-visible, .sq .sq-back:focus-visible, .sq .sq-skip:focus-visible,
-.sq .sq-retake:focus-visible, .sq .sq-input:focus-visible, .sq .sq-textarea:focus-visible, .sq .sq-share:focus-visible, .sq .sq-logo:focus-visible { outline: 2px solid var(--sq-lav); outline-offset: 3px; }
-
+.sq .sq-retake:focus-visible, .sq .sq-input:focus-visible, .sq .sq-textarea:focus-visible, 
 /* desktop */
 @media screen and (min-width: 750px) {
 .sq { padding: 28px 24px 80px; }
