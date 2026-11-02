@@ -7,7 +7,7 @@
 {%- endcomment -%}
 {%- liquid
   assign sid = section.id
-  assign size_label = section.settings.preselect_size | default: '2 Bags'
+  assign size_label = section.settings.preselect_size | default: '1 Bag'
   # Fall back to the live product handles if a product setting is empty (e.g. template out of sync)
   assign p_strips = section.settings.product_strips | default: all_products['nasal-strips']
   assign p_tape = section.settings.product_tape | default: all_products['mouth-tape']
@@ -283,7 +283,7 @@
     { "type": "text", "id": "timeline_3_text", "label": "Step 3 text", "info": "Must match the Return & Refund Policy.", "default": "Not for you? Get a full refund under our 30-Night Money-Back Guarantee." },
     { "type": "text", "id": "guarantee_text", "label": "Guarantee trust line (above the button)", "info": "Leave empty to hide.", "default": "30-Night Money-Back Guarantee" },
     { "type": "text", "id": "result_button", "label": "Button", "default": "Claim My Discount →" },
-    { "type": "text", "id": "preselect_size", "label": "Size to pre-select on the product page", "default": "2 Bags" },
+    { "type": "text", "id": "preselect_size", "label": "Size to pre-select on the product page", "info": "Must match the variant name, e.g. 1 Bag, 2 Bags, 4 Bags.", "default": "1 Bag" },
     { "type": "header", "content": "Result: Nasal Strips" },
     { "type": "product", "id": "product_strips", "label": "Product" },
     { "type": "text", "id": "strips_name", "label": "Sleep type name", "default": "The Nose Breather" },
