@@ -180,17 +180,18 @@
 
   // ---- story break: Strips story if trending to Strips, Tape if Tape, one review of each for the Bundle ----
   // ---- review carousel (replaces the story video when "Story review" blocks exist) ----
-  var rc = $('[data-sq-rc]'), rcTrack = rc && $('[data-sq-rc-track]', rc), rcTimer = null, rcDots = [];
+  var rc = $('[data-sq-rc]'), rcTrack = rc && $('[data-sq-rc-track]', rc), rcTimer = null, rcDots = [], rcCur = 0, rcMoving = 0;
   function rcCards() { return $$('.sq-rc-card', rcTrack); }
   function rcIndex() { var c = rcCards(), x = rcTrack.scrollLeft, best = 0; c.forEach(function (e, k) { if (Math.abs(e.offsetLeft - rcTrack.offsetLeft - x) < Math.abs(c[best].offsetLeft - rcTrack.offsetLeft - x)) best = k; }); return best; }
   function rcGo(k, smooth) {
     var c = rcCards(); if (!c.length) return; k = (k + c.length) % c.length;
+    rcCur = k; rcMoving = Date.now();                       // remember the target so taps during a slide still step on
     rcTrack.scrollTo({ left: c[k].offsetLeft - rcTrack.offsetLeft, behavior: smooth && !reduce ? 'smooth' : 'auto' });
     rcSync(k);
   }
   function rcSync(k) { rcDots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
   function rcStop() { clearInterval(rcTimer); rcTimer = null; }
-  function rcStart() { rcStop(); if (reduce || rcCards().length < 2) return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcIndex() + 1, true); }, 5000); }
+  function rcStart() { rcStop(); if (reduce || rcCards().length < 2) return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcCur + 1, true); }, 5000); }
   if (rc) {
     var dotsBox = $('[data-sq-rc-dots]', rc);
     if (dotsBox) rcCards().forEach(function (c, k) {
@@ -198,9 +199,9 @@
       d.addEventListener('click', function () { rcStop(); rcGo(k, true); }); dotsBox.appendChild(d); rcDots.push(d);
     });
     var pv = $('[data-sq-rc-prev]', rc), nx = $('[data-sq-rc-next]', rc);
-    if (pv) pv.addEventListener('click', function () { rcStop(); rcGo(rcIndex() - 1, true); });
-    if (nx) nx.addEventListener('click', function () { rcStop(); rcGo(rcIndex() + 1, true); });
-    var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { rcSync(rcIndex()); }, 80); }, { passive: true });
+    if (pv) pv.addEventListener('click', function () { rcStop(); rcGo(rcCur - 1, true); });
+    if (nx) nx.addEventListener('click', function () { rcStop(); rcGo(rcCur + 1, true); });
+    var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { if (Date.now() - rcMoving > 700) { rcCur = rcIndex(); rcSync(rcCur); } }, 80); }, { passive: true });
     ['pointerdown', 'touchstart', 'focusin', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcStop, { passive: true }); });
   }
   function renderStory() {
