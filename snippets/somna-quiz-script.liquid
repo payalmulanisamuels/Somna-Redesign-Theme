@@ -344,6 +344,7 @@
   function renderFix() {
     var s = score();
     $$('.sq-res').forEach(function (e) { e.hidden = e.getAttribute('data-res') !== s.result; });
+    var rimg = $('.sq-res[data-res="' + s.result + '"] img'); if (rimg) rimg.loading = 'eager';   // load the matched product image now, not on scroll
     $$('[data-sq-fix-h]').forEach(function (h) {               // "John, here's your fix: SOMNA Nasal Strips"
       if (!h.dataset.orig) h.dataset.orig = h.textContent;
       h.textContent = firstName ? firstName + ", here's " + (s.partner ? 'their' : 'your') + ' fix: SOMNA ' + h.getAttribute('data-ptitle') : h.dataset.orig;
