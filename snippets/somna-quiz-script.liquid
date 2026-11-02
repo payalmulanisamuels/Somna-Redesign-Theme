@@ -205,7 +205,7 @@
     var pv = $('[data-sq-rc-prev]', rc), nx = $('[data-sq-rc-next]', rc);
     if (pv) pv.addEventListener('click', function () { rcPause(); rcGo(rcCur - 1, true); });
     if (nx) nx.addEventListener('click', function () { rcPause(); rcGo(rcCur + 1, true); });
-    var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { if (Date.now() - rcMoving > 700) { rcCur = rcIndex(); rcSync(rcCur); } }, 80); }, { passive: true });
+    var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { if (Date.now() - rcMoving > 1200) { rcCur = rcIndex(); rcSync(rcCur); } }, 80); }, { passive: true });
     ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcPause, { passive: true }); });
     rc.addEventListener('mouseenter', function () { rcHover = true; });
     rc.addEventListener('mouseleave', function () { rcHover = false; });
@@ -418,6 +418,8 @@
     if (sending) return;                                   // ignore repeat taps / Enter
     var email = emailIn.value.trim();
     firstName = cleanName(nameIn ? nameIn.value : '');
+    if (nameIn && !firstName) { showErr('Please enter your first name.'); nameIn.setAttribute('aria-invalid', 'true'); nameIn.focus(); return; }
+    if (nameIn) nameIn.removeAttribute('aria-invalid');
     if (!EMAIL_RE.test(email)) { showErr('Enter a valid email address.'); emailIn.focus(); return; }
     if (!cfg.klaviyoCompany || !cfg.klaviyoList) { showErr("Sign-up isn't available right now. Tap the link below to see your report."); return; }
     sending = true; showErr(''); sendBtn.disabled = true; sendBtn.setAttribute('aria-busy', 'true'); sendBtn.textContent = 'Sending…';
@@ -429,6 +431,7 @@
   });
   var sendLabel = sendBtn.textContent;
   emailIn.addEventListener('input', function () { if (!err.hidden) showErr(''); });
+  if (nameIn) nameIn.addEventListener('input', function () { nameIn.removeAttribute('aria-invalid'); if (!err.hidden) showErr(''); });
   // Skip: no email needed; shows the report without the discount code
   $('[data-sq-skip]').addEventListener('click', function () { if (!sending) go(idx('report')); });
   // Email step after a successful sign-up (e.g. Back from the report): show "You're in" + code instead of the form
