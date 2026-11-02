@@ -92,8 +92,6 @@
       </div>
       <div class="sq-tilegrid" data-sq-tilegrid></div>
       <p class="sq-desc" data-sq-desc></p>
-      <button type="button" class="sq-share" data-sq-share hidden>{% render 'somna-quiz-icon', name: 'share' %}<span>{{ section.settings.share_label }}</span></button>
-      <p class="sq-share-msg" data-sq-share-msg role="status" hidden></p>
 
 
       {%- comment -%} 11 · Your fix: now straight below the report (no extra step) {%- endcomment -%}
@@ -256,7 +254,6 @@
     { "type": "text", "id": "discount_code", "label": "Discount code (email sign-ups only)", "info": "Shown on screen 11 and applied automatically through the product link. Leave empty to turn off.", "default": "QUIZ10" },
     { "type": "text", "id": "code_text", "label": "Code box text", "info": "[code] is replaced by the discount code.", "default": "Your code [code] · applied at checkout" },
     { "type": "header", "content": "10 · Sleep report" },
-    { "type": "text", "id": "share_label", "label": "Share button (partner path)", "default": "Send this to my partner" },
     { "type": "text", "id": "problem_a_self", "label": "Problem line: Snoring (me / both)", "default": "You told us snoring is the biggest problem at night." },
     { "type": "text", "id": "problem_a_partner", "label": "Problem line: Snoring (partner)", "default": "You told us their snoring is the biggest problem at night." },
     { "type": "text", "id": "problem_b_self", "label": "Problem line: Blocked nose (me / both)", "default": "You told us a blocked or stuffy nose is keeping you up." },
