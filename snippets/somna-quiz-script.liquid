@@ -190,11 +190,11 @@
     rcSync(k);
   }
   function rcSync(k) { rcDots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
-  // Autoplay: every 4.5s, loops. Pauses while the shopper touches/hovers/uses the controls, then resumes after 6s.
-  // Off for "reduce motion" users (they can still swipe, use the arrows and dots).
-  var rcResumeT = null, rcHover = false;
+  // Autoplay: loops every 4.5s (7s with no slide animation for "reduce motion" devices).
+  // Pauses only while the shopper is swiping or using the arrows/dots, then resumes 6s later.
+  var rcResumeT = null;
   function rcStop() { clearInterval(rcTimer); rcTimer = null; clearTimeout(rcResumeT); }
-  function rcStart() { rcStop(); if (reduce || !rc || rcCards().length < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden && !rcHover) rcGo(rcCur + 1, true); }, 4500); }
+  function rcStart() { rcStop(); if (!rc || rcCards().length < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcCur + 1, true); }, reduce ? 7000 : 4500); }
   function rcPause() { rcStop(); rcResumeT = setTimeout(rcStart, 6000); }
   if (rc) {
     var dotsBox = $('[data-sq-rc-dots]', rc);
@@ -207,10 +207,7 @@
     if (nx) nx.addEventListener('click', function () { rcPause(); rcGo(rcCur + 1, true); });
     var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { if (Date.now() - rcMoving > 1200) { rcCur = rcIndex(); rcSync(rcCur); } }, 80); }, { passive: true });
     ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcPause, { passive: true }); });
-    rc.addEventListener('mouseenter', function () { rcHover = true; });
-    rc.addEventListener('mouseleave', function () { rcHover = false; });
-    rc.addEventListener('focusin', function () { rcHover = true; });   // keyboard users: hold still while focused
-    rc.addEventListener('focusout', function () { rcHover = false; });
+    rc.addEventListener('keydown', rcPause);                            // keyboard users: hold still while they use it
   }
   function renderStory() {
     var t = trend(), boxes = $$('.sq-story');
