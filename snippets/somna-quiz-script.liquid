@@ -190,19 +190,27 @@
     rcSync(k);
   }
   function rcSync(k) { rcDots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
-  function rcStop() { clearInterval(rcTimer); rcTimer = null; }
-  function rcStart() { rcStop(); if (reduce || rcCards().length < 2) return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcCur + 1, true); }, 5000); }
+  // Autoplay: every 4.5s, loops. Pauses while the shopper touches/hovers/uses the controls, then resumes after 6s.
+  // Off for "reduce motion" users (they can still swipe, use the arrows and dots).
+  var rcResumeT = null, rcHover = false;
+  function rcStop() { clearInterval(rcTimer); rcTimer = null; clearTimeout(rcResumeT); }
+  function rcStart() { rcStop(); if (reduce || !rc || rcCards().length < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden && !rcHover) rcGo(rcCur + 1, true); }, 4500); }
+  function rcPause() { rcStop(); rcResumeT = setTimeout(rcStart, 6000); }
   if (rc) {
     var dotsBox = $('[data-sq-rc-dots]', rc);
     if (dotsBox) rcCards().forEach(function (c, k) {
       var d = el('button', 'sq-rc-dot', null); d.type = 'button'; d.setAttribute('aria-label', 'Review ' + (k + 1));
-      d.addEventListener('click', function () { rcStop(); rcGo(k, true); }); dotsBox.appendChild(d); rcDots.push(d);
+      d.addEventListener('click', function () { rcPause(); rcGo(k, true); }); dotsBox.appendChild(d); rcDots.push(d);
     });
     var pv = $('[data-sq-rc-prev]', rc), nx = $('[data-sq-rc-next]', rc);
-    if (pv) pv.addEventListener('click', function () { rcStop(); rcGo(rcCur - 1, true); });
-    if (nx) nx.addEventListener('click', function () { rcStop(); rcGo(rcCur + 1, true); });
+    if (pv) pv.addEventListener('click', function () { rcPause(); rcGo(rcCur - 1, true); });
+    if (nx) nx.addEventListener('click', function () { rcPause(); rcGo(rcCur + 1, true); });
     var rcScrollT; rcTrack.addEventListener('scroll', function () { clearTimeout(rcScrollT); rcScrollT = setTimeout(function () { if (Date.now() - rcMoving > 700) { rcCur = rcIndex(); rcSync(rcCur); } }, 80); }, { passive: true });
-    ['pointerdown', 'touchstart', 'focusin', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcStop, { passive: true }); });
+    ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcPause, { passive: true }); });
+    rc.addEventListener('mouseenter', function () { rcHover = true; });
+    rc.addEventListener('mouseleave', function () { rcHover = false; });
+    rc.addEventListener('focusin', function () { rcHover = true; });   // keyboard users: hold still while focused
+    rc.addEventListener('focusout', function () { rcHover = false; });
   }
   function renderStory() {
     var t = trend(), boxes = $$('.sq-story');

@@ -91,10 +91,12 @@
         {%- for b in blocks -%}
           {%- if b.type == 'review' and b.settings.text != blank -%}
             {%- assign rs = b.settings -%}
-            <figure class="sq-rc-card" data-product="{{ rs.product }}" role="group" aria-roledescription="slide" {{ b.shopify_attributes }}>
+            <figure class="sq-rc-card{% if rs.image != blank %} sq-rc-card--photo{% endif %}" data-product="{{ rs.product }}" role="group" aria-roledescription="slide" {{ b.shopify_attributes }}>
+              {%- if rs.image != blank -%}
+                <div class="sq-rc-photo">{{ rs.image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 480px, 85vw', loading: 'lazy', alt: rs.name | prepend: 'Photo from ' }}</div>
+              {%- endif -%}
               <div class="sq-rc-head">
                 {%- if rs.image != blank -%}
-                  {{ rs.image | image_url: width: 160 | image_tag: width: 56, height: 56, loading: 'lazy', alt: '', class: 'sq-rc-img' }}
                 {%- else -%}
                   {%- assign rc_words = rs.name | strip | split: ' ' -%}
                   <span class="sq-rc-img sq-review-ph" aria-hidden="true">{{ rc_words.first | slice: 0 }}{% if rc_words.size > 1 %}{{ rc_words.last | slice: 0 }}{% endif %}</span>
