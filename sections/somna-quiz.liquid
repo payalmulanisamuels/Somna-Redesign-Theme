@@ -38,7 +38,7 @@
     </div>
     <p class="sq-sr" aria-live="polite" data-sq-live></p>
 
-    {% render 'somna-quiz-screens', qs: section.settings, sid: sid %}
+    {% render 'somna-quiz-screens', qs: section.settings, sid: sid, blocks: section.blocks %}
 
     {%- comment -%} 08 · Analyzing ring (3 seconds, ticks off their own answers) {%- endcomment -%}
     <div class="sq-s" data-type="analyze">
@@ -68,6 +68,8 @@
         <button type="button" class="sq-cta" data-sq-done-next>{{ section.settings.email_done_button | default: 'See my report →' }}</button>
       </div>
       <form class="sq-form" data-sq-form novalidate>
+        <label class="sq-sr" for="sq-{{ sid }}-name">First name</label>
+        <input class="sq-input sq-input--name" id="sq-{{ sid }}-name" type="text" name="first_name" autocomplete="given-name" autocapitalize="words" maxlength="40" placeholder="{{ section.settings.name_placeholder | default: 'First name' | escape }}" data-sq-name>
         <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
         <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
         <p class="sq-err" role="alert" data-sq-err hidden></p>
@@ -90,13 +92,12 @@
       </div>
       <div class="sq-tilegrid" data-sq-tilegrid></div>
       <p class="sq-desc" data-sq-desc></p>
-      <button type="button" class="sq-cta" data-sq-to-fix>{{ section.settings.report_button }}</button>
       <button type="button" class="sq-share" data-sq-share hidden>{% render 'somna-quiz-icon', name: 'share' %}<span>{{ section.settings.share_label }}</span></button>
       <p class="sq-share-msg" data-sq-share-msg role="status" hidden></p>
-    </div>
 
-    {%- comment -%} 11 · Your fix (product, why it fits, first 30 nights, code box for email sign-ups) {%- endcomment -%}
-    <div class="sq-s sq-fix" data-type="fix">
+
+      {%- comment -%} 11 · Your fix: now straight below the report (no extra step) {%- endcomment -%}
+      <div class="sq-fix" data-sq-fix>
       {%- for r in (1..3) -%}
         {%- liquid
           case r
@@ -134,7 +135,7 @@
           data-url="{% if rp != blank %}{{ rp.url }}?variant={{ rv.id }}{% endif %}"
           data-name="{{ rname | escape }}" data-ptitle="{{ rp.title | escape }}"
           data-copy-self="{{ rself | escape }}" data-copy-partner="{{ rpartner | escape }}">
-          <h2 class="sq-q" tabindex="-1">{{ section.settings.fix_prefix }} SOMNA {{ rp.title }}</h2>
+          <h2 class="sq-q sq-fix-h" data-sq-fix-h data-ptitle="{{ rp.title | escape }}">{{ section.settings.fix_prefix }} SOMNA {{ rp.title }}</h2>
           {%- if rp != blank -%}
             {%- assign rimg = rv.featured_image | default: rp.featured_image -%}
             {%- if rimg != blank -%}
@@ -161,24 +162,12 @@
           </ol>
         </section>
       {%- endif -%}
-      {%- if code != blank -%}
-        <p class="sq-code" data-sq-code hidden>{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>
-      {%- endif -%}
       {%- if section.settings.guarantee_text != blank -%}
         <p class="sq-trust"><span class="sq-trust-i" aria-hidden="true">{% render 'somna-quiz-icon', name: 'shield' %}</span>{{ section.settings.guarantee_text }}</p>
       {%- endif -%}
       <a class="sq-cta" data-sq-plan href="{{ fallback_url }}">{{ section.settings.result_button }}</a>
       <button type="button" class="sq-retake" data-sq-retake>Retake quiz</button>
-    </div>
-
-    {%- comment -%} 12 · Getting your plan ready (1.5 seconds, every tick is true) → product page {%- endcomment -%}
-    <div class="sq-s" data-type="loader">
-      <h2 class="sq-q" tabindex="-1">{{ section.settings.loader_heading }}</h2>
-      <p class="sq-sub" data-sq-loader-sub></p>
-      <ul class="sq-loader-list" data-sq-loader-list></ul>
-      <div class="sq-loader-bar"><div data-sq-loader-bar></div></div>
-      <p class="sq-fine sq-center">{{ section.settings.loader_note }}</p>
-      <a class="sq-skip" href="{{ fallback_url }}" data-sq-go>Continue to your product →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -196,10 +185,6 @@
     "triedTape": {{ section.settings.tried_tape_line | json }},
     "bundleTick": {{ section.settings.bundle_tick | json }},
     "bundleTickPartner": {{ section.settings.bundle_tick_partner | json }},
-    "loaderSub": {{ section.settings.loader_sub | json }},
-    "loaderSelected": {{ section.settings.loader_tick_1 | json }},
-    "loaderSubscribe": {{ section.settings.loader_tick_2 | json }},
-    "loaderCode": {{ section.settings.loader_tick_3 | json }},
     "problems": {
       "snoring": [{{ section.settings.problem_a_self | json }}, {{ section.settings.problem_a_partner | json }}],
       "nose": [{{ section.settings.problem_b_self | json }}, {{ section.settings.problem_b_partner | json }}],
@@ -260,6 +245,7 @@
     { "type": "text", "id": "email_sub", "label": "Subheading", "default": "Enter your email and we'll show your code with your report." },
     { "type": "text", "id": "email_button", "label": "Button", "default": "Show my report + 10% off" },
     { "type": "text", "id": "email_skip", "label": "Skip link", "info": "Skipping shows the report without the discount code.", "default": "Skip, just show my report" },
+    { "type": "text", "id": "name_placeholder", "label": "First name placeholder", "info": "Optional field. The name personalises the report and Your fix headings.", "default": "First name" },
     { "type": "text", "id": "email_done", "label": "Signed-up message", "default": "You're in." },
     { "type": "text", "id": "email_done_button", "label": "Signed-up button", "default": "See my report →" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
@@ -270,7 +256,6 @@
     { "type": "text", "id": "discount_code", "label": "Discount code (email sign-ups only)", "info": "Shown on screen 11 and applied automatically through the product link. Leave empty to turn off.", "default": "QUIZ10" },
     { "type": "text", "id": "code_text", "label": "Code box text", "info": "[code] is replaced by the discount code.", "default": "Your code [code] · applied at checkout" },
     { "type": "header", "content": "10 · Sleep report" },
-    { "type": "text", "id": "report_button", "label": "Button", "default": "See my fix →" },
     { "type": "text", "id": "share_label", "label": "Share button (partner path)", "default": "Send this to my partner" },
     { "type": "text", "id": "problem_a_self", "label": "Problem line: Snoring (me / both)", "default": "You told us snoring is the biggest problem at night." },
     { "type": "text", "id": "problem_a_partner", "label": "Problem line: Snoring (partner)", "default": "You told us their snoring is the biggest problem at night." },
@@ -301,13 +286,6 @@
     { "type": "text", "id": "timeline_3_text", "label": "Step 3 text", "info": "Must match the Return & Refund Policy.", "default": "Not for you? Get a full refund under our 30-Night Money-Back Guarantee." },
     { "type": "text", "id": "guarantee_text", "label": "Guarantee trust line (above the button)", "info": "Leave empty to hide.", "default": "30-Night Money-Back Guarantee" },
     { "type": "text", "id": "result_button", "label": "Button", "default": "Claim My Discount →" },
-    { "type": "header", "content": "12 · Getting your plan ready" },
-    { "type": "text", "id": "loader_heading", "label": "Heading", "default": "Getting your plan ready…" },
-    { "type": "text", "id": "loader_sub", "label": "Subheading", "info": "[product] is replaced by the product name.", "default": "Taking you to your SOMNA [product]." },
-    { "type": "text", "id": "loader_tick_1", "label": "Tick 1", "info": "[product] is replaced by the product name.", "default": "[product] selected" },
-    { "type": "text", "id": "loader_tick_2", "label": "Tick 2", "default": "Subscribe & Save pre-selected" },
-    { "type": "text", "id": "loader_tick_3", "label": "Tick 3 (email sign-ups only)", "info": "[code] is replaced by the discount code.", "default": "[code] (10% off) added to your order" },
-    { "type": "text", "id": "loader_note", "label": "Small print", "default": "Please don't refresh" },
     { "type": "text", "id": "preselect_size", "label": "Size to pre-select on the product page", "default": "2 Bags" },
     { "type": "header", "content": "Result: Nasal Strips" },
     { "type": "product", "id": "product_strips", "label": "Product" },
@@ -325,6 +303,22 @@
     { "type": "textarea", "id": "bundle_self", "label": "Copy (me / both)", "default": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together." },
     { "type": "textarea", "id": "bundle_partner", "label": "Copy (partner)", "default": "It's their nose and their mouth. Strips open the airway; Tape keeps them breathing through it. Built to work together." }
   ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Story review (carousel)",
+      "settings": [
+        { "type": "paragraph", "content": "Shown as a sliding carousel on the 'Join 1,000+ SOMNA sleepers' step, in place of the video. Use REAL customer reviews only. Reviews for the shopper's matched product are shown first." },
+        { "type": "select", "id": "product", "label": "Product", "options": [ { "value": "strips", "label": "Nasal Strips" }, { "value": "tape", "label": "Mouth Tape" }, { "value": "bundle", "label": "Sleep Bundle" } ], "default": "strips" },
+        { "type": "image_picker", "id": "image", "label": "Customer photo" },
+        { "type": "text", "id": "name", "label": "Customer name", "placeholder": "Jessica M." },
+        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Review" },
+        { "type": "checkbox", "id": "verified", "label": "Show \"Verified buyer\"", "default": true }
+      ]
+    }
+  ],
+  "max_blocks": 8,
   "presets": [{ "name": "SOMNA quiz v5.2" }]
 }
 {% endschema %}
