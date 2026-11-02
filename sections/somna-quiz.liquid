@@ -69,7 +69,7 @@
       </div>
       <form class="sq-form" data-sq-form novalidate>
         <label class="sq-sr" for="sq-{{ sid }}-name">First name</label>
-        <input class="sq-input sq-input--name" id="sq-{{ sid }}-name" type="text" name="first_name" autocomplete="given-name" autocapitalize="words" maxlength="40" placeholder="{{ section.settings.name_placeholder | default: 'First name' | escape }}" data-sq-name>
+        <input class="sq-input sq-input--name" id="sq-{{ sid }}-name" type="text" name="first_name" autocomplete="given-name" autocapitalize="words" maxlength="40" placeholder="{{ section.settings.name_placeholder | default: 'First name' | escape }}" required aria-required="true" data-sq-name>
         <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
         <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
         <p class="sq-err" role="alert" data-sq-err hidden></p>
@@ -243,7 +243,7 @@
     { "type": "text", "id": "email_sub", "label": "Subheading", "default": "Enter your email and we'll show your code with your report." },
     { "type": "text", "id": "email_button", "label": "Button", "default": "Show my report + 10% off" },
     { "type": "text", "id": "email_skip", "label": "Skip link", "info": "Skipping shows the report without the discount code.", "default": "Skip, just show my report" },
-    { "type": "text", "id": "name_placeholder", "label": "First name placeholder", "info": "Optional field. The name personalises the report and Your fix headings.", "default": "First name" },
+    { "type": "text", "id": "name_placeholder", "label": "First name placeholder", "info": "Required when signing up for the code (Skip doesn't ask for it). The name personalises the report and Your fix headings.", "default": "First name" },
     { "type": "text", "id": "email_done", "label": "Signed-up message", "default": "You're in." },
     { "type": "text", "id": "email_done_button", "label": "Signed-up button", "default": "See my report →" },
     { "type": "text", "id": "email_consent", "label": "Consent line", "default": "By signing up you agree to receive marketing emails from SOMNA. Unsubscribe anytime." },
