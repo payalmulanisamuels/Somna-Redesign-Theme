@@ -186,18 +186,20 @@
   var rc = $('[data-sq-rc]'), rcTrack = rc && $('[data-sq-rc-track]', rc), rcTimer = null, rcDots = [], rcCur = 0, rcMoving = 0;
   function rcCards() { return $$('.sq-rc-card', rcTrack); }
   function rcIndex() { var c = rcCards(), x = rcTrack.scrollLeft, best = 0; c.forEach(function (e, k) { if (Math.abs(e.offsetLeft - rcTrack.offsetLeft - x) < Math.abs(c[best].offsetLeft - rcTrack.offsetLeft - x)) best = k; }); return best; }
+  // 2 cards in view on mobile, 3 on desktop: the last start position is cards - visible, then it loops to the first
+  function rcMax() { var c = rcCards(); if (!c.length) return 0; var vis = Math.max(1, Math.round(rcTrack.clientWidth / c[0].getBoundingClientRect().width)); return Math.max(0, c.length - vis); }
   function rcGo(k, smooth) {
-    var c = rcCards(); if (!c.length) return; k = (k + c.length) % c.length;
+    var c = rcCards(), m = rcMax(); if (!c.length) return; k = k > m ? 0 : (k < 0 ? m : k);
     rcCur = k; rcMoving = Date.now();                       // remember the target so taps during a slide still step on
     rcTrack.scrollTo({ left: c[k].offsetLeft - rcTrack.offsetLeft, behavior: smooth && !reduce ? 'smooth' : 'auto' });
     rcSync(k);
   }
-  function rcSync(k) { rcDots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
-  // Autoplay: loops every 4.5s (7s with no slide animation for "reduce motion" devices).
+  function rcSync(k) { var m = rcMax(); rcDots.forEach(function (d, j) { d.hidden = j > m; d.setAttribute('aria-current', j === Math.min(k, m) ? 'true' : 'false'); }); }
+  // Autoplay: one review every 1s from the moment the screen shows (3s with no slide animation for "reduce motion" devices).
   // Pauses only while the shopper is swiping or using the arrows/dots, then resumes 6s later.
   var rcResumeT = null;
   function rcStop() { clearInterval(rcTimer); rcTimer = null; clearTimeout(rcResumeT); }
-  function rcStart() { rcStop(); if (!rc || rcCards().length < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcCur + 1, true); }, reduce ? 7000 : 4500); }
+  function rcStart() { rcStop(); if (!rc || rcCards().length < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcGo(rcCur + 1, true); }, reduce ? 3000 : 1000); }
   function rcPause() { rcStop(); rcResumeT = setTimeout(rcStart, 6000); }
   if (rc) {
     var dotsBox = $('[data-sq-rc-dots]', rc);
