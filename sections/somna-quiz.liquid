@@ -103,18 +103,21 @@
               assign rname = section.settings.strips_name
               assign rself = section.settings.strips_self
               assign rpartner = section.settings.strips_partner
+              assign rpack = section.settings.strips_result_image
             when 2
               assign rk = 'tape'
               assign rp = p_tape
               assign rname = section.settings.tape_name
               assign rself = section.settings.tape_self
               assign rpartner = section.settings.tape_partner
+              assign rpack = section.settings.tape_result_image
             when 3
               assign rk = 'bundle'
               assign rp = p_bundle
               assign rname = section.settings.bundle_name
               assign rself = section.settings.bundle_self
               assign rpartner = section.settings.bundle_partner
+              assign rpack = section.settings.bundle_result_image
           endcase
           assign rv = nil
           if rp != blank
@@ -133,9 +136,10 @@
           data-copy-self="{{ rself | escape }}" data-copy-partner="{{ rpartner | escape }}">
           <h2 class="sq-q sq-fix-h" data-sq-fix-h data-ptitle="{{ rp.title | escape }}">{{ section.settings.fix_prefix }} SOMNA {{ rp.title }}</h2>
           {%- if rp != blank -%}
-            {%- assign rimg = rv.featured_image | default: rp.featured_image -%}
+            {%- comment -%} Packet-only image picked in the theme editor (Result: … → Result image); falls back to the product image {%- endcomment -%}
+            {%- assign rimg = rpack | default: rv.featured_image | default: rp.featured_image -%}
             {%- if rimg != blank -%}
-              <div class="sq-fix-img">{{ rimg | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 520px, 92vw', loading: 'lazy', alt: rp.title }}</div>
+              <div class="sq-fix-img{% if rpack != blank %} sq-fix-img--pack{% endif %}">{{ rimg | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 750px) 520px, 92vw', loading: 'lazy', alt: rp.title }}</div>
             {%- endif -%}
           {%- endif -%}
         </div>
@@ -304,16 +308,19 @@
     { "type": "text", "id": "result_button", "label": "Button", "default": "Claim My Discount →" },
     { "type": "text", "id": "preselect_size", "label": "Size to pre-select on the product page", "info": "Must match the variant name, e.g. 1 Bag, 2 Bags, 4 Bags.", "default": "1 Bag" },
     { "type": "header", "content": "Result: Nasal Strips" },
+    { "type": "image_picker", "id": "strips_result_image", "label": "Result image", "info": "Packet image shown on the quiz result. Leave empty to use the product image. Doesn't change the product." },
     { "type": "product", "id": "product_strips", "label": "Product" },
     { "type": "text", "id": "strips_name", "label": "Sleep type name", "default": "The Nose Breather" },
     { "type": "textarea", "id": "strips_self", "label": "Copy (me / both)", "default": "It looks like your nose could use a little help at night. Lying down can narrow the airflow through your nose, which can lead to snoring and slower mornings. SOMNA Strips are designed to gently hold your nose open all night." },
     { "type": "textarea", "id": "strips_partner", "label": "Copy (partner)", "default": "It looks like their nose could use a little help at night. Lying down can narrow the airflow through the nose, which can make sleep feel lighter and mornings slower, even after a full night. SOMNA Strips are designed to gently hold their nose open all night." },
     { "type": "header", "content": "Result: Mouth Tape" },
+    { "type": "image_picker", "id": "tape_result_image", "label": "Result image", "info": "Packet image shown on the quiz result. Leave empty to use the product image. Doesn't change the product." },
     { "type": "product", "id": "product_tape", "label": "Product" },
     { "type": "text", "id": "tape_name", "label": "Sleep type name", "default": "The Mouth Breather" },
     { "type": "textarea", "id": "tape_self", "label": "Copy (me / both)", "default": "You're breathing through your mouth at night, which is why you wake up dry and groggy. SOMNA Tape is designed to keep your lips gently closed so you breathe through your nose." },
     { "type": "textarea", "id": "tape_partner", "label": "Copy (partner)", "default": "They're breathing through their mouth at night. SOMNA Tape is designed to keep their lips gently closed so they breathe through their nose." },
     { "type": "header", "content": "Result: Sleep Bundle" },
+    { "type": "image_picker", "id": "bundle_result_image", "label": "Result image", "info": "Packet image shown on the quiz result. Leave empty to use the product image. Doesn't change the product." },
     { "type": "product", "id": "product_bundle", "label": "Product" },
     { "type": "text", "id": "bundle_name", "label": "Sleep type name", "default": "The Double Trouble" },
     { "type": "textarea", "id": "bundle_self", "label": "Copy (me / both)", "default": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together." },
