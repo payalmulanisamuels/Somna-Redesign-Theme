@@ -160,7 +160,9 @@
         "bundle_name": "The Double Trouble",
         "bundle_self": "It's your nose and your mouth. Strips open the airway; Tape keeps you breathing through it. Built to work together.",
         "bundle_partner": "It's their nose and their mouth. Strips open the airway; Tape keeps them breathing through it. Built to work together.",
-        "strips_result_image": "shopify://shop_images/somna-v2-strips-pouch.png"
+        "strips_result_image": "shopify://shop_images/somna-v2-strips-pouch.png",
+        "tape_result_image": "shopify://shop_images/somna-v2-tape-pouch.png",
+        "bundle_result_image": "shopify://shop_images/somna-v2-cta-pouches.png"
       }
     }
   },
