@@ -292,6 +292,26 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq [data-type="analyze"] { max-width: 480px; margin: 0 auto; }
 .sq .sq-fix-img img { aspect-ratio: 2 / 1; }
 }
+/* Result on wide screens: sleep type report (left) and the fix card (right) side by side.
+   .sq--wide is set by the script only while the result screen is showing; mobile stays stacked. */
+@media screen and (min-width: 1000px) {
+.sq.sq--wide .sq-wrap { max-width: 1100px; }
+.sq.sq--wide .sq-top { max-width: 600px; margin-left: auto; margin-right: auto; }
+.sq.sq--wide .sq-report { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 40px; align-items: start; text-align: left; }
+.sq.sq--wide .sq-report > :not(.sq-fix) { grid-column: 1; }
+.sq.sq--wide .sq-report .sq-pill--c { margin-left: 0; }
+.sq.sq--wide .sq-report > .sq-fix { grid-column: 2; grid-row: 1 / span 12; margin-top: 0; padding: 20px 22px; border: 1px solid var(--sq-line); border-radius: 20px; background: var(--sq-card); }
+.sq.sq--wide .sq-fix .sq-q { font-size: 22px; margin-bottom: 12px; }
+.sq.sq--wide .sq-fix-img { margin-bottom: 14px; }
+.sq.sq--wide .sq-fix-img img { aspect-ratio: 21 / 9; }
+.sq.sq--wide .sq-fix .sq-ticks { margin-bottom: 0; }
+.sq.sq--wide .sq-fix .sq-ticks li { font-size: 14px; }
+.sq.sq--wide .sq-fix .sq-30 { margin-top: 12px; }
+.sq.sq--wide .sq-fix .sq-tl-t { font-size: 14px; }
+.sq.sq--wide .sq-fix .sq-tl-x { font-size: 13px; }
+.sq.sq--wide .sq-fix .sq-trust { margin-top: 12px; }
+.sq.sq--wide .sq-fix .sq-cta { margin-top: 10px; }
+}
 @media (prefers-reduced-motion: reduce) {
 .sq .sq-s.is-on, .sq .sq-type.is-reveal, .sq .sq-tick { animation: none !important; }
 .sq .sq-prog-f, .sq .sq-dots i { transition: none; }

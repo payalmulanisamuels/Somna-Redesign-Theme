@@ -130,6 +130,7 @@
     $$('.sq-s:not(.is-on) video').forEach(function (v) { try { v.pause(); } catch (e) {} });
     var sc = screens[n], ty = sc.getAttribute('data-type'), q = +sc.dataset.step || 0, pk = screenKey(sc);
     if (ty !== 'story') rcStop();
+    root.classList.toggle('sq--wide', ty === 'report');      // result: report + fix side by side on wide screens (CSS)
     applyWording();
     var hasBar = PROG[pk] != null;
     top.hidden = !hasBar;
