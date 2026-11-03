@@ -67,7 +67,7 @@
         {%- if code != blank -%}<p class="sq-code">{{ section.settings.code_text | escape | replace: '[code]', code_html }}</p>{%- endif -%}
         <button type="button" class="sq-cta" data-sq-done-next>{{ section.settings.email_done_button | default: 'See my report →' }}</button>
       </div>
-      <form class="sq-form" data-sq-form novalidate>
+      <form class="sq-form" data-sq-form novalidate onsubmit="return false">
         <label class="sq-sr" for="sq-{{ sid }}-email">Email address</label>
         <input class="sq-input" id="sq-{{ sid }}-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Your email" required data-sq-email>
         <p class="sq-err" role="alert" data-sq-err hidden></p>
