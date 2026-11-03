@@ -14,10 +14,11 @@
   .sq-match__t { display: block; font-weight: 700; color: #2B4CC2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sq-match__d { display: flex; align-items: baseline; gap: 0 6px; white-space: nowrap; }
   .sq-match__why { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-  .sq-match__d > span:not(.sq-match__why), .sq-match__d > a { flex: none; }
+  .sq-match__d > .sq-match__off, .sq-match__d > a { flex: none; }
   .sq-match__d > :not(:first-child)::before { content: '·'; margin-right: 6px; color: #5B6690; }
   .sq-match a { color: #0E1A4A; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-  @media screen and (min-width: 750px) { .sq-match__in { padding: 18px 24px 10px; font-size: 14px; } }
+  .sq-match__long { display: none; }
+  @media screen and (min-width: 750px) { .sq-match__in { padding: 18px 24px 10px; font-size: 14px; } .sq-match__long { display: inline; } .sq-match__short { display: none; } }
 </style>
 <script>
   (function () {
@@ -45,7 +46,7 @@
       inner.appendChild(el('p', 'sq-match__t', '✓ ' + (m.name ? m.name + ', ' + who : who.charAt(0).toUpperCase() + who.slice(1)) + PRODUCT[m.result]));
       d.appendChild(el('span', 'sq-match__why', WHY[m.result]));
       var off = null;
-      if (m.code) { off = el('span', '', '10% off applied at checkout'); d.appendChild(off); }
+      if (m.code) { off = el('span', 'sq-match__off'); off.appendChild(el('span', 'sq-match__long', '10% off applied at checkout')); off.appendChild(el('span', 'sq-match__short', '10% off at checkout')); d.appendChild(off); }
       var a = el('a', '', 'View my report'); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; d.appendChild(a);
       inner.appendChild(d); bar.appendChild(inner); main.insertBefore(bar, main.firstChild);
       // "10% off" stays only while the code is really on the cart
