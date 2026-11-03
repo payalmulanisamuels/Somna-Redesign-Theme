@@ -65,7 +65,8 @@
       // "Neha, your match: the Sleep Bundle" (partner: "their match"; no name: "Your match: …")
       var who = partner ? 'their match: ' : 'your match: ';
       var t = el('p', 'sq-match__t', m.name ? m.name + ', ' + who : who.charAt(0).toUpperCase() + who.slice(1));
-      t.appendChild(el('strong', '', PRODUCT[m.result])); inner.appendChild(t);
+      var pn = el('strong'); pn.appendChild(el('span', 'sq-match__off--long', PRODUCT[m.result])); pn.appendChild(el('span', 'sq-match__off--short', PRODUCT[m.result].replace(/^SOMNA /, '')));
+      t.appendChild(pn); inner.appendChild(t);                 // mobile drops "SOMNA" so the longest names still fit
       var a = el('a', 'sq-match__link'); a.appendChild(el('span', 'sq-match__off--long', 'View my report →')); a.appendChild(el('span', 'sq-match__off--short', 'Report →')); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; inner.appendChild(a);
       var d = el('p', 'sq-match__d');
       d.appendChild(el('span', 'sq-match__why sq-match__why--long', WHY[m.result][0]));
