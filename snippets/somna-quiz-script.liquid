@@ -406,13 +406,18 @@
       'Quiz problem': TXT.issue[s.problem] || '', 'Quiz nose': TXT.nose[s.nose] || '', 'Quiz mouth': TXT.mouth[s.mouth] || '',
       'Quiz energy': TXT.energy[s.energy] || '', 'Quiz tried': s.tried };
     if (s.tried.indexOf('other') > -1 && answers.other) props['Quiz tried other'] = answers.other.trim();
-    var body = { data: { type: 'subscription', attributes: {
-      custom_source: cfg.source || 'quiz',
-      profile: { data: { type: 'profile', attributes: firstName ? { email: email, first_name: firstName, properties: props } : { email: email, properties: props } } }
-    }, relationships: { list: { data: { type: 'list', id: cfg.klaviyoList } } } } };
-    return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(cfg.klaviyoCompany), {
-      method: 'POST', headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' }, body: JSON.stringify(body)
-    }).then(function (res) { if (!res.ok) throw new Error('Klaviyo ' + res.status); return s.result; });
+    function sub(list) {
+      var body = { data: { type: 'subscription', attributes: {
+        custom_source: cfg.source || 'quiz',
+        profile: { data: { type: 'profile', attributes: firstName ? { email: email, first_name: firstName, properties: props } : { email: email, properties: props } } }
+      }, relationships: { list: { data: { type: 'list', id: list } } } } };
+      return fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(cfg.klaviyoCompany), {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'revision': '2024-10-15' }, body: JSON.stringify(body)
+      });
+    }
+    // Quiz Signups (tracking) decides success; the Welcome flow list (Email List → Welcome Series) is added alongside, best effort
+    var welcome = cfg.klaviyoWelcomeList && cfg.klaviyoWelcomeList !== cfg.klaviyoList ? sub(cfg.klaviyoWelcomeList).catch(function () {}) : null;
+    return sub(cfg.klaviyoList).then(function (res) { if (!res.ok) throw new Error('Klaviyo ' + res.status); return welcome; }).then(function () { return s.result; });
   }
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
