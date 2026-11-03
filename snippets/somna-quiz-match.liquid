@@ -13,7 +13,7 @@
   .sq-match__in { max-width: 1280px; margin: 0 auto; padding: 12px 16px 10px; display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; column-gap: 10px; row-gap: 2px; align-items: center; }
   .sq-match__ic { grid-row: 1 / span 2; align-self: start; width: 26px; height: 26px; border-radius: 50%; background: #2B4CC2; color: #fff; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
   .sq-match__ic svg { width: 14px; height: 14px; }
-  .sq-match__t { font-size: 14px; line-height: 1.35; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sq-match__t { font-size: 13.5px; line-height: 1.35; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .sq-match__t strong { font-weight: 700; color: #2B4CC2; }
   .sq-match__d { grid-column: 2 / span 2; display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 12.5px; line-height: 1.35; color: #4A5578; white-space: nowrap; }
   .sq-match__why { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -66,7 +66,7 @@
       var who = partner ? 'their match: ' : 'your match: ';
       var t = el('p', 'sq-match__t', m.name ? m.name + ', ' + who : who.charAt(0).toUpperCase() + who.slice(1));
       t.appendChild(el('strong', '', PRODUCT[m.result])); inner.appendChild(t);
-      var a = el('a', 'sq-match__link'); a.appendChild(el('span', 'sq-match__off--long', 'View my report →')); a.appendChild(el('span', 'sq-match__off--short', 'My report →')); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; inner.appendChild(a);
+      var a = el('a', 'sq-match__link'); a.appendChild(el('span', 'sq-match__off--long', 'View my report →')); a.appendChild(el('span', 'sq-match__off--short', 'Report →')); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; inner.appendChild(a);
       var d = el('p', 'sq-match__d');
       d.appendChild(el('span', 'sq-match__why sq-match__why--long', WHY[m.result][0]));
       d.appendChild(el('span', 'sq-match__why sq-match__why--short', WHY[m.result][1]));
