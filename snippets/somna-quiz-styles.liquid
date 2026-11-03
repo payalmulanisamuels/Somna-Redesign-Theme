@@ -109,8 +109,7 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq .sq-cta:active { transform: scale(.99); }
 .sq .sq-cta:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
 .sq .sq-cta[aria-busy="true"] { opacity: .7; cursor: progress; }
-.sq .sq-skip, .sq .sq-retake { appearance: none; display: table; margin: 14px auto 0; padding: 8px 10px; background: none; border: 0; color: var(--sq-ink); font: 500 14px/1.2 var(--sq-sans); text-decoration: underline; text-decoration-color: var(--sq-lav); text-underline-offset: 3px; text-decoration-thickness: 1.5px; cursor: pointer; border-radius: 8px; }
-.sq .sq-retake { font-size: 13px; color: var(--sq-mut); }
+.sq .sq-skip { appearance: none; display: table; margin: 14px auto 0; padding: 8px 10px; background: none; border: 0; color: var(--sq-ink); font: 500 14px/1.2 var(--sq-sans); text-decoration: underline; text-decoration-color: var(--sq-lav); text-underline-offset: 3px; text-decoration-thickness: 1.5px; cursor: pointer; border-radius: 8px; }
 /* email step Skip: larger, bold, 44px+ tap area (still a secondary text action) */
 .sq .sq-skip--lg { margin-top: 16px; min-height: 48px; padding: 12px 18px; font-size: 16px; font-weight: 700; letter-spacing: .01em; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 .sq .sq-skip--lg:hover { color: var(--sq-lav); }
@@ -165,7 +164,6 @@ padding: 18px 16px 56px; min-height: 100vh;
 .sq .sq-done-h { font-size: 18px; font-weight: 700; color: var(--sq-ink); }
 .sq .sq-done .sq-code { margin-top: 12px; }
 .sq .sq-form .sq-cta { margin-top: 10px; }
-.sq .sq-input--name { margin-bottom: 10px; }
 .sq .sq-err { color: var(--sq-err); font-size: 14px; margin-top: 8px; text-align: center; }
 
 /* 10 sleep report */
@@ -249,7 +247,7 @@ padding: 18px 16px 56px; min-height: 100vh;
 
 /* visible keyboard focus (the theme turns outlines off globally) */
 .sq .sq-opt:focus-visible, .sq .sq-cta:focus-visible, .sq .sq-back:focus-visible, .sq .sq-skip:focus-visible,
-.sq .sq-retake:focus-visible, .sq .sq-input:focus-visible, .sq .sq-textarea:focus-visible, .sq .sq-logo:focus-visible { outline: 2px solid var(--sq-lav); outline-offset: 3px; }
+.sq .sq-input:focus-visible, .sq .sq-textarea:focus-visible, .sq .sq-logo:focus-visible { outline: 2px solid var(--sq-lav); outline-offset: 3px; }
 
 /* desktop */
 @media screen and (min-width: 750px) {
