@@ -66,7 +66,7 @@
       var who = partner ? 'their match: ' : 'your match: ';
       var t = el('p', 'sq-match__t', m.name ? m.name + ', ' + who : who.charAt(0).toUpperCase() + who.slice(1));
       t.appendChild(el('strong', '', PRODUCT[m.result])); inner.appendChild(t);
-      var a = el('a', 'sq-match__link', 'View my report →'); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; inner.appendChild(a);
+      var a = el('a', 'sq-match__link'); a.appendChild(el('span', 'sq-match__off--long', 'View my report →')); a.appendChild(el('span', 'sq-match__off--short', 'My report →')); a.href = '{{ pages['quiz'].url | default: '/pages/quiz' }}?report=1'; inner.appendChild(a);
       var d = el('p', 'sq-match__d');
       d.appendChild(el('span', 'sq-match__why sq-match__why--long', WHY[m.result][0]));
       d.appendChild(el('span', 'sq-match__why sq-match__why--short', WHY[m.result][1]));
