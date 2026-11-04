@@ -150,8 +150,8 @@
     return api;
   }
 
-  // ---- reviews break: reviews for the product their answers trend to first; autoplay every 1s ----
-  var AUTOPLAY_MS = 1000, AUTOPLAY_PAUSE_MS = 4000;
+  // ---- reviews break: reviews for the product their answers trend to first; autoplay every 1.5s ----
+  var AUTOPLAY_MS = 1500, AUTOPLAY_PAUSE_MS = 4000;
   var rc = $('[data-sq-rc]'), rcTrack = rc && $('[data-sq-rc-track]', rc), rcPager = rc ? pager(rcTrack, $('[data-sq-rc-dots]', rc)) : null, rcTimer = null, rcResumeT = null;
   function rcStop() { clearInterval(rcTimer); rcTimer = null; clearTimeout(rcResumeT); }
   function rcStart() { rcStop(); if (!rcPager || rcPager.pages() < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcPager.goTo(rcPager.cur() + 1, true); }, AUTOPLAY_MS); }
