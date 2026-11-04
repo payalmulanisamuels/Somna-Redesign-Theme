@@ -244,8 +244,8 @@
         "tape_result_image": "shopify://shop_images/somna-v2-tape-pouch.png",
         "product_tape": "mouth-tape",
         "product_bundle": "sleep-bundle",
-        "v2_sections": false,
-        "v2_cursor": false
+        "v2_sections": true,
+        "v2_cursor": true
       }
     }
   },
