@@ -231,6 +231,9 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-plan-save { margin: 6px 0 0 24px; font-size: 12.5px; color: #F5A65B; }
 .sq .sq-atc { margin-top: 14px; }
 .sq .sq-buy-note { margin-top: 10px; font-size: 12px; color: var(--sq-mut); text-align: center; }
+.sq .sq-buy-view { margin-top: 8px; text-align: center; font-size: 13.5px; font-weight: 600; }
+.sq .sq-buy-view a { color: var(--sq-lav); text-decoration: underline; text-underline-offset: 3px; }
+.sq .sq-buy-view a:focus-visible { outline: 2px solid var(--sq-lav); outline-offset: 3px; border-radius: 4px; }
 /* accordions (How It Works, FAQ) */
 .sq .sq-acc { border-bottom: 1px solid var(--sq-line); }
 .sq .sq-acc summary { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; font-size: 14.5px; font-weight: 700; cursor: pointer; list-style: none; }
@@ -452,6 +455,7 @@ body { background: #F3FEEE; }
 .sq--v2 .sq-acc--box { background: #161B2C; border: 1.2px solid #3A3F4C; }
 .sq--v2 .sq-buy .sq-acc { border-bottom: 0; }
 .sq--v2 .sq-buy .sq-acc summary::after { color: #AFBDF8; }
+.sq--v2 .sq-buy-view a { color: #AFBDF8; }
 /* sticky Add to Cart */
 .sq--v2 .sq-sticky { background: rgba(243,254,238,.96); border-top: 1.6px solid #0B0F1D; }
 @media screen and (min-width: 750px) {

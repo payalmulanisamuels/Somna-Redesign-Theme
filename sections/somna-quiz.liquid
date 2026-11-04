@@ -115,6 +115,7 @@
               <button type="button" class="sq-cta sq-atc" data-sq-atc><span aria-hidden="true">🛒</span> {{ section.settings.atc_label }}</button>
               <p class="sq-err" role="alert" data-sq-atc-err hidden></p>
               {%- if section.settings.atc_note != blank -%}<p class="sq-buy-note">↻ {{ section.settings.atc_note }}</p>{%- endif -%}
+              {%- if section.settings.view_product_label != blank -%}<p class="sq-buy-view"><a href="{{ rp.url }}">{{ section.settings.view_product_label }} →</a></p>{%- endif -%}
               {%- if rbs.how_it_works != blank -%}
                 <details class="sq-acc sq-acc--box" open>
                   <summary>{{ section.settings.how_it_works_heading }}</summary>
@@ -806,6 +807,13 @@
       "id": "faq_heading",
       "label": "FAQ heading",
       "default": "Questions? <em>We've got you.</em>"
+    },
+    {
+      "type": "text",
+      "id": "view_product_label",
+      "label": "Link to the product page (under Add to Cart)",
+      "info": "Opens the matched product's page only when tapped. Empty = hidden.",
+      "default": "View full product details"
     },
     {
       "type": "text",
