@@ -75,6 +75,7 @@
     screens.forEach(function (s, k) { s.classList.toggle('is-on', k === n); });
     var sc = screens[n], ty = sc.getAttribute('data-type'), q = +sc.dataset.step || 0, pk = screenKey(sc);
     if (ty !== 'story') rcStop();
+    if (ty !== 'result') rvStop();
     $$('.sq-s:not(.is-on) video').forEach(function (v) { try { v.pause(); } catch (e) {} });
     root.classList.toggle('sq--wide', ty === 'result');       // result page uses the wide layout on desktop
     applyWording();
@@ -147,11 +148,20 @@
     return api;
   }
 
-  // ---- reviews break: reviews for the product their answers trend to first; autoplay every 3s ----
+  // ---- reviews break: reviews for the product their answers trend to first; autoplay every 1s ----
+  var AUTOPLAY_MS = 1000, AUTOPLAY_PAUSE_MS = 4000;
   var rc = $('[data-sq-rc]'), rcTrack = rc && $('[data-sq-rc-track]', rc), rcPager = rc ? pager(rcTrack, $('[data-sq-rc-dots]', rc)) : null, rcTimer = null, rcResumeT = null;
   function rcStop() { clearInterval(rcTimer); rcTimer = null; clearTimeout(rcResumeT); }
-  function rcStart() { rcStop(); if (!rcPager || rcPager.pages() < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcPager.goTo(rcPager.cur() + 1, true); }, 3000); }
-  function rcPause() { rcStop(); rcResumeT = setTimeout(rcStart, 6000); }
+  function rcStart() { rcStop(); if (!rcPager || rcPager.pages() < 2 || screens[i].getAttribute('data-type') !== 'story') return; rcTimer = setInterval(function () { if (!document.hidden) rcPager.goTo(rcPager.cur() + 1, true); }, AUTOPLAY_MS); }
+  function rcPause() { rcStop(); rcResumeT = setTimeout(rcStart, AUTOPLAY_PAUSE_MS); }
+  // result page "Real SOMNA sleepers": same autoplay (only while the result is on screen)
+  var rvTimer = null, rvResumeT = null;
+  function rvStop() { clearInterval(rvTimer); rvTimer = null; clearTimeout(rvResumeT); }
+  function rvStart(rv) {
+    rvStop(); if (reduce || !rv || !rv._pg || rv._pg.pages() < 2 || screens[i].getAttribute('data-type') !== 'result') return;
+    rvTimer = setInterval(function () { if (!document.hidden) rv._pg.goTo(rv._pg.cur() + 1, true); }, AUTOPLAY_MS);
+  }
+  function rvPause(rv) { rvStop(); rvResumeT = setTimeout(function () { rvStart(rv); }, AUTOPLAY_PAUSE_MS); }
   if (rcPager) {
     rcPager.onUser = rcPause;
     ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) { rcTrack.addEventListener(ev, rcPause, { passive: true }); });
@@ -271,7 +281,13 @@
     $$('img', r).forEach(function (im, n) { if (n < 2) im.loading = 'eager'; });
     if (!sel[k]) { var v0 = variantsOf(k)[0] || {}; sel[k] = { color: v0.color || '', bags: v0.bags || 1, mode: v0.sub != null ? 'sub' : 'once' }; }
     renderBuy(k);
-    var rv = $('[data-sq-rv]', r); if (rv && !rv.dataset.ready) { rv.dataset.ready = '1'; var pg = pager(rv, $('[data-sq-rv-dots]', r)); requestAnimationFrame(pg.build); }
+    var rv = $('[data-sq-rv]', r);
+    if (rv && !rv._pg) {
+      rv._pg = pager(rv, $('[data-sq-rv-dots]', r)); rv._pg.onUser = function () { rvPause(rv); };
+      ['pointerdown', 'touchstart', 'wheel'].forEach(function (ev) { rv.addEventListener(ev, function () { rvPause(rv); }, { passive: true }); });
+      rv.addEventListener('keydown', function () { rvPause(rv); });
+    }
+    if (rv) requestAnimationFrame(function () { rv._pg.build(); rv._pg.goTo(0, false); rvStart(rv); });
   }
 
   function renderBuy(k) {
