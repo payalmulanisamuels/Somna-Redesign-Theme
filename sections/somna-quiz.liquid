@@ -20,7 +20,7 @@
   assign sq_once_keep = 100 | minus: sq_once_off
 -%}
 
-<section class="sq" id="sq-{{ sid }}" data-sq aria-label="Sleep quiz">
+<section class="sq{% if section.settings.design == 'v2' %} sq--v2{% endif %}" id="sq-{{ sid }}" data-sq aria-label="Sleep quiz">
   <div class="sq-wrap">
     <a class="sq-logo" href="{{ routes.root_url }}" aria-label="SOMNA home">
       {%- if settings.logo != blank -%}
@@ -328,7 +328,7 @@
     }
   }
 </script>
-{% render 'somna-quiz-styles' %}
+{% render 'somna-quiz-styles', design: section.settings.design %}
 {% render 'somna-quiz-script', sid: sid %}
 
 {% schema %}
@@ -336,6 +336,16 @@
   "name": "SOMNA quiz v6",
   "class": "somna-quiz-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "Design",
+      "options": [
+        { "value": "night", "label": "Night (navy + purple)" },
+        { "value": "v2", "label": "SOMNA V2 (mint, lavender, Boldonse)" }
+      ],
+      "default": "night"
+    },
     {
       "type": "header",
       "content": "Q1 · Intro"
