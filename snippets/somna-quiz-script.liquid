@@ -38,8 +38,9 @@
       if (q === 1) who = o.getAttribute('data-tag');
     }
     var tried = (answers[6] || []).map(function (k) { return qScreens[6].querySelectorAll('.sq-opt')[k].getAttribute('data-tried'); });
-    // Check in order, stop at first match. Nasal Strips is the default (ties, low scores).
-    var result = (S >= 3 && T >= 3) ? 'bundle' : (T > S ? 'tape' : 'strips');
+    // Sleep Bundle only when Q2 = "Both" (nose and mouth); otherwise the higher score wins: Tape if mouth > nose,
+    // else Nasal Strips (also ties and low scores).
+    var result = key(2) === 'both' ? 'bundle' : (T > S ? 'tape' : 'strips');
     return { S: S, T: T, who: who, partner: who === 'partner', result: result, tried: tried,
       problem: key(2), nose: key(3), mouth: key(4), energy: key(5) };
   }
