@@ -153,30 +153,63 @@
                   {%- if rbs.point_3 != blank -%}<li>{{ rbs.point_3 }}</li>{%- endif -%}
                 </ul>
               </div>
-              {%- comment -%} V2 product-page "How it works" diagram (product photo + 4 features), read from the product's own pdp_how entry; else the image {%- endcomment -%}
+              {%- comment -%} Right side of the V2 product page "What it's made of" section: the stacked layer picture + numbered list
+                (Sleep Bundle: the two products' cards), read from the product's own pdp_layers entry; else the image {%- endcomment -%}
               {%- liquid
-                assign how = blank
+                assign lay = blank
                 if section.settings.v2_sections
-                  assign how = rp.metafields.custom.pdp_how.value
+                  assign lay = rp.metafields.custom.pdp_layers.value
                 endif
-                assign how_img = how.image.value
-                assign how_after = how.image_after.value
-                assign how_feats = how.features.value
+                assign lay_rel = lay.related.value
+                assign lay_feats = lay.features.value
+                assign lay_stack = true
+                if lay_feats == blank or lay_feats.size < 2
+                  assign lay_stack = false
+                endif
+                for f in lay_feats
+                  if f.image == blank
+                    assign lay_stack = false
+                  endif
+                endfor
               -%}
-              {%- if how_img and how_feats != blank -%}
-                <somna-quiz-how class="sq-diag{% if how_after %} sq-diag--pair{% endif %}">
-                  <div class="sq-diag-prod">
-                    {{- how_img | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 1000px) 240px, 40vw', alt: rp.title -}}
-                    {%- if how_after -%}{{ how_after | image_url: width: 500 | image_tag: loading: 'lazy', widths: '250, 500', sizes: '(min-width: 1000px) 160px, 28vw', alt: '' }}{%- endif -%}
-                  </div>
-                  {%- for f in how_feats limit: 4 -%}
-                    <div class="sq-diag-pt sq-diag-pt--{{ forloop.index }}">
-                      <span class="sq-diag-ic">{% render 'somna-pdp-icon', name: f.icon.value %}</span>
-                      <p class="sq-diag-h">{{ f.title.value }}</p>
-                      {%- if f.text != blank -%}<p class="sq-diag-t">{{ f.text.value }}</p>{%- endif -%}
+              {%- if lay_rel != blank -%}
+                <somna-quiz-layers class="sq-lay sq-lay--pair">
+                  {%- for entry in lay_rel limit: 2 -%}
+                    {%- assign card_title = entry.admin_name.value | split: ' – ' | first | split: ' - ' | first -%}
+                    {%- unless forloop.first -%}<span class="sq-lay-plus" aria-hidden="true"></span>{%- endunless -%}
+                    <div class="sq-lay-card">
+                      {%- if card_title != blank -%}<p class="sq-lay-title">{{ card_title }}</p>{%- endif -%}
+                      <div class="sq-lay-body">
+                        {%- assign entry_image = entry.image.value -%}
+                        {%- if entry_image -%}{{ entry_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 480, 640', sizes: '(min-width: 1000px) 220px, 45vw', alt: card_title }}{%- endif -%}
+                        {%- assign entry_features = entry.features.value -%}
+                        {%- if entry_features != blank -%}
+                          <ol class="sq-lay-list">
+                            {%- for f in entry_features -%}<li><p class="sq-lay-h">{{ f.title.value }}</p>{%- if f.text != blank -%}<p class="sq-lay-t">{{ f.text.value }}</p>{%- endif -%}</li>{%- endfor -%}
+                          </ol>
+                        {%- endif -%}
+                      </div>
                     </div>
                   {%- endfor -%}
-                </somna-quiz-how>
+                </somna-quiz-layers>
+              {%- elsif lay_feats != blank -%}
+                <somna-quiz-layers class="sq-lay">
+                  {%- if lay_stack -%}
+                    {%- for f in lay_feats limit: 1 -%}{%- assign first_layer = f.image.value -%}{%- endfor -%}
+                    <div class="sq-lay-stack" style="aspect-ratio: {{ first_layer.width }} / {{ first_layer.height }};">
+                      {%- for f in lay_feats -%}
+                        {%- assign li = f.image.value -%}
+                        {%- assign probe = li | image_url: width: 120 -%}
+                        {{ li | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 1000px) 300px, 55vw', class: 'sq-lay-layer', alt: f.title.value, data-probe: probe }}
+                      {%- endfor -%}
+                    </div>
+                  {%- elsif lay.image.value -%}
+                    <div class="sq-lay-stack">{{ lay.image.value | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 1000px) 300px, 55vw' }}</div>
+                  {%- endif -%}
+                  <ol class="sq-lay-list">
+                    {%- for f in lay_feats -%}<li><p class="sq-lay-h">{{ f.title.value }}</p>{%- if f.text != blank -%}<p class="sq-lay-t">{{ f.text.value }}</p>{%- endif -%}</li>{%- endfor -%}
+                  </ol>
+                </somna-quiz-layers>
               {%- elsif rbs.benefit_image != blank -%}<div class="sq-res-pic">{{ rbs.benefit_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
             </section>
           {%- endif -%}
