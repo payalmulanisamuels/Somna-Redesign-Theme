@@ -99,6 +99,24 @@
                 {%- assign rimg = rimg_pick | default: rp.selected_or_first_available_variant.featured_image | default: rp.featured_image -%}
                 {%- if rimg != blank -%}{{ rimg | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 480px, (min-width: 750px) 560px, 92vw', loading: 'lazy', alt: rp.title }}{%- endif -%}
               </div>
+              {%- if section.settings.result_extras and rimg != blank -%}
+                {%- comment -%} thumbnails: the result image + the product's own photos (as the product page gallery); tap = main image {%- endcomment -%}
+                {%- capture thumbs -%}
+                  {%- assign tn = 0 -%}
+                  {%- for m in rp.media -%}
+                    {%- if m.media_type == 'image' and m.preview_image.src != rimg.src and tn < 5 -%}
+                      {%- assign tn = tn | plus: 1 -%}
+                      <button type="button" class="sq-thumb" data-sq-thumb data-src="{{ m.preview_image | image_url: width: 900 }}" aria-label="{{ rp.title | escape }} photo {{ tn | plus: 1 }}">{{ m.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', width: 80, height: 80 }}</button>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endcapture -%}
+                {%- if tn > 0 -%}
+                  <div class="sq-thumbs" role="group" aria-label="{{ rp.title | escape }} photos">
+                    <button type="button" class="sq-thumb" data-sq-thumb data-first data-src="{{ rimg | image_url: width: 900 }}" aria-current="true" aria-label="{{ rp.title | escape }} photo 1">{{ rimg | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', width: 80, height: 80 }}</button>
+                    {{- thumbs -}}
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
               {%- if r_rating != blank -%}
                 <p class="sq-res-rating"><span class="sq-stars" aria-hidden="true">★★★★★</span> {{ r_rating }}{% if r_count != blank %} · {{ r_count }} reviews{% endif %}<span class="sq-sr"> out of 5</span></p>
               {%- endif -%}

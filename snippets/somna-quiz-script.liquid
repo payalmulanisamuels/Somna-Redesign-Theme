@@ -361,9 +361,23 @@
     return b;
   }
   function swapImage(k) {
-    var v = pick(k), box = $('[data-sq-res-img]', resEl(k)); if (!box || box.classList.contains('sq-res-img--pack') || !v.image) return;
+    var v = pick(k), r = resEl(k), box = $('[data-sq-res-img]', r); if (!box || !v.image) return;
+    var first = $('[data-sq-thumb][data-first]', r);
+    if (box.dataset.pack === '1' || (box.classList.contains('sq-res-img--pack') && !first)) return;   // fixed packet image
     var im = $('img', box); if (im) { im.removeAttribute('srcset'); im.src = v.image; }
+    // colour change: the first thumbnail follows the colour's photo and becomes the selected one
+    if (first) { first.dataset.src = v.image; var ti = $('img', first); if (ti) { ti.removeAttribute('srcset'); ti.src = v.image; } setThumb(r, first); }
   }
+  // thumbnails under the result image: tap shows that photo as the main image
+  function setThumb(r, t) { $$('[data-sq-thumb]', r).forEach(function (x) { x.setAttribute('aria-current', x === t ? 'true' : 'false'); }); }
+  $$('[data-sq-thumb]').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var r = t.closest('.sq-res'), box = r && $('[data-sq-res-img]', r), im = box && $('img', box); if (!im) return;
+      if (box.dataset.pack == null) box.dataset.pack = box.classList.contains('sq-res-img--pack') ? '1' : '0';
+      box.classList.toggle('sq-res-img--pack', t.hasAttribute('data-first') && box.dataset.pack === '1');
+      im.removeAttribute('srcset'); im.removeAttribute('sizes'); im.src = t.dataset.src; setThumb(r, t);
+    });
+  });
 
   // Add to Cart → the theme's cart drawer (same cart event as the product page, so the drawer and cart icon refresh).
   // Speed: the button says "Adding…" at once; the drawer fills and opens as soon as /cart/add.js answers (its
