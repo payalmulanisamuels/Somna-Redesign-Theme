@@ -263,10 +263,11 @@
                   assign rsticker = rp.metafields.custom.pdp_cta_sticker.value | default: '[night] a night'
                 endif
               -%}
+              {%- capture rnight_money -%}{{ rnight | money }}{%- endcapture -%}
               {%- if rnd -%}
                 <somna-quiz-float class="sq-render">
                   <div class="sq-render-prod">{{ rnd | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1000px) 260px, 50vw', alt: rp.title }}</div>
-                  {%- if rnight > 0 -%}<p class="sq-render-sticker sq-shake--pop">{{ rsticker | replace: '[night]', rnight | money }}</p>{%- endif -%}
+                  {%- if rnight > 0 -%}<p class="sq-render-sticker sq-shake--pop">{{ rsticker | replace: '[night]', rnight_money }}</p>{%- endif -%}
                 </somna-quiz-float>
               {%- elsif rbs.results_image != blank -%}<div class="sq-res-pic sq-res-pic--wide">{{ rbs.results_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
             </section>
