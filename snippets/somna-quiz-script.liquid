@@ -351,6 +351,30 @@
   // Speed: the button says "Adding…" at once; the drawer fills and opens as soon as /cart/add.js answers (its
   // rendered drawer section comes back with it), and the full cart for the cart icon is fetched after that, in the background.
   var ADDING = '<span class="sq-spin" aria-hidden="true"></span> ' + (BUY.adding || 'Adding…');
+  // drawer preview while the add is on its way: product photo, name, size/colour, plan and price + "Adding to your cart…"
+  function showAdding(drawer, td, k, v, price, sub) {
+    var inner = drawer && drawer.querySelector('.cart-drawer__inner'), items = drawer && drawer.querySelector('cart-items-component');
+    if (!inner || !td || typeof td.open !== 'function') return null;
+    var card = el('div', 'sq-adding', null); card.setAttribute('role', 'status');
+    if (v.image) { var im = document.createElement('img'); im.src = v.image; im.alt = ''; im.width = 72; im.height = 72; card.appendChild(im); }
+    var body = el('div', 'sq-adding-b', null);
+    body.appendChild(el('p', 'sq-adding-t', PRODUCTS[k].title));
+    body.appendChild(el('p', 'sq-adding-v', [v.color, v.size].filter(Boolean).join(' / ') + (sub ? ' · ' + (BUY.autoship || 'Autoship & Save') : '')));
+    var st = el('p', 'sq-adding-s', null); st.innerHTML = '<span class="sq-spin" aria-hidden="true"></span> ' + (BUY.adding_drawer || 'Adding to your cart…'); body.appendChild(st);
+    card.appendChild(body);
+    card.appendChild(el('p', 'sq-adding-p', money(price)));
+    var head = inner.querySelector('.theme-drawer__header');
+    if (head && head.nextSibling) inner.insertBefore(card, head.nextSibling); else inner.insertBefore(card, inner.firstChild);
+    if (items) items.classList.add('sq-adding-dim');
+    if (!td.isOpen) td.open();
+    return { card: card, items: items, td: td };
+  }
+  function clearAdding(p, failed) {
+    if (!p) return;
+    if (p.items) p.items.classList.remove('sq-adding-dim');
+    p.card.remove();
+    if (failed && p.td && p.td.isOpen && typeof p.td.close === 'function') p.td.close();
+  }
   function addToCart(btn) {
     var k = score().result, st = sel[k]; if (!st || btn.getAttribute('aria-busy') === 'true') return;
     var v = pick(k), r = resEl(k), err = $('[data-sq-atc-err]', r);
@@ -361,6 +385,8 @@
     var label = btn.innerHTML; btn.setAttribute('aria-busy', 'true'); btn.innerHTML = ADDING; err.hidden = true;
     var drawer = document.querySelector('cart-drawer-component'), td = drawer && drawer.closest('theme-drawer');
     var wasEmpty = !!(drawer && drawer.querySelector('[data-cart-drawer-empty], .cart-drawer--empty'));
+    // Instant: open the drawer now with a preview of the line being added; the real cart replaces it when Shopify answers
+    var preview = showAdding(drawer, td, k, v, st.mode === 'sub' && v.sub != null ? v.sub : v.once, st.mode === 'sub' && v.sub != null);
     var mod = null, deferred = null, Ev = null;
     // the add request starts right away; the events module (already preloaded by the theme) loads alongside it
     var addReq = fetch(ROOT_URL + 'cart/add.js', {
@@ -378,6 +404,7 @@
       var shown = renderer.then(function (rs) {
         if (rs && rs.morphSection && html) return rs.morphSection(ids[0], html, { mode: 'hydration', injectStylesheet: wasEmpty });
       }).catch(function () {}).then(function () {
+        clearAdding(preview);
         if (td && typeof td.open === 'function') { if (!td.isOpen) td.open(); } else window.location.href = ROOT_URL + 'cart';
       });
       btn.textContent = BUY.added || 'Added ✓';
@@ -388,6 +415,7 @@
         if (deferred) deferred.resolve({ cart: Ev.createCartFromAjaxResponse(cart), detail: { items: cart.items, source: 'somna-quiz', itemCount: 1, productId: String(PRODUCTS[k].id), sections: added.sections, didError: false } });
       });
     }).catch(function (e) {
+      clearAdding(preview, true);
       if (deferred) deferred.reject(e);
       btn.innerHTML = label; btn.removeAttribute('aria-busy');
       err.textContent = (e && e.message) || 'Could not add to cart. Please try again.'; err.hidden = false;

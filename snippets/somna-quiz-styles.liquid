@@ -114,7 +114,17 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-cta:active { transform: scale(.99); }
 .sq .sq-cta:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
 .sq .sq-cta[aria-busy="true"] { cursor: progress; }
-.sq .sq-spin { display: inline-block; width: 16px; height: 16px; margin-right: 4px; vertical-align: -3px; border: 2.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: sq-spin .7s linear infinite; }
+/* cart drawer (outside the quiz box): the line being added, shown the moment Add to Cart is tapped */
+.sq-adding { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 12px 16px 4px; padding: 12px; border: 1.5px dashed rgba(14, 26, 74, .35); border-radius: 14px; background: rgba(255, 255, 255, .6); color: #0E1A4A; animation: sq-in .25s ease; }
+.sq-adding img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; }
+.sq-adding p { margin: 0; }
+.sq-adding-t { font-weight: 700; font-size: 15px; line-height: 1.3; }
+.sq-adding-v { font-size: 13px; opacity: .75; }
+.sq-adding-s { margin-top: 4px !important; font-size: 13px; font-weight: 600; color: #4660E8; }
+.sq-adding-s .sq-spin { width: 12px; height: 12px; border-width: 2px; vertical-align: -1px; }
+.sq-adding-p { font-weight: 700; font-size: 15px; align-self: start; }
+.sq-adding-dim { opacity: .45; pointer-events: none; transition: opacity .2s; }
+.sq .sq-spin, .sq-adding .sq-spin { display: inline-block; width: 16px; height: 16px; margin-right: 4px; vertical-align: -3px; border: 2.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: sq-spin .7s linear infinite; }
 
 /* reviews break: video fallback (no review blocks) */
 .sq .sq-story { margin-top: 4px; }
