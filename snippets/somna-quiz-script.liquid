@@ -356,7 +356,9 @@
     var inner = drawer && drawer.querySelector('.cart-drawer__inner'), items = drawer && drawer.querySelector('cart-items-component');
     if (!inner || !td || typeof td.open !== 'function') return null;
     var card = el('div', 'sq-adding', null); card.setAttribute('role', 'status');
-    if (v.image) { var im = document.createElement('img'); im.src = v.image; im.alt = ''; im.width = 72; im.height = 72; card.appendChild(im); }
+    var pic = v.image, ri = !pic && $('[data-sq-res-img] img', resEl(k));
+    if (ri) pic = ri.currentSrc || ri.src;
+    if (pic) { var im = document.createElement('img'); im.src = pic; im.alt = ''; im.width = 72; im.height = 72; card.appendChild(im); } else card.classList.add('sq-adding--noimg');
     var body = el('div', 'sq-adding-b', null);
     body.appendChild(el('p', 'sq-adding-t', PRODUCTS[k].title));
     body.appendChild(el('p', 'sq-adding-v', [v.color, v.size].filter(Boolean).join(' / ') + (sub ? ' · ' + (BUY.autoship || 'Autoship & Save') : '')));
