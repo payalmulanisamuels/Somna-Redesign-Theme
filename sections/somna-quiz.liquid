@@ -33,7 +33,7 @@
         <div class="sq-prog-f" data-sq-progf></div>
       </div>
       <div class="sq-top-row">
-        <button type="button" class="sq-back" data-sq-back hidden>‹ Back</button>
+        <button type="button" class="sq-back" data-sq-back hidden><span aria-hidden="true">←</span> Back</button>
         <p class="sq-step" data-sq-step>Question 1 of 6</p>
       </div>
     </div>
@@ -232,11 +232,11 @@
                 {%- for f in steps -%}
                   {%- assign photo = f.image.value -%}
                   {%- assign crop = f.image_crop.value | downcase | default: 'center' -%}
-                  <li class="sq-step">
+                  <li class="sq-howstep">
                     {%- if photo -%}{{ photo | image_url: width: 506, height: 308, crop: crop | image_tag: loading: 'lazy', alt: photo.alt, width: 253, height: 154 }}{%- endif -%}
                     <div>
-                      <p class="sq-step-h"><span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ f.title.value }}</p>
-                      {%- if f.text != blank -%}<p class="sq-step-t">{{ f.text.value }}</p>{%- endif -%}
+                      <p class="sq-howstep-h"><span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ f.title.value }}</p>
+                      {%- if f.text != blank -%}<p class="sq-howstep-t">{{ f.text.value }}</p>{%- endif -%}
                     </div>
                   </li>
                 {%- endfor -%}

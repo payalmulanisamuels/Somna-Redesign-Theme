@@ -81,7 +81,7 @@
     var hasBar = PROG[pk] != null;
     prog.hidden = !hasBar;
     if (hasBar) { progf.style.width = PROG[pk] + '%'; prog.setAttribute('aria-valuenow', PROG[pk]); }
-    back.hidden = n === 0 || ty === 'analyze' || ty === 'result';
+    back.hidden = n === 0 || ty === 'analyze';                // result page: Back returns to Q6 with its answers (Retake is separate)
     step.hidden = !q; step.textContent = q ? 'Question ' + q + ' of ' + TOTAL : '';
     top.hidden = !hasBar && back.hidden && step.hidden;
     live.textContent = q ? 'Question ' + q + ' of ' + TOTAL : '';
