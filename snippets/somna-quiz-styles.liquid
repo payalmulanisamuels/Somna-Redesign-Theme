@@ -113,7 +113,8 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-cta:hover { background: var(--sq-accent-h); color: #fff; }
 .sq .sq-cta:active { transform: scale(.99); }
 .sq .sq-cta:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
-.sq .sq-cta[aria-busy="true"] { opacity: .7; cursor: progress; }
+.sq .sq-cta[aria-busy="true"] { cursor: progress; }
+.sq .sq-spin { display: inline-block; width: 16px; height: 16px; margin-right: 4px; vertical-align: -3px; border: 2.5px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: sq-spin .7s linear infinite; }
 
 /* reviews break: video fallback (no review blocks) */
 .sq .sq-story { margin-top: 4px; }

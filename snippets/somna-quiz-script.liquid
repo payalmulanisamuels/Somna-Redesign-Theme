@@ -347,7 +347,10 @@
     var im = $('img', box); if (im) { im.removeAttribute('srcset'); im.src = v.image; }
   }
 
-  // Add to Cart → the theme's cart drawer (same cart event as the product page, so the drawer and cart icon refresh)
+  // Add to Cart → the theme's cart drawer (same cart event as the product page, so the drawer and cart icon refresh).
+  // Speed: the button says "Adding…" at once; the drawer fills and opens as soon as /cart/add.js answers (its
+  // rendered drawer section comes back with it), and the full cart for the cart icon is fetched after that, in the background.
+  var ADDING = '<span class="sq-spin" aria-hidden="true"></span> ' + (BUY.adding || 'Adding…');
   function addToCart(btn) {
     var k = score().result, st = sel[k]; if (!st || btn.getAttribute('aria-busy') === 'true') return;
     var v = pick(k), r = resEl(k), err = $('[data-sq-atc-err]', r);
@@ -355,27 +358,40 @@
     if (st.mode === 'sub' && v.plan) body.selling_plan = v.plan;
     var ids = $$('cart-items-component', document).map(function (c) { return c.dataset.sectionId; }).filter(Boolean);
     if (ids.length) body.sections = ids.join(',');
-    var label = btn.innerHTML; btn.setAttribute('aria-busy', 'true'); err.hidden = true;
-    import('@shopify/events').catch(function () { return null; }).then(function (mod) {
-      var Ev = mod && mod.CartLinesUpdateEvent, deferred = Ev ? Ev.createPromise() : null;
+    var label = btn.innerHTML; btn.setAttribute('aria-busy', 'true'); btn.innerHTML = ADDING; err.hidden = true;
+    var drawer = document.querySelector('cart-drawer-component'), td = drawer && drawer.closest('theme-drawer');
+    var wasEmpty = !!(drawer && drawer.querySelector('[data-cart-drawer-empty], .cart-drawer--empty'));
+    var mod = null, deferred = null, Ev = null;
+    // the add request starts right away; the events module (already preloaded by the theme) loads alongside it
+    var addReq = fetch(ROOT_URL + 'cart/add.js', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body)
+    }).then(function (res) { return res.json(); });
+    var renderer = import('@theme/section-renderer').catch(function () { return null; });
+    import('@shopify/events').catch(function () { return null; }).then(function (m) {
+      mod = m; Ev = mod && mod.CartLinesUpdateEvent; deferred = Ev ? Ev.createPromise() : null;
       if (deferred) btn.dispatchEvent(new Ev({ action: 'add', context: 'product', lines: [{ merchandiseId: String(v.id), quantity: 1 }], promise: deferred.promise }));
-      return fetch(ROOT_URL + 'cart/add.js', {
-        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body)
-      }).then(function (res) { return res.json(); }).then(function (added) {
-        if (added.status) throw new Error(added.description || added.message || 'Could not add to cart');
-        return fetch(ROOT_URL + 'cart.js').then(function (res) { return res.json(); }).then(function (cart) {
-          if (deferred) deferred.resolve({ cart: Ev.createCartFromAjaxResponse(cart), detail: { items: cart.items, source: 'somna-quiz', itemCount: 1, productId: String(PRODUCTS[k].id), sections: added.sections, didError: false } });
-          var drawer = document.querySelector('cart-drawer-component'), td = drawer && drawer.closest('theme-drawer');
-          if (td && typeof td.open === 'function') td.open(); else window.location.href = ROOT_URL + 'cart';
-          try { if (window.fbq) fbq('track', 'AddToCart', { content_name: PRODUCTS[k].title, content_category: 'SOMNA Quiz' }); } catch (e) {}
-          btn.textContent = BUY.added || 'Added ✓';
-          setTimeout(function () { btn.innerHTML = label; }, 2500);
-        });
-      }).catch(function (e) {
-        if (deferred) deferred.reject(e);
-        err.textContent = (e && e.message) || 'Could not add to cart. Please try again.'; err.hidden = false;
+      return addReq;
+    }).then(function (added) {
+      if (added.status) throw new Error(added.description || added.message || 'Could not add to cart');
+      // 1) drawer: fill it from the returned section and open it now
+      var html = added.sections && ids[0] && added.sections[ids[0]];
+      var shown = renderer.then(function (rs) {
+        if (rs && rs.morphSection && html) return rs.morphSection(ids[0], html, { mode: 'hydration', injectStylesheet: wasEmpty });
+      }).catch(function () {}).then(function () {
+        if (td && typeof td.open === 'function') { if (!td.isOpen) td.open(); } else window.location.href = ROOT_URL + 'cart';
       });
-    }).then(function () { btn.removeAttribute('aria-busy'); });
+      btn.textContent = BUY.added || 'Added ✓';
+      setTimeout(function () { btn.innerHTML = label; btn.removeAttribute('aria-busy'); }, 1800);
+      try { if (window.fbq) fbq('track', 'AddToCart', { content_name: PRODUCTS[k].title, content_category: 'SOMNA Quiz' }); } catch (e) {}
+      // 2) cart icon and the rest of the theme: the full cart, in the background (the drawer is already up to date)
+      return shown.then(function () { return fetch(ROOT_URL + 'cart.js'); }).then(function (res) { return res.json(); }).then(function (cart) {
+        if (deferred) deferred.resolve({ cart: Ev.createCartFromAjaxResponse(cart), detail: { items: cart.items, source: 'somna-quiz', itemCount: 1, productId: String(PRODUCTS[k].id), sections: added.sections, didError: false } });
+      });
+    }).catch(function (e) {
+      if (deferred) deferred.reject(e);
+      btn.innerHTML = label; btn.removeAttribute('aria-busy');
+      err.textContent = (e && e.message) || 'Could not add to cart. Please try again.'; err.hidden = false;
+    });
   }
   $$('[data-sq-atc]').forEach(function (b) { b.addEventListener('click', function () { addToCart(b); }); });
 
