@@ -367,7 +367,7 @@
           var drawer = document.querySelector('cart-drawer-component'), td = drawer && drawer.closest('theme-drawer');
           if (td && typeof td.open === 'function') td.open(); else window.location.href = ROOT_URL + 'cart';
           try { if (window.fbq) fbq('track', 'AddToCart', { content_name: PRODUCTS[k].title, content_category: 'SOMNA Quiz' }); } catch (e) {}
-          btn.innerHTML = '<span aria-hidden="true">✓</span> ' + (BUY.added || 'Added');
+          btn.textContent = BUY.added || 'Added ✓';
           setTimeout(function () { btn.innerHTML = label; }, 2500);
         });
       }).catch(function (e) {
