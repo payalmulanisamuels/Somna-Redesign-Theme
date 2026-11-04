@@ -132,9 +132,11 @@
   function pager(track, dotsBox) {
     var dots = [], pageW = function () { return track.clientWidth || 1; };
     function pages() { return Math.max(1, Math.round(track.scrollWidth / pageW())); }
-    function cur() { return Math.round(track.scrollLeft / pageW()); }
-    function sync() { var c = cur(); dots.forEach(function (d, j) { d.setAttribute('aria-current', j === c ? 'true' : 'false'); }); }
-    function goTo(k, smooth) { var n = pages(); k = (k + n) % n; track.scrollTo({ left: k * pageW(), behavior: smooth && !reduce ? 'smooth' : 'auto' }); dots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
+    var idx = 0, auto = false;  // page we are on (kept here: reading scrollLeft mid-scroll or on a half last page gives the wrong page)
+    function fromScroll() { var max = track.scrollWidth - track.clientWidth; return max > 0 && track.scrollLeft >= max - 2 ? pages() - 1 : Math.round(track.scrollLeft / pageW()); }
+    function cur() { return idx; }
+    function sync() { if (!auto) idx = fromScroll(); var c = idx; dots.forEach(function (d, j) { d.setAttribute('aria-current', j === c ? 'true' : 'false'); }); }
+    function goTo(k, smooth) { var n = pages(); k = (k + n) % n; idx = k; auto = !!smooth; clearTimeout(autoT); autoT = setTimeout(function () { auto = false; }, 900); track.scrollTo({ left: k * pageW(), behavior: smooth && !reduce ? 'smooth' : 'auto' }); dots.forEach(function (d, j) { d.setAttribute('aria-current', j === k ? 'true' : 'false'); }); }
     function build() {
       if (!dotsBox) return; dotsBox.innerHTML = ''; dots = [];
       for (var k = 0; k < pages(); k++) (function (k) {
@@ -143,7 +145,7 @@
       })(k);
       dotsBox.parentNode.hidden = dots.length < 2; sync();
     }
-    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(sync, 80); }, { passive: true });
+    var t, autoT; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(sync, 80); }, { passive: true });
     var api = { build: build, goTo: goTo, cur: cur, pages: pages, onUser: null };
     return api;
   }
