@@ -367,13 +367,13 @@
     card.appendChild(el('p', 'sq-adding-p', money(price)));
     var head = inner.querySelector('.theme-drawer__header');
     if (head && head.nextSibling) inner.insertBefore(card, head.nextSibling); else inner.insertBefore(card, inner.firstChild);
-    if (items) items.classList.add('sq-adding-dim');
+    if (items) items.classList.add(drawer.querySelector('[data-cart-drawer-empty], .cart-drawer--empty') ? 'sq-adding-hide' : 'sq-adding-dim');
     if (!td.isOpen) td.open();
     return { card: card, items: items, td: td };
   }
   function clearAdding(p, failed) {
     if (!p) return;
-    if (p.items) p.items.classList.remove('sq-adding-dim');
+    if (p.items) p.items.classList.remove('sq-adding-dim', 'sq-adding-hide');
     p.card.remove();
     if (failed && p.td && p.td.isOpen && typeof p.td.close === 'function') p.td.close();
   }
