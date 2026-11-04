@@ -169,10 +169,10 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-rc-head { display: flex; align-items: center; gap: 8px; }
 .sq .sq-rc-img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; }
 .sq .sq-rc-who { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; min-width: 0; }
-.sq .sq-rc-stars { order: -1; display: inline-flex; gap: 2px; }
+.sq .sq-rc-stars { order: -2; display: inline-flex; gap: 2px; }
 .sq .sq-rc-stars svg { width: 12px; height: 12px; fill: #F5B83D; }
 .sq .sq-rc-stars svg.is-off { fill: var(--sq-track); }
-.sq .sq-rc-ver { font-size: 11px; font-weight: 500; color: var(--sq-lav); white-space: nowrap; }
+.sq .sq-rc-ver { order: -1; font-size: 11px; font-weight: 500; color: var(--sq-lav); white-space: nowrap; }
 .sq .sq-rc-name { flex-basis: 100%; font-size: 13.5px; font-weight: 700; color: var(--sq-ink); }
 .sq .sq-rc-text { margin-top: 2px; font-size: 13px; line-height: 1.4; font-style: italic; color: var(--sq-ink); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .sq .sq-rc-prod { margin-top: 4px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sq-mut); }
@@ -277,7 +277,7 @@ padding: 10px 16px 40px; min-height: 100vh;
 /* sticky Add to Cart */
 .sq .sq-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(13,13,28,.94); border-top: 1px solid var(--sq-line); backdrop-filter: blur(6px); }
 .sq .sq-sticky .sq-cta { margin: 0 auto; max-width: 460px; }
-.sq .sq-result { padding-bottom: 72px; }
+.sq .sq-result { padding-top: 12px; padding-bottom: 96px; }
 
 /* visible keyboard focus (the theme turns outlines off globally) */
 .sq .sq-opt:focus-visible, .sq .sq-cta:focus-visible, .sq .sq-back:focus-visible, .sq .sq-tier:focus-visible, .sq .sq-swatch:focus-visible,
