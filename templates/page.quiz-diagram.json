@@ -236,7 +236,10 @@
         "product_tape": "mouth-tape",
         "product_bundle": "sleep-bundle",
         "v2_sections": true,
-        "v2_cursor": true
+        "v2_cursor": true,
+        "result_extras": true,
+        "perk_1": "Free shipping",
+        "ship_single": "FREE shipping"
       }
     }
   },
