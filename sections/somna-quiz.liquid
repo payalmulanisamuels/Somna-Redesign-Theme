@@ -156,7 +156,7 @@
               {%- comment -%} V2 product-page "How it works" diagram (product photo + 4 features), read from the product's own pdp_how entry; else the image {%- endcomment -%}
               {%- liquid
                 assign how = blank
-                if rbs.benefit_diagram
+                if section.settings.v2_sections
                   assign how = rp.metafields.custom.pdp_how.value
                 endif
                 assign how_img = how.image.value
@@ -164,7 +164,7 @@
                 assign how_feats = how.features.value
               -%}
               {%- if how_img and how_feats != blank -%}
-                <div class="sq-diag{% if how_after %} sq-diag--pair{% endif %}">
+                <somna-quiz-how class="sq-diag{% if how_after %} sq-diag--pair{% endif %}">
                   <div class="sq-diag-prod">
                     {{- how_img | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 1000px) 240px, 40vw', alt: rp.title -}}
                     {%- if how_after -%}{{ how_after | image_url: width: 500 | image_tag: loading: 'lazy', widths: '250, 500', sizes: '(min-width: 1000px) 160px, 28vw', alt: '' }}{%- endif -%}
@@ -176,7 +176,7 @@
                       {%- if f.text != blank -%}<p class="sq-diag-t">{{ f.text.value }}</p>{%- endif -%}
                     </div>
                   {%- endfor -%}
-                </div>
+                </somna-quiz-how>
               {%- elsif rbs.benefit_image != blank -%}<div class="sq-res-pic">{{ rbs.benefit_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
             </section>
           {%- endif -%}
@@ -188,6 +188,27 @@
                 <h3 class="sq-res-h3">{{ rbs.howto_heading }}</h3>
                 {%- if rbs.howto_text != blank -%}<p class="sq-res-p">{{ rbs.howto_text }}</p>{%- endif -%}
               </div>
+              {%- liquid
+                assign steps = blank
+                if section.settings.v2_sections
+                  assign steps = rp.metafields.custom.pdp_steps.value.features.value
+                endif
+              -%}
+              {%- if steps != blank -%}
+              <ol class="sq-steps" role="list">
+                {%- for f in steps -%}
+                  {%- assign photo = f.image.value -%}
+                  {%- assign crop = f.image_crop.value | downcase | default: 'center' -%}
+                  <li class="sq-step">
+                    {%- if photo -%}{{ photo | image_url: width: 506, height: 308, crop: crop | image_tag: loading: 'lazy', alt: photo.alt, width: 253, height: 154 }}{%- endif -%}
+                    <div>
+                      <p class="sq-step-h"><span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ f.title.value }}</p>
+                      {%- if f.text != blank -%}<p class="sq-step-t">{{ f.text.value }}</p>{%- endif -%}
+                    </div>
+                  </li>
+                {%- endfor -%}
+              </ol>
+              {%- else -%}
               <div class="sq-res-steps">
                 {%- if rbs.howto_image != blank -%}
                   {%- if rbs.howto_label_1 != blank -%}<p class="sq-res-step-l">{{ rbs.howto_label_1 }}</p>{%- endif -%}
@@ -198,6 +219,7 @@
                   <div class="sq-res-pic">{{ rbs.howto_image_2 | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>
                 {%- endif -%}
               </div>
+              {%- endif -%}
             </section>
           {%- endif -%}
 
@@ -222,7 +244,31 @@
                   <div class="sq-guar"><span class="sq-guar-n" aria-hidden="true">30</span><div><p class="sq-guar-h">{{ section.settings.guarantee_heading }}</p><p>{{ section.settings.guarantee_text }}</p></div></div>
                 {%- endif -%}
               </div>
-              {%- if rbs.results_image != blank -%}<div class="sq-res-pic sq-res-pic--wide">{{ rbs.results_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
+              {%- liquid
+                assign rnd = blank
+                if section.settings.v2_sections
+                  assign rnd = rp.metafields.custom.pdp_how.value.image.value
+                  assign rv = rp.variants.first
+                  assign ralloc = rv.selling_plan_allocations | first
+                  assign rprice = rv.price
+                  if ralloc
+                    assign rprice = ralloc.price
+                  endif
+                  assign rbags = rv.title | split: ' ' | first | plus: 0
+                  if rbags < 1
+                    assign rbags = 1
+                  endif
+                  assign rnights = rp.metafields.custom.nights.value | default: 30
+                  assign rnight = rprice | divided_by: rbags | divided_by: rnights
+                  assign rsticker = rp.metafields.custom.pdp_cta_sticker.value | default: '[night] a night'
+                endif
+              -%}
+              {%- if rnd -%}
+                <somna-quiz-float class="sq-render">
+                  <div class="sq-render-prod">{{ rnd | image_url: width: 600 | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1000px) 260px, 50vw', alt: rp.title }}</div>
+                  {%- if rnight > 0 -%}<p class="sq-render-sticker sq-shake--pop">{{ rsticker | replace: '[night]', rnight | money }}</p>{%- endif -%}
+                </somna-quiz-float>
+              {%- elsif rbs.results_image != blank -%}<div class="sq-res-pic sq-res-pic--wide">{{ rbs.results_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
             </section>
           {%- endif -%}
 
@@ -354,6 +400,7 @@
   }
 </script>
 {% render 'somna-quiz-styles', design: section.settings.design %}
+{%- if section.settings.v2_cursor -%}{% render 'somna-cursor', force: true %}{%- endif -%}
 {% render 'somna-quiz-script', sid: sid %}
 
 {% schema %}
@@ -370,6 +417,19 @@
         { "value": "v2", "label": "SOMNA V2 (mint, lavender, Boldonse)" }
       ],
       "default": "night"
+    },
+    {
+      "type": "checkbox",
+      "id": "v2_sections",
+      "label": "Result: use the SOMNA V2 product page sections",
+      "info": "Main benefit = How it works diagram, How to use = numbered steps, Results = product with the per-night sticker. Read from each product's own V2 content; falls back to the images below.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "v2_cursor",
+      "label": "SOMNA V2 moon cursor on the quiz",
+      "default": false
     },
     {
       "type": "header",
@@ -1032,13 +1092,6 @@
           "type": "textarea",
           "id": "benefit_text",
           "label": "Text"
-        },
-        {
-          "type": "checkbox",
-          "id": "benefit_diagram",
-          "label": "Show the product page's How it works diagram",
-          "info": "Product photo with its four features, from the product's How it works content (same as the product page). Off, or no content = the image below.",
-          "default": true
         },
         {
           "type": "image_picker",

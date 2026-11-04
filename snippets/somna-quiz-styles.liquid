@@ -5,6 +5,7 @@
   Weights used: Lora 700; Inter 400 / 500 / 700 (all loaded by the theme, so nothing is faux-bolded).
 {%- endcomment -%}
 <style>
+@font-face { font-family: 'Boldonse'; src: url('{{ 'boldonse-latin-400.woff2' | asset_url }}') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 /* quiz page only: hide theme header (incl. announcement bar) and footer; page background matches the quiz */
 .shopify-section-group-header-group, .shopify-section-group-footer-group { display: none !important; }
 body { background: #0d0d1c; }
@@ -271,6 +272,32 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-diag-ic svg { width: 22px; height: 22px; }
 .sq .sq-diag-h { margin-top: 6px; font: 500 12px/1.2 var(--sq-sans); color: var(--d-fg); }
 .sq .sq-diag-t { margin-top: 2px; font-size: 10.5px; line-height: 1.3; color: var(--d-fg); opacity: .85; }
+/* SOMNA V2 product page pieces in the result ("Result: use the SOMNA V2 product page sections") */
+.sq .sq-diag, .sq .sq-steps, .sq .sq-render { --sq-disp: 'Boldonse', var(--font-accent--family, sans-serif); }
+/* How to use: numbered steps (photo left, 01 TITLE + text right) on a mint card */
+.sq .sq-steps { margin: 14px 0 0; padding: 14px; list-style: none; display: grid; gap: 8px; border-radius: 18px; background: #F3FEEE; color: #000; }
+.sq .sq-step { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 12px; align-items: center; }
+.sq .sq-step img { display: block; width: 100%; height: auto; border-radius: 12px; }
+.sq .sq-step-h { font: 400 20px/1.3 var(--sq-disp); text-transform: uppercase; color: #000; }
+.sq .sq-step-t { margin-top: 2px; font: 700 12.5px/1.25 Arimo, Arial, Helvetica, sans-serif; color: #000; }
+/* Results: product on lavender with the per-night sticker (as the V2 closing section) */
+.sq .sq-render { position: relative; display: grid; place-items: center; margin-top: 14px; padding: 28px 16px 40px; border-radius: 18px; background: #AFBDF8; perspective: 1100px; overflow: hidden; }
+.sq .sq-render-prod { width: min(62%, 260px); transform-style: preserve-3d; }
+.sq .sq-render-prod img { display: block; width: 100%; height: auto; }
+.sq .sq-render-sticker { position: absolute; left: 7%; bottom: 14%; padding: 7px 14px; border: 2px solid #000; border-radius: 999px; background: #F3FEEE; box-shadow: 3px 4px 0 #000; color: #000; font: 400 14px/1.4 var(--sq-disp); text-transform: uppercase; white-space: nowrap; rotate: -4deg; }
+.sq .sq-render.is-floating .sq-render-prod { animation: sqFloat 4s ease-in-out infinite; }
+/* sticker "pop" shake and the float, as the V2 product page */
+@keyframes sqShakePop { 0%, 72%, 100% { transform: scale(1) rotate(0deg); } 76% { transform: scale(1.06) rotate(-3deg); } 81% { transform: scale(1.06) rotate(3deg); } 86% { transform: scale(1.03) rotate(-1.5deg); } 92% { transform: scale(1) rotate(0deg); } }
+.sq .sq-shake--pop { animation: sqShakePop 3.4s cubic-bezier(.3, .7, .4, 1) infinite; }
+@keyframes sqFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+/* How it works: hop-flip in, then float (played by <somna-quiz-how>) */
+.sq somna-quiz-how { perspective: 1100px; }
+.sq somna-quiz-how .sq-diag-prod { transform-style: preserve-3d; will-change: transform; }
+.sq somna-quiz-how.is-pending :is(.sq-diag-prod, .sq-diag-ic, .sq-diag-h, .sq-diag-t) { opacity: 0; }
+.sq somna-quiz-how.is-done .sq-diag-prod img { animation: sqFloat 4s ease-in-out infinite; }
+.sq somna-quiz-how.is-done.sq-diag--pair .sq-diag-prod img { animation-duration: 3.2s; }
+.sq somna-quiz-how.is-done.sq-diag--pair .sq-diag-prod img + img { animation-delay: -1.6s; }
+@media (prefers-reduced-motion: reduce) { .sq .sq-shake--pop, .sq .sq-render.is-floating .sq-render-prod, .sq somna-quiz-how.is-done .sq-diag-prod img { animation: none; } }
 .sq .sq-res-step-l { margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--sq-lav); }
 .sq .sq-res-step-l + .sq-res-pic { margin-top: 6px; }
 .sq .sq-rv-track { display: grid; grid-auto-flow: column; grid-auto-columns: 86%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none; }
@@ -341,6 +368,13 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-res-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 48px; align-items: center; }
 .sq .sq-res-split--rev > :first-child { order: 2; }
 .sq .sq-res-split .sq-res-pic, .sq .sq-res-split .sq-res-steps > .sq-res-pic:first-child { margin-top: 0; }
+.sq .sq-res-split .sq-steps, .sq .sq-res-split .sq-render { margin-top: 0; }
+.sq .sq-steps { padding: 18px; gap: 10px; }
+.sq .sq-step { grid-template-columns: 200px minmax(0, 1fr); gap: 18px; }
+.sq .sq-step-h { font-size: 30px; }
+.sq .sq-step-t { font-size: 15px; }
+.sq .sq-render { padding: 44px 20px 56px; }
+.sq .sq-render-sticker { font-size: 16px; left: 6%; }
 .sq .sq-res-split .sq-diag { margin-top: 0; padding: 36px 20px; gap: 72px 12px; }
 .sq .sq-diag-pt { max-width: 150px; }
 .sq .sq-diag-ic { width: 58px; height: 58px; }
@@ -358,7 +392,6 @@ padding: 10px 16px 40px; min-height: 100vh;
 /* ---------- SOMNA V2 design (Design = "SOMNA V2"): the look of the Somna-V2 product pages ----------
    Mint #F3FEEE and lavender #AFBDF8 bands, navy #0B0F1D buy box, Boldonse uppercase headings,
    black-outline "sticker" cards with an offset shadow, lavender Add to Cart. Overrides the night look above. */
-@font-face { font-family: 'Boldonse'; src: url('{{ 'boldonse-latin-400.woff2' | asset_url }}') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 body { background: #F3FEEE; }
 .sq.sq--v2 {
 --sq-bg: #F3FEEE; --sq-card: #fff; --sq-card2: #E9EDFD; --sq-line: #0B0F1D; --sq-track: #D5DCFA;

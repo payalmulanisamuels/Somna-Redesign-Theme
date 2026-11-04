@@ -97,8 +97,7 @@
             "faq_5_q": "Can I cancel Autoship anytime?",
             "faq_5_a": "Yes. Skip, pause, swap or cancel anytime from your account. No support ticket needed.",
             "faq_6_q": "How long does delivery take?",
-            "faq_6_a": "7–9 business days. We'll email you tracking as soon as it ships.",
-            "benefit_diagram": true
+            "faq_6_a": "7–9 business days. We'll email you tracking as soon as it ships."
           }
         },
         "result_tape": {
@@ -140,8 +139,7 @@
             "faq_5_q": "Can I cancel Autoship anytime?",
             "faq_5_a": "Yes. Skip, pause, swap or cancel anytime from your account. No support ticket needed.",
             "faq_6_q": "How long does delivery take?",
-            "faq_6_a": "7–9 business days. We'll email you tracking as soon as it ships.",
-            "benefit_diagram": true
+            "faq_6_a": "7–9 business days. We'll email you tracking as soon as it ships."
           }
         },
         "result_bundle": {
@@ -186,8 +184,7 @@
             "faq_5_a": "Yes. Skip, pause, swap or cancel anytime from your account. No support ticket needed.",
             "faq_6_q": "How long does delivery take?",
             "faq_6_a": "7–9 business days. We'll email you tracking as soon as it ships.",
-            "results_image": "shopify://shop_images/somna_breathe_blue_final.png",
-            "benefit_diagram": true
+            "results_image": "shopify://shop_images/somna_breathe_blue_final.png"
           }
         }
       },
@@ -237,7 +234,9 @@
         "product_strips": "nasal-strips",
         "tape_result_image": "shopify://shop_images/somna-v2-tape-pouch.png",
         "product_tape": "mouth-tape",
-        "product_bundle": "sleep-bundle"
+        "product_bundle": "sleep-bundle",
+        "v2_sections": true,
+        "v2_cursor": true
       }
     }
   },

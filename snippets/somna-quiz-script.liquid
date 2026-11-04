@@ -398,3 +398,80 @@
   show(0, false);
 })();
 </script>
+<script>
+  /* SOMNA V2 product page motion on the quiz result (only when "Result: use the SOMNA V2 product page sections" is on):
+     <somna-quiz-how>  — How it works: the product hops in and flips (single) or both products hop in (pair, Sleep Bundle),
+                         lands with a small squash, floats; then the features pop in (1, 2, 4, 3), as on the V2 product page.
+     <somna-quiz-float> — Results: the product flips once in place, then floats; the sticker keeps its pop shake (CSS).
+     Plays when it comes on screen, resets once scrolled back below. Web Animations API, no library. */
+  (function () {
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function watch(el, play, reset) {
+      var io = new IntersectionObserver(function (e) { if (e[0].isIntersecting) play(); }, { rootMargin: '0px 0px -25% 0px' });
+      var out = new IntersectionObserver(function (e) { if (!e[0].isIntersecting && e[0].boundingClientRect.top > 0) reset(); });
+      io.observe(el); out.observe(el);
+      return function () { io.disconnect(); out.disconnect(); };
+    }
+    if (!customElements.get('somna-quiz-how')) customElements.define('somna-quiz-how', class extends HTMLElement {
+      connectedCallback() {
+        if (still) return;
+        this.prod = this.querySelector('.sq-diag-prod'); if (!this.prod) return;
+        this.points = ['1', '2', '4', '3'].map((n) => this.querySelector('.sq-diag-pt--' + n)).filter(Boolean);
+        this.anims = []; this.classList.add('is-pending');
+        this.stop = watch(this, () => this.play(), () => this.reset());
+      }
+      disconnectedCallback() { if (this.stop) this.stop(); (this.anims || []).forEach((a) => a.cancel()); }
+      add(el, kf, opt) { var a = el.animate(kf, Object.assign({ fill: 'both' }, opt)); this.anims.push(a); return a; }
+      reset() {
+        if (!this.played) return;
+        this.anims.forEach((a) => a.cancel()); this.anims = []; this.played = false;
+        this.classList.remove('is-done'); this.classList.add('is-pending');
+      }
+      play() {
+        if (this.played) return; this.played = true;
+        this.classList.remove('is-pending');
+        var imgs = [...this.prod.querySelectorAll('img')], v = this.getBoundingClientRect(), last;
+        if (imgs.length > 1) {
+          imgs.forEach((im, i) => {
+            var r = im.getBoundingClientRect(), c = r.left + r.width / 2;
+            var dx = i === 0 ? Math.min(-120, v.left - c) : Math.max(120, v.right - c), d = i * 200;
+            this.add(im, [
+              { transform: 'translate3d(' + dx + 'px,0,0) rotateY(0deg)', opacity: 0, offset: 0 }, { opacity: 1, offset: 0.12 },
+              { transform: 'translate3d(' + dx * 0.45 + 'px,-70px,0) rotateY(180deg)', offset: 0.5 }, { transform: 'translate3d(0,0,0) rotateY(360deg)', opacity: 1, offset: 1 }
+            ], { duration: 1100, delay: d, easing: 'cubic-bezier(0.45, 0, 0.55, 1)' });
+            last = this.add(im, [{ scale: '1 1' }, { scale: '1.05 0.94' }, { scale: '0.99 1.02' }, { scale: '1 1' }], { duration: 380, delay: d + 1060, easing: 'ease-out', fill: 'none' });
+          });
+        } else {
+          var p = this.prod.getBoundingClientRect(), x = v.left + v.width * 0.12 - (p.left + p.width / 2);
+          this.add(this.prod, [
+            { transform: 'translate3d(' + x + 'px,0,0) rotateY(0deg)', opacity: 0, offset: 0 }, { opacity: 1, offset: 0.12 },
+            { transform: 'translate3d(' + x * 0.45 + 'px,-80px,0) rotateY(180deg)', offset: 0.5 }, { transform: 'translate3d(0,0,0) rotateY(360deg)', opacity: 1, offset: 1 }
+          ], { duration: 1300, easing: 'cubic-bezier(0.45, 0, 0.55, 1)' });
+          if (imgs[0]) last = this.add(imgs[0], [{ transform: 'scale(1,1)' }, { transform: 'scale(1.05,0.94)' }, { transform: 'scale(0.99,1.02)' }, { transform: 'scale(1,1)' }], { duration: 400, delay: 1250, easing: 'ease-out', fill: 'none' });
+        }
+        if (last) last.finished.then(() => { if (this.played) this.classList.add('is-done'); }).catch(function () {});
+        var start = imgs.length > 1 ? 1450 : 1550, step = imgs.length > 1 ? 220 : 300;
+        this.points.forEach((pt, i) => {
+          var at = start + i * step, ic = pt.querySelector('.sq-diag-ic');
+          if (ic) this.add(ic, [{ opacity: 0, transform: 'scale(0.5)' }, { opacity: 1, transform: 'scale(1.08)', offset: 0.7 }, { opacity: 1, transform: 'scale(1)' }], { duration: 350, delay: at, easing: 'ease-out' });
+          pt.querySelectorAll('.sq-diag-h, .sq-diag-t').forEach((t, j) => this.add(t, [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 350, delay: at + 150 + j * 70, easing: 'ease-out' }));
+        });
+      }
+    });
+    if (!customElements.get('somna-quiz-float')) customElements.define('somna-quiz-float', class extends HTMLElement {
+      connectedCallback() {
+        this.prod = this.querySelector('.sq-render-prod'); if (!this.prod) return;
+        if (still) return;
+        this.stop = watch(this, () => {
+          if (this.flipped) return; this.flipped = true;
+          this.classList.remove('is-floating');
+          this.anim = this.prod.animate([
+            { transform: 'translateY(0) rotateY(0deg)', opacity: 0 }, { transform: 'translateY(-24px) rotateY(180deg)', opacity: 1, offset: 0.5 }, { transform: 'translateY(0) rotateY(360deg)', opacity: 1 }
+          ], { duration: 1100, easing: 'cubic-bezier(0.45, 0, 0.55, 1)' });
+          this.anim.finished.then(() => { if (this.flipped) this.classList.add('is-floating'); }).catch(function () {});
+        }, () => { this.flipped = false; if (this.anim) this.anim.cancel(); this.classList.remove('is-floating'); });
+      }
+      disconnectedCallback() { if (this.stop) this.stop(); }
+    });
+  })();
+</script>
