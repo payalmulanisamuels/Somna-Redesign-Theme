@@ -419,36 +419,33 @@ padding: 10px 16px 40px; min-height: 100vh;
 /* ---------- Cart drawer on the quiz page, in the quiz's dark look (Result extras) ---------- */
 dialog.theme-drawer__dialog:has(cart-drawer-component) { background: #0d0d1c; color: #fff; border-left: 1px solid #2a2a45; }
 cart-drawer-component :is(.cart-drawer__inner, .cart-drawer__content, .cart-drawer__items, .cart-drawer__summary, .theme-drawer__close-button) { background: #0d0d1c !important; color: #fff; }
-cart-drawer-component :is(h2, h3, .theme-drawer__header, .theme-drawer__header *, a.cart-items__title, .cart-items__title, dt, dd, td, p, span, .text-component) { color: #fff; }
+cart-drawer-component, cart-drawer-component * { color: #fff !important; }
+cart-drawer-component input { background: transparent !important; }
 cart-drawer-component .theme-drawer__header { border-color: #2a2a45; }
-cart-drawer-component .theme-drawer__close-button { color: #9a98b5; }
-cart-drawer-component :is(.cart-items__details, .cart-items__variants, .cart-items__properties) * { color: #c9c7df; }
+cart-drawer-component .theme-drawer__close-button, cart-drawer-component .theme-drawer__close-button * { color: #c9c7df !important; }
+cart-drawer-component :is(.cart-items__details, .cart-items__variants, .cart-items__properties) * { color: #c9c7df !important; }
 cart-drawer-component s, cart-drawer-component s * { color: #8f8daa !important; }
 cart-drawer-component hr, cart-drawer-component .cart-items__table-row { border-color: #2a2a45; }
 /* free gifts bar: dark card instead of the yellow wave */
 cart-drawer-component .sleep-guide-progress-wrapper { margin: 8px 0 12px; padding: 16px 16px 18px; border: 1px solid #2a2a45; border-radius: 14px; background: #16162b; }
 cart-drawer-component .sleep-guide-progress-wrapper .bg-svg { display: none; }
 cart-drawer-component .sleep-guide-progress-wrapper .progressbar-content { position: static; transform: none; padding: 0 8px; }
-cart-drawer-component .message_cotent span, cart-drawer-component .message_cotent strong { color: #fff; }
 cart-drawer-component .message_cotent img, cart-drawer-component .message_cotent svg { filter: invert(1); }
 cart-drawer-component .progress-track { background: #23233e; }
 cart-drawer-component .fill-track { background: #6D49E0; }
 /* quantity, upsells, buttons, trust pill */
 cart-drawer-component .quantity-selector { background: #16162b !important; color: #fff; border-color: #2a2a45; }
-cart-drawer-component .quantity-selector :is(button, input) { color: #fff; }
-cart-drawer-component :is(.cart-items__remove, .cart-item__remove, button[class*="remove"]) { color: #c9c7df; }
+cart-drawer-component .quantity-selector :is(button, input) { color: #fff; background: transparent !important; }
+cart-drawer-component :is(.cart-items__remove, .cart-item__remove, button[class*="remove"]) { background: transparent !important; }
+cart-drawer-component :is(.cart-items__remove, .cart-item__remove, button[class*="remove"]) * { color: #c9c7df !important; }
 cart-drawer-component .hz-minicart-upsell__card, cart-drawer-component .hz-minicart-upsell__media { background: #16162b; border-color: #2a2a45; color: #fff; }
-cart-drawer-component .hz-minicart-upsell__card * { color: #fff; }
 cart-drawer-component .hz-minicart-upsell__card s { color: #8f8daa !important; }
 cart-drawer-component .hz-upsell-add-btn { background: #6D49E0; color: #fff !important; }
-cart-drawer-component .hz-save-badge, cart-drawer-component .hz-save-badge * { color: #fff; }
 cart-drawer-component .cart__checkout-button { background: #6D49E0 !important; color: #fff !important; box-shadow: 0 8px 24px rgba(109,73,224,.35); }
-cart-drawer-component .cart__checkout-button * { color: #fff !important; }
-cart-drawer-component .hz-trust-pill { background: #16162b; border: 1px solid #2a2a45; }
-cart-drawer-component .hz-trust-pill * { color: #fff; }
+cart-drawer-component .hz-trust-pill { background: #16162b !important; border: 1px solid #2a2a45; }
+cart-drawer-component img[src*="aplle-pay"], cart-drawer-component img[src*="apple"], cart-drawer-component img[alt*="Apple"] { filter: invert(1); }
 cart-drawer-component .hz-trust-pill img, cart-drawer-component .hz-trust-pill svg { filter: invert(1); }
 cart-drawer-component [class*="saved"], cart-drawer-component [class*="saving"] { color: #6FD39B !important; }
-cart-drawer-component .button:not(.cart__checkout-button):not(.hz-upsell-add-btn) { background: #6D49E0; color: #fff; }
 /* the line being added (preview) */
 .sq-adding { border-color: #3a3a5c; background: #16162b; color: #fff; }
 .sq-adding-s { color: #98A3DE; }
