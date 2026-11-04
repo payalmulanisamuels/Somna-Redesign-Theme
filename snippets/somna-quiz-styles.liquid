@@ -445,7 +445,7 @@ cart-drawer-component .cart__checkout-button { background: #6D49E0 !important; c
 cart-drawer-component .hz-trust-pill { background: #16162b !important; border: 1px solid #2a2a45; }
 cart-drawer-component img[src*="aplle-pay"], cart-drawer-component img[src*="apple"], cart-drawer-component img[alt*="Apple"] { filter: invert(1); }
 cart-drawer-component .hz-trust-pill img, cart-drawer-component .hz-trust-pill svg { filter: invert(1); }
-cart-drawer-component [class*="saved"], cart-drawer-component [class*="saving"] { color: #6FD39B !important; }
+cart-drawer-component :is(.hz-cart-totals-saved, .hz-cart-totals-saved *, [class*="saving"], [class*="saving"] *) { color: #6FD39B !important; }
 /* the line being added (preview) */
 .sq-adding { border-color: #3a3a5c; background: #16162b; color: #fff; }
 .sq-adding-s { color: #98A3DE; }
