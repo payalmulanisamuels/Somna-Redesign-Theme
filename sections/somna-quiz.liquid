@@ -153,7 +153,31 @@
                   {%- if rbs.point_3 != blank -%}<li>{{ rbs.point_3 }}</li>{%- endif -%}
                 </ul>
               </div>
-              {%- if rbs.benefit_image != blank -%}<div class="sq-res-pic">{{ rbs.benefit_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
+              {%- comment -%} V2 product-page "How it works" diagram (product photo + 4 features), read from the product's own pdp_how entry; else the image {%- endcomment -%}
+              {%- liquid
+                assign how = blank
+                if rbs.benefit_diagram
+                  assign how = rp.metafields.custom.pdp_how.value
+                endif
+                assign how_img = how.image.value
+                assign how_after = how.image_after.value
+                assign how_feats = how.features.value
+              -%}
+              {%- if how_img and how_feats != blank -%}
+                <div class="sq-diag{% if how_after %} sq-diag--pair{% endif %}">
+                  <div class="sq-diag-prod">
+                    {{- how_img | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 500, 700', sizes: '(min-width: 1000px) 240px, 40vw', alt: rp.title -}}
+                    {%- if how_after -%}{{ how_after | image_url: width: 500 | image_tag: loading: 'lazy', widths: '250, 500', sizes: '(min-width: 1000px) 160px, 28vw', alt: '' }}{%- endif -%}
+                  </div>
+                  {%- for f in how_feats limit: 4 -%}
+                    <div class="sq-diag-pt sq-diag-pt--{{ forloop.index }}">
+                      <span class="sq-diag-ic">{% render 'somna-pdp-icon', name: f.icon.value %}</span>
+                      <p class="sq-diag-h">{{ f.title.value }}</p>
+                      {%- if f.text != blank -%}<p class="sq-diag-t">{{ f.text.value }}</p>{%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- elsif rbs.benefit_image != blank -%}<div class="sq-res-pic">{{ rbs.benefit_image | image_url: width: 900 | image_tag: widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 520px, 92vw', loading: 'lazy' }}</div>{%- endif -%}
             </section>
           {%- endif -%}
 
@@ -1008,6 +1032,13 @@
           "type": "textarea",
           "id": "benefit_text",
           "label": "Text"
+        },
+        {
+          "type": "checkbox",
+          "id": "benefit_diagram",
+          "label": "Show the product page's How it works diagram",
+          "info": "Product photo with its four features, from the product's How it works content (same as the product page). Off, or no content = the image below.",
+          "default": true
         },
         {
           "type": "image_picker",

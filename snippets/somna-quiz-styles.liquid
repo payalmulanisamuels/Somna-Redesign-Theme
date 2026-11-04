@@ -256,6 +256,19 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-res-points li { position: relative; padding-left: 20px; font-size: 14px; line-height: 1.55; color: var(--sq-mut); }
 .sq .sq-res-points li::before { content: "✦"; position: absolute; left: 0; color: var(--sq-lav); }
 .sq .sq-res-points strong { color: var(--sq-ink); }
+/* "How it works" diagram from the V2 product page: mint card, product in the middle, a feature at each corner */
+.sq .sq-diag { --d-bg: #F3FEEE; --d-fg: #000; margin-top: 14px; padding: 22px 12px; border-radius: 18px; background: var(--d-bg); color: var(--d-fg); display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.3fr) minmax(0, .85fr); grid-template-rows: auto auto; gap: 56px 4px; align-items: start; justify-items: center; }
+.sq .sq-diag-prod { grid-column: 2; grid-row: 1 / span 2; align-self: center; display: flex; align-items: center; justify-content: center; width: 100%; }
+.sq .sq-diag-prod img { display: block; width: 100%; height: auto; }
+.sq .sq-diag--pair .sq-diag-prod img { width: 58%; }
+.sq .sq-diag--pair .sq-diag-prod img + img { width: 42%; margin-left: -8%; }
+.sq .sq-diag-pt { display: grid; justify-items: center; max-width: 110px; text-align: center; }
+.sq .sq-diag-pt--1 { grid-area: 1 / 1; } .sq .sq-diag-pt--2 { grid-area: 1 / 3; }
+.sq .sq-diag-pt--3 { grid-area: 2 / 1; align-self: end; } .sq .sq-diag-pt--4 { grid-area: 2 / 3; align-self: end; }
+.sq .sq-diag-ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--d-fg); color: var(--d-bg); }
+.sq .sq-diag-ic svg { width: 22px; height: 22px; }
+.sq .sq-diag-h { margin-top: 6px; font: 500 12px/1.2 var(--sq-sans); color: var(--d-fg); }
+.sq .sq-diag-t { margin-top: 2px; font-size: 10.5px; line-height: 1.3; color: var(--d-fg); opacity: .85; }
 .sq .sq-res-step-l { margin-top: 14px; font-size: 13px; font-weight: 700; color: var(--sq-lav); }
 .sq .sq-res-step-l + .sq-res-pic { margin-top: 6px; }
 .sq .sq-rv-track { display: grid; grid-auto-flow: column; grid-auto-columns: 86%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; outline: none; }
@@ -326,6 +339,12 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-res-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 48px; align-items: center; }
 .sq .sq-res-split--rev > :first-child { order: 2; }
 .sq .sq-res-split .sq-res-pic, .sq .sq-res-split .sq-res-steps > .sq-res-pic:first-child { margin-top: 0; }
+.sq .sq-res-split .sq-diag { margin-top: 0; padding: 36px 20px; gap: 72px 12px; }
+.sq .sq-diag-pt { max-width: 150px; }
+.sq .sq-diag-ic { width: 58px; height: 58px; }
+.sq .sq-diag-ic svg { width: 30px; height: 30px; }
+.sq .sq-diag-h { margin-top: 10px; font-size: 16px; }
+.sq .sq-diag-t { font-size: 12px; }
 .sq .sq-res-faq { max-width: 720px; margin-left: auto; margin-right: auto; }
 .sq .sq-sticky .sq-cta { max-width: 420px; }
 }
@@ -408,6 +427,7 @@ body { background: #F3FEEE; }
 .sq--v2 .sq-res-faq { --band: #F3FEEE; }
 .sq--v2 .sq-res-split--rev + .sq-res-split { --band: #AFBDF8; --sq-em: #F3FEEE; --sq-mut: #1F2433; }
 .sq--v2 .sq-res-top .sq-pill { background: #F3FEEE; }
+.sq--v2 .sq-diag { border: 1.6px solid var(--sq-line); box-shadow: var(--sq-shadow); }
 .sq--v2 .sq-res-img, .sq--v2 .sq-res-pic { border: 1.6px solid var(--sq-line); border-radius: 22px; box-shadow: var(--sq-shadow); background: #fff; }
 .sq--v2 .sq-res-rating { color: var(--sq-ink); font-weight: 600; }
 .sq--v2 .sq-res-img--pack img { object-fit: cover; }
