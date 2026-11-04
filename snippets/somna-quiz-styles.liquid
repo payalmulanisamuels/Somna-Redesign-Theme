@@ -291,6 +291,9 @@ padding: 10px 16px 40px; min-height: 100vh;
 .sq .sq-render-prod img { display: block; width: 100%; height: auto; }
 .sq .sq-render-sticker { position: absolute; left: 7%; bottom: 14%; padding: 7px 14px; border: 2px solid #000; border-radius: 999px; background: #F3FEEE; box-shadow: 3px 4px 0 #000; color: #000; font: 400 14px/1.4 var(--sq-disp); text-transform: uppercase; white-space: nowrap; rotate: -4deg; }
 .sq .sq-render.is-floating .sq-render-prod { animation: sqFloat 4s ease-in-out infinite; }
+/* V2 moon cursor on the quiz: over clickable things the full moon is see-through with a solid outline,
+   so the answer / button text underneath stays readable (the V2 pages keep the solid moon) */
+.somna-cursor.is-hover .somna-cursor__body { fill-opacity: .22; stroke: var(--somna-cursor-moon); stroke-width: 1.6; }
 /* sticker "pop" shake and the float, as the V2 product page */
 @keyframes sqShakePop { 0%, 72%, 100% { transform: scale(1) rotate(0deg); } 76% { transform: scale(1.06) rotate(-3deg); } 81% { transform: scale(1.06) rotate(3deg); } 86% { transform: scale(1.03) rotate(-1.5deg); } 92% { transform: scale(1) rotate(0deg); } }
 .sq .sq-shake--pop { animation: sqShakePop 3.4s cubic-bezier(.3, .7, .4, 1) infinite; }
