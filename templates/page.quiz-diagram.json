@@ -243,7 +243,8 @@
         "result_extras": true,
         "perk_1": "Free shipping",
         "ship_single": "FREE shipping",
-        "design": "night"
+        "design": "night",
+        "retake_label": ""
       }
     }
   },
